@@ -275,6 +275,30 @@ def generate_synthetic_glyph(char: str, glyph_id: int) -> bytes:
     return bytes(packed)
 
 
+_ETEN_ASC_PATH = r"D:\git\Fonts\iso\FILES\ASCFONT.15"
+_ETEN_ASC_STRIDE = 15
+
+
+def build_eten_ascii_block() -> bytes:
+    """Builds the 256x16-byte ASCII glyph block (8x16, 1 byte/row, code-indexed)
+    appended after the CJK glyphs in ZH16.DAT, sourced from the real ETen
+    ASCFONT.15 (8x15, padded with a blank trailing row). Falls back to an
+    all-blank block if the font file isn't available."""
+    try:
+        bank = Path(_ETEN_ASC_PATH).read_bytes()
+    except OSError:
+        return b"\x00" * (256 * 16)
+    out = bytearray()
+    for code in range(256):
+        offset = code * _ETEN_ASC_STRIDE
+        glyph = bank[offset : offset + _ETEN_ASC_STRIDE]
+        if len(glyph) < _ETEN_ASC_STRIDE:
+            glyph = glyph + b"\x00" * (_ETEN_ASC_STRIDE - len(glyph))
+        out.extend(glyph)
+        out.append(0)
+    return bytes(out)
+
+
 def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
     """Builds the ZH16.DAT binary and corresponding JSON mapping."""
     char_to_id: dict[str, int] = {}
@@ -311,7 +335,9 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
         "glyphs": unique_glyphs,
     }
 
-    return hdr + body, meta
+    ascii_block = build_eten_ascii_block()
+
+    return hdr + body + ascii_block, meta
 
 
 def main() -> None:

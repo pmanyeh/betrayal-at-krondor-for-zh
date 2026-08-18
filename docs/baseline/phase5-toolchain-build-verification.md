@@ -77,6 +77,46 @@ uv run bak build --clean
 WSL2 工具鏈增量編譯（僅 `TEXTWRAP.C` 需要重新編譯+連結，`VMCODE.OVL` /
 `SX.OVL` 仍維持 byte-identical），實機驗證兩行中文正確分開、不再疊字。
 
+## 4.2 中英混排基線一致性 (Mixed Latin/Chinese Baseline)
+
+實測發現英文字（例如角色英文名 `(Gorath)`）夾在中文句子裡時，因為走的是遊戲
+原本的 ASCII 比例字型（跟中文 16x16 點陣的基線、字高都不同），視覺上明顯對不齊。
+使用者要求「中英混排時應改用中文字型自己的英文字」來解決。
+
+從倚天光碟同時找到了 `ASCFONT.15`（8x15、1 byte/row、直接以字元碼索引，
+oracle 驗證：'A'、'g'、'1'、空白皆正確），整合方式：
+
+- `ZH16.DAT` 格式擴充：CJK glyph 資料後方固定附加 256×16 bytes 的 ASCII 區塊
+  （8x15 補一列空白湊 16 列），`font_init_chinese()` 一次配置、一次讀入。
+- `DIALOG.C` 的 `dialog_render_text_with_tokens()` 組好 `g_pMainScratchBuf`
+  後掃描一次，設定全域旗標 `g_bMixedZhMode`（同時涵蓋它自己提早呼叫一次
+  `textwrap_compute_lines` 的路徑，跟稍後 `textwrap_draw_aligned` 內部呼叫的路徑，
+  避免兩次呼叫用不同判斷結果）。
+- `FONT.C` 的 `font_draw_text_far` / `font_text_pixel_width` / `font_glyph_metrics`
+  三處都在 `g_bMixedZhMode` 成立時，把可印 ASCII（`0x20-0x7E`）導向新的
+  `font_draw_eten_ascii_glyph()`（8px 寬），否則完全維持原本路徑不動。
+- 純英文（無中文字元）內容完全不受影響，已用未修改的原生對話截圖確認
+  （黃色+陰影樣式維持原樣）。
+
+Commit `1276b58`（upstream 子模組）。實機驗證：`(Gorath)` 與周圍中文字基線對齊。
+
+## 4.3 超長文本換頁 (Long-Text Pagination)
+
+疑慮：計畫文件裡「換頁／翻頁」只在 Phase 7（BOK 書籍）章節出現，Phase 5 的
+對話文字框沒有明講框高溢位時的行為。
+
+測試方式：直接借用一段既有的長英文旁白（約 350 bytes、原本需要 5+ 行），前面
+加一個中文字觸發 `g_bMixedZhMode`，讓整段文字走新的 8px ETen ASCII 路徑
+（比原字型更寬，更容易撞到框高上限），不需另外翻譯。
+
+結果：**原版引擎既有的 `scroll_start` / `dialog_wait_for_acknowledge` 捲動機制
+在混排模式下正常運作**——超出框高的內容不會遺失或造成當機，滑鼠點擊／按鍵
+會正確翻到下一頁，直到文字完全顯示完畢（實測 3 頁）。這代表 Phase 5 不需要
+額外處理分頁邏輯，原生機制已經相容。
+
+（測試中第 3 頁尾端出現一個字元被截斷，是測試腳本為了維持 DDX record 原始
+byte 長度而自行裁切填充文字造成的，不是渲染或分頁邏輯的問題。）
+
 ## 5. 字型 (Font)
 
 `ZH16.DAT` 目前由 `tools/font/build_font.py` 的 `render_glyph_from_ttf()`
