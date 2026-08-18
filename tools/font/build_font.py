@@ -108,6 +108,51 @@ def decode_string(data: bytes, id_to_char: dict[int, str]) -> str:
     return "".join(out)
 
 
+_TTF_FONT_CANDIDATES = (
+    r"C:\Windows\Fonts\msjh.ttc",  # Microsoft JhengHei (Traditional Chinese)
+    r"C:\Windows\Fonts\mingliu.ttc",
+)
+
+
+def render_glyph_from_ttf(char: str, font_path: str | None = None, size: int = 15) -> bytes | None:
+    """Rasterizes a single character to a 16x16 monochrome bitmap (32 bytes) using an
+    installed TTF/TTC. Returns None if Pillow or a usable font isn't available, so
+    callers can fall back to generate_synthetic_glyph."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return None
+
+    candidates = (font_path,) if font_path else _TTF_FONT_CANDIDATES
+    font = None
+    for path in candidates:
+        if path is None:
+            continue
+        try:
+            font = ImageFont.truetype(path, size)
+            break
+        except OSError:
+            continue
+    if font is None:
+        return None
+
+    img = Image.new("L", (16, 32), 0)
+    draw = ImageDraw.Draw(img)
+    draw.text((0, 0), char, font=font, fill=255)
+    crop = img.crop((0, 3, 16, 19))  # empirically centers CJK ink in a 16x16 window at size 15
+    px = crop.load()
+
+    rows = bytearray()
+    for y in range(16):
+        bits = 0
+        for x in range(16):
+            if px[x, y] > 128:
+                bits |= 1 << (15 - x)
+        rows.append((bits >> 8) & 0xFF)
+        rows.append(bits & 0xFF)
+    return bytes(rows)
+
+
 def generate_synthetic_glyph(char: str, glyph_id: int) -> bytes:
     """Generates a high-contrast 16x16 monochrome bitmap (32 bytes) for testing."""
     # 16 rows, 2 bytes (16 bits) per row
@@ -171,7 +216,7 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
     body = bytearray()
 
     for gid, ch in enumerate(unique_glyphs):
-        bitmap = generate_synthetic_glyph(ch, gid)
+        bitmap = render_glyph_from_ttf(ch) or generate_synthetic_glyph(ch, gid)
         body.extend(bitmap)
 
     meta = {
