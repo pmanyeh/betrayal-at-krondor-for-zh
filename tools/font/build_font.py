@@ -29,6 +29,7 @@ POC_GLYPHS = (
     "金幣隊伍戰鬥攻擊防禦魔法逃跑投降"
     "道具說明是否"
     "猛然向前撲去鎖鏈他腕間如屬毒蛇般扭動"
+    "特一躍手之的鐵鍊像著"
 )
 
 
@@ -107,6 +108,69 @@ def decode_string(data: bytes, id_to_char: dict[int, str]) -> str:
             out.append(f"\\x{b:02x}")
             i += 1
     return "".join(out)
+
+
+# ETen 3.53 native bitmap font (STDFONT.15 hanzi + SPCFONT.15 punctuation,
+# 16x15 1bpp, 30-byte stride). This is the actual period-authentic 1993 DOS
+# Chinese font — index math and oracle verified against known glyphs (idx 0 is
+# "一", A4A4 is "中", A143 is the "。" glyph in SPCFONT).
+_ETEN_STD_PATH = r"D:\git\Fonts\iso\FILES\STDFONT.15"
+_ETEN_SPC_PATH = r"D:\git\Fonts\iso\FILES\SPCFONT.15"
+_ETEN_STRIDE = 30
+_ETEN_N_COMMON = 5401  # count of the "common" hanzi block (A440-C67E)
+
+_eten_banks: dict[str, bytes] = {}
+
+
+def _eten_big5_raw(hi: int, lo: int) -> int:
+    return (hi - 0xA1) * 157 + ((lo - 0x40) if lo < 0x7F else (lo - 0x62))
+
+
+def _eten_glyph_slot(hi: int, lo: int) -> tuple[str, int] | None:
+    r = _eten_big5_raw(hi, lo)
+    last_spc = _eten_big5_raw(0xA3, 0xBF)
+    base_a440 = _eten_big5_raw(0xA4, 0x40)
+    last_common = _eten_big5_raw(0xC6, 0x7E)
+    base_c940 = _eten_big5_raw(0xC9, 0x40)
+    if r < 0:
+        return None
+    if r <= last_spc:
+        return ("spc", r)
+    if r < base_a440:
+        return None
+    if r <= last_common:
+        return ("std", r - base_a440)
+    if r < base_c940:
+        return None
+    return ("std", _ETEN_N_COMMON + (r - base_c940))
+
+
+def render_glyph_from_eten(char: str) -> bytes | None:
+    """Rasterizes a single character from the real ETen 3.53 16x15 bitmap font,
+    padded to 16x16 (32 bytes) with a blank trailing row. Returns None if the
+    font files aren't available or the character isn't representable in Big5."""
+    for key, path in (("std", _ETEN_STD_PATH), ("spc", _ETEN_SPC_PATH)):
+        if key not in _eten_banks:
+            try:
+                _eten_banks[key] = Path(path).read_bytes()
+            except OSError:
+                return None
+
+    try:
+        raw = char.encode("big5")
+    except (UnicodeEncodeError, LookupError):
+        return None
+    if len(raw) != 2:
+        return None
+    slot = _eten_glyph_slot(raw[0], raw[1])
+    if slot is None:
+        return None
+    bank_name, idx = slot
+    bank = _eten_banks[bank_name]
+    offset = idx * _ETEN_STRIDE
+    if offset + _ETEN_STRIDE > len(bank):
+        return None
+    return bank[offset : offset + _ETEN_STRIDE] + b"\x00\x00"
 
 
 # (path, size): size is the point size at which each font's CJK grid renders
@@ -230,7 +294,11 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
     body = bytearray()
 
     for gid, ch in enumerate(unique_glyphs):
-        bitmap = render_glyph_from_ttf(ch) or generate_synthetic_glyph(ch, gid)
+        bitmap = (
+            render_glyph_from_eten(ch)
+            or render_glyph_from_ttf(ch)
+            or generate_synthetic_glyph(ch, gid)
+        )
         body.extend(bitmap)
 
     meta = {
