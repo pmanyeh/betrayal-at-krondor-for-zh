@@ -108,39 +108,52 @@ def decode_string(data: bytes, id_to_char: dict[int, str]) -> str:
     return "".join(out)
 
 
+# (path, size): size is the point size at which each font's CJK grid renders
+# pixel-crisp (no antialiasing) — verified empirically per font, not a guess.
+# Fusion Pixel is a genuine pixel-art font (authentic blocky retro look, matches
+# the game's era); Microsoft JhengHei is a smooth outline font used as fallback.
 _TTF_FONT_CANDIDATES = (
-    r"C:\Windows\Fonts\msjh.ttc",  # Microsoft JhengHei (Traditional Chinese)
-    r"C:\Windows\Fonts\mingliu.ttc",
+    (r"C:\Windows\Fonts\mingliu.ttc", 15),  # MingLiU / 新細明體
+    (r"D:\git\Fonts\Fusion_Pixel_10px.ttf", 14),
+    (r"C:\Windows\Fonts\msjh.ttc", 15),
 )
 
 
-def render_glyph_from_ttf(char: str, font_path: str | None = None, size: int = 15) -> bytes | None:
+def render_glyph_from_ttf(
+    char: str, font_path: str | None = None, size: int | None = None
+) -> bytes | None:
     """Rasterizes a single character to a 16x16 monochrome bitmap (32 bytes) using an
-    installed TTF/TTC. Returns None if Pillow or a usable font isn't available, so
-    callers can fall back to generate_synthetic_glyph."""
+    installed TTF/TTC, tightly cropped to its ink and centered in the 16x16 cell.
+    Returns None if Pillow or a usable font isn't available, so callers can fall
+    back to generate_synthetic_glyph."""
     try:
         from PIL import Image, ImageDraw, ImageFont
     except ImportError:
         return None
 
-    candidates = (font_path,) if font_path else _TTF_FONT_CANDIDATES
+    candidates = ((font_path, size or 15),) if font_path else _TTF_FONT_CANDIDATES
     font = None
-    for path in candidates:
+    for path, pt_size in candidates:
         if path is None:
             continue
         try:
-            font = ImageFont.truetype(path, size)
+            font = ImageFont.truetype(path, pt_size)
             break
         except OSError:
             continue
     if font is None:
         return None
 
-    img = Image.new("L", (16, 32), 0)
-    draw = ImageDraw.Draw(img)
-    draw.text((0, 0), char, font=font, fill=255)
-    crop = img.crop((0, 3, 16, 19))  # empirically centers CJK ink in a 16x16 window at size 15
-    px = crop.load()
+    big = Image.new("L", (32, 32), 0)
+    draw = ImageDraw.Draw(big)
+    draw.text((8, 8), char, font=font, fill=255)
+    bbox = big.getbbox()
+    canvas = Image.new("L", (16, 16), 0)
+    if bbox is not None:
+        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        ox, oy = max(0, (16 - w) // 2), max(0, (16 - h) // 2)
+        canvas.paste(big.crop(bbox), (ox, oy))
+    px = canvas.load()
 
     rows = bytearray()
     for y in range(16):
