@@ -65,6 +65,18 @@ uv run bak build --clean
 - 結果：DOSBox-X 實機執行新編譯的 `KRONDOR.EXE`，於埋伏戰鬥開場正確顯示
   「戈拉斯攻擊」四個繁體中文字，英文文字全程正常，無當機、無記憶體錯亂。
 
+## 4.1 多行折行 bug 與修正 (Multi-line Wrap Bug & Fix)
+
+擴充翻譯成完整長句（跨兩行）後實測發現：第二行文字會往上疊到第一行，可讀性
+極差。追查 `TEXTWRAP.C` 的 `textwrap_draw_aligned()` 發現行距計算固定使用
+`g_graphics_context.pFont_height[0]`（原 ASCII 字型的較矮行高），完全沒有
+考慮中文字圖是 16px 高——導致含中文的行被以過窄的行距堆疊。
+
+修正（commit `90be31b`，upstream 子模組）：在計算 `line_height` 後，掃描整段
+文字，若含有 `0x80-0x DF` 前導位元組，line_height 至少提升到 16。重新以
+WSL2 工具鏈增量編譯（僅 `TEXTWRAP.C` 需要重新編譯+連結，`VMCODE.OVL` /
+`SX.OVL` 仍維持 byte-identical），實機驗證兩行中文正確分開、不再疊字。
+
 ## 5. 字型 (Font)
 
 `ZH16.DAT` 目前由 `tools/font/build_font.py` 的 `render_glyph_from_ttf()`
