@@ -22,8 +22,9 @@ class TestChineseFont(unittest.TestCase):
         self.assertEqual(meta["glyph_width"], 16)
         self.assertEqual(meta["glyph_height"], 16)
 
-        # Expected size: 16 bytes header + glyph_count * 32 bytes
-        expected_size = 16 + len(glyphs) * 32
+        # Expected size: 16 bytes header + glyph_count * 32 bytes CJK bitmaps
+        # + a trailing 256-entry * 16 bytes ETen ASCII block (mixed-mode Latin glyphs).
+        expected_size = 16 + len(glyphs) * 32 + 256 * 16
         self.assertEqual(len(font_data), expected_size)
 
         # Verify Header unpacking

@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-18　**目前狀態：** Phase 5（穩健中文文字引擎）已透過真實 1993 工具鏈驗證，多項核心能力確認可用。
+**寫於：** 2026-08-19　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過（含置中對齊、異常雙位元組序列的實機驗證，以及涵蓋全部 Acceptance 類別的 deterministic test suite），可以視為 Phase 5 PASS，準備進入 Phase 6（DDX 翻譯正式流程）。
 
 這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
 
@@ -18,6 +18,26 @@
 字型目前用的是**真正的倚天 3.53 點陣字**（`STDFONT.15` 漢字 + `SPCFONT.15` 符號 + `ASCFONT.15` 英數），不是合成佔位圖案或現代 TTF 點陣化。
 
 目前示範字庫只有 82 個中文字（POC 階段，夠測試用，離完整翻譯還很遠）。
+
+本次 session 額外完成 Phase 5 驗收清單剩下的部分（對齊／裁切／異常位元組），詳見
+`docs/baseline/phase5-toolchain-build-verification.md` §4.4：
+
+- **置中對齊**：查證 `wFlags & 4`（DDX 記錄自帶的旗標，非我們新增）在真實遊戲資料裡
+  確實有在用（單一章節就有 13 筆），拿既有必經觸發點（node `1600003`）開這個位元、
+  塞中文字重新編譯測試，實機確認中文字正確置中。靠右對齊在現有遊戲資料裡找不到任何
+  真的會走到的路徑，只用 Python simulation 覆蓋，沒有另外做實機測試。
+- **異常/不完整雙位元組序列**：發現並修正一個真的 bug（commit `4b681d3`，upstream
+  子模組）——字串結尾若剛好是一個沒有 trail byte 的中文前導位元組，`font_draw_text_far`
+  本來就會跳過不畫，但寬度計算函式 (`font_text_pixel_width`／`textwrap_compute_lines`)
+  卻仍算它 16px 寬，兩邊不一致。修正後拿同一批必經觸發點實機測試畸形序列，確認會被
+  安靜跳過、不當機、不影響後續劇情。
+- 新增 `tests/unit/test_phase5_chinese_textwrap_sim.py`：逐行對照目前
+  `FONT.C`／`TEXTWRAP.C` 演算法的 deterministic test，涵蓋 Phase 5 Acceptance
+  清單全部類別（17 個測試全過）。順手修好一個無關但過期的既有測試
+  (`test_chinese_font.py`，`ZH16.DAT` 預期檔案大小公式沒算進 ASCII 區塊)。
+- `dist/test_v100_zh/DIAL_Z16.DDX` 目前內容就是這次置中＋畸形序列測試用的版本
+  （node `1600003` 被改成置中中文、node `1600004` 被改成畸形序列），提醒：這個資料夾
+  本來就是暫時性測試產物，下一輪測試會直接覆寫，不用特別還原。
 
 ## 2. 環境設置（下個 session 不用重裝，但要知道在哪）
 
@@ -74,12 +94,11 @@
 
 ## 5. 建議下一步（挑一個開始）
 
-1. **建立正式翻譯來源檔**：目前翻譯內容只存在測試用 DDX 二進位檔跟對話紀錄裡，沒有人類可讀、可版本控制的來源檔。可以參考 `PROJECT_PLAN.md` Phase 9 的 schema 想法，建一份 `localization/translated/*.json`（穩定 ID、原文、譯文、狀態），之後不用每次口頭翻譯再塞進 DDX。
+1. **建立正式翻譯來源檔**（Phase 6 起點）：目前翻譯內容只存在測試用 DDX 二進位檔跟對話紀錄裡，沒有人類可讀、可版本控制的來源檔。可以參考 `PROJECT_PLAN.md` Phase 6 的 schema 想法，建一份 `localization/translated/*.json`（穩定 ID、原文、譯文、狀態），之後不用每次口頭翻譯再塞進 DDX。
 2. **擴充字庫**：目前只有 82 字，離「完整翻譯」還很遠，可以規劃一套系統化的擴充流程（例如先跑一輪常用字統計）。
-3. **盤點其他文字介面**（PROJECT_PLAN Phase 8 範疇）：目前只測過 DDX 對話，BOK 書籍、主選單、UI 標籤都還沒碰過，`textwrap_draw_aligned` 理論上是共用管線，但實際行為沒驗證過。
-4. **對齊/裁切/異常位元組**測試（Phase 5 驗收清單剩下的部分）：置中、靠右對齊，還有畸形/不完整雙位元組序列的容錯行為都還沒測。
+3. **盤點其他文字介面**（PROJECT_PLAN Phase 8 範疇）：目前只測過 DDX 對話，BOK 書籍、主選單、UI 標籤都還沒碰過，`textwrap_draw_aligned` 理論上是共用管線，但實際行為沒驗證過（`font_glyph_metrics` 對「字串結尾孤立前導位元組」目前沒有跟 §1 提到的修正版本同步處理寬度，因為它沒有下一個 byte 的上下文可看——BOK/UI 若要重用中文渲染，這點需要重新評估）。
 
 ## 6. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。
-- `upstream/betrayal-at-krondor`：本地領先 origin 4 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`），**尚未 push**。這幾個 commit 是本次中文渲染邏輯的核心，push 前建議先跟原專案作者確認是否歡迎這類修改進主線，或考慮 fork 成獨立分支。
+- `upstream/betrayal-at-krondor`：本地領先 origin 5 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`），**尚未 push**。這幾個 commit 是本次中文渲染邏輯的核心，push 前建議先跟原專案作者確認是否歡迎這類修改進主線，或考慮 fork 成獨立分支。

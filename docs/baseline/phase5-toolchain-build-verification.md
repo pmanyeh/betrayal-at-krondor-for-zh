@@ -117,7 +117,54 @@ Commit `1276b58`（upstream 子模組）。實機驗證：`(Gorath)` 與周圍�
 （測試中第 3 頁尾端出現一個字元被截斷，是測試腳本為了維持 DDX record 原始
 byte 長度而自行裁切填充文字造成的，不是渲染或分頁邏輯的問題。）
 
+## 4.4 對齊、換行溢位與異常雙位元組序列 (Alignment, Clipping, Malformed Sequences)
+
+延續 Phase 5 Features 清單裡尚未驗證的三項：alignment、clipping、malformed sequence
+handling。
+
+**置中對齊 (horizontal-center)**：讀 `DIALOG.C` 才發現這不是我們可以自由選的參數——
+`textwrap_draw_aligned()` 的 `flags` 來自 `pStyle->header[6]`（7 組固定樣式，全部只有
+垂直置中位 `0x10`，沒有水平置中/靠右）,唯一能打開水平置中位（`0x02`）的地方是
+`if (record->wFlags & 4) flags = flags & 0xf8 | 2;`——也就是**個別 DDX 對話記錄自己
+的 `wFlags`**。检查 `DIAL_Z16.DDX` 發現這個位元在真實遊戲資料裡並非死碼：光是這一個
+章節檔就有 13 筆記錄設了這個位元。確認 `wFlags & 4` 在 `DIALOG.C` 裡只影響這一處水平
+置中計算、不影響其他任何邏輯後，選了 Phase 5 已驗證過必經的觸發點（node `1600003`，
+章節一開場埋伏戰鬥）,直接把它的 `wFlags` 開這個位元、文字換成中文「我們在哪裡」
+重新編譯測試。實機結果：中文字正確置中顯示在對話框內（明顯不貼左邊界，跟同一次
+截圖裡其他靠左對齊的中文行成對比）。靠右對齊（`flags & 4` 但不含 `0x02`）在目前的
+遊戲資料與樣式表裡完全沒有被觸發過的路徑，判斷為理論上存在但實際不可達，故只留給
+下面的 deterministic simulation 覆蓋，未另外做實機測試。
+
+**異常/不完整雙位元組序列 (malformed sequence)**：這是全新程式碼路徑（中文渲染邏輯
+本身是本專案寫的，不是原版既有邏輯），風險最高，仿照過去「手刻補丁沒驗證位址就當機」
+的教訓,特別做了實機測試。檢查後發現一個真實的小 bug：一個中文前導位元組
+(`0x80-0xDF`) 如果剛好是字串最後一個 byte（後面直接接 `\0`），`font_draw_text_far()`
+會整個跳過不繪圖（`text++`，不畫、不佔位），但 `font_text_pixel_width()` 跟
+`textwrap_compute_lines()` 卻仍然把它算成完整 16px 寬——兩邊不一致，理論上會在換行
+判斷或置中位移計算時多算 16px 的空白。修正（commit `4b681d3`，upstream 子模組）：
+兩個寬度計算函式都先看一眼下一個 byte 是不是字串結尾，是的話這個字元寬度算 0，跟
+繪圖端的行為對齊。修正後在同一個章節一開場觸發點（node `1600004`）塞入
+「我們在哪」+ 一個沒有後續 trail byte 的孤立前導位元組，重新編譯後實機測試：
+畸形字元被安靜跳過，沒有亂繪圖、沒有當機、沒有卡死，後續劇情（node `1600005`）
+照常正常播放中英文。
+
+以上兩項實機驗證，以及 punctuation/long line/max line/mixed 等原本就適合用
+deterministic test 而非螢幕截圖驗證的項目，整理成
+`tests/unit/test_phase5_chinese_textwrap_sim.py`——逐行對照目前 `FONT.C`／
+`TEXTWRAP.C`（含上述修正）的演算法，涵蓋 Phase 5 Acceptance 清單全部類別
+（ASCII only / Chinese only / mixed / punctuation / long line / max line /
+malformed bytes）以及 `textwrap_draw_aligned` 的水平置中／靠右／垂直置中／
+換行溢位（分頁）算式。17 個測試全數通過。
+
+順帶修正了一個既有、與本次改動無關但被順手發現的過期測試：
+`tests/unit/test_chinese_font.py` 的 `ZH16.DAT` 預期檔案大小公式沒有算入
+mixed-mode Latin 功能（commit `1276b58`）新增的 256×16 bytes ETen ASCII 區塊，
+導致該測試一直是壞的；已修正公式，現在全部 36 個既有單元測試皆綠燈。
+
 ## 5. 字型 (Font)
+
+> 以下描述的是本檔案寫成當時（TTF 點陣化）的狀態；後續已改用真正的倚天 3.53
+> 點陣字，細節見 `HANDOFF.md` 與其引用的後續 commit。
 
 `ZH16.DAT` 目前由 `tools/font/build_font.py` 的 `render_glyph_from_ttf()`
 使用 Windows 內建「微軟正黑體」（`msjh.ttc`）點陣化產生（16x15 視窗，
