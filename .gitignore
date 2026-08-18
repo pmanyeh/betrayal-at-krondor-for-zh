@@ -1,0 +1,30 @@
+# Game data and assets (Must not be distributed or committed)
+betrayal-at-krondor/
+*.zip
+*.001
+*.rmf
+*.gam
+*.sx
+*.ovl
+*.drv
+*.wri
+
+# Build and toolchain artifacts
+build/
+dist/
+toolchain/
+*.obj
+*.exe
+*.bin
+
+# Python and virtual environments
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
