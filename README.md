@@ -59,5 +59,9 @@ python -m unittest discover -s tests/unit -v
 
 ## 致謝
 
-- [`canassa/betrayal-at-krondor`](https://github.com/canassa/betrayal-at-krondor) — 原始碼還原與 byte-perfect 重建工具鏈，本專案所有中文化修改都建立在這份工作之上。
-- [`old-games/bak-translation-tools`](https://github.com/old-games/bak-translation-tools) — DDX / FNT / BOK 等資源格式的早期研究參考。
+- [`canassa/betrayal-at-krondor`](https://github.com/canassa/betrayal-at-krondor) — 原始碼還原與 byte-perfect 重建工具鏈，本專案所有中文化修改都建立在這份工作之上，是整個計畫能成立的基礎。
+- [`old-games/bak-translation-tools`](https://github.com/old-games/bak-translation-tools) — 原由 Andrey Fedoseev 開發、後由 Old-Games.RU 社群維護的 DDX / FNT / BOK 等資源格式研究工具，是本專案早期格式調查的重要參考。
+- [`xavieran/BaKGL`](https://github.com/xavieran/BaKGL) — 現代 OpenGL 重製專案，作為文字/資源格式與遊戲行為的輔助研究參考（目前戰鬥系統尚未完成，本專案未採用其作為主要 runtime）。
+- xBaK — 更早期的開源重製／逆向工程成果，BaKGL 與 `canassa/betrayal-at-krondor` 皆承認其研究貢獻；本專案僅在還原原始碼無法回答問題時，作為次要的歷史參考。
+- [DOSBox-X](https://github.com/joncampbell123/dosbox-x) — 本專案所有實機驗證都在 DOSBox-X 上執行。
+- [`pmanyeh/DOSBox-X-MCP-Debugger`](https://github.com/pmanyeh/DOSBox-X-MCP-Debugger) — 基於 DOSBox-X 打造、可由 AI agent 操作的除錯/自動化驗證分支（截圖、按鍵模擬、記憶體讀寫等），本專案每一輪中文渲染的實機驗證都靠它自動化完成。
