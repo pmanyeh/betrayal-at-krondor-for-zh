@@ -2,7 +2,9 @@
 
 ## 1. DDX 對話資源二進位結構 (DDX File Binary Specification)
 
-`DIAL_Zxx.DDX` 檔案儲存於 `KRONDOR.001` 內部，其命名規則對應各章節：`chapter = node_id / 100000`，如第一章為 `DIAL_Z01.DDX`，主章節對話庫為 `DIAL_Z00.DDX`。
+`DIAL_Zxx.DDX` 檔案儲存於 `KRONDOR.001` 內部，其命名規則是 `xx = node_id / 100000`。
+
+**更正（原文件曾誤植為「xx 對應故事章節」，如第一章為 `DIAL_Z01.DDX`——並非如此）**：`xx` 只是對話節點的檔案分片索引（`DIALOG.C` 的 `dialog_load_record_by_key()` 用它選檔案），跟遊戲內部真正的故事章節計數器 `g_gameState.nChapter`（1–9）是兩個完全獨立的系統，程式碼裡沒有交叉引用。已證實 `DIAL_Z16.DDX` 同時含有「第一章開場埋伏戰」節點跟「全部 9 章共用」的系統彈窗/重播旁白文字；`DIAL_Z01.DDX` 的內容則完全由二進位資源資料（NPC 對話鍵值表）決定，原始碼裡找不到任何硬編碼引用，無法從程式碼證實它專屬於第一章。換言之，`DIAL_Zxx.DDX` 不能被當成「第 xx 章的對話檔」，只能當成一個依 node_id 前綴分片的扁平對話池。
 
 ### 1.1 檔案佈局總覽 (File Layout)
 ```text

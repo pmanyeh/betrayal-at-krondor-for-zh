@@ -14,9 +14,9 @@
         "@4",
         "\\x00"
       ],
-      "translation": "\t我們在克朗多\n\t道具@4說明是否\u0000",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「再往前一段路，這條路便會分岔，」@4說。「往南通往艾格利，最終抵達克朗多；往東則穿越幽暗林。你們認為我們該走哪條路？」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (narration + @4 speaker token), not a final translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#1",
@@ -29,8 +29,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿越山道時，偶爾襲來的寒風凍得他們骨頭發疼，直到終於感受到王國南方特有的溫和暖風，才鬆了口氣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -43,8 +43,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉向東方。\n\t一連數日，他們都在濃霧中前行，白天濕氣浸透衣物，夜裡寒意刺骨。當山勢終於漸漸低緩，霧氣散去，他們發現自己已站在一片大森林的邊緣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -57,8 +57,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -68,9 +68,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "歐文我\u0000",
+      "translation": "亞邦\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#5",
@@ -79,9 +79,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "們在哪\u0000",
+      "translation": "拉姆特\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#6",
@@ -90,9 +90,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "裡克朗\u0000",
+      "translation": "尊恩\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#7",
@@ -101,9 +101,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "多洛爾\u0000",
+      "translation": "鷹谷\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#8",
@@ -112,9 +112,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "戈拉斯\u0000",
+      "translation": "洛瑞爾\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#9",
@@ -123,9 +123,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "塔主選\u0000",
+      "translation": "泰索格\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#10",
@@ -134,9 +134,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "單開始\u0000",
+      "translation": "因克林德爾山口\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#11",
@@ -145,9 +145,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "繼續設\u0000",
+      "translation": "尊恩山口\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#12",
@@ -156,9 +156,9 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "定離庫\u0000",
+      "translation": "麥克莫丹卡達爾\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#13",
@@ -168,9 +168,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "歐文\n我們在哪\u0000",
+      "translation": "米歇爾．安巴薩克\n「你如今的模樣，曾是我的模樣；我如今的模樣，終將是你的模樣。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#14",
@@ -180,9 +180,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "在哪\n裡克朗多\u0000",
+      "translation": "拉姆特的蘿賽爾\n「她容顏溫柔，雙手能治百病。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#15",
@@ -192,9 +192,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "朗多\n洛爾戈拉\u0000",
+      "translation": "帕格斯．阿塔卡珀\n「他釣的魚，從未逃脫。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#16",
@@ -204,9 +204,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "戈拉\n斯塔主選\u0000",
+      "translation": "無名氏\n「他的胸膛，被莫瑞德人剖開。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#17",
@@ -216,9 +216,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "主選\n單開始繼\u0000",
+      "translation": "A．R．克萊蒙\n「他說了謊，付出了代價。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#18",
@@ -228,9 +228,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "始繼\n續設定離\u0000",
+      "translation": "克拉蒙塔拉．佩克塔\n「為了榮譽，命喪烈焰。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#19",
@@ -240,9 +240,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "定離\n庫存裝備\u0000",
+      "translation": "戈蒂．克羅\n「死時，她的容顏猶如君王。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#20",
@@ -252,9 +252,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "裝備\n觀察金幣\u0000",
+      "translation": "海登．米勒\n「一根魚骨，要了他的命。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#21",
@@ -264,9 +264,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "金幣\n隊伍戰鬥\u0000",
+      "translation": "米瑞安．哈索卡夫\n「她將鑰匙，交給了收網人。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#22",
@@ -276,9 +276,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "戰鬥\n攻擊防禦\u0000",
+      "translation": "賈德．皮伯斯\n「他完成了此生最後一件事。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#23",
@@ -288,9 +288,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "防禦\n魔法逃跑\u0000",
+      "translation": "維克多．馬摩利安\n「卑鄙如他，無賴如他，我們仍舊愛他。」\u0000",
       "status": "translated",
-      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+      "notes": ""
     },
     {
       "id": "DIAL_Z01.DDX#24",
@@ -300,8 +300,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "伊魯娜\n「哈達提女子，長眠荒野。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -312,8 +312,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "阿格勒斯．索金\n「多吃了一口，便入了黃泉。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -324,8 +324,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "大衛．布利\n「靜靜長眠，無人多言。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -336,8 +336,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "普爾．達丁\n「無人知曉他何時來，何時去。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -348,8 +348,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "西莉亞．德布倫\n「水，將她帶往深淵。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -360,8 +360,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "嬰兒伊莉莎\n「她哭了一週，才安然入睡。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -372,8 +372,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "一位母親\n「她先女兒一日，步入長夜。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -384,8 +384,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "班．斯奈爾\n「多少人，曾被他的機智擄獲。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -396,8 +396,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "傑克．卡里奧克\n「他豪飲的日子，已然終結。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -408,8 +408,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "休伯特\n「我們，並不想絞死你。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -421,8 +421,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\tó這件事花了他們不少時間才辦妥。我原以為，一路追殺我們的刺客，是跟著我們穿過了因克林德爾山口才追上來，但人數未免太多了——就算是要追捕戈拉斯這樣的叛徒，也用不著這麼多人手。迪勒肯必定是動用了早已安插在王國境內的眼線。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -433,8 +433,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t但迪勒肯坐鎮薩薩戈斯，我逃脫的消息，照理說只能跟著我們的腳步一路傳開……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -445,8 +445,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t但我們在如此偏南之地便遭到攻擊，這說明事情恐怕並非如此……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -459,8 +459,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我從未親眼見過，但曾聽聞一種名為ó心靈ó傳語的異能。極少數法師擁有此術，卻能讓人跨越極遙遠的距離傳遞心聲。或許迪勒肯雇用了這樣的人才。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -471,8 +471,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這絕非不可能。早在我逃離他的堡壘之前，就有傳言說，與他往來的法師之中，有人擁有這種異能。我知道他的助手納戈曾自稱擁有這種力量，儘管我從未親眼見過證據……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -483,8 +483,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t倘若迪勒肯真有這種能力，他必定會善加利用手下的助手。因此我們在前往克朗多的路上，得多加小心，留意任何看似法師的人。你們兩人，都要保持警覺……\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

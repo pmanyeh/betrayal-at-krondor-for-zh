@@ -70,11 +70,17 @@ def encode_string(text: str, char_to_id: dict[str, int]) -> bytes:
     """Encodes a Unicode text string into BAK-ZH game encoded bytes."""
     output = bytearray()
     for ch in text:
-        if ord(ch) < 0x80:
+        code = ord(ch)
+        if code < 0x80:
             # Standard ASCII (0..127)
-            output.append(ord(ch))
+            output.append(code)
         elif ch in char_to_id:
             output.extend(glyph_id_to_bytes(char_to_id[ch]))
+        elif 0xE0 <= code <= 0xFF:
+            # Raw style/control byte (font_render_glyph_or_ctrl), carried
+            # over verbatim from the source text -- never Chinese-encoded,
+            # since 0xE0-0xFF is outside the 0x80-0xDF lead-byte range.
+            output.append(code)
         else:
             # Fallback for unmapped characters: '?'
             output.append(ord("?"))
@@ -340,13 +346,39 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
     return hdr + body + ascii_block, meta
 
 
+def glyphs_from_translations(translated_dir: Path) -> list[str]:
+    """Collects every unique CJK character actually used by translated
+    (status == "translated") entries across all localization/translated/*.json
+    files, so the glyph set grows from real translation work instead of a
+    hand-picked demo list."""
+    chars: dict[str, None] = {}
+    for path in sorted(translated_dir.glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for entry in data.get("entries", []):
+            if entry.get("status") != "translated":
+                continue
+            for ch in entry.get("translation", ""):
+                code = ord(ch)
+                is_cjk_ideograph = 0x4E00 <= code <= 0x9FFF
+                is_cjk_punctuation = 0x3000 <= code <= 0x303F
+                is_fullwidth_form = 0xFF00 <= code <= 0xFFEF
+                is_general_punct_dash_or_ellipsis = code in (0x2014, 0x2026)
+                if is_cjk_ideograph or is_cjk_punctuation or is_fullwidth_form or is_general_punct_dash_or_ellipsis:
+                    chars.setdefault(ch, None)
+    return list(chars)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build ZH16.DAT and mapping table.")
     parser.add_argument("--output-font", type=Path, default=Path("ZH16.DAT"), help="Output font binary path")
     parser.add_argument("--output-map", type=Path, default=Path("zh_mapping.json"), help="Output JSON mapping path")
+    parser.add_argument("--from-translations", type=Path, default=None,
+                         help="Directory of localization/translated/*.json files to derive the glyph set from "
+                              "(default: the built-in POC_GLYPHS demo list).")
     args = parser.parse_args()
 
-    font_bin, meta = build_zh_font(list(POC_GLYPHS))
+    glyphs = glyphs_from_translations(args.from_translations) if args.from_translations else list(POC_GLYPHS)
+    font_bin, meta = build_zh_font(glyphs)
     args.output_font.write_bytes(font_bin)
     args.output_map.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Generated {meta['glyph_count']} glyphs -> {args.output_font} ({len(font_bin)} bytes), {args.output_map}")

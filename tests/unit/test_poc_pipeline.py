@@ -10,6 +10,7 @@ Verifies:
 
 import json
 import struct
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -163,17 +164,23 @@ class TestPocPipeline(unittest.TestCase):
         """Verify POC patched DDX contains intact record 100009 with encoded Chinese."""
         arc_path = Path(r"d:\git\betrayal-at-krondor-for-zh\betrayal-at-krondor\krondor.001")
         rmf_path = Path(r"d:\git\betrayal-at-krondor-for-zh\betrayal-at-krondor\krondor.rmf")
-        map_path = Path(r"d:\git\betrayal-at-krondor-for-zh\localization\generated\zh_mapping.json")
-        out_dir = Path(r"d:\git\betrayal-at-krondor-for-zh\localization\generated")
 
         if not arc_path.exists() or not rmf_path.exists():
             self.skipTest("Game data files not found, skipping DDX patch generation test")
 
-        out_file, meta = generate_poc_patch(arc_path, rmf_path, map_path, out_dir)
-        self.assertTrue(out_file.exists())
+        # Use a mapping file built from this test's own POC_GLYPHS (matching
+        # self.char_to_id/id_to_char) rather than the real, evolving
+        # localization/generated/zh_mapping.json -- that file now reflects
+        # actual Phase 6 translation work (over a thousand glyphs) and isn't
+        # guaranteed to contain this test's fixed POC sentence in the same
+        # encoding this test decodes with.
+        with tempfile.TemporaryDirectory() as tmp:
+            map_path = Path(tmp) / "zh_mapping.json"
+            map_path.write_text(json.dumps(self.font_meta, ensure_ascii=False), encoding="utf-8")
+            out_file, meta = generate_poc_patch(arc_path, rmf_path, map_path, Path(tmp))
+            self.assertTrue(out_file.exists())
+            data = out_file.read_bytes()
 
-        # Extract and verify record 100009
-        data = out_file.read_bytes()
         extracted = extract_ddx_data(data)
 
         target_rec = None
