@@ -101,4 +101,4 @@
 ## 6. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。
-- `upstream/betrayal-at-krondor`：本地領先 origin 5 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`），**尚未 push**。這幾個 commit 是本次中文渲染邏輯的核心，push 前建議先跟原專案作者確認是否歡迎這類修改進主線，或考慮 fork 成獨立分支。
+- `upstream/betrayal-at-krondor`：本地領先 origin 5 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
