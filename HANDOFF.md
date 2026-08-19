@@ -222,7 +222,19 @@ python tools/font/build_font.py --from-translations localization/translated \
 
 這兩點都屬於 `PROJECT_PLAN.md` Phase 8（文字介面盤點）範疇，下一個 session 可以接著查。
 
+## 5.4 Phase 7（BOK 書籍）前置調查：開新遊戲後的「故事書」開場畫面（本次 session 完成）
+
+使用者開新遊戲後截圖了一個章節開場的敘事畫面（羊皮紙背景、花體斜體字、左上角有裝飾性放大首字母、頁碼），懷疑不是 DDX 對話。派 agent 深入原始碼＋實際解出對應資料檔確認：**這是完全獨立的 BOK 書籍系統**（對應 `PROJECT_PLAN.md` Phase 7），跟 DDX 對話是兩套不同機制，此次只做調查，沒有動任何程式碼或翻譯。
+
+- **觸發點與檔名規則**：`SRC/GAME/GMAIN.C:292`（`gmain_play_chapter_intro`）用樣板檔名 `"C00.BOK"`，把章節數加到 byte 1、部數加到 byte 2（`bookName[1] += chapter; bookName[2] += part;`）算出實際檔名，呼叫 `bookview_show(bookName, -1)`。第一章第一部對應到 `C11.BOK`，實際觸發是從 `TTMDLG.C:111` 的劇本 opcode 呼叫，不是「新遊戲」程式碼直接觸發的。
+- **資料位置**：`C11.BOK` 連同其餘 21 個章節書籍檔（`C12`、`C21`、`C23`、`C31`、`C32`、`C41`、`C43`~`C46`、`C51`~`C53`、`C61`、`C63`、`C71`、`C81`、`C83`、`C91`、`C92`、`C94`，共 22 個）都封裝在 `krondor.001` 裡，靠 `krondor.rmf` 索引。用既有的 `bak rmf extract` 就能把原始 bytes 挖出來（這部分工具已經有了），解出來的 `C11.BOK` 內容跟截圖文字完全對得上（"lood soaked rags collected at the boy's feet." 開頭，後面接 Owyn 幫傷兵包紮的敘述）。
+- **檔案格式是全新的、跟 DDX 完全不同的私有二進位格式**：開頭 `u32` 總長 + 頁面目錄（`int` 頁數 + 每頁一個 `u32` offset），每頁一個 56-byte 頁首（文字欄位矩形、頁碼、上/下一頁指標、圖片數、「文字避開矩形」數、頁碼顯示旗標等），接著是避開矩形清單、圖片清單（`x, y, imageIndex, mirrorFlags`），最後才是帶控制標籤的文字流：`0xF4`=樣式區塊（字型槽位/基線/前景背景色/旗標，10 bytes）、`0xF1`=版面區塊（邊界/行高/縮排，16 bytes）、`0xF3`=保留用的 2-byte「word hook」（目前是 no-op）、`0xF0`=結束符。共用資源（`BOOK.FNT` 字型、`BOOK.SCX` 羊皮紙背景、`BOOK.BMX` 插圖/首字母圖庫、`BOOK.PAL` 調色盤）只在 `bookview_init()` 載入一次，不分書共用。**目前完全沒有任何工具能解析/重新封裝這個格式**，等於要比照當初寫 `ddx_extract.py`/`ddx_pack.py` 的方式，從零開發一套 BOK 專用工具。
+- **左上角那個花體放大字母是獨立圖片，不是文字**——已用資料直接驗證：`C11.BOK` 第一頁 `wImageCount=2`，其中 `imageIndex=0` 的圖片座落在頁面設定的「文字避開矩形」正中間，而緊接在後的文字流開頭就是 `"lood soaked..."`——「Blood」的「B」完全沒有出現在文字裡，是靠這張圖片畫出來的。交叉比對其他 BOK 檔案也一致：`C71.BOK` 用同一張圖庫的另一個 index，文字從 `"ells to..."` 開頭（對應「Bells tolled...」缺開頭 B）；`C91.BOK` 用另一個 index，文字從 `"ocklear..."` 開頭（對應「Locklear...」缺開頭 L）。**中文沒有「放大首字」這個概念，這塊必須是設計決定（重畫圖或整個拿掉），不是翻譯能解決的問題。**
+- **渲染管線目前不支援中文**——`BOOKTEXT.C` 雖然呼叫的是跟 DDX 共用的同一個 `FONT.C`（`font_activate`、`font_glyph_metrics`、`font_draw_text_ds`），寬度計算 (`font_glyph_metrics`) 也已經有處理 0x80-0xDF 前導位元組（回報 16×16），**但實際畫字元的呼叫（`font_render_glyph_or_ctrl`，被 `BOOKTEXT.C` 的 `booktext_draw_glyph_kerned` 直接呼叫）只認得 0xE0/0xF0 開頭的樣式控制位元組，其餘一律當成單位元組英文字元繪製**——雙位元組配對繪圖 (`font_draw_zh_glyph`) 跟 `text+=2` 的邏輯只存在於再上一層的 `font_draw_text_far()`，而 `BOOKTEXT.C` 完全沒有呼叫到那一層，是自己另外刻了一套逐 byte 掃描的排版/換行/齊行邏輯（`booktext_layout_rndr_one_line` 等）。現在如果直接塞中文字進去，前導位元組會被畫成錯的英文字圖案，後面的後隨位元組會被當成獨立字元繼續解析，整行後面全部跳掉。**要支援中文，得改 `BOOKTEXT.C` 原始碼**（教它認得雙位元組配對，或乾脆改成呼叫已經支援中文的 `textwrap_draw_aligned`），不是單純資料/翻譯層的工作，這點呼應上面 §5.3.2 提到的「不同介面可能各自需要獨立驗證中文渲染」。
+
+**盤點結論**：Phase 7（BOK）是獨立的一塊工程量——新工具（解析/封裝 BOK 格式）+ 新引擎改動（`BOOKTEXT.C` 支援中文雙位元組）+ 設計決定（放大首字母怎麼處理），不能只算翻譯量。排優先序時要把這個獨立成本算進去，不能假設「反正 DDX 都能翻了，BOK 應該差不多」。
+
 ## 6. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。`origin` 已設定指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
-- `upstream/betrayal-at-krondor`：本地領先 origin 5 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+- `upstream/betrayal-at-krondor`：本地領先 origin 7 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
