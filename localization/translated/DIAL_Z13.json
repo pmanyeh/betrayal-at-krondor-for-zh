@@ -1,0 +1,2299 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z13.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z13.DDX#0",
+      "node_id": 1300001,
+      "source": "#Three Hillmen Pawn#\tThe shop was littered with castoffs, forgotten trinkets, lost items which few would want or need to reclaim. Here it seemed tarnish and rust were the things that were prized, the crumbling items to which they clung of only secondary value.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#1",
+      "node_id": 1300002,
+      "source": "#Nia's Goods#\tThe door protested with a loud shriek as @4 stepped into the disused shop. He covered his mouth so as to avoid breathing dust. There seemed to be little variety in the types of items offered for sale, but the items present had been selected with ruthless practicality.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#2",
+      "node_id": 1300003,
+      "source": "#Touchstone Gems#\tWhile many of the things in the shop glittered gold or silver, @4 was travelled enough to know that the items of greatest value were not on display. Instead, they would be locked away elsewhere, brought out by the owner only if he believed that his customers had honest intentions.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#3",
+      "node_id": 1300004,
+      "source": "#Dabeh's Fanciful Trinkets#\tMoving casually through the magician's shop, @3 suppressed a knowing grin as he glanced sidelong at Gorath. Since entering, the moredhel seemed unnaturally fascinated by the array of scrolls, items which would be utterly useless to any save a trained magician. While the owner's fascination spell was unscrupulous, it ñwas clever.\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#4",
+      "node_id": 1300005,
+      "source": "#The Grumbling Magician#\t@3 surveyed the shop. Though he could see no perceptible evidence the shop's owner had placed any special wards around his inventory, he ñwas dimly aware of something unnatural about the doorway through which they had passed. In the pit of his stomach, he knew that thieves would find themselves the victim of some magical unpleasantness.\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#5",
+      "node_id": 1300006,
+      "source": "#Guds#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#6",
+      "node_id": 1300007,
+      "source": "#Oeirdu and Company#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#7",
+      "node_id": 1300008,
+      "source": "#The Crossroads#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#8",
+      "node_id": 1300009,
+      "source": "#Hamil's Pawn#\tThe shop was littered with castoffs, forgotten trinkets, lost items which few would want or need to reclaim. Here it seemed that tarnish and rust were the things that were prized, the items to which they clung of only secondary value.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#9",
+      "node_id": 1300010,
+      "source": "#Corby's Chalet#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#10",
+      "node_id": 1300011,
+      "source": "#Roots and Herbs#\t@4 sniffed. Rubbing his irritated nose, he struggled against the urge to sneeze, but the smoky interior of the shop made it hard to maintain his demeanor. More annoying, the smoke obscured his view of the vials and jars which crammed the store shelves, most of which appeared to contain herbs or incense.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#11",
+      "node_id": 1300012,
+      "source": "#Jewels, Keys, Rings#\tThe shop was littered with castoffs, forgotten trinkets and lost items which few would want or need to reclaim. Here it seemed that tarnish and rust were the things that were prized, the items to which they clung of only secondary value.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#12",
+      "node_id": 1300013,
+      "source": "#Cloth Yard Shot#\tIt took no extended amount of time for @4 to discover the establishment catered specifically to ñarchersð. Upon opening a latched bin, he discovered a stack of quarrels piled high like ricks of firewood, each meticulously tagged as to where it came from and who had fletched it.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#13",
+      "node_id": 1300014,
+      "source": "#Children of the Green Heart#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#14",
+      "node_id": 1300015,
+      "source": "#Kege's Herbs#\t@4 sniffed. Rubbing his irritated nose, he struggled against the urge to sneeze, but the smoky interior of the shop made it hard to maintain his demeanor. More annoying, the smoke obscured his view of the vials and jars which crammed the store shelves, most of which appeared to contain herbs or incense.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#15",
+      "node_id": 1300016,
+      "source": "#Kingdom Goods#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#16",
+      "node_id": 1300017,
+      "source": "#The Armory#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#17",
+      "node_id": 1300018,
+      "source": "#The Mercantile#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#18",
+      "node_id": 1300019,
+      "source": "#Scavenger's Meet#\tThe shop was littered with castoffs, forgotten trinkets and lost items which few would want or need to reclaim. Here it seemed that tarnish and rust were the things that were prized, the items to which they clung of only secondary value.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#19",
+      "node_id": 1300020,
+      "source": "#Et Cetera Goods#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#20",
+      "node_id": 1300021,
+      "source": "#The Arms of Dala#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#21",
+      "node_id": 1300022,
+      "source": "#Wyke Armors#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#22",
+      "node_id": 1300023,
+      "source": "#Six Toe Tavern#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#23",
+      "node_id": 1300024,
+      "source": "#The Dagger 'n Star Tavern#\tDespite the fact that light was dim and pooled only in shallow corners, the mood within seemed cheerful as the tavernkeeper animatedly related tales of mischief, reaping gales of laughter from people who had most likely heard his story dozens of times.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#24",
+      "node_id": 1300025,
+      "source": "#Raglam's Hobble#\tConversation within the room halted briefly as @4 pushed his way inside the room, returning a nod from a rough looking pair of mercenaries who otherwise seemed engaged in a dispute over a lost bet.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#25",
+      "node_id": 1300026,
+      "source": "#The Dusty Dwarf Inn#\tExcept for a thin strip of floor that led between the door, the counter and the stairs, a grey cowl of dust coated the inn's fixtures. The patrons of the inn seemed similarly stagnant as they glanced up lazily from their mugs of ale and brandy.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#26",
+      "node_id": 1300027,
+      "source": "#Lapping Meadows#\tExcept for a thin strip of floor that led between the door, the counter and the stairs, a grey cowl of dust coated the inn's fixtures. The patrons of the inn seemed similarly stagnant as they glanced up lazily from their mugs of ale and brandy.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#27",
+      "node_id": 1300028,
+      "source": "#River Pilot's Folly#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#28",
+      "node_id": 1300029,
+      "source": "#Wolf's Teeth#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#29",
+      "node_id": 1300030,
+      "source": "#Babon's Hostel#\tConversation within the room halted briefly as @4 pushed his way inside the room, returning a nod from a rough looking pair of mercenaries who otherwise seemed engaged in a dispute over a lost bet.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#30",
+      "node_id": 1300031,
+      "source": "#The Royal Bed#\tUnaware until he stepped into the room that he had been chilled, @4 was glad to have the solid oaken door of the room closed behind him. Others within seemed likewise contented as they chatted quietly among themselves, taking little notice of the new arrivals.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#31",
+      "node_id": 1300032,
+      "source": "#The Wayside#\tConversation within the room halted briefly as @4 pushed his way inside the room, returning a nod from a rough looking pair of mercenaries who otherwise seemed engaged in a dispute over a lost bet.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#32",
+      "node_id": 1300033,
+      "source": "#Rapid Rooks Inn#\t@5 elbowed Owyn in the ribs, noticing the color rising in his young companion's cheeks as they surveyed the three young ladies who graced the common room. With other matters on their minds, the attentions of a soft spoken female could be fatally distracting should a fight break out in the confines of the room.\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#33",
+      "node_id": 1300059,
+      "source": "#Tom's Tavern#\tDespite the fact that light was dim and pooled only in shallow corners, the mood within seemed cheerful as the tavernkeeper animatedly related tales of mischief, reaping gales of laughter from people who had most likely heard his story dozens of times.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#34",
+      "node_id": 1300060,
+      "source": "#The Nameless Hideaway#\tExcept for a thin strip of floor that led between the door, the counter and the stairs, a grey cowl of dust coated the inn's fixtures. The patrons of the inn seemed similarly stagnant as they glanced up lazily from their mugs of ale and brandy.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#35",
+      "node_id": 1300034,
+      "source": "#The Stranger#\tExcept for a battle scarred mercenary who glanced up at them, the common room of the tavern was completely empty. Only the restless shuffle of feet on the boards over their heads indicated anyone else was in the building.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#36",
+      "node_id": 1300035,
+      "source": "#The Flying Sow#\tUnaware until he stepped into the room that he had been chilled, @4 was glad to have the solid oaken door of the room closed behind him. Others within seemed likewise contented as they chatted quietly among themselves, taking little notice of the new arrivals.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#37",
+      "node_id": 1300036,
+      "source": "#Candlemaker's Grin#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#38",
+      "node_id": 1300037,
+      "source": "#The Point#\tExcept for a thin strip of floor that led between the door, the counter and the stairs, a grey cowl of dust coated the inn's fixtures. The patrons of the inn seemed similarly stagnant as they glanced up lazily from their mugs of ale and brandy.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#39",
+      "node_id": 1300038,
+      "source": "#Darkmoor's Rest#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#40",
+      "node_id": 1300085,
+      "source": "#Dencamp on the Teeth#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#42",
+      "node_id": null,
+      "source": "\tThe nightmaster looked tired.\n\t\"@0 for the night,\" he grumbled. \"Though, if you louse my beds I'll charge you ñdoubleð. We turn you out at sunrise -- oh, and there's a chamberpot in the corner if you need it. Shall I sign you in for the night?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#44",
+      "node_id": null,
+      "source": "\t@4 knocked on the counter.\n\tA few moments later the nightmaster appeared, an annoyed look on his face. \"You lot again. We can set you up again, same rate of @0 per night. Tonight though, I'd ñappreciate it if you didn't kick the other the other patrons while you were looking for the chamberpot. So...another night?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#45",
+      "node_id": null,
+      "source": "\tThe guest book was open.\n\tIntrigued, @4 checked to make certain the nightmaster wasn't coming, then scanned the pages. While there weren't any names familiar to him, he was puzzled by a red circle that had been drawn around their false travelling names.\n\t\"Get your nose out of there,\" the nightmaster snapped, appearing in the doorway. \"That's ñprivate information. Only business you have here is signing up for another night. Is that what you want?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#46",
+      "node_id": null,
+      "source": "\t@5 yawned.\n\t\"Sleep well?\" the nightmaster asked.\n\t\"Not exactly,\" @3 replied, rubbing his eyes. \"The fellow that was sharing our bed tossed all night. Kept burying his elbows in our guts.\"\n\t\"And his fingers in our ñmoney ñpouchesð!\" @5 growled, examining their finances. \"He stole a handful of golden sovereigns.\"\n\tThe nightmaster smiled nervously. \"You understand that nothing...that...the establishment can't be held ñresponsibleð. I can sign you up for another night, though. Are you...uh, interested?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#47",
+      "node_id": null,
+      "source": "\t@4 drummed his fingers on the counter.\n\tAfter a brief wait, the nightmaster entered whistling, a cheerful look on his face. \"So, gents, did you have a good night?\"\n\t\"Excellent,\" @4 intoned with false sincerity. \"I don't know when I've had a better sleep. That was, of course, when I could ñget to sleep. What were you doing down here, skinning cats?\"\n\tA deep blush spread across the innkeeper's face. \"I had ñcompanyð. It's been a while,\" he said sheepishly. \"You can't hold that against a fellow, now can you? So...can I sign you up for another night?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#48",
+      "node_id": null,
+      "source": "\tDaylight arrived.\n\tHis eyes rimmed red and his stomach turning, @4 stumbled down the steps to find the inn's nightmaster. Angrily, he pounded on the counter.\n\t\"Yes?\" the man said, glaring at @4. \"What is it?\"\n\t\"One of your patrons last night must have had some kind of sickness. I've been emptying my guts in your bedpans all morning.\"\n\tThe nightmaster looked unsympathetic. \"I shall have to see they are cleaned out.\" Glancing down at his guest book, he ran his finger down the names. \"I still seem to have space available this evening. Shall you be staying again?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#49",
+      "node_id": null,
+      "source": "\tThe nightmaster was waiting.\n\t\"There is a message for you,\" he said, seeing @4. Reaching beneath the counter, he produced @0 sovereigns. \"One of the guests that was here last night told me to give you these and tell you they are a gift from Delekhan.\"\n\t@4 froze, his hand clasped over the coins. \"Anything else?\"\n\t\"No, that was it,\" the man said cheerfully. \"Just give them these coins and tell them it was from Delekhan. So, how about spending a little of that new found fortune on another night here, eh? That will more than cover the cost.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#50",
+      "node_id": null,
+      "source": "\t@4 smiled.\n\tStill feeling light headed from his well-earned sleep, he waited patiently as the nightmaster stirred from his office behind the counter.\n\t\"You seem to be in a good mood,\" the man said, picking up the guest register.\n\t@4 replied only by nodding noncommittally, knowing the innkeeper might increase his rates if he seemed too pleased with the service.\n\t\"Seeing as how you slept so well, how about another night?\" the nightmaster asked. \"And just to show you how generous I am, I'll keep the same rate. @0 per night. What do you say?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#51",
+      "node_id": null,
+      "source": "\t@4 frowned.\n\t\"Another time nightmaster,\" he said, rapping a knuckle against the counter. \"A bit of advice, however. You want more customers, I'd advise dropping your prices. Even the Empress of Kesh would balk at what you're asking.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#53",
+      "node_id": null,
+      "source": "\tThe innkeeper frowned.\n\t\"Let me guess,\" he said, reading @4's distressed face as he searched his pack for the money. \"You haven't any money but you just need someplace to bed down for the night because you're being chased by some mob of ruffians and you'll be eternally in my debt if I just let you stay the night. Right?\"\n\t\"I truly thought I had the funds,\" @4 said.\n\t\"Hundreds of men are eternally in my debt but they don't pay the bills. Get out of here.\"\n\tGraciously the innkeeper escorted them to the door.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#54",
+      "node_id": null,
+      "source": "\t@4 settled up the account.\n\t\"Room's upstairs,\" the nightmaster said. \"Have a good rest.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#55",
+      "node_id": null,
+      "source": "\tThe room was cramped.\n\tShrugging, @3 stepped over snoring bodies and selected a spot of floor which looked like it might be comfortable for the night, while @5 squeezed into a bed already occupied by three disheveled looking men.\n\t\"Ah, the romance of travelling,\" @3 said, with a chuckle. \"See you all in the morning.\"\n\tIn moments, they were all fast asleep...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#56",
+      "node_id": null,
+      "source": "\tIn moments, they were all fast asleep...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#58",
+      "node_id": null,
+      "source": "\tLeft clicking on this button will exit the heal interface.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#59",
+      "node_id": null,
+      "source": "\tLeft clicking on this button will heal a player.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#60",
+      "node_id": null,
+      "source": "\tLeft clicking on this button go to the next player.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#61",
+      "node_id": 1300075,
+      "source": "\tThe priest shook his head.\n\tTwice he had examined everyone from head to toe, but apparently he had found nothing wrong with his patients.\n\t\"If you are cursed or sick, I see no sign of it,\" he said to @4. \"You are as healthy as I could imagine.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#62",
+      "node_id": 1300083,
+      "source": "\tThe priest shrugged.\n\t\"There is nothing wrong with you that I may mend,\" he said at last. \"Your wounds will heal themselves with time or may be mended by chirurgeon, but I can only heal those things of a ñspiritual nature. There is no curse upon you, nor has Lims-Kragma marked you to come soon to her halls. You shall survive without assistance.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#63",
+      "node_id": 1300076,
+      "source": "\t@ blanched.\n\t\"I'm afraid I may have overextended myself. Seems I haven't the money I thought I had.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#64",
+      "node_id": 1300077,
+      "source": "\t@ was studied.\n\t\"It will require many hours of our time and even priests must find ways to pay for their needs. For your condition we will need many oils and candles... @0 should cover the cost of our services.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#65",
+      "node_id": 1300078,
+      "source": "\t@ sat up.\n\tLooking around the room, he blinked at the haggard looking healer priest who was propped up in the corner. Dimly, he recalled the events of the grueling hours which had passed, hours in which he had thrashed on the bed as clerics chanted over him, other times in which he lapsed into fevered dreams filled with nightmarish creatures.\n\t\"You are free of your demons,\" the priest said with a weak smile. His voice was gravelly with exertion. \"It was a tough battle, but you are well enough as you are. You may go.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#66",
+      "node_id": 1300079,
+      "source": "\t@ presented the @1 to a priest.\n\tRunning his hand over the metal, the young man frowned, then glanced up at @. \"This has ñalready been favored by the gods. If you wish, I may remove the enchantment upon it, but you should know the potency of an enchantment varies between temples. It may be that our blessing would be less effective.\"\n\t\"How so?\" @ asked.\n\t\"It has to do with the nature of the gods. The deities who are counted as more forceful have the strongest enchantments; these would be Lims-Kragma, Kahooli, Dala and Tith. After them come the moderate gods; Killian, Silban, Ruthia, Banath and Astalon. The rest of the gods and goddesses seem to be more passive when it comes to human affairs and their blessings tend to be less effective. While I cannot be sure which of the temples have placed their blessing on this weapon, I still may remove its enchantment. Do you wish for me to do so?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "@1",
+        "\\x0a",
+        "\\x09",
+        "@",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#67",
+      "node_id": 1300080,
+      "source": "\tA priest accepted the item.\n\tCarefully, he laid the @0 on a low table covered with a white cloth while he opened a book which he retrieved from a cluttered bookshelf. Flipping through its tattered pages, he found a column of numbers and ran his finger down them.\n\t\"I've always wondered why the price of a blessing varied from item to item,\" @4 said, watching the priest. \"Does it have something to do with the gods?\"\n\t\"Rather more to do with how the item was made,\" the priest explained. \"If there are any special metals used in its construction or spells used to bend the metal, then they become factors in how difficult it will be for us to make a blessing óstick.\" Leaning closer to the page, he stabbed at a figure. \"Ah! Here it is... for your @0, it will be @1,\" the priest said.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "@0",
+        "@1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#69",
+      "node_id": null,
+      "source": "\t@ blanched as he realized he was short of funds. \"I'm afraid I may have overextended myself. Seems I haven't the money I thought I had.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#71",
+      "node_id": null,
+      "source": "\t@ waited.\n\tFar off, he could hear the low chanting of the priests in their alcoves, their prayers weaving the fabric of the enchantment. It seemed the better part of the day had passed away as he listened to the sonorous whispers rising and falling in the near dark. Suddenly, the doors to a great chamber were thrown open and the priest emerged, the blade laid in his arms, swaddled in a white cloth.\n\t\"Your weapon has been enchanted,\" the priest said with a bow. \"Use it as your place upon the Great Wheel bids you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#72",
+      "node_id": null,
+      "source": "\t@ waited.\n\tFar off, he could hear the low chanting of the priests in their alcoves, their prayers weaving the fabric of the enchantment. It seemed the better part of the day had passed away as he listened to the sonorous whispers rising and falling in the near dark. Suddenly, the doors to a great chamber were thrown open and the priest emerged, the armor laid in his arms, swaddled in a white cloth.\n\t\"Your armor has been enchanted,\" the priest said with a bow. \"Use it as your place upon the Great Wheel bids you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#73",
+      "node_id": 1300081,
+      "source": "\t@ handed over the item.\n\tWhile the priest scurried off with the @0, he looked over the tapestries of the Temple's inner sanctum. Several of them looked to be hundreds of years old, their religious themes fraying or threadbare, patched in humble earnest by weavers far less accomplished than the original makers.\n\t\"I regret that your petition has been órefused.\" Startled, @ turned to find that the priest had returned, a frown etched on his face. \"It may not be blessed. For whatever reason, it has been deemed... óinappropriate.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "@",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#74",
+      "node_id": 1300072,
+      "source": "\t@4 pulled the curtains aside.\n\tThe rear section of the temple was as dramatic as was the meditation chamber; a large pool occupied the center of a lush courtyard and was hemmed in on all sides by an alabaster peristyle with climbing vines. Cloistered immediately off the open area were several arches, doorways either blocked by heavily woven curtains or choked with clouds of obscuring incense.\n\tNearby, a gong sounded and immediately a priest hurried out of a doorway, halting as he caught sight of the unexpected supplicants...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#75",
+      "node_id": null,
+      "source": "\tThe priests bid them farewell.\n\tLeaving the lushness of the central courtyard, they passed back through the curtains into the deserted meditation chamber.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#78",
+      "node_id": null,
+      "source": "\t@4 searched his pack.\n\t\"Which of your items would you like blessed today?\" a priest asked.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#80",
+      "node_id": null,
+      "source": "\tThe priest stared at them.\n\tHis eyes much like guttering candle flames, he leaned against the wall of the temple for support. \"I cannot help you, not now. Not until I can get some sleep,\" he murmured. \"Sleep...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#81",
+      "node_id": null,
+      "source": "\tThe priest shook his head.\n\t\"I am only just now training to be a healer,\" he said, directing his gaze at the floor. \"Until I have learned more, you will need to have High Priestess Beyla attend to any healing you require.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#82",
+      "node_id": 1300040,
+      "source": "#Temple of Killian#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#83",
+      "node_id": 1300042,
+      "source": "#Temple of Ishap#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#84",
+      "node_id": 1300044,
+      "source": "#Temple of Silban#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#85",
+      "node_id": 1300046,
+      "source": "#Temple of Sung#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#86",
+      "node_id": 1300048,
+      "source": "#Temple of Lims-Kragma#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#87",
+      "node_id": 1300050,
+      "source": "#Temple of Ruthia#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#88",
+      "node_id": 1300052,
+      "source": "#Temple of Banath#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#89",
+      "node_id": 1300054,
+      "source": "#Temple of Kahooli#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#90",
+      "node_id": 1300056,
+      "source": "#Temple of Dala#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#91",
+      "node_id": 1300058,
+      "source": "#Temple of Tith#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#92",
+      "node_id": 1300087,
+      "source": "#Temple of Guiswa#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#93",
+      "node_id": 1300068,
+      "source": "\t@4 squinted.\n\tNo matter how he looked at the picture, it didn't seem to represent anything in particular.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#94",
+      "node_id": 1300073,
+      "source": "\t@4 squinted.\n\tThe wall looked strangely barren, as if a space had been prepared for a decoration which had not yet been crafted.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#95",
+      "node_id": 1300069,
+      "source": "\tThe fire was ñcoldð.\n\tUnnerved by the unnatural flame, @4 decided to explore elsewhere.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#96",
+      "node_id": 1300070,
+      "source": "Leave the temple.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#97",
+      "node_id": 1300071,
+      "source": "The curtains seemed to lead to an inner sanctum.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#99",
+      "node_id": null,
+      "source": "\tLeft clicking on this button will cancel the teleport.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#100",
+      "node_id": null,
+      "source": "\tLeft clicking on a temple site you have visited will teleport you to that temple.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#102",
+      "node_id": null,
+      "source": "\tThe design was odd.\n\t\"I see the mandala interests you.\" Turning, @4 noticed a thin young man standing in the archway, his hands hidden in the folds of his robe. \"While the relations between the temples and the new Academy of Magic at Stardock have been cool, it is one of the treasures they have passed on of the Tsurani magic. It has given us great mobility.\"\n\t\"Mobility?\" @4 asked. \"How can a painting help you move?\"\n\tThe acolyte smiled. \"It would be easier to explain by example. Tell me about a place you are familiar with, a place where you have spent a good deal of time.\"\n\t@4 shrugged, describing the place he had grown up, the layout of the rooms, the various things associated with his home.\n\t\"Very good,\" the man replied. \"As you described those things to me, doubtless you also experienced certain memories through which you were able to relive your past. In the same way, these mandalas help us locate a óplace. By memorizing a pattern painted on the wall of a specific temple, we may ówill ourselves there.\"\n\t\"I could óthink my way home with this?\"\n\t\"No. The memory of your home would be too unfocused for you to make the attempt. But, if you were to memorize this pattern, you could return here by recalling its image in your mind when assisted by the power of another Temple.\"\n\t@4 looked back at the mandala, lost in thought for a moment, his eyes soaking up the intricacies of it. \"I assume there would be some fee associated with moving between locations?\"\n\tThe acolyte nodded. \"As simple as it is in concept, it still requires a great deal of effort to move even a single individual, though I am told the Tsurani Great Ones move about with less effort. I believe Pug wished to restrict our knowledge of this in some ways until we had proven we would not abuse its power.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#103",
+      "node_id": null,
+      "source": "\tA priest approached.\n\tHis dark robes rustling as he crossed into the meditation chamber, he came to a halt behind @0. \"I sensed that someone studied the mandala. Am I to assume you wish to call upon the powers of the Temple?\"\n\t\"Perhaps,\" @4 said. \"I would like to ponder my options first.\"\n\t\"Certainly,\" the priest replied. \"If you will allow me, I will alert the required brethren while you make your choice. Should you decide to summon the mandala, I will collect the fee at that time.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#104",
+      "node_id": 1300062,
+      "source": "\t@4 blanched.\n\t\"I'm afraid I may have overextended myself. Seems I haven't the money I thought I had.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#105",
+      "node_id": 1300063,
+      "source": "\tA bell sounded.\n\tAbruptly a darkly robed priest swept into the room and came to a halt behind @4. \"I was alerted that you might desire to use the mandala.\"\n\t\"Desire, perhaps, but I haven't seen any of the other symbols,\" @4 said. \"I don't suppose you could go with us?\"\n\t\"I am regret that I cannot assist you,\" the priest said. \"My duties require I stay here to guide others that wish to arrive. I am sorry.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#106",
+      "node_id": 1300064,
+      "source": "\t@4 recalled the mandala.\n\tLike a wheel of fire, it exploded across @4's consciousness, vanquishing the world in a searing blaze of white light. For a heartbeat all that existed in universe was a single point of rotating fire, spun by an unseen hand with incredible power. Spun by the hand of a god.\n\t@4 blinked. As abruptly as it had burst into existence, the mandala was gone, replaced by a simple painting upon a temple wall. A ñnew temple wall. Nearby, a clutch of darkly robed acolytes waited, their faces registering neither shock nor fear at the sudden arrival.\n\t\"You knew we were coming?\" @4 asked, stepping away from the symbol.\n\t\"As a courtesy, we are given some warning by the sending Temple,\" one of the priests said. \"You will likely feel a little disoriented for a time, but the sensation should pass. Be welcome.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#107",
+      "node_id": 1300065,
+      "source": "\tThe priest waited.\n\tSighing, @4 stepped away from the mandala on the wall. \"I don't believe we will be using your services at the moment, brother. Thank you for your attentions.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#108",
+      "node_id": 1300084,
+      "source": "\tThe priest chuckled.\n\tPerplexed by what the darkly robed acolyte suddenly found so amusing, @4 arched an eyebrow and waited for an explanation.\n\t\"Spare me the baleful look,\" the priest said mirthfully. \"Apparently you are a bit disoriented. The mandala you wished to be transported to is right in front of your face. ñThis temple.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#110",
+      "node_id": null,
+      "source": "\t@4 seethed.\n\tFour times they had asked one of the temple's blood stained priests to send for the high priestess, and four times they had been left waiting in the alcoves of the temple's central courtyard. When at last it became apparent their repeated summons were not going to be answered, @4 shook his head. \"It would seem the Red Jawed Hunter has other hunts to pursue. I am weary of waiting. Let us leave.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#112",
+      "node_id": null,
+      "source": "\tThey were shown to a chamber.\n\tHere, there were no flagstones or chipped tiles underneath their feet, but instead a thick carpet of grass jeweled with dew. At the far end of the room, a pair of yew trees overarched a throne of woven reed, upon which was seated a striking looking woman, her shoulder length black hair bound behind her back with a green cord.\n\t\"I am the High Priestess of this Temple,\" she said musically. \"Killian welcomes you to her domain. Come. Be seated.\"\n\tListening with keen interest to the stories told by @4, the priestess remained as motionless as a statue. At last, she folded her hands in her lap and sighed heavily.\n\t\"That was most entertaining,\" she said. \"I particularly liked the part about the drunk. But I would advise you in the future to keep an eye on the food you eat. You shouldn't simply gulp down the first thing you find without taking a look at it first.\"\n\tProperly chastened, @4 shrugged his shoulders and promised he would be more careful in the future. Cheered, he didn't mind when the High Priestess escorted them from the room.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#114",
+      "node_id": null,
+      "source": "\tAcolytes escorted them.\n\tAfter passing through a maddening series of arches, they finally were let into a large chamber upon whose floor a seven rayed star was formed in mosaic by dark blue tiles. A small priest stood in the symbol's center, his back turned towards them.\n\t\"We are looking for the high priest of this Temple,\" @4 said. \"Would you know where we could find him?\"\n\t\"I am he.\" As the man half-turned, @4 suppressed a gasp at the priest's hideous visage. Stuck to the left side of his face was a dark brown strip of cloth, a ragged hole torn in it to allow a pinkish looking eye to peer out at them. \"What is it that you want?\" he wheezed, his frame shuddering with each breath. \"Are you new acolytes?\"\n\t\"No.\" @4 swallowed with some difficulty. \"We are...travellers.\"\n\t\"As all under the heavens are,\" the man said, making a feeble gesture at the vaulted ceiling above them. \"All travellers. Please, let us talk a while.\"\n\tWhen at last many of the candles in the chamber had burned low, the priest nodded his head. \"I have enjoyed this,\" he said quietly.\n\t\"As have we,\" @4 replied graciously, rising to leave. \"Oh, before I forget, where was the interesting statue again that you mentioned?\"\n\t\"The oracle? In the hills to the east of Malac's Cross,\" the priest replied. \"Perhaps your journeys will take you there soon.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#116",
+      "node_id": null,
+      "source": "\t@4 requested an audience.\n\tAfter several minutes of waiting, a plump woman dressed in brown robes appeared in the courtyard, a quizzical look etched on her face as she hurried across the flagstones. Glancing at @4, she arched an eyebrow. \"You are the father of the child?\"\n\t@4 blinked. \"I'm no one's father as far as I'm aware, but...\"\n\t\"Then why in the sweet goddess' name are you ñhereð?\" the woman asked, blinking furiously as beads of sweat trailed into her eyes. \"I've got four exhausted acolytes and a terrified woman who we aren't sure will make it through birth. Then I have a priestess come running and telling me that a lord is demanding an audience. Did you just decide to drop in and chat?\"\n\tTurning red, @4 tried to make amends. \"I didn't really mean to...\" But before he could finish, the priestess was storming back across the courtyard.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#117",
+      "node_id": null,
+      "source": "\tA priestess escorted them.\n\tExpecting a chamber in keeping with the rest of the grandeur of the Temple, @4 was startled when they were led into a cramped room where an old woman sat reading through a sheaf of papers. Glancing up, the high priestess squinted at them, then shook her head.\n\t\"You will excuse me, but I was expecting someone else,\" she said, laying aside the papers she had been reading. \"A few days ago I sent a summons to one of our faithful, a Franklin that lives to the north of Eggley.\"\n\t\"I doubt he would have been able to get to you,\" Owyn replied. \"We ran into a band of men just outside the temple who seemed bent on killing any that came up the road.\"\n\tThe priestess exhaled loudly. \"The Quegian fever is spreading here, and likely those were more men infected with it. If you were to go to him and tell him the way is clear, I would consider it a very great favor.\" Looking back down at the tracts scattered in her lap, she rubbed at her eyes. \"You'll forgive me, but I really must get back to work on these. Please see yourselves out. Goddess blessing on you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#119",
+      "node_id": null,
+      "source": "\tThey waited.\n\tAfter an uncomfortably long wait, the high priestess' plump assistant emerged into the courtyard, her face high with color.\n\t\"The high priestess sends her regrets that she cannot come at the moment,\" Belandra said with a respectful bow. \"She is otherwise occupied. She sends her thanks and her gratitude for having helped us in the past and asks that you forgive her this discourtesy. Goddess blessing on you gentlemen.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#120",
+      "node_id": null,
+      "source": "\tA messenger went to find the high priestess.\n\tIn a few moments, a tall, proud looking woman limped from under one of the arches, her long grey hair hanging lank around her face as a plump woman trundled at her side for support. When @4 hailed them, the shorter woman wheeled angrily. \"The high priestess has been through a terrible ceremony,\" she snapped. \"She has no time for...\"\n\t\"Belandra!\" The high priestess jerked her arm from her assistant's grasp, silencing her with a cold stare. \"I am neither so old, nor so ill in the goddess' favor that I cannot spare a moment to speak with these gentlemen. If you were to remember the spirit of our catechisms more often than their letter, I think you might replace me someday. Our place is in service to both the earth mother ñand those who worship her. Remember.\"\n\t@4 bowed his head. \"That is very gracious of you, high priestess, but if another time would be more convenient...\"\n\tThe old woman chuckled darkly. \"Speak, noble one.\"\n\tSensing that brevity was in his best interest, he quickly related the things Devon had told him during their visit to the Stranger Tavern in Eggley. When, at last, he had finished, a grave expression was on the high priestess' face.\n\t\"There is no curse upon the town, whatever this man Devon may have told you,\" she said. \"But we share fault in this. The ritual of the Festival never was intended like this, and now it has brought shame on this Temple and misery upon our faithful of Eggley. Nevermore shall there be a Festival...\"\n\tBelandra gasped. \"High priestess! the Festival...\"\n\t\"Silence, child,\" she said, turning her glare on @4. \"I will also see this ñCollector brought to justice! If you can find him, send him to us with word that we have a reward to give him. I will see you very well remunerated for your efforts. Goddess blessing on you.\"\n\tTurning, the high priestess moved across the courtyard, followed quickly after by her plump assistant...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#121",
+      "node_id": null,
+      "source": "\t@4 sent for the high priestess.\n\tAfter only a brief pause, the woman appeared in the courtyard, thankfully without the company of her plump assistant.\n\t\"As you have returned so early, I must only assume you have found the gentleman named the Collector,\" she said quickly. \"Is it so?\"\n\t@4 shook his head. \"We have not met face to face as yet, but...\" Holding up a hand, the high priestess shook her head. \"No excuses. I shall see you again once you have sent him to us. Goddess blessing on you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#122",
+      "node_id": null,
+      "source": "\tA messenger went to find the high priestess.\n\tIn a few moments she appeared, her grey hair floating behind her as she greeted her guests. \"On behalf of the Earth Mother, we thank you,\" she said. \"The man who called himself the Collector is now in our custody.\"\n\t\"What will become of him?\" @4 asked.\n\t\"He will learn what it means to anger a ñgoddessð,\" she replied. \"After, if he still lives, we will see he is rehabilitated.\"\n\t@4 shivered as he contemplated the future that likely lay ahead for the criminal. In the few instances he had seen a convicted heretic punished, he had been forced to avert his eyes. Hesitantly, he cleared his throat. \"I believe there was some mention of a reward?\"\n\tThe priestess nodded. \"I have arranged for a few healing potions to be given to you as well as a small sum of gold. You will have them before you leave the Temple. I must leave you now to begin dispensing justice on this Collector. Goddess blessing on you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#124",
+      "node_id": null,
+      "source": "\t@4 asked to see the high priestess.\n\t\"She can't see you.\" Turning, they noticed another, hawkish looking priest half-hidden in the shadows of the colonnade, his eyes rimmed red. He rubbed vigorously at his face before rising to stand next to his fellow priest. \"Mariah and I just put her abed about half an hour ago. She awoke ñscreaming this morning.\"\n\tThe two priests exchanged a significant look, but the meaning of it was lost on @4. \"Is she ill?\" he interrupted.\n\t\"No, no.\" the taller priest said with assurance. \"It is only a symptom of things that have been going on here for a short while. It will pass.\"\n\t\"You sound very certain, Kellan,\" the other priest said angrily.\n\t\"None of us has slept well in weeks. Our healer is so exhausted that he may not even bind so much as a finger pricked on a spindle! There is something evil at work here.\"\n\tBemused, @4 looked to Kellan. \"Why would someone be trying to keep you from sleeping? Who could do it?\"\n\tBoth priests shrugged. \"The purpose is beyond us, but we know that whomever is responsible is a magician and ñvery close by,\" the shorter priest replied. \"I have also sensed in his dream sendings that he has others with him, soldiers perhaps. I don't actually believe he means to communicate with us, but instead with someone far away. Either way, I don't believe any of us shall have an hour's rest until he is dead or we've discovered what he wants.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#125",
+      "node_id": null,
+      "source": "\tKellan greeted them.\n\t\"You look a little more lively than the last time we met,\" @4 said. \"Have you gotten a bit of rest?\"\n\t\"The first I've had in a while,\" the priest admitted. \"As I suspected, the dreams plague us no more. I've even heard our healer is once more on his feet. Our high priestess is still tired as yet, but I assume she will be back about her duties in no time. Things return to normal as by the will of Sung...\"\n\tGorath hissed through his teeth at the bowing priest. \"Like all priests, you credit those who watch and not those who ódoð.\"\n\tSnapping abruptly upright, a hurt look glowered in Kellan's eyes. \"What do you mean?\"\n\t\"He means,\" Owyn interjected, \"that ówe found the person responsible for the dream sendings. There was a moredhel magician and ówe took care of the problem.\"\n\tSensing that the boy might go too far in his glory hounding, @4 seized Owyn's arm in a tight grip. \"Please forgive my companions for their outbursts. They have been on the road for quite some time and have óforgotten ótheir ómannersð.\"\n\t\"No apology is necessary,\" the priest said, removing @4's grip on Owyn's arm. \"They are quite proper in asking acknowledgement. How may I reward you?\"\n\t\"Do you have any spells I might learn?\" Owyn interjected. Seeing the anger flaring in the seigneur's eyes, he quickly amended, \"If there are other magicians like them, it might be prudent for us to be better prepared to meet the challenge.\"\n\tKellan nodded. \"I have one such spell I can teach you that will allow you to protect yourselves. If the others will stay here?\"\n\tFuming, @4 nodded his reluctant assent, taking a seat next to the reflection pool, motioning for Gorath to do likewise. Wordlessly, both sat down and prepared for a long wait...\n\tAfter several hours Owyn returned, a light smile flickering on his lips, but in the intervening time, @4's anger had not abated. Thanking the priest as graciously as he could, @4 turned and stormed from the temple's courtyard, his charges following quickly behind him...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#126",
+      "node_id": null,
+      "source": "\t@4 asked to see the high priestess.\n\t\"She can't see you.\" Turning, they noticed another, hawkish looking priest half-hidden in the shadows of the colonnade, his eyes rimmed red. He rubbed vigorously at his face before rising to stand next to his fellow priest. \"Mariah and I just put her abed about half an hour ago. She awoke ñscreaming this morning.\"\n\tThe two priests exchanged a significant look, but the meaning of it was lost on @4. \"Is she ill?\" he interrupted.\n\t\"No, no.\" the taller priest said with assurance. \"It is only a symptom of things that have been going on here for a short while. It will pass.\"\n\t\"You sound very certain, Kellan,\" the other priest said angrily.\n\t\"None of us has slept well in weeks. Our healer is so exhausted that he may not even bind so much as a finger pricked on a spindle! There is something evil at work here.\"\n\tBemused, @4 looked to Kellan. \"Why would someone be trying to keep you from sleeping? Who could do it?\"\n\tBoth priests shrugged. \"The purpose is beyond us, but we know that whomever is responsible is a magician and ñvery close by,\" the shorter priest replied. \"I have also sensed in his dream sendings that he has others with him, soldiers perhaps. I don't actually believe he means to communicate with us, but instead with someone far away. Either way, I don't believe any of us shall have an hour's rest until he is dead or we've discovered what he wants.\"\n\tSeeing that @4 had suddenly grown silent, the priests asked what was the matter. Quickly @4 explained about their encounter with the moredhel spellcaster Nago and the fact that he was very probably the cause of their previous distress.\n\t\"But this is wonderful news,\" Kellan said, clapping his hands. \"Things will improve here once we have all gotten our sleep. Perhaps our healer is already rested. He might be able to bind your wounds if you were injured.\"\n\t\"We shall also see you rewarded,\" the other priest insisted, despite @4 persistent shaking of his head.\n\t\"Do you have any spells I might learn?\" Owyn interjected. Seeing the anger flaring in the seigneur's eyes, he quickly amended, \"If there are other magicians like them, it might be prudent for us to be better prepared to meet the challenge.\"\n\tKellan nodded. \"I have one such spell I can teach you that will allow you to protect yourselves. If the others will stay here?\"\n\t@4 nodded his reluctant assent, taking a seat next to the reflection pool, motioning for Gorath to do likewise. Wordlessly, both sat down and prepared for a long wait, chatting wearily with the other priest of Sung. After several hours Owyn returned, a light smile flickering on his lips. \"A wonderful spell,\" he whispered in @4's ear. \"I can't wait to try it out in practice.\"\n\t\"Don't be too eager,\" @4 shot back. \"I'm not quite in the mood to run across another moredhel any time soon.\"\n\tThanking the priests for their kind reward, @4 turned and escorted his companions out of the courtyard...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#127",
+      "node_id": null,
+      "source": "\tFire was everywhere in the Temple.\n\tIn braziers, in pits, in censers; flame seemed to the principle decoration in many of the chambers they were led through on the way to the high priestess. Though by all rights Prandur was the proper god of fire, @4 mused that Sung could easily claim a right to it by the way her priests and priestesses adorned her temple.\n\tAt last they were admitted to a large circular chamber ringed by flaming torches and in which the high priestess was kneeling at an altar of flawless white marble. Rising, she turned to face her guests and dismissed the acolytes who had brought them.\n\t\"High priestess,\" @4 said with a respectful bow. \"We have been on the road for many days and merely wished to express our homage to the goddess. We are in need of whatever luck we might find and whatever wisdom.\"\n\tA faint look of distress appeared in the woman's green eyes. In reply she said nothing, keeping her gaze fixed intently on @4's face.\n\t\"Have we given offense?\" @4 asked. \"Transgressed in some way?\"\n\tAgain the priestess said nothing, but touched a hand to her lips and then to her ear, giving the sign that she was mute. Understanding, @4 bowed again to her and begged forgiveness. \"We shall trouble you no further.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#129",
+      "node_id": null,
+      "source": "\tThere were no walls in the high priestess' chamber.\n\t@4 struggled to imagine how any such room could fit within the confines of the Temple, seeming as vast as any river valley through which he had ever passed. Even more startling had been the winding maze-like corridors the death acolyte had led them through to reach the room.\n\t\"Few rush to speak to our lady. I am curious to know why you wish to converse with us.\" the high priestess said softly. A gauzy black pavilion draped her throne, obscuring from view all but her lithe form limned in witchlight and a single pale foot which she rested upon a skull carved of onyx. \"Why do you call on the Drawer of Nets?\"\n\tSeeing no point in lying to her, @4 shrugged. \"Curiosity, as much as anything High Priestess. I wished to learn a little more about what awaits me when I am no longer living and you, short of the Mother Matriarch in Rillanon, are probably the one with the best answers. I do not like surprises.\"\n\t\"Unless you are prepared to devote your life to her services, I cannot help you. It is not something I may merely unfold for you in an hour or an afternoon,\" she said. \"I will say this. There is no joy or love in her realm, but neither is there sorrow or pain. You have nothing to fear of her unless you swear the oaths of a Nighthawk.\"\n\t\"Why? What would that mean?\"\n\t\"Pain everlasting,\" the high priestess replied. \"Those who are Nighthawks have sworn a dark oath, and those of them that are known as the Black Slayers swear the darkest oaths of all, allying themselves to other gods or goddesses who would hold them free of the portal of death at the price of their souls. Once a man becomes a Black Slayer, he may only be called into her halls by an invocation of Lims-Kragma herself, the Prayer of ñFinal ñRestð.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#131",
+      "node_id": null,
+      "source": "\t@4 seethed.\n\tFour times they had asked one of the temple's golden robed priestesses to send for the high priestess, and four times they had been left waiting in the alcoves of the temple's central courtyard. When at last it became apparent that their repeated summons were not going to be answered, @4 shook his head. \"We don't have time for this. Let's get going.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#133",
+      "node_id": null,
+      "source": "\tThe hour was sounded.\n\tClapping his hands over his ears, @4 looked resentfully up at the brass bells as they passed underneath them, mourning the fact that he hadn't a bit of beeswax to block out the clanging noise. If the priest leading them took any notice, he made no sign.\n\tThe Lector of the Temple of Banath greeted them at the door to his study, a greying man with rounded features who patted each on the back as they passed inside to his study.\n\t\"How may the Servants of Banath be of service?\" he asked.\n\t\"I'm not certain,\" @4 said, taking a seat by the window. \"We have a difficult journey ahead and I was hoping that perhaps your god might have some insight into our predicament.\"\n\tThe priest motioned for him to continue. Quickly @4 related most of their tale, with @5 breaking in occasionally to correct certain inaccuracies.\n\tWhen the tale was, at last, finished the lector was squinting at them. \"I am not sure of how we could be of assistance to you,\" he said. \"It is the place of the temple to give aid when possible, but it seems as if many of the things you are having difficulty with you have brought on yourselves or are matters that are beyond the reach of what I may do for you. I am sorry.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#136",
+      "node_id": null,
+      "source": "\tThey were escorted to the lector's chambers.\n\tSeated behind a large mahogany desk was a man of middle years, the hair greying at his temples, sweeping back from a wide tanned forehead. Without standing he motioned for them to take seats.\n\t\"I have very little time this morning,\" the lector said. \"Please make whatever request you have as direct as possible.\"\n\t\"That suits me fine. We're looking for a band of murderers,\" James said. \"They killed a squad of men sent from Bas-Tyra on the First Adviser's orders to investigate the possible activities of Nighthawks in Romney. The idea occurred to me while we were standing in the meditation chambers the Temple of Kahooli might know something of it.\"\n\t\"I am listening,\" he replied gravely.\n\t\"When I was studying under Father Timothy in the Temple of Astalon in Krondor,\" James said, \"I learned quite a bit about the various temples and their gods. As I recalled, Kahooli is the god of revenge...\"\n\t\"ñJusticeð,\" the lector snapped. \"Not revenge. If one is innocent, he has nothing to fear from The Howler After Fugitives. If one has violated the wise strictures of our gods and eluded punishment, however, we are the hounds that bay at his heels. There is no place one can run to that we cannot sniff them out.\"\n\tJames nodded. \"A well known fact. But it is also well known that the Temple of Kahooli hires assassins on occasion to do the sniffing.\"\n\t\"If you imply that we hired the Guild of Assassins to kill the men in Bas-Tyra, it is not so. We have had no dealing with the Hawks of the Night for several months. It may well be that we have common cause at the moment.\" The priest stopped for a moment as if considering something, then continued slowly. \"They have become churlish. They no longer follow the codes of piety which we lay out for the behavior of our faithful and they have not paid a tithe in a great deal of time. We wish to separate them from our ranks, but... No protectors of the faith will challenge them.\"\n\tJames leaned across the desk. \"I ówant the Nighthawks, Lector. Tell me the name of the man who leads them and where he may be found and we both can profit from an end to them.\"\n\tThe lector laughed a dark, rumbling laugh that had nothing of humor in it. \"I wish that it were that easy. Kahooli, how I wish. But when the Nighthawks swore their oath to the Temple, they required of us a ñholy oath---to Kahooli himself---that their identities could never be revealed to any that were not of the Temple itself. You would have to be at ñleast protector of the faith before I could even think of giving the name of whomever you seek.\"\n\t\"I see.\" James sat back in his chair, his eyes full of brooding. \"How would we become protectors?\"\n\t\"You would have to study with the Prelate who lives nearby and learn the codes of piety,\" the lector said, a clever smile tugging at the corner of his mouth. \"Though I will warn you, his house is well protected. There are many who ñdo perceive us as the dispensers of revenge and attempt to save themselves peremptorily. I will say this---if you can come to the Temple and have performed even one of the acts of piety that the Lector teaches you, I think I can see to it that you are made protectors of the faith.\"\n\t\"And you will tell us where to find these Nighthawks?\" James asked.\n\tThe priest smiled. \"Most certainly.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#139",
+      "node_id": null,
+      "source": "\tThe lector agreed to see them.\n\tSipping from a steaming cup of tea, he looked critically across the desk at them. \"The men looking for the Nighthawks,\" he said. \"I am glad to see you once again, but as yet, you cannot be inducted as protectors of the faith,\" the lector said. \"You ómust perform one of the acts of piety. There is simply no other way that I can help you. The laws of our Temple are very specific and binding.\"\n\t\"Which act would be best?\" @4 asked, at a loss to know what to do.\n\tThe lector shook his head. \"It is not a question of best or easiest. These things vary from person to person, though many may find that one or another option simply may not be open to them through conflicting oaths or practicality. Again I say to you, go and visit the Prelate. He is the only man that will be of any use to you in this. He lives very close by.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#140",
+      "node_id": null,
+      "source": "\t@4 stumbled.\n\tCursing oaths that seemed far from appropriate within the hallowed temple walls, he followed the priest robed in light grey. Behind him, @3 and @5 seemed similarly pained, but all made it well enough to the lector's study.\n\tPushing their way into the oak paneled room, they took their seats and waited. In a few moments, the lector arrived, arrayed in his dark robes of office. Looking at all their faces, he nodded with a certain grim satisfaction. \"You have chosen the mortification of the flesh,\" he said. \"An admirable act of piety. It is enough.\"\n\t@4 nodded. \"Good. Then tell me about the Guild of Assassins.\"\n\t\"In a moment.\" Stepping back to the door, he whispered to the priest who waited outside. Footsteps hurried off into the distance. \"Haestan will bring rations for you. You will be of little use against Navon and his band without your strength.\"\n\t@4 sat forward in his chair. \"Navon ñwhoð?\"\n\t\"Navon du Sandau,\" the lector said, emphasizing each syllable. \"He lives here in Kenting Rush, poses as a travelling merchant. That gives him the excuse he needs to cover the strange visitors he has from time to time. He leads the Nighthawks, but the time has come for the end of the Guild of Assassins.\"\n\t\"Agreed,\" James said, wobbling to his feet. \"We appreciate your help.\"\n\t\"Wait.\" The lector leveled a stare at them. \"As Kahooli has come to your aid, as protectors of the faith, you must now aid us. It is your responsibility now to slay him. His is excommunicate of the Temple of Kahooli. His life is forfeit.\"\n\t\"You didn't mention this in the bargain before,\" James said. \"Shall we be expecting ñother demands of you later?\"\n\tThe priest shook his head. \"Only this. You may do as you please thereafter, though I would warn you always to tread carefully from this day forth when dealing with Kahooli. You are now, in our eyes, the arm of The Tireless Pursuer.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#142",
+      "node_id": null,
+      "source": "\tA scream echoed in the temple.\n\tAlarmed, @4 made to find the source of the shout, but a robed priest halted him by laying a hand on his chest.\n\t\"Do not be alarmed by the sights and sounds you find in the Temple of Kahooli,\" the priest said calmly. \"Know that justice is being dispensed within our halls.\"\n\tStill shaken by the sound, @4 looked to the priest. \"What of our request to see the lector?\"\n\t\"He is busy at the moment,\" the priest said. \"I am afraid he cannot see you today.\"\n\tAnother scream rang through the courtyard...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#144",
+      "node_id": null,
+      "source": "\t@4 requested to see the high priestess.\n\t\"I am afraid that is impossible,\" the attendant priest said. \"She is away at the behest of Dala and may not return for some time. If you return at a later time, I am sure she would be pleased to see you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#145",
+      "node_id": null,
+      "source": "\t@4 asked to see the high priestess.\n\tThe attendant priest escorting them rattled like a great knight, a broadsword belted at his hip and his head covered in chain link underneath his hood.  They passed other priests in the temple who were similarly attired, the whole of the religious order seemingly geared for a great battle.\n\tWhen at last they entered a small room, the burly priest nodded towards a large paper triptych which stood near the rear wall. \"High priestess Risa will see you after she has attended to the sick one. I will return after your business is finished.\"\n\tA small whimper came from behind the shadowed screen but was quickly shushed by the high priestess. After a few moments, a lightly robed figure moved out from behind the screen, a bowl of gruel clutched between her small hands.\n\t\"High priestess?\" @4 ventured.\n\tSeeing @4's surprised look, the woman smiled. \"Let me guess. I am not as you expected. Many of my faithful think I have talons, eyes of fire and a sword sheathed at my hip.\" Moving to a small table, she set aside her wooden bowl and spoon, snatching up a towel to wipe broth from her hands. \"People misinterpret Dala's role in the balance of things. While she guards those in battle, she also guards travellers as they sleep and looks after those in need. At the moment, I would value far more a bag of grain than I would all the martial skill in the world.\"\n\t@4 blinked. \"Why is that, high priestess?\"\n\t\"Our stores are nearly empty,\" she replied. \"What food we haven't given out to the poor has been stolen by thieves who have taken advantage of our generosity. If we can't get any grain to be milled soon, we will have to turn away children who have no other source of food.\"\n\t\"We might be able to bring you rations...\"\n\tThe high priestess shook her head. \"You can't store rations, not for long.  We need a óbag óof ógrain. In exchange, I think Dala might bestow you a boon, though I can't presume upon the goddess' favor without consultation. I would speak to you more, but I have others I need to see today.\"\n\t\"I understand,\" @4 replied. \"Thank you for your time.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#147",
+      "node_id": null,
+      "source": "\tThe priest asked them to follow.\n\tInstead of leading them to the small room to which they had been shown on their last visit, he instead admitted them to a private garden in which the high priestess Risa sat waiting next to a reflection pool.\n\t\"Have you found the grain we need?\" she asked.\n\tTaken off guard by the terseness of the priestess question, @4 shook his head. \"We haven't found any grain in a form you could use. We were hoping that perhaps you would have some ideas about where we could find what we need.\"\n\tAccepting this, the priestess pulled her knees up to her chest. \"Look for any of the daughters of Flendel Halfgate. He used to live in this area and was considered one of the most loyal of our patrons. I believe the eldest was named Thea, but I am not certain. They might be of further assistance to you in this.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#148",
+      "node_id": null,
+      "source": "\t@4 motioned for help.\n\tSeeing that they were burdened with the heavy bag of grain, a burly priest named Vabon hurried to their assistance, taking the weight upon his own shoulders. \"The high priestess will be most pleased to see you,\" the priest grinned. \"Do you remember the way to her private garden?\"\n\tNodding, @4 turned through a small arch, holding up a woven curtain for @3 and @5 to pass through. Together they entered Risa's contemplation glade.\n\tGlancing up from where she was trailing a hand through the gentle waves of the pool, she smiled warmly at them. \"You've brought the grain.\"\n\t\"How did you know?\" @4 asked, a little startled by the surety in the high priestess' green eyes.\n\t\"There are certain advantages to living in the presence of a goddess,\" she laughed. \"I knew this morning when I awoke that I would be seeing you. I also know that she will bestow upon one of you the boon of her blessing.\"\n\t\"Blessing?\" @4 asked, intrigued.\n\tStanding to assume a more priestess-like posture, she folded her hands in front of her stomach. \"To the one you choose, she shall, for the rest of his life, watch over him to protect him from harm. This is Dala's Will.\"\n\t@4 gaped. \"The goddess will make him invincible?\"\n\t\"Not as such, no,\" she said regretfully. \"But her favor will see to it that it is very difficult for him to be injured by those who seek to harm him. Who do you choose to receive this blessing?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@3",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#149",
+      "node_id": null,
+      "source": "\tThe priestess nodded.\n\tWalking to @0, she placed her hands on his head, her eyes flashing a deep green as she intoned the words of prayer to her goddess. As soon as she began to speak, the character of the room seemed to change, as if the walls were fat being rendered in a hot cauldron.\n\t\"Dala,\" she cried out. \"Protector Goddess, Shield of the Weak, Watcher at Hearth and Threshold, we seek your touch! This one who stands before your servant has acted with good faith in the name of thy faithful. As high priestess of your order, I ask that you bestow upon him your boon!\"\n\tShuddering, @0 gasped as a light flashed around him, seemingly emanating from within his flesh. The priestess seemed likewise shocked, though she recovered from its effects far more quickly. Slowly the effects of the flash faded and the room began to resume its more normal appearance.\n\tStanding away from @0, Risa rubbed at her eyes with the heels of her hands. \"It is done,\" she said unceremoniously. \"You may go now. Dala has blessed you, @0. Remember this always.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#150",
+      "node_id": null,
+      "source": "\tThey were unable to choose.\n\tFor a quarter of an hour, they discussed the issue at length, each indicating someone else as more deserving of the blessing. Amused by the debacle, Risa intervened. \"Very well,\" she said, interposing herself into the good natured argument. \"As you seemed to have all come to the conclusion that one man alone is not fit for Dala's blessings, I shall bestow her blessings on you all. Please go now, modest men. The gods love you truly.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#152",
+      "node_id": null,
+      "source": "\tBattle standards floated over their heads.\n\tEscorted into a room which looked more like a king's banquet hall than a sacred chamber, @4 feasted his eyes on the hundreds of war banners and shields which were hung on the walls. The room's most prominent feature was a long table which stretched the length of the torchlit hall and was covered with statuettes which looked like soldiers.\n\tA priest sat at the far end of the table, rearranging a cluster of the bone figurines that were before him. Larger than even Gorath across the shoulders, the Father Patriarch looked as menacing a figure as any that @4 had ever seen.\n\t\"This looks like a war council,\" @4 observed, noting many of the figurines lay on their sides.\n\t\"Of a sorts,\" the Patriarch said without looking up. Scratching at his grey streaked beard, he moved another piece, but seemed unsure of its placement as if he were moving it on someone else's advice. \"Here, however, I merely óobserve. Others plan this battle.\"\n\t\"Whose battle?\"\n\tThe Father Patriarch glanced up, his wolfish eyes fixing on them. \"Hmmm? This battle? It unfolds in the south of Kesh, near the Confederacy. I fear that the Empress Lakeisha's forces are far superior. Her dog soldiers will crush the rebellion soon, I should think.\"\n\t@4 nodded as he looked over the lay of the battlefield. \"How do you know where everyone is? Does Tith tell you?\"\n\tThe priest shook his head. \"If the war god wished to tell me, it would take all the enjoyment out of making my guesses. I have messengers arriving daily to tell me how things transpire.\" Thumping the hardwood table with his fist, he looked at another group of figurines and moved to rearrange them as well. \"Sometimes I am surprised.\"\n\t\"I see. I don't suppose you could tell us about what the moredhel plan in the North, could you?\" @4 asked, a little nervous about the presumption.\n\t\"No,\" the priest replied. \"I would be greatly interested, but all those messengers of mine that I have dispatched to check have been killed. Since I have less priests than I have curiosities, I decided to wait until I had either more of one or less of the other.\"\n\tSuddenly another priest appeared at the door to the chamber and hurried over to whisper in his superior's ear. Cursing, the Patriarch thumped the table again. \"I have other things I must attend to,\" the priest said gruffly as soon as the other priest had scurried away. \"I would offer you some Redweed Brew, but I have none to offer you, so you will have to find some elsewhere. Good day, men.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#154",
+      "node_id": null,
+      "source": "\tThe priest motioned for them to follow.\n\tAlthough the temple was smaller for its housing within Krondor's palace, it was far more richly adorned than many of the other places of worship in Midkemia. Where others used woven curtains or tapestries to divide rooms, there were often richly carved doors here, sometimes with religious themes, other times with scenes of life in Krondor.\n\tWhen at last they had reached a small room, the priest followed them in and closed the door. Turning, he looked as if he were waiting for @4 to do something.\n\t\"Are you going to get the Lector for us?\" @4 asked, feeling uncomfortable.\n\t\"óI am the Lector,\" the man explained, smoothing the folds out of his sky blue robe. \"Were you not aware that Father Timothy died recently? I am his replacement sent from Rillanon. Father Francis at your service.\"\n\t@4 nodded and offered his apologies about the mistake. \"We were hoping you could offer us a bit of advice on something.\" As quickly as possible, he attempted to explain their situation as the Lector listened patiently.\n\t\"I don't know how Astalon might help you in this situation,\" the priest admitted after a brief moment of contemplation. \"I wouldn't even know where we might begin. You would perhaps do better seeking advice from Prince Arutha or his assistants on this matter.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#156",
+      "node_id": null,
+      "source": "\tThe attendant priest looked nervous.\n\tProbably a boy of no more than fourteen summers, he gawked at the strange visitors to the Abbaye. \"I don't know where Abbot Graves might be. The last time I saw him, he was hurrying off into town. I'm not sure when he will be back.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z13.DDX#159",
+      "node_id": null,
+      "source": "\tThe abbot came quickly.\n\tA man of advancing years, his hair and beard seemed like a snow drift, starkly in contrast to his dark skin which was wrinkled like carefully crafted mahogany. Shaking @4's hand, he greeted them as if he had known them all their lives. \"Welcome to Ishap's Abbey, travellers. I am Father John. How may we be of assistance to you?\"\n\t\"We thought while we were passing through that we would come and visit the famous Abbey of Ishap at Sarth,\" @4 said. \"You've done impressive things here.\"\n\tThe abbot's eyes crinkled as he gave them a prideful glance. \"We hope to do more. We've only begun our work here, but thanks to Brother Anthony and Brother Marc, we have come a long way.\"\n\t@4 bit his lip, hesitant to ask his question. \"Could we impose on your hospitality a bit? We have a few questions...\"\n\t\"I would love to, though alas, I have services to attend at the moment. But if you have questions, Sarth is the place to come. We have books on many things, and if you seek out Brother Marc, he can help you with a good many other questions. Good day to you!\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,2896 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z16.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z16.DDX#0",
+      "node_id": 1600002,
+      "source": "\tGorath seemed distant.\n\tThough the moredhel warrior didn't appear grieved about killing the assassin that had followed them from the Northlands, his eyes had a baleful look in them that seemed something between hatred and rage. Several times he glanced back at the corpse that lay behind them in the dust, his thoughts unguessable from his expression...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#1",
+      "node_id": null,
+      "source": "\tDo you wish to bury him? We could do that.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#2",
+      "node_id": null,
+      "source": "\tIt is not our way. I simply am somewhat disturbed that he should come after me. He was...a ókinsman. There are other things that trouble me as well...\n\tDelekhan's assistants are slow but not altogether stupid. Another like Haseth and you'll only have my ócorpse to drag before your Prince Arutha.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#3",
+      "node_id": null,
+      "source": "\tSorry, you don't get off that easy. As long as you are under my command you are forbidden to die, moredhel. I've gone to far too much trouble keeping you alive to bury you now.\n\tIt's time that we took the chains off of you. It'll be far easier for you to defend yourself if your hands are free to swing a sword again.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#4",
+      "node_id": null,
+      "source": "\tYou're not just going to set him free are you? I thought you said he was your prisoner.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#5",
+      "node_id": null,
+      "source": "\tHe is my prisoner, Owyn, but the circumstances are terribly complicated. Even if he chose to sneak off, he'd be lucky to make it to the next town alive. This is the third such assassin we've run into since we left the Northlands and I have a feeling that more will be waiting for us. He will be much safer with me and I with him.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#6",
+      "node_id": null,
+      "source": "\tAs the boy would be. If he were to whisper the wrong word in the wrong ear, he could easily be the death of us.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#7",
+      "node_id": null,
+      "source": "\tMe? Who am I going to talk to? I'm not even heading in the same direction.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#8",
+      "node_id": null,
+      "source": "\tIt wouldn't be a matter of who you talked to, Owyn. There will be ears listening for word of a moredhel travelling with a noble. Damnation. I should have thought about this when you entered camp...\n\tFor the time being, you're my squire. Once we arrive safely at the palace, you'll be free to go your own way.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#9",
+      "node_id": null,
+      "source": "\tBut I have pressing business in Tiburn...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#10",
+      "node_id": null,
+      "source": "\tThis is not a subject of debate! óWe ómust óget óto óKrondor. My mission is of critical importance and I don't have time to improvise an easy solution. The only other possible option would be to slit your throat and leave you dying. I have absolutely no desire to do that. Now let's get moving before Delekhan's assassins catch our scent again. They'll likely come looking when Haseth doesn't return from his mission.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#11",
+      "node_id": 1600003,
+      "source": "\t...Gorath leapt forward, his chains writhing between his wrists like metallic vipers.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "\t我們在哪裡\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline live-verification test (chapter-1 ambush trigger node)."
+    },
+    {
+      "id": "DIAL_Z16.DDX#12",
+      "node_id": 1600004,
+      "source": "#Gorath#\n\tGet out from underfoot, Owyn! Assassin in the camp!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "#Gorath#\n\t我們在克朗多\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline live-verification test (chapter-1 ambush trigger node)."
+    },
+    {
+      "id": "DIAL_Z16.DDX#13",
+      "node_id": 1600005,
+      "source": "#Gorath#\n\tDo not struggle so, Haseth. I wish to keep you alive.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#14",
+      "node_id": 1600178,
+      "source": "#Gorath#\n\tBut be glad I do ónot. The goddess of death will show you greater mercy.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#15",
+      "node_id": 1600006,
+      "source": "#Arutha#\n\tAs glad as I am at the sight of you safely home again, Locklear, I can't say that my nose is as well pleased. I thought we had broken you and Seigneur James of clambering round in the sewers.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#16",
+      "node_id": 1600007,
+      "source": "#Locklear#\n\tYou know the way of old habits, highness. We encountered a bit of trouble with the gates and so I chose a more expedient though somewhat more disagreeable path. It came to a happy end, however. James told us to send word that he is well and would see you in the morning.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#17",
+      "node_id": 1600008,
+      "source": "#Arutha#\n\tIncurable sewer rats, the both of you. I shall have to order that each of you be accompanied by a score of washing maidens to keep you presentable enough for court. Welcome home, Locky.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#18",
+      "node_id": 1600009,
+      "source": "#Locklear#\n\tThank you. As happy as I am to be here, I'm afraid I come with bad news from the Northlands.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#19",
+      "node_id": 1600010,
+      "source": "#Arutha#\n\tI expected as much. With the false Nighthawks prowling my streets above and below it can only mean the moredhel are up to their old mischief. What do you know?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#20",
+      "node_id": 1600011,
+      "source": "\tMotioning to Gorath, Locklear introduced the former moredhel chieftain with a wave. Slowly, Gorath lowered his hood. The gasps and startled reactions of those crowding the hall helped mask the stealthy entrance of a second moredhel in the chamber; this one armed with a longbow!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#21",
+      "node_id": 1600012,
+      "source": "#Pug#\nóAssassin! óGet ódown!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#22",
+      "node_id": 1600013,
+      "source": "#Arutha#\n\tWhat I must or must not do will not be dictated by a dissident moredhel! If not for Locklear's good faith in you, I would have had your head staked on a pole and paraded up and down the low quarters of Krondor once I saw you!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#23",
+      "node_id": 1600014,
+      "source": "#Gorath#\n\tWhat evidence? I bear the humiliation of betraying my vow as a moredhel and the indignity of surrendering to a sworn enemy...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#24",
+      "node_id": 1600015,
+      "source": "#Makala#\n\tWhy betray Delekhan to the Kingdom of the Isles? Of what benefit to you is it to snare him?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#25",
+      "node_id": 1600016,
+      "source": "#Gorath#\n\tHe is leader in name only. However bitter a draught Delekhan may be for your kith and kin to drink, magician, his rule is black poison in the gullets of me and mine. Already he enslaves my cousins and rapes the land.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#26",
+      "node_id": 1600017,
+      "source": "#Arutha#\n\tWhere would you have me send my troops? If indeed he intends a strike against one of our northernmost possessions, which castle shall I garrison for the attack? Highcastle? Ironpass? Northwarden? If I am to fight a war, by my teeth tell me where would you have me fight it!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#27",
+      "node_id": 1600018,
+      "source": "#Gorath#\n\tWould that I could tell you! Delekhan holds in good confidence only a handful of cowering dogs and, among them, only a few are privy to his war plans. His private councils are restricted to choice individuals, his advisers Narab and Nago, his mistress Liallan, his son Moraeulf and---Nighthawks!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#28",
+      "node_id": 1600019,
+      "source": "#Arutha#\n\tHe keeps foul company that leader of yours...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#29",
+      "node_id": 1600020,
+      "source": "#Gorath#\n\tYour highness, if you give me leave, I believe I can find the evidence of Delekhan's intent. I will need someone to accompany me to Romney and supplies for my journey and a small parcel of gold.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#30",
+      "node_id": 1600021,
+      "source": "#Arutha#\n\tRomney? What do you think you can find in a provincial river town in the heart of the Kingdom?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#31",
+      "node_id": 1600022,
+      "source": "#Gorath#\n\tI aim to catch a bird in flight. Of late Delekhan has emptied a good deal of his treasury to revive the service of the Nighthawks. In exchange he has demanded tactical information about Kingdom holdings...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#32",
+      "node_id": 1600023,
+      "source": "#Pug#\n\tHe's turned the Guild of Assassins into a guild of spies?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#33",
+      "node_id": 1600024,
+      "source": "#Gorath#\n\tOnly for a time. Although the payments have been left in various hidden locales, the messengers were always sent to a rendezvous in Romney. If I go there, I may be able to intercept information concerning a forthcoming attack. Would such evidence suffice?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#34",
+      "node_id": 1600025,
+      "source": "#Arutha#\n\tPerhaps.\n\tDamn me but I don't trust you Gorath. How do I know that this isn't a plot of yours? We can weigh the evidence to our hearts content and your cousins could be slitting the throats of my serfs as we sit dawdling...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#35",
+      "node_id": 1600026,
+      "source": "#Arutha#\n\tI have been tolerant while I listened to your vague speculations based on incidental half-heard conversations, but how am I to believe what you say? What evidence have you laid before this council to prove what Delekhan intends to do?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#36",
+      "node_id": 1600027,
+      "source": "#Gorath#\n\tBloody his nose, Prince of Krondor. Blunt his swords and the unified tribes will cast him down in wrath. Let him cross your Northern border, however, and ten other clans will join their strength to his and the legacy of Murmandamus will be but a spark next to his glory.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#37",
+      "node_id": 1600028,
+      "source": "#Arutha#\n\tGo to Romney, but you will provide for yourself. If this is part of some secret moredhel scheme, I'll not look the fool before the world. Pug, unroll the map for me...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#38",
+      "node_id": 1600029,
+      "source": "#Arutha#\n\tAs I see it, Delekhan could have only two potential targets for attack into the Kingdom: óHighcastle...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#39",
+      "node_id": 1600030,
+      "source": "#Arutha#\n\t...and óNorthwarden.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#40",
+      "node_id": 1600031,
+      "source": "#Arutha#\n\tHis fortress at óSar-Sargoth is three hundred miles to the North and I doubt he has the resources to defend a line that long.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#41",
+      "node_id": 1600032,
+      "source": "#Arutha#\n\tSo an attack at Northwarden seems unlikely.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#42",
+      "node_id": 1600033,
+      "source": "#Pug#\n\tLeaving óHighcastle...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#43",
+      "node_id": 1600034,
+      "source": "#Arutha#\n\tWhich is a viable alternative, but neither target seems to have an obvious goal. I know you are no field strategist and you hate to become involved in state matters but I should like you to delay your return to your home at Stardock for a while. I feel...ill at ease.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#44",
+      "node_id": 1600035,
+      "source": "#Pug#\n\tYou are not alone in that. I too have sensed something unusual in the air, but I won't ascribe it to anything as dire as magic. More likely we suffer from bad soup.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#45",
+      "node_id": 1600036,
+      "source": "#Arutha#\n\tFeelings aside, I will call up the militia reserves from óMalac's óCross, óDarkmoor, and óLyton and join them to a detachment of the Krondorian Lancers just outside of the Dimwood.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#46",
+      "node_id": 1600037,
+      "source": "#Arutha#\nJames will send word to me there.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#47",
+      "node_id": 1600038,
+      "source": "#Pug#\n\tWhat of the garrison?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#48",
+      "node_id": 1600039,
+      "source": "#Arutha#\n\tIt will remain in place. I have considered the option of a full push south and it seems unlikely, but I will give Delekhan nothing. Our agreement remains.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#49",
+      "node_id": 1600040,
+      "source": "#Arutha#\n\tNow we wait. Gods help Gorath if he betrays us to the moredhel.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#50",
+      "node_id": 1600041,
+      "source": "#Arutha#\n\tAs I see it, Delekhan could have only two potential targets for attack into the Kingdom: óHighcastle...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#51",
+      "node_id": 1600042,
+      "source": "#Arutha#\n\t...and óNorthwarden.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#52",
+      "node_id": 1600043,
+      "source": "#Arutha#\n\tHis fortress at óSar-Sargoth is three hundred miles to the North and I doubt he has the resources to defend a line that long.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#53",
+      "node_id": 1600044,
+      "source": "#Arutha#\n\tFeelings aside, I will call up the militia reserves from óMalac's óCross, óDarkmoor, and óLyton and join them to a detachment of the Krondorian Lancers just outside of the Dimwood.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#54",
+      "node_id": 1600175,
+      "source": "\tEven as they threw the door open, James bit back the impulse to vomit. Kingdom soldiers lay scattered about the room, each lying in his own coagulating pool of blood. Nowhere did there appear to be anyone untouched by murderous hands...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#55",
+      "node_id": 1600045,
+      "source": "#James#\n\tI have had it with your mysterious half-answers, moredhel! Now for the sake of your continued good health, I want to hear some explanations fast why you were here in Romney a six-month before you made your appearance at the Inclindel Pass.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#56",
+      "node_id": 1600046,
+      "source": "#Gorath#\n\tThe only explanation Seigneur is that you are mistaken. I have ónever been south of the Inclindel...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#57",
+      "node_id": 1600047,
+      "source": "#James#\n\tWhile we carried the dead from the Black Sheep Tavern, a tavern boy informed me that a man answering to your description called on three unwholesomes dressed in black, all of whom wore the trademark silver rings of the Nighthawks. He heard them refer to the moredhel as óGorath!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#58",
+      "node_id": 1600048,
+      "source": "#James#\n\tIt seems that this moredhel paid a sizeable sum of money to those Nighthawks before departing, enough perhaps to arrange the death of a company of the King's soldiers?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#59",
+      "node_id": 1600049,
+      "source": "#Gorath#\n\tHe may well have paid a king's death, but I know nothing of it. I realize it may impress little upon you but Gorath is a passing ñcommon name in the Northlands and oft as not your Kingdom fellow folk have mistaken ñme for an elf! The barkeeper was likely deceived by enemies of mine.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#60",
+      "node_id": 1600050,
+      "source": "#Gorath#\n\tIf I had cause to mislead you or your Prince, I would have found a far less convoluted means of confusing the royal sanity. Look elsewhere for your enemies, James. While we may not be friends, I mean you no harm.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#61",
+      "node_id": 1600051,
+      "source": "#James#\n\tI shall look where I wish until you are no longer my responsibility.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#62",
+      "node_id": 1600052,
+      "source": "#James#\n\tWe may not be able to strike at the Nighthawk stronghold, but if we can locate it, we may still be able to get inside and find the information Prince Arutha needs.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#63",
+      "node_id": 1600053,
+      "source": "#Gorath#\n\tThe Nighthawks will shun Romney for a time. However bold they may be in their murderous nights, they flee when daylight breaks.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#64",
+      "node_id": 1600054,
+      "source": "#James#\n\tNo one walks without leaving footprints and these men are no different. However skilled they may be at assassination, they have never been any good at covering their tracks. Let me see those things you found in the tavern.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#65",
+      "node_id": 1600055,
+      "source": "#Gorath#\nThey are here.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#66",
+      "node_id": 1600056,
+      "source": "#James#\n\tGood. Those are our footprints. Of all the items we found on the dead company, both those items seemed conspicuously out of place and may be related in some way to our elusive murderers.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#67",
+      "node_id": 1600057,
+      "source": "#James#\n\tWe begin our hunt for the Nighthawks with a spider and a spyglass.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#68",
+      "node_id": 1600058,
+      "source": "#Narab#\n\tAs much as I would enjoy delivering your carcass to Delekhan I will reserve the pleasure of your execution for him.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#69",
+      "node_id": 1600059,
+      "source": "#Narab#\nDo not move, Gorath.  You are completely surrounded.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#70",
+      "node_id": 1600060,
+      "source": "#Delekhan#\n\tI see my assistants have been overzealous in their efforts to sedate you! It is proper to ótremble when you are addressed by Delekhan, leader of the unified tribes of the Northlands!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#71",
+      "node_id": 1600061,
+      "source": "#Delekhan#\n\tWe found this among your things Kingdom dog. Tell me where you were going with it!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#72",
+      "node_id": 1600062,
+      "source": "#Owyn#\n\tWe weren't taking it anywhere. We just picked up everything we could carry and ran. We needed gold...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#73",
+      "node_id": 1600063,
+      "source": "#Delekhan#\n\tA lie! The seal that the Nighthawks use for our messages was broken. The new writing at the bottom of the page confirms your guilt. What does Gabot's Folly mean? Who are Arthur and Jimmy the Hand?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#74",
+      "node_id": 1600064,
+      "source": "#Owyn#\n\tI really have no idea. Someone else must have beaten us to it and opened the scroll before we got there. We took what we found and left before we got nabbed. Do you want us to cut you in on the booty?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#75",
+      "node_id": 1600065,
+      "source": "#Delekhan#\n\tWhat I want is information! Your companion Gorath damns you as certainly as your lie does. Until he betrayed his own, he was second in power only to me. He shall die for his disloyalty.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#76",
+      "node_id": 1600066,
+      "source": "#Delekhan#\n\tSince you choose to remain silent, I shall have your tongue and feed it to my rats. Have back your message, spy. It will do you little good in your grave.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#77",
+      "node_id": 1600067,
+      "source": "#Gorath#\n\t...evaded capture and at last we were intercepted by your guards in the Inclindel Pass. The journey south to your camp here outside the Dimwood took many long days but we moved with great haste as our message is vital.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#78",
+      "node_id": 1600068,
+      "source": "#Arutha#\n\tVery interesting tale, but how do I know a word of it is true? How can I believe that this scroll you have given me is the genuine article and not a forgery trumped up by Delekhan?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#79",
+      "node_id": 1600069,
+      "source": "#Arutha#\n\tI was very explicit with you before, Gorath. I refuse to act until I have word from Seigneur James!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#80",
+      "node_id": 1600070,
+      "source": "#Owyn#\n\tHe told us to give you a message, but it's...odd, sire.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#81",
+      "node_id": 1600071,
+      "source": "#Arutha#\n\tWhat óexactly did he say?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#82",
+      "node_id": 1600072,
+      "source": "#Owyn#\n\tHe said to tell you that there's a party at mother's...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#83",
+      "node_id": 1600073,
+      "source": "#Arutha#\n\t...and a good time will be had by all. Gods, Laurie and Jimmy used that phrase years ago! All's right then! James has just saved the pair of you your necks and me a good portion of grief.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#84",
+      "node_id": 1600074,
+      "source": "#Arutha#\n\tNow I must settle down to the matter of finding out what Delekhan is thinking. If this report is correct then the best force he could muster would number at the most two thousands warriors, a pitiful spit in the eye for a castle assault.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#85",
+      "node_id": 1600075,
+      "source": "#Gorath#\n\tYou believe he has something else in mind.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#86",
+      "node_id": 1600076,
+      "source": "#Arutha#\n\tUndoubtedly. As James indicated in his brief note, it would take some spectacular strategy on Delekhan's part to take the castle, and honestly, he has never displayed that kind of ñwitð. We faced him before when he was still a field captain for Murmandamus. Wherever he is going he will no doubt hit fast and run for high ground. Now we have to establish where that high ground is.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#87",
+      "node_id": 1600077,
+      "source": "#Gorath#\n\tShall we accompany you to Northwarden?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#88",
+      "node_id": 1600078,
+      "source": "#Arutha#\n\tNo. I have a much more important task for you, though I doubt you will find it as exciting. I need you to return to Krondor immediately.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#89",
+      "node_id": 1600079,
+      "source": "#Arutha#\n\tInform Master Magician Pug of the situation. Considering his tactics, I have a feeling Delekhan may have a few surprises in store for us. If that bastard brings anything magical to bear I want to know what it is and how to counteract it.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#90",
+      "node_id": 1600080,
+      "source": "#Arutha#\nYou leave immediately.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#91",
+      "node_id": 1600081,
+      "source": "#Gorath#\n\tShall we accompany you to Northwarden?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#92",
+      "node_id": 1600082,
+      "source": "#Arutha#\n\tNo. I have a much more important task for you, though I doubt you will find it as exciting. I need you to return to Krondor immediately.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#93",
+      "node_id": 1600083,
+      "source": "#Patrus#\n\t...And if it weren't bad enough I had to chase you, you made me get rocks in my best shoes! I'm blistered! Know how mad I get when my feet hurt? I get river bottom mud sucking badger whacked mad...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#94",
+      "node_id": 1600084,
+      "source": "#James#\n\tExcuse us...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#95",
+      "node_id": 1600085,
+      "source": "#Patrus#\n\tGo way. I'm busy right now agitatin' this here moredhel...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#96",
+      "node_id": 1600086,
+      "source": "#James#\n\tBegging your pardon, but I am Seigneur James...and this...and this is...Seigneur Locklear. We have been sent...by the Baron Gabot...to find...you. You are his magical adviser, aren't you?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#97",
+      "node_id": 1600087,
+      "source": "#Patrus#\n\tJust Patrus, please. I don't ken to titles much. Glad to meet you. I've just been out trying to get some information about these moredhel. They've been gettin' too close to the castle and it was makin' my tongue itch. Man can't respectably eat thataways.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#98",
+      "node_id": 1600088,
+      "source": "#James#\n\tHave you...learned anything about the attack?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#99",
+      "node_id": 1600089,
+      "source": "#Patrus#\n\tOnly that there's six companies of 'em out creepin' in the woods somewhere but I don't know exactly where yet. I think they've got their own magicians, too.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#100",
+      "node_id": 1600090,
+      "source": "#James#\n\tMagicians?! The Baron will be sorry to hear that I'll wager. We need to return to the castle. Which way would be quickest?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#101",
+      "node_id": 1600091,
+      "source": "#Patrus#\n\tNorthwarden? Oh, well it's THATAWAY...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#102",
+      "node_id": 1600092,
+      "source": "#James#\n\tI was beginning to believe you were going to miss all the fun!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#103",
+      "node_id": 1600093,
+      "source": "#Arutha#\n\tDelekhan would think me impolite if I didn't attend his little party. How are the men?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#104",
+      "node_id": 1600094,
+      "source": "#James#\n\tVery bad. Of the original garrison of four hundred and fifteen men, two hundred twenty seven are dead, thirty five are mortally wounded and the rest are afflicted with dysentery or are too exhausted to wield a sword. Your arrival came none too soon.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#105",
+      "node_id": 1600095,
+      "source": "#James#\n\tNo discourtesy intended, Prince, but why did you wait so long in coming?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#106",
+      "node_id": 1600096,
+      "source": "#Arutha#\n\tWe made all haste, nearly to the point of calamity! Your well-meaning messengers bumped into trouble and nearly didn't win themselves free. Consequently we didn't receive your word until it was nearly too late for us to respond. We were greatly fortunate to arrive as soon as we did.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#107",
+      "node_id": 1600097,
+      "source": "#James#\n\tThe moredhel are in retreat?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#108",
+      "node_id": 1600098,
+      "source": "#Arutha#\n\tWhat few of them remain. By the accounts of my scouts, they think there may have been up to at least six companies in the hills.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#109",
+      "node_id": 1600099,
+      "source": "#James#\n\tAbout that. Since they didn't have the decency to attack all at once, we couldn't tell.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#110",
+      "node_id": 1600100,
+      "source": "#Arutha#\n\tIf our trackers are to be believed, four of those companies slipped out a week ago while the other two kept your forces pinned down. The rest apparently turned southwest.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#111",
+      "node_id": 1600101,
+      "source": "#James#\n\tSounds like they mean to strike at Highcastle.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#112",
+      "node_id": 1600102,
+      "source": "#Arutha#\n\tUndoubtedly. Since the moredhel leader has mimicked many of the moves that his predecessor Murmandamus made, it stands to reason he may make many of the same mistakes.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#113",
+      "node_id": 1600103,
+      "source": "#Arutha#\n\tAs a precaution, I split my forces and diverted half of them to Highcastle. As soon as we are finished cleaning up here, I will take the rest of our companies to engage him there.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#114",
+      "node_id": 1600104,
+      "source": "#Pug#\nArrayed in flame the enemy comes,\nTo shriek his cadence on skeleton drums...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#115",
+      "node_id": 1600105,
+      "source": "#Makala#\n...For thunder's spite we'll raise our call,\nThough down shall crumble Empire all.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#116",
+      "node_id": 1600106,
+      "source": "#Makala#\n\tA Tsurani poet. I believe he was House Omechan...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#117",
+      "node_id": 1600107,
+      "source": "#Pug#\n\tHouse Minwanabi, reign of the fifty third Light of Heaven.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#118",
+      "node_id": 1600108,
+      "source": "#Pug#\n\tIs there something you need to see me about Makala? I am...busy.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#119",
+      "node_id": 1600109,
+      "source": "#Makala#\n\tBusy? You have been behaving like a needra bull with a burr in his bit! I came to ask what has Pug of Stardock so distracted that he cannot find time to meet with his associate magicians? Has his reputation so inflated that a member of the Tsurani Assembly is no longer worthy of his attention?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#120",
+      "node_id": 1600110,
+      "source": "#Pug#\n\tI am sorry. Perhaps you are right, I've just been very preoccupied.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#121",
+      "node_id": 1600111,
+      "source": "#Pug#\n\tI find myself ñobsessed with this storm. All week I've felt it building over the Bitter Sea and all the while I have suspected there is more to it than is immediately perceptible. It doesn't feel natural. Have you seen its like?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#122",
+      "node_id": 1600112,
+      "source": "#Makala#\n\tI have seen its match in destruction. As I recall, you created far more havoc in Tsuranuanni when you disrupted my Emperor's Imperial Games. Several city blocks destroyed, countless lives lost, the Warlord cast down in dishonor...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#123",
+      "node_id": 1600113,
+      "source": "#Pug#\n\tI had a ófeeling you didn't summon a rift-door to chastise me about my lack of attention. What is this about, Makala?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#124",
+      "node_id": 1600114,
+      "source": "#Makala#\n\tYour loyalties, Pug. While you claim loyalty to the Empire, you live your life under the influence of a Midkemian King and took to wife a Thuril highlander. Your judgement is suspect!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#125",
+      "node_id": 1600115,
+      "source": "#Pug#\n\tFrom the day I left the Empire, my judgement and my loyalties ceased to be the concern of the Assembly of Magicians. I do what I see is best for all concerned.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#126",
+      "node_id": 1600116,
+      "source": "#Makala#\n\tI see. Then, is any act justifiable to that end?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#127",
+      "node_id": 1600117,
+      "source": "#Pug#\n\tIf it serves the common good, yes.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#128",
+      "node_id": 1600118,
+      "source": "#Makala#\n\tEven if it violates an individual's rights?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#129",
+      "node_id": 1600119,
+      "source": "#Pug#\n\tWhat do you wish for me to say, Makala?! You lead me as if I were one of your needra cows but I am in no mood for games. State your business.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#130",
+      "node_id": 1600120,
+      "source": "#Makala#\n\tVery well...Your daughter Gamina has blossomed into a remarkable young woman. She is beautiful, gracious and an honor to your house. Unfortunately, she is also a girl with remarkable powers.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#131",
+      "node_id": 1600121,
+      "source": "#Pug#\n\tMy estimation of a person's magical talents is not determined by their sex, Makala, and I refuse to murder my child to appease a barbaric tenant of the Assembly! They have no authority in Midkemia!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#132",
+      "node_id": 1600122,
+      "source": "#Makala#\n\tIn this instance, I believe they will choose to ignore the geography. At this juncture, the Assembly is troubled--- surrounded by anti-traditionalists who embrace your Midkemian values, led in large part by Mara of the Acoma.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#133",
+      "node_id": 1600123,
+      "source": "#Makala#\n\tAlthough I am equally wary of female abomination, I have no desire to see your daughter dead. I have acted on your behalf and placed her in exile until such a time we can agree upon her ultimate fate...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#134",
+      "node_id": 1600124,
+      "source": "#Pug#\n\tãWãhãyã ãdãiãdãnã'ãtã ãyãoãuã ãcãoãnãsãuãlãtã ãmãeã?ã ãWãhãeãrãeã ãhãaãvãeã ãyãoãuã ãsãeãnãtã ãhãeãrã?ã!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#135",
+      "node_id": 1600125,
+      "source": "#Makala#\n\tSeek her if you wish, but it will avail you little. Your further interference will likely ensure that the Assembly will carry out its order of death. They will be unable to kill her, however, if they cannot find her. It would be to your advantage to leave her be.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#136",
+      "node_id": 1600126,
+      "source": "#Pug#\n\tI will not content myself to sit here while the Assembly banters about the value of my daughter's life! I shall find her and then you tell your brethren to expect my visit!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#137",
+      "node_id": 1600127,
+      "source": "#Makala#\n\tYou embark on a dangerous road but it is yours to take. Farewell then, Pug...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#138",
+      "node_id": 1600128,
+      "source": "#Makala#\n\tOpen defiance by you as our most notable member could weaken our position within the Empire and that is something we cannot afford! We would be forced to make you publicly comply.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#139",
+      "node_id": 1600129,
+      "source": "#Makala#\n\tYour love for your daughter has led you into a grievous miscarriage of your duties! óWhy óhave óyou ólet óher ólive?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#140",
+      "node_id": 1600130,
+      "source": "#Gorath#\n\tWe may not be the strongest or the fastest Tomas, but we are able and we are here. Send us to him.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#141",
+      "node_id": 1600131,
+      "source": "#Tomas#\n\tI have little choice. You, Gorath, shall be my emissary in this. May the blessings of Elvandar go with you...and tell Pug I am sorry.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#142",
+      "node_id": 1600132,
+      "source": "#Gorath#\nWe shall.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#143",
+      "node_id": 1600133,
+      "source": "#Arutha#\n\tCooperate now moredhel and I promise you'll live to see your children become adults. Daunt me and I'll have your eyes for necklace beads and your manhood for an inkwell!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#144",
+      "node_id": 1600134,
+      "source": "#Moredhel#\n\tMy death will be unimportant...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#145",
+      "node_id": 1600135,
+      "source": "#Arutha#\n\tIf you think we shall torture you unto death, I would advise that you ponder my mood. Anxious though I am to have answer, I will keep you screaming this side of death a month or a year or until I feel well satisfied that we have heard all that you have to say!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#146",
+      "node_id": 1600136,
+      "source": "#Moredhel#\n\tA day, a month, you've already lost! Nail my entrails to your door post, feed...my brain to your dogs, it will not matter! Even if you act now, you will be too late!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#147",
+      "node_id": 1600137,
+      "source": "#Arutha#\n\tYou will win only pain for your trouble! Instruct him, torturer!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#148",
+      "node_id": 1600138,
+      "source": "#Moredhel#\n\tYou do...not...listen!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#149",
+      "node_id": 1600139,
+      "source": "#Moredhel#\n\tWe know...the secret of Se-thanon! We shall free him!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#150",
+      "node_id": 1600140,
+      "source": "#Arutha#\n\tWhat secret? Why to Sethanon?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#151",
+      "node_id": 1600141,
+      "source": "#Moredhel#\n\tTen years ago we attacked...with Murmandamus..you captured, imprisoned him...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#152",
+      "node_id": 1600142,
+      "source": "#Arutha#\n\tDeluded fool, we killed Murmandamus at Sethanon and burned his bones for potash! There is nothing there for Delekhan to find!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#153",
+      "node_id": 1600143,
+      "source": "#Moredhel#\n\tA lie...we have spied...What else could...you guard so closely?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#154",
+      "node_id": 1600144,
+      "source": "#Arutha#\n\tHow does he think he will win past our garrison at Highcastle! He hasn't enough men!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#155",
+      "node_id": 1600145,
+      "source": "#Arutha#\nAnswer me!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#156",
+      "node_id": 1600146,
+      "source": "#Moredhel#\n\tRiiift-machine!...The Six have a machine...It can take them place to place...like a door between great distances...Even while your troops die at Sethanon...we will walk through the machine!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#157",
+      "node_id": 1600147,
+      "source": "#Moredhel#\n\tWe shall be through the Dimwood and inside Sethanon a week before you can reach us! Your troops will be exhausted! The day will be ours!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#158",
+      "node_id": 1600148,
+      "source": "#Arutha#\n\tA rift-machine inside the Dimwood! That bastard Tsurani magician has been consorting with Delekhan!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#159",
+      "node_id": 1600149,
+      "source": "#Arutha#\n\tTorturer, tell Seigneurs James and Locklear to ride to the Dimwood. They must find and destroy that rift-machine while I hie to Highcastle and divert our forces once more! Time is of the essence!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#160",
+      "node_id": 1600150,
+      "source": "\tAn angry scream of air raked at James and Locklear like the claw of an invisible beast, tugging at them as if to stuff them whole into the insatiable black maw of the collapsing rift machine. Desperately they called out to Patrus to grab on to something, but for him it was too late...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#161",
+      "node_id": 1600151,
+      "source": "#Patrus#\nStay back! Stay back!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#162",
+      "node_id": 1600152,
+      "source": "#Locklear#\nSpellweavers!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#163",
+      "node_id": 1600176,
+      "source": "#Patrus#\n\tAIGHHHH!!!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#164",
+      "node_id": 1600153,
+      "source": "#Pug#\n\tShe lives. Makala has many blessings to count.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#165",
+      "node_id": 1600154,
+      "source": "#Pug#\n\tGorath, see if you can do something about the cage...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#166",
+      "node_id": 1600155,
+      "source": "#Gorath#\n\tCover your head and stand back!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#167",
+      "node_id": 1600156,
+      "source": "#Pug#\n\tStay your swords, Seigneurs. I believe it is still considered rude in the Kingdom to skewer your friends.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#168",
+      "node_id": 1600157,
+      "source": "#James#\n\tDuke Pug! Never have I been half so relieved to see a friendly face. We were expecting moredhel magicians...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#169",
+      "node_id": 1600158,
+      "source": "#Pug#\n\tTsurani magicians, James, or rather magicians trained by a Tsurani. No moredhel witch would have the capability to make a rift machine nor would they chance going into battle with such poor odds of success.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#170",
+      "node_id": 1600159,
+      "source": "#Pug#\n\tI still should like to know how exactly it was that Delekhan managed to make contact with Makala? I had hoped that the moredhel would be wary of another such attack following the defeat of Murmandamus ten years ago.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#171",
+      "node_id": 1600160,
+      "source": "#James#\n\tPrince Arutha said they hope to find Murmandamus and free him. The moredhel are convinced we've been holding him captive all these long years.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#172",
+      "node_id": 1600161,
+      "source": "#Pug#\n\tSo Gorath has told me. Doubtless Makala exploited that belief to his advantage. That at least explains one wrinkle. The moredhel have never forgiven us for that loss.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#173",
+      "node_id": 1600162,
+      "source": "#James#\n\tBut why is Makala doing all of this? Obviously he isn't in this to rescue a dead moredhel leader.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#174",
+      "node_id": 1600163,
+      "source": "#Pug#\n\tFor the moment I believe I know, but I don't wish to say until I have taken a better look at something. This last problem I will have to unravel myself, with some assistance from Gorath and Owyn.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#175",
+      "node_id": 1600164,
+      "source": "#Pug#\n\tFrom here I think we will be able to teleport into the caverns beneath Sethanon. It is there our objective lies.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#176",
+      "node_id": 1600165,
+      "source": "#James#\n\tWhat of Locklear and myself?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#177",
+      "node_id": 1600166,
+      "source": "#Pug#\n\tOnce Prince Arutha arrives with his reinforcements, deliver my assurance that he will not face anything magical from the moredhel. If Makala indeed has assistants, they will be uninterested in the Prince.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#178",
+      "node_id": 1600167,
+      "source": "#Pug#\nThey will be waiting for ñmeð.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#179",
+      "node_id": 1600177,
+      "source": "\tDisliking the fact that they would be at a disadvantage against a magical opponent without Patrus, James steeled himself as he grabbed for his weapon...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#180",
+      "node_id": 1600168,
+      "source": "#Pug#\n\tI hoped more for you, Makala. When first you came to us years ago from the Assembly I sensed your heart full of dark calculation, but I had thought with us you would grow to gentleness.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#181",
+      "node_id": null,
+      "source": "#Makala#\n\tWe Tsurani are of course bereft of that quality...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#182",
+      "node_id": null,
+      "source": "#Pug#\n\tSave your prating for the Assembly! You have returned my friendship with cold contempt, treated with my daughter as a wolf to his prey and have defied my interdict to visit Sethanon. Assume nothing between us now other than the respect due between practitioners. Why has the Assembly of Magicians seen fit to interpose itself into Midkemian affairs?\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#183",
+      "node_id": null,
+      "source": "#Makala#\n\tAs a whole, the Assembly was unable to reach consensus on this matter; they hesitate to dabble in matters that might arouse your ire. Otherwise disposed with a small problem concerning House Acoma they decided those who felt this investigation necessary could conduct it of their own volition. I undertook that responsibility.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#184",
+      "node_id": null,
+      "source": "#Pug#\n\tI should be careful taking such weight upon your shoulders. It may yet crush you.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#185",
+      "node_id": null,
+      "source": "#Makala#\n\tTen years ago you engaged in a battle to bar the Valheru entrance to your world, a battle in which you requested the service of several companies of Tsurani foot soldiers. As such, the battle became a matter of imperial interest and fell within the jurisdiction of the Assembly. You, however, have thwarted all our efforts to gather information about that battle and have forbade our investigation of Sethanon. Many sons of great houses fell but their bodies were never recovered for the proper rites...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#186",
+      "node_id": null,
+      "source": "#Pug#\n\tYour attempts at evasion are execrable, Makala! Never has the Assembly concerned itself with the souls of the dead and I don't believe they are practicing a new found piety. You wished to learn how I defeated the Valheru.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#187",
+      "node_id": null,
+      "source": "#Makala#\n\tIndeed. How could we not? The Valheru were a race of unspeakable evil and dread power who once nearly destroyed our world. Although my brothers harbor you the greatest respect Pug, you would be incapable of turning aside such monstrous power unaided. Judging by the numerous defenses that ringed this abandoned town, we assumed the only possible solution. You concealed a thing of power in the caverns here.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#188",
+      "node_id": null,
+      "source": "#Pug#\n\tI cannot fault your fears, but your methodology has been despicable.\n\tThe Lifestone was created in the darkest days of the Mad God's Rage, a war in which the Valheru strove to destroy the gods of Midkemia. With it they believed they could conquer every corner of the universe, and in all likelihood, they could have. It must be eternally locked away here and its existence must die out with that small handful of us that have looked upon it. You will speak to none of the Assembly about what you have found here or you shall answer to ñmeð.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#189",
+      "node_id": null,
+      "source": "#Makala#\n\tI cannot in good conscience keep such a secret. What if such a weapon were wielded against the Empire? Could not such a weapon lay waste to all her children? We cannot simply bury such a weapon. It must be destroyed for the good of all future generations of the Empire ñand the Kingdom.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#190",
+      "node_id": null,
+      "source": "#Pug#\n\tImpossible. We have no way to know what would happen if we attempted to destroy it. It may not be tested without potentially disturbing the Valheru whose souls now occupy the stone...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#191",
+      "node_id": null,
+      "source": "#Makala#\n\tAs I suspected. You have done nothing to study it. Great though your power may be, you haven't an inkling what secrets lie within that stone. It's very existence is obscene! It must not fall into the hands of a hostile power.\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#192",
+      "node_id": null,
+      "source": "#Pug#\n\tMakala, do not tamper with the stone. It must be left untouched for the good of all!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#193",
+      "node_id": null,
+      "source": "#Makala#\n\tI judge now as is my right as a Great One of the Assembly of Magicians. It must be destroyed, Pug...\n\táfáoárá átáháeá ágáoáoádá áoáfá átáháeá áEámápáiáráeá!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#195",
+      "node_id": 1600169,
+      "source": "#Delekhan#\n\tWhat madness is this?... WHO?...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#196",
+      "node_id": 1600170,
+      "source": "#Gorath#\n\tSomething within the sword...consumes! Can't fight...it...HIM!...Ashen-Shugar...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#197",
+      "node_id": 1600171,
+      "source": "#Pug#\n\tThe Valheru souls trapped within the stone are slipping their bonds! We will have to kill them both...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#198",
+      "node_id": 1600172,
+      "source": "#Owyn#\n\táBáuátá áwáháaátá áaábáoáuátá áGáoáráaátáhá?á!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#199",
+      "node_id": 1600173,
+      "source": "#Gorath#\n\tYou ñmustð...Owyn...evil...Can't fight it...HIM much...ll...ON...ger...Can't...hold...him...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#200",
+      "node_id": 1600174,
+      "source": "#Pug#\náNáOáWá!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\xe1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#201",
+      "node_id": 1600179,
+      "source": "His reflexes responding when his sensibility had long since fled, Owyn wedded his magical strength to the blast, feeling a simultaneous sensation of horror and elation as the Lifestone chamber crackled with power. In an instant, all that had been Delekhan or Gorath vanished in a concussive blast...\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#202",
+      "node_id": 1600180,
+      "source": "\tOwyn stared blankly at the Lifestone.\n\t\"We killed him,\" Owyn said, a bitter hurt in his words. \"He came to the Kingdom to warn us and we killed him.\"\n\t\"Don't be petulant, Owyn. This isn't a time for it.\"\n\tGlaring at Pug with shock, Owyn opened his mouth to reply, but found that adequate words failed him. Angered, he turned as if to leave, but felt the master magician's hand on his shoulder.\n\t\"Wait,\" Pug said, his voice more gentle than it had been. Meeting the boy's hateful gaze, he motioned for him to stay. \"You must understand. Gorath was dead the minute he touched the sword. If we had hesitated another moment longer, both he and Delekhan would be dead and an unspeakable evil would be loose on our world. When Delekhan began to change you could see the valheru were attempting to mold them into a form they could use. Do you remember the terrible devastation we saw on Timirianya? That would be a paradise compared to the lives we would lead under their dominion. I'm telling you this because you now have knowledge and abilities which come with terrible responsibilities. You will have to make decisions far worse than this someday if you continue down the path you are on. You are going to have to learn to think before you act, but never to regret your decisions, right or wrong. Otherwise, you will slowly begin to not make decisions at all.\"\n\t\"But how can I know which are the right decisions?\" Owyn asked. \"How can I be sure?\"\n\tPug squeezed his shoulder. \"You need to live to a ripe old age to know that and I am not nearly old enough to have an answer. All I know is what Macros the Black once told me. He said to train those around me well, to make them powerful, but also to make them loving and generous. I see those things in you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#203",
+      "node_id": 1600182,
+      "source": "\tLocklear and Owyn escort Gorath to Krondor. Finding the gates jammed, they are forced to enter the palace through the royal sewers.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#204",
+      "node_id": 1600183,
+      "source": "\tJames and Gorath meet Owyn in the sewers under Krondor and the trio travels to Romney to rendezvous with a detachment of King Lyam's troops at the Black Sheep tavern.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#205",
+      "node_id": 1600184,
+      "source": "\tJames, Owyn, and Gorath solve the mystery of the spyglass and the spider. Following a tangled web of clues they penetrate the Nighthawk's headquarters and discover a chest that should hold the evidence they need to convince Arutha of the impending moredhel attack.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#206",
+      "node_id": 1600185,
+      "source": "\tHeading south to deliver an important note to prince Arutha, Gorath and Owyn are captured by the moredhel and imprisoned in the dungeons at Sar-Sargoth. They manage to escape and finally fight their way to the Inclindel Pass where they are given an escort to Arutha's camp outside the Dimwood forest.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#207",
+      "node_id": 1600186,
+      "source": "\tJames, Locklear, and Patrus help Duke Martin prepare for the moredhel siege on Northwarden.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#208",
+      "node_id": 1600187,
+      "source": "\tStunned by the sudden disappearance of Pug and Gamina, Owyn and Gorath search desperately for the Book of Macros...their only clue. The quest takes them through the mines of the Mac Mordain to the tree top city of Elvandar.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#209",
+      "node_id": 1600188,
+      "source": "\tRealizing the moredhel attacks at Northwarden and Highcastle were part of a clever ruse to pull his forces into defensive positions along the northern border and away from Sethanon -- Delekhan and Makala's òtrue objective -- Arutha sends James, Locklear, and Patrus to the Dimwood to find and òdestroy the rift machine.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf2",
+        "\\xf2",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#210",
+      "node_id": 1600189,
+      "source": "\tHaving used the Book of Macros to follow Pug to an alien world nearly devoid of magic, Owyn and Gorath finally locate the powerless magician. Together, they are able to find Pug's daughter Gamina...trapped in a crystal cage.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z16.DDX#211",
+      "node_id": 1600190,
+      "source": "\tHoping to prevent Makala from reaching the Lifestone before them, Pug, Owyn, and Gorath discover that the cavern containing the magical device has been sealed by a group of Tsurani spellcasters known as óThe óSix. After finding and killing the last of these magicians, they are shocked to find Makala already in the cavern. Pug and Owyn engage the Tsurani Great One in a spectacular magic battle and, finally, defeat him.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

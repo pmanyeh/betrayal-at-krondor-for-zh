@@ -1,0 +1,475 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z03.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z03.DDX#0",
+      "node_id": 300026,
+      "source": "\tMist floated in the pass.\n\t\"This road leads to Krondor and the west,\" @4 said, \"though I believe it also forks to the north and leads through the Dimwood forest. Which way do you think would be best?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#1",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern coastal reaches of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#2",
+      "node_id": null,
+      "source": "\tThey moved north.\n\tFor days they moved in mist, the moisture soaking into their clothes and chilling them by night. When at last the mountains sloped downward, the fog lifted and they found themselves standing at the edge of a great wood...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#3",
+      "node_id": null,
+      "source": "\tThey turned back.\n\tIn a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#4",
+      "node_id": 300001,
+      "source": "KEEP OUT!\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#5",
+      "node_id": 300002,
+      "source": "Sloop\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#6",
+      "node_id": 300003,
+      "source": "Romney\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#7",
+      "node_id": 300004,
+      "source": "The name on the signpost had long worn away.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#8",
+      "node_id": 300005,
+      "source": "Lyton\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#9",
+      "node_id": 300027,
+      "source": "óMalac's óDragon - \nTurn to the south.\u0000",
+      "tokens": [
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#10",
+      "node_id": 300006,
+      "source": "North Trail\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#11",
+      "node_id": 300007,
+      "source": "Food and Lodging\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#12",
+      "node_id": 300008,
+      "source": "Darkmoor\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#13",
+      "node_id": 300009,
+      "source": "Temple of Ruthia\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#14",
+      "node_id": 300010,
+      "source": "Malac's Cross\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#15",
+      "node_id": 300011,
+      "source": "Leighton Dink\n\"No longer can he hate his name.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#16",
+      "node_id": 300012,
+      "source": "Penny May\n\"Or maybe she won't.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#17",
+      "node_id": 300013,
+      "source": "Kevyn Pathan\n\"Got too close to his work.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#18",
+      "node_id": 300014,
+      "source": "Dulcima Daggens\n\"Mother's womb to earthen tomb.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#19",
+      "node_id": 300015,
+      "source": "Vaness Marlin\n\"Couldn't rest in life...\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#20",
+      "node_id": 300016,
+      "source": "Randall Deigh\n\"His death has enriched our lives.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#21",
+      "node_id": 300017,
+      "source": "Daniel Velecamp\n\"Pore pore Danny. Had a bad spell.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#22",
+      "node_id": 300018,
+      "source": "Wayland M. Wasserman\n\"Hated everything.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#23",
+      "node_id": 300019,
+      "source": "Keisha\n\"The traveler's friend.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#24",
+      "node_id": 300020,
+      "source": "Mason Moorcamp\n\"Had a nasty Alement.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#25",
+      "node_id": 300021,
+      "source": "Jalice Riggens\n\"Mother. Wife. Lover.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#26",
+      "node_id": 300022,
+      "source": "Ulandra Maggard\n\"Lost her mind before her life.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#27",
+      "node_id": 300023,
+      "source": "Lewece Champetier\n\"Loved her Kings.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#28",
+      "node_id": 300024,
+      "source": "Warren Gunther\n\"Greatfully Dead.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#29",
+      "node_id": 300025,
+      "source": "J.R. Halbhuber\n\"Death by association.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#31",
+      "node_id": null,
+      "source": "\tSince we've come this far north, Gorath, I want to go on up to Cavall Keep.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#32",
+      "node_id": null,
+      "source": "\tPrince Arutha seemed to think that finding this Pug was of importance...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#33",
+      "node_id": null,
+      "source": "\tIt óis important, but at the same time, we aren't far from there and I need to find out if Ugyne and my uncle are all right.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#34",
+      "node_id": null,
+      "source": "\tWhy would they not be?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#35",
+      "node_id": null,
+      "source": "\tWe were captured by moredhel who had penetrated into the Kingdom as far south as Cavall Keep. Since they took us, how can I be certain they didn't ride into Cavall Keep and burn it all to the ground? Maybe Navon du Sandau's Nighthawk friends didn't appreciate their little ring being broken up and decided to take it out on the local count. I've been thinking about it since we escaped from Sar-Sargoth and it's something I just need to know...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#36",
+      "node_id": null,
+      "source": "\tI don't wish to sound indifferent to the fate of your kin, but I think there are rather more important issues to concentrate on. If the Kingdom falls to Delekhan and his supporters, I can óguarantee your relatives will find their deaths early. I will go wherever you lead, Owyn, but I think you should think with your head rather than your heart...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#37",
+      "node_id": 300029,
+      "source": "\tThe acolyte stopped.\n\t\"I... do not fully understand,\" he started. \"A disturbance surrounding Malac's Cross precludes any teleporting there. I am sorry, but from óthis end there is nothing óI can do.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z03.DDX#38",
+      "node_id": 300030,
+      "source": "\t@4 motioned for some assistance.\n\t\"Regretfully, until our problems with the Pantathians are resolved,\" responded an acolyte, \"we will not be able to perform to óany service, except for vital healings. The Abbot can explain further...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

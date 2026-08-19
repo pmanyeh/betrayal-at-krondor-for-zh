@@ -1,0 +1,83 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z08.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z08.DDX#1",
+      "node_id": null,
+      "source": "\tGorath halted.\n\tBlinking slowly, he put a hand over his stomach, then looked towards his confused looking companion...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z08.DDX#2",
+      "node_id": null,
+      "source": "\tHold for a moment, Owyn. I wish to speak to you.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z08.DDX#3",
+      "node_id": null,
+      "source": "\tWhy? What is it?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z08.DDX#4",
+      "node_id": null,
+      "source": "\tI merely wished to prepare you for things that may transpire before we reach Elvandar. There are ómagics ---things ancient--- which have kept the moredhel from crossing into the forests of the eledhel, but I feel those things have been awakened. I may have some ódifficulty in completing our journey.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z08.DDX#5",
+      "node_id": null,
+      "source": "\tDifficulty...What do you mean?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z08.DDX#6",
+      "node_id": null,
+      "source": "\tIt was not my intent to alarm you. Only to reassure you that no matter what may happen between here and Elvandar, I have come to consider you a friend.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

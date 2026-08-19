@@ -1,0 +1,748 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z06.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z06.DDX#0",
+      "node_id": 600001,
+      "source": "Harlech\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#1",
+      "node_id": 600002,
+      "source": "Sar Sargoth\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#2",
+      "node_id": 600003,
+      "source": "Caern\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#3",
+      "node_id": 600004,
+      "source": "Wyke\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#4",
+      "node_id": 600005,
+      "source": "Raglam EAST\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#5",
+      "node_id": 600006,
+      "source": "Bronwynn Alpress\n\"My first love.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#6",
+      "node_id": 600007,
+      "source": "Delynne Malpress\n\"Died in the battle of Armengar.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#7",
+      "node_id": 600008,
+      "source": "Braddock Alwynne\n\"Died for the Protector.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#8",
+      "node_id": 600009,
+      "source": "Larston Alwynne\n\"The death of the city consumed him.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#9",
+      "node_id": 600010,
+      "source": "Quentin Alwynne\n\"A good soldier.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#10",
+      "node_id": 600011,
+      "source": "Walton Dannis\n\"Fought valiantly at the battle of Armengar.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#11",
+      "node_id": 600012,
+      "source": "Trell Dannis\n\"Killed by a troll at the battle of Armengar.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#12",
+      "node_id": 600013,
+      "source": "Keshia Marne\n\"Mother. Lover. Soldier.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#13",
+      "node_id": 600014,
+      "source": "Indall Marne\n\"Murmandamus killed him.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#14",
+      "node_id": 600015,
+      "source": "Peller Caldwynne\n\"Died fighting for the Protector.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#15",
+      "node_id": 600016,
+      "source": "Oliver Caldwynne\n\"His victories surpassed his years.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#16",
+      "node_id": 600017,
+      "source": "\"The battle of Sar Sargoth was fought here.  Let all who visit this place remember the strength and courage of our ancestors. May their legacy stand forever. \"\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#17",
+      "node_id": 600018,
+      "source": "Gorath of the Greenheart Clan\n\"His death was slow and torturous.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#18",
+      "node_id": 600019,
+      "source": "Owyn Belleforte\n\"His luck finally ran out.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#19",
+      "node_id": 600020,
+      "source": "Gorath of the Greenheart Clan\n\"A traitor to his people.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#20",
+      "node_id": 600021,
+      "source": "Gorath of the Greenheart Clan\n\"He died on his knees.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#21",
+      "node_id": 600022,
+      "source": "Owyn Belleforte\n\"Called himself a magician.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#22",
+      "node_id": 600023,
+      "source": "Gorath of the Greenheart Clan\n\"Betrayed his people. Choked to death on his own blood.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#23",
+      "node_id": 600024,
+      "source": "Owyn Belleforte\n\"Merely a pawn in a grand game.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#24",
+      "node_id": 600025,
+      "source": "Gorath of the Greenheart Clan\n\"Delekhan ran him through.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#25",
+      "node_id": 600026,
+      "source": "Gorath of the Greenheart Clan\n\"His human blood made him weak.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#26",
+      "node_id": 600027,
+      "source": "Gorath of the Greenheart Clan\n\"Lay with beasts.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#27",
+      "node_id": 600028,
+      "source": "Eldoban\n\"Beldogal Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#28",
+      "node_id": 600029,
+      "source": "Weldaam\n\"Beldogal Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#29",
+      "node_id": 600030,
+      "source": "Nundekamp\n\"Beldogal Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#30",
+      "node_id": 600031,
+      "source": "Indabul Laz\n\"Golbandek Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#31",
+      "node_id": 600032,
+      "source": "Mobalgalf\n\"Golbandek Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#32",
+      "node_id": 600033,
+      "source": "Slubnovak\n\"Yulvend Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#33",
+      "node_id": 600034,
+      "source": "Culdenvalk\n\"Yulvend Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#34",
+      "node_id": 600035,
+      "source": "Plubneband\n\"Pobel Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#35",
+      "node_id": 600036,
+      "source": "Vell Hulbandek\n\"Pobel Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#36",
+      "node_id": 600037,
+      "source": "Olvundekai\n\"Pobel Clan\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#37",
+      "node_id": null,
+      "source": "\t@3 gasped.\n\tLooking from one headstone to the next, he was horrified that each bore either his or @5's names...\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#38",
+      "node_id": null,
+      "source": "\tHow can they have made these stones so quickly?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#39",
+      "node_id": null,
+      "source": "\tThey are possessed of an evil magic, these stones. They are known as the Terror Stones. Condemned of Sar-Sargoth are sometimes on the eve of their execution brought to this place and interred so that their head remains above ground. Until the time they are to die, they gaze onto their names and often go mad. I can only assume Delekhan intended that we were to be brought here...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#40",
+      "node_id": null,
+      "source": "\tAfter people are executed, are they buried here?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#41",
+      "node_id": null,
+      "source": "\tWe are like unto the Eledhel in our ways of the dead. Once a moredhel falls in death, that which lies upon the ground is a living thing no more, only rotting meat, unworthy of further attention. Only when we intend great insult do we inter our kin.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#43",
+      "node_id": null,
+      "source": "\tBefore us lies Harlech. We will have to turn to the east and skirt along the mountains...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#44",
+      "node_id": null,
+      "source": "\tWhy? We could probably do with picking up a few supplies. Surely we can get through if we just duck in and back out...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#45",
+      "node_id": null,
+      "source": "\tIt is not that simple. Among my kin, my appearance is...well known.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#46",
+      "node_id": null,
+      "source": "\tWhy? Are you a prince or something?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#47",
+      "node_id": null,
+      "source": "\tAside from Delekhan, there is only one other moredhel of high station other than myself. I suspect him long dead, slain by Moraeulf when I fled the Northlands and encountered your Seigneur Locklear...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#48",
+      "node_id": null,
+      "source": "\tBut if you're so important, then surely we can find óhelp!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#49",
+      "node_id": null,
+      "source": "\tNo...all claims I may have once had were sundered when first I left the Northlands. I have unresolvable differences with most of my kindred.\n\tThis is not the time to be discussing such things. We ómust turn to the east. Be careful of how you walk here, Owyn.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#51",
+      "node_id": null,
+      "source": "\tWe haven't moved far enough away from Harlech. We should skirt the mountains to the far east to travel around it.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#53",
+      "node_id": null,
+      "source": "\tIf my nose does not mislead, we must be nearing the naphtha caves of which Irmelyn spoke. It will be critical for you to cooperate with all that I say if we are to get Obkhar out of these caves alive.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#54",
+      "node_id": null,
+      "source": "\tWhy are we even doing this? Why don't we simply ñhead ñsouthð?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#55",
+      "node_id": null,
+      "source": "\tObkhar is a name familiar to me and I believe he may serve a purpose with his freedom. Kin to me in irritation, he has pricked Delekhan's ire times enough that we may ódepend he will avenge himself upon his captor.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#56",
+      "node_id": null,
+      "source": "\tYou're hoping that he's as much a bother to Delekhan as Narab then... So what will we need to do?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#57",
+      "node_id": null,
+      "source": "\tVenutrier of Lan operates in this locale and is known as a trader of slaves. I will offer you into slavery...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#58",
+      "node_id": null,
+      "source": "\tYou're going to ñwhatð?!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#59",
+      "node_id": null,
+      "source": "\tDo not alarm yourself overmuch. Venutrier would have no need of a scrawny young boy in his naphtha caves and will undoubtedly insist óI see his operations---reassurance you will not be ill treated---and when we have entered the caves, undoubtedly the both of us will be taken captive.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#60",
+      "node_id": null,
+      "source": "\tThis is your brilliant plan? We just got away from Delekhan in Sar-Sargoth and you want to get us taken captive again?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#61",
+      "node_id": null,
+      "source": "\tWe have a way out, however. As you may detect by the stench of this river that runs hard by, the naphtha mixes with it from and underground river which runs through the caves---it has since the day Guy du Bas-Tyra torched Armengar. I know this because I have had words with others once held captive by Venutrier. Once we are ready to leave, we dive in the underground river and will emerge somewhere downstream.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#62",
+      "node_id": null,
+      "source": "\tNo one has ever died doing this?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z06.DDX#63",
+      "node_id": null,
+      "source": "\tI have met none that have. Come, we have business to attend to.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

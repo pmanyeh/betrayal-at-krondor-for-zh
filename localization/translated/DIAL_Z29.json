@@ -1,0 +1,314 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z29.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z29.DDX#3",
+      "node_id": null,
+      "source": "\tIt is much the same as the magical perimeters the Timirianyan gods use. Makala must have learned their nature while he was there...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#4",
+      "node_id": null,
+      "source": "\tCan you disassemble it?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#5",
+      "node_id": null,
+      "source": "\tNot directly. We will have to go to the source of its generation and eliminate the problem there.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#6",
+      "node_id": null,
+      "source": "\tSo if we find Makala, we'll be able to remove it...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#7",
+      "node_id": null,
+      "source": "\tNo. Makala is already within, investigating the Lifestone as we speak. He will have spell weavers scattered through this location to maintain a shield of this power. I don't think he was absolutely certain that I would have found the cup.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#8",
+      "node_id": null,
+      "source": "\tSo he óknew you were going to find it?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#9",
+      "node_id": null,
+      "source": "\tAbout two years ago, he was absent from Midkemia for a number of months---shortly after I informed him that I would divulge no more about this chamber and the events at the end of the Great Uprising of the moredhel. When he reappeared, he dismissed his absence saying that he had been travelling.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#10",
+      "node_id": null,
+      "source": "\tSo you think he ran across the cup himself?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#11",
+      "node_id": null,
+      "source": "\tAmong other things. Its the only way he could have known about its powers and left it for me to discover. It is also probably about the time he decided to make contact with the moredhel...It's time we found the Six.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#12",
+      "node_id": null,
+      "source": "\tDelekhan's magical assistants?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#13",
+      "node_id": null,
+      "source": "\tNot having seen them, I can't be certain whether they are native or not, but I suspect they aren't moredhel spellweavers, despite whatever appearance they may be using. Makala has played your ruler for a fool. Delekhan won't stand to benefit in the slightest from this raid, despite anything Makala might have indicated... Enough speculation...The sooner we find the Six, the sooner we can get this shield down.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#15",
+      "node_id": null,
+      "source": "\tI don't know what it was you were thinking, Owyn, but as you see, the barrier is still here. We will have to find the Six and convince them to drop this shield.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#16",
+      "node_id": null,
+      "source": "\tYou mean kill them?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#17",
+      "node_id": null,
+      "source": "\tIf they are Tsurani as I suspect, it is very probable. Let's get to finding them...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#19",
+      "node_id": 2900002,
+      "source": "\tThe hallway widened.\n\tIn a few moments the path turned, opening into a large chamber where a dragon lay curled on the ground...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#20",
+      "node_id": 2900003,
+      "source": "\tMakala raised his staff.\n\tNot wanting to strike down the Tsurani, but realizing the choice was being made for him, Pug summoned what resources were left to him after the Timirianyan cup had blanked his spellcasting ability. Perhaps between he and the boy, they could still defeat Makala...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#22",
+      "node_id": null,
+      "source": "\tBefore we move any further, I am of a mind to prepare you for what we are going to encounter. Located in these chambers is an artifact known as the Lifestone, crafted by the ancient Valheru. It has powers beyond even my comprehension, but we know that it was crafted for the purpose of great destruction. It was this that the false Murmandamus sought to achieve during the Great Uprising...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#23",
+      "node_id": null,
+      "source": "\tFalse Murmandamus? What do you mean?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#24",
+      "node_id": null,
+      "source": "\tHe was not truly moredhel. He was a Pantathian who took on the semblance of a moredhel so he could achieve his goal. The point is irrelevant. What he sought was to activate the Lifestone. If that had happened, the devastation of Timirianya would seem a garden compared to what would be left of Midkemia.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#25",
+      "node_id": null,
+      "source": "\tIf the Valheru are dead, what does it matter? If no one knows how to use it, then it can't be of any danger to us.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#26",
+      "node_id": null,
+      "source": "\tNot so. The souls of the Valheru are bound to the stone and it may be that tampering with it may allow them to emerge once more, perhaps even to inhabit a living body. Even in a symbiotic state, we have no certain way of knowing what destruction they would be capable of.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#27",
+      "node_id": null,
+      "source": "\tSo Makala wants to destroy everything?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#28",
+      "node_id": null,
+      "source": "\tHe is not mad, but his curiosity may lead to more trouble than he imagines. Hopefully, we can find and stop him before he can do anything catastrophic.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#29",
+      "node_id": null,
+      "source": "\tBut why tell óus about any of this? I'm a squire from Tiburn and Gorath is a renegade from the Northlands. Isn't that dangerous?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z29.DDX#30",
+      "node_id": null,
+      "source": "\tYour stations are unimportant. I was once a kitchen boy in the court of Crydee. I trust you because apparently Macros óprefigured your involvement in this and did nothing to warn me before he left Midkemia. For whatever reason, I think he believes it necessary you be involved in these events and he invariably acts for the greater good, however mysterious his reasons may be.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

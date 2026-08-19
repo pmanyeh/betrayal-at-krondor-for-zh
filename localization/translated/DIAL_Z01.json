@@ -1,0 +1,491 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z01.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z01.DDX#0",
+      "node_id": 100009,
+      "source": "\tMist floated in the pass.\n\t\"This road branches a little further on,\" @4 said. \"To the south it leads towards Eggley and eventually Krondor. To the east, it leads through the Dimwood forest. Which way do you think we should take?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "\t我們在克朗多\n\t道具@4說明是否\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (narration + @4 speaker token), not a final translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#1",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern reaches of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#2",
+      "node_id": null,
+      "source": "\tThey moved east.\n\tFor days they moved in mist, the moisture soaking into their clothes by day and chilling them by night. When at last the mountains sloped downward, the fog lifted and they found themselves standing at the edge of a great wood...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#3",
+      "node_id": null,
+      "source": "\tThey turned about.\n\tIn just a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#4",
+      "node_id": 100010,
+      "source": "Yabon\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "歐文我\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#5",
+      "node_id": 100011,
+      "source": "LaMut\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "們在哪\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#6",
+      "node_id": 100012,
+      "source": "Zun\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "裡克朗\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#7",
+      "node_id": 100013,
+      "source": "Hawk's Hollow\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "多洛爾\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#8",
+      "node_id": 100014,
+      "source": "Loriel\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "戈拉斯\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#9",
+      "node_id": 100015,
+      "source": "Tyr-Sog\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "塔主選\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#10",
+      "node_id": 100016,
+      "source": "Inclindel Pass\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "單開始\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#11",
+      "node_id": 100017,
+      "source": "Zun Pass\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "繼續設\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#12",
+      "node_id": 100018,
+      "source": "Mac Mordain Cadal\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "定離庫\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (place name slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#13",
+      "node_id": 100019,
+      "source": "Michel Ambazac\n\"As you are, I once was. As I am, you will be.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "歐文\n我們在哪\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#14",
+      "node_id": 100020,
+      "source": "Rosel LaMutian\n\"Her face was sweet and her hands could heal.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "在哪\n裡克朗多\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#15",
+      "node_id": 100021,
+      "source": "Pargus Attacarper\n\"His fish didn't get away.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "朗多\n洛爾戈拉\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#16",
+      "node_id": 100022,
+      "source": "Stranger\n\"His chest was opened by a moredhel.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "戈拉\n斯塔主選\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#17",
+      "node_id": 100023,
+      "source": "A. R.Cramond\n\"He told a lie and paid the price.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "主選\n單開始繼\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#18",
+      "node_id": 100024,
+      "source": "Klamontala Pechta\n\"Touched by flames for honor's sake.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "始繼\n續設定離\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#19",
+      "node_id": 100025,
+      "source": "Goldie Crowe\n\"In death her face was that of a sovereign.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "定離\n庫存裝備\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#20",
+      "node_id": 100026,
+      "source": "Hyden Miller\n\"A bone did him in.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "裝備\n觀察金幣\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#21",
+      "node_id": 100027,
+      "source": "Mirriam Haselcalph\n\"To the Drawer of Nets she took her key.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "金幣\n隊伍戰鬥\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#22",
+      "node_id": 100028,
+      "source": "Jad Peebles\n\"He engaged in his last undertaking.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "戰鬥\n攻擊防禦\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#23",
+      "node_id": 100029,
+      "source": "Victor Marmallion\n\"A cad. A cur. We loved him still.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "防禦\n魔法逃跑\u0000",
+      "status": "translated",
+      "notes": "Phase 6 pipeline test placeholder (epitaph slot), not a real translation."
+    },
+    {
+      "id": "DIAL_Z01.DDX#24",
+      "node_id": 100030,
+      "source": "Iruna\n\"In the wilds was the Hadati woman.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#25",
+      "node_id": 100031,
+      "source": "Aglus Soggin\n\"Another helping put him six feet under.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#26",
+      "node_id": 100032,
+      "source": "David Bouli\n\"Buried without a word.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#27",
+      "node_id": 100033,
+      "source": "Pul Dudding\n\"No one knew when he came or when he went.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#28",
+      "node_id": 100034,
+      "source": "Ceilia deBuellen\n\"Water took her to the deeps.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#29",
+      "node_id": 100035,
+      "source": "Baby Irisa\n\"A week she cried before she slept.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#30",
+      "node_id": 100036,
+      "source": "A Mother\n\"Down to night she went, a day before her daughter.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#31",
+      "node_id": 100037,
+      "source": "Ben Snared\n\"Many were captured by his wit.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#32",
+      "node_id": 100038,
+      "source": "Jake Careoaq\n\"His drinking days are done.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#33",
+      "node_id": 100039,
+      "source": "Hubert\n\"We didn't want to hang you.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#35",
+      "node_id": null,
+      "source": "\tóThis took some time for them to assemble. I thought perhaps the assassins that had attacked us thus far had followed us through the Inclindel, but there are too many of them, even to chase a renegade like Gorath. Delekhan has to be calling on spies already placed within the Kingdom.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#36",
+      "node_id": null,
+      "source": "\tBut Delekhan sits in Sar-Sargoth. Word of my escape could only have travelled as we have come...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#37",
+      "node_id": null,
+      "source": "\tThe fact that we have been attacked this far south suggests otherwise...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#38",
+      "node_id": null,
+      "source": "\tI have never been a witness to it, but I have heard of a talent called ómind óspeech. Very few magicians have it, but the ability allows men to communicate over very long distances. Perhaps Delekhan might have hired such help.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#39",
+      "node_id": null,
+      "source": "\tIt is entirely possible. Even before I escaped from his fortress, it was rumored that the magicians with whom he has been keeping company had such talents. I know that his assistant Nago claimed to have such powers, though I never saw evidence of such...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z01.DDX#40",
+      "node_id": null,
+      "source": "\tAnd if Delekhan has the capacity, then undoubtedly he shall use his assistants. So we will have to be cautious and watch out for any who seem like magicians as we head for Krondor. Both of you, keep your eyes open...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,650 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z21.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z21.DDX#0",
+      "node_id": 2100016,
+      "source": "The party's @1 ability has increased.\u0000",
+      "tokens": [
+        "@1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#1",
+      "node_id": 2100017,
+      "source": "The party's abilities have increased.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#2",
+      "node_id": 2100018,
+      "source": "@'s @1 ability has increased.\u0000",
+      "tokens": [
+        "@",
+        "@1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#3",
+      "node_id": 2100019,
+      "source": "@'s abilities have increased.\u0000",
+      "tokens": [
+        "@",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#4",
+      "node_id": 2100007,
+      "source": "\tIt's best if we move through town as quickly as possible. I left a wedding party here not too long ago and it might raise unpleasant questions if I were seen here again.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#5",
+      "node_id": null,
+      "source": "\tWe may need supplies...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#6",
+      "node_id": null,
+      "source": "\tThere's a shop here called the Crossroads where we might be able to pick up a few things. Otherwise, we should be cautious.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#25",
+      "node_id": null,
+      "source": "\tThe gambler looked up.\n\tMaking a fist, he shook it under @4's nose, then smiled wickedly as he opened his palm to reveal a pair of dice. \"The game is dice, my friend,\" the gambler said, sitting back down. \"Winner wins half as much as he bets. How much gold will you wager?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#28",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"You've had quite a good run of luck by the look of you,\" he said. \"We, alas, have not been so fortunate. Perhaps someone else will play with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#29",
+      "node_id": null,
+      "source": "\tThe gambler shook his head.\n\t\"I'm afraid I have come to the end of my funds,\" he said. \"Perhaps when I have recouped my losses we can play again.\"\n\t@4 nodded. \"I would like that very much. Good day to you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#30",
+      "node_id": null,
+      "source": "\t@4 examined their funds.\n\tBefore their opponent could roll the dice, @4 slapped down his hand. \"I have just checked what we have, and we have less than I thought,\" he explained, hoping the gambler would not react badly. \"We bid you good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#31",
+      "node_id": null,
+      "source": "\tRuthia smiled on them.\n\tScooping up his shining winnings as graciously as possible, @4 deposited their won sovereigns with as much discretion as possible. \"I hope you have better luck in the future,\" @4 said with a nod.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#32",
+      "node_id": null,
+      "source": "\t@4 rolled poorly.\n\tFrowning at the unfortunate turn of events, he reluctantly handed over the sovereigns he had bet. \"The game is yours, sir,\" he said.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#33",
+      "node_id": null,
+      "source": "\tThe throws were even.\n\t\"A draw. It seems the goddess Ruthia favors us equally,\" @4 said, recollecting his investment. \"Perhaps we can play again.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#37",
+      "node_id": null,
+      "source": "\tThe gambler tapped a deck of cards.\n\t\"For a small wager, I'll play you Lin-Lan,\" he said. \"Winner takes as much as he bets. What's your wager?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#40",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"You've had quite a good run of luck by the look of you,\" he said. \"We, alas, have not been so fortunate. Perhaps someone else will play with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#41",
+      "node_id": null,
+      "source": "\tThe gambler shook his head.\n\t\"I'm afraid I have come to the end of my funds,\" he said. \"Perhaps when I have recouped my losses we can play again.\"\n\t@4 nodded. \"I would like that very much. Good day to you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#42",
+      "node_id": null,
+      "source": "\t@4 examined their funds.\n\tBefore their opponent could deal out the cards, @4 slapped down his hand. \"I have just checked what we have, and we have less than I thought,\" he explained, hoping the gambler would not react badly. \"We bid you good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#43",
+      "node_id": null,
+      "source": "\tRuthia smiled on them.\n\tScooping up his shining winnings as graciously as possible, @4 deposited their won sovereigns with as much discretion as possible. \"I hope you have better luck in the future,\" @4 said with a nod.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#44",
+      "node_id": null,
+      "source": "\t@4 stared at his cards.\n\tBy far one of the worst hands he had ever been dealt in Lin-Lan, he frowned as he reluctantly handed over the sovereigns he had bet. \"The game is yours, sir,\" he said.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#45",
+      "node_id": null,
+      "source": "\tThe cards were on the table.\n\t\"A draw. It seems the goddess Ruthia favors us equally,\" @4 said, recollecting his investment. \"Perhaps we can play again.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#49",
+      "node_id": null,
+      "source": "\tThe gambler tapped a deck of cards.\n\t\"Pashawa,\" he said, pushing the brightly colored deck towards @4. Seeing that his offer didn't seem attractive enough, he sweetened the bet. \"If you win, I'll pay half again what you wager. What do you wish to bet?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#52",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"You've had quite a good run of luck by the look of you,\" he said. \"We, alas, have not been so fortunate. Perhaps someone else will play with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#53",
+      "node_id": null,
+      "source": "\tThe gambler shook his head.\n\t\"I'm afraid I have come to the end of my funds,\" he said. \"Perhaps when I have recouped my losses we can play again.\"\n\t@4 nodded. \"I would like that very much. Good day to you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#54",
+      "node_id": null,
+      "source": "\t@4 examined their funds.\n\tBefore their opponent could deal out the cards, @4 slapped down his hand. \"I have just checked what we have, and we have less than I thought,\" he explained, hoping the gambler would not react badly. \"We bid you good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#55",
+      "node_id": null,
+      "source": "\tRuthia smiled on them.\n\tScooping up his shining winnings as graciously as possible, @4 deposited their won sovereigns with as much discretion as possible. \"I hope you have better luck in the future,\" @4 said with a nod.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#56",
+      "node_id": null,
+      "source": "\t@4 stared at his cards.\n\tBy far one of the worst hands he had ever been dealt in Pashawa, he frowned as he reluctantly handed over the sovereigns he had bet. \"The game is yours, sir,\" he said.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#57",
+      "node_id": null,
+      "source": "\tThe cards were on the table.\n\t\"A draw. It seems the goddess Ruthia favors us equally,\" @4 said, recollecting his investment. \"Perhaps we can play again.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#61",
+      "node_id": null,
+      "source": "\tThe man was a gambler.\n\tWithdrawing a deck of cards thicker than those used for Lin-Lan or Pashawa, he slapped it down on the table, withdrew a strange looking card and flipped it over. A woman was drawn on the face of the card.\n\t\"Called a Blue Lady,\" the man said with a drawl. \"The game is óPokiir, the latest thing played by the Keshian dog soldiers. Have you heard of it?\"\n\t@4 nodded. \"I've even had occasion to play it with mercenaries passing through the local tavern.\"\n\tAlthough the gambler seemed disappointed, he continued. \"Uneven bet. I'll pay you half of what you bet since you already know how to play. What will you put up?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#64",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"You've had quite a good run of luck by the look of you,\" he said. \"We, alas, have not been so fortunate. Perhaps someone else will play with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#65",
+      "node_id": null,
+      "source": "\tThe gambler shook his head.\n\t\"I'm afraid I have come to the end of my funds,\" he said. \"Perhaps when I have recouped my losses we can play again.\"\n\t@4 nodded. \"I would like that very much. Good day to you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#66",
+      "node_id": null,
+      "source": "\t@4 examined their funds.\n\tBefore their opponent could deal out the cards, @4 slapped down his hand. \"I have just checked what we have, and we have less than I thought,\" he explained, hoping the gambler would not react badly. \"We bid you good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#67",
+      "node_id": null,
+      "source": "\tRuthia smiled on them.\n\tScooping up his shining winnings as graciously as possible, @4 deposited their won sovereigns with as much discretion as possible. \"I hope you have better luck in the future,\" @4 said with a nod.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#68",
+      "node_id": null,
+      "source": "\t@4 stared at his cards.\n\tBy far one of the worst hands he had ever been dealt in óPokiir, he frowned as he reluctantly handed over the sovereigns he had bet. \"The game is yours, sir,\" he said.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#69",
+      "node_id": null,
+      "source": "\tThe cards were on the table.\n\t\"A draw. It seems the goddess Ruthia favors us equally,\" @4 said, recollecting his investment. \"Perhaps we can play again.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#73",
+      "node_id": null,
+      "source": "\tThe man frowned.\n\tOn the table before him was a small chessboard with carved wooden pieces, arranged in such a way that whoever was playing white seemed to be in quite a bad situation. Without looking up, he moved a piece. \"Do you play?\"\n\t@4 shrugged and took a seat. \"I'm not bad.\"\n\t\"Excellent. Then you won't mind placing a small wager on our game,\" the man said with a smile, moving a piece from the opposite side this time. \"Even bet. You win what you bet. How much shall you wager?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#81",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"You've had quite a good run of luck by the look of you,\" he said. \"We, alas, have not been so fortunate. Perhaps someone else will play with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#82",
+      "node_id": null,
+      "source": "\tThe gambler shook his head.\n\t\"I'm afraid I have come to the end of my funds,\" he said. \"Perhaps when I have recouped my losses we can play again.\"\n\t@4 nodded. \"I would like that very much. Good day to you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#83",
+      "node_id": null,
+      "source": "\t@4 examined their funds.\n\tBefore their opponent could finish rearranging the pieces, @4 halted him. \"I have just checked what we have, and we have less than I thought,\" he explained, hoping the gambler would not react badly. \"We bid you good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#84",
+      "node_id": null,
+      "source": "\tHis gambit worked.\n\tSmiling at the way he had successfully sacked the gambler's defensive moves, he gathered his winnings gracefully. \"I hope you have better luck in the future,\" @4 said with a nod.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#85",
+      "node_id": null,
+      "source": "\tCheckmate.\n\tScowling at how easily the gambler had slipped in an destroyed him, @4 tried to remember the moves of the game as he handed over his bet to the gambler. \"Good game,\" he muttered.\n\t\"Aye,\" the gambler replied. \"Though I think I will have enjoyed it more than you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z21.DDX#86",
+      "node_id": null,
+      "source": "\tStalemate.\n\tAlthough the result was far from what he had desired when he had begun the match, he was certainly happy enough that his bet wouldn't be going into the money pouch of his opponent.\n\t\"A draw. It seems the goddess Ruthia favors us equally,\" @4 said, recollecting his investment. \"Perhaps we can play again.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

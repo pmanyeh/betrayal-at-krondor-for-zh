@@ -1,0 +1,338 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z07.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z07.DDX#0",
+      "node_id": 700019,
+      "source": "\tMist floated in the pass.\n\t\"This road branches a little further on,\" @4 said. \"To the west it leads towards Loriel and LaMut. To the south, it leads towards Eggley and eventually Krondor. Which way do you think we should take?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#1",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, footsore and road weary, they emerged near the town of Hawk's Hollow.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#2",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern reaches of the Kingdom.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#3",
+      "node_id": null,
+      "source": "\tThey turned back.\n\tIn a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#4",
+      "node_id": 700020,
+      "source": "\tMist floated in the pass.\n\t\"This road branches a little further on,\" @4 said. \"To the west it leads towards Eggley and eventually Krondor. To the east, it will take us near Sethanon. Which way do you think we should take?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#5",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern reaches of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#6",
+      "node_id": null,
+      "source": "\tThe landscape flattened.\n\tSlowly the hills and trees began to thin, becoming far more sparse in the grassy midlands of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#7",
+      "node_id": null,
+      "source": "\tThey turned back.\n\tIn a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#8",
+      "node_id": 700001,
+      "source": "Beware! Dangerous forest!\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#9",
+      "node_id": 700002,
+      "source": "Marlen Shephard\n\"Threw a stone at a dragon.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#10",
+      "node_id": 700003,
+      "source": "Raoul du Lezanne\n\"Skins were his trade.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#11",
+      "node_id": 700004,
+      "source": "Jarrett Jester\n\"Stood beneath the wrong tree.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#12",
+      "node_id": 700005,
+      "source": "Forrest Walker\n\"Deadicated\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#13",
+      "node_id": 700006,
+      "source": "Christopher Madine\n\"He was like a brother to us.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#14",
+      "node_id": 700007,
+      "source": "James Delittle\n\"Swallowed his pride and it killed him.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#15",
+      "node_id": 700008,
+      "source": "Dell Briddle\n\"She followed her love wherever he went.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#16",
+      "node_id": 700009,
+      "source": "Unknown\n\"May his soul find the peace he could not.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#17",
+      "node_id": 700010,
+      "source": "Red du Wied\n\"A stronger man there never was.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#18",
+      "node_id": 700011,
+      "source": "Julie DeChamp\n\"Her smile could warm the coldest day.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#19",
+      "node_id": 700012,
+      "source": "Paulson Berthold\n\"Came to the Dimwood looking for peace.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#20",
+      "node_id": 700013,
+      "source": "Barlew Tunns\n\"He forgot to concentrate.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#21",
+      "node_id": 700014,
+      "source": "Ashlyn Mecchus\n\"All who knew her loved her.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#22",
+      "node_id": 700015,
+      "source": "Mitchell Janns\n\"Disappeared into the woods. Never came back.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#23",
+      "node_id": 700016,
+      "source": "Miller Dubbs\n\"At last he has joined his beloved wife.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#24",
+      "node_id": 700017,
+      "source": "Rose Dubbs\n\"No wife shall be so missed.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z07.DDX#25",
+      "node_id": 700018,
+      "source": "Orson du Bas Fadamor\n\"Killed the giant that dealt his fatal blow.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z24.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z24.DDX#0",
+      "node_id": 2400001,
+      "source": "#Hakha's Cajunlo#\t@3 surveyed the shop. Though he could see no perceptible evidence the shop's owner had placed any special wards around his inventory, he ñwas dimly aware of something unnatural about the doorway through which they had passed. In the pit of his stomach, he knew that thieves would find themselves the victim of some magical unpleasantness.\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#1",
+      "node_id": 2400002,
+      "source": "To Hakha's Cajunlo\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#2",
+      "node_id": 2400003,
+      "source": "#Touchstone Gems#\tWhile many of the things in the shop glittered gold or silver, @4 was travelled enough to know that the items of greatest value were not on display. Instead, they would be locked away elsewhere, brought out by the owner only if he believed that his customers had honest intentions.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#3",
+      "node_id": 2400004,
+      "source": "To Touchstone Gems\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#4",
+      "node_id": 2400005,
+      "source": "#The Armory#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#5",
+      "node_id": 2400006,
+      "source": "To The Armory\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#6",
+      "node_id": 2400007,
+      "source": "#Sign of the Sword#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#7",
+      "node_id": 2400008,
+      "source": "To the Sign of the Sword\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#8",
+      "node_id": 2400022,
+      "source": "#The Forge#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#9",
+      "node_id": 2400023,
+      "source": "To The Forge\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#10",
+      "node_id": 2400024,
+      "source": "#Scavenger's Meet#\tThe shop was littered with castoffs, forgotten trinkets, lost items which few would want or need to reclaim. Here it seemed that tarnish and rust were the things that were prized, the items to which they clung of only secondary value.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#11",
+      "node_id": 2400025,
+      "source": "To the Scavenger's Meet\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#12",
+      "node_id": 2400015,
+      "source": "#Joseph the Animal's#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop contained a startling variety of armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#13",
+      "node_id": 2400026,
+      "source": "\t@4 surveyed their equipment.\n\t\"Which of your items would you like repaired, today?\" the mender asked.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#14",
+      "node_id": 2400016,
+      "source": "#The Woolen Man#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#15",
+      "node_id": 2400032,
+      "source": "#The Fife and Laurel#\tThe little shop was covered with dust.\nLike delicate wall hangings, silky cobwebs decorated every corner of the quaint old shop. The Dimwood was hardly a well travelled area and it was obvious the establishment received very few visitors.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#16",
+      "node_id": 2400017,
+      "source": "#Morgan Hurley's#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#17",
+      "node_id": 2400018,
+      "source": "#Pierce Perry's Weapons#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#18",
+      "node_id": 2400019,
+      "source": "#Split Tree Goods#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#19",
+      "node_id": 2400020,
+      "source": "#Gallowlees' Jewels#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#20",
+      "node_id": 2400021,
+      "source": "#Rygate and Supply#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#21",
+      "node_id": 2400027,
+      "source": "\tAll were silent.\n\tIn their minds only one thought prevailed.  \"óWho óamong óthem ówould ódare ñcheató?  ñWould óanyone ñever óstep óforward?ð\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf1",
+        "\\xf3",
+        "\\xf1",
+        "\\xf3",
+        "\\xf1",
+        "\\xf3",
+        "\\xf3",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#23",
+      "node_id": null,
+      "source": "\tI will...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#24",
+      "node_id": null,
+      "source": "\t\"My @0 rating is limited to a mere @1,\" thought @2.  \"Perhaps I should increase it?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@0",
+        "@1",
+        "@2",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#27",
+      "node_id": 2400028,
+      "source": "\tIt defied logic.\n\tVisions of a Moredhel Lock chest infused their minds.  Of the many questions that drifted amongst their dreams...  óHow?... óWhy?...  the most evasive was: ówhat ócode ócould ópossibly óopen óthis ólock?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#28",
+      "node_id": 2400029,
+      "source": "\tAll were silent.\n\tPerplexed by the magical device inside the chest, they continued their investigation more carefully.  The device looked as if it might aid in getting past situations that might, because of past mistakes, be insurmountable.\n\t\"We should be cautious not to ñabuse this power,\" suggested @4 as they began to explore their options.  \"On the other hand,\" he continued, \"perhaps we ñare in a situation where we could use it.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "@4",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#29",
+      "node_id": 2400030,
+      "source": "\tHe stopped.\n\t\"ñWhy,\" he thought, \"do we attempt the cheaters path? Certainly there are ñother paths to take...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z24.DDX#30",
+      "node_id": 2400031,
+      "source": "\tThey conferred.\n\t\"Perhaps,\" suggested @4, \"your mind has grown weak from the travelling?\"\n\t\"Yet it ñis an option if...\", returned @0.\n\t\"ñOnly ñif ñthere ñis ñNO ñOTHER ñWAYð,\" interrupted @4. \"Certainly this must be our ñlast resort!\"\n\tIt would be some time before they reached their decision to the question, 'Should this chapter be concluded now?'\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "@4",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

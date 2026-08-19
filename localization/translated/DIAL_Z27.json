@@ -1,0 +1,1469 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z27.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z27.DDX#0",
+      "node_id": 2700022,
+      "source": "\tThis is ñnot the direction we should be going. Let's head back the other way.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#1",
+      "node_id": 2700001,
+      "source": "\tThe pass was empty.\n\t\"It's a five day journey if the sign is to be believed,\" @4 remarked. \"It would also be an excellent place to stage an ambush. Think we should take the chance?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#2",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, foot sore and road weary, they emerged near the coast of the Bitter Sea.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#3",
+      "node_id": 2700002,
+      "source": "\tThe pass ahead was empty.\n\t\"It's a two day journey if the sign is to be believed,\" @5 remarked. \"Think we should attempt it?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#4",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern reaches of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#5",
+      "node_id": 2700003,
+      "source": "\t@5 stared down the pass.\n\t\"If I recall my geography, this road skirts between the High Wold and the Teeth of the World,\" he said. \"Ultimately it leads past the northern garrisons at Highcastle and Northwarden. What do you think? Do we take this path?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#6",
+      "node_id": null,
+      "source": "\tDays passed.\n\tTo the north the mountains undulated like the scales of a great dragon, sloping ever higher as the Thunderhell Steppes gave way to the even more majestic range of the Teeth of the World. To the south, the mountains flattened out, becoming eventually a wide plain called the High Wold, which stretched south and curled at the feet of a minor range of hills...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#7",
+      "node_id": 2700004,
+      "source": "\t@4 shook his head.\n\t\"The cold will kill us if the moredhel don't,\" he said, \"It's like Finn said, we'll have to consider the Inclindel blocked for the time being.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#8",
+      "node_id": 2700023,
+      "source": "\tA sulphurous stench was in the wind.\n\t\"This must be the Mac Mordain Cadal,\" @4 said, his eyes glazing as he lost himself in thought. \"I knew that it was somewhere close. As I recall ñMac is dwarven for mine or cave or something like that. Now considering the dwarves are no friends of the moredhel, they might be of some assistance to us, assuming they don't take exception to Gorath here. Do we investigate or not?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#9",
+      "node_id": null,
+      "source": "\tThe tunnels were damp.\n\tThough the silver seamed earthen roof which stretched over their heads was tall enough that they didn't have to crouch, @4 felt hemmed in by the shaft. He was privately thankful the dwarves were larger than they were often given credit for in the legends...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#10",
+      "node_id": 2700021,
+      "source": "\t@4 shook his head.\n\t\"The cold will kill us if the moredhel don't,\" he said, \"It's like Finn said, we'll have to consider the Inclindel blocked for the time being.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#11",
+      "node_id": 2700005,
+      "source": "\tThe road was littered with rocks.\n\tInstinctively he knew that they had simply fallen from the sides of the rocky defile which now faced them, but a part of him entertained the notion that perhaps they had fallen onto the roadbed when someone had scrambled ñup the cliffs to await their party.\n\t\"If we head to the north, there's always the possibility the moredhel will have more assassins waiting for us,\" @4 said. \"Do we risk it?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#12",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, foot sore and road weary, they emerged near the town of Zun.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#13",
+      "node_id": 2700006,
+      "source": "\tThe road was littered with rocks.\n\tInstinctively he knew that they simply fallen from the sides of the rocky defile which now faced them, but a part of him entertained the notion that perhaps they had fallen onto the roadbed when someone had scrambled ñup the cliffs to await them.\n\t\"If we head to the north, there's always the possibility the moredhel will have more assassins waiting for us,\" @4 said. \"Do we risk it?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#14",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, foot sore and road weary, they emerged near the town of Hawk's Hollow.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#15",
+      "node_id": 2700007,
+      "source": "\tThe road lead east.\n\tHalting for a moment to ponder his options, @4 stared off in the direction of the Kingdom's populated heartland. \"We'll pass through Malac's Cross or Sethanon if we head this way. Think that's the best idea?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#16",
+      "node_id": null,
+      "source": "\tThe landscape flattened.\n\tSlowly the hills and trees began to thin, far more sparse in the grassy midlands of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#17",
+      "node_id": 2700024,
+      "source": "\tThe passage was blocked.\n\t\"Let's move back the other way,\" @4 said. \"Looks as if this entrance is closed for good.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#18",
+      "node_id": 2700008,
+      "source": "\tThe road lead west.\n\t\"Krondor's another 4 days from here by my guess,\" @4 said, thinking aloud. \"Anyone think of a good reason ñnot to go this way?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#19",
+      "node_id": null,
+      "source": "\tThe trip was ódull.\n\tWith only the occasional cold draft to chill their bones as they moved through the pass, it was a relief to finally feel the more temperate winds typical to the southern coastal reaches of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#20",
+      "node_id": 2700009,
+      "source": "\tOwyn was whistling.\n\tSuddenly aware his travelling companion had grown irrepressibly cheerful over the last few miles, @0 turned and favored the squire with an inquisitive stare. \"Why the sudden lift in your spirits?\"\n\t\"Unless I'm mistaken, we're heading towards my uncle Corvalis' estates in Cavall Keep, assuming we keep heading this way. We óare going that direction aren't we?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#21",
+      "node_id": null,
+      "source": "\tOwyn talked as they travelled.\n\tPointing out familiar geographical features, he related a good deal of history about the region's history as they attempted to ford a small river. Soon, they found themselves back upon a major road...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#22",
+      "node_id": 2700010,
+      "source": "\tThe road lead south.\n\tHalting for a moment to ponder his options, @4 stared off in the direction of the Kingdom's populated heartland. \"We'll pass through Malac's Cross or Sethanon if we head this way. Think that's the best idea?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#23",
+      "node_id": null,
+      "source": "\tThe landscape flattened.\n\tSlowly the hills and trees began to thin, far more sparse in the grassy midlands of the Kingdom than in the region from which they'd just come...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#24",
+      "node_id": 2700011,
+      "source": "\t@4 legs ached.\n\tIt seemed that he'd been walking for eternity, and the long stretch of road which led to the north did nothing for his enthusiasm. \"We can keep going this way, or we can turn about. Keep going?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#25",
+      "node_id": null,
+      "source": "\tSnow capped the mountains.\n\t@4 motioned for a temporary halt as they came through the pass into their new surroundings. Vaguely he could sense the cold that was coming down from the north and could imagine it would be even colder on the other side of the Teeth of the World...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#26",
+      "node_id": 2700012,
+      "source": "\tThe road was littered with rocks.\n\tInstinctively he knew that they simply fallen from the sides of the rocky defile which now faced them, but a part of him entertained the notion that perhaps they had fallen onto the roadbed when someone had scrambled ñup the cliffs to await their party.\n\t\"If we head to the west, there's always the possibility the moredhel will have more assassins waiting for us,\" @4 said. \"Do we risk it?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#27",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, foot sore and road weary, they emerged near the town of Tyr-Sog.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#28",
+      "node_id": 2700013,
+      "source": "\tOwyn was whistling.\n\tSuddenly aware his travelling companion had grown irrepressibly cheerful over the last few miles, @0 turned and favored the squire with an inquisitive stare.\n\t\"Why the sudden lift in your spirits?\" @0 asked.\n\t\"We're heading towards my uncle Corvalis' estates in Cavall Keep, assuming we keep heading this way. We óare going that direction aren't we?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#29",
+      "node_id": null,
+      "source": "\tOwyn talked as they travelled.\n\tPointing out familiar geographical features, he related a good deal of history about the region's history as they pushed through a hedgerow. Soon, they found themselves back upon a major road...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#30",
+      "node_id": 2700014,
+      "source": "\tThe wind howled.\n\tEyeing the gap which was the mouth of Northwarden pass, James turned to Locklear and clapped him on the back. \"So, how about a little fun old friend?\"\n\t\"You know, I've lost friends every time I've gone into the Northlands,\" Locklear replied coldly. \"Bronwynn, Captain Moyiet...\"\n\tJames nodded. \"Sounds to me you've got something to pay them back for then. What do you say we go stir up trouble with Delekhan's troops in the Northlands?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#31",
+      "node_id": null,
+      "source": "\tThey marched in silence.\n\tFearing that the sound of their Kingdom speech would carry in the cold, they moved as quickly as possible through the treacherous Northwarden pass, each steeling himself for the difficulties that lay ahead as they surveyed the snow covered landscape...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#32",
+      "node_id": 2700015,
+      "source": "\t@4 shook his head.\n\t\"The freezing snow will kill us if the moredhel don't,\" he said, \"We'll have to consider Cutter's Gap blocked for the time being.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#33",
+      "node_id": 2700016,
+      "source": "\tMist floated in the pass.\n\t\"This road leads through the Dimwood forest,\" @4 said. \"It might be a good way to keep our passage concealed from prying eyes. Think we should go this way?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#34",
+      "node_id": null,
+      "source": "\tThey moved south.\n\tFor days they moved in mist, the moisture soaking into their clothes and chilling them by night. When at last the mountains sloped downward, the fog lifted and they found themselves standing at the edge of a great wood...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#35",
+      "node_id": 2700025,
+      "source": "\tThe door was unlocked.\n\tCracking it open, @4 peered into the formless darkness of the shaft. When no one replied to his shouted greetings, he turned to @0. \"No one down there,\" @4 said. \"Might be interesting to take a look around. Feel like blundering around in the dark for a few minutes?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#36",
+      "node_id": null,
+      "source": "\tAn hour passed.\n\tAfter moving through a long stairwell that seemed to twist and wind in unexpected directions, they found themselves standing on an earthen floor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#37",
+      "node_id": 2700046,
+      "source": "\t@4 shook his head.\n\t\"I don't like the idea of going this way,\" he said, \"We can't accomplish anything that far north. All that is up there is controlled completely by Moredhel, and we would be walking straight into the enemy's hands.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#38",
+      "node_id": 2700051,
+      "source": "\t@4 shook his head.\n\t\"I don't like the idea of going this way,\" he said, \"We can't accomplish anything that far north. All that is up there is controlled completely by Moredhel, and we would be walking straight into the enemy's hands.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#39",
+      "node_id": 2700017,
+      "source": "\tThe road was littered with rocks.\n\tInstinctively he knew that they simply fallen from the sides of the rocky defile which now faced them, but a part of him entertained the notion that perhaps they had fallen onto the roadbed when someone had scrambled ñup the cliffs to await their party.\n\t\"We've nearly made it back to the Kingdom now,\" @4 said. \"Do you think we should go on ahead now or wait a bit?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#40",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, foot sore and road weary, they emerged near the town of Tyr-Sog.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#41",
+      "node_id": 2700018,
+      "source": "\t@4 legs ached.\n\tIt seemed that he'd been walking for eternity, and the long stretch of road which led to the south did nothing for his enthusiasm. \"We can keep going this way, or we can turn about. Keep going?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#42",
+      "node_id": null,
+      "source": "\tSnow capped the mountains.\n\t@4 motioned for a temporary halt as they came through the pass into their new surroundings. Vaguely, he could sense the cold that was coming down from the north and could imagine it would be even colder on the other side of the Teeth of the World...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#43",
+      "node_id": 2700019,
+      "source": "\t@4 legs ached.\n\tIt seemed that he'd been walking for eternity, and the long stretch of road which led to the south did nothing for his enthusiasm. \"We can keep going this way, or we can turn about. Keep going?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#44",
+      "node_id": null,
+      "source": "\tSnow capped the mountains.\n\t@4 motioned for a temporary halt as they came through the pass into their new surroundings. Vaguely he could sense the cold that was coming down from the north and could imagine it would be even colder on the other side of the Teeth of the World...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#45",
+      "node_id": 2700026,
+      "source": "\tYOU SHOULD NEVER SEE THIS MESSAGE. IF YOU HAVE MANAGED TO TRIGGER It, THEN REPORT WHAT CHAPTER YOU FOUND IT IN AND GIVE AN EXACT LOCATION. N. H.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#46",
+      "node_id": null,
+      "source": "\tYOU SHOULD NEVER SEE THIS MESSAGE. IF YOU HAVE MANAGED TO TRIGGER It, THEN REPORT WHAT CHAPTER YOU FOUND IT IN AND GIVE AN EXACT LOCATION. N. H.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#47",
+      "node_id": 2700020,
+      "source": "\t@4 legs ached.\n\tIt seemed that he'd been walking for eternity, and the long stretch of road which led to the north did nothing for his enthusiasm. \"We can keep going this way, or we can turn about. Keep going?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#48",
+      "node_id": null,
+      "source": "\tSnow capped the mountains.\n\t@4 motioned for a temporary halt as they came through the pass into their new surroundings. Vaguely he could sense the cold that was coming down from the north and could imagine it would be even colder on the other side of the Teeth of the World...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#49",
+      "node_id": 2700052,
+      "source": "\t@4 shook his head.\n\t\"I don't like the idea of going this way,\" he said, \"We can't accomplish anything that far north. All that is up there is controlled completely by Moredhel, and we would be walking straight into the enemy's hands.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#50",
+      "node_id": 2700027,
+      "source": "\tA sulphurous stench was in the wind.\n\t\"Apparently we're back at the Mac Mordain Cadal,\" @4 said. \"Any reason you can think of to go back down there?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#51",
+      "node_id": null,
+      "source": "\tThe tunnels were damp.\n\tThough the silver seamed, earthen roof which stretched over their heads was tall enough that they didn't have to crouch, @4 felt hemmed in by the shaft, privately thankful the dwarves were larger than they were often given credit for in the legends...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#52",
+      "node_id": 2700028,
+      "source": "\tThe door was unlocked.\n\tCracking it open, @4 peered into the formless darkness of the shaft. When no one replied to his shouted greetings, he turned to @0. \"No one down there,\" @4 said. \"Might be interesting to take a look around. Feel like blundering around in the dark for a few minutes?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#53",
+      "node_id": null,
+      "source": "\tAn hour passed.\n\tAfter moving through a long stairwell that seemed to twist and wind in unexpected directions, they found themselves standing on an earthen floor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#54",
+      "node_id": 2700029,
+      "source": "\tThe door was unlocked.\n\tCracking it open, @4 peered into the formless darkness of the shaft. When no one replied to his shouted greetings, he turned to @0. \"No one down there,\" @4 said. \"Might be interesting to take a look around. Feel like blundering around in the dark for a few minutes?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#55",
+      "node_id": null,
+      "source": "\tAn hour passed.\n\tAfter moving through a long stairwell that seemed to twist and wind in unexpected directions, they found themselves standing on an earthen floor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#56",
+      "node_id": 2700030,
+      "source": "\tDaylight filtered in from above.\n\t\"This will be the way back to the main road, south of LaMut,\" @0 said. \"Do you think we should leave?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#57",
+      "node_id": null,
+      "source": "\tLight guided them.\n\tFollowing the ascending shaft of the Mac Mordain Cadal into daylight, they emerged at last on a road leading to the east and the King's Highway.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#58",
+      "node_id": 2700031,
+      "source": "\tA long corridor stretched before them.\n\t\"This must be the passage to Elvandar,\" noted @3. \"If we go this way, it may take us a few hours to get to the end. Are we up to the climb right now?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#59",
+      "node_id": null,
+      "source": "\tHours passed.\n\tJust as @4 was beginning to wonder if they would ever see the light of day again, the walls of the stairwell widened and were illuminated by dim shafts of light piercing the darkness through an oaken door. Pushing it open, @4 gasped at the marvel of the leafy canopy which spread above them...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#60",
+      "node_id": 2700032,
+      "source": "\tThe stairwell spiralled downward.\n\t\"Well,\" inquired @5. \"Shall we?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#61",
+      "node_id": null,
+      "source": "\tThey descended noisily.\n\tSeveral times @3 nearly lost his footing on the mossy steps, but fortunately caught himself before sending them all tumbling down the dwarven stairwell.\n\tAt last, they emerged into a large corridor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#62",
+      "node_id": 2700033,
+      "source": "\t@5 looked up the narrow stairwell.\n\tIt was definitely a way up, but he questioned whether it was the right way for them to be going at the moment. \"What do you think, @3?\" he asked. \"Feel like climbing all that way back up?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#63",
+      "node_id": null,
+      "source": "\t@3 nearly broke his neck.\n\tLess footsure than @5 and further encumbered by his bulky staff, it was a constant struggle for him to keep upright as they wound up the mossy steps of the dwarven mine. When they reached level ground once again, he resisted the urge to drop and kiss the dirt...\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#64",
+      "node_id": 2700034,
+      "source": "\tDaylight filtered in from above.\n\t\"This will be the way back to the main road,\" @4 said. \"Are you sure your ready to get moving again, @0?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#65",
+      "node_id": null,
+      "source": "\tLight guided them.\n\tFollowing the ascending shaft into daylight, they emerged at last on a path leading to Sarth...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#66",
+      "node_id": 2700035,
+      "source": "\tDaylight filtered in from above.\n\t\"This way leads out,\" @0 said. \"Are you sure your ready to get moving again, @4?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#67",
+      "node_id": null,
+      "source": "\tLight guided them.\n\tFollowing the ascending shaft into strange daylight, they emerged at last on a path leading to the south...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#68",
+      "node_id": 2700045,
+      "source": "\tSomeone ahead shouted.\n\tHurrying down the corridor to see what the cause of the commotion was, @4 was halted by an angry looking dwarf.\n\t\"Na further, lad!\" the dwarf drawled. \"I don't care what Naddur may or may not 'ave told you about what is going on down 'ere. We've enough ta do ta clear out this mess without yar interferin'. Now go back the way ya come and let us get about our work.\"\n\tWhen the dwarf couldn't be reasoned with, @4 loped back down the corridor.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#69",
+      "node_id": 2700059,
+      "source": "\tSomeone ahead shouted.\n\tHurrying down the corridor to see what the cause of the commotion was, @4 was halted by an angry-looking dwarf.\n\t\"No further, lad!\" the dwarf drawled. \"We've not cleared out the way to the lower caverns as yet and there's a danger of another collapse. Turn round and leave us to our work.\"\n\tWhen @4 realized the dwarf couldn't be reasoned with, they loped back down the low ceilinged corridor.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#70",
+      "node_id": 2700060,
+      "source": "\tThe walls narrowed slightly.\n\tSoon the corridor made an abrupt turn, ending in a mass of broken crossbeams, earth and crumbled masonwork. \"Cave in,\" @4 pondered aloud. \"We'll have to go another way.\"\n\tTurning round, the party ventured back up the corridor, down which they had come...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#71",
+      "node_id": 2700036,
+      "source": "\tRubble filled the stairwell.\n\t\"No way we're going to be able to dig through all that by ourselves,\" @4 said. \"Just as well. We have other things we need to be attending to at the moment.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#72",
+      "node_id": 2700053,
+      "source": "\tRubble choked the stairwell.\n\t\"We can't leave this hole just yet,\" Pug said regretfully, seeing the dour look on Owyn's face. \"Come. We have an appointment with Makala.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#73",
+      "node_id": 2700056,
+      "source": "\tPug searched his memory.\n\tHis faculties still clouded by the residual effects of his encounter on Timirianya, he tried to remember the exact sequence of passageways in the ancient Valheru ruins.\n\tSeeing the master magician's dazed expression, Owyn tugged on his sleeve. \"Are we going to go down to another level?\" he asked.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#74",
+      "node_id": null,
+      "source": "\t\"Of course,\" Pug replied absently. \"I was just thinking about something else.\"\n\tWithout another word, Pug led them down the crumbling steps.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#75",
+      "node_id": 2700037,
+      "source": "\tA chill descended the shaft.\n\tThough he desperately wished to be out of the foul smelling caves, Owyn realized that neither Venutrier or his guards would allow him to escape and live. His only option was to find a way to free both himself and Obkhar from their captivity.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#76",
+      "node_id": 2700058,
+      "source": "\tThey descended the stairwell.\n\tHalfway down its spiral, they discovered a heavy iron door which prevented them from moving any further downward. \"Looks like it's rusted shut,\" @4 said, examining the reddish dust which caked the lock. \"No going further for the time being.\"\n\tDisheartened, he led the way back up to the mouth of the stairwell...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#77",
+      "node_id": 2700038,
+      "source": "\t@4 sniffed the air.\n\tExpecting a foul aroma from the lower levels of the sewers, he was pleasantly surprised that it seemed less rank than the sewers through which they had already trudged. \"Believe it or not, it ñsmells better down there,\" he remarked. \"Shall we go down and have a look around?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#78",
+      "node_id": null,
+      "source": "\tThey descended noisily.\n\tSeveral times @3 nearly lost his footing on the mossy steps, but fortunately caught himself before sending them all tumbling down the stairwell.\n\tAt last, they emerged into a large corridor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#79",
+      "node_id": 2700039,
+      "source": "\t@5 looked up the narrow stairwell.\n\tIt was definitely a way up, but he questioned whether it was the right way for them to be going at the moment. \"What do you think, @3?\" he asked. \"Feel like climbing all that way back up?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#80",
+      "node_id": null,
+      "source": "\t@3 nearly broke his neck.\n\tLess footsure than @5 and further encumbered by his bulky staff, it was a constant struggle for him to keep upright as they wound up the mossy steps. However glad he was to see level ground, he was less pleased with the ñsmells that now assaulted him...\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#81",
+      "node_id": 2700040,
+      "source": "\tGorath halted at the stairwell.\n\tFor a moment he narrowed his eyes as if he were intently listening, then turned to face his companion. \"I should like to know your opinion,\" he said, his eyes lambent in the near darkness. \"It is possible that Delekhan has posted guards on the other side of this stairwell. If so, we may die even before we draw weapons.\"\n\t\"We'll die if we don't go up as I see it,\" Owyn replied. \"Die in a dungeon or die fighting for our lives. I'd at least like to think I was trying ñsomething.\"\n\tGorath smiled. \"At times you are not the boy you pretend to be. But still we have the decision. Are you ready to make the ascent right now?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#82",
+      "node_id": null,
+      "source": "\tThe stairwell was unguarded.\n\tBreathing a sigh of relief, Owyn followed after his friend as they progressed down the corridors of the dungeon...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#83",
+      "node_id": 2700041,
+      "source": "\tThe stairwell spiralled downward.\n\t\"Well,\" inquired @5. \"Shall we?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#84",
+      "node_id": null,
+      "source": "\tThey descended noisily.\n\tSeveral times @3 nearly lost his footing on the stone steps, but fortunately caught himself before sending them all tumbling down the stairwell.\n\tAt last, they emerged into a large corridor...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#85",
+      "node_id": 2700050,
+      "source": "\tA long corridor stretched before them.\n\t\"This must be the passage to Elvandar,\" noted @3. \"If we go this way, it may take us a few hours to get to the end. Are we up to the climb right now?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#86",
+      "node_id": null,
+      "source": "\tHours passed.\n\tJust as @4 was beginning to wonder if they would ever see the light of day again, the walls of the stairwell widened and were illuminated by dim shafts of light piercing the darkness through an oaken door. Pushing it open, @4 gasped at the marvel of the leafy canopy which spread above them...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#87",
+      "node_id": 2700042,
+      "source": "\tA long corridor stretched before them.\n\t\"This must be the passageway up,\" noted @3. \"If we go this way, it may take us a few hours to get to the end. Are we up to the climb right now?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#88",
+      "node_id": null,
+      "source": "\tHours passed.\n\tJust as @4 was beginning to wonder if they would ever see the light of day again, the walls of the stairwell widened and were illuminated by dim shafts of light piercing the darkness through an oaken door...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#89",
+      "node_id": 2700043,
+      "source": "\tDaylight filtered in from above.\n\t\"This will be the way back to the main road,\" @4 said. \"Are you sure you're ready to get moving again, @3?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#90",
+      "node_id": null,
+      "source": "\tLight guided them.\n\tFollowing the ascending shaft into daylight, they emerged at last on a path leading to the south...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#91",
+      "node_id": 2700047,
+      "source": "\tOwyn shivered.\n\tUncertain how long he and Gorath had spent in the darkness of the room beyond, each rendered helpless by the mind numbing drugs administered by Delekhan's assistants, he was in no hurry to return to the cages. \"I think we already know what lies that way,\" he said to Gorath. \"Let's try another way.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#92",
+      "node_id": 2700048,
+      "source": "\tStones littered the stairwell.\n\tTaking a few steps up, @4 realized the passageway was utterly choked with the stony refuse. \"It's no good,\" he said with a sigh. \"We won't be getting through all that mess.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#93",
+      "node_id": 2700057,
+      "source": "\t@5 looked up the narrow stairwell.\n\tIt was definitely a way up, but he questioned whether it was the right way for them to be going at the moment. \"This is the way we came,\" he said, looking to Pug. \"Will we be moving up to the other level?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z27.DDX#94",
+      "node_id": null,
+      "source": "\t@3 nearly broke his neck.\n\tLess footsure than @5 and further encumbered by his bulky staff, it was a constant struggle for him to keep upright as they wound up the mossy steps...\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z04.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z04.DDX#0",
+      "node_id": 400001,
+      "source": "Prank's Stone\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#1",
+      "node_id": 400002,
+      "source": "Kenting Rush\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#2",
+      "node_id": 400003,
+      "source": "Cavall Keep\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#3",
+      "node_id": 400004,
+      "source": "Leighton Dink\n\"No longer can he hate his name.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#4",
+      "node_id": 400005,
+      "source": "Jason Verchew\n\"He sung off key.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#5",
+      "node_id": 400006,
+      "source": "Nat Delars\n\"May the Goddess of Death be gentle.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#6",
+      "node_id": 400007,
+      "source": "Marty Hippler\n\"Beloved by all.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#7",
+      "node_id": 400008,
+      "source": "Jenny Gray\n\"Oh, to feel her sweet kiss.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#8",
+      "node_id": 400009,
+      "source": "Lincoln Albervant\n\"He lies here too.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#9",
+      "node_id": 400010,
+      "source": "Sher Perlance\n\"She loved to dance.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#10",
+      "node_id": 400011,
+      "source": "Corey Perlance\n\"Lost his life fighting a fire.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#11",
+      "node_id": 400012,
+      "source": "Damon Boyersmith\n\"He didn't want to go.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#12",
+      "node_id": 400013,
+      "source": "Kyle Bruning\n\"Always our loving son.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#14",
+      "node_id": null,
+      "source": "\tIt's gone! Gods, the whole Keep is gone!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#15",
+      "node_id": null,
+      "source": "\tWhat's gone?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#16",
+      "node_id": null,
+      "source": "\tRemember when I told you that I had an uncle living near here, the count of Cavall Keep? His whole keep is gone! It should be right in front of us!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#17",
+      "node_id": null,
+      "source": "\tAre you sure you just haven't forgotten the way? Perhaps we've just made a wrong turn somewhere.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z04.DDX#18",
+      "node_id": null,
+      "source": "\tNo, no, no. I'm certain of it. Something very wrong is up around here...Perhaps we should go north, up into Cavall Keep itself. At least we could get some answers there...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

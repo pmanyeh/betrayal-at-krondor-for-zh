@@ -1,0 +1,483 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z02.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z02.DDX#0",
+      "node_id": 200027,
+      "source": "\tMist floated in the pass.\n\t\"This road leads to Loriel and LaMut to the west,\" @4 said, \"though I believe it also forks to the east and leads through the Dimwood forest. Which way do you think would be best?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#1",
+      "node_id": null,
+      "source": "\tDays passed.\n\tDisliking the exposed feeling created by the defile, they moved quickly during the nights and left the days to resting under rocky overhangs and listening for assassin's footsteps. At last, footsore and road weary, they emerged near the town of Hawk's Hollow.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#2",
+      "node_id": null,
+      "source": "\tThey moved east.\n\tFor days they moved in mist, the moisture soaking into their clothes and chilling them by night. When at last the mountains sloped downward, the fog lifted and they found themselves standing at the edge of a great wood...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#3",
+      "node_id": null,
+      "source": "\tThey turned back.\n\tIn a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#4",
+      "node_id": 200028,
+      "source": "\tMist floated in the pass.\n\t\"This road leads to Sethanon to the east,\" @4 said, \"though I believe it also forks to the north and leads through the Dimwood forest. Which way do you think would be best?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#5",
+      "node_id": null,
+      "source": "\tThe landscape flattened.\n\tSlowly the hills and trees began to thin, becoming far more sparse in the grassy midlands of the Kingdom...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#6",
+      "node_id": null,
+      "source": "\tThey moved north.\n\tFor days they moved in mist, the moisture soaking into their clothes by day and chilling them by night. When at last the mountains sloped downward, the fog lifted and they found themselves standing at the edge of a great wood...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#7",
+      "node_id": null,
+      "source": "\tThey turned back.\n\tIn a few moments they were back on the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#8",
+      "node_id": 200001,
+      "source": "Tanneurs\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#9",
+      "node_id": 200002,
+      "source": "Eggley\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#10",
+      "node_id": 200003,
+      "source": "North to Dimwood\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#11",
+      "node_id": 200004,
+      "source": "East to Eggley\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#12",
+      "node_id": 200005,
+      "source": "Questor's View\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#13",
+      "node_id": 200029,
+      "source": "South to Krondor\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#14",
+      "node_id": 200006,
+      "source": "Dersham Pruitt\n\"His end justified the means.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#15",
+      "node_id": 200007,
+      "source": "Barlow Flinn\n\"May the Death Goddess treat him well.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#16",
+      "node_id": 200008,
+      "source": "Stell Larim\n\"She died in her lover's arms.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#17",
+      "node_id": 200009,
+      "source": "Unknown\n\"A lovely lass. Found beside the road.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#18",
+      "node_id": 200010,
+      "source": "Algon Trent\n\"Wanted to be a prince.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#19",
+      "node_id": 200011,
+      "source": "Melba Kane\n\"Outlived her kids.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#20",
+      "node_id": 200012,
+      "source": "Timothy Boyer\n\"First in everything.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#21",
+      "node_id": 200013,
+      "source": "Bursha Amberton\n\"Lost his wife, then took his life.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#22",
+      "node_id": 200014,
+      "source": "Olive Amberton\n\"Rest easy my darling.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#23",
+      "node_id": 200015,
+      "source": "Parker Biddle\n\"Dug his own grave.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#24",
+      "node_id": 200016,
+      "source": "WARNING!\nThe fiend beneath this stone is trapped by dirt, not by death. Stay away!\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#25",
+      "node_id": 200017,
+      "source": "Neblon Hunt\n\"Our loving father.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#26",
+      "node_id": 200018,
+      "source": "Thomas Brooke\n\"Fought with his neighbors. Lost.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#27",
+      "node_id": 200019,
+      "source": "Timothy Weyant\n\"Suffers no longer.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#28",
+      "node_id": 200020,
+      "source": "Alana Roberts\n\"Sleep, sweet. Sweet sleep.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#29",
+      "node_id": 200021,
+      "source": "Todor Milbo\n\"The townsfolk strung him up.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#30",
+      "node_id": 200022,
+      "source": "Hatfield Tucker\n\"Drank his own poison.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#31",
+      "node_id": 200023,
+      "source": "Larston Dewey\n\"I TOLD you I was sick!\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#32",
+      "node_id": 200024,
+      "source": "Anthony Rankin\n\"Fell off his high horse.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#33",
+      "node_id": 200025,
+      "source": "Ryan Wingard\n\"Lost at dice. Lost his temper. Lost his life.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#34",
+      "node_id": 200026,
+      "source": "Baylor Dalatail\n\"Drank his milk everyday.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#36",
+      "node_id": null,
+      "source": "\tGorath stopped.\n\tWith a face bearing signs of frustration, he turned to Owyn.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#37",
+      "node_id": null,
+      "source": "\tOur path seems futile. We ñneed to find the ñBook ñof ñMacrosð... Perhaps a scribe might be our best source of information. What do ñyou know of scribes in southern Midkemia?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z02.DDX#38",
+      "node_id": null,
+      "source": "\tThe Vaults of Sarth are, of course, replete with scribes. Brother Marc could help us there. Also, I've heard Abbot Graves at Malac's Cross is well known for such knowledge.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z11.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z11.DDX#0",
+      "node_id": 1100001,
+      "source": "Transport through these sewers is strictly prohibited!  Official Kingdom business only! - Swordmaster Corby -\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

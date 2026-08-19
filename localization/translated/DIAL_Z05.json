@@ -1,0 +1,171 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z05.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z05.DDX#0",
+      "node_id": 500001,
+      "source": "Dencamp On The Teeth\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#1",
+      "node_id": 500002,
+      "source": "Eldpoint\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#2",
+      "node_id": 500003,
+      "source": "South to Dimwood\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#3",
+      "node_id": 500004,
+      "source": "NW to Highcastle\nSE to Dimwood\nNE to Northwarden\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#4",
+      "node_id": 500005,
+      "source": "Highcastle\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#5",
+      "node_id": 500006,
+      "source": "Wolfram\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#6",
+      "node_id": 500007,
+      "source": "Constance Frohmeyer\n\"Had twelve kids. The thirteenth killed her.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#7",
+      "node_id": 500008,
+      "source": "Manek Ekeland\n\"His company was killed in the Northlands.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#8",
+      "node_id": 500009,
+      "source": "Virginia Ekeland\n\"Her husband never came home.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#9",
+      "node_id": 500010,
+      "source": "Bradford Ekeland\n\"He made his parents proud.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#10",
+      "node_id": 500011,
+      "source": "Luke Midkiff\n\"Soon the Gods will know his name.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#11",
+      "node_id": 500012,
+      "source": "Lloyd Brenneman\n\"His head was in the clouds.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#12",
+      "node_id": 500013,
+      "source": "Rue Beal\n\"Died in her favorite red dress.\"\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z05.DDX#14",
+      "node_id": null,
+      "source": "\t\"We're wasting time. Anything that's going on this far south won't have any critical effect on the battle at Northwarden. We need to head back... \"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

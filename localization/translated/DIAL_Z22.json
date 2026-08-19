@@ -1,0 +1,1923 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z22.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z22.DDX#4",
+      "node_id": null,
+      "source": "\t\"Which of you would be interested in purchasing?\" the keeper asked. \"They will only cost you @1 a pack.\"\n\t@4 found they had @2 to spend...\u0000",
+      "tokens": [
+        "\\x09",
+        "@1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@2",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#14",
+      "node_id": 2200034,
+      "source": "\tThey were stopped by two men.\n\t\"You will go no further,\" one of the men commanded. \"Before any shall enter the temple of Banath they must strip off all metals.\"\n\t@4 scowled, \"Under whose authority do you make these demands? We are representatives of Prince Arutha and order you to let us pass.\"\n\tThe men seemed a bit taken aback by this news, but as they departed they continued to speak of their levy.\n\t\"Metal is base and offensive to our god. He who enters this temple with metal on his person shall be struck dead...\" From the other side of the temple, almost out of earshot, @4 heard, \"...by the will of Banath!\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#16",
+      "node_id": null,
+      "source": "\tAn arrow hissed by @4's head.\n\tStartled, but having presence enough of mind to react, he halted immediately and held up both hands, hissing for his companions to do likewise. They had come across Count Corvalis' guards.\n\tMoving through the long stemmed grass with a nearly feline litheness, a long limbed soldier halted a few steps away, eyeing them suspiciously. \"What business do you have here?\" the man said.\n\t\"Actually, we came looking for you,\" @4 said, still relieved that the crossbow bolt hadn't struck him. \"You are one of Count Corvalis' guards aren't you?\"\n\t\"If I am, what of it?\" the man replied.\n\tJerking his thumb back at the way they had come, @4 related what the franklin had explained to them about the spiders in the area. \"They asked for you to come and help as soon as possible.\"\n\tLooking back to the other men who waited in the field, the soldier waved to them and instructed a few of them to get someone to go an help out.\n\t\"What about us?\" @4 asked.\n\t\"Do what you like,\" the soldier replied. \"You lot don't look like poachers anyway. Just don't let us catch you poking around near the ruins of the Keep.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#17",
+      "node_id": null,
+      "source": "\tAn arrow hissed by @4's head.\n\tStartled, but having presence enough of mind to react, he halted immediately and held up both hands, hissing for his companions to do likewise. They had come across Count Corvalis' guards.\n\tMoving through the long stemmed grass with a nearly feline litheness, a long limbed soldier halted a few steps away, eyeing them suspiciously. \"What business do you have here?\" the man said.\n\t\"Actually, we came looking for you,\" @4 said, still relieved that the crossbow bolt hadn't struck him. \"You are one of Count Corvalis' guards aren't you?\"\n\t\"If I am, what of it?\" the man replied.\n\t\"We're looking for Ugyne,\" @4 explained. Pointing to Owyn, he continued nervously, \"This one is the nephew of the Count.\"\n\tApproaching a little more closely, the man stepped past @4 to have a good look at the boy. \"óDoes look a bit like the Count,\" the man confirmed. \"But I can't allow you to go any further just based on a faint resemblance and your word. If you wish to keep yourselves alive, I'd advise you to turn about.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#19",
+      "node_id": null,
+      "source": "\t@4 noticed something in the dirt.\n\tBending down to pick it up, he brushed away the dirt which partially obscured what lay there. Picking it up delicately, he threw his companions a surprised grin. \"Someone's been up to mischief. This is Silverthorn!\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#21",
+      "node_id": null,
+      "source": "\tSomething caught @4's eye.\n\tBending down to get a closer look he saw it was a set of fresh footprints that appeared to be heading east.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#23",
+      "node_id": null,
+      "source": "\t@4 tapped the fellow on the shoulder.\n\tWiping ale froth from his lips, the man gave his guests a once over, then put aside his drinking cup. \"You want something taken up to the muster in Northwarden?\" he asked.\n\t\"Are you a messenger?\" Owyn replied.\n\t\"Not as such, but if anyone wants a message delivered to Northwarden, I'd be the one to do it,\" the man said. \"I just got stuck with the duty you might say.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#24",
+      "node_id": null,
+      "source": "\tWithdrawing the note that they had found, Owyn handed it over to him. \"It is important this message get to someone in a position of authority at Northwarden. I've had a chance to look it over, and I think what's within may affect the tide of the battle.\"\n\t\"That so?\" the man said, gaining his feet. \"All right then. I'll see to it that it reaches no less than Duke Martin himself. But I warn you, if this is some kind of prank, I'll hunt you down wherever you are and give you the thrashing of your life.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#25",
+      "node_id": null,
+      "source": "\tOwyn nodded. \"I'll keep that in mind,\" he said. \"I'd take care on your run though. I hear things are getting rough up that way.\"\n\tReturning to his beer, the man muttered over the rim of his cup. \"You don't know the half of it.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#26",
+      "node_id": 2200037,
+      "source": "\tThe mercenary approached them.\n\tSizing them up, he drummed his fingers on the hilt of his sword, pacing back and forth before them. At last, apparently quite sure of himself, he taunted them...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#27",
+      "node_id": null,
+      "source": "\tSo...come to fight with the óbig ólads, have you? Think you're man enough to take on a real soldier, ópretty óboyð? Let's just see if you've what it takes to fight a real battle, what say?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#28",
+      "node_id": null,
+      "source": "\tJust where do you two think you're going, eh? You'll feel the hard edge of my blade before I allow you to pass this way. Get your behinds moving the other direction!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#29",
+      "node_id": null,
+      "source": "\tGo away ñpretty ñboysð! Run home to your mother's or we'll ósend you home to her in pieces!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf1",
+        "\\xf1",
+        "\\xf0",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#30",
+      "node_id": null,
+      "source": "\tWhat d'ya think you're óstaring at, lad? Answer me!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#31",
+      "node_id": null,
+      "source": "\tLet me guess...A pompous, fat, old soldier who has no better way to serve the King than to stop law abiding citizens who are on their way to help fight a battle at Northwarden? Sounds like an óadmirable profession to me...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#32",
+      "node_id": null,
+      "source": "\tIf I had to venture a guess, I'd say a gwali's butt and I can't say I care for the sight of it...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#33",
+      "node_id": null,
+      "source": "\tNothing, nothing...just the ground.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#34",
+      "node_id": null,
+      "source": "\tBegging your pardon, we haven't come round to cause difficulties. If you allow us to pass, we'll be no trouble to you at all.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#35",
+      "node_id": null,
+      "source": "\tWhat I see is a ridiculous child masquerading in the body of a full grown man. You would be well advised to allow us to pass...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#36",
+      "node_id": null,
+      "source": "\tWhat I may or may not be looking at is none of your affair. I could give you a lesson in swordplay but the price would be too high...it would cost you your life. I would suggest standing to...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#37",
+      "node_id": 2200039,
+      "source": "\t@4 grimaced.\n\tNone of the cortege of men arrayed against them looked to be in a good mood, and even if they had no argument with them, it was entirely possible their presence on the road meant trouble lay further ahead. Not exactly wishing for an armed confrontation, @4 tried to make the best of the situation.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#38",
+      "node_id": null,
+      "source": "\tCan we be of some assistance to you fellows? You appear distressed.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#39",
+      "node_id": null,
+      "source": "\tDistressed? Oh aye, we are ódistressed in the extreme. There's that terrible mess down in Romney and we lot are heading down to lend a hand to the Riverpuller's Guild. What of you? You siding with Mitchel and that bloody Glazer's Guild?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#40",
+      "node_id": null,
+      "source": "\tThen you must support Ian?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#41",
+      "node_id": null,
+      "source": "\tMen without commitments, eh? Well, better liars than one of the rabble running Romney at the moment. But I warn you, you best stay clear of all that mess!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#42",
+      "node_id": null,
+      "source": "\tMitchel Waylander is a ósnake and Ian is just as unspeakable! The Riverpullers were granted an exclusive trade agreement by the crown itself and the both of them have called in their own men. Now their fighting brings other guilds in, guilds that undercut our business! How dare you side with them!\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#44",
+      "node_id": null,
+      "source": "\tLurough hurried past them.\n\t\"I'm a wee bit busy, lads\" he apologized, running to tend to another soldier demanding a drink. When at last he had put a foaming brew before the man, he returned with a towel in hand. \"I really can't thank you the both of you enough for saving me skin though.\"\n\t\"So, you think the patrons will refrain from burning your tavern to the ground?\" @4 asked.\n\tThe bartender wrinkled his freckled nose at his visitors. \"Well, I wouldn't care to speculate about their inclinations just yet, but I think the óDagger óN óStar is safe enough for the time.\" Cringing as another patron shouted for something, he shrugged. \"I must be working. Good day to you both.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#46",
+      "node_id": null,
+      "source": "\tThe bartender shook his head.\n\tWeaving past a hard looking mercenary, he bent his head low as he spoke, fearing being overheard. \"For all this fuss about the moredhel, I don't know that I could be worse off than I have been these last few weeks,\" Lurough grumbled.  \"Had a group of soldiers come in last evening after last watch. They threatened to set the óDagger óN óStar alight if I didn't get them something to drink. Fortunately Dabney was able to talk sense to them.\"\n\tLooking around the bar, Owyn could tell that the mood had changed little since the run in. \"We've looked around for you...\"\n\t\"Yes?\" Lurough said with sudden interest. \"Did you find anything?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#47",
+      "node_id": null,
+      "source": "\tThe bartender shook his head.\n\tWeaving past a hard looking mercenary, he bent his head low as he spoke, fearing being overheard. \"For all this fuss about the moredhel, I don't know that I could be worse off than I have been these last few weeks,\" Lurough grumbled.  \"Had a group of soldiers come in last evening after last watch. They threatened to set the óDagger óN óStar alight if I didn't get them something to drink. Fortunately Dabney was able to talk sense to them.\"\n\tLooking around the bar, Owyn could tell that the mood had changed little since the run in. \"We've looked around for you...\"\n\t\"Yes?\" Lurough said with sudden interest. \"Did you find anything?\"\n\tOwyn frowned. \"No luck as yet. We will keep looking.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#48",
+      "node_id": null,
+      "source": "\t@4 grinned.\n\tFeeling like Father Charity at a Midwinter's Festival, he undid the hood of his satchel and flashed the tavern keep a view of their prize, at the same time looking about to see if they were observed.\n\tGlee dancing in the bar keep's eyes, he was barely able to contain himself as he escorted them to the rear room of the tavern. \"There may not be much there, but at least it'll keep a riot from breaking out in here!\" he squeaked, giving in to an urge to caper now that he was out of the sight bar patrons. \"Let me make this up to you!\"\n\tRummaging through the goods in the back room, he found a long object wrapped in burlap and handed it over to them.\n\t\"It's a sword,\" @5 said, looking at the finely crafted weapon. \"And quite deadly looking by my estimation.\"\n\tLurough nodded. \"My grandfather used that during the Great Rising,\" he said. \"I hope you can put it to better use than I could.\"\n\tResuming a calm facade, Lurough escorted them back into the common room of the tavern...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#49",
+      "node_id": null,
+      "source": "\t@4 lied.\n\tAlthough he felt badly about the barkeeper's present situation, he felt a need to hold onto the wine cask. \"We've not found anything for you as yet.\"\n\tLurough accepted the news with ambivalence, glancing back at the angry looking clientele of the tavern. \"Just don't take ótoo long looking,\" he sighed.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#50",
+      "node_id": null,
+      "source": "\t@4 motioned to the man.\n\tDressed in a food stained apron which seemed to weigh heavy upon his shoulders, tavern keeper Lurough approached them hesitantly, his green eyes reflecting a certain fearful quality. \"If you've come looking for a drink, I'm afraid you'll be turned away empty handed. Our tap has run dry.\"\n\t@4 raised a startled eyebrow at the carrot headed fellow, then looked about at the grumbling patrons of the bar. \"You've no alcohol and a bar full of soldiers. I'm surprised there hasn't been an uprising,\" he said.\n\t\"Oh, its óoccurred to them,\" the barkeeper replied. \"So far, they're not so mean spirited yet we can't keep them corralled. But things keep up as they are, these soldiers will get like wild dogs and there'll be nothing to keep them from fighting amongst themselves. The same is true down at the óCandlemaker's óGrin tavern. It'll be a bloodier war than any fought at Northwarden or Highcastle.\"\n\t\"Sad state of affairs,\" Owyn agreed. \"What if we could get you the alcohol?\"\n\t\"Could you now?\" the barkeep said with astonishment. \"You know where there might be supplies?\"\n\tOwyn waved off Lurough's enthusiasm. \"Not precisely, no. But we will look around and see what we can come up with. I...óknow a few people around these parts.\"\n\tGrabbing up the boy's hand, Lurough kissed the back of it. \"You'll be a savior if you do, boy. Thank you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#51",
+      "node_id": 2200048,
+      "source": "The tavern was óclosed.\nTacked on the door was a note which appeared to have been hastily written: ãDãuãeã ãtãoã ãaã ãsãhãoãrãtãaãgãeã ãoãfã ãlãiãqãuãoãrã,ã ãtãhãeã ãCãaãnãdãlãeãmãaãkãeãrã'ãsã ãGãrãiãnã ãiãsã ãhãeãrãeãbãyã ãcãlãoãsãeãdã ãuãnãtãiãlã ãfãuãrãtãhãeãrã ãnãoãtãiãcãeã.ã\nã\nãTãaãbãaãrã\nãPãrãoãpãrãiãeãtãoãrã ãoãfã ãtãhãeã ãCãaãnãdãlãeãmãaãkãeãrã'ãsã ãGãrãiãn\u0000",
+      "tokens": [
+        "\\xf3",
+        "\\x0a",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\x0a",
+        "\\xe3",
+        "\\x0a",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\x0a",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\xe3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#54",
+      "node_id": null,
+      "source": "\tA man intercepted them.\n\tOffensive in his body odor, the fellow who stood before them was brutish, his pitch colored hair clipped just above his heavy brows and his eyes set close on either side of his lumpish nose.\n\t\"Sorry, no one is to see M'lady Boswich except her advisers. Get along with you,\" the guard said, waving a huge hand at them.  \"The mustering captain is elsewhere. He probably has óneed of a pair of scullions...\"\n\tIrritated, Owyn muttered a quick incantation and clapped his hands together, creating a flickering ball of flame between his palms. \"Know any scullions that can do óthatð?\"\n\tStaring dully at the flame, the guard shrugged his massive shoulders. \"Conjurer, eh? Very nice. Can you pull a scarf out of your ear?\"\n\tColoring a furious shade of red, Owyn began the incantation to a spell of a more maleficent nature, but Gorath clasped his shoulder.\n\t\"Let us be ógoing, Owyn,\" Gorath said, nodding to the other guards who were now approaching them. \"I don't think it would do either of us well if you set that one's hair afire at this moment.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#55",
+      "node_id": null,
+      "source": "\tA man intercepted them.\n\tOffensive in his body odor, the fellow who stood before them was brutish, his pitch colored hair clipped just above his heavy brows and his eyes set close on either side of his lumpish nose.\n\t\"Sorry, no one is to see M'lady Boswich except her advisers. Get along with you,\" the guard said, waving a huge hand at them.  \"The mustering captain is elsewhere. He probably has óneed of a pair of scullions...\"\n\tChoosing to ignore the slight, Owyn took a deep breath. \"I have to get in to speak to Lady Boswich. We're trying to make sure your muster here doesn't turn into a riot.\"\n\t\"I'm not supposed to let anybody by,\" he said, as if reviewing the information for his own benefit rather than theirs. \"But I'll let you in for fifty sovereigns.\"\n\t\"What?\" Owyn blinked, startled that the guard would be so blatantly corrupt. \"How did you arrive at that figure?\"\n\t\"Easy. See, if what's you got to say to M'lady is as important as you say, then you won't mind paying that sum. If, however, M'lady doesn't like the fact I let you two in, I still have me commission for the month when she dismisses me. So...do we have a deal?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#56",
+      "node_id": null,
+      "source": "\tOwyn blanched.\n\t\"No, I ódo ónot think we have a deal,\" he said.\n\t\"Suit yourself,\" the guard said. \"Whatever you had to say must not'a been that important.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#58",
+      "node_id": null,
+      "source": "\tThey didn't have enough.\n\tTurning out the contents of both his and Gorath's packs, Owyn searched frantically for the sovereigns while the rest of Lady Boswich's guard watched in amusement. At last, realizing they didn't have the sum, he threw up his hands.\n\t\"Sorry, we don't have it,\" Owyn said, restuffing his pack.\n\t\"Fine by me,\" the guard replied. \"We'll just take it out your hide..\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#59",
+      "node_id": null,
+      "source": "\tOwyn handed over the gold.\n\tAnnoyed the guard had insisted on counting the coins before allowing them to pass, he tapped his foot in the muddy soil.\n\t\"In you go then,\" the guard said, rattling the bag of coins with satisfaction as he finished his inspection. \"Give me regards to M'lady.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#60",
+      "node_id": null,
+      "source": "\tThe guard squinted at them.\n\t\"Oh, its you two,\" he said. \"You've already paid your fee, so get on with you.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#61",
+      "node_id": 2200004,
+      "source": "\tThe man was in a talkative mood.\n\tTaking drinks from an overly large cup of ale between tales about his mercenaries, he wandered eventually into a discourse about how much he hated the followers of the god Kahooli.\n\t\"Why do you dislike them so much?\" @4 asked.\n\tRaising a single eyebrow at that, the man shook his head. \"Those damn Kahooli priests in the temple up at Kenting Rush aren't ónaturalð I tell you. What pleasures a man's got, they want him to give up. All tied up in those damnable codes of piety. What in Tith's name does the mortification of the flesh mean anyway but some sorry sod's got to starve himself down to tooth and bone, and give up wenching and drinking? Not natural at all if you ask me...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#62",
+      "node_id": 2200040,
+      "source": "\tThere were armed guards in front of the house.\n\t\"We are on official business,\" called @4.\n\tPlacing a hand on his weapon, one of the guards shot back, \"On whose authority?\"\n\t\"On authority of the Prince of Krondor,\" @4 said, matter-of-factly. \"And we were sent by the priests of the Temple of Kahooli.\"\n\tApparently satisfied with this answer, the guards moved aside and let them pass.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#64",
+      "node_id": null,
+      "source": "\tA Nighthawk awaited them.\n\tReaching inside the black folds of his tunic, he drew out something that gleamed in the gloom. But rather than lunging forward, he snaked his hand to his mouth and bit down, acting before James could realize what he was doing.\n\t\"He's just swallowed poison,\" James said, holding Gorath back. \"Just as well. Saved us the trouble of killing him.\" Crouching down to study the quavering face of the Nighthawk, a look of disgust twisting his features, James continued, \"I'll wager as well he wasn't the leader and that the door beyond will be locked. We find whoever is running this ring and we'll find the key we need.\"\n\t\"How can you guess all that?\" Owyn asked, perplexed by the statement. \"He doesn't have a key on him, and secondly, I don't believe the leader of the Guild of Death would simply commit suicide. More likely he'd try to take as many of us with him as he could when he went.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#65",
+      "node_id": null,
+      "source": "\tA Nighthawk awaited them.\n\tReaching inside the black folds of his tunic, he drew out something that gleamed in the gloom. But rather than lunging forward, he snaked his hand to his mouth and bit down, acting before James could realize what he was doing.\n\t\"He's just swallowed poison,\" James said, holding Gorath back. \"Just as well. Saved us the trouble of killing him.\" Crouching down to study the quavering face of the Nighthawk, a look of disgust twisted his features. \"Fortunately we already found Navon and his key. I imagine it unlocks the door just over there.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#68",
+      "node_id": null,
+      "source": "\tThe door was ajar.\n\tThey entered the building and were greeted by a man behind a small counter, \"I am the chief lender here. My name is Isunatus. Can I help you?\" he inquired.\n\t@4 brought out the accountant's roll they had discovered in Abuk's magic chest and placed it on the counter. \"We were wondering what you might be able to tell us about the details of this note. It has your mark here at the bottom.\"\n\t\"Yes, I óseeð,\" the man replied. Pushing his eyeglasses down onto the bridge of his nose, he began to examine it carefully, first looking at the top of his note, then glancing down at the bottom with a scowl, then back to the top like a small child following the actions of a bouncing ball. At last he spoke. \"I'm afraid that to make an exact match with our records, I would need a name and a date. It would be impossible for me to sort out otherwise. I wonder why there is no name attached to it...\"\n\t\"Are you sure there is no other way to make a verification?\" @4 asked.\n\t\"Quite sure,\" Isunatus replied. \"Though I can tell you that judging by the size of the deposit, it was definitely a man of high position, either a lord or a merchant with foreign contacts.\"\n\t@4 thanked the man as they let themselves out.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#69",
+      "node_id": null,
+      "source": "\tThe door was ajar.\n\tThey entered the building and were greeted by a man behind a small counter, \"Can I help you?\" he inquired. \"Perhaps you would like to open an account with us?\"\n\t\"I suppose that would depend on what you could do for us,\" @4 said with a smile.\n\tThey spoke to the man about his moneylending business and the services that he could provide. Thanking him for the information and promising to return, they left.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#71",
+      "node_id": null,
+      "source": "\tA cloud of dust greeted them at the door.\n\t\"Sorry sirs,\" said a young lady. \"I just wanted to shake out me dust mop... didn't know anyone was out there.\"\n\tShaking dust out of his hair with a flip of his head @4 replied, \"No trouble. This is the Corvalis household, is it not?\"\n\t\"You're right about that, but Count Corvalis and his daughter Ugyne aren't here at the moment,\" she said.\n\t@4 smiled and asked pleasantly, \"Oh, do you happen to know where they've gone?\"\n\tThe servant girl looked around, then said in a half whisper, \"They've gone to the muster in Kenting Rush to take charge of affairs for Lady Boswich. But you didn't hear that from me.\"\n\tThey thanked her for the information and left.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#73",
+      "node_id": null,
+      "source": "\t@4 roused the occupants.\n\tThe door cracked open with a small squeak, just enough space to allow a pale-eyed girl in a dust caked skirt to peek out at them. She studied them with a doubtful look, hesitant to let the strangers in. \"Yes? What is it?\"\n\tStepping around the seigneur, Owyn peered at the girl with a puzzled expression, then brightened. \"Miri? It's okay. They may look a little rough, but they're with ómeð.\"\n\tWithout a word, the servant girl stepped out of the way, allowing the three of them to follow her into the foyer of the manor. Excusing herself, she scurried off to fetch her master who was located in the rear apartments.\n\tFollowing what sounded like a distant argument, a dark haired man swept into the room, a look of annoyance set in his features. Shooting a glance of mild hostility first at Owyn and then the moredhel, he turned on the Seigneur...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#75",
+      "node_id": null,
+      "source": "\tTheir knock was answered by a servant.\n\t\"Yes?\" Judging by the disarray of her hair and the night shift which the girl was wearing, the servant had likely been disturbed from an otherwise restful sleep.\n\t\"Sorry to have wakened you,\" @4 apologized.\n\t\"Count Corvalis is away at the moment, and his daughter Ugyne is abed,\" the girl said, apparently trying to forestall any further questions. \"I'm afraid you will have to come calling at a ódecent hour. Goodbye.\"\n\t\"Wait!\" Jamming his foot in the door before it swung closed again, @4 exhaled with pain as his foot was caught in the jamb. \"Where is it that the Count has gone?\"\n\t\"Out,\" the girl said angrily. \"He sometimes goes hunting at night on the original lands of the keep.\"\n\t\"Then we might find him there?\"\n\tThe girl shrugged. \"Doubtful. And I wouldn't advise trying. He keeps a guard on his land out for poachers. Sometimes they attack without asking questions...\"\n\tKicking @4's foot out of the jamb, the servant girl bid them to go away and closed the door.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#76",
+      "node_id": null,
+      "source": "\tA servant of the Corvalis household answered their knock.\n\t\"Go away!\" she demanded. \"If you wish to speak to Count Corvalis or his daughter you will have to come back later. Preferably,\" she said icily, \"During the day!\"\n\tBefore he had a chance to say another word, @4 found himself standing in front of a closed door.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#78",
+      "node_id": null,
+      "source": "\tA man met them at the door.\n\tDressed not in the mode of a common servant, but instead in the white tabard of a garrison soldier, he looked them over as if they were bulls for sale at market.\n\t\"If you have come to meet with Baron Troville, he is not here,\" he said at last. \"He has gone to Darkmoor and we do not expect him back for some time.\"\n\t\"Is there anyone else about that we could speak to?\" @4 asked.\n\tThe man nodded. \"Baron Kevin is about, but I'm afraid you will have to come back after dawn. He is sleeping and does not wish to be disturbed.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#79",
+      "node_id": null,
+      "source": "\tA soldier let them in.\n\tFollowing the swirling tail of the man's white tabard; they were escorted into a well appointed study with large windows overlooking the marshalling yard of the castle. Seated in the casement just below it, a large man was watching the activities below with an absorbed fascination, occasionally scribbling down notes on a piece of parchment at his side.\n\t\"Baron Kevin, these men asked to be shown in,\" the soldier announced. \"Shall I leave you?\"\n\tThe red haired man nodded, motioning for them to take seats a little more conventional than the one he currently occupied. \"What can I do for you gentlemen? I am afraid Baron Troville isn't here.\"\n\t\"That is quite all right. We were looking for insights about a possible attack on Highcastle,\" @4 started. \"Have you seen anything unusual recently?\"\n\t\"Have óIð?\" Kevin said with a laugh, his blue eyes twinkling. \"I see unusual things every day. You don't work in a frontier fort and lead a boring life you know.\"\n\tAfter relating several amusing stories, the Baron mentioned that an important bridge had collapsed to the north of Cutter's Gap, possibly stranding several goblins on the Kingdom side of Highcastle Gorge. \"They are likely to begin attacking travelling merchants for food. If you are heading in that direction, I'd advise watching my step if I were you. And if you happen to stumble across those goblins, I'd appreciate it if you brought us back some evidence they were around.\"\n\t\"We might be passing that way,\" @4 said with a shrug. \"We don't exactly have an itinerary. If we don't know where we're going, then the people who are trying to silence Gorath here won't know either.\"\n\t\"I understand,\" the Baron said, favoring Gorath with a doubtful look. \"Be careful in your journeys...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#81",
+      "node_id": null,
+      "source": "\tKevin met them at the door.\n\tAfter exchanging pleasantries, they followed him as he lead them towards the kitchens where he had been originally bound. Turning a wide corner, they entered a small galley.\n\t\"So?\" he asked, retrieving something to snack on, handing them all food to snack on as well. \"What have you discovered in your travels?\"\n\tWordlessly, @4 retrieved the note they removed from the dead goblin and handed it over, watching carefully as the Baron read over its contents. At last he crumpled the parchment into a ball as he spoke, \"Delekhan will have to do better than putting such an obvious plant over the bridge. He is trying to convince us to take a force across the river since we so ñobviously outnumber the ñmeager forces there. We won't be falling for that trick,\" he said resolutely. Taking a large bite out of a joint of beef, he mumbled around his food. \"Reminds me of the tactics the Tsurani used while I was serving the Lady of the Acoma on Kelewan.\"\n\t\"I'm sorry the information we brought back wasn't of more value,\" @4 apologized.\n\tBaron Kevin straightened, \"No need to be sorry. The message you brought back tells us that Delekhan is operating in this area---perhaps has his sights set on Highcastle. At any rate, you deserve to be recompensed for your efforts. Before you leave here I shall see to it that 200 gold are given to you.\"\n\t\"That is most gracious, but --\"\n\t\"Please, no false modesty,\" interrupted the Baron. Breaking into an eager smile, he slapped @4's back. \"It's not as if I'm giving away my own money anyway. I don't think Baron Troville would have minded.\"\n\tAt last they agreed to take the money, and said their goodbyes...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\xf1",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#82",
+      "node_id": null,
+      "source": "\tA servant lead them back to Baron Kevin.\n\t\"Hello! It's good to see you again,\" he said, greeting them with a big smile. \"What news do you bring from the North?\"\n\tThey told him briefly of their travels and he once again made them promise to bring him anything out of the ordinary should they return to the area.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#84",
+      "node_id": null,
+      "source": "\tGoblins halted them.\n\t\"You remember us, don't you?\" @4 said, shouting out to the waiting band. \"You have a new contract with us?\"\n\t\"We remember,\" the goblin leader replied. \"We shall be leaving for Northwarden soon, as asked. Come through. You shall not be harmed.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#86",
+      "node_id": null,
+      "source": "\tA band of goblins milled in the roadway.\n\tJames stared hard at the leader of the goblin band that faced them. At his side, Locklear counted heads, silently calculating the combined worth of the mercenary force.\n\t\"What do you think, Locky?\" James muttered.\n\t\"Whatever Delekhan's game is, he's ópaying for it,\" Locklear replied grimly. \"Goblin mercenaries charge small fortunes for their services and by my guess, there's at least...a thousand sovereigns worth of them here. I don't think they'll attack us unless they think we're getting too close. We ómight be able to negotiate a passage price...\"\n\t\"Pah,\" Patrus spat. \"Dark Brothers are Dark Brothers. They're just mean spirited, period.\"\n\tStepping out of the ranks of the enemy, a tall pale complected goblin drew his sword and pointed it at James. Speaking the Kingdom tongue with some difficulty, he glared at them with black eyes. \"You speak price of passage,\" he said. \"Deirgun hear speaking of you and tell to Gulla. Gulla consider and say price of passing is being thousands of two sovereigns.\"\n\t\"Thousands of two?\" James repeated. \"You mean two thousand sovereigns?\"\n\tGulla nodded. \"If you pay, we shall let you pass. If you come closer and not pay we kill you. You give us thousands of two?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#87",
+      "node_id": null,
+      "source": "\tA band of goblins milled in the roadway.\n\tJames stared hard at the leader of the goblin band that faced them. At his side, Locklear counted heads, silently calculating the combined worth of the mercenary force.\n\t\"What do you think, Locky?\" James muttered.\n\t\"Whatever Delekhan's game is, he's ópaying for it,\" Locklear replied grimly. \"Goblin mercenaries charge small fortunes for their services and by my guess, there's at least...a thousand sovereigns worth of them here. I don't think they'll attack us unless they think we're getting too close. We ómight be able to negotiate a change of contract...\"\n\t\"Pah,\" Patrus spat. \"Dark Brothers are Dark Brothers. They just mean spirited, period.\"\n\tStepping out of the ranks of the enemy, a tall pale complected goblin drew his sword and pointed it at James. Speaking the Kingdom tongue with some difficulty, he glared at them with black eyes. \"You speak price of passage,\" he said. \"Deirgun hear speaking of you and tell to Gulla. Gulla consider and say price of our changing contracts is being thousands of two sovereigns.\"\n\t\"Thousands of two?\" James repeated. \"You mean two thousand sovereigns?\"\n\tGulla nodded. \"If you pay, we shall let you pass and will fight for Gabot Baron in this battle. If you come closer and not pay we kill you. You give us thousands of two?\"\n\tJames shook his head. \"We don't have that much.\"\n\tStriding forward, the goblin drew a line in the dirt at their feet. \"Then you not cross this line,\" Gulla said. \"Or you will die.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#88",
+      "node_id": null,
+      "source": "\tJames produced the required amount.\n\tThrowing it at the feet of the goblin, he waited for it to be collected by the scrambling mercenaries. \"You promised passage,\" James said.\n\t\"Yes,\" the goblin replied. \"We not fight, nor shall any our company you meet. Tell them you paid your way at Gulla's command. We will fight for your Baron.\"\n\tAs the goblin leader moved away, Locklear chuckled as he whispered in James' ear. \"Imagine the look on Baron Gabot's face when that lot marches up to Northwarden and announces they're fighting on óhis side. He'll have a fit!\"\n\tJames smiled. \"Too bad we won't be there to see it.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#89",
+      "node_id": null,
+      "source": "\tJames shook his head.\n\t\"Your price is too high,\" he said. \"We could hire twice as many Kingdom soldiers for the same price.\"\n\tStriding forward, the goblin drew a line in the dirt at their feet. \"Then you not cross this line,\" Gulla said. \"Or you will die.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#90",
+      "node_id": null,
+      "source": "\tGoblins halted them.\n\t\"Gulla said we could pass,\" @4 said, shouting out to the waiting band. \"You have a new contract with us.\"\n\tBewildered, the goblin hordes argued amongst themselves, the leader at last shouting for silence. \"You pass,\" he shouted back. \"If Gulla say, we obey. You will not be harmed.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#92",
+      "node_id": null,
+      "source": "\t@4 remembered the man.\n\tSmiling warmly at them, the man asked how their search for the missing minstrel was going. \"Have you found him yet?\"\n\t\"No,\" James replied with a sigh. \"I was hoping you might have some more insight on the issue.\"\n\tThe man shrugged. \"I'm not sure I know much to help you with. All I know is that he headed towards the old barn with the sticking door. That happens quite a bit up in these climates.\"\n\t\"What do you mean?\" @4 asked.\n\t\"Its all the rain,\" the man said, motioning at the roof. \"Warps the doors and rusts the hinges. Half the farmers in these parts have to keep a supply of Fadamor's Formula handy just so they can get at their cows in the mornings.\"\n\t\"Didn't know that,\" James replied. \"Ah well, I'll leave you to your drink. We've got to be searching some more.\"\n\t\"Good day to you then,\" the man said with a nod. \"Hope you find him.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#93",
+      "node_id": null,
+      "source": "\tThe man invited them to talk.\n\tA quiet, amiable fellow who was missing three of the fingers of his left hand, he smiled as James and Locklear told some of the stories about their childhood together in Krondor. When at last they began a story about the minstrel Laurie who had become the Duke of Salador, the man nodded, but interrupted them when they claimed he was the best minstrel that ever lived.\n\t\"I imagine this Duke of yours was quite talented,\" the man said. \"But a short while ago, a ójongleur played here, the match of which I've never heard.\"\n\tImmediately Locklear and James exchanged a meaningful look, then looked back to the man. \"What did this minstrel look like?\" James asked.\n\t\"Young, attractive. Rather tall as I recall,\" the man said. \"Have you seen him before?\"\n\tJames nodded. \"If its who I'm thinking, then yes. Do you happen to know what became of him?\"\n\t\"Not certain, but he was asking about for a place to put down for the night. One of the other patrons that was in here told him that a franklin nearby sometimes leaves his barn open for travellers. He might have gone there.\"\n\tMaking a mental note of all the man had said, @4 began to rise from the table when the man tugged at his sleeve. \"Another thing, The man told him that the door to the barn sticks quite a bit and that he might not be able to get the door open. Takes quite a óstrong man to get it to work sometimes.\"\n\t\"I'll keep that in mind,\" @4 said. \"Have a good day.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#95",
+      "node_id": null,
+      "source": "\tPatrus stopped.\n\t@4 took a few more steps before he realized the magician wasn't with him and turned to find him staring off into the bushes with a comical, questioning look.\n\t\"Somethin' ain't right about things here...\" Patrus said, turning in a slow circle. \"Ain't what they appears to be óat óall. An if'n a thing ain't what it looks like, that means it's wearin' some kind o' mask.\"\n\t\"What are you babbling on about?\" Locklear asked.\n\t\"The invisible magicians, you donkey!\" Patrus shot back. Almost imperceptibly, his mouth began to move. Silently forming words long forgotten, his lips began to move faster, in sync with a secret accelerating rhythm only he could know. Then he gave voice to the words and they tumbled from his throat, louder and louder until he was nearly shouting.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#96",
+      "node_id": null,
+      "source": "\t@4 saw a strange shimmering in the air. He turned to look and before his amazed eyes saw a huddled pack of moredhel spellcasters!\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#97",
+      "node_id": null,
+      "source": "\t@5 felt a stinging poke.\n\t\"Ouch!\" he cried out, looking for the insect responsible for his discomfort. Finding none, he turned to a puzzled @3 to explain his outburst. But before the words could come out of his mouth, @3 felt a bite.\n\t\"What is this place?\" cried the magician, feeling still another sting.\n\t\"I don't know,\" said @5. \"But I suggest we leave here -- hmmph -- at once.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#98",
+      "node_id": 2200024,
+      "source": "\t@4 stopped.\n\tHe shook his head, then turned to the others. \"This course is futile. We will gain nothing save a waste of valuable time if we continue to travel in this direction. We must turn back.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#100",
+      "node_id": 2200017,
+      "source": "\t@3 swallowed hard.\n\tThe moredhel moss troopers guarding the bridge greeted them with icy stares as they approached. \"No one shall past this point without word from Moreaulf,\" threatened one of the guards. \"Do you know the password?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#101",
+      "node_id": null,
+      "source": "\t@5 shook his head.\n\tThe guard eyed him suspiciously, then motioned to @3, \"Your mercenary friend is a bit lean, don't you think? He's only a stripling.\"\n\tWithout dropping his gaze, @5 replied, \"He is no mercenary, but a spy sent from the Kingdom to steal secrets from the Six. He has told me where other soldiers are waiting in the hills. The Six told me I am to go and find if the boy is telling the truth...\"\n\tThe guard didn't even hesitate, \"The Six have óno authority to tell you to do so. Only Moraeulf can authorize passage across this span. Now leave, the both of you, before we run you through.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#103",
+      "node_id": null,
+      "source": "\t@5 stared at them.\n\t\"Moreaulf has gone away for several days. We were unable to determine the password, but we have his sanction so if you would allow us through --\"\n\t\"I am no fool,\" the guard said, his cold eyes burning into @3. \"You will not pass this way until you have the password. Is that perfectly clear to you? óNo one passes across the bridge.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#104",
+      "node_id": null,
+      "source": "\tGorath nodded.\n\t\"Serpentslayers,\" he said, staring the moredhel guard deep in the eye. \"And that comes from Moraeulf himself. Now shall I return and tell him you will not allow us across?\"\n\tThe guard stared hard at them. \"Very good then. You may pass.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#107",
+      "node_id": null,
+      "source": "\t@3 felt dizzy.\n\tThe air next to the river was heavy with naphtha fumes and breathing it nearly made him pass out. \"Are you ósure this leads out?\"\n\t@5 nodded. \"Delekhan placed a few others of my clan here. They told me how they escaped. But first, we have to find Obkhar and assist him in whatever he needs.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#109",
+      "node_id": null,
+      "source": "\t@3 felt dizzy.\n\tHis head spinning from the strong effects of the fumes within the cavern, he stared at the naphtha tainted water.\n\t\"Are you prepared for the swim?\" Gorath asked, \"Or do you need to prepare for a bit?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#110",
+      "node_id": null,
+      "source": "\tAs he fit the vapor mask over his mouth and nose he studied the water before him, watched as it poured in a never ending stream into the rock cave where he knew it must, eventually, empty back into the open air...and freedom.\n\tBreathing deeply through the mask, he felt his head finally clear and he dropped into the river, @5 splashing in beside him. The icy water was almost painful against his skin and he found it somewhat ironic the vapor mask had finally allowed him to breathe a little easier, but now the cold had taken that luxury away.\n\tStruggling against his pain he let the water carry him until he reached the dark mouth of the cave that would swallow him up as soon as he loosened his grip on the sides of the cavern.\n\tWith a deep breath, deep as he was capable of, he let go. The dark beast sucked him into its gullet and @3's world disappeared into total darkness...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#111",
+      "node_id": null,
+      "source": "\tThe naphtha fumes made Owyn ill.\n\t\"We will need to find masks for the vapor,\" @4 said, looking about as if to find what he sought on the ground nearby.\n\tFrowning, @3 stared at his travelling companion. \"Why do we need masks?\" he asked. \"We'll be holding our breath while we're swimming out.\"\n\t\"It is a long swim. If your breath should fail you before you surface, it is likely you would breathe in the naphtha. If you lost consciousness, your death would be assured, as would mine.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#112",
+      "node_id": 2200025,
+      "source": "\t@3 saw a dim light.\n\tIt was hazy and without form but it quickly began to grow in intensity and definition, and rushing beside it -- pain. A dull throbbing pain in his head and limbs that hurt more with each beat of his heart.\n\tHis eyelids flickered open and he could make out Gorath's form standing over him, though it was shrouded and somehow unreal, like a dream. But he knew it wasn't a dream, he knew he had survived his trip through the water cave, and with the realization he was alive he managed to whisper hoarsely, \"If you EVER put us through that again, I will invent a cantrip whose sole purpose\" he began to speak more rapidly and coherently, \"is to cause you to fall desperately in love with a warthog -- may the two of you live happily ever after!\"\n\tGorath smiled, unusual for the normally sedate moredhel, water still dripping from his hair.\n\t\"I'm glad your sense of humor has returned. When you came up on the river banks and did not breathe, I was afraid you were lost.\"\n\tOwyn stood slowly and painfully. Gorath helped him with his pack and soon they were ready to leave.\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#113",
+      "node_id": 2200021,
+      "source": "\t@4 approached the moredhel tavern.\n\t\"So you really think we can just walk right in without attracting unwanted attention?\" asked @3.\n\t\"It's a trick I learned many years ago, everyone will gravitate toward the simplest solution to any dilemma,\" he whispered, reaching for the door.\n\t@3 wasn't convinced. \"This is highly irregular.\"\n\t\"Look at it this way,\" @4 continued. \"We either have a legitimate reason to be here or we are completely insane and are walking right into the middle of enemy territory. That doesn't make a lick of sense, so everyone inside will assume the first is true. Now try to act like you belong here...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#114",
+      "node_id": 2200042,
+      "source": "\t@4 approached a moredhel.\n\tHe eyed them suspiciously, then shrugged. Though he spoke to them in the Kingdom tongue his speech was broken and somewhat slurred.\n\t\"You been hired by Narab's brother? What's his name again...Nago?\" asked the moredhel.\n\t@4 nodded his head. \"Yes, we are... mercenaries... from Queg, just arrived. What news have you of the thrust South?\"\n\tThe moredhel lowered his head, then whispered, \"They say Captain Kroldech has got final orders for the move against Northwarden. Beyond that, I ain't got the faintest what's going on.\"\n\tResigning himself to the fact that the moredhel had nothing more of value to tell them, @4 remained for a short while to listen, not wanting to attract undue attention to themselves. At last, he excused himself from the table.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#115",
+      "node_id": 2200043,
+      "source": "\tThe moredhel approached them.\n\tApparently satisfied with their story about being mercenaries from Queg, the moredhel told them he was a trader who made frequent trips to several of the towns located near the border between the Kingdom and the Northlands, explaining his command of their language.\n\t\"What can you tell of the push south?\" asked @4.\n\t\"Word has it that Captain Kroldech received his final orders for the move against Northwarden. Futile. With our numbers, we have no hope of surviving the march to it and then breaching the walls. This Kingdom baron will crush us utterly unless the engineer has come up with something.\"\n\tTrying not to be too interested, @4 prodded the moredhel further. \"Segersen?\"\n\tThe moredhel stared at them strangely. \"I had heard he was killed in a Quegian battle near Palanque.\"\n\t\"I wouldn't know,\" @4 recovered casually. \"I've not been on foot for eight years or more. I've been working in a press gang.\"\n\t\"Mmm,\" the moredhel replied. \"Well, it's all a moot point at the moment anyway. Kroldech has locked himself into his commandeered command post to work on the battle plans for a goblin offensive and the engineer just sits in his house drawing up designs. Hopefully the Kingdom won't elect to retaliate after this madness is over with.\"\n\tThey thanked him for the information he was able to provide and casually strolled back to a spot near the tavern door.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#117",
+      "node_id": null,
+      "source": "\t@4 placed a hand on the wooden monster.\n\tIt was a marvel of moredhel engineering and though short on artistic value -- something that marked a difference between the moredhel and their elven cousins -- it showed signs of precision craftsmanship.\n\t\"Fitting we could turn their own weapon against them,\" @5 said.\n\tThough they had already done the damage they had come to do, @4 wanted to watch the machine work one more time...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#118",
+      "node_id": null,
+      "source": "\t@5 gaped in wonderment at the heavy wooden catapult.\n\tThey walked around the weapon and studied it from every angle, spending extra time looking at the firing and trigger mechanisms. On the whole it appeared to be in good condition, though one of the torsion gears had broken...\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#119",
+      "node_id": null,
+      "source": "\t\"Moredhel must'a built this toad throwin' toy to annoy the Baron. They'd never get it up the pass 'fore old grump buckets shot 'em down!\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#120",
+      "node_id": null,
+      "source": "\t\"Perhaps, but it's of no use to them now unless someone fixed it in order to lob stones at óRaglam.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#121",
+      "node_id": null,
+      "source": "\t\"Now, óthat's peculiar now that you mention it. Tell me Locky, if you were just going to leave something like this lying around in a field, even if you didn't have it working, would you leave it ópointed at your home?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#122",
+      "node_id": null,
+      "source": "\t\"What are you getting at?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#123",
+      "node_id": null,
+      "source": "\t\"The only reason this thing won't function is because one of the torsion gears is broken, not something all that complicated to fix. Now suppose the gear didn't break of its own accord. Gorath told me that many of the moredhel clans had reservations about fighting under the old battle colors of Murmandamus. Now if you were one of those clans and wanted a backup plan in case you wanted to back out of the strike, it would simply be a matter of installing a replacement gear...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#124",
+      "node_id": null,
+      "source": "\t\"...and pulling the release lever! It even has a payload in the basket! Of course, assuming we could find the part ourselves, we could stir up some trouble. Maybe find a way to get to the plans Duke Martin needs in the confusion.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#125",
+      "node_id": null,
+      "source": "\t\"Perhaps, but we'll need to find a replacement catapult part first. I doubt there is one lying about here somewhere, but let's check around...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#126",
+      "node_id": null,
+      "source": "\tThey searched the area for half an hour, hoping to discover a replacement part for the broken gear. When it didn't materialize, they picked up their packs and prepared to leave.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#127",
+      "node_id": null,
+      "source": "\t@5 took a deep breath.\n\tHolding the catapult part they had found in the box, and using some makeshift tools he kneeled before the machine and set to work.\n\tIt took nearly two hours to install the part, and though @5 wasn't positive the machine would work at all, he stepped back to admire his handiwork.\u0000",
+      "tokens": [
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#128",
+      "node_id": null,
+      "source": "\t\"I'm not an engineer, but I think that should work,\" he said, motioning to the others to join him.\n\tTogether, they stood before the strange wooden creature, it's one arm poised, ready to fling its special cargo into the sleepy moredhel town of Raglam.\n\t@5 took a deep breath. \"Shall we give it a try?\" he asked.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#129",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"Perhaps we will come back later and try it,\" he said. \"For now we should leave before we are seen.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#130",
+      "node_id": null,
+      "source": "\t@3 backed away from the catapult.\n\tWiping his forehead with the back of his hand, @5 bent down to grab the wooden handle that would bring the monster to life...\u0000",
+      "tokens": [
+        "\\x09",
+        "@3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#131",
+      "node_id": 2200038,
+      "source": "\t\"Don't be in such a hurry my young friend.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#132",
+      "node_id": null,
+      "source": "\t\"What's wrong?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#133",
+      "node_id": null,
+      "source": "\t\"Soldiers ahead. Delekhan loyalists no doubt. Though I may swing a sword and you wield great arts, I do not believe we would alone do well against these fighters for others will be camped in very close proximity. We would probably be safest choosing a different route back into the Kingdom. Let us turn back.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#134",
+      "node_id": 2200052,
+      "source": "\tWell, it looks like this will be as far as we're going. Too many guards on the other side of that bridge for us to slip by. I don't think it's too important we go that way anyway. Our objective is to get those plans for the Duke. Come on, let's head back towards Raglam.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z22.DDX#135",
+      "node_id": 2200049,
+      "source": "\t@4 tugged on the grating.\n\t\"No good, it won't budge,\" @4 said. \"I guess we'll just have to leave by the front gate. My nose is happier for it all the same.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

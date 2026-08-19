@@ -1,0 +1,47 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z10.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z10.DDX#0",
+      "node_id": 1000001,
+      "source": "\tDaylight filtered in from the cave mouth.\n\t\"This will be the way back to the main road,\" @0 said. \"Do you think we should leave?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z10.DDX#1",
+      "node_id": null,
+      "source": "\tLight guided them.\n\tFollowing the ascending shaft of the Mac Mordain Cadal into daylight, they emerged at last on a road leading to the east and the King's Highway.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z10.DDX#2",
+      "node_id": 1000002,
+      "source": "\"Death will come quickly to those who trespass here. Leave now, or your suffering will be a thousand times worse than that of the one now buried beneath this marker.\"\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}

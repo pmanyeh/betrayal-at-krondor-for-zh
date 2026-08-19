@@ -1,0 +1,2254 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_ddx": "DIAL_Z15.DDX",
+  "entries": [
+    {
+      "id": "DIAL_Z15.DDX#0",
+      "node_id": 1500001,
+      "source": "The purchasing counter.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#1",
+      "node_id": 1500002,
+      "source": "Return to the road.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#2",
+      "node_id": 1500003,
+      "source": "Leave this establishment.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#3",
+      "node_id": 1500004,
+      "source": "\tExamine the area carefully.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#4",
+      "node_id": 1500005,
+      "source": "\tThe lute was old.\n\tFrom the looks of it, it had probably been beaten over a wandering minstrel's head for an unsatisfactory performance.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#5",
+      "node_id": 1500006,
+      "source": "\tThe patron returned @4's gaze.\n\tWhile it seemed unlikely they would get a knife through the gut for making idle talk, he had known stranger things to happen in taverns.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#6",
+      "node_id": 1500178,
+      "source": "\tThe colonnade was typical.\n\tLike most of Midkemia's places of worship, the temple's exterior was devoid of any kind of adornment that might be carried off by wandering thieves. \"I would really like to know why it is that the priests who design these Temples can't see fit to let someone know what god or goddess is being worshipped inside,\" @4 growled. \"Would a sign ñreally be too much to ask for?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf1",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#7",
+      "node_id": 1500149,
+      "source": "\t@4 yawned.\n\t\"Looks like this is the way to the sleeping quarters,\" he said.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#8",
+      "node_id": 1500173,
+      "source": "\tThe building's windows were shoddy.\n\t\"Even money says it's a tavern,\" @4 said. \"You don't pay much for windows when you have to replace them often.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#9",
+      "node_id": 1500166,
+      "source": "\tTo the repair counter.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#10",
+      "node_id": 1500174,
+      "source": "\t@4 scrutinized the person.\n\t\"By my guess that's an innkeeper,\" he whispered to @0, indicating the ring of assorted keys which they twirled.  \"This place might offer a more soothing place to rest than the rock-strewn dirt we've seen a lot of lately.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#11",
+      "node_id": 1500175,
+      "source": "\t@4 studied the barkeep.\n\tAlthough he couldn't tell by looks alone, he could see no immediate reason not to trust the person.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#12",
+      "node_id": 1500176,
+      "source": "\t@4 studied the barmaid.\n\tAlthough he couldn't tell by looks alone, he could see no immediate reason not to trust the person.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#13",
+      "node_id": 1500008,
+      "source": "\tThe path turned.\n\t@4 studied the road before them, saw it slithered into the distance like a giant snake before descending, eventually, into a large town. \"LaMut,\" @0 said. \"Do you think we should go in for supplies?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#14",
+      "node_id": 1500009,
+      "source": "\tThey bid LaMut farewell.\n\tAfter half an hour's journey, they returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#15",
+      "node_id": 1500010,
+      "source": "#LaMut#\tIn many ways the town looked like something created on an alcoholic binge; rude dwarven shacks smashed up against delicate elven shops while weird Tsurani taverns grew from a press of Kingdom-style dwellings. A sign outside the city gate had summed it up well: All who visit LaMut are equal for in LaMut all is equally queer.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#16",
+      "node_id": 1500011,
+      "source": "The Blue Wheel Inn.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#17",
+      "node_id": 1500012,
+      "source": "#Blue Wheel Inn#\tUndoubtedly the newest tavern in town, the Blue Wheel was sedate, almost sleepy in comparison with other LaMutian shops. Inside, dark skinned patrons slapped down hard earned sovereigns in exchange for the Blue Wheel's exclusive imports from the far distant Empire of Tsuranuanni.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#18",
+      "node_id": 1500014,
+      "source": "The Fletcher's Post.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#19",
+      "node_id": 1500015,
+      "source": "#Fletcher's Post#\tThe Fletcher's Post had been constructed with elven sensibilities. Within and without, little if anything had been used in a manner that could be called scurrilous and certainly nothing was merely decorative. Along the walls, the shop's array of arrows and other archery goods were finely displayed and each thing seemed precisely in its place.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#20",
+      "node_id": 1500016,
+      "source": "The LaMutian Garrison.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#21",
+      "node_id": 1500018,
+      "source": "@4 stared at the water.\nAll in all the flood of the LaMutian river looked ordinary, though he entertained the thought that something might be buried under the stream's bed.\u0000",
+      "tokens": [
+        "@4",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#22",
+      "node_id": 1500019,
+      "source": "\tFish scattered.\n\tDipping his hand into the cold river, @4 explored the spaces beneath the mossy pebbles of the riverbed, explaining over his shoulder, \"I've heard a rhyme that its good luck to throw coins into the LaMutian river. I don't think we'll be cursed for sharing in that fortune...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#23",
+      "node_id": 1500020,
+      "source": "\tThe path turned.\n\tAfter a few minutes of travelling, the roadbed began to slope towards the sea, leading eventually through a pair of iron gates and into the majestic seat of the principality.\n\t\"Krondor,\" @4 said with a sigh that seemed to indicate both relief and concern. \"If assassins have been sent against us, it seems a safe bet they'll be lying in wait for us between here and the palace. What's your guess, Gorath? Do we go in now or not?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#24",
+      "node_id": 1500021,
+      "source": "\tThey bid Krondor farewell.\n\tAfter half an hour's journey, they returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#25",
+      "node_id": 1500022,
+      "source": "#Krondor#\tGulls wheeled in the skies over the capitol of the Western Realm, weaving daring circles about the parapets of the palace, narrowly avoiding the Prince's standards which fluttered in the salty breeze. Below, the city folk of Krondor took little notice of the majestic display as they hurried about their own affairs.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#26",
+      "node_id": 1500023,
+      "source": "To the Palace.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#27",
+      "node_id": 1500172,
+      "source": "\tThe gatemaster let them in.\n\tAnnouncing the small party, he escorted them inside the enclosure of the Krondorian palace...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#28",
+      "node_id": 1500024,
+      "source": "#Palace#\tThe majesty of the palace was impressive, drawing appreciative glances of astonishment from all as they wound through room after room of banquet halls, reception areas and at last a colorfully decorated gymnasium before entering the throne chambers of the Prince of Krondor.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#29",
+      "node_id": 1500144,
+      "source": "\tThe room was cramped.\n\t\"Locky, Locky, Locky,\" @4 muttered, looking through the Seigneur's personal effects piled in disorganized heaps. \"You may be a fine swordsman, but your personal organization leaves quite a bit to be desired.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#30",
+      "node_id": 1500143,
+      "source": "\tTo Locklear's Quarters.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#31",
+      "node_id": 1500147,
+      "source": "\tThey could be seen.\n\t@4 halted the party to consider. \"Let's not give Delekhan any more help than he needs. If we leave through the palace's main gates, we might as well have trumpeters going before us and announcing the fact to everyone within the Kingdom of the Isles. The sewers are probably our best option.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#32",
+      "node_id": 1500025,
+      "source": "#Rainbow Parrot Inn#\tUnaware, until he stepped into the room, that he had been chilled, @4 was glad to have the solid oaken door of the room closed behind him. Others within seemed likewise contented as they chatted quietly among themselves, taking little notice of the new arrivals.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#33",
+      "node_id": 1500026,
+      "source": "To The Rainbow Parrot Inn.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#34",
+      "node_id": 1500027,
+      "source": "To The Shrine of Astalon.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#35",
+      "node_id": 1500140,
+      "source": "#Shrine of Astalon#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. Elsewhere within the chapel, it sounded as if a choir of priests were practicing their hymns.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#36",
+      "node_id": 1500028,
+      "source": "To the Sewers.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#37",
+      "node_id": 1500029,
+      "source": "\t@4 led the way down.\n\tTwice he nearly lost his footing on the treacherous climb, but at last they arrived safely on a precipice of rock just below the northern gate.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#38",
+      "node_id": 1500030,
+      "source": "#Sewer door#\tToo thick to allow a determined effort at entry, the door was probably set over the sewer entrance to prevent odors from offending visitors passing through the northern gate.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#39",
+      "node_id": 1500031,
+      "source": "\tWas there something hidden in the hole?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#40",
+      "node_id": 1500032,
+      "source": "\tWas there something hidden in the hole?\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#41",
+      "node_id": 1500033,
+      "source": "Entrance to the Sewers.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#42",
+      "node_id": 1500034,
+      "source": "\t@4 took a deep breath and led them into reeking blackness...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#43",
+      "node_id": 1500035,
+      "source": "#Sign of the Eagle#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#44",
+      "node_id": 1500036,
+      "source": "To the Sign of the Eagle.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#45",
+      "node_id": 1500037,
+      "source": "\t@0 snorted.\n\t\"The market district in Krondor?\" he said, containing his amusement. \"Why don't we just take all our possessions and GIVE them away instead? The Mockers are thick as porridge in there and the local merchants hike up the prices accordingly. We'd be better off buying OUTSIDE of the city.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#46",
+      "node_id": 1500038,
+      "source": "\t@0 studied the small road.\n\tFollowing it with his eyes he saw the road rise and fall, turning this way and that as it descended into the distance toward a large town.\n\t\"Malac's Cross,\" @0 said. \"Do you think we should go in for supplies?.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#47",
+      "node_id": 1500039,
+      "source": "\tThey bid Malac's Cross farewell.\n\tFor a time it seemed the sounds and smells of the village chased after them, but slowly the sensual remnants faded into the afternoon as they hiked further uphill... \u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#48",
+      "node_id": 1500040,
+      "source": "#Malac's Cross#\tMalac's Cross was a tumultuous town grown fat on the prosperity of centuries. Exotic gewgaws bulged in storefront windows, each mere fractions of the wealth that coursed daily through the busy trading town. Over it all loomed the impressive bulk of the Abbaye Ishap, a temple nearly as ancient as the Kingdom of the Isles itself.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#49",
+      "node_id": 1500041,
+      "source": "#Queen's Row Inn#\tDespite the fact that light was dim and pooled only in shallow corners, the mood within seemed cheerful as the tavernkeeper animatedly related tales of mischief, reaping gales of laughter from people who had most likely heard his story dozens of times.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#50",
+      "node_id": 1500042,
+      "source": "The Queen's Row Inn.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#51",
+      "node_id": 1500043,
+      "source": "To the Chapel of Ishap.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#52",
+      "node_id": 1500135,
+      "source": "#Chapel of Ishap#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#53",
+      "node_id": 1500044,
+      "source": "\tThe barrel smelled awful.\n\t\"Sometimes people will throw out the strangest things,\" @4 said, wiggling the lid of the refuse barrel loose. \"Perhaps there's something in here we can use.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#54",
+      "node_id": 1500045,
+      "source": "It appears to be a large barrel.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#55",
+      "node_id": 1500046,
+      "source": "\t@4 tried to look inside.\n\t\"Someone's boarded over the inside,\" he grumbled. \"Can't see a thing.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#59",
+      "node_id": null,
+      "source": "\t@4 tried the door.\n\tWhen it refused to open, he shrugged. \"It's been barred from the inside,\" he said. \"I guess that's all the lecturer has to say at the moment.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#60",
+      "node_id": null,
+      "source": "\tA man halted them.\n\t\"Ticket,\" he barked through gapped teeth. When @4 failed to respond quickly enough, he leaned closer and shouted. \"Are you ódeafð!? I'll need your lecture ticket.\"\n\t\"What if we don't have a ticket?\" @4 replied.\n\tThe man smiled an unpleasant smile. Hooking his thumb at four extremely well developed soldiers who looked to be members of Malac's Cross' constabulary, he squinted. \"Do you have tickets for this evening's lecture or no?\"\n\t\"No,\" @4 said, backing into the street. \"We don't want any trouble. We'll be leaving now.\"\n\tThe door slammed closed...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#61",
+      "node_id": null,
+      "source": "\tA man took their ticket at the door.\n\tWaving smoke from his face, @4 was surprised by the number of young nobles seated in the lecture hall, most looking as if they would rather be drinking ale in the tavern across the street. He shuffled his way through shoulders and elbows, finding benches for both Owyn and Gorath before taking a seat next to a scrawny soldier wearing a tabard emblazoned with a red stone tor---the colors of Highcastle.\n\tAgainst the back wall a small stage had been set up, its perimeter surrounded by flickering candles, casting an eerie yellowish glow on the faces of Baron Troville and the two men who attended him. When at last they had set up the hardwood podium, the baron stood and looked across the room.\n\t\"I wish I could deliver this speech under happier circumstances, but to the north the Dark Brothers are massing for yet another siege against us,\" the baron started slowly. \"I am here not by request of your Abbot, but because I await the arrival of volunteers from Darkmoor and Salador to come and join my forces at Highcastle. We have received word that the moredhel's new prince, Delekhan, has unfurled the war banners of óMurmandamusð.\"\n\tA rumble passed through the congregation of nobles, the significance of the old moredhel name not lost on the students. Looking at most of the faces in the room, @4 knew that most in the room had only been children when Murmandamus had led his troops to Sethanon and had likely lost fathers or uncles in that deadly battle.\n\t\"I think therefore this lesson will be a little more practical for our purposes and will concentrate on the defenses at Highcastle,\" Troville continued. \"Page, please fetch my maps...\"\n\tFor five hours the baron lectured on defensive techniques and the essential tactics known to be of use in Northlands. When at last his energy began to flag, he took a few questions before calling the meeting to an end and exiting the hall through a rear exit.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#62",
+      "node_id": null,
+      "source": "\tA man took their ticket at the door.\n\tWaving smoke from his face, @4 was surprised by the number of young nobles seated in the lecture hall, most looking as if they would rather be drinking ale in the tavern across the street. Despite that, they made friendly company as they offered up seats to James and his companions.\n\t\"All rise for Guy of Rillanon, First Adviser to the Throne of Kingdom of Isles,\" a page announced from the rear of the room.\n\tAfter an uncomfortably long wait, a pair of men dressed in purple tabards advanced to the foot of the rude stage and took up station, the looks on their faces stern and watchful. Quick behind them was a man dressed all in black, from tunic to trousers to the patch over his left eye. Mounting the stage between his escorts, he looked out on the assemblage as if they were all his soldiers in the field. Seeing James, a smile touched the First Adviser's face.\n\t\"It seems I'm not the only first adviser here, James of Krondor,\" Guy said, motioning for everyone to take their seats. \"I am surprised Prince Arutha could spare your company.\" James shrugged and covered with a quick lie that seemed to satisfy all in the room, as anxious as the rest for the lecture to begin.\n\tHours passed. After a lengthy discussion of the battles at Deep Taunton and the siege of the Shamata Garrison, the First Adviser finished his lecture and dismissed his boggled students, stepping down from the podium to speak with James. A grave look was upon Guy's face as he grasped the Seigneur's shoulder.\n\t\"You are lucky most of the men in this room don't know Arutha,\" Guy whispered, glancing at Owyn. \"If they did, none of them would believe you had been sent to Romney to fetch this puny little squire. I'm am also curious to know why you are travelling in the company of a Dark Brother.\" Seeing the fire burning in the Adviser's good eye, James realized the old man was asking the questions in deadly earnest and that his two escorts were standing close for reasons other than show. \"I'll not have Arutha betrayed.\"\n\tWaiting until the rest of the students had been shunted out the door, James quickly began to explain the situation, allowing Gorath to fill in the details which he only partially knew. When he mentioned the Nighthawks and Romney, the First Adviser nodded.\n\t\"Prince Arutha is right to send you to Romney,\" Guy said. \"There óis a group of Kingdom men there. I had Duke de Sevigny send them a few months ago when we heard about the guild troubles brewing there. We had suspicions the Guild of Death was involved.\" Grabbing up his cloak, the First Adviser nodded to his escorts to check the streets. \"If anyone in the Kingdom can find the Nighthawks, it will be those men from Bas-Tyra. They've been of great help in the cause of the Kingdom over the past few years. I'll warn you, however, that they've made quite a few enemies along the way. Watch your step between here and the Black Sheep Tavern.\"\n\tOnce the guards had indicated that the road was clear, Guy was gone and the building's watcher shuffled them outside...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#63",
+      "node_id": 1500048,
+      "source": "\tThe road was rocky and rutted.\n\tStaring into the distance he saw that the road snaked its way toward an imposing fortress city. \"Sar-Sargoth,\" @0 said. \"Do you think we should go in for supplies?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#64",
+      "node_id": 1500049,
+      "source": "\tThey bid Sar-Sargoth farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#65",
+      "node_id": 1500050,
+      "source": "#Sar-Sargoth#\tThough a frosty wind skirled dust around the moredhel stronghold of Sar-Sargoth, no snow or ice formed on its ancient battlements. Instead, there was only a lonely howl that whispered between a thousand pikes which fanned out in every direction from the fortress, each graced with a decapitated head.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#66",
+      "node_id": 1500051,
+      "source": "#Commons#\tUnaware until he stepped into the room that he had been chilled, @4 was glad to have the solid oaken door of the room closed behind him. Others within seemed likewise contented as they chatted quietly among themselves, taking little notice of the new arrivals.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#67",
+      "node_id": 1500052,
+      "source": "To the Commons.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#68",
+      "node_id": 1500054,
+      "source": "To the Dungeons.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#69",
+      "node_id": 1500055,
+      "source": "It was a skull.\nThough he couldn't reach it directly, he shook the pike on which it was impaled and was satisfied to hear it make a faint rattle...\u0000",
+      "tokens": [
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#70",
+      "node_id": 1500056,
+      "source": "\t@4 shook the skull loose.\n\tFalling to the ground like a wine goblet tumbled from a table, it spilled its contents onto the moredhel soil. Quickly, @4 scrambled to investigate before replacing it...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#71",
+      "node_id": 1500057,
+      "source": "\tThe path turned.\n\tAfter a few minutes of travelling the roadbed began a steady rise, spiralling around the base of a sheer, rock faced hill.\n\t\"Sarth,\" @4 said. \"We probably have enough time to drop in for a brief visit, and it might break up the monotony of the road. Want to take a look around?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#72",
+      "node_id": 1500058,
+      "source": "\tThey bid Sarth farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#73",
+      "node_id": 1500059,
+      "source": "#Sarth#\tFrom a distance the Abbey of Ishap at Sarth had seemed a fortress, its sheer walled courtyard dominated by an ancient single story keep. But closer inspection revealed that a shop profited where once an iron monger had forged swords, delicate flowers bloomed where soldiers had once mustered.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#74",
+      "node_id": 1500060,
+      "source": "To The Library.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#75",
+      "node_id": 1500061,
+      "source": "#Library#\tA supernatural silence reigned in the vaults under Sarth, a perfect stillness which was unbroken even when a priest would accidentally let fall a book while searching the shelves or when someone would sneeze while opening a dusty volume. It was as if time itself had been frozen here, trapped between the wooden cases like pages within a book.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#76",
+      "node_id": 1500062,
+      "source": "To the Temple of Ishap.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#77",
+      "node_id": 1500136,
+      "source": "#Temple of Ishap#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. The only bow that had been made to adornment in the temple appeared to be the strange pattern that had been etched upon the wall.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#78",
+      "node_id": 1500137,
+      "source": "\t@4 squinted.\n\tNo matter how he looked at the picture, it didn't seem to represent anything in particular.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#79",
+      "node_id": 1500063,
+      "source": "#Stardock Annex#\tOwyn ogled as he picked through the assortment of magical items which had been laid out in the improvised store. Many of the items were marked by tags which indicated they had been sent from the Academy of Magic run by Pug of Stardock.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#80",
+      "node_id": 1500064,
+      "source": "To Stardock Annex.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#81",
+      "node_id": 1500158,
+      "source": "\tLight blinded @4.\n\tScreaming, he arched back from the doorway he had been about to press open and covered his eyes, as if averting some great horror. Stumbling backward into @5, he trembled in the warrior's grasp.\n\t\"Magic,\" @4 gasped as last. \"Terrible, terrible magic. It was like... like looking into a ónightmare. Someone has warded the door.\"\n\tReleasing his hold on the boy, @5 stared at the doorway doubtfully. \"Is there anyway you can banish it?\"\n\t@4 shook his head. \"No, no. It is far too powerful.  We will have to find another way in if we are to enter this place.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@5",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#82",
+      "node_id": 1500065,
+      "source": "\tThe path turned.\n\tFollowing the river-like course of the small dusty road, @0 saw that it flowed around several small hills, descending eventually toward a large town. \"Romney,\" he said. \"Do you think we should go in for supplies?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#83",
+      "node_id": 1500066,
+      "source": "\tThey bid Romney farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#84",
+      "node_id": 1500067,
+      "source": "#Romney#\tKnown as the City of Guilds, Romney's cobblestone streets were óknottedð, a labyrinth of closes and wynds, often leading nowhere or into blind alleys populated by disreputable looking drinking establishments. Only the dark main street called the Murky Mile seemed at all inviting to visitor's to the strange town.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#85",
+      "node_id": 1500068,
+      "source": "#The Black Sheep Tavern#\tWithin, the accommodations were humble. Several splintering tables had been jammed into the common room and arranged to accommodate perhaps twenty five men, thirty if hunger pressed them. Greasy stains covered benches and walls, evidence of wild days past.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#86",
+      "node_id": 1500069,
+      "source": "To the Black Sheep Tavern.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#87",
+      "node_id": 1500141,
+      "source": "#Port Exchange#\tThe lay of the goods store was comfortably familiar, arranged in such a common sense fashion that it took only a few moments for @4 to locate the items which interested him.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#88",
+      "node_id": 1500142,
+      "source": "To the Port Exchange.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#89",
+      "node_id": 1500070,
+      "source": "It appears to be a well.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#90",
+      "node_id": 1500071,
+      "source": "\tThe water was fresh.\n\tSlurping down several handfuls drawn from the well, @4 splashed his face and arms as well for good measure. When at last he felt fully refreshed, he moved away from the bucket so that @0 could do the same.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#91",
+      "node_id": 1500072,
+      "source": "\tThe road ramped up the mountain.\n\tPausing to catch his breath, @0 motioned up the road then said, \"Highcastle. Do you think we should pay a little visit?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#92",
+      "node_id": 1500073,
+      "source": "\tThey bid Highcastle farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#93",
+      "node_id": 1500074,
+      "source": "#Highcastle#\tA grim reminder of the conflict between the Kingdom of the Isles and the Nations of the North, Highcastle drew its name from the heavy stone fortifications built on a tor which guarded the frontier town. To the distant north loomed Cutter's Gap, one of the few gaps in the wall of mountains known as the Teeth of the World.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#94",
+      "node_id": 1500075,
+      "source": "#Ranger's Hall#\tDespite the fact that light was dim and pooled only in shallow corners, the mood within seemed cheerful as the tavernkeeper animatedly related tales of mischief, reaping gales of laughter from people who had most likely heard his story dozens of times.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#95",
+      "node_id": 1500076,
+      "source": "To the Ranger's Hall.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#96",
+      "node_id": 1500077,
+      "source": "#The Battleworks#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#97",
+      "node_id": 1500078,
+      "source": "To The Battleworks.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#98",
+      "node_id": 1500081,
+      "source": "To the Castle.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#99",
+      "node_id": 1500083,
+      "source": "To Cutter's Gap.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#100",
+      "node_id": 1500084,
+      "source": "\tRain slanted out of the sky.\n\tSquiffing through the muddy pass, @4 stared miserably at the broken remnants of a bridge which had once spanned Highcastle Gorge. Blinking rain out of his eyes, he looked to @0. \"The bridge has been sabotaged,\" he spat. \"Three days of this back to Highcastle unless you have any other ideas.\"\n\t@0 scowled and shook his head. \"I don't know what would be ógained by turning back into the Northlands. I think it just as well the way is blocked.\"\n\t\"I have my reasons,\" @4 shot back, angry that the trip had been a waste of time. \"Let's head back to Highcastle...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#101",
+      "node_id": 1500085,
+      "source": "\tThe path turned.\n\tThe road before them was well travelled. @0 saw it switchback several times before climbing towards a large garrison. \"Northwarden,\" he said. \"Do you think we should go in for supplies?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#102",
+      "node_id": 1500086,
+      "source": "\tThey bid Northwarden farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#103",
+      "node_id": 1500087,
+      "source": "#Northwarden#\tA treacherously narrow path wound its way up to the front gates of Northwarden, Castle, scarcely wide enough to allow two men to walk abreast.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#104",
+      "node_id": 1500088,
+      "source": "To the Great Hall\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#105",
+      "node_id": 1500089,
+      "source": "#Great Hall#\tLeft as a legacy to Northwarden by a baron who cared more about leisure than practicality, the Great Hall was still maintained with a military discipline, no corner of it left unscrubbed or cluttered by the unnecessary.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#106",
+      "node_id": 1500090,
+      "source": "#The Iron Monger#\tEverywhere @4 looked, polished metal gleamed. As much a temple to war as any Temple of Tith, the cramped shop offered a startling variety of weapons and armor.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#107",
+      "node_id": 1500091,
+      "source": "To the Iron Monger.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#108",
+      "node_id": 1500092,
+      "source": "\t@4 strolled into the trees.\n\tNoting a suspiciously ordered pile of leaves, he suspected that someone may have hidden something underneath.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#109",
+      "node_id": 1500093,
+      "source": "\t@4 strolled into the trees.\n\tSeeing a suspiciously ordered pile of leaves, he prodded its depths but was relieved to find that no one had left a trap behind. Still curious, he continued to burrow...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#112",
+      "node_id": 1500094,
+      "source": "\tWeeds and scrub brush lined the road.\n\t\"This road leads into the town of Cavall Keep,\" @0 said. \"Do you think we should go in and have a look around?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#113",
+      "node_id": 1500095,
+      "source": "\tThey bid Cavall Keep farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#114",
+      "node_id": 1500096,
+      "source": "#Cavall Keep#\tTucked away in the Midkemian countryside like a hidden treasure, Cavall Keep was a rustic ray of sunshine in the stony enclosure of the Kenting hills. Enclosed on all sides by a low stone wall, the sheep herding community was unpresumptuous in most respects, its only true bow to vanity being the small fountain which had been constructed in the village square.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#115",
+      "node_id": 1500097,
+      "source": "#Duck's Head Inn#\tExcept for the drunken reeves who glanced up at them, the common room of the tavern was quiet. Only the restless shuffle of feet on the boards over their heads seemed to indicate anyone else was even conscious.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#116",
+      "node_id": 1500098,
+      "source": "To the Duck's Head Inn.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#117",
+      "node_id": 1500099,
+      "source": "To Cavall Manor.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#118",
+      "node_id": 1500100,
+      "source": "#The Manor#\tSigns of recent renovations were everywhere in evidence within what had, until recently, been the Lord Mayor's domicile. The ceiling, once a low and heavy affair, had now been vaulted in imitation of the great palaces of Krondor and Salador. There was no question the Count was spending a fortune.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#119",
+      "node_id": 1500101,
+      "source": "Examine the area carefully.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#120",
+      "node_id": 1500102,
+      "source": "\t@4 leaned over the well.\n\tBelow he couldn't see anything, but heard a gentle bumping below as the bucket rode on the crest of the deep water.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#121",
+      "node_id": 1500103,
+      "source": "\tA sign creaked in the wind.\n\tTen golden coins were portrayed on its face, a sign obvious to anyone familiar with Midkemia's financial institutions.\n\t\"It's a moneylender,\" @4 said. \"Perhaps we should pay them a visit.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#122",
+      "node_id": 1500105,
+      "source": "\tThe air smelled awful.\n\tNot sure he wanted to go any further, @0 followed the path before them with his eyes, but a strange mist obscured his vision. \"No telling what might be waiting for us up ahead,\" he said, \"Think we should go take a look?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#123",
+      "node_id": 1500106,
+      "source": "\tThey bid Armengar farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#124",
+      "node_id": 1500107,
+      "source": "#Armengar#\tA funereal pall hung over the broken stone walls of Armengar as a thick oily smoke rose from dark cracks in ground. Scavengers thrived in the ruins, living on the artifacts they found like mushrooms supping on the decayed bones of some old, dead thing. Slowly the moredhel would reclaim their city and restore its ancient name---óSar-Isbandia.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#125",
+      "node_id": 1500108,
+      "source": "#The Giant's Broth#\tConversation within the room halted briefly as @4 pushed his way inside the room, returning a nod from a rough looking pair of mercenaries who otherwise seemed engaged in a dispute over a lost bet.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#126",
+      "node_id": 1500109,
+      "source": "To the Giant's Broth.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#127",
+      "node_id": 1500111,
+      "source": "\t@4 investigated.\n\tPeering into the smoke filled hole, he was unable to see anything, although he was certain he smelled something like the burning of oil. For a long moment he stared into the darkness before returning to his companion.\n\t\"The fires still burn underground here,\" he said to Owyn. \"Ten years ago past, when this fortress was attacked by Murmandamus, the man who held this ancient moredhel city set it ablaze rather than see the moredhel take it again.\"\n\t\"Do you hate him for it?\" Owyn asked, seeing Gorath's pained expression.\n\tThe moredhel shook his head. \"No. As much we should have done when Delekhan first raided in our villages.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#128",
+      "node_id": 1500110,
+      "source": "To the Naphtha Mines.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#129",
+      "node_id": 1500112,
+      "source": "#Naphtha Caverns#\t@4 coughed.\nNearly passing out from the intense fumes within the cavern, he was only able to take a few steps inside before the light was completely obscured by oily smoke. Still, there seemed to be a small hole dug in the wall of the cavern next to the entrance which he thought he could just reach...\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#130",
+      "node_id": 1500164,
+      "source": "\tCuriosity won him over.\n\tPushing rubble out of the way, @4 groped in the hole, hoping that someone might have left something valuable behind...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#131",
+      "node_id": null,
+      "source": "\t\"óNaphthað\", @4 coughed, feeling the sticky black substance adhering to his fingers as he grabbed a greasy bottle neck. Feeling that the fumes were beginning to get to him, he stumbled away from the hole.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf0",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#132",
+      "node_id": null,
+      "source": "\tHe could feel nothing in the space beyond, leaning further and further forward to extend his reach but managing only to inhale the fumes coming from the hole. Racked by coughing fits, he stumbled away from the hole, managing to walk only with the assistance of @0.\u0000",
+      "tokens": [
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#133",
+      "node_id": 1500165,
+      "source": "\t@4 squinted.\n\tBetween the poor natural lighting and the fact that his eyes had not completely adjusted to the darkness, he was uncertain what might or might not have been inside.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#134",
+      "node_id": 1500171,
+      "source": "\t@4 squinted.\n\tBetween the poor natural lighting and the fact that his eyes had not completely adjusted to the darkness, he was uncertain what might or might not have been inside.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#135",
+      "node_id": 1500117,
+      "source": "\t@0 smelled fish.\n\t\"Looks like this road will take us into the town of Silden,\" he said. \"Think we should go in for supplies?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#136",
+      "node_id": 1500118,
+      "source": "\tThey bid Silden farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#137",
+      "node_id": 1500119,
+      "source": "#Silden#\tSoaked for ages in the rank perfume of fish scales and sea salt, the wharves of Silden seemed more likely a home for a race of fish men than the leather skinned sailors who trod its wooden planked docks. Traditionally the home of the less reputable, it was known for its shady transactions with the slavers of Greater Kesh.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#138",
+      "node_id": 1500120,
+      "source": "#Anchorhead Tavern#\tConversation within the room halted briefly as @4 pushed his way inside the room, returning a nod from a rough looking pair of mercenaries who otherwise seemed engaged in a dispute over a lost bet.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#139",
+      "node_id": 1500121,
+      "source": "The Anchorhead Tavern.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#140",
+      "node_id": 1500122,
+      "source": "\tThe boat was at anchor.\n\tThough he could see several sailors hurrying about on deck, he was unable to find the name of the ship painted on the hull.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#142",
+      "node_id": null,
+      "source": "\t@4 shouted at the ship.\n\tAppearing at the railing of the ship, a golden haired man waved down to them, advising them to stand clear of the net that was coming over the side.\n\t\"What ship is this?\" @4 shouted.\n\t\"The óMist óDevilð, this is,\" the sailor replied proudly, pounding the railing with a fist. \"Only ship fast enough to have slipped away from Captain Trenchard! We're readying sail for the Isle of Eortis at the moment.\"\n\t@4 considered for a moment. \"How much for passage to the Isle?\"\n\t\"30 golden sovereigns,\" the sailor called down. \"Are you interested in making the trip? If so, come on up the gangplank.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#144",
+      "node_id": null,
+      "source": "\tThey boarded the ship.\n\tWithin minutes of weighing anchor, the óMist óDevil sped across the narrow channel which separated the Isle of Eortis from the mainland. After an eternity of the distant horizon seeming to grow no closer, they eventually docked with the help of a river pilot...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#145",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"Though we would like to sail with you, I regret we haven't the funds,\" @4 said. \"Some other time perhaps.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#146",
+      "node_id": null,
+      "source": "\t@4 shook his head.\n\t\"It is too much,\" @4 said. \"Some other time perhaps.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#147",
+      "node_id": null,
+      "source": "\t@4 shouted at the ship.\n\tAppearing at the railing of the ship, a golden haired man waved down to them, then cupped his hands over his mouth. \"Unless one of you are in need of a trip to the priestess on the Isle of Eortis, I can't help you,\" he shouted. \"I've got to get the óMist óDevil ready for sailing out within the week. Is one of you critical ill?\"\n\t\"No, but...\" @4 spluttered, but was cut off by the first mate.\n\t\"Sorry, mates,\" the retreating man shouted, ringing a bell on deck. \"I've got to get these swabs moving...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#148",
+      "node_id": null,
+      "source": "\t@4 shouted at the ship.\n\tAppearing at the railing of the ship, a golden haired man waved down to them, then cupped his hands over his mouth. \"Unless one of you are in need of a trip to the priestess on the Isle of Eortis, I can't help you,\" he shouted. \"I've got to get the óMist óDevil ready for sailing out within the week. Is one of you critical ill?\"\n\t\"No, but...\" @4 spluttered, but was cut off by the first mate.\n\t\"Sorry, mates,\" the retreating man shouted, ringing a bell on deck. \"I've got to get these swabs moving...\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#149",
+      "node_id": 1500159,
+      "source": "\tThey boarded the ship.\n\tWithin minutes of weighing anchor, the óMist óDevil sped across the narrow channel which separated the Isle of Eortis from the mainland. After an eternity of the distant horizon seeming to grow no closer, they eventually docked with the help of a river pilot...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#150",
+      "node_id": 1500124,
+      "source": "#Isle of Eortis#\tMysterious as the terns and plovers who made their homes in the stony cliffs of the island, the Temple of Eortis' origins were clouded in myth. Inhabited by a splinter faction of the Temple of Killian, the priestesses who took up residence on the desolate isle believed their prayers would one day summon the ancient sea god from oblivion.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#151",
+      "node_id": 1500125,
+      "source": "\tIncense swirled.\n\t@4 made for the heavy wooden doors which had been sealed to preserve the privacy of any ceremonies in progress. Pulling a tasseled rope which hung next to the door, he awaited the response of the door warden.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#152",
+      "node_id": 1500138,
+      "source": "#Temple of Eortis#\tThe meditation chamber was Spartan and strangely cold, seeming all the colder for the heatless flame which burned in the holy censer. Only the distant sounds of the ocean lapping outside gave @4 any comfort.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#153",
+      "node_id": 1500139,
+      "source": "\t@4 squinted.\n\tNo matter how he looked at the picture, it didn't seem to represent anything in particular.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#154",
+      "node_id": 1500126,
+      "source": "\tThe road before them was strange.\n\tThough @0 wasn't sure what unnerved him about it, there was something sinister about the whole area and he wasn't too sure he wanted to follow the dusty road they were on much further. \"Sethanon ahead,\" he said. \"Should we continue on and take a look around?\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#155",
+      "node_id": 1500127,
+      "source": "\tThey bid Sethanon farewell.\n\tAfter half an hour's journey, they had returned once more to the main road.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#156",
+      "node_id": 1500128,
+      "source": "#Sethanon#\tAs much a fixture in the myths and legends of Midkemia as the stories of the gods told by priests in the Temples, Sethanon was nothing more now than a sad old ghost town. In passing a low brick wall which had been overgrown with ivy, they were struck by the words that had been painted there in sheep's blood: óREMEMBER óUS.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#157",
+      "node_id": 1500161,
+      "source": "To the Ruins.\u0000",
+      "tokens": [
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#158",
+      "node_id": 1500162,
+      "source": "\t@4 stared into the crevice.\n\tStanding on the rubble of Sethanon's ancestral keep, he was shaken by the sight of the thousands of moredhel bones which had been used to fill the gap into the undergrounds. However interested he was in finding out what lay below, he had no desire to burrow through the moldering bodies.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#159",
+      "node_id": 1500131,
+      "source": "\tRubble littered the ground.\n\tMoving closer, @4 tried to see what was between the cracks of the fallen stone, but was unable to tell more simply by looking.\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#160",
+      "node_id": 1500132,
+      "source": "\tCuriosity got the best of him.\n\tDropping to his hands and knees, @4 began pulling the rocks aside in hopes of finding something of interest...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#162",
+      "node_id": null,
+      "source": "\tLocklear made a face as he shook the bars.\n\tFor all the troubles he had been through to get them all alive to Krondor, the locked palace gates simply added insult to injury. Calling out to the gatemaster angrily, he pounded the hilt of his sword against the portcullis.\n\tStirred by the racket, a young man liveried in the colors of the Krondorian Lancers strode out of his watch house and squinted at them, snapping up his bardiche which leaned against the interior wall.\n\t\"Would you get this gate open, please?\" Locklear said. \"We have business with the Prince.\"\n\t\"Can't help you, Seigneur,\" the guard replied. \"The gate mechanism's broken, has been since three nights ago. Unless you and your companions have a mind of climbing the walls, there won't be any getting through here until we can find the plans for the portcullis. The castle engineer is absolutely livid.\"\n\tLocklear accepted the news with irritation, but knew of nothing else that could be done. \"Could you go and get Prince Arutha for me then? It's a rather urgent matter.\"\n\tAgain the guard shook his head. \"He's meeting with Pug of Stardock and some Tsurani fellow named Makala. Gave explicit instructions he wasn't to be disturbed unless the castle was burning down around their ears.\"\n\t\"Could you at least find Seigneur James...\"\n\tThe guard cut him off with a shake of his shaggy head. \"Been missing for two days. No one knows quite where he's off to, but you óknow how James can be.\"\n\tLocklear nodded. \"All too well. My bump of trouble tells me he's looking for whoever sabotaged the gate.\"\n\t\"Sabotaged?\" The guard looked puzzled, as if the thought hadn't occurred to him. \"Why would anyone do that?\"\n\t\"I'm not sure, but if the thought occurs to me, I can guarantee that it has occurred to Seigneur James.\" Resheathing his sword, Locklear bid the guard farewell and motioned for his companions to follow him.\n\t\"I have a feeling that the only way to solve both our problems is by going through the sewers that lead beneath the city,\" Locklear whispered, hurrying them to the northern gate. \"There is a secret passage that will lead us into the palace, and I also suspect that we may bump into Seigneur James down there as well.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#163",
+      "node_id": null,
+      "source": "\tThe gate was broken.\n\t\"Once ñagainð,\" Locklear stressed, \"I have a feeling that the only way to solve both our problems is by going through the sewers that lead beneath the city. There is a secret passage that will lead us into the palace, and I also suspect that we may bump into Seigneur James down there as well.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf1",
+        "\\xf0",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#164",
+      "node_id": 1500163,
+      "source": "\t@4 stared at @0.\n\t\"After all the trouble we went through to avoid being noticed, don't you think it would be a bit stupid to stroll back through the gates,\" @4 fumed. \"Let's get headed to Romney before we are spotted.\"\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "@0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#165",
+      "node_id": 1500157,
+      "source": "\t@4 narrowed his eyes.\n\tToo many times on the road he had discovered that nothing was what it had seemed, so it was natural he had developed an instinctive tendency to scrutinize his hosts. On this occasion, however, he found nothing out of the ordinary.\u0000",
+      "tokens": [
+        "\\x09",
+        "@4",
+        "\\x0a",
+        "\\x09",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    },
+    {
+      "id": "DIAL_Z15.DDX#167",
+      "node_id": null,
+      "source": "\tA tattooed dwarf stared at them.\n\tSmiling, he revealed a mouth full of teeth which had been filed into shark- like points and his black eyes seemed just as deadly. \"óSa óa'kai, óenconsið,\" he said, speaking with a thick Keshian lilt. He motioned to a table that was nearby. \"Please, gentlemen. The game awaits you.\"\n\tNot feeling like beginning an argument with the strange skashakan cannibal, @4 allowed himself to be escorted to a table where a deck of pokiir cards was stacked...\u0000",
+      "tokens": [
+        "\\x09",
+        "\\x0a",
+        "\\x09",
+        "\\xf3",
+        "\\xf3",
+        "\\xf3",
+        "\\xf0",
+        "\\x0a",
+        "\\x09",
+        "@4",
+        "\\x00"
+      ],
+      "translation": "",
+      "status": "untranslated",
+      "notes": ""
+    }
+  ]
+}
