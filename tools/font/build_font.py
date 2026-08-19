@@ -309,21 +309,40 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
     """Builds the ZH16.DAT binary and corresponding JSON mapping."""
     char_to_id: dict[str, int] = {}
     id_to_char: dict[int, str] = {}
-    unique_glyphs = []
+    next_gid = 0
     for g in glyphs:
         if g not in char_to_id:
-            gid = len(unique_glyphs)
-            char_to_id[g] = gid
-            id_to_char[gid] = g
-            unique_glyphs.append(g)
+            # Never assign a glyph ID whose trail byte would land in
+            # TRAIL_PART2 (0x80-0xDF). TEXTWRAP.C's line-wrap break-point
+            # scan treats any byte in that range as a break point on the
+            # (English-derived) assumption that it can only be a lead byte;
+            # a trail byte that happens to share the range is indistinguishable
+            # to it from a real lead byte, and its backward break-point search
+            # walks byte-by-byte with no character-boundary tracking, so it
+            # misreads such a trail byte as a break point and cuts the line
+            # short there. Restricting every glyph to a TRAIL_PART1
+            # (0x20-0x7E) trail byte makes 0x80-0xDF unambiguously
+            # "lead byte" again, fixing this without touching TEXTWRAP.C.
+            # This wastes 65 of every 160 ID slots per lead byte (9,120
+            # usable of 15,360 total) -- still ample headroom.
+            while next_gid % SLOTS_PER_LEAD >= 95:
+                next_gid += 1
+            char_to_id[g] = next_gid
+            id_to_char[next_gid] = g
+            next_gid += 1
 
-    count = len(unique_glyphs)
+    count = (max(id_to_char) + 1) if id_to_char else 0
 
     # Header: "ZHFN" (4), version 1 (u16), width 16 (u8), height 16 (u8), count (u16), base_lead 0x80 (u8), pad 5
     hdr = struct.pack("<4sHBBHB5s", b"ZHFN", 1, 16, 16, count, LEAD_MIN, b"\x00" * 5)
     body = bytearray()
 
-    for gid, ch in enumerate(unique_glyphs):
+    for gid in range(count):
+        ch = id_to_char.get(gid)
+        if ch is None:
+            # Unused slot skipped above (trail byte would be in TRAIL_PART2).
+            body.extend(b"\x00" * 32)
+            continue
         bitmap = (
             render_glyph_from_eten(ch)
             or render_glyph_from_ttf(ch)
@@ -338,7 +357,7 @@ def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
         "glyph_height": 16,
         "glyph_count": count,
         "char_to_id": char_to_id,
-        "glyphs": unique_glyphs,
+        "glyphs": [id_to_char.get(i, "") for i in range(count)],
     }
 
     ascii_block = build_eten_ascii_block()
