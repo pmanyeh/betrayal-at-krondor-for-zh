@@ -1,0 +1,140 @@
+{
+  "format": "BAK_ZH_UI_STRINGS",
+  "version": 1,
+  "notes": "Hardcoded C string constants (Phase 8 Text Surface Inventory §5), not DDX resource data -- no source_ddx/node_id/tokens fields apply. Exists so tools/font/build_font.py --from-translations picks up the glyphs these strings need, and so translations are tracked/reviewable the same way as DDX entries. Each id names the exact C source array/variable + index it patches.",
+  "entries": [
+    {
+      "id": "DIALOG.C#g_abStatNames[0]",
+      "source": "Health",
+      "translation": "生命值",
+      "status": "translated",
+      "notes": "Character stat label, 15-byte buffer incl. NUL -- max 7 full-width chars."
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[1]",
+      "source": "Stamina",
+      "translation": "體力",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[2]",
+      "source": "Speed",
+      "translation": "速度",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[3]",
+      "source": "Strength",
+      "translation": "力量",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[4]",
+      "source": "Defense",
+      "translation": "防禦",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[5]",
+      "source": "Accy: Crossbow",
+      "translation": "弩弓命中",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[6]",
+      "source": "Accy: Melee",
+      "translation": "近戰命中",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[7]",
+      "source": "Accy: Casting",
+      "translation": "施法命中",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[8]",
+      "source": "Assessment",
+      "translation": "鑑定",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[9]",
+      "source": "Armorcraft",
+      "translation": "護甲工藝",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[10]",
+      "source": "Weaponcraft",
+      "translation": "武器工藝",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[11]",
+      "source": "Barding",
+      "translation": "馬術",
+      "status": "translated",
+      "notes": "Horsemanship/riding skill."
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[12]",
+      "source": "Haggling",
+      "translation": "議價",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[13]",
+      "source": "Lockpick",
+      "translation": "開鎖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[14]",
+      "source": "Scouting",
+      "translation": "偵查",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "DIALOG.C#g_abStatNames[15]",
+      "source": "Stealth",
+      "translation": "潛行",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CHARSCRN.C#charscreen_info_draw:Ratings",
+      "source": "Ratings:",
+      "translation": "屬性：",
+      "status": "translated",
+      "notes": "Character sheet header above the primary-stat box."
+    },
+    {
+      "id": "CHARSCRN.C#charscreen_info_draw:Condition",
+      "source": "Condition:",
+      "translation": "狀態：",
+      "status": "translated",
+      "notes": "Character sheet header above the status-effect list."
+    },
+    {
+      "id": "CHARSCRN.C#charscreen_info_draw:Normal",
+      "source": "Normal",
+      "translation": "正常",
+      "status": "translated",
+      "notes": "Shown in place of the status-effect list when the character has no active conditions."
+    }
+  ]
+}

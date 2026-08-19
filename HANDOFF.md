@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-19　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆，全遊戲共用的物品檢視說明文字）共 615 筆真實翻譯**，字庫從 82 字長到 **2198 字**，全部真倚天點陣、零 fallback。DIAL_Z18 build 驗證 0 mismatch/0 drift fallback，測試套件 48/48 過。
+**寫於：** 2026-08-19　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆，全遊戲共用的物品檢視說明文字）共 615 筆真實翻譯**，字庫從 82 字長到 **2198 字**，全部真倚天點陣、零 fallback。DIAL_Z18 build 驗證 0 mismatch/0 drift fallback，測試套件 48/48 過。**本次 session 追加**：Phase 8（文字介面盤點）完整完成，產出 `docs/research/text-surface-inventory.md`；開始處理 §5 硬編碼 UI 字串，翻完角色屬性面板全部文字（`g_abStatNames` 16 個屬性/技能名 ＋ `CHARSCRN.C` 的 `Ratings:`/`Condition:`/`Normal`）；新增「小字級中文字型」引擎機制（`font_draw_zh_glyph_small`，來源 Fusion Pixel TTF）解決緊湊 UI 區塊塞不下 16×16 中文字的問題；意外挖到並修正一個既有的全域旗標殘留 bug（`g_bMixedZhMode` 對話框畫完沒重設，會讓之後任何畫面的英數字誤用中文字型的粗體 ASCII）。實機全部驗證過，細節見 §7。
 
 這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
 
@@ -68,6 +68,7 @@
 - `D:\git\Fonts\iso\FILES\STDFONT.15` / `SPCFONT.15` / `ASCFONT.15`（真的倚天 3.53 點陣字，索引公式已用 oracle 驗證過）。
 - 這個路徑是寫死在 `tools/font/build_font.py` 裡的（`_ETEN_STD_PATH` 等常數）。**如果下個 session 是在別台機器上，這些檔案不會存在**，字型產生工具會自動退回 TTF 點陣化（微軟正黑體/新細明體）或合成佔位圖案，不會報錯，但字型會變成備用方案，這點要注意。
 - `D:\git\Fonts\ET353S.iso`（原始 ISO）本身是**損毀的**（7z、Windows 內建掛載都打不開），能用的是使用者自己手動解壓出來放在 `D:\git\Fonts\iso\` 底下的內容，這個資料夾如果之後被清掉，字型來源就沒了。
+- `D:\git\Fonts\Fusion_Pixel_10px.ttf`（本次 session 新增依賴，見 §6.2 小字級字型）：一款像素字型，`tools/font/build_small_font.py` 跟 `build_font.py` 的 TTF fallback 都會用到，路徑寫死在 `tools/font/build_font.py` 的 `_FUSION_PIXEL_PATH`。同樣是本機外部依賴，別台機器上若沒有這個檔案，`render_glyph_from_ttf_sized()` 會回傳 `None`，小字型建置會產生全空白字形（不會報錯，但字看不見），這點要注意。
 
 ## 3. 關鍵原始碼位置
 
@@ -96,7 +97,7 @@
 ## 5. 建議下一步（挑一個開始）
 
 1. **繼續翻譯其他章節**：`DIAL_Z01`＋`DIAL_Z16`（第一章開場，251 筆）＋`DIAL_Z18`（全遊戲共用物品說明，364 筆）已經全部翻完，共 615 筆。其餘 30 個 DDX 章節檔（`DIAL_Z00`、`DIAL_Z02`～`DIAL_Z17`、`DIAL_Z19`～`DIAL_Z31`、`TEST`）都已經 `scaffold` 好骨架、躺在 `localization/translated/` 裡等著填（剩餘筆數見 §5.2，總量 5,932 筆已扣掉本次翻完的部分）。可以挑接下來玩家會碰到的章節繼續（但要注意：§5.2 已經證實 `DIAL_Zxx.DDX` 的編號**不對應故事章節**，無法單靠檔名判斷「這是第幾章的內容」，需要用其他方式判斷優先順序，例如照 node_id 的遊戲內觸發順序，或乾脆按檔案大小/內容概覽挑）。翻譯專有名詞密集的內容時，切記先查 `glossary.json`，翻完後也要記得跑一次關鍵字掃描確認沒有憑印象翻出跟既有譯名不一致的版本（見 §5.0 的教訓）。
-2. **盤點其他文字介面**（PROJECT_PLAN Phase 8 範疇）：目前只測過 DDX 對話，BOK 書籍、主選單、UI 標籤都還沒碰過，`textwrap_draw_aligned` 理論上是共用管線，但實際行為沒驗證過（`font_glyph_metrics` 對「字串結尾孤立前導位元組」目前沒有跟 §1 提到的修正版本同步處理寬度，因為它沒有下一個 byte 的上下文可看——BOK/UI 若要重用中文渲染，這點需要重新評估）。
+2. ~~盤點其他文字介面~~ **已完成**（見 §6.1，`docs/research/text-surface-inventory.md`）；已挑了優先度最高的 `g_abStatNames` 開始做（見 §6.2）。接下來可以挑：§5 剩餘的硬編碼字串（`INVENTOR.C`／`INVINSP.C`／`TOWNSCN.C`／`CACTOR.C`）——不需要新工具，跟 `g_abStatNames` 一樣直接改原始碼；或是 §4／§4a／§4b 的 MenuPage/`KEYWORD.DAT`/`fmap_twn.dat` 資源家族——需要先開發通用 `.dat` parser/packer，工程量較大。（`font_glyph_metrics` 對「字串結尾孤立前導位元組」的處理缺口仍未評估，BOK 之外目前還沒撞到這個情境。）
 3. **翻譯品質校對**：§5.2 的 251 筆翻譯是這次一口氣翻完的，語氣/用詞一致性有靠 `localization/glossary/glossary.json` 把關，但畢竟沒有第二個人核對過，建議找懂《裂谷之戰》原作或至少通順中文的人抽查一輪。
 
 ## 5.0 Phase 6 追加產出：DIAL_Z18（全遊戲物品檢視說明文字，364 筆）完整翻譯（本次 session 完成）
@@ -234,7 +235,31 @@ python tools/font/build_font.py --from-translations localization/translated \
 
 **盤點結論**：Phase 7（BOK）是獨立的一塊工程量——新工具（解析/封裝 BOK 格式）+ 新引擎改動（`BOOKTEXT.C` 支援中文雙位元組）+ 設計決定（放大首字母怎麼處理），不能只算翻譯量。排優先序時要把這個獨立成本算進去，不能假設「反正 DDX 都能翻了，BOK 應該差不多」。
 
-## 6. Git 狀態
+## 6. Phase 8 文字介面盤點 + 角色屬性面板中文化（本次 session 完成）
+
+### 7.1 Phase 8：文字介面盤點正式完成
+
+新增 [`docs/research/text-surface-inventory.md`](docs/research/text-surface-inventory.md)，系統性盤點遊戲內**所有**文字來源，不只 DDX/BOK。結論：全遊戲文字分四條路徑——
+
+1. **DDX 對話系統**（Phase 6 既有基礎設施）。
+2. **BOK 書籍系統**（Phase 7 前置調查，見 §5.4）。
+3. **MenuPage / NamedTable / DialogWidget 資源系統**（新發現）——主選單、存讀檔、Options、片尾名單、法術選單、戰鬥選單等幾乎所有按鈕標籤，走一套獨立於 DDX/BOK 的 `*.dat` 資源家族（`req_opt0.dat`、`spells.dat`、`cred.dat`……數十個檔案），**先前懷疑「主選單是圖片」的推測已排除，其實是文字**，只是需要新開發一套 parser/packer。
+4. **話題詢問選單 `KEYWORD.DAT`**（新發現，`ASKABOUT.C`）——對話畫面下方「`<角色> asked about:`」的關鍵字按鈕格，**不屬於 DDX**，玩家實機截圖抓到才發現這個缺口。另外還有 `fmap_twn.dat`（大地圖城鎮標籤）也是獨立資源。
+
+加上大量硬編碼 C 字串常數（`INVENTOR.C`／`INVINSP.C`／`CHARSCRN.C`／`ENCAMP.C`／`TOWNSCN.C`／`COMBAT.C`／`CACTOR.C`）可以直接改原始碼、不需要新工具。**渲染引擎結論**：不管走哪條路徑，最終繪圖幾乎全部收斂到 `font_draw_text_far`／`font_draw_text_ds`（已支援中文），`BOOKTEXT.C` 是唯一的例外。詳細分類、每項的 SOURCE/FORMAT/EXTRACTABLE/PACKABLE/RUNTIME PATH/CHINESE READY/STATUS 欄位、建議工程順序都在該文件裡，下一步要挑戰哪個介面直接查那份文件就好，不用重新盤點。
+
+### 7.2 角色屬性面板（Ratings 面板）全部中文化 + 兩個真的 bug
+
+盤點完成後，挑 §5「硬編碼字串」裡優先度最高的 `g_abStatNames`（[`DIALOG.C:25`](upstream/betrayal-at-krondor/bak/SRC/DIALOG/DIALOG.C#L25)，16 個屬性/技能名，同時被 DDX `%s` token 共用）先做，連帶把 `CHARSCRN.C` 的 `"Ratings:"`／`"Condition:"`／`"Normal"`／`"of"` 也翻完，新增 `localization/translated/UI_HARDCODED.json` 追蹤這類「非 DDX 硬編碼字串」的翻譯來源（格式仿照 DDX 的 translated json，但欄位精簡，`id` 直接寫「檔名#變數名」）。這個檔案會被 `build_font.py --from-translations` 自動掃到，字庫因此照常長大，不用額外收字。
+
+過程中在 DOSBox-X 實機測試抓到兩個真的 bug（不是這次新翻譯內容寫錯，是既有引擎邏輯本來就有問題，只是之前沒有中文字經過這幾段程式碼所以沒暴露出來）：
+
+- **`charscreen_draw_stat_row()` 的行距是照英文字型調校的，中文字塞不下**（[`CHARSCRN.C`](upstream/betrayal-at-krondor/bak/SRC/CHAR/CHARSCRN.C) 原本 `y = stat_idx * 0xb + 0x1c`，11px 行距）——這個「Ratings:」方框本來就設計給一個明顯比 16×16 矮的英文字型用，塞進標準 16×16 中文字會四行疊在一起。**沒有把行距硬拉大了事**（那樣會讓中文字比旁邊的數字明顯粗大、比例失調，使用者實機測試後回報「字太大」），而是新刻了一套**小字級中文點陣字**：`font_init_chinese_small()`／`font_draw_zh_glyph_small()`（新增於 `FONT.C`／`FONT.H`），從 `Fusion_Pixel_10px.ttf`（一款真正的像素字型，風格貼近年代）用 `tools/font/build_small_font.py` 烘焙出 10×10 點陣，存成稀疏格式的 `ZHSTAT.DAT`（用跟主字庫**同一套 glyph ID**，只是稀疏儲存實際用到的幾十個字，不用整個 3695 字全複製一份，佔用記憶體極小、放在傳統記憶體即可不用碰 EMS）。`CHARSCRN.C` 新增 `charscreen_draw_small_zh_label()` 這個獨立的小字繪圖輔助函式，只有這個「Ratings:」面板（含下面技能清單，兩處都套用以保持視覺一致）呼叫它，DDX 對話跟其他地方的中文渲染完全不受影響。**這個做法之後很可能會一直重複用到**——凡是「中文字在原本設計給窄字型的緊湊 UI 區塊裡顯得過大/比例不搭」，都可以照這個模式辦理，不用每次重新設計。
+- **`g_bMixedZhMode` 全域旗標離開對話框後沒有重設**——這個旗標是 Phase 5 加的「中英混排時英文改用中文字型自己的倚天 ASCII 點陣」功能，只在 `DIALOG.C: dialog_render_text_with_tokens()` 裡設定（含中文字就設 1），但**這個函式結束時從來沒有把它重設回 0**。結果是：玩家只要看過一段有中文的對話，這個旗標就會一直殘留是 1，直到下一段對話重新計算為止；期間打開任何其他畫面（角色畫面、可能還有其他畫面），裡面**純英文/數字的文字**（"60"、"Gorath"、"Exit"、"N/A"……）也會被誤判成「中英混排」，改用比較粗大的倚天 ASCII 點陣去畫，不是遊戲原本的小字體。使用者實機測試（先經過中文對話、再開角色畫面）才抓到這個症狀，跟這次新翻譯的內容本身無關，是曝光了一個潛藏已久的既有 bug。**修法**：在 `dialog_render_text_with_tokens()` 唯一的出口（函式結尾，`}` 前）加一行 `g_bMixedZhMode = 0;`，這是它的單一 return path，不影響函式內部其餘繪圖呼叫仍然正確使用這個旗標。
+
+全部改動都在 `upstream/betrayal-at-krondor` 個別 commit（`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，共 6 個，細節見 §7），實機在 DOSBox-X 逐步驗證過（疊字消失、字級比例正常、`g_bMixedZhMode` 修好後數字恢復小字體、間距對齊使用者要求）。
+
+## 7. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。`origin` 已設定指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
-- `upstream/betrayal-at-krondor`：本地領先 origin 7 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+- `upstream/betrayal-at-krondor`：本地領先 origin 13 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`，加上本次 session 新增的 `c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。

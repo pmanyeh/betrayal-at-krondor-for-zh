@@ -1029,9 +1029,20 @@ CHINESE READY
 STATUS
 ```
 
+## 現況（已完成盤點）
+
+[`docs/research/text-surface-inventory.md`](file:///d:/git/betrayal-at-krondor-for-zh/docs/research/text-surface-inventory.md) 已產出，涵蓋全部四條文字路徑：
+
+1. DDX 對話系統（Phase 6 既有基礎設施，615 筆已翻譯）。
+2. BOK 書籍系統（Phase 7 前置調查已完成，新格式＋需改 `BOOKTEXT.C` 支援雙位元組）。
+3. MenuPage / NamedTable / DialogWidget 資源系統（新發現，主選單/存讀檔/法術選單/戰鬥選單等數十個 `.dat` 檔，需要新 parser/packer）。
+4. 話題詢問選單 `KEYWORD.DAT`（新發現，對話畫面下方的關鍵字按鈕格，**不屬於 DDX**，是獨立第四條路徑）。
+
+另加：話題詢問選單 `KEYWORD.DAT`（§4a）、大地圖城鎮標籤 `fmap_twn.dat`（§4b）、大量硬編碼 C 字串常數（可直接改原始碼，無需新工具，`g_abStatNames` 優先度最高）、密碼盤謎題（需要設計決策而非翻譯）、隊伍角色名字（存檔二進位欄位，暫不處理）。詳見該文件 §1–§11。盤點已涵蓋全部類別，唯一剩餘開放項目（`MENULBL.C` 捲動貼圖被哪支 `.TTM` 腳本呼叫，§9）屬於資料檔調查，不影響盤點完整性。
+
 ## Gate
 
-在 inventory 未完成前，不得宣稱「完整中文化工具鏈完成」。
+在 inventory 未完成前，不得宣稱「完整中文化工具鏈完成」。**Inventory 本身已完成，但這只代表「已知道要做什麼」——§3/§4/§4a 列出的新資源格式尚未開發對應 parser/packer，翻譯/工程工作尚未開始，不得因為 inventory 完成就宣稱這些子系統已可翻譯。**
 
 ---
 

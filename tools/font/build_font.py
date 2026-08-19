@@ -237,6 +237,75 @@ def render_glyph_from_ttf(
     return bytes(rows)
 
 
+_FUSION_PIXEL_PATH = r"D:\git\Fonts\Fusion_Pixel_10px.ttf"
+
+
+def render_glyph_from_ttf_sized(
+    char: str, cell: int, font_path: str = _FUSION_PIXEL_PATH, pt_size: int | None = None
+) -> bytes | None:
+    """Rasterizes a single character to a cell x cell monochrome bitmap using an
+    installed TTF, tightly cropped to its ink and centered in the cell. Row stride
+    is ceil(cell/8) bytes, matching the packing font_draw_zh_glyph_small() expects.
+    Returns None if Pillow or the font file isn't available."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return None
+
+    try:
+        font = ImageFont.truetype(font_path, pt_size or cell)
+    except OSError:
+        return None
+
+    pad = cell
+    big = Image.new("L", (cell + 2 * pad, cell + 2 * pad), 0)
+    draw = ImageDraw.Draw(big)
+    draw.text((pad, pad), char, font=font, fill=255)
+    bbox = big.getbbox()
+    canvas = Image.new("L", (cell, cell), 0)
+    if bbox is not None:
+        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        ox, oy = max(0, (cell - w) // 2), max(0, (cell - h) // 2)
+        canvas.paste(big.crop(bbox), (ox, oy))
+    px = canvas.load()
+
+    stride = (cell + 7) // 8
+    rows = bytearray()
+    for y in range(cell):
+        row_bits = bytearray(stride)
+        for x in range(cell):
+            if px[x, y] > 128:
+                row_bits[x >> 3] |= 0x80 >> (x & 7)
+        rows.extend(row_bits)
+    return bytes(rows)
+
+
+def build_small_zh_font(chars: list[str], char_to_id: dict[str, int], cell: int = 10) -> bytes:
+    """Builds a sparse small-cell Chinese glyph table (ZHSM format) covering only
+    `chars`, keyed by the SAME glyph IDs as the main ZH16 font's char_to_id mapping
+    (so callers decode the standard BAK-ZH 2-byte encoding and get the same glyph
+    identity, just rendered at `cell` size instead of 16x16). Unlike the main font,
+    unused glyph IDs simply aren't stored -- entries are (u16 gid, stride*cell bytes
+    bitmap) records read via a linear scan, since only a handful of entries are ever
+    needed by any one small-font caller."""
+    stride = (cell + 7) // 8
+    seen: dict[int, str] = {}
+    for ch in chars:
+        if ch not in char_to_id:
+            raise ValueError(f"{ch!r} has no glyph ID in the provided mapping")
+        seen.setdefault(char_to_id[ch], ch)
+
+    hdr = struct.pack("<4sHBBH", b"ZHSM", 1, cell, cell, len(seen))
+    body = bytearray()
+    for gid, ch in sorted(seen.items()):
+        bitmap = render_glyph_from_ttf_sized(ch, cell)
+        if bitmap is None:
+            bitmap = bytes(stride * cell)
+        body.extend(struct.pack("<H", gid))
+        body.extend(bitmap)
+    return hdr + bytes(body)
+
+
 def generate_synthetic_glyph(char: str, glyph_id: int) -> bytes:
     """Generates a high-contrast 16x16 monochrome bitmap (32 bytes) for testing."""
     # 16 rows, 2 bytes (16 bits) per row
