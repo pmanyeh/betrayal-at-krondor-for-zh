@@ -319,7 +319,32 @@ python tools/font/build_font.py --from-translations localization/translated \
 - ~~文字太長、換行溢出成 3 行以上~~——測過極短的中文（4+5 個字，遠低於任何合理的寬度上限），一樣卡死；而更長的純 ASCII 兩行反而沒事。
 - ~~§8.2 的無號數下溢 bug 本身~~——修法對純 ASCII 案例證實有效，但對短中文案例無效，代表**中文內容在這個版位裡踩到的是另一個、目前還沒定位到的問題**，不是同一個 bug 的殘留。
 
-用剩的時間排查到這裡沒有再繼續深入（`pause_execution` 抓到的 CS:EIP 每次都停在同一個 VGA 垂直回掃等待迴圈 `55FA:134A`~`134D`，這是遊戲畫面更新時極常被命中的熱路徑，光憑這個訊號無法判斷是不是真正卡住的位置，需要更精準的中斷點或反組譯比對才能繼續往下查）。**這次的處理方式：把這 9 筆（`DIAL_Z00.DDX#291`~`#299`）暫時還原成英文**（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `status` 改回 `untranslated`、`notes` 欄位記錄了原因），讓遊戲能正常遊玩，其餘 409 筆翻譯內容完全不受影響、實機驗證正常。
+**追加排查（§8.2 修好之後又繼續查了一輪，找到一個很有機會就是真正答案的線索，但沒能在時限內百分之百證實）**：讀完 `DIALOG.C:850` 起的 `dialog_play_record()` 全文，發現我們這筆記錄（`wFlags=0x4014`，`wFlags & 0x200`／`0x400` 都是 0）走的是 `DIALOG.C:1405`~`1431` 那個 `else` 分支，這是一段**逐頁顯示、需要玩家按鍵/點滑鼠才能翻頁**的迴圈：
+
+```c
+do {
+    if (dialog_wait_for_acknowledge(
+            g_wTextWrapXAccum,
+            g_wTextWrapLinesRemaining != 0 ? 0 : record->wFlags, 0, 1) == 0) {
+        g_bCutsceneEscPressed = '\x01';
+    }
+    ...
+    if ((done != 0) || (g_wTextWrapLinesRemaining == 0)) break;
+    i = i + g_wTextWrapLinesDrawn;
+    dialog_frame_draw(record, (int far *)0L);
+    dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, i);
+    ...
+} while (done == 0);
+```
+
+關鍵在 `dialog_wait_for_acknowledge()`（`DIALOG.C:216`）收到的 `flags` 參數：**`g_wTextWrapLinesRemaining != 0` 時傳入的是 `0`，否則傳入 `record->wFlags`**。而 `dialog_wait_for_acknowledge` 開頭第一件事就是 `if (flags & 0x4000) return 1;`——`record->wFlags = 0x4014` 剛好有設這個 bit（`0x4014 & 0x4000 = 0x4000`），代表**這筆記錄原本設計成「不需要等玩家確認、自動繼續」**。純 ASCII 的 `"AAA"`／`"A\nB"` 之所以順利過關，很可能正是因為內容全部塞得進**一頁**（`g_wTextWrapLinesRemaining` 在渲染完就是 0），直接吃到 `record->wFlags` 那個自動繼續的路徑。**中文因為 `g_bMixedZhMode` 把行高強制拉到 16px，兩行塞不進這個窄版位、必須分兩頁顯示，`g_wTextWrapLinesRemaining` 變成非 0，這時傳進去的 `flags` 被換成 `0`（不含 `0x4000`），於是真的進入了「等玩家按鍵/點滑鼠翻頁」的迴圈——而且因為畫面在這整段期間都還是黑的（`gmain_start_dispatch` 要等 `dialog_play_record` 整個回傳才會 `palette_fade_in`，見 §8.2 步驟 3），玩家完全看不到有東西在等他確認。**
+
+這個理論如果成立，代表**這根本不是傳統意義上的無窮迴圈 bug，而是「原文一頁裝得下、中文裝不下要多一頁，但這個特定橫幅的顯示流程本來就沒設計成會需要多頁」的情境沒被考慮到**——實機測試時我試著補按十幾次 Enter／Space 想手動翻過這一頁，畫面仍然沒有變化，但**不能排除是 MCP 這邊模擬的按鍵沒有在正確的時機被 `kbhit_read()` 撈到**（`dialog_poll_arrow_or_button()`／`DIALOG.C:168` 確認會接受 Enter/Space 的掃描碼，理論上該有效，但這條路徑同時也接受滑鼠按鍵，而這個環境完全沒有滑鼠模擬能力可以交叉測試）；也可能是 `g_engine_prefs->text_speed` 剛好不是造成 `deadline=0xffffffff`（無限等待）的那個設定值，只是純粹的逾時時間長到我沒等夠。**因為沒能在時限內百分之百證實，這次還是先把這 9 筆還原成英文**（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `status` 改回 `untranslated`、`notes` 欄位記錄了原因），讓遊戲能正常遊玩，其餘 409 筆翻譯內容完全不受影響、實機驗證正常。
+
+**下一個 session 建議的驗證方式**（比從頭排查快很多）：
+1. 用同一份診斷環境重現（`dist/test_v100_zh` 複製一份、換上這幾筆的中文版 `DIAL_Z00.DDX`），啟動後**請使用者自己坐在電腦前，用滑鼠實際點擊**卡住的畫面（不要只靠 MCP 鍵盤模擬）——如果滑鼠點擊能翻頁過去，就完全證實這個理論，代表根本不用改引擎，只要接受「中文版章節橫幅需要玩家多點一下滑鼠翻頁」這個行為就好（甚至這行為本身可能才是正確、原汁原味的遊戲設計，只是我們還沒見過英文版真的觸發多頁的樣子）。
+2. 如果證實了，**不需要任何程式碼修正**，只要把 `localization/translated/DIAL_Z00.json` 裡這 9 筆重新翻回中文、重新 build 部署即可，不用再改 `TEXTWRAP.C` 或任何 C 原始碼。
+3. 如果滑鼠點擊也沒用，才需要回頭用真正的中斷點（不要再靠 `pause_execution` 隨機抽樣 `55FA:134A` 那個熱迴圈，那個訊號已經證實沒有鑑別度）去確認 `dialog_wait_for_acknowledge` 到底有沒有真的被進入、`g_engine_prefs->text_speed` 實際數值是多少。
 
 **下一個 session 如果要繼續查**：可以從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異。也可以考慮參考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型），也許能繞開整個問題，不用再深究這個特定的排版計算 bug。
 
