@@ -3815,7 +3815,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#292",
@@ -3831,7 +3831,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#293",
@@ -3848,7 +3848,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#294",
@@ -3863,7 +3863,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#295",
@@ -3879,7 +3879,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#296",
@@ -3892,7 +3892,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#297",
@@ -3907,7 +3907,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#298",
@@ -3922,7 +3922,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#299",
@@ -3937,7 +3937,7 @@
       ],
       "translation": "",
       "status": "untranslated",
-      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. A real engine bug (TEXTWRAP.C unsigned-short underflow) was found and fixed, but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs after that fix. The 'waiting for player to click through a second page' theory was tested live with real mouse clicks on the black screen -- confirmed NOT the cause, clicking has zero effect. Root cause still unknown; needs real breakpoint/symbol-level debugging, not black-box testing. See HANDOFF.md §8.3 for the full investigation."
     },
     {
       "id": "DIAL_Z00.DDX#300",

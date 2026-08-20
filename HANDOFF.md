@@ -339,12 +339,21 @@ do {
 
 關鍵在 `dialog_wait_for_acknowledge()`（`DIALOG.C:216`）收到的 `flags` 參數：**`g_wTextWrapLinesRemaining != 0` 時傳入的是 `0`，否則傳入 `record->wFlags`**。而 `dialog_wait_for_acknowledge` 開頭第一件事就是 `if (flags & 0x4000) return 1;`——`record->wFlags = 0x4014` 剛好有設這個 bit（`0x4014 & 0x4000 = 0x4000`），代表**這筆記錄原本設計成「不需要等玩家確認、自動繼續」**。純 ASCII 的 `"AAA"`／`"A\nB"` 之所以順利過關，很可能正是因為內容全部塞得進**一頁**（`g_wTextWrapLinesRemaining` 在渲染完就是 0），直接吃到 `record->wFlags` 那個自動繼續的路徑。**中文因為 `g_bMixedZhMode` 把行高強制拉到 16px，兩行塞不進這個窄版位、必須分兩頁顯示，`g_wTextWrapLinesRemaining` 變成非 0，這時傳進去的 `flags` 被換成 `0`（不含 `0x4000`），於是真的進入了「等玩家按鍵/點滑鼠翻頁」的迴圈——而且因為畫面在這整段期間都還是黑的（`gmain_start_dispatch` 要等 `dialog_play_record` 整個回傳才會 `palette_fade_in`，見 §8.2 步驟 3），玩家完全看不到有東西在等他確認。**
 
-這個理論如果成立，代表**這根本不是傳統意義上的無窮迴圈 bug，而是「原文一頁裝得下、中文裝不下要多一頁，但這個特定橫幅的顯示流程本來就沒設計成會需要多頁」的情境沒被考慮到**——實機測試時我試著補按十幾次 Enter／Space 想手動翻過這一頁，畫面仍然沒有變化，但**不能排除是 MCP 這邊模擬的按鍵沒有在正確的時機被 `kbhit_read()` 撈到**（`dialog_poll_arrow_or_button()`／`DIALOG.C:168` 確認會接受 Enter/Space 的掃描碼，理論上該有效，但這條路徑同時也接受滑鼠按鍵，而這個環境完全沒有滑鼠模擬能力可以交叉測試）；也可能是 `g_engine_prefs->text_speed` 剛好不是造成 `deadline=0xffffffff`（無限等待）的那個設定值，只是純粹的逾時時間長到我沒等夠。**因為沒能在時限內百分之百證實，這次還是先把這 9 筆還原成英文**（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `status` 改回 `untranslated`、`notes` 欄位記錄了原因），讓遊戲能正常遊玩，其餘 409 筆翻譯內容完全不受影響、實機驗證正常。
+這個理論如果成立，代表**這根本不是傳統意義上的無窮迴圈 bug，而是「原文一頁裝得下、中文裝不下要多一頁，但這個特定橫幅的顯示流程本來就沒設計成會需要多頁」的情境沒被考慮到**。
 
-**下一個 session 建議的驗證方式**（比從頭排查快很多）：
-1. 用同一份診斷環境重現（`dist/test_v100_zh` 複製一份、換上這幾筆的中文版 `DIAL_Z00.DDX`），啟動後**請使用者自己坐在電腦前，用滑鼠實際點擊**卡住的畫面（不要只靠 MCP 鍵盤模擬）——如果滑鼠點擊能翻頁過去，就完全證實這個理論，代表根本不用改引擎，只要接受「中文版章節橫幅需要玩家多點一下滑鼠翻頁」這個行為就好（甚至這行為本身可能才是正確、原汁原味的遊戲設計，只是我們還沒見過英文版真的觸發多頁的樣子）。
-2. 如果證實了，**不需要任何程式碼修正**，只要把 `localization/translated/DIAL_Z00.json` 裡這 9 筆重新翻回中文、重新 build 部署即可，不用再改 `TEXTWRAP.C` 或任何 C 原始碼。
-3. 如果滑鼠點擊也沒用，才需要回頭用真正的中斷點（不要再靠 `pause_execution` 隨機抽樣 `55FA:134A` 那個熱迴圈，那個訊號已經證實沒有鑑別度）去確認 `dialog_wait_for_acknowledge` 到底有沒有真的被進入、`g_engine_prefs->text_speed` 實際數值是多少。
+**⚠️ 這個理論已經被實機測試明確推翻，不要再往這個方向查**：把這 9 筆重新翻回中文部署後，請使用者本人坐在電腦前、**親自用滑鼠實際點擊**卡住的黑畫面——完全沒有反應，跟先前 MCP 鍵盤模擬的結果一致。這排除了「只是在等分頁確認、滑鼠點一下就會過去」的可能性，**證實這確實是貨真價實的卡死，不是分頁等待輸入**。已經把這 9 筆（`DIAL_Z00.DDX#291`~`#299`）重新還原成英文（`localization/translated/DIAL_Z00.json` 的 `notes` 欄位記錄了這個結論），讓遊戲維持正常可玩，其餘 409 筆翻譯不受影響。
+
+**下一個 session 如果要繼續查，已排除的假說清單（不要重複測試）**：
+- ~~字庫太大／EMS 記憶體不足~~
+- ~~`\xf1`／`\xf0` 樣式控制位元組的處理方式~~
+- ~~文字太長、換行溢出成 3 行以上~~
+- ~~§8.2 的無號數下溢 bug 本身（已修好但對這個問題無效）~~
+- ~~分頁等待玩家按鍵/點滑鼠確認（`dialog_wait_for_acknowledge` 的 `flags&0x4000` 理論）~~——**已用真人滑鼠實測推翻**。
+
+**下一步真正該做的**：`pause_execution` 抓到的 CS:EIP 每次都停在同一個 VGA 垂直回掃熱迴圈（`55FA:134A`~`134D`），已經證實這個訊號在游戲**正常運作**跟**真的卡死**兩種情況下都會出現、完全沒有鑑別度，不要再靠它判斷。真正需要的是**設一個落在 `textwrap_draw_aligned`／`dialog_render_text_with_tokens`／`dialog_wait_for_acknowledge` 這幾個函式範圍內的真斷點**，但目前沒有這幾個函式在 `KRONDOR.EXE` 裡的實際記憶體位址（`KRONDOR.MAP` 只有 segment 層級的資訊，沒有個別 public symbol 位址）。可行的做法：
+1. 在 WSL 工具鏈重新編譯時，想辦法讓 Turbo Link 產生**含 public symbol 的完整 `.MAP` 檔**（目前的編譯指令似乎沒開這個選項），這樣就能查到這幾個函式的確切位址，直接下記憶體斷點。
+2. 或者從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異——這次沒能算出 `pStyle->header[]` 的實際數值就是因為沒有斷點可以直接讀暫存器/記憶體，只能純推理。
+3. 或者乾脆参考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型，不強制 `g_bMixedZhMode` 把行高拉到 16px），也許能繞開整個問題的根源（`line_height` 被拉高導致的一連串效應），不用再深究這個特定的排版計算 bug 到底卡在哪一行——**這可能是投資報酬率最高的方向**，因為不需要先找到卡死的確切原因，只要讓中文在這個版位裡也維持跟原文差不多的行高，很可能就不會再觸發這整條有問題的路徑。
 
 **下一個 session 如果要繼續查**：可以從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異。也可以考慮參考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型），也許能繞開整個問題，不用再深究這個特定的排版計算 bug。
 
