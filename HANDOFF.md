@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-19　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆，全遊戲共用的物品檢視說明文字）共 615 筆真實翻譯**，字庫從 82 字長到 **2198 字**，全部真倚天點陣、零 fallback。DIAL_Z18 build 驗證 0 mismatch/0 drift fallback，測試套件 48/48 過。**本次 session 追加**：Phase 8（文字介面盤點）完整完成，產出 `docs/research/text-surface-inventory.md`；開始處理 §5 硬編碼 UI 字串，翻完角色屬性面板全部文字（`g_abStatNames` 16 個屬性/技能名 ＋ `CHARSCRN.C` 的 `Ratings:`/`Condition:`/`Normal`）；新增「小字級中文字型」引擎機制（`font_draw_zh_glyph_small`，來源 Fusion Pixel TTF）解決緊湊 UI 區塊塞不下 16×16 中文字的問題；意外挖到並修正一個既有的全域旗標殘留 bug（`g_bMixedZhMode` 對話框畫完沒重設，會讓之後任何畫面的英數字誤用中文字型的粗體 ASCII）。實機全部驗證過，細節見 §7。
+**寫於：** 2026-08-20　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆，全遊戲共用的物品檢視說明文字）＋ DIAL_Z00（418 筆，全遊戲共用的隨機遭遇/存讀檔 UI/主選單章節標題等文字，本次 session 完成）共 1,033 筆真實翻譯**，字庫從 82 字長到 **4072 字**，全部真倚天點陣、零 fallback。DIAL_Z00 build 對照本機原版 DDX（用 `bak rmf extract` 現場解出，非陳舊本地檔案）驗證 **0 mismatch/0 drift fallback**，測試套件 48/48 過。**本次 session**：翻完整個 `DIAL_Z00.json`（418 筆，最大宗是隨機遭遇/伏擊敘事模板，因為套用範本重複性高，加上主選單存讀檔／Options UI 提示文字、九章章節標題與任務目標、四位主角背景介紹段落），`glossary.json` 新增約 20 筆新專有名詞（含 Milamber／Kulgan／Crydee／Riftwar／the Great Rising 等背景設定詞彙），翻完後重新收字、重新跑測試套件、重新用 `ddx_translate.py build` 對照現場解出的乾淨原版 DDX 驗證 0 fallback，已部署到 `dist/test_v100_zh/`（`DIAL_Z00.DDX`／`ZH16.DAT`）**但尚未在 DOSBox-X 實機測試**——這次 session 全程 DOSBox-X 都沒有啟動，下一步建議優先做這件事。詳細教訓見 §8。
 
 這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
 
@@ -96,7 +96,7 @@
 
 ## 5. 建議下一步（挑一個開始）
 
-1. **繼續翻譯其他章節**：`DIAL_Z01`＋`DIAL_Z16`（第一章開場，251 筆）＋`DIAL_Z18`（全遊戲共用物品說明，364 筆）已經全部翻完，共 615 筆。其餘 30 個 DDX 章節檔（`DIAL_Z00`、`DIAL_Z02`～`DIAL_Z17`、`DIAL_Z19`～`DIAL_Z31`、`TEST`）都已經 `scaffold` 好骨架、躺在 `localization/translated/` 裡等著填（剩餘筆數見 §5.2，總量 5,932 筆已扣掉本次翻完的部分）。可以挑接下來玩家會碰到的章節繼續（但要注意：§5.2 已經證實 `DIAL_Zxx.DDX` 的編號**不對應故事章節**，無法單靠檔名判斷「這是第幾章的內容」，需要用其他方式判斷優先順序，例如照 node_id 的遊戲內觸發順序，或乾脆按檔案大小/內容概覽挑）。翻譯專有名詞密集的內容時，切記先查 `glossary.json`，翻完後也要記得跑一次關鍵字掃描確認沒有憑印象翻出跟既有譯名不一致的版本（見 §5.0 的教訓）。
+1. **繼續翻譯其他章節**：`DIAL_Z01`＋`DIAL_Z16`（第一章開場，251 筆）＋`DIAL_Z18`（全遊戲共用物品說明，364 筆）＋`DIAL_Z00`（全遊戲共用隨機遭遇/UI/章節標題，418 筆，本次 session 完成，見 §8）已經全部翻完，共 1,033 筆。其餘 29 個 DDX 章節檔（`DIAL_Z02`～`DIAL_Z17`、`DIAL_Z19`～`DIAL_Z31`、`TEST`）都已經 `scaffold` 好骨架、躺在 `localization/translated/` 裡等著填（總量 5,514 筆，已扣掉本次翻完的 418 筆）。**強烈建議先做的事**：下一個 session 一開始就先啟動 DOSBox-X，實機驗證這次 DIAL_Z00 的 418 筆翻譯（這次 session 完全沒機會實機測試，見 §8），確認沒問題後才繼續翻下一個章節檔，不要讓沒驗證過的翻譯批次越疊越多。可以挑接下來玩家會碰到的章節繼續（但要注意：§5.2 已經證實 `DIAL_Zxx.DDX` 的編號**不對應故事章節**，無法單靠檔名判斷「這是第幾章的內容」，需要用其他方式判斷優先順序，例如照 node_id 的遊戲內觸發順序，或乾脆按檔案大小/內容概覽挑）。翻譯專有名詞密集的內容時，切記先查 `glossary.json`，翻完後也要記得跑一次關鍵字掃描確認沒有憑印象翻出跟既有譯名不一致的版本（見 §5.0 的教訓）。
 2. ~~盤點其他文字介面~~ **已完成**（見 §6.1，`docs/research/text-surface-inventory.md`）；已挑了優先度最高的 `g_abStatNames` 開始做（見 §6.2）。接下來可以挑：§5 剩餘的硬編碼字串（`INVENTOR.C`／`INVINSP.C`／`TOWNSCN.C`／`CACTOR.C`）——不需要新工具，跟 `g_abStatNames` 一樣直接改原始碼；或是 §4／§4a／§4b 的 MenuPage/`KEYWORD.DAT`/`fmap_twn.dat` 資源家族——需要先開發通用 `.dat` parser/packer，工程量較大。（`font_glyph_metrics` 對「字串結尾孤立前導位元組」的處理缺口仍未評估，BOK 之外目前還沒撞到這個情境。）
 3. **翻譯品質校對**：§5.2 的 251 筆翻譯是這次一口氣翻完的，語氣/用詞一致性有靠 `localization/glossary/glossary.json` 把關，但畢竟沒有第二個人核對過，建議找懂《裂谷之戰》原作或至少通順中文的人抽查一輪。
 
@@ -258,6 +258,21 @@ python tools/font/build_font.py --from-translations localization/translated \
 - **`g_bMixedZhMode` 全域旗標離開對話框後沒有重設**——這個旗標是 Phase 5 加的「中英混排時英文改用中文字型自己的倚天 ASCII 點陣」功能，只在 `DIALOG.C: dialog_render_text_with_tokens()` 裡設定（含中文字就設 1），但**這個函式結束時從來沒有把它重設回 0**。結果是：玩家只要看過一段有中文的對話，這個旗標就會一直殘留是 1，直到下一段對話重新計算為止；期間打開任何其他畫面（角色畫面、可能還有其他畫面），裡面**純英文/數字的文字**（"60"、"Gorath"、"Exit"、"N/A"……）也會被誤判成「中英混排」，改用比較粗大的倚天 ASCII 點陣去畫，不是遊戲原本的小字體。使用者實機測試（先經過中文對話、再開角色畫面）才抓到這個症狀，跟這次新翻譯的內容本身無關，是曝光了一個潛藏已久的既有 bug。**修法**：在 `dialog_render_text_with_tokens()` 唯一的出口（函式結尾，`}` 前）加一行 `g_bMixedZhMode = 0;`，這是它的單一 return path，不影響函式內部其餘繪圖呼叫仍然正確使用這個旗標。
 
 全部改動都在 `upstream/betrayal-at-krondor` 個別 commit（`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，共 6 個，細節見 §7），實機在 DOSBox-X 逐步驗證過（疊字消失、字級比例正常、`g_bMixedZhMode` 修好後數字恢復小字體、間距對齊使用者要求）。
+
+## 8. Phase 6 追加產出：DIAL_Z00 完整翻譯（418 筆，本次 session 完成）
+
+在 §5 建議的「繼續翻譯章節」方向下，這次挑了 `DIAL_Z00.DDX`（418 筆，是繼 DIAL_Z01/Z16/Z18 之後第四個翻完的章節檔）。跟 DIAL_Z18 一樣，這個檔案**不是特定章節劇情**，而是全遊戲共用的內容，具體可分四類：
+
+- **隨機遭遇/伏擊敘事模板**（佔絕大多數，約 300 筆）：地下城、荒野各種隨機戰鬥觸發前的敘事文字，大量使用 `@0`~`@5` 隊伍成員代稱與樣板化措辭（同一組「毫無防備／早已等待／殺了對方一個措手不及」三態變化反覆出現在不同生物類型上），翻譯時建立了一套固定的中文句式對應，同一模板不同觸發條件時保持譯文一致。
+- **存讀檔／Options／戰鬥按鈕 UI 提示文字**（約 90 筆）：滑鼠停留說明，格式高度一致（「Left clicking on this button will...」），逐筆翻成「左鍵點擊這個按鈕可……」的固定句式。
+- **九個章節標題與任務目標**（`#291`~`#299`，例如 "Chapter One: Into a Dark Night / Escort Gorath to Krondor!"）：這是玩家會在「目錄」畫面看到的九章標題，翻譯時第一次處理到 `wFlags`／樣式位元組**沒有配對、逐詞觸發**的排版方式（源文字每個英文單字前都有一個 `\xf1` 標記但結尾沒有對應的關閉標記，是這款引擎既有的逐詞樣式開關機制，不是本專案自創的格式），對應譯文一樣拆成對應數量的詞組、在每個詞組前插入同樣數量的 `\xf1`，token 結構才會過。
+- **四位主角背景介紹段落**（Locklear/Gorath/Owyn/Pug/James/Patrus，`#284`~`#289`）：這是玩家開新遊戲挑角色時會看到的人物簡介，帶出不少先前翻譯內容沒出現過的背景設定名詞（見下方 glossary 新增清單），是這批裡文學性最高、最需要查證的部分。
+
+**`glossary.json` 這次新增**（約 20 筆）：Crenard（傭兵）、Guild of Death（死亡公會，跟既有 Nighthawks/Guild of Assassins 是不同的公會）、Ruthia（幸運女神）、Guiswa（獵神）、**Milamber**（帕格的圖蘭尼法師名，這次才第一次出現在已翻譯內容裡）、Kulgan（帕格的啟蒙師父）、Crydee（帕格的故鄉）、Great One(s)（圖蘭尼「至尊法師」頭銜）、William（帕格之子）、the Upright Man（克朗多盜賊公會首領「正直人」，是詹姆士的生父）、Brak Nurr（礦坑巨獸）、bulldrake（牛蜥，常見小型龍族怪物）、**Riftwar**（裂界之戰，跟遊戲本身的「大崛起之戰」是兩場不同戰爭，先前的翻譯內容裡都還沒正式收錄這個詞，是這次才發現的缺漏）、the Great Rising（大崛起之戰，正式收錄）、Armengar、Land's End、Ardanien（戈拉斯的氏族名）、Green Heart（莫瑞德人家園森林）、Great Northern Mountains、Beleforte（歐文的家族姓氏）、Duke of Euper、Ran（城市）。**下次翻到背景設定或人物簡介類文字時，先查這批新詞，不要重新音譯。**
+
+**驗收**：418 筆全數翻完（`ddx_translate.py status` 顯示 418/418 `translated`），用 `bak rmf extract` 從 `krondor.rmf` 現場解出乾淨的 `DIAL_Z00.DDX` 原始檔（沒有信任本機任何舊檔案，遵守 §5.1 教訓），`ddx_translate.py build` 對照驗證 **0 筆 token-mismatch fallback、0 筆 source-drift fallback**。翻完後跑過一次關鍵字掃描確認沒有已知譯名的錯誤變體殘留，也掃過一次確認除了 `#9`（故意保留原文的莫瑞德語擬語言台詞）之外沒有任何意外殘留的英文字母。字庫用 `build_font.py --from-translations` 重新收字，從 2198 字長到 **4072 字**；重新跑過全部 8 個測試模組（48 個測試）全過。已把 `DIAL_Z00.DDX` 跟新字庫 `ZH16.DAT` 複製進 `dist/test_v100_zh/`，**但這次 session 從頭到尾都沒有啟動 DOSBox-X**（連 MCP debugger 都確認過連不上——`ping` 正常但 `get_debug_status` 回報 `DOSBOK_NOT_CONNECTED`，因為 DOSBox-X 程式本身沒有在跑），所以這批翻譯**完全沒有經過實機驗證**，只驗證過結構層面（token round-trip、build fallback 計數）。**下一個 session 的第一件事，應該是啟動 DOSBox-X、實際玩過幾場隨機遭遇戰鬥、翻翻主選單跟開新遊戲的角色簡介畫面，肉眼確認這 418 筆的排版跟字距沒問題**——尤其這批內容量體是先前單次 session 最大的一批（4072 字字庫是目前最大值，比 §5.0 踩過 EMS 記憶體瓶頸的 2198 字幾乎翻倍，雖然 §5.0 的修法理論上空間還很充裕，但沒實機測過還是要小心）。
+
+另外這次順手發現：其餘 30 個待翻章節檔中，`DIAL_Z18` 之後真正翻完的是 `DIAL_Z00`，代表 §5.2 提到的「檔名不對應章節」問題持續成立——`DIAL_Z00` 雖然編號最前，內容卻是全遊戲共用的隨機遭遇模板，不是開場章節劇情。
 
 ## 7. Git 狀態
 
