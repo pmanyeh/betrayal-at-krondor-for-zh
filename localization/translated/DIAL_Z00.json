@@ -3813,9 +3813,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第一章：ñ踏入ñ黑暗ñ之ñ夜\n護送戈拉斯前往克朗多！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#292",
@@ -3829,9 +3829,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第二章：ñ夜鷹ñ會ñ之ñ影\n前往羅姆尼的黑羊酒館！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#293",
@@ -3846,9 +3846,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第三章：ñ望ñ遠鏡ñ與ñ蜘ñ蛛\n解開望遠鏡與蜘蛛之謎！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#294",
@@ -3861,9 +3861,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第四章：ñ死亡ñ印ñ記\n逃離北境！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#295",
@@ -3877,9 +3877,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第五章：ñ血ñ染ñ河ñ川\n堅守北衛城！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#296",
@@ -3890,9 +3890,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第六章：ñ叛變\n尋找馬克羅斯之書！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#297",
@@ -3905,9 +3905,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第七章：ñ漫漫ñ長ñ路\n摧毀莫瑞德人的裂界機！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#298",
@@ -3920,9 +3920,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第八章：ñ遠方ñ之ñ地\n救出帕格與蓋米娜！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#299",
@@ -3935,9 +3935,9 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "第九章：ñ狂神ñ之ñ怒\n阻止馬卡拉抵達生命石！\u0000",
-      "status": "translated",
-      "notes": ""
+      "translation": "",
+      "status": "untranslated",
+      "notes": "Reverted to English: translating this record hangs the game at the chapter-start transition. Root cause partially diagnosed (see HANDOFF.md) -- a genuine engine bug in TEXTWRAP.C's line-fit loop was found and fixed (unsigned-short underflow), but Chinese text in this record's narrow opcode-overridden dialog geometry still hangs even after that fix, via a different/related mechanism not yet fully understood. Needs further investigation before translating."
     },
     {
       "id": "DIAL_Z00.DDX#300",

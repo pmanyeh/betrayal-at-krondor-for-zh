@@ -1,6 +1,11 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-20　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆，全遊戲共用的物品檢視說明文字）＋ DIAL_Z00（418 筆，全遊戲共用的隨機遭遇/存讀檔 UI/主選單章節標題等文字，本次 session 完成）共 1,033 筆真實翻譯**，字庫從 82 字長到 **4072 字**，全部真倚天點陣、零 fallback。DIAL_Z00 build 對照本機原版 DDX（用 `bak rmf extract` 現場解出，非陳舊本地檔案）驗證 **0 mismatch/0 drift fallback**，測試套件 48/48 過。**本次 session**：翻完整個 `DIAL_Z00.json`（418 筆，最大宗是隨機遭遇/伏擊敘事模板，因為套用範本重複性高，加上主選單存讀檔／Options UI 提示文字、九章章節標題與任務目標、四位主角背景介紹段落），`glossary.json` 新增約 20 筆新專有名詞（含 Milamber／Kulgan／Crydee／Riftwar／the Great Rising 等背景設定詞彙），翻完後重新收字、重新跑測試套件、重新用 `ddx_translate.py build` 對照現場解出的乾淨原版 DDX 驗證 0 fallback，已部署到 `dist/test_v100_zh/`（`DIAL_Z00.DDX`／`ZH16.DAT`）**但尚未在 DOSBox-X 實機測試**——這次 session 全程 DOSBox-X 都沒有啟動，下一步建議優先做這件事。詳細教訓見 §8。
+**寫於：** 2026-08-21　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆）＋ DIAL_Z00（409／418 筆，9 筆章節標題暫留英文，見下）共 1,024 筆真實翻譯**，字庫 **4072 字**，全部真倚天點陣、零 fallback，實機驗證通過（含正式進入互動 3D 畫面）。**本次 session 翻完 `DIAL_Z00.json` 全部 418 筆後，實機測試時炸出兩個影響全域的真 bug，都已在 C 原始碼層級修正**：
+
+1. **字庫編號洗牌 bug（已修正為預設行為，不會再重演）**：`build_font.py --from-translations` 原本每次都把所有中文字的字庫編號重新洗牌一遍；這次因為 `DIAL_Z00.json` 檔名排序在 `DIAL_Z01`/`Z16`/`Z18` 之前，導致這幾個「這次根本沒改過」的已翻譯章節全部跟著錯位、螢幕全部變亂碼。已改成**穩定、只增不變（append-only）**的編號分配：`build_font.py` 現在預設會讀取既有的 `--output-map`（若存在）當作基準，只給新字元分配新編號，舊字元的編號永遠不變──這樣以後任何時候擴充字庫，都不會再讓已經 build 好的舊 DDX 檔案報廢。細節見 §8.1。
+2. **`TEXTWRAP.C` 真的 infinite loop（已修正並重新編譯進 `KRONDOR.EXE`）**：`textwrap_draw_aligned()` 用來計算「這個對話框裝得下幾行」的迴圈，用 `unsigned short` 型別的 `g_wTextWrapLinesRemaining` 做減法，沒有上界檢查；一旦超過應有範圍，C 的無號數提升規則會讓減法結果從負數變成一個巨大正數，導致迴圈條件永遠成立、遊戲整個卡死（黑畫面、無法操作，但 DOSBox-X 進程本身沒當掉）。這個 bug 原本潛伏著沒被發現，因為原文英文內容從來沒觸發過這個邊界；**是這次翻譯章節標題文字（`DIAL_Z00` 的 `#291`~`#299`，node_id 294~302）第一次讓中文內容跑進這條路徑才炸出來**。已在 `bak/SRC/UI/TEXTWRAP.C` 修正（加一個上界檢查）並重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。細節見 §8.2。
+
+**已知未解問題**：即使修好上述兩個 bug，**九筆章節標題／任務目標文字（`DIAL_Z00.DDX#291`~`#299`）翻成中文後，在這個特定的「章節橫幅」UI（一個由 opcode 覆寫過版位的窄小對話框）裡，仍然會讓遊戲卡死**，原因還沒完全查清楚（純 ASCII 短文字在同一個版位下沒事，中文——即使是極短的中文——就會卡住；已排除是文字長度換行溢出的問題）。這次先把這 9 筆暫時還原成英文（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `notes` 欄位有記錄），讓遊戲能正常進行，其餘 409 筆全部正常運作。**下一個 session 如果要繼續查這個問題，診斷過程與已排除的假說都詳細記錄在 §8.3，不要重新從頭摸索。**
 
 這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
 
@@ -96,7 +101,7 @@
 
 ## 5. 建議下一步（挑一個開始）
 
-1. **繼續翻譯其他章節**：`DIAL_Z01`＋`DIAL_Z16`（第一章開場，251 筆）＋`DIAL_Z18`（全遊戲共用物品說明，364 筆）＋`DIAL_Z00`（全遊戲共用隨機遭遇/UI/章節標題，418 筆，本次 session 完成，見 §8）已經全部翻完，共 1,033 筆。其餘 29 個 DDX 章節檔（`DIAL_Z02`～`DIAL_Z17`、`DIAL_Z19`～`DIAL_Z31`、`TEST`）都已經 `scaffold` 好骨架、躺在 `localization/translated/` 裡等著填（總量 5,514 筆，已扣掉本次翻完的 418 筆）。**強烈建議先做的事**：下一個 session 一開始就先啟動 DOSBox-X，實機驗證這次 DIAL_Z00 的 418 筆翻譯（這次 session 完全沒機會實機測試，見 §8），確認沒問題後才繼續翻下一個章節檔，不要讓沒驗證過的翻譯批次越疊越多。可以挑接下來玩家會碰到的章節繼續（但要注意：§5.2 已經證實 `DIAL_Zxx.DDX` 的編號**不對應故事章節**，無法單靠檔名判斷「這是第幾章的內容」，需要用其他方式判斷優先順序，例如照 node_id 的遊戲內觸發順序，或乾脆按檔案大小/內容概覽挑）。翻譯專有名詞密集的內容時，切記先查 `glossary.json`，翻完後也要記得跑一次關鍵字掃描確認沒有憑印象翻出跟既有譯名不一致的版本（見 §5.0 的教訓）。
+1. **繼續翻譯其他章節**：`DIAL_Z01`＋`DIAL_Z16`（第一章開場，251 筆）＋`DIAL_Z18`（全遊戲共用物品說明，364 筆）＋`DIAL_Z00`（全遊戲共用隨機遭遇/UI/章節標題，409／418 筆，9 筆章節標題暫留英文，本次 session 完成並實機驗證通過，見 §8）已經全部翻完，共 1,024 筆。其餘 29 個 DDX 章節檔（`DIAL_Z02`～`DIAL_Z17`、`DIAL_Z19`～`DIAL_Z31`、`TEST`）都已經 `scaffold` 好骨架、躺在 `localization/translated/` 裡等著填（總量 5,514 筆，已扣掉本次翻完的 418 筆）。**下個 session 開始翻新章節前，務必先讀過 §8.1／§8.2 這兩個修過的真 bug**（字庫編號穩定性、`TEXTWRAP.C` 無號數下溢），確認自己不會重蹈覆轍；如果有興趣，也可以先挑戰 §8.3 還沒解決的章節橫幅卡死問題，把 `#291`~`#299` 這 9 筆補完。繼續翻譯新章節時，記得每次翻完一批都要**實機測試過再收工**，不要只靠結構驗證（token round-trip／build fallback 計數）就當作完成——這次 session 就是活生生的教訓：結構驗證 100% 過關，實機還是炸出兩個真 bug。可以挑接下來玩家會碰到的章節繼續（但要注意：§5.2 已經證實 `DIAL_Zxx.DDX` 的編號**不對應故事章節**，無法單靠檔名判斷「這是第幾章的內容」，需要用其他方式判斷優先順序，例如照 node_id 的遊戲內觸發順序，或乾脆按檔案大小/內容概覽挑）。翻譯專有名詞密集的內容時，切記先查 `glossary.json`，翻完後也要記得跑一次關鍵字掃描確認沒有憑印象翻出跟既有譯名不一致的版本（見 §5.0 的教訓）。
 2. ~~盤點其他文字介面~~ **已完成**（見 §6.1，`docs/research/text-surface-inventory.md`）；已挑了優先度最高的 `g_abStatNames` 開始做（見 §6.2）。接下來可以挑：§5 剩餘的硬編碼字串（`INVENTOR.C`／`INVINSP.C`／`TOWNSCN.C`／`CACTOR.C`）——不需要新工具，跟 `g_abStatNames` 一樣直接改原始碼；或是 §4／§4a／§4b 的 MenuPage/`KEYWORD.DAT`/`fmap_twn.dat` 資源家族——需要先開發通用 `.dat` parser/packer，工程量較大。（`font_glyph_metrics` 對「字串結尾孤立前導位元組」的處理缺口仍未評估，BOK 之外目前還沒撞到這個情境。）
 3. **翻譯品質校對**：§5.2 的 251 筆翻譯是這次一口氣翻完的，語氣/用詞一致性有靠 `localization/glossary/glossary.json` 把關，但畢竟沒有第二個人核對過，建議找懂《裂谷之戰》原作或至少通順中文的人抽查一輪。
 
@@ -270,11 +275,55 @@ python tools/font/build_font.py --from-translations localization/translated \
 
 **`glossary.json` 這次新增**（約 20 筆）：Crenard（傭兵）、Guild of Death（死亡公會，跟既有 Nighthawks/Guild of Assassins 是不同的公會）、Ruthia（幸運女神）、Guiswa（獵神）、**Milamber**（帕格的圖蘭尼法師名，這次才第一次出現在已翻譯內容裡）、Kulgan（帕格的啟蒙師父）、Crydee（帕格的故鄉）、Great One(s)（圖蘭尼「至尊法師」頭銜）、William（帕格之子）、the Upright Man（克朗多盜賊公會首領「正直人」，是詹姆士的生父）、Brak Nurr（礦坑巨獸）、bulldrake（牛蜥，常見小型龍族怪物）、**Riftwar**（裂界之戰，跟遊戲本身的「大崛起之戰」是兩場不同戰爭，先前的翻譯內容裡都還沒正式收錄這個詞，是這次才發現的缺漏）、the Great Rising（大崛起之戰，正式收錄）、Armengar、Land's End、Ardanien（戈拉斯的氏族名）、Green Heart（莫瑞德人家園森林）、Great Northern Mountains、Beleforte（歐文的家族姓氏）、Duke of Euper、Ran（城市）。**下次翻到背景設定或人物簡介類文字時，先查這批新詞，不要重新音譯。**
 
-**驗收**：418 筆全數翻完（`ddx_translate.py status` 顯示 418/418 `translated`），用 `bak rmf extract` 從 `krondor.rmf` 現場解出乾淨的 `DIAL_Z00.DDX` 原始檔（沒有信任本機任何舊檔案，遵守 §5.1 教訓），`ddx_translate.py build` 對照驗證 **0 筆 token-mismatch fallback、0 筆 source-drift fallback**。翻完後跑過一次關鍵字掃描確認沒有已知譯名的錯誤變體殘留，也掃過一次確認除了 `#9`（故意保留原文的莫瑞德語擬語言台詞）之外沒有任何意外殘留的英文字母。字庫用 `build_font.py --from-translations` 重新收字，從 2198 字長到 **4072 字**；重新跑過全部 8 個測試模組（48 個測試）全過。已把 `DIAL_Z00.DDX` 跟新字庫 `ZH16.DAT` 複製進 `dist/test_v100_zh/`，**但這次 session 從頭到尾都沒有啟動 DOSBox-X**（連 MCP debugger 都確認過連不上——`ping` 正常但 `get_debug_status` 回報 `DOSBOK_NOT_CONNECTED`，因為 DOSBox-X 程式本身沒有在跑），所以這批翻譯**完全沒有經過實機驗證**，只驗證過結構層面（token round-trip、build fallback 計數）。**下一個 session 的第一件事，應該是啟動 DOSBox-X、實際玩過幾場隨機遭遇戰鬥、翻翻主選單跟開新遊戲的角色簡介畫面，肉眼確認這 418 筆的排版跟字距沒問題**——尤其這批內容量體是先前單次 session 最大的一批（4072 字字庫是目前最大值，比 §5.0 踩過 EMS 記憶體瓶頸的 2198 字幾乎翻倍，雖然 §5.0 的修法理論上空間還很充裕，但沒實機測過還是要小心）。
+**驗收**：418 筆全數翻完，`ddx_translate.py build` 對照 `bak rmf extract` 現場解出的乾淨原始檔驗證 **0 筆 token-mismatch fallback、0 筆 source-drift fallback**（結構層面完全正確）。字庫用 `build_font.py --from-translations` 重新收字，從 2198 字長到 **4072 字**。**部署後第一次實機測試就炸出了兩個影響全域的真 bug（§8.1、§8.2），另外還有一個目前沒解決、已知會卡死遊戲的問題（§8.3，這次繞過了但沒修好）**——這次 session 大部分時間都花在抓這兩個 bug 跟隔離第三個問題，過程與教訓詳細記錄在下面三節，下一個 session 如果要繼續深挖 §8.3，或未來又遇到類似「明明結構驗證都過、實機卻卡死」的狀況，務必先看這幾節，不要重新從頭排查。
 
 另外這次順手發現：其餘 30 個待翻章節檔中，`DIAL_Z18` 之後真正翻完的是 `DIAL_Z00`，代表 §5.2 提到的「檔名不對應章節」問題持續成立——`DIAL_Z00` 雖然編號最前，內容卻是全遊戲共用的隨機遭遇模板，不是開場章節劇情。
+
+## 8.1 真 bug：字庫編號沒有穩定性，新增一個排序較前的翻譯檔會讓所有舊 DDX 變亂碼
+
+`DIAL_Z00.json` 翻完後跑 `build_font.py --from-translations` 重新收字，**部署後發現 `DIAL_Z01`／`DIAL_Z16`／`DIAL_Z18`（這次完全沒有改動的既有翻譯）在畫面上全部變成亂碼**，使用者截圖抓到的第一個異狀就是這個。
+
+**根因**：`glyphs_from_translations()` 用 `sorted(translated_dir.glob("*.json"))`（依檔名字母序）掃描 `localization/translated/*.json`，`build_zh_font()` 再依掃描到字元的**先後順序**依序分配字庫編號（`char_to_id`）。在這次 session 之前，`DIAL_Z00.json` 全部是 `status: untranslated`，完全沒有貢獻任何字元，所以 `DIAL_Z01.json` 的字元最先被掃到、拿到最低的編號區段。這次把 `DIAL_Z00.json` 全部翻完後，因為檔名排序在 `DIAL_Z01` 之前，它的字元變成**最先**被掃到、搶走了原本屬於 `DIAL_Z01`/`Z16`/`Z18`/`UI_HARDCODED` 字元的低編號——`ZH16.DAT`（字庫點陣圖）用新編號重新產生了，但**那幾個既有的 DDX 檔案還是用舊編號 encode 的、完全沒有重新 build**，於是同一個編號現在指向了完全不同的字，滿螢幕亂碼。
+
+**修法（已改成永久預設行為，不是一次性補丁）**：`tools/font/build_font.py` 的 `build_zh_font()` 新增 `base_mapping` 參數；`main()` 預設會讀取既有的 `--output-map`（若已存在）當作基準，把裡面每個字元的編號**原封不動保留**，只給「這次新出現的字元」依序分配編號、接在舊字庫最大編號之後。驗證方式：用 `git show HEAD~1:...zh_mapping.json` 拿出這次改動前、跟目前部署的 `DIAL_Z01`/`Z16`/`Z18` 一致的舊 mapping 當基準，重新跑 append 模式，逐一比對舊 mapping 裡全部 2200 個字元的編號，**0 筆變動**，新字庫變成 4072 字（多出的 377 字全部接在後面）。新增 `--fresh` 旗標保留「真的要從零重算」的退路（會在說明文字裡明講這樣做很危險），但預設一律安全。**這個修正是永久性的，以後任何時候擴充字庫都不會再重演這個 bug**，不用每次都手動注意檔名排序。
+
+## 8.2 真 bug：`TEXTWRAP.C` 一個潛伏的無號數下溢 infinite loop，被中文文字第一次踩中
+
+修好字庫編號問題、實機重新測試後，遊戲會在「看完開場擄劫戰的對話、正式切換到互動 3D 畫面」的那一刻卡死——黑畫面、鍵盘滑鼠都沒反應，但 DOSBox-X 進程本身沒當掉（工作管理員看 `Responding: True`）。這個卡死點無論是新遊戲開場、還是讀取存檔進度，只要是「正式進入遊戲」都會發生。
+
+**排查過程**（很長，記錄下來是為了下次遇到類似「結構驗證都過、實機卻卡死」的情況時，知道怎麼有效率地二分排查，而不是靠猜）：
+1. 先懷疑是不是 §5.0 那次 EMS 記憶體瓶頸重演（字庫又變大了，4072 字比當時的 2198 字幾乎翻倍）。做了一個對照組：新字庫（4072 字）＋**原始英文** `DIAL_Z00.DDX`，結果順利進入 3D 畫面——證明**不是字庫大小/記憶體的問題**。
+2. 改用二分法排查：寫了一個小工具（`scratchpad/apply_z00.py`，本 session 用完即丟，沒進 repo）反覆把 `DIAL_Z00.json` 一部分筆數還原成英文、一部分保留中文，逐次縮小範圍，每次都要完整重跑一次「主選單 → 開新遊戲 → 走過場書 → 對話 → 切換 3D 畫面」的操作序列（用 DOSBox-X AI Debugger MCP 的 `key_tap`／`capture_frame`，全程無滑鼠，靠固定的按鍵序列可靠重現）。十輪二分後鎖定到單一筆：**`DIAL_Z00.DDX#291`（node_id 294，「第一章：Into a Dark Night」章節標題／任務目標橫幅）**。
+3. 派 agent 讀 `bak/SRC/DIALOG/DIALOG.C`／`bak/SRC/UI/TEXTWRAP.C` 追根因，同時自己動手驗證。找到：`gmain_start_dispatch()`（`GMAIN.C:178`）在切換到每一章的那一刻，會直接呼叫 `dialog_play_record(chapter + 0x125, 0)`（第一章 = node 294）播放這個章節橫幅，用的是跟一般對話框相同的 `dialog_render_text_with_tokens()` → `textwrap_draw_aligned()` 路徑，但**這筆記錄的 opcode（`wOp=6`）會覆寫掉這個對話框原本的版位（位置/寬高），換成一個窄很多的自訂尺寸**——這是本專案第一次有中文內容跑過這條「非預設版位」的路徑。
+4. 讀 `TEXTWRAP.C` 的 `textwrap_draw_aligned()`：裡面有一段算「這個版位裝得下幾行、超出的幾行要捨棄」的迴圈，用全域變數 `g_wTextWrapLinesRemaining`（宣告成 `unsigned short`）當迴圈變數做減法：
+   ```c
+   for (g_wTextWrapLinesRemaining = 0;
+        max_height < (int)((line_height + line_spacing) * ((count - fl) - g_wTextWrapLinesRemaining) - line_spacing);
+        g_wTextWrapLinesRemaining++) { }
+   ```
+   這裡完全**沒有上界檢查**。當中文內容觸發 `g_bMixedZhMode` 把 `line_height` 強制拉高到 16px（比這個窄版位原本預期的字體高很多）、導致可用高度不夠裝下哪怕一行時，`g_wTextWrapLinesRemaining` 會一路遞增超過 `count - fl`。C 的無號數提升規則（`unsigned short` 在 16-bit int 平台上，因為 `int` 裝不下它的完整值域，會被提升成 `unsigned int` 而非 `int`）讓 `(count - fl) - g_wTextWrapLinesRemaining` 這個減法一旦被減數超過被減數，結果不會變成負數、而是**環繞成一個巨大正數**（例如 `2 - 3` 在無號 16-bit 下變成 `65535`），導致迴圈條件永遠成立、卡死——這正是黑畫面＋無回應、但進程沒當的行為模式。這個 bug 原本就潛伏在原始（英文）程式碼裡，只是英文內容從來沒有讓 `line_height` 超出版位預期過，直到這次中文橫幅才第一次踩中。
+5. **修法**：在迴圈條件加一個上界檢查，防止 `g_wTextWrapLinesRemaining` 超過 `count - fl`：
+   ```c
+   for (g_wTextWrapLinesRemaining = 0;
+        g_wTextWrapLinesRemaining < (unsigned short)(count - fl) &&
+        max_height < (int)((line_height + line_spacing) * ((count - fl) - g_wTextWrapLinesRemaining) - line_spacing);
+        g_wTextWrapLinesRemaining++) { }
+   ```
+   改在 `upstream/betrayal-at-krondor` commit `47d0a32`（`bak/SRC/UI/TEXTWRAP.C`），用 WSL2 Borland 工具鏈重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 BYTE-IDENTICAL。**用最小重現案例驗證過修法有效**：把 `#291` 的內容換成純 ASCII `"AAA\x00"`（單行、無任何中文）在修法前會卡死，修法後順利進入 3D 畫面。
+
+## 8.3 已知未解問題：即使修好 §8.2，中文內容在這個特定「章節橫幅」版位裡還是會卡死
+
+修好 §8.2 後，原本期待 `#291`~`#299` 這 9 筆章節標題可以直接用完整中文翻譯，但**實測發現只要內容含有中文字（哪怕只有 4~5 個字、雙行），這個特定版位還是會卡死**；反而是純 ASCII 的兩行文字（例如 `"A\nB\x00"`）不會卡死。已經排除的假說：
+- ~~字庫太大／EMS 記憶體不足~~——§8.2 步驟 1 已排除。
+- ~~`\xf1`／`\xf0` 樣式控制位元組的處理方式~~——測過完全不含任何樣式位元組、純中文字的版本，一樣卡死。
+- ~~文字太長、換行溢出成 3 行以上~~——測過極短的中文（4+5 個字，遠低於任何合理的寬度上限），一樣卡死；而更長的純 ASCII 兩行反而沒事。
+- ~~§8.2 的無號數下溢 bug 本身~~——修法對純 ASCII 案例證實有效，但對短中文案例無效，代表**中文內容在這個版位裡踩到的是另一個、目前還沒定位到的問題**，不是同一個 bug 的殘留。
+
+用剩的時間排查到這裡沒有再繼續深入（`pause_execution` 抓到的 CS:EIP 每次都停在同一個 VGA 垂直回掃等待迴圈 `55FA:134A`~`134D`，這是遊戲畫面更新時極常被命中的熱路徑，光憑這個訊號無法判斷是不是真正卡住的位置，需要更精準的中斷點或反組譯比對才能繼續往下查）。**這次的處理方式：把這 9 筆（`DIAL_Z00.DDX#291`~`#299`）暫時還原成英文**（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `status` 改回 `untranslated`、`notes` 欄位記錄了原因），讓遊戲能正常遊玩，其餘 409 筆翻譯內容完全不受影響、實機驗證正常。
+
+**下一個 session 如果要繼續查**：可以從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異。也可以考慮參考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型），也許能繞開整個問題，不用再深究這個特定的排版計算 bug。
 
 ## 7. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。`origin` 已設定指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
-- `upstream/betrayal-at-krondor`：本地領先 origin 13 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`，加上本次 session 新增的 `c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+- `upstream/betrayal-at-krondor`：本地領先 origin 14 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`、`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，加上本次 session 新增的 `47d0a32`——§8.2 的 `TEXTWRAP.C` infinite loop 修正）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。

@@ -374,11 +374,35 @@ def build_eten_ascii_block() -> bytes:
     return bytes(out)
 
 
-def build_zh_font(glyphs: list[str]) -> tuple[bytes, dict[str, Any]]:
-    """Builds the ZH16.DAT binary and corresponding JSON mapping."""
+def build_zh_font(glyphs: list[str], base_mapping: dict[str, Any] | None = None) -> tuple[bytes, dict[str, Any]]:
+    """Builds the ZH16.DAT binary and corresponding JSON mapping.
+
+    If `base_mapping` (a previously-generated mapping dict, e.g. loaded from
+    an existing zh_mapping.json) is given, every character it already
+    assigned an ID to keeps that *exact* ID -- new characters are appended
+    after the existing maximum. This makes glyph-ID assignment stable across
+    rebuilds: any DDX file already encoded against an older mapping stays
+    valid without needing to be rebuilt, as long as the font is always grown
+    from its own previous mapping rather than recomputed from scratch. Never
+    skip this when the glyph set is derived from scanning multiple
+    translation files (`--from-translations`) -- which file contributes which
+    character first depends on filename sort order, so which characters get
+    the low IDs can change as soon as any earlier-sorting file gains newly
+    translated content, silently invalidating every already-built DDX that
+    used those IDs (this happened once already: translating DIAL_Z00.json,
+    which sorts before DIAL_Z01/16/18, reassigned all their glyph IDs and
+    turned already-deployed DDX files -- unrelated to the new content --
+    into garbage on screen).
+    """
     char_to_id: dict[str, int] = {}
     id_to_char: dict[int, str] = {}
     next_gid = 0
+    if base_mapping:
+        for ch, gid in base_mapping.get("char_to_id", {}).items():
+            char_to_id[ch] = gid
+            id_to_char[gid] = ch
+        if id_to_char:
+            next_gid = max(id_to_char) + 1
     for g in glyphs:
         if g not in char_to_id:
             # Never assign a glyph ID whose trail byte would land in
@@ -463,13 +487,26 @@ def main() -> None:
     parser.add_argument("--from-translations", type=Path, default=None,
                          help="Directory of localization/translated/*.json files to derive the glyph set from "
                               "(default: the built-in POC_GLYPHS demo list).")
+    parser.add_argument("--fresh", action="store_true",
+                         help="Ignore any existing --output-map and reassign every glyph ID from scratch. "
+                              "DANGEROUS: invalidates every already-built DDX file's glyph IDs -- they would "
+                              "all need to be rebuilt against the new mapping in lockstep, or they'll render "
+                              "garbage. Only use this deliberately (e.g. a clean first build); the default "
+                              "behavior instead preserves every existing ID and only appends new characters.")
     args = parser.parse_args()
 
     glyphs = glyphs_from_translations(args.from_translations) if args.from_translations else list(POC_GLYPHS)
-    font_bin, meta = build_zh_font(glyphs)
+
+    base_mapping = None
+    if not args.fresh and args.output_map.exists():
+        base_mapping = json.loads(args.output_map.read_text(encoding="utf-8"))
+
+    font_bin, meta = build_zh_font(glyphs, base_mapping=base_mapping)
     args.output_font.write_bytes(font_bin)
     args.output_map.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"Generated {meta['glyph_count']} glyphs -> {args.output_font} ({len(font_bin)} bytes), {args.output_map}")
+    added = meta["glyph_count"] - (base_mapping["glyph_count"] if base_mapping else 0)
+    print(f"Generated {meta['glyph_count']} glyphs ({added:+d} vs. existing mapping) -> "
+          f"{args.output_font} ({len(font_bin)} bytes), {args.output_map}")
 
 
 if __name__ == "__main__":
