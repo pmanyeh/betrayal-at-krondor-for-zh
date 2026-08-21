@@ -1,11 +1,12 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-21　**目前狀態：** Phase 5（穩健中文文字引擎）驗收清單已全部跑過；Phase 6（DDX 翻譯正式流程）pipeline 已建立，已完成 **DIAL_Z01（40 筆）＋ DIAL_Z16（211 筆）＋ DIAL_Z18（364 筆）＋ DIAL_Z00（409／418 筆，9 筆章節標題暫留英文，見下）共 1,024 筆真實翻譯**，字庫 **4072 字**，全部真倚天點陣、零 fallback，實機驗證通過（含正式進入互動 3D 畫面）。**本次 session 翻完 `DIAL_Z00.json` 全部 418 筆後，實機測試時炸出兩個影響全域的真 bug，都已在 C 原始碼層級修正**：
+**寫於：** 2026-08-21　**目前部署狀態：** `dist/test_v100_zh/DIAL_Z00.DDX` 目前是**完全未翻譯的原始英文版**（見下方第 3 點原因）；`localization/translated/DIAL_Z00.json` 裡 409/418 筆翻譯內容本身完好保留（`status: translated`），只是暫時沒有 build 進部署檔案。`DIAL_Z01`（40 筆）／`DIAL_Z16`（211 筆）／`DIAL_Z18`（364 筆）維持正常部署、實機驗證正常。字庫 **4072 字**，全部真倚天點陣、零 fallback。
+
+本次 session 翻完 `DIAL_Z00.json` 全部 418 筆、實機測試後，**一共炸出三個影響全域的真 bug，其中兩個已在 C 原始碼層級修好並重新編譯進 `KRONDOR.EXE`，第三個尚未解決、是目前 `DIAL_Z00` 完全沒部署的原因**：
 
 1. **字庫編號洗牌 bug（已修正為預設行為，不會再重演）**：`build_font.py --from-translations` 原本每次都把所有中文字的字庫編號重新洗牌一遍；這次因為 `DIAL_Z00.json` 檔名排序在 `DIAL_Z01`/`Z16`/`Z18` 之前，導致這幾個「這次根本沒改過」的已翻譯章節全部跟著錯位、螢幕全部變亂碼。已改成**穩定、只增不變（append-only）**的編號分配：`build_font.py` 現在預設會讀取既有的 `--output-map`（若存在）當作基準，只給新字元分配新編號，舊字元的編號永遠不變──這樣以後任何時候擴充字庫，都不會再讓已經 build 好的舊 DDX 檔案報廢。細節見 §8.1。
-2. **`TEXTWRAP.C` 真的 infinite loop（已修正並重新編譯進 `KRONDOR.EXE`）**：`textwrap_draw_aligned()` 用來計算「這個對話框裝得下幾行」的迴圈，用 `unsigned short` 型別的 `g_wTextWrapLinesRemaining` 做減法，沒有上界檢查；一旦超過應有範圍，C 的無號數提升規則會讓減法結果從負數變成一個巨大正數，導致迴圈條件永遠成立、遊戲整個卡死（黑畫面、無法操作，但 DOSBox-X 進程本身沒當掉）。這個 bug 原本潛伏著沒被發現，因為原文英文內容從來沒觸發過這個邊界；**是這次翻譯章節標題文字（`DIAL_Z00` 的 `#291`~`#299`，node_id 294~302）第一次讓中文內容跑進這條路徑才炸出來**。已在 `bak/SRC/UI/TEXTWRAP.C` 修正（加一個上界檢查）並重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。細節見 §8.2。
-
-**已知未解問題**：即使修好上述兩個 bug，**九筆章節標題／任務目標文字（`DIAL_Z00.DDX#291`~`#299`）翻成中文後，在這個特定的「章節橫幅」UI（一個由 opcode 覆寫過版位的窄小對話框）裡，仍然會讓遊戲卡死**，原因還沒完全查清楚（純 ASCII 短文字在同一個版位下沒事，中文——即使是極短的中文——就會卡住；已排除是文字長度換行溢出的問題）。這次先把這 9 筆暫時還原成英文（`localization/translated/DIAL_Z00.json` 裡這幾筆的 `notes` 欄位有記錄），讓遊戲能正常進行，其餘 409 筆全部正常運作。**下一個 session 如果要繼續查這個問題，診斷過程與已排除的假說都詳細記錄在 §8.3，不要重新從頭摸索。**
+2. **`TEXTWRAP.C` 真的 infinite loop（已修正並重新編譯進 `KRONDOR.EXE`）**：`textwrap_draw_aligned()` 用來計算「這個對話框裝得下幾行」的迴圈，用 `unsigned short` 型別的 `g_wTextWrapLinesRemaining` 做減法，沒有上界檢查；一旦超過應有範圍，C 的無號數提升規則會讓減法結果從負數變成一個巨大正數，導致迴圈條件永遠成立、遊戲整個卡死（黑畫面、無法操作，但 DOSBox-X 進程本身沒當掉）。這個 bug 原本潛伏著沒被發現，因為原文英文內容從來沒觸發過這個邊界；**是這次翻譯章節標題文字（`DIAL_Z00` 的 `#291`~`#299`，node_id 294~302）第一次讓中文內容跑進這條路徑才炸出來**。已在 `bak/SRC/UI/TEXTWRAP.C` 修正（加一個上界檢查）並重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。細節見 §8.2。**這 9 筆章節標題目前仍暫時還原成英文**（原因見 §8.3，跟這個 bug 修好與否無關，是另一個更難查的問題）。
+3. **⚠️ 尚未解決：撿屍體會讓遊戲直接閃退（`MEM:34 Heap Corrupt! Null pointer assignment`）**：開新遊戲、走完擄劫戰對話進入 3D 畫面後，點擊地上被幹掉的刺客屍體，本來應該顯示一段描述文字、接著進入戰利品/物品畫面，**結果遊戲直接閃退**，跟 DOS 記憶體管理員回報堆積（heap）已損毀。過程中順手發現並修好了另一個真的越界讀取 bug（`DIALOG.C` 的 `@N` 角色代稱展開邏輯），但那個修正**沒能解決這次閃退**，代表真正原因還是別的地方。這是本次 session 唯一沒解決的問題，細節、已排除的假說、下一步建議都在 §8.4，**目前為了保證遊戲能正常玩，`DIAL_Z00` 整個先退回原始英文部署，翻譯內容本身沒有遺失**。
 
 這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
 
@@ -355,9 +356,31 @@ do {
 2. 或者從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異——這次沒能算出 `pStyle->header[]` 的實際數值就是因為沒有斷點可以直接讀暫存器/記憶體，只能純推理。
 3. 或者乾脆参考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型，不強制 `g_bMixedZhMode` 把行高拉到 16px），也許能繞開整個問題的根源（`line_height` 被拉高導致的一連串效應），不用再深究這個特定的排版計算 bug 到底卡在哪一行——**這可能是投資報酬率最高的方向**，因為不需要先找到卡死的確切原因，只要讓中文在這個版位裡也維持跟原文差不多的行高，很可能就不會再觸發這整條有問題的路徑。
 
-**下一個 session 如果要繼續查**：可以從 `dialog_apply_style_state()`（`DIALOG.C` 裡處理 `wOp==6` 版位覆寫的那個函式，用 grep `"sub2->wOp == 6"` 找）開始，比對這個窄版位覆寫後的實際數值（`nA1`/`nA2`/`nA3`/`nA4` = `12`/`160`/`160`/`30`，但欄位對應到 `StyleState` struct 的哪個成員還沒確認），配合 `dialog_render_text_with_tokens()`（`DIALOG.C:564`）裡 `g_bMixedZhMode` 被設起來後受影響的所有分支，逐一比對「中文開啟 `g_bMixedZhMode`」跟「純 ASCII 不開啟」兩條路徑在這個窄版位下實際算出來的數值差異。也可以考慮參考 §7.2 已經建立的「小字級中文字型」機制（`font_draw_zh_glyph_small`／`ZHSTAT.DAT`）——如果這個章節橫幅版位本來就是設計給比 16×16 小的字體用，比照角色屬性面板的解法（改用 10×10 小字型），也許能繞開整個問題，不用再深究這個特定的排版計算 bug。
+## 8.4 尚未解決：撿屍體導致 Heap Corrupt 閃退
+
+**症狀**：開新遊戲，一路看完擄劫戰對話、進入互動 3D 畫面後，畫面上有一具被幹掉的刺客屍體。點擊這具屍體，本來應該顯示一段描述文字（`DIAL_Z00.DDX#365`，「Gorath looked for supplies...」／中文「@0搜尋著補給……」），接著進入戰利品／物品畫面。**用中文版 `DIAL_Z00.DDX` 時，遊戲會直接閃退**，畫面顯示：
+
+```
+A system error has occured.  Please write down the following data and contact Sierra Customer Support:
+MEM:34 (Heap Corrupt!)
+Null pointer assignment
+```
+
+這是遊戲自己的記憶體管理員在偵測到堆積（heap）內部結構被破壞時印出的錯誤，代表某處發生了越界寫入，而且偵測到的當下（撿屍體、切換到物品畫面）不一定就是實際寫壞記憶體的那一刻——經典的「破壞發生在早，偵測在晚」情況。
+
+**排查記錄（已用實機測試逐一驗證，不要重複測試）**：
+1. **不是字庫大小的問題**——用這次 session 之前的舊字庫（3695 字）配上目前的中文版 `DIAL_Z00.DDX`，**一樣閃退**；用原始英文版 `DIAL_Z00.DDX`（不管哪個字庫），完全正常，文字顯示、物品畫面都沒問題。
+2. **不是特定「撿屍體」相關的那幾筆翻譯**——把最直接相關的 4 筆（`#364`／`#365`／`#367`／`#368`，內容都是「檢查屍體」「翻找補給」之類）還原成英文，其餘 405 筆仍是中文，**還是一樣閃退**。代表觸發原因不是這幾筆本身的內容，可能是其餘 405 筆裡的某一筆（甚至可能是更早顯示過的其他章節的中文內容，只是損壞效應延後才被偵測到），也可能不是單一筆文字內容的問題。
+3. **過程中額外抓到並修好一個真的越界讀取 bug，但這個 bug 不是這次閃退的根因**：`DIALOG.C` 的 `dialog_render_text_with_tokens()` 在展開 `@0`／`@1` 這類角色代稱時，會讀取 `g_pMainScratchBuf[nScratchLen - 2]` 來判斷前一個字是不是英文的 `a`（用來決定要不要插入 `an` 的文法修正）；如果 `@0` 出現在字串最前面（例如 `"\t@0..."`，`\t` 之後緊接著就是 `@0`，這時 `nScratchLen` 只有 1），`nScratchLen - 2` 會變成 `-1`，讀到配置緩衝區起始位置**前面**的位元組——貨真價實的越界讀取，剛好完全符合 `#365`（`"\t@0搜尋著補給"`）的樣式，一度以為就是這次閃退的原因。已在 `upstream/betrayal-at-krondor` commit `4ecd59d` 修正（加 `nScratchLen >= 2` 的防呆檢查），`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。**但修好之後閃退依然發生**，代表這不是（或不是唯一）根因，只是一個順手抓到、值得留著的獨立修正。
+
+**目前處理方式**：`localization/translated/DIAL_Z00.json` 裡 409 筆翻譯內容**完全保留**（`status` 沒有改動），但**部署到 `dist/test_v100_zh/` 的 `DIAL_Z00.DDX` 暫時整個換回原始英文版**，直到抓到真正原因為止——已經花了不少輪二分法測試把範圍縮小到「4 筆明顯相關的以外，還有別的東西」，但每一輪都需要真人重新開新遊戲、走到屍體、點擊才能驗證，成本很高，這次先在此打住。
+
+**下一個 session 建議的做法**：
+1. **繼續二分法縮小範圍**：目前已知 405 筆裡有問題（或問題其實在別的章節，只是延遲發作），可以從 `localization/translated/DIAL_Z00.json` 挑一半還原成英文、重新 build、請使用者重新測試，比照這次的方法對半找，大概還要 3~4 輪就能鎖定到單一筆或一小群。
+2. **認真考慮「破壞發生得更早」的可能性**：這次只测試了「還原 DIAL_Z00 的某些筆」，還沒測過「如果連 `DIAL_Z16`（擄劫戰對話）都還原成英文，撿屍體會不會就正常了」——如果連 `DIAL_Z16` 都需要還原才會沒事，代表問題根本不在 `DIAL_Z00`，而是更早顯示的對話內容造成的延遲性堆積損毀，那整個排查方向都要重新來過。這個測試成本較低（因為 `DIAL_Z16` 只有 211 筆而非 405 筆），建議下次優先做。
+3. 如果想避免每輪都要真人操作，值得評估看看能不能請使用者**存一個「剛進入 3D 畫面、還沒撿屍體」的存檔**，之後每輪二分法就能直接讀檔測試、不用重新看一次過場對話，大幅降低每輪的操作成本。
 
 ## 7. Git 狀態
 
 - 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。`origin` 已設定指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
-- `upstream/betrayal-at-krondor`：本地領先 origin 14 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`、`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，加上本次 session 新增的 `47d0a32`——§8.2 的 `TEXTWRAP.C` infinite loop 修正）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+- `upstream/betrayal-at-krondor`：本地領先 origin 15 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`、`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，加上本次 session 新增的 `47d0a32`——§8.2 的 `TEXTWRAP.C` infinite loop 修正——與 `4ecd59d`——§8.4 過程中順手修好的 `DIALOG.C` `@N` 越界讀取，但注意這個修正沒解決 §8.4 的主要閃退問題）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
