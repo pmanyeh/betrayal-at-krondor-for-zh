@@ -10,8 +10,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "普蘭克之石\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -21,8 +21,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "肯廷拉什\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -32,8 +32,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "卡瓦爾堡\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -44,8 +44,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "萊頓．丁克\n「他再也無法厭惡自己的名字了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -56,8 +56,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "傑森．維丘\n「他總是唱走音。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -68,8 +68,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "納特．德拉爾斯\n「願死亡女神溫柔以待。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -80,8 +80,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "馬蒂．希普勒\n「人人敬愛。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -92,8 +92,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "珍妮．格雷\n「啊，願再嚐她那甜美的一吻。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -104,8 +104,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "林肯．奧伯凡特\n「他也長眠於此。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -116,8 +116,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "雪兒．波蘭斯\n「她熱愛跳舞。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -128,8 +128,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "柯瑞．波蘭斯\n「殉職於一場祝融之災。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -140,8 +140,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "戴蒙．博耶史密斯\n「他並不想離開。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -152,8 +152,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "凱爾．布魯寧\n「永遠是我們摯愛的兒子。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -164,8 +164,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t不見了！諸神在上，整座堡壘都不見了！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -176,8 +176,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t什麼不見了？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -188,8 +188,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t還記得我跟你說過，我有個叔叔住在這附近，是卡瓦爾堡的伯爵嗎？他整座堡壘都不見了！明明應該就在我們眼前的！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -200,8 +200,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t你確定不是自己忘了路怎麼走嗎？也許我們只是在哪裡轉錯了彎。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -212,8 +212,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t不，不，不。我很確定。這附近一定出了什麼大問題……或許我們該往北走，直接進卡瓦爾堡看看。至少在那裡能得到些答案……\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

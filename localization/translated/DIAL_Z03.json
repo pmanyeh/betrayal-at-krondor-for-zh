@@ -14,8 +14,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「這條路往西通向克朗多，」@4說。「不過我記得它往北也有一條岔路，穿過幽暗林。你們認為該走哪條路比較好？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -29,8 +29,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿越山道時，偶爾襲來的寒風凍得他們骨頭發疼，直到終於感受到王國南方沿海地帶特有的溫和暖風，才鬆了口氣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -43,8 +43,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉向北方。\n\t一連數日，他們都在濃霧中前行，濕氣浸透衣物，夜裡寒意刺骨。當山勢終於漸漸低緩，霧氣散去，他們發現自己已站在一片大森林的邊緣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -57,8 +57,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -68,8 +68,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "禁止進入！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -79,8 +79,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "斯魯普\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -90,8 +90,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "羅姆尼\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -101,8 +101,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "路標上的名字早已風化難辨。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -112,8 +112,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "萊頓\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -126,8 +126,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ó馬拉克的ó巨龍－\n往南轉。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -137,8 +137,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "北方小徑\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -148,8 +148,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "食宿\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -159,8 +159,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "黑沼鎮\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -170,8 +170,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "露西亞神殿\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -181,8 +181,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "馬拉克十字鎮\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -193,8 +193,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "萊頓．丁克\n「他再也無法厭惡自己的名字了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -205,8 +205,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "潘妮．梅\n「又或許，她不會。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -217,8 +217,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "凱文．帕坦\n「太過投入他的工作了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -229,8 +229,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "杜爾希瑪．達根斯\n「自母親的子宮，到大地的墳塋。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -241,8 +241,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "凡妮絲．馬林\n「生前無法安息……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -253,8 +253,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "藍道爾．戴伊\n「他的死，豐富了我們的人生。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -265,8 +265,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "丹尼爾．維勒坎普\n「可憐的丹尼啊，中了個壞咒語。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -277,8 +277,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "韋蘭．M．瓦瑟曼\n「厭惡世間萬物。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -289,8 +289,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "凱夏\n「旅人的朋友。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -301,8 +301,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "梅森．摩爾坎普\n「染上了惡疾。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -313,8 +313,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "賈利絲．瑞根斯\n「母親。妻子。愛人。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -325,8 +325,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "烏蘭德拉．瑪加德\n「先失去了心智，才失去了生命。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -337,8 +337,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "露薇絲．香佩提耶\n「鍾愛她的國王們。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -349,8 +349,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "沃倫．岡瑟\n「死而無憾。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -361,8 +361,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "J．R．哈爾胡伯\n「死於連坐之罪。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -373,8 +373,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t既然我們已經北上到這裡了，戈拉斯，我想再往上走一趟，去卡瓦爾堡看看。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -385,8 +385,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t亞魯莎王子似乎認為，找到這位帕格十分重要……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -398,8 +398,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這ó確實重要，但我們現在離那裡不遠，我需要確認烏格妮和我叔叔是否平安。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -410,8 +410,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們怎麼會不平安？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -422,8 +422,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我們被那些深入王國南至卡瓦爾堡的莫瑞德人擄走。既然他們能擄走我們，我又怎能確定他們沒有闖入卡瓦爾堡，把那裡燒成一片焦土？也許是納馮．杜桑多那些夜鷹會的朋友，不滿他們的小圈子被拆散，於是拿當地伯爵出氣。自從我們從薩薩戈斯逃出來，我就一直在想這件事，這是我非知道不可的事……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -435,8 +435,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我不想顯得對你親人的命運漠不關心，但我認為，眼下有更重要的事該優先處理。如果王國落入迪勒肯及其黨羽之手，我可以ó向你保證，你的親人只會死得更早。歐文，無論你往哪裡走，我都會跟隨，但我認為你該用理智思考，而非只憑感情用事……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -451,8 +451,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t那名侍僧停了下來。\n\t「我……不太明白，」他開口道。「馬拉克十字鎮周圍出現了異常干擾，導致無法傳送過去。很抱歉，但從ó這一端，ó我實在無能為力。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -467,8 +467,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4示意需要協助。\n\t「很遺憾，在我們與潘塔西亞人的問題解決之前，」一名侍僧回應道，「我們將無法提供ó任何服務，除非是攸關性命的治療。院長能為您進一步說明……」\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

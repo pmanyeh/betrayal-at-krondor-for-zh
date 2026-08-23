@@ -10,8 +10,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "世界之齒紮營地\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -21,8 +21,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "艾爾德角\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -32,8 +32,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "南往幽暗林\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -45,8 +45,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "西北往高堡\n東南往幽暗林\n東北往北衛城\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -56,8 +56,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "高堡\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -67,8 +67,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "沃夫朗\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -79,8 +79,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "康絲坦絲．弗羅邁爾\n「生了十二個孩子，第十三個要了她的命。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -91,8 +91,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "馬內克．伊克蘭\n「他的部隊在北境全軍覆沒。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -103,8 +103,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "維吉妮亞．伊克蘭\n「她的丈夫再也沒有回家。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -115,8 +115,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "布拉福德．伊克蘭\n「他讓父母引以為傲。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -127,8 +127,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "路克．米德基夫\n「諸神不久便將知曉他的名字。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -139,8 +139,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "洛伊德．布倫尼曼\n「他總是心不在焉。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -151,8 +151,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "露伊．畢爾\n「穿著她最愛的紅裙離世。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -163,8 +163,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t「我們在浪費時間。這麼南邊發生的任何事，都不會對北衛城的戰局有什麼決定性影響。我們得回頭了……」\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

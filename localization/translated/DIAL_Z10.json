@@ -14,8 +14,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t洞口透進了日光。\n\t「這應該是通回大路的路，」@0說。「你覺得我們該離開了嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -28,8 +28,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光引領著他們。\n\t沿著麥克莫丹卡達爾向上通往日光的豎坑而行，一行人終於來到一條通向東方、連接御道的道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -39,8 +39,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "「膽敢闖入此地者，死亡將迅速降臨。趁早離開，否則你所受的苦，將是眠於此碑之下者的千倍。」\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

@@ -14,8 +14,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「這條路往西通向洛瑞爾和拉姆特，」@4說。「不過我記得它往東也有一條岔路，穿過幽暗林。你們認為該走哪條路比較好？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -28,8 +28,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t數日過去。\n\t他們不喜隘道帶來的暴露感，於是趁夜疾行，白天則躲在岩壁下歇息，豎耳戒備刺客的腳步聲。終於，一行人腳痠腿疼、風塵僕僕，來到了鷹谷鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -42,8 +42,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉向東方。\n\t一連數日，他們都在濃霧中前行，濕氣浸透衣物，夜裡寒意刺骨。當山勢終於漸漸低緩，霧氣散去，他們發現自己已站在一片大森林的邊緣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -56,8 +56,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -71,8 +71,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「這條路往東通向賽瑟儂，」@4說。「不過我記得它往北也有一條岔路，穿過幽暗林。你們認為該走哪條路比較好？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -85,8 +85,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t地勢漸趨平坦。\n\t丘陵與林木逐漸稀疏，眼前是王國中部一望無際的草原……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -99,8 +99,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉向北方。\n\t一連數日，他們都在濃霧中前行，白天濕氣浸透衣物，夜裡寒意刺骨。當山勢終於漸漸低緩，霧氣散去，他們發現自己已站在一片大森林的邊緣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -113,8 +113,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -124,8 +124,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "坦紐爾\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -135,8 +135,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "艾格利\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -146,8 +146,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "北往幽暗林\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -157,8 +157,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "東往艾格利\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -168,8 +168,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "尋道崖\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -179,8 +179,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "南往克朗多\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -191,8 +191,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "德爾山．普魯伊特\n「他的死，讓一切手段都顯得正當。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -203,8 +203,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "巴洛．弗林\n「願死亡女神善待他。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -215,8 +215,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "史黛爾．拉林\n「她死在愛人的懷中。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -227,8 +227,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "無名氏\n「一位可愛的姑娘，被人發現於路旁。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -239,8 +239,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "艾爾岡．特倫特\n「一心想當王子。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -251,8 +251,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "梅爾芭．肯恩\n「白髮人送黑髮人。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -263,8 +263,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "提摩西．波耶\n「凡事皆爭第一。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -275,8 +275,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "伯夏．安柏頓\n「先失去了妻子，後了結了自己。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -287,8 +287,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "奧莉芙．安柏頓\n「安息吧，我的摯愛。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -299,8 +299,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "帕克．畢多\n「自掘墳墓。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -311,8 +311,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "警告！\n這塊墓碑下的惡魔，只是被泥土困住，並非真正死去。切勿靠近！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -323,8 +323,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "奈布倫．杭特\n「我們摯愛的父親。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -335,8 +335,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "湯瑪斯．布魯克\n「與鄰居爭鬥，敗北。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -347,8 +347,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "提摩西．韋恩特\n「終於不再受苦。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -359,8 +359,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "艾拉娜．羅伯茲\n「安睡吧，甜心。甜美的長眠。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -371,8 +371,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "托多爾．米波\n「被鎮民處以絞刑。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -383,8 +383,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "哈特菲爾德．塔克\n「喝下了自己調製的毒藥。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -395,8 +395,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "拉斯頓．杜威\n「我早就說過我生病了！」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -407,8 +407,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "安東尼．蘭金\n「從他的高頭大馬上摔了下來。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -419,8 +419,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "萊恩．溫加德\n「賭骰輸了，發了脾氣，賠上了性命。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -431,8 +431,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "貝勒．達拉泰爾\n「他每天都喝牛奶。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -445,8 +445,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t戈拉斯停下腳步。\n\t他面露慍色，轉向歐文。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -463,8 +463,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我們的路似乎是徒勞無功。我們ñ需要ñ找到ñ馬克羅斯ñ之書ð……或許找個抄寫員，會是我們最好的情報來源。ñ你對米德凱米亞南部的抄寫員了解多少？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -475,8 +475,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t薩斯地窖裡自然滿是抄寫員。馬克修士能在那裡幫上忙。另外，我聽說馬拉克十字鎮的葛瑞夫斯院長，在這方面也是頗有名望。\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

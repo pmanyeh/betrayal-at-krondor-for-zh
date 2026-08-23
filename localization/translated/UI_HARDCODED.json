@@ -135,6 +135,258 @@
       "translation": "正常",
       "status": "translated",
       "notes": "Shown in place of the status-effect list when the character has no active conditions."
+    },
+    {
+      "id": "DIALOG.C#dialog_cmbt_name_assign_kind:shopkeeper",
+      "source": "shopkeeper",
+      "translation": "店主",
+      "status": "translated",
+      "notes": "Default @N speaker placeholder for a generic shop NPC (g_speaker_names[6][32], plenty of headroom); matches the established DIAL_Z18 rendering of \"The shopkeeper...\" -> \"店主...\"."
+    },
+    {
+      "id": "DIALOG.C#dialog_cmbt_name_assign_kind:tavernkeeper",
+      "source": "tavernkeeper",
+      "translation": "酒館老闆",
+      "status": "translated",
+      "notes": "Default @N speaker placeholder used instead of shopkeeper during a rest/tavern encounter; matches the established DIAL_Z00 rendering of \"the tavern keeper\" -> \"酒館老闆\"."
+    },
+    {
+      "id": "GSTATE.C#gstate_format_money:gold",
+      "source": "gold",
+      "translation": "金幣",
+      "status": "translated",
+      "notes": "Currency unit word, shared across gstate_format_money's 3 display modes and INVENTOR.C's own inline copy; matches OBJINFO.DAT#53 \"Gold Sovereigns\" -> 金幣. The English source used two inconsistent word choices (\"gold\"/\"sovereign\") for the same currency depending on mode -- unified to one Chinese term."
+    },
+    {
+      "id": "GSTATE.C#gstate_format_money:silver",
+      "source": "silver",
+      "translation": "銀盾",
+      "status": "translated",
+      "notes": "Currency unit word; matches OBJINFO.DAT#54 \"Silver Royals\" -> 銀盾 (established via the DIAL_Z18 exchange-rate line \"十枚銀盾能兌一枚金幣\"). Also unifies the English \"silver\"/\"royal\" split into one term. The English plural-suffix logic (strcat \"s\", %c 's') was dropped since Chinese nouns don't inflect for number -- verified the branches produced byte-identical output either way before removing them."
+    },
+    {
+      "id": "MODALSCR.C#travel_cost:sovereigns",
+      "source": "sovereigns",
+      "translation": "金幣",
+      "status": "translated",
+      "notes": "Travel-cost display on the fast-travel map screen; same currency as GSTATE.C's gold/sovereign."
+    },
+    {
+      "id": "INVENTOR.C#invui_grid_render:Unavailable",
+      "source": "Unavailable",
+      "translation": "無法估價",
+      "status": "translated",
+      "notes": "Shown instead of a price when itemtbl_compute_value() returns a negative value (item cannot be appraised/sold)."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:Amount",
+      "source": "Amount: %d",
+      "translation": "數量：%d",
+      "status": "translated",
+      "notes": "Item-inspect panel stat line, shown for stackable/currency items (wFlags 0x8000 or category 7). Rendered in small-zh mode (g_bSmallZhMode) directly under the item name, which is also small now -- both used to be full 16x16 and collided."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:UsesLeft",
+      "source": "Uses left: %d",
+      "translation": "剩餘次數：%d",
+      "status": "translated",
+      "notes": "Item-inspect panel stat line for charge-limited items (wFlags 0x2000)."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:ValueRating",
+      "source": "Value Rating: %d%",
+      "translation": "價值評等：%d%%",
+      "status": "translated",
+      "notes": "Item-inspect panel stat line for wFlags 0x1000 + wSub_flags 4 items. Source has a pre-existing single trailing '%' (likely an original-game typo, not our bug) -- left the numeric format alone, only translated the label text."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:Condition",
+      "source": "Condition: %d%%",
+      "translation": "耐久度：%d%%",
+      "status": "translated",
+      "notes": "Item-inspect panel durability line for generic wFlags 0x1000 items. Rendered as \"耐久度\" (durability) rather than reusing CHARSCRN.C's \"狀態\" (character condition/status), since these are different concepts."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:Using",
+      "source": "Using",
+      "translation": "使用中",
+      "status": "translated",
+      "notes": "Item-inspect panel equip-state word, prefixed before Broken/Repairable when the item is currently equipped."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:Broken",
+      "source": "Broken",
+      "translation": "已損壞",
+      "status": "translated",
+      "notes": "Item-inspect panel condition word."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:Repairable",
+      "source": "Repairable",
+      "translation": "可修復",
+      "status": "translated",
+      "notes": "Item-inspect panel condition word."
+    },
+    {
+      "id": "INVINSP.C#invinspect_item_flow:separator",
+      "source": ", ",
+      "translation": "、",
+      "status": "translated",
+      "notes": "Joins \"Using\" with \"Broken\"/\"Repairable\" when both apply; Chinese enumeration comma instead of \", \"."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Thrust",
+      "source": "Thrust",
+      "translation": "突刺",
+      "status": "translated",
+      "notes": "\"More Info\" weapon-detail popup column header. NOTE: the \"More Info\"/\"Repair\" buttons that open this popup are themselves NOT hardcoded C strings -- they come from a MenuPage/.dat resource (page->pEntries[...].pPrimary_label) that this project doesn't have a parser/packer for yet (Phase 8 text-surface inventory §4). Only this popup's own content is fixable now."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Swing",
+      "source": "Swing",
+      "translation": "揮砍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:BaseDmg",
+      "source": "Base Dmg:",
+      "translation": "基礎傷害：",
+      "status": "translated",
+      "notes": "Melee weapon detail row."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:BaseDamage",
+      "source": "Base Damage:",
+      "translation": "基礎傷害：",
+      "status": "translated",
+      "notes": "Ranged weapon (quarrel/crossbow) detail row; same Chinese as Base Dmg:, the English source just spelled it out differently."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Accuracy",
+      "source": "Accuracy:",
+      "translation": "命中：",
+      "status": "translated",
+      "notes": "Used for both melee and ranged weapon detail rows."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:ArmorMod",
+      "source": "Armor Mod:",
+      "translation": "護甲加成：",
+      "status": "translated",
+      "notes": "Armor-category detail row."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:ActiveMods",
+      "source": "Active Mods:",
+      "translation": "附加效果：",
+      "status": "translated",
+      "notes": "Weapon-category (wCategory==1) enchant row label."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Resistances",
+      "source": "Resistances:",
+      "translation": "抗性：",
+      "status": "translated",
+      "notes": "Armor-category (wCategory==4) enchant row label; same value list as Active Mods:, different label per item type."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:BlessType",
+      "source": "Bless Type:",
+      "translation": "祝福等級：",
+      "status": "translated",
+      "notes": "Shows #1/#2/#3 (+5%/+10%/+15%) tiers, so \"level/tier\" (等級) fit better than a literal \"type\"."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:RacialMod",
+      "source": "Racial Mod:",
+      "translation": "種族加成：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:None",
+      "source": "None",
+      "translation": "無",
+      "status": "translated",
+      "notes": "Default value for both the Active Mods/Resistances line and the Bless Type line."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:enchant_words",
+      "source": "Poisoned / Frosted / Flaming / Steelfired / Enhanced",
+      "translation": "淬毒 / 冰霜 / 燃燒 / 淬鋼 / 強化",
+      "status": "translated",
+      "notes": "Concatenated flag words with no separator (matches the English source's own lack of a separator between multiple simultaneous flags); trailing space dropped since Chinese doesn't need word-boundary spacing. \"Enhanced\" covers two different flag bits (0x800/0x1000) that both used this same English word."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:race_names",
+      "source": "Tsurani / Elf / Dwarf / Human",
+      "translation": "圖蘭尼 / 精靈 / 矮人 / 人類",
+      "status": "translated",
+      "notes": "wRace_mask item-restriction display; Tsurani matches the established glossary term."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Strength",
+      "source": "Strength",
+      "translation": "力量",
+      "status": "translated",
+      "notes": "\"%d+Strength\" damage-formula value; matches g_abStatNames[3]."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Skill",
+      "source": "Skill",
+      "translation": "技巧",
+      "status": "translated",
+      "notes": "\"%d+Skill\" accuracy-formula value."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Quarrel_CrossBow",
+      "source": "Quarrel / CrossBow",
+      "translation": "弩箭 / 弩",
+      "status": "translated",
+      "notes": "Damage-formula unit word, substituted into \"%d+%s\"/\"%d+%s+Skill\"; matches the OBJINFO.DAT quarrel/crossbow item names."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:Affecting_CanAffect",
+      "source": "Affecting / Can affect",
+      "translation": "正影響 / 可影響",
+      "status": "translated",
+      "notes": "Prefix substituted into \"%s player statistics\" -> \"%s玩家屬性\" (id below)."
+    },
+    {
+      "id": "INVINSP.C#invinspect_render_details:player_statistics",
+      "source": "player statistics",
+      "translation": "玩家屬性",
+      "status": "translated",
+      "notes": "Suffix half of the Affecting/Can affect sentence."
+    },
+    {
+      "id": "ENCAMP.C#g_apszEncampStatColHeaders[0]",
+      "source": "Health/Stamina",
+      "translation": "生命/體力",
+      "status": "translated",
+      "notes": "Encampment screen column header; matches g_abStatNames[0]/[1] (生命值/體力), shortened to fit the column."
+    },
+    {
+      "id": "ENCAMP.C#g_apszEncampStatColHeaders[1]",
+      "source": "Rations",
+      "translation": "口糧",
+      "status": "translated",
+      "notes": "Matches the established OBJINFO.DAT item name."
+    },
+    {
+      "id": "ENCAMP.C#g_pszHpSeparator",
+      "source": " of ",
+      "translation": " / ",
+      "status": "translated",
+      "notes": "Joins current/max HP-Stamina numbers (\"100 of 100\" -> \"100 / 100\"); kept as a plain ASCII slash rather than a CJK character since it only ever sits between two itoa()'d digit strings."
+    },
+    {
+      "id": "MODALSCR.C#modalscreen_inv_draw_gold_amount:PartyGold",
+      "source": "Party Gold:",
+      "translation": "隊伍金幣：",
+      "status": "translated",
+      "notes": "Encampment-screen gold total label."
     }
   ]
 }

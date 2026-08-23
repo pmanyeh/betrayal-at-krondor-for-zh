@@ -13,8 +13,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#哈卡的卡瓊洛#\t@3打量著這間店鋪。雖然看不出店主在貨品四周佈下了什麼看得見的防護，但他隱約ñ察覺到，剛才穿過的那道門有些不太尋常。他打從心底就知道，膽敢在這裡下手的小偷，肯定會嚐到某種法術的苦頭。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -24,8 +24,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往哈卡的卡瓊洛\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -37,8 +37,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#試金石珠寶行#\t店裡不少東西閃著金光銀輝，但走南闖北慣了的@4很清楚，真正值錢的貨色從不會擺在外頭展示，而是鎖在別處，只有店主確信顧客誠心交易，才會拿出來。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -48,8 +48,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往試金石珠寶行\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -61,8 +61,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#軍械庫#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，陳列的武器與盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -72,8 +72,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往軍械庫\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -85,8 +85,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#利劍之徽#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，陳列的武器與盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -96,8 +96,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往利劍之徽\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -109,8 +109,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#鍛爐#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，陳列的武器與盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -120,8 +120,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往鍛爐\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -132,8 +132,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#拾荒市集#\t店裡堆滿了各種棄置物、被遺忘的小玩意兒，還有幾乎沒人想找回的失物。在這裡，鏽蝕與斑駁彷彿才是珍品，物品本身的價值反倒成了其次。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -143,8 +143,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "往拾荒市集\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -156,8 +156,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#「野獸」約瑟夫的店#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，裡頭盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -171,8 +171,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的裝備。\n\t「今天想修理哪件東西呢？」修理匠問道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -184,8 +184,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#羊毛商人#\t這間雜貨店的陳設令人感到熟悉又自在，擺放方式合情合理，@4沒花多少功夫，就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -197,8 +197,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#橫笛與月桂#\t這間小店積滿了灰塵。\n蛛絲如精緻的掛毯，妝點著這間古雅老店的每個角落。幽暗林向來人跡罕至，顯然這裡鮮少有客人上門。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -210,8 +210,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#摩根．赫利的店#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，陳列的武器與盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -223,8 +223,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#皮爾斯．佩里軍火行#\t@4放眼望去，處處都是擦得發亮的金屬光澤。這間擁擠的小店，論起對戰爭的崇敬，絲毫不輸給任何一座提斯神殿，陳列的武器與盔甲種類多得驚人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -236,8 +236,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#裂樹雜貨行#\t這間雜貨店的陳設令人感到熟悉又自在，擺放方式合情合理，@4沒花多少功夫，就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -249,8 +249,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#加羅利斯珠寶行#\t這間雜貨店的陳設令人感到熟悉又自在，擺放方式合情合理，@4沒花多少功夫，就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -262,8 +262,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#萊蓋特雜貨行#\t這間雜貨店的陳設令人感到熟悉又自在，擺放方式合情合理，@4沒花多少功夫，就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -289,8 +289,8 @@
         "\\xf0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t眾人陷入了沉默。\n\t他們心裡，都只剩下同一個念頭：「ó他們ó之中ó究竟ó有誰ó敢ñ作弊ó？ñ有誰ó願意ñ挺身ó而出ó？ð」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -301,8 +301,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我會的……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -316,8 +316,8 @@
         "@2",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t「我的@0評分只有區區@1，」@2心想。「或許我該提升一下？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -339,8 +339,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這完全不合邏輯。\n\t一只莫瑞德鎖箱的畫面浮現在他們腦海中。在夢境般紛亂盤旋的諸多疑問裡……ó要怎麼？……ó為什麼？……但最難捉摸的是：ó什麼樣的ó密碼ó才ó有可能ó打開ó這ó把鎖？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -358,8 +358,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t眾人陷入沉默。\n\t箱子裡的法術裝置令他們大惑不解，於是他們更加謹慎地繼續調查。這件裝置看起來，或許能幫他們擺脫某些因過去的失誤而看似無解的困境。\n\t「我們應該小心，別ñ濫用這股力量，」@4一邊開始琢磨可能的選擇一邊提議道。「不過話說回來，」他接著說，「也許我們正處在一個ñ確實可以用上它的處境。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -374,8 +374,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他停了下來。\n\t「ñ為什麼，」他心想，「我們要走作弊者的路？肯定還有ñ其他路可以走……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -407,8 +407,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們商議了起來。\n\t「或許，」@4提議道，「你的腦子是不是被這一路的旅途累壞了？」\n\t「不過這ñ確實是個選項，如果……」@0回答道。\n\t「ñ只有ñ在ñ真的ñ沒有ñ任何ñ其他ñ辦法的情況下ð，」@4打斷道。「這肯定得是我們的ñ最後手段！」\n\t他們得再過一段時間，才能對『這一章現在該結束了嗎？』這個問題做出決定。\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

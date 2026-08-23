@@ -14,8 +14,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「再往前一段路，這條路便會分岔，」@4說。「往西通往洛瑞爾與拉姆特，往南則通往艾格利，最終抵達克朗多。你們認為我們該走哪條路？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -28,8 +28,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t數日過去。\n\t他們不喜隘道帶來的暴露感，於是趁夜疾行，白天則躲在岩壁下歇息，豎耳戒備刺客的腳步聲。終於，一行人腳痠腿疼、風塵僕僕，來到了鷹谷鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -43,8 +43,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿越山道時，偶爾襲來的寒風凍得他們骨頭發疼，直到終於感受到王國南方特有的溫和暖風，才鬆了口氣。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -57,8 +57,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -72,8 +72,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t濃霧瀰漫山道之間。\n\t「再往前一段路，這條路便會分岔，」@4說。「往西通往艾格利，最終抵達克朗多；往東則會帶我們接近賽瑟儂。你們認為我們該走哪條路？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -87,8 +87,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿越山道時，偶爾襲來的寒風凍得他們骨頭發疼，直到終於感受到王國南方特有的溫和暖風，才鬆了口氣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -101,8 +101,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t地勢漸趨平坦。\n\t丘陵與林木逐漸稀疏，眼前是王國中部一望無際的草原……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -115,8 +115,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們轉身折返。\n\t不消片刻，便回到了大路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -126,8 +126,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "小心！危險森林！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -138,8 +138,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "馬倫．謝帕德\n「朝巨龍扔了顆石頭。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -150,8 +150,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "拉伍爾．杜勒贊\n「他以獸皮為業。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -162,8 +162,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "賈瑞特．傑斯特\n「站錯了樹下。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -174,8 +174,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "佛瑞斯特．沃克\n「至死不渝。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -186,8 +186,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "克里斯多福．馬岱恩\n「他待我們如同兄弟。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -198,8 +198,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "詹姆士．德利托\n「吞下了自尊心，卻要了他的命。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -210,8 +210,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "戴爾．布里朵\n「無論他去哪裡，她都追隨相伴。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -222,8 +222,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "無名氏\n「願他的靈魂，尋得生前未曾擁有的安寧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -234,8 +234,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "雷德．杜維德\n「世上再無比他更堅強之人。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -246,8 +246,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "茱莉．德香\n「她的微笑，能溫暖最寒冷的日子。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -258,8 +258,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "波爾森．伯托德\n「來到幽暗林，只為尋一份安寧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -270,8 +270,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "巴爾魯．唐斯\n「他忘了集中精神。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -282,8 +282,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "艾希琳．梅丘斯\n「所有認識她的人，都深愛著她。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -294,8 +294,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "米切爾．揚斯\n「消失在林中，再也沒有回來。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -306,8 +306,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "米勒．達布斯\n「終於，他與摯愛的妻子重聚了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -318,8 +318,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "蘿絲．達布斯\n「再無妻子如此令人思念。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -330,8 +330,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "奧森．杜巴斯．法達莫爾\n「殺死了給他致命一擊的巨人。」\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

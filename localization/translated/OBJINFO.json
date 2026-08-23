@@ -1,0 +1,1103 @@
+{
+  "format": "BAK_ZH_OBJINFO_TRANSLATION",
+  "version": 1,
+  "source_file": "OBJINFO.DAT",
+  "entries": [
+    {
+      "id": "OBJINFO.DAT#1",
+      "index": 1,
+      "source": "Crystal Staff",
+      "translation": "水晶法杖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#2",
+      "index": 2,
+      "source": "Lightning Staff",
+      "translation": "閃電法杖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#3",
+      "index": 3,
+      "source": "Wooden Staff",
+      "translation": "木法杖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#4",
+      "index": 4,
+      "source": "Staff of Macros",
+      "translation": "馬克羅斯之杖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#5",
+      "index": 5,
+      "source": "Amulet of the Upright Man",
+      "translation": "正直者護符",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#6",
+      "index": 6,
+      "source": "Ring of Prandur",
+      "translation": "普蘭鐸之戒",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#7",
+      "index": 7,
+      "source": "Brass Spyglass",
+      "translation": "黃銅望遠鏡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#8",
+      "index": 8,
+      "source": "Cup of Rlnn Skr",
+      "translation": "倫恩斯克之杯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#9",
+      "index": 9,
+      "source": "Eliaem's Heart",
+      "translation": "伊萊安姆之心",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#10",
+      "index": 10,
+      "source": "Glory Hand",
+      "translation": "榮耀之手",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#11",
+      "index": 11,
+      "source": "Horn of Algon Kokoon",
+      "translation": "阿爾岡科昆號角",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#12",
+      "index": 12,
+      "source": "Idol of Lassur",
+      "translation": "拉蘇爾偶像",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#13",
+      "index": 13,
+      "source": "Infinity Pool",
+      "translation": "無盡之池",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#14",
+      "index": 14,
+      "source": "Raw Manna",
+      "translation": "原初嗎哪",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#15",
+      "index": 15,
+      "source": "Roric's Seal",
+      "translation": "羅瑞克封印",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#16",
+      "index": 16,
+      "source": "Shell",
+      "translation": "貝殼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#17",
+      "index": 17,
+      "source": "Wyvern's Egg",
+      "translation": "飛龍蛋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#18",
+      "index": 18,
+      "source": "Broadsword",
+      "translation": "闊劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#19",
+      "index": 19,
+      "source": "Galon 'Griefmaker'",
+      "translation": "蓋隆「悲愴使者」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#20",
+      "index": 20,
+      "source": "Goblin Sticker",
+      "translation": "哥布林扦",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#21",
+      "index": 21,
+      "source": "Greatsword",
+      "translation": "巨劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#22",
+      "index": 22,
+      "source": "Guarda Revanche",
+      "translation": "加爾達復仇劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#23",
+      "index": 23,
+      "source": "Exotic sword",
+      "translation": "異域劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#24",
+      "index": 24,
+      "source": "Keshian Tapir",
+      "translation": "凱許貘刃",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#25",
+      "index": 25,
+      "source": "Moredhel Lamprey",
+      "translation": "莫瑞德七鰓鰻",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#26",
+      "index": 26,
+      "source": "Rapier",
+      "translation": "細劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#27",
+      "index": 27,
+      "source": "Sword of Kinnur",
+      "translation": "金努爾之劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#28",
+      "index": 28,
+      "source": "Sword of Lims-Kragma",
+      "translation": "林絲克拉格瑪之劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#29",
+      "index": 29,
+      "source": "Two-Handed Broadsword",
+      "translation": "雙手劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#30",
+      "index": 30,
+      "source": "Light Crossbow",
+      "translation": "輕弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#31",
+      "index": 31,
+      "source": "Medium Crossbow",
+      "translation": "中弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#32",
+      "index": 32,
+      "source": "Bessy Mauler",
+      "translation": "貝西重錘",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#33",
+      "index": 33,
+      "source": "Tsurani Light Crossbow",
+      "translation": "圖蘭尼輕弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#34",
+      "index": 34,
+      "source": "Tsurani Heavy Crossbow",
+      "translation": "圖蘭尼重弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#35",
+      "index": 35,
+      "source": "Elven Crossbow",
+      "translation": "精靈弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#36",
+      "index": 36,
+      "source": "Quarrels",
+      "translation": "弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#37",
+      "index": 37,
+      "source": "Elven Quarrels",
+      "translation": "精靈弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#38",
+      "index": 38,
+      "source": "Tsurani Quarrels",
+      "translation": "圖蘭尼弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#39",
+      "index": 39,
+      "source": "Poisoned Quarrels",
+      "translation": "淬毒弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#40",
+      "index": 40,
+      "source": "Poisoned Elven Quarrels",
+      "translation": "淬毒精靈弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#41",
+      "index": 41,
+      "source": "Poisoned Tsurani Quarrels",
+      "translation": "淬毒圖蘭尼弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#42",
+      "index": 42,
+      "source": "Flaming Quarrels",
+      "translation": "火焰弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#43",
+      "index": 43,
+      "source": "Enchanted Quarrels",
+      "translation": "附魔弩箭",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#44",
+      "index": 44,
+      "source": "Dragon Plate Armor",
+      "translation": "龍鱗鎧甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#45",
+      "index": 45,
+      "source": "Euliliko Armor",
+      "translation": "尤利利科鎧甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#46",
+      "index": 46,
+      "source": "Elven Armor",
+      "translation": "精靈鎧甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#47",
+      "index": 47,
+      "source": "Grey Tower Plate",
+      "translation": "灰塔鎧甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#48",
+      "index": 48,
+      "source": "Standard Kingdom Armor",
+      "translation": "標準板甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#49",
+      "index": 49,
+      "source": "Valheru Armor",
+      "translation": "瓦爾赫魯鎧甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#50",
+      "index": 50,
+      "source": "Potio Noxum",
+      "translation": "毒性藥劑",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#51",
+      "index": 51,
+      "source": "Powder Bag",
+      "translation": "藥粉袋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#52",
+      "index": 52,
+      "source": "Tuning Fork",
+      "translation": "音叉",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#53",
+      "index": 53,
+      "source": "Gold Sovereigns",
+      "translation": "金幣",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#54",
+      "index": 54,
+      "source": "Silver Royals",
+      "translation": "銀盾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#55",
+      "index": 55,
+      "source": "Diamonds",
+      "translation": "鑽石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#56",
+      "index": 56,
+      "source": "Emeralds",
+      "translation": "祖母綠",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#57",
+      "index": 57,
+      "source": "Rubies",
+      "translation": "紅寶石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#58",
+      "index": 58,
+      "source": "Shell",
+      "translation": "貝殼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#59",
+      "index": 59,
+      "source": "Moredhel Brooch",
+      "translation": "莫瑞德胸針",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#60",
+      "index": 60,
+      "source": "Bag of Grain",
+      "translation": "穀物袋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#61",
+      "index": 61,
+      "source": "Peasant's Key",
+      "translation": "農民鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#62",
+      "index": 62,
+      "source": "Virtue Key",
+      "translation": "貞操鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#63",
+      "index": 63,
+      "source": "Key of Lineages",
+      "translation": "血脈之鑰",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#64",
+      "index": 64,
+      "source": "Cellar Key",
+      "translation": "地窖鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#65",
+      "index": 65,
+      "source": "Nivek's Key",
+      "translation": "尼維克鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#66",
+      "index": 66,
+      "source": "Interdictor Key",
+      "translation": "禁制鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#67",
+      "index": 67,
+      "source": "Noble's Passkey",
+      "translation": "貴族通行鑰",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#68",
+      "index": 68,
+      "source": "Guilder's Passkey",
+      "translation": "公會通行鑰",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#69",
+      "index": 69,
+      "source": "Guildis Thorn",
+      "translation": "基爾迪斯棘刺",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#70",
+      "index": 70,
+      "source": "Ward of Ralen-Sheb",
+      "translation": "拉倫謝布守護符",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#71",
+      "index": 71,
+      "source": "Royal Key of Krondor",
+      "translation": "克朗多王家鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#72",
+      "index": 72,
+      "source": "Rations",
+      "translation": "口糧",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#73",
+      "index": 73,
+      "source": "Rations (Poisoned)",
+      "translation": "口糧（有毒）",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#74",
+      "index": 74,
+      "source": "Rations (Spoiled)",
+      "translation": "口糧（腐壞）",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#75",
+      "index": 75,
+      "source": "Armorer's Hammer",
+      "translation": "鎧甲匠鎚",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#76",
+      "index": 76,
+      "source": "Heavy Bowstring",
+      "translation": "重弓弦",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#77",
+      "index": 77,
+      "source": "Light Bowstring",
+      "translation": "輕弓弦",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#78",
+      "index": 78,
+      "source": "Herbal Pack",
+      "translation": "藥草包",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#79",
+      "index": 79,
+      "source": "Ale Cask",
+      "translation": "麥酒桶",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#80",
+      "index": 80,
+      "source": "Picklocks",
+      "translation": "開鎖工具",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#81",
+      "index": 81,
+      "source": "Practice Lute",
+      "translation": "練習魯特琴",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#82",
+      "index": 82,
+      "source": "Rope",
+      "translation": "繩索",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#83",
+      "index": 83,
+      "source": "Shovel",
+      "translation": "鏟子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#84",
+      "index": 84,
+      "source": "Torch",
+      "translation": "火把",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#85",
+      "index": 85,
+      "source": "Whetstone",
+      "translation": "磨刀石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#86",
+      "index": 86,
+      "source": "Aventurine",
+      "translation": "砂金石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#87",
+      "index": 87,
+      "source": "Burial Cloth",
+      "translation": "裹屍布",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#88",
+      "index": 88,
+      "source": "Ring of the Golden Way",
+      "translation": "黃金之路指環",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#89",
+      "index": 89,
+      "source": "Vapor Mask",
+      "translation": "防毒面罩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#90",
+      "index": 90,
+      "source": "Weedwalkers",
+      "translation": "沼澤靴",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#91",
+      "index": 91,
+      "source": "Catapult gear",
+      "translation": "投石機零件",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#92",
+      "index": 92,
+      "source": "Geomancy Stones",
+      "translation": "堪輿石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#93",
+      "index": 93,
+      "source": "Glazer's Guild Seal",
+      "translation": "玻璃匠公會印璽",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#94",
+      "index": 94,
+      "source": "Hellfire Trap",
+      "translation": "地獄火陷阱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#95",
+      "index": 95,
+      "source": "IronJaw Trap",
+      "translation": "鐵顎陷阱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#96",
+      "index": 96,
+      "source": "River Trap",
+      "translation": "河流陷阱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#97",
+      "index": 97,
+      "source": "Knights Piece",
+      "translation": "騎士棋子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#98",
+      "index": 98,
+      "source": "Lecture Ticket",
+      "translation": "講座票券",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#99",
+      "index": 99,
+      "source": "Leather Leggings",
+      "translation": "皮革護腿",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#100",
+      "index": 100,
+      "source": "Skeletal Hand",
+      "translation": "骷髏之手",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#101",
+      "index": 101,
+      "source": "Waani",
+      "translation": "瓦尼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#102",
+      "index": 102,
+      "source": "Wooden Chest",
+      "translation": "木箱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#103",
+      "index": 103,
+      "source": "Althafain's Icer",
+      "translation": "阿爾薩芬冰凝器",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#104",
+      "index": 104,
+      "source": "Clerical Oilcloth",
+      "translation": "教會油布",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#105",
+      "index": 105,
+      "source": "Coltari Poison",
+      "translation": "科塔利毒藥",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#106",
+      "index": 106,
+      "source": "Dragon Stone",
+      "translation": "龍石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#107",
+      "index": 107,
+      "source": "Flame Root Oil",
+      "translation": "火根油",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#108",
+      "index": 108,
+      "source": "Killian's Root Oil",
+      "translation": "基利安根油",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#109",
+      "index": 109,
+      "source": "Naphtha",
+      "translation": "那夫沙油",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#110",
+      "index": 110,
+      "source": "Sarigsbane",
+      "translation": "薩瑞格的剋星",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#111",
+      "index": 111,
+      "source": "Silver Spider",
+      "translation": "銀蜘蛛",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#112",
+      "index": 112,
+      "source": "Silverthorn",
+      "translation": "銀刺",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#113",
+      "index": 113,
+      "source": "Silverthorn Anti-Venom",
+      "translation": "銀刺解毒劑",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#114",
+      "index": 114,
+      "source": "Dalatail Milk",
+      "translation": "達拉泰爾聖水",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#115",
+      "index": 115,
+      "source": "Fadamor's Formula",
+      "translation": "法達莫爾秘方",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#116",
+      "index": 116,
+      "source": "Lewton's Concentrate",
+      "translation": "路頓濃縮液",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#117",
+      "index": 117,
+      "source": "Redweed Brew",
+      "translation": "紅草釀",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#118",
+      "index": 118,
+      "source": "Truesight Tea",
+      "translation": "真視茶",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#119",
+      "index": 119,
+      "source": "Restoratives",
+      "translation": "恢復藥劑",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#120",
+      "index": 120,
+      "source": "Note",
+      "translation": "字條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#121",
+      "index": 121,
+      "source": "Great One's Note",
+      "translation": "至尊法師字條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#122",
+      "index": 122,
+      "source": "Mitchel Waylander's Note",
+      "translation": "米契爾．韋蘭德字條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#123",
+      "index": 123,
+      "source": "Navon's Note",
+      "translation": "納馮字條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#124",
+      "index": 124,
+      "source": "Abbot's Journal",
+      "translation": "院長日誌",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#125",
+      "index": 125,
+      "source": "Lorgan's Journal",
+      "translation": "洛根日誌",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#126",
+      "index": 126,
+      "source": "Accts of Shamata Garrison",
+      "translation": "沙瑪塔守軍帳冊",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#127",
+      "index": 127,
+      "source": "Chapel's Rmur n Whepuns",
+      "translation": "禮拜堂甲冑武備",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#128",
+      "index": 128,
+      "source": "Dorcas' Treatise",
+      "translation": "多爾卡斯論著",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#129",
+      "index": 129,
+      "source": "Kalem's Dialectic",
+      "translation": "卡倫辯證論",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#130",
+      "index": 130,
+      "source": "Psalms of Dala",
+      "translation": "達拉詩篇",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#131",
+      "index": 131,
+      "source": "Strategies of Trading",
+      "translation": "貿易策略手冊",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#132",
+      "index": 132,
+      "source": "Thiful's Bird Migrations",
+      "translation": "提福爾候鳥遷徙誌",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#133",
+      "index": 133,
+      "source": "Magical Scroll",
+      "translation": "魔法卷軸",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#134",
+      "index": 134,
+      "source": "Days Rations",
+      "translation": "每日口糧",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#135",
+      "index": 135,
+      "source": "Quegian Brandy",
+      "translation": "奎格白蘭地",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#136",
+      "index": 136,
+      "source": "Ale",
+      "translation": "麥酒",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "OBJINFO.DAT#137",
+      "index": 137,
+      "source": "Keshian Ale",
+      "translation": "凱許麥酒",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}
