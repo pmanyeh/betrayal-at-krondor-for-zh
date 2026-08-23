@@ -11,8 +11,8 @@
         "@1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "隊伍的@1能力提升了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -22,8 +22,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "隊伍的各項能力都提升了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -35,8 +35,8 @@
         "@1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "@的@1能力提升了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -47,8 +47,8 @@
         "@",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "@的各項能力都提升了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -59,8 +59,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我們最好盡快穿過這座城鎮。我不久前才在這裡放了一場婚禮的鴿子，要是又被人認出來，恐怕會惹來不少尷尬的追問。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -71,8 +71,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t我們可能需要補給……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -83,8 +83,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這裡有間叫做「十字路口」的店，我們或許能買到一些東西。除此之外，我們得謹慎行事。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -98,8 +98,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒抬起頭來。\n\t他握緊拳頭，在@4鼻子底下晃了晃，接著壞笑一聲攤開手掌，露出一對骰子。「這局玩骰子，朋友，」賭徒重新坐了下來說道。「贏家可以拿到賭注的一半。你要下多少金幣？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -113,8 +113,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「看你的樣子，運氣一直不錯啊，」他說。「可惜我們沒這麼幸運。或許該找別人跟你玩了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -130,8 +130,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒搖了搖頭。\n\t「恐怕我的錢都輸光了，」他說。「等我把輸的贏回來，或許能再玩一局。」\n\t@4點了點頭。「那真是太好了，改天見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -146,8 +146,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的資金。\n\t趁對方還沒擲出骰子，@4便攔住了他的手。「我剛才查過我們的家當，發現比我想的還少，」他向賭徒解釋，希望對方別介意。「我們就此告辭了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -162,8 +162,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t露西亞女神對他們微笑。\n\t@4儘量不動聲色地收起那堆閃亮的贏來的錢，把贏得的金幣收進口袋。「希望你以後運氣能好一點，」@4點頭說道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -177,8 +177,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4擲出了爛骰子。\n\t他皺著眉，不情願地交出下注的金幣。「這局是你的了，先生，」他說。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -192,8 +192,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t兩邊擲出的點數不相上下。\n\t「平手。看來露西亞女神待我們同樣公平，」@4收回自己的賭注說道。「或許我們可以再玩一局。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -206,8 +206,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒拍了拍手中的一疊牌。\n\t「小賭一把如何，陪我玩一局林嵐牌，」他說。「贏家可以拿走跟賭注一樣多的錢。你要下多少注？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -221,8 +221,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「看你的樣子，運氣一直不錯啊，」他說。「可惜我們沒這麼幸運。或許該找別人跟你玩了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -238,8 +238,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒搖了搖頭。\n\t「恐怕我的錢都輸光了，」他說。「等我把輸的贏回來，或許能再玩一局。」\n\t@4點了點頭。「那真是太好了，改天見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -254,8 +254,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的資金。\n\t趁對方還沒發牌，@4便攔住了他的手。「我剛才查過我們的家當，發現比我想的還少，」他向賭徒解釋，希望對方別介意。「我們就此告辭了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -270,8 +270,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t露西亞女神對他們微笑。\n\t@4儘量不動聲色地收起那堆閃亮的贏來的錢，把贏得的金幣收進口袋。「希望你以後運氣能好一點，」@4點頭說道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -285,8 +285,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4盯著手中的牌。\n\t這大概是他在林嵐牌裡拿過最爛的一手牌，他皺著眉，不情願地交出下注的金幣。「這局是你的了，先生，」他說。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -300,8 +300,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t牌都攤在桌上了。\n\t「平手。看來露西亞女神待我們同樣公平，」@4收回自己的賭注說道。「或許我們可以再玩一局。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -315,8 +315,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒拍了拍手中的一疊牌。\n\t「帕夏瓦牌，」他說著，把色彩鮮豔的一疊牌推向@4。見對方對這提議似乎興趣缺缺，他便加碼利誘。「如果你贏了，我會付你賭注的一倍半。你想下多少注？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -330,8 +330,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「看你的樣子，運氣一直不錯啊，」他說。「可惜我們沒這麼幸運。或許該找別人跟你玩了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -347,8 +347,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒搖了搖頭。\n\t「恐怕我的錢都輸光了，」他說。「等我把輸的贏回來，或許能再玩一局。」\n\t@4點了點頭。「那真是太好了，改天見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -363,8 +363,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的資金。\n\t趁對方還沒發牌，@4便攔住了他的手。「我剛才查過我們的家當，發現比我想的還少，」他向賭徒解釋，希望對方別介意。「我們就此告辭了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -379,8 +379,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t露西亞女神對他們微笑。\n\t@4儘量不動聲色地收起那堆閃亮的贏來的錢，把贏得的金幣收進口袋。「希望你以後運氣能好一點，」@4點頭說道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -394,8 +394,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4盯著手中的牌。\n\t這大概是他在帕夏瓦牌裡拿過最爛的一手牌，他皺著眉，不情願地交出下注的金幣。「這局是你的了，先生，」他說。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -409,8 +409,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t牌都攤在桌上了。\n\t「平手。看來露西亞女神待我們同樣公平，」@4收回自己的賭注說道。「或許我們可以再玩一局。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -431,8 +431,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這男人是個賭徒。\n\t他抽出一疊比林嵐牌或帕夏瓦牌都厚的牌，啪地拍在桌上，抽出一張造型古怪的牌翻了過來。牌面上畫著一名女子。\n\t「這叫『藍衣夫人』，」男人拖長了語調說道。「這遊戲叫做ó波基爾，是凱許狗兵最近才在玩的新花樣。你聽過嗎？」\n\t@4點了點頭。「我還曾經跟路過本地酒館的傭兵玩過幾局。」\n\t賭徒似乎有些失望，但仍接著說：「那就不對等下注吧。既然你已經會玩了，我就付你賭注的一半。你要下多少注？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -446,8 +446,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「看你的樣子，運氣一直不錯啊，」他說。「可惜我們沒這麼幸運。或許該找別人跟你玩了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -463,8 +463,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒搖了搖頭。\n\t「恐怕我的錢都輸光了，」他說。「等我把輸的贏回來，或許能再玩一局。」\n\t@4點了點頭。「那真是太好了，改天見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -479,8 +479,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的資金。\n\t趁對方還沒發牌，@4便攔住了他的手。「我剛才查過我們的家當，發現比我想的還少，」他向賭徒解釋，希望對方別介意。「我們就此告辭了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -495,8 +495,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t露西亞女神對他們微笑。\n\t@4儘量不動聲色地收起那堆閃亮的贏來的錢，把贏得的金幣收進口袋。「希望你以後運氣能好一點，」@4點頭說道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -511,8 +511,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4盯著手中的牌。\n\t這大概是他在ó波基爾裡拿過最爛的一手牌，他皺著眉，不情願地交出下注的金幣。「這局是你的了，先生，」他說。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -526,8 +526,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t牌都攤在桌上了。\n\t「平手。看來露西亞女神待我們同樣公平，」@4收回自己的賭注說道。「或許我們可以再玩一局。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -545,8 +545,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t那男人皺起眉頭。\n\t他面前的桌上擺著一副小巧的西洋棋盤，木雕棋子的擺法看起來執白的一方情勢相當不妙。他頭也不抬地挪動了一枚棋子。「你會下棋嗎？」\n\t@4聳了聳肩，坐了下來。「還算過得去。」\n\t「很好。那你應該不介意我們這局下點小注吧，」男人微笑著說，這次換從對面挪動了一枚棋子。「對等下注。贏家拿走賭注。你要下多少？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -560,8 +560,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「看你的樣子，運氣一直不錯啊，」他說。「可惜我們沒這麼幸運。或許該找別人跟你玩了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -577,8 +577,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t賭徒搖了搖頭。\n\t「恐怕我的錢都輸光了，」他說。「等我把輸的贏回來，或許能再玩一局。」\n\t@4點了點頭。「那真是太好了，改天見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -593,8 +593,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了他們的資金。\n\t趁對方還沒擺好棋子，@4便攔住了他。「我剛才查過我們的家當，發現比我想的還少，」他向賭徒解釋，希望對方別介意。「我們就此告辭了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -608,8 +608,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他的棄兵策略奏效了。\n\t他微笑著看自己如何成功攻破了賭徒的防守陣式，優雅地收起贏來的錢。「希望你以後運氣能好一點，」@4點頭說道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -625,8 +625,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t將死。\n\t@4皺眉苦思，沒想到自己竟這麼輕易就被賭徒將死了，他一邊努力回想這局棋是怎麼下輸的，一邊把賭注交給賭徒。「這局你贏了，」他咕噥道。\n\t「是啊，」賭徒回答。「不過我猜我可比你享受多了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -642,8 +642,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t和局。\n\t雖然這結果跟他原本盼望的相去甚遠，但至少慶幸賭注沒有落入對手的錢袋，他也還算滿意。\n\t「平手。看來露西亞女神待我們同樣公平，」@4收回自己的賭注說道。「或許我們可以再玩一局。」\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

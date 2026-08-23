@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-23　**目前部署狀態：** `dist/test_v100_zh/` 裡的 `DIAL_Z00.DDX`（418 筆，含 §8.3 那 9 筆章節橫幅）已經**完整部署且實機驗證通過**——§8.3／§8.4 當時記錄的「章節橫幅卡死」「撿屍體閃退」兩個問題都已經在 §8.5（2026-08-21）跟緊接著的這次 session（§9，2026-08-21~23）修好，**下面第 1～3 點與 §8.3／§8.4 的「尚未解決」結論已經過時，不要照著繼續排查，直接看 §8.5／§9**。
+**最後更新：** 2026-08-23　**目前部署狀態：** `dist/test_v100_zh/` 裡的 `DIAL_Z00.DDX`（418 筆，含 §8.3 那 9 筆章節橫幅）已經**完整部署且實機驗證通過**——§8.3／§8.4 當時記錄的「章節橫幅卡死」「撿屍體閃退」兩個問題都已經在 §8.5（2026-08-21）跟緊接著的這次 session（§9，2026-08-21~23）修好。§10 的撿屍／物件說明停住與 §11 的戰鬥後升級訊息空白死機也已解決；**下面第 1～3 點與 §8.3／§8.4 的「尚未解決」結論已經過時，不要照著繼續排查，直接看 §8.5／§9／§10／§11**。
 
 目前累計已完整翻譯並部署：15 個 DDX 章節檔共 **1234 筆對話**（`DIAL_Z00`／`Z01`／`Z02`／`Z03`／`Z04`／`Z05`／`Z07`／`Z08`／`Z10`／`Z11`／`Z12`／`Z16`／`Z18`／`Z24`／`Z29`），加上全新的 `OBJINFO.DAT` 物品名稱系統（137 筆全譯）、`UI_HARDCODED.json` 硬編碼字串 55 筆。字庫 **4212 個字庫 ID 槽位**（實際 2522 個相異字元，槽位數大於字元數是因為 §5.2 的編碼避碰機制本來就會跳過部分 ID），全部真倚天點陣、零 fallback。詞彙表 `glossary.json` 已有 **174 筆**詞條。全遊戲 DDX 對話總量 5,931 筆，扣掉已翻的 1,234 筆，其餘約 4,697 筆待翻（29 個章節檔的 scaffold 都已建好）。
 
@@ -533,7 +533,172 @@ if (page_id < 300) {
 
 ### 9.6 下一步建議
 
-1. **優先**：§9.5 的物件貼圖雜色 bug，已經有明確、可執行的下一步（見上面 5 點），比起前幾次「完全沒有位址資訊」的窘境已經好很多，值得優先排。
+1. ~~**優先**：§9.5 的物件貼圖雜色 bug。~~ **已完成**：根因與原始碼修正見 §9.7，正式重建、部署及冷啟動實機驗收見 §9.8。
 2. **繼續翻譯**：還有約 4,700 多筆待翻（29 個章節檔的 scaffold 都已建好）；`OBJINFO.DAT`／`UI_HARDCODED.json` 兩個系統目前已知範圍內都翻完了，如果之後又發現新的硬編碼字串或新的資源類別，照這次的模式（先讀原始碼確認是硬編碼還是資源檔、查 glossary、翻完後關鍵字掃描比對）處理即可。
 3. **`MenuPage`／`.dat` 資源系統**（§9.4）：如果想解決「More Info」這類按鈕標籤，需要先開發通用 parser/packer，工程量比字串翻譯大很多，§4 文件裡已經有建議的技術路線跟起步難度排序。
 4. 翻譯品質校對：這次新翻的 201+137+55 筆內容都還沒有第二人核對過，尤其 `DIAL_Z29` 是重要主線劇情，建議找機會抽查。
+
+### 9.7 2026-08-23：物件縮放雜色根因已定位並修正原始碼
+
+§9.5 的 EMS page-id 理論已用 live debugger **推翻**。中文版實際偵測到 932 個 EMS pages，但重現雜點時 200 次 `emsimg_sprite_blit_scaled_paged()` 呼叫只使用 page 1、10、43、50；當時整個遊戲也只配置約 22 pages，沒有任何 `page_id >= 300` 的呼叫。
+
+真正根因是 `gfx169d.h` 把 `POLYRAST.ASM` 內兩個 CS-resident palette remap table 的 near offset 寫死：1.00 用 `0x005c/0x0a5c`，1.02 用 `0x0066/0x0a66`。原版 EXE 的 rasterizer 確實位於 `CS:1324`、fog table 位於 `CS:005c`；但中文 resident code 變大後，TLINK 為該 segment 選出的 paragraph frame 改變，中文版 rasterizer 位於 `CS:1322`、fog table 實際位於 `CS:005a`。呼叫端仍傳入 `0x005c + bucket*0x100`，導致 `XLAT CS:[BX+AL]` 每次都從 palette table 晚兩個 bytes 開始讀，遠處縮小物件的少量色碼因而被映射成亮藍／紅色雜點。物品欄使用的 cursor remap table 同樣錯位。
+
+原始碼修正位於 `bak/INCLUDE/gfx169d.h`：移除版本別的 magic constants，改用 `FP_OFF(&g_abFogRemapTable[0])` 與 `FP_OFF(&g_abCursorPaletteLut[0])`，讓 linker far-symbol fixup 提供該次 link 真正的 near offset。原版 byte-identical layout 下仍會解析成原本常數；resident code 改變後也會自動跟著正確位址。
+
+實機驗證採同一份存檔、同一視角：未修時右側小樹有穩定藍色雜點；在每次縮放呼叫入口把 `0x005c/0x015c` 即時改成 `0x005a/0x015a` 後重新繪製，雜點完全消失。對照截圖為 `scratchpad/remap-before.png` 與 `scratchpad/remap-after-hotpatch.png`。
+
+本次 Windows session 的 WSL2/KVM 功能不可用，且 host 沒有 QEMU/Docker，因此尚未用 Borland 工具鏈產生正式新 EXE。下一步只需在既有 `~/krondor-build` 可用的環境執行標準流程：pull 原始碼、`uv run bak build`、複製 `work/KRONDOR.EXE` 到 `dist/test_v100_zh/`，再用同一存檔做一次冷啟動對照。不要再調整 `EMSIMG.C` 的 `< 300` 作為這個雜點問題的修法。
+
+### 9.8 2026-08-23：WSL2 正式重建、部署與冷啟動驗收通過
+
+使用者完成 Windows BIOS 虛擬化與 WSL2 安裝後，已在全新的 Ubuntu 26.04 LTS 環境重建 §9.7 的正式修正版。環境檢查結果如下：
+
+- WSL distribution：`Ubuntu`，WSL version `2`。
+- Linux kernel：`6.18.33.2-microsoft-standard-WSL2`。
+- 使用者：`pmanyeh`，已加入 `kvm` 群組，且對 `/dev/kvm` 具備實際讀寫權限。
+- QEMU：`qemu-system-i386 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.2)`。
+- mtools：`4.0.49`。
+- uv：`0.12.5`。
+
+建置全程在 WSL 原生 ext4 目錄 `/home/pmanyeh/krondor-build` 執行，沒有在 `/mnt/d` 上執行 `uv sync`／`uv run`。Borland／FreeDOS 工具鏈解壓至 `/home/pmanyeh/bak-toolchain`；來源為上游 `toolchain-v1` release，下載後已驗證完整 SHA-256：
+
+```text
+99c83ad04f77c503b3795127645810f7977e647514e91a03da2c697d93dc8dfb
+```
+
+正式建置命令：
+
+```bash
+cd /home/pmanyeh/krondor-build
+BAK_TOOLCHAIN=/home/pmanyeh/bak-toolchain ~/.local/bin/uv run bak build
+```
+
+這是首次建置，因此走完整 clean build，並由 QEMU 分別使用 KVM／TCG 完成 Borland C++ 3.1、TASM 與 BC++ 2.0/3.0 的編譯及連結。建置驗證結果：
+
+- `VMCODE.OVL`：**BYTE-IDENTICAL**，44,582 bytes，SHA-256 `cd0cf73df9b11b7f70aa2036c813a64a8178ba60d24f9bbe548155c3e56237e0`。
+- `SX.OVL`：**BYTE-IDENTICAL**，40,742 bytes，SHA-256 `d73d92d8ff1a698ad64df9b108a04bc1ee7221bc4c336b4a6073191e5f4dabdb`。
+- `KRONDOR.EXE`：456,112 bytes，SHA-256 `aa819f9a1be34c5de86999daf6894e4caa8ac9f37dd3af27e175f844fa2cd31d`。它與原版大小不同是中文引擎修改及本次修正的預期結果；兩個未修改 OVL 的 byte-identical 結果證明工具鏈與整條建置管線正確。
+
+新產生的 `KRONDOR.MAP` 再次確認同一 CS segment 內的實際符號位置：
+
+```text
+070E:005A  _G_ABFOGREMAPTABLE
+070E:0A5A  _G_ABCURSORPALETTELUT
+070E:1322  _POLYRAST_SPR_SCALED_BLIT_PLANAR
+```
+
+這與 §9.7 的根因完全吻合：中文版正確 offset 是 `0x005a/0x0a5a`，不是原先硬編碼的 `0x005c/0x0a5c`。`gfx169d.h` 改用 `FP_OFF(...)` 後，由 linker fixup 自動填入本次 link 的正確值。
+
+正式產物已部署至 `dist/test_v100_zh/krondor.exe`。部署前的舊版沒有覆蓋後丟失，而是備份為：
+
+```text
+dist/test_v100_zh/krondor.pre-remap-fix-5e924bda.exe
+SHA-256 5e924bda558d1faab7eda8c8b8cabe9bc7191afae6e82388c445f8661b56734d
+```
+
+最後以 DOSBox-X 2026.06.02 **完整冷啟動**修正版，載入既有存檔並檢查物品欄貼圖。使用者於 2026-08-23 目視確認：原先會出現的藍色／紅色雜點已消失，物品圖示顯示正常，回報「正常了」。因此 §9.5 的物件縮放雜色問題已完成「根因定位 → 原始碼修正 → 正式重建 → 部署 → 冷啟動實機驗收」全流程，可正式標記為 **RESOLVED**。
+
+後續注意事項：不要再以調整 `EMSIMG.C` 的 `page_id < 300` 作為此問題的修法；該假說已由 live debugger 數據推翻。真正且已驗證的修正是 `bak/INCLUDE/gfx169d.h` 中以 linker-resolved `FP_OFF(...)` 取代 palette remap table 的版本別 magic offsets。
+
+## 10. 2026-08-23：撿屍／物件說明停住（RESOLVED）
+
+### 10.1 症狀與重現
+
+使用 `dist/test_v100_zh/GAMES/SAVES.G01/SAVE00.GAM` 可穩定重現：戰鬥後第一次點擊屍體會顯示描述，第二次點擊原應進入物品界面，但遊戲停在描述且不再接受輸入。另一路徑是在物品界面對物件按右鍵開啟物件說明，同樣會停住。換回原始英文 `DIAL_Z00.DDX` 後，撿屍流程可進入物品界面，但只要之後觸發中文版物件說明仍會停住，因此排除 DDX 結構、特定屍體 record 與 actor 資料本身。
+
+### 10.2 Live debugger 證據與根因
+
+當表面症狀發生時，CPU 最後會執行到 `CS:IP = 0000:0000`。堆疊證明上一層是 `INT 21h` 返回點，而 IVT 中 INT 21h 的四個向量 bytes 已被清成零。對實體位址 `0000:0084`～`0000:0087` 設寫入監看點後，精準抓到：
+
+```text
+CS:IP = 0824:4819   repe movsw (_fmemcpy / res_fread_far)
+ES:DI = 0008:0008
+來源 = ZHSTAT.DAT 的 128-byte 讀取區塊
+目的 = alloc_far() 回傳的 0008:0000
+呼叫者 = font_init_chinese_small()
+```
+
+`ZHSTAT.DAT` 為 40,204 bytes（1,827 glyphs，每筆 22 bytes）。進入中文小字型說明時，低於 640 KB 的傳統記憶體已不足；配置路徑出現 DOS error 8，重建的 `alloc_far()` 路徑卻把 `AX=0008` 接受成有效 segment，導致 `res_fread_far()` 從實體位址 `0x80` 開始覆寫 IVT。這解釋了「描述仍留在畫面、任何輸入都無效」：INT 21h 向量已遭破壞，並非遊戲輸入迴圈真的卡死。
+
+### 10.3 正式修正
+
+- `bak/SRC/GFX/FONT/FONT.C`
+  - 補上 `SRC/IO/RESFAR.H` 的正式 prototype。
+  - `ZHSTAT.DAT` 小字型優先配置於 EMS，依 16 KB 分頁載入，不再永久占用約 40 KB conventional memory。
+  - 40,194-byte glyph payload 可完整映射在四個連續 EMS page-frame slots 中，因此 22-byte record 即使跨邏輯頁面也可直接搜尋。
+  - 無 EMS 時仍保留原 conventional-memory fallback。
+
+排查途中曾嘗試修改 `DOSMEM.C` 與 EMS 欄位語意，但 live debugger 後續證明原重建程式的 EMS 全域欄位名稱雖具誤導性，執行期語意仍能工作；這些實驗性邏輯均已撤回。現在正式修正只在既有 `FONT.C` 指標中以 `0000:chain` 記錄小字型 EMS chain，避免增加 DGROUP/BSS 全域欄位並改變舊程式記憶體布局。工作樹中的 `DOSMEM.C`／`EMSDET.C` 若仍顯示 diff，是換行格式差異，不代表部署了上述實驗修法。
+
+### 10.4 建置與驗收
+
+WSL2/KVM 增量建置成功；`VMCODE.OVL` 與 `SX.OVL` 均維持 byte-identical。正式部署產物：
+
+```text
+dist/test_v100_zh/krondor.exe
+size    456,480 bytes
+SHA-256 b98ff9a194c5bfaa6f120b140a979aff6a2cb8964c0a1673d77de73afb8ec7a0
+
+dist/test_v100_zh/ZHSTAT.DAT
+size    40,204 bytes
+SHA-256 a28b74ad5a03bc9baef907b414e2c4983363f7ec986d35913a400a70a1f93d7c
+```
+
+使用者以相同存檔完成以下人工驗收：
+
+1. 第一次點擊屍體：正常顯示描述。
+2. 第二次點擊屍體：正常進入物品界面。
+3. 在物品上按右鍵：正常開啟物件說明。
+
+驗收後暫停 CPU 並讀取 IVT，`0000:0084`～`0000:0087` 仍為 `00 D1 00 F0`，即有效的 `F000:D100` INT 21h 向量，且全程未觸發 IVT 寫入監看點。此問題已完成「交叉排除 → 精準寫入監看 → 根因定位 → 原始碼修正 → 重建部署 → 兩條路徑實機驗收」，正式標記為 **RESOLVED**。
+
+## 11. 2026-08-23：戰鬥後能力提升訊息空白死機（RESOLVED）
+
+### 11.1 症狀與關鍵對照
+
+使用同一份 `SAVE00.GAM` 完成戰鬥後，能力提升通知可能只顯示第一段文字；再次點擊時訊息框變空白，滑鼠與鍵盤均無法使流程繼續。曾將 `DIAL_Z21.DDX` 暫時換成原始英文版做 A/B：第一頁可顯示 `Locklear's 近戰命中`，按下後仍進入空白死機。這排除了中文翻譯 body、`@1` 替換與 DDX 結構本身是唯一根因。
+
+Debugger 在空白畫面抓到的 CPU 位於原版 VGA vertical-retrace wait，但這只是 `screen_frame_present()` 正準備呈現空白頁時停留的位置。嘗試替 retrace wait 加 timeout 會造成戰鬥畫面嚴重閃爍，並非正確修法，相關 VMCODE 實驗已全部撤回；目前 `VMCODE.OVL` 仍與原版 byte-identical。
+
+### 11.2 真正根因：兩行／單行頁面的零進度分頁
+
+當下記憶體中的 record 仍是 node `2100018`（`@'s @1 ability has increased.`），證明使用者看到的不是「下一筆訊息」，而是同一筆訊息換頁。`TEXTWRAP.C:textwrap_draw_aligned()` 原有防孤行規則：若只剩一行，就再把一行移到下一頁。當「總共剩 2 行、版位每頁只能畫 1 行」時，它把 remaining 由 1 加成 2，造成：
+
+```text
+g_wTextWrapLinesDrawn = (2 - 2) - 0 = 0
+```
+
+`DIALOG.C` 隨後以 `scroll_start += g_wTextWrapLinesDrawn` 前進，因此永遠加 0：每輪都繪製空白頁、每輪都停在相同 acknowledge/present 流程，看起來就像遊戲死機。
+
+正式修正位於 `bak/SRC/UI/TEXTWRAP.C`：只有在增加 remaining 後，本頁仍至少有一行可畫時才套用防孤行規則，即 `remaining == 1 && (count - first_line) > 2`。這保證分頁每一輪都有正進度。
+
+### 11.3 緊湊通知框的小字版面
+
+能力提升 record 使用 `flags=0x0014`、矩形 `(70,40,180,35)`；扣除樣式內距後可用高度只有 28px，放不下兩行 16×16 中文（含 1px 行距需 33px）。因此 `DIALOG.C` 對這個精確版位啟用既有 `g_bSmallZhMode`，改用 10×10 中文字，讓完整通知可在同一框顯示。
+
+另在 `FONT.C` 修正小字混排：`g_bSmallZhMode` 下的 ASCII（包含動態代入的角色姓名）改走遊戲原本的小型英文字型，字寬與 glyph metrics 也使用同一路徑，不再出現姓名仍為 8×16、中文已縮成 10×10 的比例不一致。全隊通知不含姓名；此輪實測只直接覆蓋全隊版本，單人姓名分支已編入同一版，之後遇到單人升級事件時可再做視覺回歸確認。
+
+### 11.4 最終部署與實機驗收
+
+本機 upstream 原始碼 commit：`4da895b`（`fix: stabilize Chinese rendering and dialog pagination`）。依本專案慣例，此 commit 保存在 `upstream/betrayal-at-krondor` 的本機歷史，不推送至原作者的 GitHub repository。
+
+```text
+dist/test_v100_zh/krondor.exe
+size    456,480 bytes
+SHA-256 b98ff9a194c5bfaa6f120b140a979aff6a2cb8964c0a1673d77de73afb8ec7a0
+
+dist/test_v100_zh/DIAL_Z21.DDX
+size    7,926 bytes
+SHA-256 d9492290e9cc8b293e7bc0f3a256b9ed1927356ab5ed6246c38276e825bee367
+
+dist/test_v100_zh/VMCODE.OVL
+size    44,582 bytes
+SHA-256 cd0cf73df9b11b7f70aa2036c813a64a8178ba60d24f9bbe548155c3e56237e0
+
+dist/test_v100_zh/SX.OVL
+size    40,742 bytes
+SHA-256 d73d92d8ff1a698ad64df9b108a04bc1ee7221bc4c336b4a6073191e5f4dabdb
+```
+
+使用者重新完成戰鬥後確認：全隊升級訊息「隊伍的各項能力都提升了。」以小字完整顯示於同一訊息框，標點正常，連續操作不再空白或死機，回報「沒當機了」。主問題正式標記為 **RESOLVED**。
