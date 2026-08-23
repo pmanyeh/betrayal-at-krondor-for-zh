@@ -66,7 +66,11 @@ def pack_ddx_data(data: dict[str, Any], use_raw_hex: bool = False) -> bytes:
         new_off = orig_off_to_new_off.get(orig_off, orig_off)
         new_dir_entries.append((node_id, new_off))
 
-    # Pass 3: Build record binary blobs, updating any choice/opcode pointer (nA3) if it points to a known record
+    # Pass 3: Build record binary blobs.  A choice's nA3/nA4 words are one
+    # 32-bit dwTarget_key.  Offset-based child choices can therefore point
+    # beyond 64 KiB and must be remapped as a single value when translated
+    # text changes record positions.  DdxOp.nA3 is an ordinary signed
+    # operand, not a record pointer, and must never be remapped.
     body_chunks: list[bytes] = []
     for i, rec in enumerate(records):
         style = rec["style"]
@@ -82,20 +86,23 @@ def pack_ddx_data(data: dict[str, Any], use_raw_hex: bool = False) -> bytes:
         # Pack choices (cnt1 * 10 bytes)
         choices_bin = bytearray()
         for ch in choices:
-            nA3 = ch["nA3"]
-            # If nA3 points to another record's offset, remap it to new offset
-            if nA3 in orig_off_to_new_off:
-                nA3 = orig_off_to_new_off[nA3]
-            choices_bin += struct.pack("<HHHHH", ch["wCond"], ch["nA1"], ch["nA2"], nA3, ch["nA4"])
+            target_key = ch["nA3"] | (ch["nA4"] << 16)
+            target_key = orig_off_to_new_off.get(target_key, target_key)
+            choices_bin += struct.pack(
+                "<HHHHH",
+                ch["wCond"],
+                ch["nA1"],
+                ch["nA2"],
+                target_key & 0xFFFF,
+                (target_key >> 16) & 0xFFFF,
+            )
 
         # Pack opcodes (cnt2 * 10 bytes)
         opcodes_bin = bytearray()
         for op in opcodes:
-            nA3 = op["nA3"]
-            # If nA3 points to another record's offset, remap it to new offset
-            if nA3 in orig_off_to_new_off:
-                nA3 = orig_off_to_new_off[nA3]
-            opcodes_bin += struct.pack("<HHHHH", op["wOp"], op["nA1"], op["nA2"], nA3, op["nA4"])
+            opcodes_bin += struct.pack(
+                "<HHHHH", op["wOp"], op["nA1"], op["nA2"], op["nA3"], op["nA4"]
+            )
 
         hdr_bin = _DDX_RECORD_HDR.pack(style, speaker, flags, cnt1, cnt2, body_len)
         body_chunks.append(hdr_bin + choices_bin + opcodes_bin + body_bytes)

@@ -16,6 +16,51 @@ from tools.text.ddx_pack import pack_ddx_data
 
 
 class TestDdxRoundTrip(unittest.TestCase):
+    def test_repack_remaps_full_32_bit_child_offset_only(self):
+        """Choice targets are 32-bit offsets; opcode operands are not pointers."""
+        old_child_offset = 0x00012345
+        data = {
+            "dir_entries": [(100001, 0x00010000)],
+            "records": [
+                {
+                    "orig_offset": 0x00010000,
+                    "style": 0,
+                    "speaker_id": 0,
+                    "flags": 0,
+                    "choices": [{
+                        "wCond": 0,
+                        "nA1": 0,
+                        "nA2": 0,
+                        "nA3": old_child_offset & 0xFFFF,
+                        "nA4": old_child_offset >> 16,
+                    }],
+                    "opcodes": [{
+                        "wOp": 6,
+                        "nA1": 12,
+                        "nA2": 160,
+                        "nA3": 0x2345,
+                        "nA4": 30,
+                    }],
+                    "text": "parent\x00",
+                },
+                {
+                    "orig_offset": old_child_offset,
+                    "style": 0,
+                    "speaker_id": 0,
+                    "flags": 0,
+                    "choices": [],
+                    "opcodes": [],
+                    "text": "child\x00",
+                },
+            ],
+        }
+
+        extracted = extract_ddx_data(pack_ddx_data(data))
+        child_offset = extracted["records"][1]["orig_offset"]
+        choice = extracted["records"][0]["choices"][0]
+        self.assertEqual(choice["nA3"] | (choice["nA4"] << 16), child_offset)
+        self.assertEqual(extracted["records"][0]["opcodes"][0]["nA3"], 0x2345)
+
     def test_synthetic_roundtrip(self):
         """Build a synthetic DDX binary with keyed and child records, verify exact byte round-trip."""
         # 2 records: Rec 1 at off 18, Rec 2 (child) at off 18 + len(rec1)

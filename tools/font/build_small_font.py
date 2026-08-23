@@ -18,21 +18,31 @@ from pathlib import Path
 from build_font import build_small_zh_font
 
 
-def chars_from_translations(path: Path) -> list[str]:
-    data = json.loads(path.read_text(encoding="utf-8"))
+def chars_from_translations(paths: list[Path]) -> list[str]:
+    """Collects glyphs from every given translation source. A small-font glyph
+    table is sparse and used by more than one UI surface at once (e.g. the
+    character sheet's stat panel AND the chapter-title banner both use the
+    10x10 small font) -- passing only one source silently drops any glyph the
+    OTHER surface needs, even though both surfaces render fine individually.
+    Always pass every source that shares this font, not just the one you're
+    currently working on."""
     chars: dict[str, None] = {}
-    for entry in data.get("entries", []):
-        if entry.get("status") != "translated":
-            continue
-        for ch in entry.get("translation", ""):
-            if ord(ch) >= 0x2E80:
-                chars.setdefault(ch, None)
+    for path in paths:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for entry in data.get("entries", []):
+            if entry.get("status") != "translated":
+                continue
+            for ch in entry.get("translation", ""):
+                if ord(ch) >= 0x2E80:
+                    chars.setdefault(ch, None)
     return list(chars)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build a sparse small-cell ZHSM font.")
-    parser.add_argument("translations", type=Path, help="localization/translated/*.json source")
+    parser.add_argument("translations", type=Path, nargs="+",
+                         help="One or more localization/translated/*.json sources -- "
+                              "pass every source that shares this small font, not just one.")
     parser.add_argument("--zh-mapping", type=Path, required=True,
                          help="localization/generated/zh_mapping.json (for glyph IDs)")
     parser.add_argument("--cell", type=int, default=10, help="Glyph cell size in pixels")

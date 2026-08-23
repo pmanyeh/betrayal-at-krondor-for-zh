@@ -30,31 +30,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "font"))
 
 from ddx_extract import extract_ddx_data  # noqa: E402
-from ddx_pack import pack_ddx_data  # noqa: E402
-from build_font import encode_string  # noqa: E402
-
-_TOKEN_RE = re.compile(r"@\d|@|[\x00-\x1f\xe0-\xff]")
+from ddx_rebuild_common import build_ddx_file, extract_tokens  # noqa: E402
 
 _DEFAULT_MAPPING = Path(__file__).resolve().parents[2] / "localization" / "generated" / "zh_mapping.json"
 
 
-def extract_tokens(text: str) -> list[str]:
-    """Structural markers a translation must reproduce exactly: speaker
-    tokens (@0, @1, ...), control/style bytes (0xE0-0xFF), and raw
-    control characters like \\t / \\n. Encoded as \\xNN for the
-    non-printable single bytes so the token list is JSON-safe."""
-    tokens = []
-    for m in _TOKEN_RE.finditer(text):
-        s = m.group(0)
-        if len(s) == 1 and ord(s) < 0x20 or (len(s) == 1 and ord(s) >= 0xE0):
-            tokens.append(f"\\x{ord(s):02x}")
-        else:
-            tokens.append(s)
-    return tokens
-
-
 def _entry_id(ddx_name: str, rec_index: int) -> str:
     return f"{ddx_name}#{rec_index}"
+
+
+def _preview(source: str, width: int = 70) -> str:
+    return "".join(
+        char if 0x20 <= ord(char) < 0x7F else f"\\x{ord(char):02x}"
+        for char in source[:width]
+    )
 
 
 def cmd_scaffold(args: argparse.Namespace) -> None:
@@ -117,13 +106,6 @@ def cmd_scaffold(args: argparse.Namespace) -> None:
     print(f"Scaffolded {len(new_entries)} entries ({added} new, {translated} already translated) to {out_path}")
 
 
-def _preview(source: str, width: int = 70) -> str:
-    return "".join(
-        c if 0x20 <= ord(c) < 0x7F else f"\\x{ord(c):02x}"
-        for c in source[:width]
-    )
-
-
 def cmd_status(args: argparse.Namespace) -> None:
     data = json.loads(Path(args.json_path).read_text(encoding="utf-8"))
     entries = data.get("entries", [])
@@ -145,63 +127,12 @@ def cmd_status(args: argparse.Namespace) -> None:
 
 
 def cmd_build(args: argparse.Namespace) -> None:
-    ddx_path = Path(args.ddx_path)
-    ddx_name = ddx_path.name
-    payload = ddx_path.read_bytes()
-    extracted = extract_ddx_data(payload)
-
-    data = json.loads(Path(args.json_path).read_text(encoding="utf-8"))
-    if data.get("source_ddx") != ddx_name:
-        print(f"warning: translation file was scaffolded from {data.get('source_ddx')!r}, "
-              f"building against {ddx_name!r}", file=sys.stderr)
-    translations = {e["id"]: e for e in data.get("entries", [])}
-
-    mapping = json.loads(Path(args.mapping).read_text(encoding="utf-8"))
-    char_to_id = mapping["char_to_id"]
-
-    applied = 0
-    skipped_untranslated = 0
-    skipped_token_mismatch = 0
-    skipped_source_drift = 0
-
-    for rec in extracted["records"]:
-        entry_id = _entry_id(ddx_name, rec["rec_index"])
-        entry = translations.get(entry_id)
-        if entry is None or entry["status"] != "translated" or not entry["translation"]:
-            if entry is not None and entry["status"] != "untranslated" and not entry["translation"]:
-                skipped_untranslated += 1
-            continue
-
-        if entry.get("source") != rec["text"]:
-            print(f"warning: {entry_id} source text on file doesn't match the local DDX you're building "
-                  f"against, falling back to the local DDX's text\n"
-                  f"  on file: {_preview(entry.get('source', ''))}\n"
-                  f"  local:   {_preview(rec['text'])}", file=sys.stderr)
-            skipped_source_drift += 1
-            continue
-
-        source_tokens = extract_tokens(rec["text"])
-        translation_tokens = extract_tokens(entry["translation"])
-        if source_tokens != translation_tokens:
-            print(f"warning: {entry_id} token mismatch, falling back to source text\n"
-                  f"  source tokens:      {source_tokens}\n"
-                  f"  translation tokens: {translation_tokens}", file=sys.stderr)
-            skipped_token_mismatch += 1
-            continue
-
-        encoded = encode_string(entry["translation"], char_to_id)
-        rec["text"] = encoded.decode("latin1")
-        applied += 1
-
-    packed = pack_ddx_data(extracted)
     out_path = Path(args.out)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_bytes(packed)
-
-    print(f"Built {out_path}: {applied} record(s) translated, "
-          f"{skipped_untranslated} marked-but-empty skipped, "
-          f"{skipped_token_mismatch} token-mismatch fallback(s), "
-          f"{skipped_source_drift} source-drift fallback(s)")
+    stats = build_ddx_file(Path(args.ddx_path), Path(args.json_path), out_path, Path(args.mapping))
+    print(f"Built {out_path}: {stats['applied']} record(s) translated, "
+          f"{stats['skipped_untranslated']} marked-but-empty skipped, "
+          f"{stats['skipped_token_mismatch']} token-mismatch fallback(s), "
+          f"{stats['skipped_source_drift']} source-drift fallback(s)")
 
 
 def main() -> None:
