@@ -1,14 +1,16 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**寫於：** 2026-08-21　**目前部署狀態：** `dist/test_v100_zh/DIAL_Z00.DDX` 目前是**完全未翻譯的原始英文版**（見下方第 3 點原因）；`localization/translated/DIAL_Z00.json` 裡 409/418 筆翻譯內容本身完好保留（`status: translated`），只是暫時沒有 build 進部署檔案。`DIAL_Z01`（40 筆）／`DIAL_Z16`（211 筆）／`DIAL_Z18`（364 筆）維持正常部署、實機驗證正常。字庫 **4072 字**，全部真倚天點陣、零 fallback。
+**最後更新：** 2026-08-23　**目前部署狀態：** `dist/test_v100_zh/` 裡的 `DIAL_Z00.DDX`（418 筆，含 §8.3 那 9 筆章節橫幅）已經**完整部署且實機驗證通過**——§8.3／§8.4 當時記錄的「章節橫幅卡死」「撿屍體閃退」兩個問題都已經在 §8.5（2026-08-21）跟緊接著的這次 session（§9，2026-08-21~23）修好，**下面第 1～3 點與 §8.3／§8.4 的「尚未解決」結論已經過時，不要照著繼續排查，直接看 §8.5／§9**。
 
-本次 session 翻完 `DIAL_Z00.json` 全部 418 筆、實機測試後，**一共炸出三個影響全域的真 bug，其中兩個已在 C 原始碼層級修好並重新編譯進 `KRONDOR.EXE`，第三個尚未解決、是目前 `DIAL_Z00` 完全沒部署的原因**：
+目前累計已完整翻譯並部署：15 個 DDX 章節檔共 **1234 筆對話**（`DIAL_Z00`／`Z01`／`Z02`／`Z03`／`Z04`／`Z05`／`Z07`／`Z08`／`Z10`／`Z11`／`Z12`／`Z16`／`Z18`／`Z24`／`Z29`），加上全新的 `OBJINFO.DAT` 物品名稱系統（137 筆全譯）、`UI_HARDCODED.json` 硬編碼字串 55 筆。字庫 **4212 個字庫 ID 槽位**（實際 2522 個相異字元，槽位數大於字元數是因為 §5.2 的編碼避碰機制本來就會跳過部分 ID），全部真倚天點陣、零 fallback。詞彙表 `glossary.json` 已有 **174 筆**詞條。全遊戲 DDX 對話總量 5,931 筆，扣掉已翻的 1,234 筆，其餘約 4,697 筆待翻（29 個章節檔的 scaffold 都已建好）。
+
+以下第 1～3 點是 2026-08-21 當天寫下、**現已被 §8.5 取代**的舊結論，保留僅供追溯排查歷史：
 
 1. **字庫編號洗牌 bug（已修正為預設行為，不會再重演）**：`build_font.py --from-translations` 原本每次都把所有中文字的字庫編號重新洗牌一遍；這次因為 `DIAL_Z00.json` 檔名排序在 `DIAL_Z01`/`Z16`/`Z18` 之前，導致這幾個「這次根本沒改過」的已翻譯章節全部跟著錯位、螢幕全部變亂碼。已改成**穩定、只增不變（append-only）**的編號分配：`build_font.py` 現在預設會讀取既有的 `--output-map`（若存在）當作基準，只給新字元分配新編號，舊字元的編號永遠不變──這樣以後任何時候擴充字庫，都不會再讓已經 build 好的舊 DDX 檔案報廢。細節見 §8.1。
-2. **`TEXTWRAP.C` 真的 infinite loop（已修正並重新編譯進 `KRONDOR.EXE`）**：`textwrap_draw_aligned()` 用來計算「這個對話框裝得下幾行」的迴圈，用 `unsigned short` 型別的 `g_wTextWrapLinesRemaining` 做減法，沒有上界檢查；一旦超過應有範圍，C 的無號數提升規則會讓減法結果從負數變成一個巨大正數，導致迴圈條件永遠成立、遊戲整個卡死（黑畫面、無法操作，但 DOSBox-X 進程本身沒當掉）。這個 bug 原本潛伏著沒被發現，因為原文英文內容從來沒觸發過這個邊界；**是這次翻譯章節標題文字（`DIAL_Z00` 的 `#291`~`#299`，node_id 294~302）第一次讓中文內容跑進這條路徑才炸出來**。已在 `bak/SRC/UI/TEXTWRAP.C` 修正（加一個上界檢查）並重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。細節見 §8.2。**這 9 筆章節標題目前仍暫時還原成英文**（原因見 §8.3，跟這個 bug 修好與否無關，是另一個更難查的問題）。
-3. **⚠️ 尚未解決：撿屍體會讓遊戲直接閃退（`MEM:34 Heap Corrupt! Null pointer assignment`）**：開新遊戲、走完擄劫戰對話進入 3D 畫面後，點擊地上被幹掉的刺客屍體，本來應該顯示一段描述文字、接著進入戰利品/物品畫面，**結果遊戲直接閃退**，跟 DOS 記憶體管理員回報堆積（heap）已損毀。過程中順手發現並修好了另一個真的越界讀取 bug（`DIALOG.C` 的 `@N` 角色代稱展開邏輯），但那個修正**沒能解決這次閃退**，代表真正原因還是別的地方。這是本次 session 唯一沒解決的問題，細節、已排除的假說、下一步建議都在 §8.4，**目前為了保證遊戲能正常玩，`DIAL_Z00` 整個先退回原始英文部署，翻譯內容本身沒有遺失**。
+2. **`TEXTWRAP.C` 真的 infinite loop（已修正並重新編譯進 `KRONDOR.EXE`）**：`textwrap_draw_aligned()` 用來計算「這個對話框裝得下幾行」的迴圈，用 `unsigned short` 型別的 `g_wTextWrapLinesRemaining` 做減法，沒有上界檢查；一旦超過應有範圍，C 的無號數提升規則會讓減法結果從負數變成一個巨大正數，導致迴圈條件永遠成立、遊戲整個卡死（黑畫面、無法操作，但 DOSBox-X 進程本身沒當掉）。這個 bug 原本潛伏著沒被發現，因為原文英文內容從來沒觸發過這個邊界；**是這次翻譯章節標題文字（`DIAL_Z00` 的 `#291`~`#299`，node_id 294~302）第一次讓中文內容跑進這條路徑才炸出來**。已在 `bak/SRC/UI/TEXTWRAP.C` 修正（加一個上界檢查）並重新編譯，`VMCODE.OVL`／`SX.OVL` 仍 byte-identical。細節見 §8.2。~~這 9 筆章節標題目前仍暫時還原成英文~~ **已在 §8.5 用 `g_bSmallZhMode` 小字模式解決，9 筆章節橫幅現在正常顯示中文，見 §8.5 B 段。**
+3. ~~⚠️ 尚未解決：撿屍體會讓遊戲直接閃退~~ **已在 §8.5 A 段解決**：根因是 `ddx_pack.py` 把 `DdxChoice` 的 32-bit `dwTarget_key` 誤當成獨立 16-bit 欄位重映射，中文版 record 長度改變後子記錄位址跳錯，讀到未初始化資料寫穿記憶體。已修正 `ddx_pack.py`，實機確認撿屍體不再閃退。
 
-這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。
+這份文件的目的：讓下一個對話 session（不管是不是同一個 agent）不需要重新摸索環境，能直接接續開發。詳細技術過程另見 `docs/baseline/phase5-toolchain-build-verification.md`；長期規劃見 `Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`（主線，目前採用中）；另有一份 `Betrayal_at_Krondor_HD_Traditional_Chinese_PROJECT_PLAN.md`（HD host-side overlay 替代方案，尚未採用，僅供未來評估）。**下一個 session 開始前，務必先讀 §9（本次 session 完整記錄），特別是 §9.5 那個還沒解決、有明確線索的物件貼圖雜色 bug。**
 
 ---
 
@@ -382,5 +384,156 @@ Null pointer assignment
 
 ## 7. Git 狀態
 
-- 主專案 `betrayal-at-krondor-for-zh`：`master` 分支，最新 commit 見 `git log --oneline -10`。`origin` 已設定指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
-- `upstream/betrayal-at-krondor`：本地領先 origin 15 個 commit（`2dcb2b0`、`90be31b`、`e7f94c0`、`1276b58`、`4b681d3`、`378050c`、`0e2f249`、`c7feb11`、`f38a089`、`12b9a14`、`42f6fd4`、`8ddc763`、`d0af98c`，加上本次 session 新增的 `47d0a32`——§8.2 的 `TEXTWRAP.C` infinite loop 修正——與 `4ecd59d`——§8.4 過程中順手修好的 `DIALOG.C` `@N` 越界讀取，但注意這個修正沒解決 §8.4 的主要閃退問題）。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+- 主專案 `betrayal-at-krondor-for-zh`：`master` 分支。**目前工作目錄裡大量檔案都還是未 commit 的異動**（`localization/translated/*.json` 新翻譯內容、`localization/generated/ZH16.DAT`／`zh_mapping.json`、`localization/glossary/glossary.json`、`docs/research/text-surface-inventory.md`、多個 `tools/text/*.py`／`tools/font/build_small_font.py`、新增的 `tools/text/objinfo_translate.py`、`tests/unit/test_objinfo_translate.py` 等）——這是本專案一貫的作法（只在使用者明確要求時才 commit，翻譯/工具異動不會自動 commit），下一個 session 接手前**先 `git status` 確認清楚哪些是已完成、待 commit 的工作，不要誤以為是別人動過的髒狀態**。`origin` 指向使用者自己的 GitHub repo（`https://github.com/pmanyeh/betrayal-at-krondor-for-zh`）——commit/push 都對這裡，不是上游來源。
+- `upstream/betrayal-at-krondor`：本地領先 origin 多個 commit，且**這個 sub-repo 裡的 commit 是本專案慣例會直接做的**（每次重編譯 exe 前，先在這裡 commit C 原始碼異動，才能讓 WSL clone `git pull` 取到）。目前分支最新（由舊到新）：`...` → `1276b58` → `4b681d3` → `378050c` → `0e2f249` → `c7feb11` → `f38a089` → `12b9a14` → `42f6fd4` → `8ddc763` → `d0af98c` → `47d0a32`（§8.2 `TEXTWRAP.C` 無窮迴圈修正）→ `4ecd59d`（§8.4 過程中順手修好的 `DIALOG.C` `@N` 越界讀取）→ 本次 session 新增的 8 個 commit：`bddbfe0`（`g_bSmallZhMode` 章節橫幅 + `dialog_show_by_key` 名稱表初始化）→ `ddb10ea`（角色屬性面板 `Ratings:`/`Condition:` 標題改小字）→ `78a0ad1`（物品欄格子名稱＋耐久度改小字）→ `62c8bb1`（`shopkeeper`／貨幣字串翻譯）→ `591d041`（物品欄價格行也改小字）→ `9ec0558`（物品檢視面板名稱/耐久度標籤）→ `284b7ae`（補 `INVINSP.C` 缺的 `FONT.H` include）→ `566e11c`（More Info 詳情彈窗＋紮營畫面＋Party Gold 翻譯）。詳見 §9。**這些 commit 永久只留在本地 clone，不 push 回 origin、不對上游開 PR**——這是專案的固定規則，不是暫時待確認事項。上游是還原保存專案、不是 modding 專案，我們的中文化修改只在自己的專案（`betrayal-at-krondor-for-zh`）裡管理和 commit。
+
+## 8.5 2026-08-21 Debug 收尾：DDX 子記錄位址、章節橫幅與 `@N` 名稱替換
+
+> **本節是 §8.3／§8.4 的後續實測結論；其中「章節橫幅仍無法中文化」與「屍體閃退尚未解決」的舊結論，均已被下列修正取代。**
+
+### A. 屍體互動的 `MEM:34 (Heap Corrupt!)` 已定位並修正
+
+**根因不是 DOSBox cycles，也不是中文字型或特定一段屍體文稿。** `tools/text/ddx_pack.py` 重建 DDX 時，錯把 `DdxChoice` 的 `dwTarget_key` 當作獨立的 16-bit `nA3` 欄位處理；實際上它由 `nA3`（低 16 位）和 `nA4`（高 16 位）組成 32-bit 的子記錄檔案位址。
+
+中文翻譯改變各 record 長度後，父選項仍跳往英文檔的舊位址（例如屍體路徑由 record `#363` 跳往舊 `0x12CC4`，但中文版正確子記錄已移到 `0xC347`）。遊戲從檔案尾端以外讀到未初始化資料，誤配出超大矩形高度，`draw_rect_filled()` 的 span table 寫穿記憶體，最終才在之後配置 `KEYWORD.DAT` 時由 heapcheck 報 `MEM:34`。
+
+**修正：**
+
+- `ddx_pack.py` 現在會合併 choice 的 `nA3 | (nA4 << 16)`，依新 record offset 重映射後再拆回兩個 word。
+- `DdxOp.nA3` 是一般運算元，**絕不能**當指標重映射；舊作法也已移除。
+- `tests/unit/test_ddx_roundtrip.py` 新增 32-bit child target 測試，以及「opcode operand 不變」斷言；相關 DDX tests 共 **15 passed**。
+- 重新執行 `ddx_translate.py build scratchpad/pristine/DIAL_Z00.DDX localization/translated/DIAL_Z00.json dist/test_v100_zh/DIAL_Z00.DDX` 後，實機點擊屍體已正常顯示文字、不再閃退。
+
+**重要：** 任何已經用舊版 packer 建出的本地化 DDX，都必須從原始 DDX **重新 build** 才會帶到此修正；只改 Python 工具不會回頭修好既有 `.DDX` 成品。
+
+### B. 章節橫幅已恢復中文，並使用 10×10 小字形
+
+章節橫幅是 `DIAL_Z00.DDX#291`～`#299`，不是另一份英文圖片文字。先前畫面仍顯示英文，是因為部署目錄裡仍是舊打包的 `DIAL_Z00.DDX`；用正確的重建成品後已帶入九筆中文。
+
+這個版位高度只有 30 px，16×16 中文會造成舊有排版/流程問題。因此新增 `g_bSmallZhMode` 小字模式：
+
+- `DIALOG.C` 識別章節橫幅版位（`wFlags == 0x4014` 與 style rect `12,160,160,30`）後啟用小字模式。
+- `FONT.C`／`FONT.H` 讓中文字的繪製、像素寬度與 glyph metrics 在此模式使用 10×10。
+- `TEXTWRAP.C` 在小字模式採 10 px 行高及 10 px 中文寬度；其他對話仍是 16×16。
+- 初始 `ZHSTAT.DAT` 只有角色面板所需的 35 個字，章節字出現時只會留少數字形。已用 `tools/font/build_small_font.py localization/translated/DIAL_Z00.json --zh-mapping localization/generated/zh_mapping.json --output dist/test_v100_zh/ZHSTAT.DAT` 重建為 **1,735** 個小字 glyph，實機確認章節一完整顯示中文。
+
+未來只要新的小字版位會使用其他 DDX 的中文，必須把那些譯稿字元也納入 `ZHSTAT.DAT` 的建置來源；不能沿用只含 35 字的舊檔。
+
+### C. `@0`～`@5` 角色佔位字元
+
+屍體文稿 `DIAL_Z00.DDX#365` 的 `@0` 曾顯示成一大片空白，並不是在 `@0` 後直接接中文字的編碼問題；引擎已吃掉 placeholder，但直接由腳本呼叫的 `dialog_show_by_key()` 沒有建立 `g_speaker_names[]` 表，所以得到空字串。
+
+`dialog_show_by_key()` 現在先呼叫 `dialog_combatant_name_table_init()`，因此 `@0` 已可正常替換為 `Gorath`。在 `@0` 後加空白只會影響排版間距，不是修正必要條件。角色資料本身目前仍儲存英文名稱；若要讓 `Gorath` 顯示為「戈拉斯」，需另做角色名稱在執行期的本地化，不能只改 DDX 文稿。
+
+### D. 實機驗證結果
+
+1. 點擊第一章 3D 畫面屍體：中文文稿正常顯示，後續不再 `MEM:34`／`Null pointer assignment`。
+2. 章節一地圖橫幅：正常顯示「第一章：踏入黑暗之夜／護送戈拉斯前往克朗多！」的 10×10 中文小字。
+3. `@0`：可替換為 `Gorath`，不再留下空白佔位區。
+
+## 9. 2026-08-21～23 Session：新章節翻譯 + 物品名稱系統 + UI 版面修正（大量小字模式擴充）
+
+延續 §8.5 之後的同一輪對話 session（跨了兩次日期換日，實際是連續工作）。內容分五塊：新翻譯章節、全新的物品名稱系統、一大批 UI 硬編碼字串＋版面 bug 修正、確認「More Info」按鈕屬於未開發的資源系統、以及一個**還沒解決但已經有明確線索**的物件貼圖雜色 bug。
+
+### 9.1 新翻完的 DDX 章節（共 201 筆，+ 之前累計＝1234 筆）
+
+- `DIAL_Z02`（38）／`DIAL_Z03`（38）／`DIAL_Z07`（26）：三個結構很像的「路口濃霧敘事＋墓誌銘」章節，一起翻完，順便在 §5.0 已有的墓誌銘翻譯風格（`姓氏．名字\n「雙關語式墓誌銘」`）基礎上繼續套用。過程中發現的新地名/人名見詞彙表新增清單。
+- `DIAL_Z04`／`DIAL_Z05`／`DIAL_Z08`／`DIAL_Z10`／`DIAL_Z11`／`DIAL_Z12`（合計 46 筆）：全都是小檔案，一次翻完。`Z04` 是卡瓦爾堡被摧毀的後續劇情（呼應 `Z03` 埋下的伏筆）；`Z08` 是戈拉斯／歐文往艾爾凡達路上的對話，帶出新種族詞 `eledhel`（光精靈，仿照 `moredhel` 音譯為「伊列德人」）；`Z12` 提到「六賢者」洞穴，直接呼應 `Abbot's Journal`／`Wooden Chest`／`Shell` 這幾個物品名稱（見 §9.2），是刻意的劇情道具伏筆。
+- `DIAL_Z24`（28 筆）：幽暗林商店群（八間店名＋制式風味文字）＋一段**開發者留下的 meta 玩笑對話**（`#21`／`#27`／`#29`／`#30`，逐字元樣式標記，內容是角色們在討論「要不要用作弊手段開鎖」「這一章該不該現在結束」，玩家看不太出來但翻譯時要小心逐字元 `\xf1`/`\xf3` token 對齊，這批是本次 session token 結構最複雜的幾筆）。
+- `DIAL_Z29`（25 筆）：**帕格在生命石洞穴前向歐文/戈拉斯揭露真相**的主線高潮劇情——冒牌穆爾曼達穆斯其實是潘塔西亞人偽裝、瓦爾赫魯靈魂被封印在生命石裡、帕格自曝出身克萊迪宮廷廚房小廝、馬克羅斯早已預見兩人的介入。新詞彙全部加入 glossary（`false Murmandamus`→冒牌穆爾曼達穆斯，比照既有的「冒牌夜鷹會」譯法）。
+
+全部經過跟之前批次一樣的驗證流程：`ddx_translate.py scaffold` 確認無 source drift、`extract_tokens()` 逐筆比對 token 結構、`ddx_rebuild_all.py` 全量重建 0 fallback、`pytest tests/unit` 全過。
+
+### 9.2 全新發現：物件簡短名稱其實在 `OBJINFO.DAT`，已完整翻譯（137 筆）
+
+之前的 Phase 8 文字盤點（`docs/research/text-surface-inventory.md`）漏掉了一塊：物品欄格子裡顯示的**物品本身的簡短名稱**（如「Long Sword」，不是 `DIAL_Z18` 那種長篇風味文字，也不是 `INVENTOR.C`／`INVINSP.C` 的欄位標籤）到底存在哪裡，一直沒查過。這次查到：
+
+- **來源**：`KRONDOR.RMF` 裡的 `OBJINFO.DAT`，由 `ITEMTBL.C:itemtbl_load()` 整包讀進 `g_pItemDefTable`。
+- **格式**：全遊戲**目前碰過最簡單**的格式——沒有字串池、沒有 offset 表，就是 138 筆固定 80-byte 的 `ItemRecord`（`INCLUDE/structs.h:837`）緊接著排列：前 32 bytes 是 NUL 補齊的 `pName`，接著 `wFlags`（32-33 byte）、`wName_split_off`（**34-35 byte，不是 32-33！**，見下面的踩坑記錄）、傷害/價格等數值欄位。
+- **新工具**：`tools/text/objinfo_translate.py`（`scaffold`／`status`／`build`，介面比照 `ddx_translate.py`）。因為 `pName` 是固定 32 bytes，`build` 會檢查編碼後是否 ≤31 bytes，超過就安全 fallback。
+- **翻譯內容**：137 筆（index 0 為空、不使用）全數譯完，存在 `localization/translated/OBJINFO.json`。翻譯時發現大量物品名稱其實已經在 `DIAL_Z18` 的風味文字內文裡被直接引用過（例如「銀刺」「禁制鑰匙」「那夫沙油」「真視茶」「基爾迪斯棘刺」），逐一比對後採用了那些既有譯名，並回頭修正兩處 `DIAL_Z18` 自己沒抓到的舊譯名不一致（`Aventurine` 東陵石→砂金石、`Flame Root Oil` 火根精油→火根油）。約 20 個新詞彙加入 glossary（`Fadamor`、`Dalatail`、`Sarig`、`Coltari`、`Kalem`、`Dorcas`、`Nivek`、`Glazer's Guild` 等），並回頭修正了先前 `DIAL_Z02`/`DIAL_Z07` 兩筆墓誌銘裡跟這批新詞撞名但拼法不一致的地方（人名 `Dalatail`／`Fadamor` 統一轉寫）。
+
+**⚠️ 真 bug（已修正）：`objinfo_translate.py` 寫錯了 `wName_split_off` 的位元組偏移量，把 `wFlags` 清空了。**
+`ItemRecord.pName[32]` 後面接的是 `wFlags`（32-33 byte），**再來才是** `wName_split_off`（34-35 byte）——第一版 `build()` 把「重設成單行」這行寫在 `offset + NAME_SIZE`（=32），以為那是 `wName_split_off`，實際上蓋掉的是 `wFlags`。`wFlags` 正是耐久度百分比／堆疊數量徽章要不要顯示、顯示成 `%d%%` 還是純數字的判斷依據，全部清零後，**所有翻譯後物品的耐久度/數量徽章完全消失**（使用者實機截圖抓到，物品欄格子空白一片、講價視窗數字不見）。已修正偏移量（`offset + NAME_SIZE + 2`），逐位元組驗證除了名字本身跟 `wName_split_off` 外其餘欄位跟原版一致，並新增 `tests/unit/test_objinfo_translate.py` 防止同樣的偏移量錯誤再發生。**這是一個很好的教訓：手動計算 C struct 的欄位偏移量一定要對照原始 struct 定義逐欄位算，不要憑印象假設「名字後面接著的就是我要的那個欄位」。**
+
+`wName_split_off`（物品欄格子裡「英文名字太長要拆兩行」的斷行位置，字元索引）目前策略是**全部強制設回 0**（單行置中顯示）——中文譯名普遍只有 2-6 個全形字，早期在物品欄格子裡測試時（§9.3 的排版問題出現前）名稱本身沒有塞不下的狀況，因為後來發現的排版問題其實是「名稱＋耐久度那一行」用了 16×16 標準字高、跟下面的價格行擠在一起（見下方 §9.3），不是名稱本身太長，所以維持強制單行的做法沒有改。
+
+### 9.3 一整批 UI 硬編碼字串＋版面重疊 bug（`g_bSmallZhMode` 應用範圍大幅擴大）
+
+使用者實機截圖陸續抓到好幾個「中文字比原本設計的英文字高，擠壓/裁切到旁邊文字」的情況，全部照 §7.2 已經驗證過的模式解決：**把該處的中文改用既有的 10×10 `g_bSmallZhMode` 小字模式**（不是重新設計版面座標，先前 §7.2 已確認這個模式好用、可重複套用）。這次一口氣把小字模式的套用範圍擴大到：
+
+- `INVENTOR.C` 物品欄格子（`invui_grid_render`，商店／裝備格通用）：「名稱＋耐久度」那一行、下面的「NN金幣 NN銀盾」價格行，兩行都改小字（原本只改了名稱那行，使用者截圖抓到價格行還是大字、又擠在一起，第二輪才補齊）。
+- `INVINSP.C` 物品檢視面板（`invinspect_item_flow`）：物品名稱＋`數量：`／`剩餘次數：`／`價值評等：`／`耐久度：` 這行，跟底下的 `使用中、可修復`／`已損壞` 狀態行，都改小字，耐久度行的 y 座標額外往下微調 2px 留呼吸空間（比照 §7.2 `charscreen_draw_stat_row` 的先例）。
+- `INVINSP.C` 的「More Info」詳情彈窗（`invinspect_render_details`）：`突刺`／`揮砍`（Thrust/Swing）欄位標題跟底下所有數值列，整個函式都包進小字模式。
+- `ENCAMP.C` 紮營畫面的「生命/體力」「口糧」欄位標題也改小字（這處實測沒有明顯重疊，但基於一致性跟預防性一併處理）。
+
+**每次擴大 `g_bSmallZhMode` 涵蓋範圍，都要記得把新用到的中文字元也餵進 `ZHSTAT.DAT`**（這是 §8.5-B 自己寫下但這次還是差點忘記的教訓）——`tools/font/build_small_font.py` 原本**只能吃一個翻譯來源檔**，這次把它改成可以吃多個（`nargs="+"`），現在標準呼叫方式是：
+
+```bash
+python tools/font/build_small_font.py \
+  localization/translated/UI_HARDCODED.json \
+  localization/translated/DIAL_Z00.json \
+  localization/translated/OBJINFO.json \
+  --zh-mapping localization/generated/zh_mapping.json \
+  --output dist/test_v100_zh/ZHSTAT.DAT
+```
+
+**每次改完任何一個小字模式涵蓋的畫面，都要重跑這行**（目前 1827 個小字 glyph）。忘記跑的話，新用到的字會安靜顯示成空白（不會報錯、不會當機，很容易漏看）——這正是這次踩過的坑（角色屬性面板漏了「鑑」「甲」「偵」三個字，起因是 §8.5-B 重建 `ZHSTAT.DAT` 時只用了 `DIAL_Z00.json` 一個來源，沒帶入 `UI_HARDCODED.json`）。
+
+**同時翻掉的純硬編碼字串**（跟 DDX 無關，直接改 C 原始碼字串常數，記錄在 `localization/translated/UI_HARDCODED.json`，目前共 55 筆）：
+
+- `shopkeeper`→店主、`tavernkeeper`→酒館老闆（`DIALOG.C` 的 `@N` 通用 NPC 稱呼預設值）。
+- **貨幣用詞統一**：原始英文其實用兩套不一致的說法指同一種貨幣——`gstate_format_money()` 的 mode 1 用 `gold`/`silver`，mode 2 用 `sovereign`/`royal`；`INVENTOR.C` 自己還有一份重複的 `gold`/`silver` inline 版本。全部統一成物品名稱系統已經確立的「金幣」／「銀盾」，順便把英文版原本的複數字尾邏輯（`strcat(buf,"s")`、`%c` 三元運算子）整段刪掉——中文名詞不需要複數變化，刪之前先確認過兩個分支在數值上會輸出一樣的字串，才敢刪。
+- `INVINSP.C` More Info 彈窗內容：`Base Dmg:`／`Accuracy:`／`Armor Mod:`／`Active Mods:`／`Resistances:`／`Bless Type:`／`Racial Mod:`／`None`／附魔詞（`Poisoned`/`Frosted`/`Flaming`/`Steelfired`/`Enhanced`）／種族名（`Tsurani`/`Elf`/`Dwarf`/`Human`）／`Strength`/`Skill`／`Quarrel`/`CrossBow`／`Affecting`/`Can affect player statistics`，整批翻完。
+- `ENCAMP.C` 的 `Health/Stamina`／`Rations` 欄位標題、` of ` 分隔字（改成 ` / `，故意保留半形斜線不用中文字元，因為它只會出現在兩個 `itoa()` 數字之間）。
+- `MODALSCR.C` 的 `Party Gold:`→隊伍金幣：、旅費顯示的 `%d sovereigns`。
+- `INVENTOR.C` 的 `Unavailable`（物品無法估價時顯示）→無法估價。
+
+翻譯這批之前都先跑過關鍵字掃描，確認沒有跟已有 glossary／既有 DDX 譯名衝突（例如 `Condition:` 在角色面板脈絡是「狀態」，但在物品脈絡刻意改用「耐久度」，避免玩家搞混兩種不同概念）。
+
+**順手發現並修正一個完全無關的既有 bug**：`DIAL_Z18.DDX#319`（「伊夏之眼」法術卷軸標題）的翻譯裡多了一個 `\xf1` 樣式位元組（4 個而不是原文的 3 個），導致這筆早就翻好、早就部署過的內容其實一直在悄悄 fallback 回英文，只是因為 §5.2 當初驗收時沒有針對這筆特別測到而沒被抓到。已修正字元分組讓 token 數對齊。
+
+### 9.4 確認：「More Info」按鈕本身沒辦法翻——屬於還沒開發的 `MenuPage`／`.dat` 資源系統
+
+`invinspect_render_details()`（§9.3 翻完的詳情彈窗）內容本身是硬編碼 C 字串沒錯，但**觸發它的「More Info」按鈕、以及旁邊「Repair」之類的按鈕標籤，全文搜尋 `upstream/betrayal-at-krondor/bak/SRC/` 完全找不到對應字串**——追進呼叫端（`INVINSP.C` 裡 `page->pEntries + 0x23` 那段）確認它是從 `MenuPage` 結構的 `pEntries[...].pPrimary_label` 讀出來的，屬於 `docs/research/text-surface-inventory.md` §4 早就盤點過、但**還沒開發解析/封裝工具**的 `MenuPage`／`NamedTable`／`DialogWidget` 資源家族（`.dat` 檔，字串池＋offset 修補格式）。這不是這次能翻的範圍，工程量遠大於改幾個硬編碼字串，需要專門排一個 phase 去寫通用 codec（§4 文件裡已經有建議的技術路線，`fmap_twn.dat`／`KEYWORD.DAT` 格式最簡單，適合當作第一個試點）。**下次使用者截圖抓到某個按鈕/選單標籤沒被翻譯時，先確認它是不是也屬於這個資源家族，不要預期能像硬編碼字串一樣三兩下翻完。**
+
+### 9.5 ⚠️ 尚未解決：物件貼圖縮小後會出現雜色噪點（已有具體線索，缺live驗證）
+
+使用者實機截圖抓到：世界地圖上**距離較遠、貼圖被縮小**的樹木／物件，邊緣會冒出一堆不該有的藍色雜點；同一個物件放大／靠近觀察時完全乾淨。同樣情形也出現在物品欄圖示（木杖等）。
+
+**已經確認、可以排除的假說**（不要重複測試）：
+
+- ~~字庫大小/EMS 佔用~~——把字庫砍到只剩 500 字（EMS 佔用從 9 個分頁降到 1 個），雜點仍在。
+- ~~畫面上正在畫中文字~~——把 DDX／物品名稱全部換回純英文（該畫面完全沒有任何中文字被畫出來），雜點仍在。
+- ~~DOSBox-X 的 OpenGL 縮放濾波器（fringe/halo 效應）~~——用完全沒被動過的原版英文遊戲資料夾（複製到 `scratchpad/pristine_playtest/`，同一份 `dosbox_zh_test.conf` 設定只是改掛載路徑）重現同一場景，**貼圖完全乾淨**，證實不是 DOSBox-X 顯示設定的問題，是我們的 build 才有的問題。
+- **使用者明確表示：這個問題在這次 session 幫字型加上 EMS（更早的 §5.0）之前就已經存在，不是這次新引入的回歸。**
+
+**目前最有機會的理論**：`upstream/betrayal-at-krondor/bak/SRC/SYS/EMSIMG.C` 裡負責把 EMS 分頁映射回可讀記憶體位址的四個函式（`emsimg_sprite_blit_scaled_paged`／`emsimg_gouraud_blit_paged`／`emsimg_putsprite_ems_swap`／`emsimg_map_then_call_180c`），全部用同一種寫法判斷「這個 `wImageData` 數值到底是 EMS 分頁鏈編號還是已經解析好的記憶體 segment」：
+
+```c
+page_id = sprite->wImageData;
+if (page_id < 300) {
+    mapped = ems_map_resource_pages(page_id);
+    sprite->wImageData = FP_SEG(mapped);
+}
+```
+
+這是一個**用數值大小猜測型別**的脆弱寫法（EMS 分頁鏈編號是小整數，真正的記憶體 segment 通常遠大於 300，所以原作者假設「< 300 就一定是分頁編號」）。物件縮放繪製 (`emsimg_sprite_blit_scaled_paged`) 正好是這條路徑；如果某個圖片資源的分頁鏈編號剛好落在這個門檻附近或超過（例如整局遊戲下來，EMS 分頁鏈編號的計數真的超過 300），就會被誤判成「已經是位址」，跳過映射步驟，直接拿一個不是真正 segment 的小整數當記憶體位址去讀，讀到的是垃圾資料——完全符合「縮小的遠處物件才會出現雜點」的現象（如果不同縮放比例的貼圖是分開存放、各自有獨立分頁編號，數值較大/較晚配置的那批更容易越過 300 這個門檻）。使用者確認這個問題比字型 EMS 化還早，代表這個 `< 300` 門檻很可能本來就已經脆弱、只是這次才被踩中或才被注意到，不一定是我們自己的新增程式碼直接造成。
+
+**已經嘗試但還沒成功的即時驗證**：這次 session 難得拿到含 public symbol 的完整 `.MAP` 檔（跑 `bak build link` 這個獨立 stage 會強制用 `tlink /m` 而不是平常增量建置預設的快速 relink，之前 §8.3 卡住的「沒有函式位址」限制解除了——`_EMSIMG_SPRITE_BLIT_SCALED_PAGED` 靜態位址是 `26CE:024D`），但**要把這個靜態位址換算成遊戲實際執行時的記憶體位址，需要知道程式載入時的 load segment**，而這個只能在程式剛啟動、第一行指令都還沒執行的那一刻準確量到（`e_cs`/`e_ip` 在這個 EXE 的 MZ header 裡都是 0，代表入口點就在 load segment 本身，是最乾淨的校準點）。這次沒有用 `-break-start` 重新啟動遊戲去抓這個校準點（會中斷使用者當時的遊戲進度），改用「中途 `pause_execution()` 抓到的 CS 反推」的土法煉鋼方式，但抓到的 CS 每次都落在一個底層 VGA 垂直回掃等待迴圈（`55FA` 附近），這段程式碼**不在 `krondor.exe` 檔案內容裡**（搜尋編譯後的 exe 檔案位元組找不到對應片段，可能是連結進來的圖形函式庫，來源不明），沒辦法拿來反推。
+
+**下一個 session 如果要繼續查，建議直接做**：
+1. 用 `-break-start` 搭配 AGENT_GUIDE.md 說明的方式重開一次遊戲（`dosbox-x.exe -defaultdir -break-start C:\KRONDOR.EXE`，需要注意 AGENT_GUIDE 提到的「不能用管道重導向 stdout，否則偵錯器主控台初始化會讓整個 process 當掉」那個限制），在**入口點那一刻**用 `get_debug_status()` 抓 CS，這個 CS 值減去 0（因為 `e_cs=0`）就是 load segment。
+2. 用這個 load segment 加上 MAP 檔裡的靜態位址（`26CE:024D`），算出 `emsimg_sprite_blit_scaled_paged` 的實際執行位址，下斷點。
+3. 想辦法讓遠處縮小的物件被畫出來那一刻剛好停下（可能需要先 `continue_execution()` 讓遊戲跑到那個場景、視角轉到有遠處小物件的地方，再觸發斷點），讀出 `page_id`（`sprite->wImageData`）的實際數值。
+4. 同時讀 `g_ems_total_pages`／`g_free_memory_kb`（`SRC/SYS/EMS.C`）目前的值，確認 EMS 分頁鏈編號有沒有真的逼近或超過 300。
+5. 如果數值確實接近/超過 300，代表理論成立，修法方向可以考慮：（a）評估把 `< 300` 的門檻調高到一個更有把握的安全值（但要先搞清楚這個 300 是不是有什麼別的理由不能隨便調），或（b）幫 `ImageRecord`／`sprite` 結構額外加一個明確的「是否為 EMS 分頁編號」旗標欄位，不要再用數值大小猜測型別——這是治本的作法但改動面較廣，屬於 §prefer-proper-fix-over-workaround 那種值得花力氣做對的情況。
+
+臨時測試留下的檔案：`scratchpad/pristine_playtest/`（原版遊戲資料夾的可寫入副本，用來對照測試，可以留著給下次用）、`dist/dosbox_pristine_compare.conf`（掛載那個副本資料夾的 DOSBox-X 設定檔）。
+
+### 9.6 下一步建議
+
+1. **優先**：§9.5 的物件貼圖雜色 bug，已經有明確、可執行的下一步（見上面 5 點），比起前幾次「完全沒有位址資訊」的窘境已經好很多，值得優先排。
+2. **繼續翻譯**：還有約 4,700 多筆待翻（29 個章節檔的 scaffold 都已建好）；`OBJINFO.DAT`／`UI_HARDCODED.json` 兩個系統目前已知範圍內都翻完了，如果之後又發現新的硬編碼字串或新的資源類別，照這次的模式（先讀原始碼確認是硬編碼還是資源檔、查 glossary、翻完後關鍵字掃描比對）處理即可。
+3. **`MenuPage`／`.dat` 資源系統**（§9.4）：如果想解決「More Info」這類按鈕標籤，需要先開發通用 parser/packer，工程量比字串翻譯大很多，§4 文件裡已經有建議的技術路線跟起步難度排序。
+4. 翻譯品質校對：這次新翻的 201+137+55 筆內容都還沒有第二人核對過，尤其 `DIAL_Z29` 是重要主線劇情，建議找機會抽查。

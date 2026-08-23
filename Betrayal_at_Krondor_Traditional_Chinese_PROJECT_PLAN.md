@@ -906,6 +906,16 @@ malformed bytes
 
 建立可重現的 DDX 翻譯工作流。
 
+## 強制建置規則（已實作）
+
+凡是要產生、更新或部署 `DIAL_*.DDX`，**必須遵守**
+[`docs/workflows/ddx-safe-rebuild.md`](docs/workflows/ddx-safe-rebuild.md)。
+
+- 原始 DDX 必須從同一版本遊戲的 `krondor.rmf`／`krondor.001` 擷取，不能信任曾被測試或部署使用過的鬆散檔案。
+- 日常建置／部署必須使用 `ddx_rebuild_all.py` 的全量流程；它會先驗證所有原始檔、於暫存目錄完成全量 build 與結構驗證，全部成功後才更新輸出。
+- `ddx_translate.py build` 僅可用於單檔診斷；即使如此，仍須通過其內建的輸入／輸出結構驗證。
+- 成功建置後必須保留 `DDX_BUILD_MANIFEST.json`，並仍要做相應的 DOSBox-X 實機測試；結構驗證不能取代遊戲執行驗證。
+
 ## Desired pipeline
 
 ```text
@@ -948,6 +958,8 @@ Agent 必須保留 record identity，不得靠文字本身當 key。
 - token count/identity validation
 - illegal byte detection
 - buffer size validation
+- DDX directory target 與本檔 choice target 的 record-boundary validation
+- 全量建置不得部分更新；所有輸出通過驗證後才可部署
 - deterministic output
 - report changed records
 

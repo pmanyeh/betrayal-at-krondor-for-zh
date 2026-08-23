@@ -94,6 +94,20 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
+## 4c. `OBJINFO.DAT` — 物品名稱（新發現，已完成基礎設施＋翻譯）
+
+§10 先前把「item names/descriptions」標成已盤點，但當時只涵蓋了物品風味文字（DDX_Z18）跟物品欄位標籤（§5），漏掉了物品**本身的簡短名稱**（如「Long Sword」「Healing Potion」這種顯示在物品欄格子裡的名字）真正的資料來源——這次補上。
+
+- **SOURCE**：`KRONDOR.RMF`／`KRONDOR.001` 內的 `OBJINFO.DAT`，由 [`SRC/GAME/ACTOR/ITEMTBL.C:49`](file:///d:/git/betrayal-at-krondor-for-zh/upstream/betrayal-at-krondor/bak/SRC/GAME/ACTOR/ITEMTBL.C#L49) `itemtbl_load()` 讀取整包 `0x2b7a`（11,130）bytes 進 `g_pItemDefTable`。
+- **FORMAT**：全遊戲**最簡單**的格式——沒有字串池、沒有 offset 修補表，就是 138 筆固定 80-byte 的 `ItemRecord`（定義於 [`INCLUDE/structs.h:837`](file:///d:/git/betrayal-at-krondor-for-zh/upstream/betrayal-at-krondor/bak/INCLUDE/structs.h#L837)）緊接在一起：前 32 bytes 是 NUL 補齊的 `pName`，接著是 `wFlags`／`wName_split_off`（物品欄格子內兩行斷行位置，字元索引）／傷害／價格等數值欄位。檔案結尾另有一段跟文字無關的 90-byte 小表（特殊價格用）。138 筆之後（index 0 為空、不使用）實際約 137 筆有名稱。
+- **EXTRACTABLE / PACKABLE**：新增 `tools/text/objinfo_translate.py`（`scaffold`／`status`／`build`，介面比照 `ddx_translate.py`）。因為 `pName` 是**固定** 32 bytes（不像 DDX 文字變長），`build` 會檢查編碼後是否 ≤31 bytes（留 1 byte 給 NUL），超過就安全 fallback 回英文，不會截斷或溢位。
+- **RUNTIME PATH**：`INVENTOR.C`／`INVINSP.C` 都是直接 `sprintf`／`invui_draw_text_aligned_shadow()` 印 `item->pName`，最終一樣走 `font_draw_text_far()`，跟其餘介面共用同一套已支援中文的引擎路徑。
+- **CHINESE READY**：是。
+- **STATUS**：137 筆已全數翻譯完成（`localization/translated/OBJINFO.json`），翻譯時發現不少物品名稱其實已經在 `DIAL_Z18`（物品風味文字）的譯文內文裡被直接引用過（例如「銀刺」「禁制鑰匙」「那夫沙油」「真視茶」），逐一核對後採用那些已翻好的既有譯名，並回頭修正了兩筆 Z18 沒被抓到的舊譯名不一致（Aventurine 東陵石→砂金石、Flame Root Oil 火根精油→火根油等）。
+- **`wName_split_off` 處理**：這個欄位是「物品欄格子內把名字拆成兩行」用的英文字元斷點索引，換成中文後完全對不上，且中文譯名普遍比對應英文短很多（多半 2-6 個全形字），目前策略是**全部強制設回 0**（單行置中顯示），不搬用舊的斷行位置。這是實機測試前的暫定決策，需要之後在遊戲畫面裡確認物品欄格子夠不夠寬、有沒有任何中文譯名仍然被裁切或跑版，若有，屆時再針對個別過長的名稱手動加回斷行。
+
+---
+
 ## 5. 硬編碼於 C 原始碼的字串常數（可直接沿用，無需新工具）
 
 以下全部經 `font_draw_text_far`／`font_draw_text_ds`／`invui_draw_text_aligned_shadow` 繪製，做法與 DDX 翻譯相同——直接編輯原始碼字串即可，**已可開始，不受阻於任何工具開發**。
@@ -159,7 +173,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - [x] 已盤點 BOK books（§3，Phase 7 前置調查）
 - [x] 已盤點 UI labels（§4 MenuPage/NamedTable/DialogWidget 資源家族；§4a 話題詢問選單 `KEYWORD.DAT`）
 - [x] 已盤點 inventory（§5 INVENTOR.C/INVINSP.C）
-- [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5）
+- [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5；物品簡短名稱＝§4c `OBJINFO.DAT`，已完成翻譯，`wName_split_off` 斷行仍待實機驗證）
 - [x] 已盤點 spell names/descriptions（§4 spells.dat/spelldoc.dat/InvSpell.dat）
 - [x] 已盤點 character names（§8，確認為存檔二進位欄位、暫不處理）
 - [x] 已盤點 location names（§4b `fmap_twn.dat` 大地圖城鎮標籤；其餘地名多半走 DDX）
