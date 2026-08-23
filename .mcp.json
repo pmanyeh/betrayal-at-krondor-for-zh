@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dosbox-x-debugger": {
+      "command": "D:\\git\\DOSBox-X-AI\\.venv\\Scripts\\python.exe",
+      "args": ["D:\\git\\DOSBox-X-AI\\ai\\server.py"]
+    }
+  }
+}
