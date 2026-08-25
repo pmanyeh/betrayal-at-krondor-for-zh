@@ -12,8 +12,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這ñ不是我們該走的方向。我們往回走吧。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -27,8 +27,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t山口空無一人。\n\t「要是路標可信的話,這趟路要走上五天,」@4說道。「這裡也是設伏的絕佳地點。你覺得我們該冒這個險嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -41,8 +41,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t他們厭惡峽谷裡那種毫無遮蔽的感受,便趁夜快速趕路,白天則躲在岩石突出處休息,豎耳戒備刺客的腳步聲。終於,雙腳痠痛、風塵僕僕的他們,來到了苦海岸邊附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -56,8 +56,8 @@
         "@5",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t前方的山口空無一人。\n\t「要是路標可信的話,這趟路要走上兩天,」@5說道。「你覺得我們該試試看嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -71,8 +71,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿過山口時,除了偶爾襲來的寒風凍得他們渾身發僵,總算能感受到王國南境典型的溫和微風,讓人鬆了口氣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -86,8 +86,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@5望向山口的另一端。\n\t「要是我地理沒記錯,這條路是沿著高沃德高地跟世界之齒山脈之間穿過去的,」他說道。「最終會經過北邊高堡和北衛城的駐軍。你怎麼看?我們要走這條路嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -100,8 +100,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t北方群山起伏,猶如巨龍身上的鱗片,雷獄草原漸漸收攏,讓位給更加雄偉的世界之齒山脈,地勢也隨之越升越高。南方的山勢則逐漸趨緩,最終化為一片名叫高沃德的遼闊平原,一路向南延伸,蜿蜒消失在一列低矮丘陵的腳下……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -115,8 +115,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「要是莫瑞德人殺不死我們,這寒冷也會要了我們的命,」他說道。「就像芬恩說的,我們暫時得把因克林德爾山口當成此路不通了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -131,8 +131,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t風裡飄來一股硫磺的惡臭。\n\t「這一定就是麥克莫丹卡達爾了,」@4眼神有些恍惚,陷入沉思,說道。「我就知道這裡離得不遠。我記得ñ麥克在矮人語裡是礦坑或洞穴之類的意思。既然矮人跟莫瑞德人不對盤,他們說不定能幫上我們一些忙,前提是他們不會對戈拉斯在場有意見。我們要不要進去查看看?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -146,8 +146,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t隧道裡潮濕陰暗。\n\t頭頂那片帶著銀色紋路的泥土屋頂雖然高得不必彎腰,@4卻仍覺得這條豎坑讓人喘不過氣。他暗自慶幸,傳說裡矮人的身材其實比一般人想像的還要高大……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -161,8 +161,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「要是莫瑞德人殺不死我們,這寒冷也會要了我們的命,」他說道。「就像芬恩說的,我們暫時得把因克林德爾山口當成此路不通了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -179,8 +179,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t路上散落著石塊。\n\t他直覺這些石塊只是從眼前這處岩石峽谷的兩側崩落而已,但心裡也有一部分懷疑,或許是有人爬ñ上峭壁,埋伏在此等候他們一行人,才把石頭震落到路面上。\n\t「如果我們往北走,莫瑞德人還是有可能派更多刺客在那裡等著我們,」@4說道。「要不要冒這個險?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -193,8 +193,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t他們厭惡峽谷裡那種毫無遮蔽的感受,便趁夜快速趕路,白天則躲在岩石突出處休息,豎耳戒備刺客的腳步聲。終於,雙腳痠痛、風塵僕僕的他們,來到了尊恩鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -211,8 +211,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t路上散落著石塊。\n\t他直覺這些石塊只是從眼前這處岩石峽谷的兩側崩落而已,但心裡也有一部分懷疑,或許是有人爬ñ上峭壁,埋伏在此等候他們,才把石頭震落到路面上。\n\t「如果我們往北走,莫瑞德人還是有可能派更多刺客在那裡等著我們,」@4說道。「要不要冒這個險?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -225,8 +225,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t他們厭惡峽谷裡那種毫無遮蔽的感受,便趁夜快速趕路,白天則躲在岩石突出處休息,豎耳戒備刺客的腳步聲。終於,雙腳痠痛、風塵僕僕的他們,來到了鷹谷鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -240,8 +240,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這條路通往東方。\n\t@4停下腳步,思忖片刻,望向王國人口稠密的心臟地帶。「往這個方向走,我們會經過馬拉克十字鎮或賽瑟儂。你覺得這樣走比較好嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -254,8 +254,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t地勢漸漸趨於平坦。\n\t丘陵與林木漸漸稀疏,王國青草遍布的中部地帶顯得空曠許多……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -269,8 +269,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t通道被堵住了。\n\t「我們往回走吧,」@4說道。「看來這個入口是徹底封死了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -285,8 +285,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這條路通往西方。\n\t「照我估計,從這裡到克朗多還要四天,」@4喃喃自語道。「有誰能想出一個ñ不走這條路的好理由嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -300,8 +300,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這趟旅程ó枯燥乏味。\n\t穿過山口時,除了偶爾襲來的寒風凍得他們渾身發僵,總算能感受到王國南方沿海地帶典型的溫和微風,讓人鬆了口氣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -318,8 +318,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t歐文吹著口哨。\n\t察覺這位旅伴這幾哩路以來心情變得異常愉快,@0轉過身,用探詢的眼神打量這位侍從。「你怎麼突然這麼高興?」\n\t「要是我沒記錯,只要我們繼續往這個方向走,就會抵達我叔叔科瓦利斯在卡瓦爾堡的莊園。我們ó確實是往這個方向走吧?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -332,8 +332,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t歐文一路走一路聊。\n\t他一邊指出沿途熟悉的地標,一邊講述這一帶的歷史,同時試著涉過一條小河。沒過多久,他們又回到了大路上……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -347,8 +347,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這條路通往南方。\n\t@4停下腳步,思忖片刻,望向王國人口稠密的心臟地帶。「往這個方向走,我們會經過馬拉克十字鎮或賽瑟儂。你覺得這樣走比較好嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -361,8 +361,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t地勢漸漸趨於平坦。\n\t丘陵與林木漸漸稀疏,比起他們剛剛離開的那片地區,王國青草遍布的中部地帶顯得空曠許多……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -376,8 +376,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4的雙腿痠痛不已。\n\t他覺得自己彷彿已經走了一輩子,眼前這條通往北方的漫漫長路,絲毫提不起他的興致。「我們可以繼續往這條路走,也可以掉頭。要繼續走嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -391,8 +391,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t群山覆滿了白雪。\n\t穿過山口進入這片陌生的地帶後,@4示意稍作停留。他隱約能感受到北方吹來的寒意,不禁想像世界之齒山脈另一側恐怕會更加酷寒……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -409,8 +409,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t路上散落著石塊。\n\t他直覺這些石塊只是從眼前這處岩石峽谷的兩側崩落而已,但心裡也有一部分懷疑,或許是有人爬ñ上峭壁,埋伏在此等候他們一行人,才把石頭震落到路面上。\n\t「如果我們往西走,莫瑞德人還是有可能派更多刺客在那裡等著我們,」@4說道。「要不要冒這個險?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -423,8 +423,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t他們厭惡峽谷裡那種毫無遮蔽的感受,便趁夜快速趕路,白天則躲在岩石突出處休息,豎耳戒備刺客的腳步聲。終於,雙腳痠痛、風塵僕僕的他們,來到了泰索格鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -444,8 +444,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t歐文吹著口哨。\n\t察覺這位旅伴這幾哩路以來心情變得異常愉快,@0轉過身,用探詢的眼神打量這位侍從。\n\t「你怎麼突然這麼高興?」@0問道。\n\t「只要我們繼續往這個方向走,就會抵達我叔叔科瓦利斯在卡瓦爾堡的莊園。我們ó確實是往這個方向走吧?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -458,8 +458,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t歐文一路走一路聊。\n\t他一邊指出沿途熟悉的地標,一邊講述這一帶的歷史,同時推開一叢樹籬前行。沒過多久,他們又回到了大路上……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -476,8 +476,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t狂風呼嘯著。\n\t詹姆士望著北衛城山口那道缺口,轉頭拍了拍洛克利爾的背。「怎麼樣,老朋友,要不要找點樂子?」\n\t「你知道嗎,我每次進北境,都會失去一些朋友,」洛克利爾冷冷地回答道。「布朗溫、莫耶特隊長……」\n\t詹姆士點了點頭。「聽起來你正好有帳要算。那麼,我們要不要去北境找迪勒肯的部隊找點麻煩?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -490,8 +490,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們默不作聲地行軍。\n\t擔心王國語的談話聲會在這寒冷的空氣裡傳得很遠,他們盡可能加快腳步,穿過險惡的北衛城山口,望著眼前積雪的地貌,各自在心裡為前方的艱難做好準備……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -505,8 +505,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「要是莫瑞德人殺不死我們,這冰封的雪也會要了我們的命,」他說道。「我們暫時得把割岩隘口當成此路不通了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -520,8 +520,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t薄霧在山口間飄蕩。\n\t「這條路穿過幽暗林,」@4說道。「走這條路或許能避開別人窺探的目光。你覺得我們該走這條路嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -534,8 +534,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們往南方前進。\n\t一連好幾天,他們都行走在濃霧之中,潮氣浸透了衣物,入夜後更是凍得刺骨。終於,山勢漸漸下降,霧氣也隨之消散,他們發現自己站在一片大森林的邊緣……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -551,8 +551,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t門沒有上鎖。\n\t@4把門推開一條縫,望進豎坑裡那片渾沌的黑暗。他大喊了幾聲問候,卻沒人回應,便轉頭望向@0。「下面沒人,」@4說道。「或許值得下去看看。你想不想在黑暗裡摸索個幾分鐘?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -565,8 +565,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個鐘頭過去了。\n\t走過一段彎彎曲曲、朝著意想不到的方向蜿蜒而下的長樓梯後,他們終於站上了一片泥土地面……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -580,8 +580,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「我不喜歡走這條路,」他說道。「再往北走,我們也做不了什麼。那一帶完全被莫瑞德人控制著,我們這是自己送上門去。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -595,8 +595,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「我不喜歡走這條路,」他說道。「再往北走,我們也做不了什麼。那一帶完全被莫瑞德人控制著,我們這是自己送上門去。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -613,8 +613,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t路上散落著石塊。\n\t他直覺這些石塊只是從眼前這處岩石峽谷的兩側崩落而已,但心裡也有一部分懷疑,或許是有人爬ñ上峭壁,埋伏在此等候他們一行人,才把石頭震落到路面上。\n\t「我們差不多已經快回到王國境內了,」@4說道。「你覺得我們該現在就繼續前進,還是再等一下?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -627,8 +627,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾天過去了。\n\t他們厭惡峽谷裡那種毫無遮蔽的感受,便趁夜快速趕路,白天則躲在岩石突出處休息,豎耳戒備刺客的腳步聲。終於,雙腳痠痛、風塵僕僕的他們,來到了泰索格鎮附近。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -642,8 +642,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4的雙腿痠痛不已。\n\t他覺得自己彷彿已經走了一輩子,眼前這條通往南方的漫漫長路,絲毫提不起他的興致。「我們可以繼續往這條路走,也可以掉頭。要繼續走嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -657,8 +657,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t群山覆滿了白雪。\n\t穿過山口進入這片陌生的地帶後,@4示意稍作停留。他隱約能感受到北方吹來的寒意,不禁想像世界之齒山脈另一側恐怕會更加酷寒……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -672,8 +672,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4的雙腿痠痛不已。\n\t他覺得自己彷彿已經走了一輩子,眼前這條通往南方的漫漫長路,絲毫提不起他的興致。「我們可以繼續往這條路走,也可以掉頭。要繼續走嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -687,8 +687,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t群山覆滿了白雪。\n\t穿過山口進入這片陌生的地帶後,@4示意稍作停留。他隱約能感受到北方吹來的寒意,不禁想像世界之齒山脈另一側恐怕會更加酷寒……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -699,8 +699,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t你不應該看到這則訊息。如果你真的觸發了它,請回報你是在哪一章遇到的,並附上確切的位置。N. H.\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -711,8 +711,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t你不應該看到這則訊息。如果你真的觸發了它,請回報你是在哪一章遇到的,並附上確切的位置。N. H.\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -726,8 +726,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4的雙腿痠痛不已。\n\t他覺得自己彷彿已經走了一輩子,眼前這條通往北方的漫漫長路,絲毫提不起他的興致。「我們可以繼續往這條路走,也可以掉頭。要繼續走嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -741,8 +741,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t群山覆滿了白雪。\n\t穿過山口進入這片陌生的地帶後,@4示意稍作停留。他隱約能感受到北方吹來的寒意,不禁想像世界之齒山脈另一側恐怕會更加酷寒……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -756,8 +756,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「我不喜歡走這條路,」他說道。「再往北走,我們也做不了什麼。那一帶完全被莫瑞德人控制著,我們這是自己送上門去。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -771,8 +771,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t風裡飄來一股硫磺的惡臭。\n\t「看來我們又回到麥克莫丹卡達爾了,」@4說道。「你能想到什麼理由要再下去一趟嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -786,8 +786,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t隧道裡潮濕陰暗。\n\t頭頂那片帶著銀色紋路的泥土屋頂雖然高得不必彎腰,@4卻仍覺得這條豎坑讓人喘不過氣。他暗自慶幸,傳說裡矮人的身材其實比一般人想像的還要高大……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -803,8 +803,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t門沒有上鎖。\n\t@4把門推開一條縫,望進豎坑裡那片渾沌的黑暗。他大喊了幾聲問候,卻沒人回應,便轉頭望向@0。「下面沒人,」@4說道。「或許值得下去看看。你想不想在黑暗裡摸索個幾分鐘?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -817,8 +817,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個鐘頭過去了。\n\t走過一段彎彎曲曲、朝著意想不到的方向蜿蜒而下的長樓梯後,他們終於站上了一片泥土地面……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -834,8 +834,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t門沒有上鎖。\n\t@4把門推開一條縫,望進豎坑裡那片渾沌的黑暗。他大喊了幾聲問候,卻沒人回應,便轉頭望向@0。「下面沒人,」@4說道。「或許值得下去看看。你想不想在黑暗裡摸索個幾分鐘?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -848,8 +848,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個鐘頭過去了。\n\t走過一段彎彎曲曲、朝著意想不到的方向蜿蜒而下的長樓梯後,他們終於站上了一片泥土地面……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -863,8 +863,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線從上方灑落下來。\n\t「這應該是通往拉姆特南邊那條大路的出口,」@0說道。「你覺得我們該出去了嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -877,8 +877,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線引領著他們。\n\t沿著麥克莫丹卡達爾裡向上延伸的豎坑走向天光,他們終於來到一條通往東方、接上御道的道路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -892,8 +892,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一條長廊在他們面前延伸而去。\n\t「這一定是通往艾爾凡達的通道,」@3說道。「如果走這條路,可能得花上好幾個鐘頭才能走到盡頭。我們現在有辦法應付這段路嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -908,8 +908,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾個鐘頭過去了。\n\t就在@4開始懷疑他們是否再也見不到天日之時,樓梯的通道漸漸變寬,幾道微弱的光線穿透黑暗,從一扇橡木門的縫隙中透了進來。@4推開門,望見頭頂展開的蒼翠樹冠,不禁驚嘆連連……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -923,8 +923,8 @@
         "@5",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t樓梯螺旋著往下延伸。\n\t「怎麼樣,」@5問道。「要下去嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -940,8 +940,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們吵吵鬧鬧地往下走。\n\t@3好幾次差點在長滿青苔的階梯上踩空,幸好都及時穩住身子,沒讓大夥兒一起摔下這座矮人的樓梯。\n\t終於,他們走進了一條寬闊的走廊……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -956,8 +956,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@5抬頭望向這條狹窄的樓梯。\n\t這條路確實能往上走,但他不確定現在走這條路對不對。「你怎麼想,@3?」他問道。「你有興致爬那麼長一段路回去嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -972,8 +972,8 @@
         "@5",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@3差點沒摔斷脖子。\n\t他的腳步不如@5穩健,又扛著那根笨重的法杖,一路沿著矮人礦坑裡長滿青苔的階梯往上爬,幾乎每一步都得拚命站穩。等終於重新踏上平地,他強忍住想跪下親吻地面的衝動……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -988,8 +988,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線從上方灑落下來。\n\t「這應該是通往大路的出口,」@4說道。「你確定準備好要繼續前進了嗎,@0?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1002,8 +1002,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線引領著他們。\n\t沿著向上延伸的豎坑走向天光,他們終於來到一條通往薩斯的小路……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1018,8 +1018,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線從上方灑落下來。\n\t「這條路通往外頭,」@0說道。「你確定準備好要繼續前進了嗎,@4?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1032,8 +1032,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線引領著他們。\n\t沿著向上延伸的豎坑走向那片陌生的天光,他們終於來到一條通往南方的小路……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1052,8 +1052,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t前方有人在喊叫。\n\t@4匆匆趕往走廊深處查看騷動的原因,卻被一名神情惱怒的矮人攔了下來。\n\t「別、別再往前了,小子!」矮人拖著粗嘎的嗓音說道。「我才不管納杜爾跟你們說了什麼、沒說什麼。這下面亂成一團,我們忙都忙不過來了,哪有空讓你們在這兒礙事。給我原路回去,讓我們做事。」\n\t見這矮人講不通道理,@4只好悻悻然沿著走廊退了回去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1072,8 +1072,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t前方有人在喊叫。\n\t@4匆匆趕往走廊深處查看騷動的原因,卻被一名神情惱怒的矮人攔了下來。\n\t「別再往前了,小子!」矮人拖著嗓音說道。「通往下層洞穴的路我們還沒清出來,再往前有再次坍塌的危險。掉頭回去,讓我們做事。」\n\t@4見這矮人講不通道理,便沿著這條低矮的走廊退了回去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1089,8 +1089,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t牆壁稍微收窄了些。\n\t沒過多久,走廊猛地一個轉彎,盡頭是一堆斷裂的橫梁、泥土與崩塌的磚石。「坍方了,」@4喃喃自語道。「我們得走別條路了。」\n\t眾人轉過身,沿著原路,往走廊回頭走去……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1104,8 +1104,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t碎石堵滿了樓梯間。\n\t「憑我們自己,絕對挖不通這些石堆,」@4說道。「也好,眼下我們還有別的事得處理。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1118,8 +1118,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t碎石堵塞了樓梯間。\n\t「我們現在還不能離開這個洞,」帕格見歐文一臉悶悶不樂,語帶遺憾地說道。「來吧。我們跟馬卡拉還有約。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1134,8 +1134,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t帕格在回想。\n\t他在提米里安亞的那場遭遇留下的餘波,仍讓他的神智有些朦朧,他努力回想這座古老瓦爾赫魯遺跡裡通道的確切順序。\n\t見這位法師大師一臉恍惚,歐文扯了扯他的衣袖。「我們要繼續往下一層走嗎?」他問道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1148,8 +1148,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t「當然,」帕格心不在焉地回答道。「我只是在想別的事。」\n\t帕格一言不發,領著眾人走下那段搖搖欲墜的階梯。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1162,8 +1162,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一陣寒意順著豎坑而下。\n\t歐文雖然迫切渴望離開這座臭氣熏天的洞穴,卻很清楚維努特里爾和他的守衛絕不會放他活著逃出去。他唯一的辦法,就是想辦法讓自己和奧布卡都脫離這牢籠般的囚禁。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1179,8 +1179,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們往樓梯下走去。\n\t走到螺旋樓梯一半時,他們發現一扇沉重的鐵門擋住了去路,無法再往下走。「看來是鏽死了,」@4檢視著鎖上結塊的紅褐色鏽跡,說道。「暫時沒辦法再往前了。」\n\t他心情低落地領著眾人,往回走向樓梯口……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1195,8 +1195,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4嗅了嗅空氣。\n\t他原本以為下水道的更深處會有股惡臭,卻意外發現這裡的氣味,比他們已經走過的那段下水道還要不那麼刺鼻。「信不信由你,下面ñ反而比較好聞,」他說道。「我們要不要下去看看?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1212,8 +1212,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們吵吵鬧鬧地往下走。\n\t@3好幾次差點在長滿青苔的階梯上踩空,幸好都及時穩住身子,沒讓大夥兒一起摔下這座樓梯。\n\t終於,他們走進了一條寬闊的走廊……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1228,8 +1228,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@5抬頭望向這條狹窄的樓梯。\n\t這條路確實能往上走,但他不確定現在走這條路對不對。「你怎麼想,@3?」他問道。「你有興致爬那麼長一段路回去嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1245,8 +1245,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@3差點沒摔斷脖子。\n\t他的腳步不如@5穩健,又扛著那根笨重的法杖,一路沿著長滿青苔的階梯往上爬,幾乎每一步都得拚命站穩。雖然總算慶幸重新踏上平地,但撲面而來的ñ氣味卻讓他高興不起來……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1264,8 +1264,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t戈拉斯在樓梯口停下腳步。\n\t他瞇起眼睛,彷彿全神貫注地傾聽著什麼,片刻後轉向同伴。「我想聽聽你的看法,」他說道,昏暗中雙眼閃著幽光。「迪勒肯很可能已經在這座樓梯的另一頭布下守衛。真是如此的話,我們恐怕連武器都還沒拔出來就要沒命了。」\n\t「照我看,不往上走我們也是死路一條,」歐文回答道。「死在地牢裡,還是拚死一戰而死。我至少想覺得自己ñ試過些什麼。」\n\t戈拉斯微微一笑。「有時候你並不像你裝出來的那樣還是個孩子。不過決定還是得做。你現在準備好要往上爬了嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1278,8 +1278,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t樓梯口沒有守衛。\n\t歐文鬆了一口氣,跟著朋友一起沿著地牢的走廊繼續前進……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1293,8 +1293,8 @@
         "@5",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t樓梯螺旋著往下延伸。\n\t「怎麼樣,」@5問道。「要下去嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1310,8 +1310,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們吵吵鬧鬧地往下走。\n\t@3好幾次差點在石階上踩空,幸好都及時穩住身子,沒讓大夥兒一起摔下這座樓梯。\n\t終於,他們走進了一條寬闊的走廊……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1325,8 +1325,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一條長廊在他們面前延伸而去。\n\t「這一定是通往艾爾凡達的通道,」@3說道。「如果走這條路,可能得花上好幾個鐘頭才能走到盡頭。我們現在有辦法應付這段路嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1341,8 +1341,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾個鐘頭過去了。\n\t就在@4開始懷疑他們是否再也見不到天日之時,樓梯的通道漸漸變寬,幾道微弱的光線穿透黑暗,從一扇橡木門的縫隙中透了進來。@4推開門,望見頭頂展開的蒼翠樹冠,不禁驚嘆連連……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1356,8 +1356,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一條長廊在他們面前延伸而去。\n\t「這一定是通往上方的通道,」@3說道。「如果走這條路,可能得花上好幾個鐘頭才能走到盡頭。我們現在有辦法應付這段路嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1371,8 +1371,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t幾個鐘頭過去了。\n\t就在@4開始懷疑他們是否再也見不到天日之時,樓梯的通道漸漸變寬,幾道微弱的光線穿透黑暗,從一扇橡木門的縫隙中透了進來……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1387,8 +1387,8 @@
         "@3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線從上方灑落下來。\n\t「這應該是通往大路的出口,」@4說道。「你確定準備好要繼續前進了嗎,@3?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1401,8 +1401,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t光線引領著他們。\n\t沿著向上延伸的豎坑走向天光,他們終於來到一條通往南方的小路……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1415,8 +1415,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t歐文打了個寒顫。\n\t他不確定自己跟戈拉斯在那片黑暗的房間裡待了多久,兩人都被迪勒肯的手下下了令人麻痺的藥物,弄得動彈不得,他實在不急著回到那些籠子裡。「我想我們已經知道那個方向有什麼了,」他對戈拉斯說道。「我們試試別條路吧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1430,8 +1430,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t石塊散落了滿樓梯間。\n\t才往上走了幾步,@4便發現這條通道完全被亂石堵死了。「不行,」他嘆了口氣說道。「我們穿不過這堆亂石。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1445,8 +1445,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@5抬頭望向這條狹窄的樓梯。\n\t這條路確實能往上走,但他不確定現在走這條路對不對。「這是我們原本上來的路,」他望向帕格說道。「我們要往上移動到另一層嗎?」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1461,8 +1461,8 @@
         "@5",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@3差點沒摔斷脖子。\n\t他的腳步不如@5穩健,又扛著那根笨重的法杖,一路沿著長滿青苔的階梯往上爬,幾乎每一步都得拚命站穩……\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

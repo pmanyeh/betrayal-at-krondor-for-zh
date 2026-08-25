@@ -3,213 +3,1643 @@
   "version": 1,
   "notes": "Traditional Chinese proper-noun glossary for Betrayal at Krondor. No official Chinese translation exists for this game or its novelization (Krondor: The Betrayal) -- the only confirmed official term is Pug/帕格, from the Taiwan-published translation of the original Riftwar Saga novels (Gaea Books/Sharp Point), which this game is a spin-off of. Everything else here is an original, internally-consistent transliteration/translation, informed by that confirmed term's style. Consult this file before translating any DDX entry that names a person, place, faction, or notable object; add new terms here the first time they appear, don't improvise a fresh rendering per-entry.",
   "entries": [
-    {"term": "Pug", "category": "person", "translation": "帕格", "notes": "Confirmed official term from the Taiwan Riftwar Saga (魔法師) translation. Legendary archmage; may only be referenced, not a Betrayal at Krondor player character."},
-    {"term": "Owyn", "category": "person", "translation": "歐文", "notes": "Player character, young magician's apprentice."},
-    {"term": "Locklear", "category": "person", "translation": "洛克利爾", "notes": "Player character, king's squire. Title \"Seigneur\" (used as an honorific before his name) renders as 紳爵."},
-    {"term": "Seigneur", "category": "proper_noun", "translation": "紳爵", "notes": "Feudal honorific title, used before a name e.g. \"Seigneur Locklear\" -> 洛克利爾紳爵."},
-    {"term": "Gorath", "category": "person", "translation": "戈拉斯", "notes": "Moredhel defector, escorted by the party. Already used consistently since Phase 5 live testing."},
-    {"term": "James / Seigneur James", "category": "person", "translation": "詹姆士", "notes": "Later-playable character; addressed formally as James/Seigneur James throughout DIAL_Z16 dialogue."},
-    {"term": "Jimmy the Hand", "category": "person", "translation": "神偷吉米", "notes": "Old nickname for James, used casually/in-jokes (\"Jimmy the Hand\", \"Jimmy\"). Same person as James above -- use 詹姆士 for direct address, 吉米 alone or 神偷吉米 only when the source text itself uses the nickname."},
-    {"term": "Gamina", "category": "person", "translation": "蓋米娜", "notes": "Later-playable character, not yet encountered in translated content."},
-    {"term": "Patrus", "category": "person", "translation": "派特魯斯", "notes": "Later-playable character, not yet encountered in translated content."},
-    {"term": "Arutha (conDoin)", "category": "person", "translation": "亞魯莎", "notes": "Prince of Krondor."},
-    {"term": "Delekhan", "category": "person", "translation": "迪勒肯", "notes": "Moredhel warlord, main antagonist."},
-    {"term": "Nago", "category": "person", "translation": "納戈", "notes": "Delekhan's magician assistant."},
-    {"term": "Haseth", "category": "person", "translation": "哈賽斯", "notes": "Referenced in the chapter-1 ambush dialogue (\"Do not struggle so, Haseth\")."},
-    {"term": "moredhel", "category": "proper_noun", "translation": "莫瑞德人", "notes": "The \"dark elf\" race/faction; lowercase common noun in English, treated as a proper noun here."},
-    {"term": "Krondor", "category": "place", "translation": "克朗多", "notes": "Capital city, game's title location. Established since Phase 4/5 POC testing -- keep this exact rendering everywhere."},
-    {"term": "the Kingdom (of the Isles)", "category": "place", "translation": "王國", "notes": "The setting's dominant kingdom."},
-    {"term": "Yabon", "category": "place", "translation": "亞邦", "notes": ""},
-    {"term": "LaMut", "category": "place", "translation": "拉姆特", "notes": ""},
-    {"term": "Zun", "category": "place", "translation": "尊恩", "notes": ""},
-    {"term": "Hawk's Hollow", "category": "place", "translation": "鷹谷", "notes": ""},
-    {"term": "Loriel", "category": "place", "translation": "洛瑞爾", "notes": ""},
-    {"term": "Tyr-Sog", "category": "place", "translation": "泰索格", "notes": ""},
-    {"term": "Inclindel Pass", "category": "place", "translation": "因克林德爾山口", "notes": ""},
-    {"term": "Zun Pass", "category": "place", "translation": "尊恩山口", "notes": ""},
-    {"term": "Mac Mordain Cadal", "category": "place", "translation": "麥克莫丹卡達爾", "notes": "Dwarven mine/underground realm."},
-    {"term": "Eggley", "category": "place", "translation": "艾格利", "notes": ""},
-    {"term": "Dimwood", "category": "place", "translation": "幽暗林", "notes": "Forest, meaning-translated rather than transliterated (\"dim\" + \"wood\")."},
-    {"term": "Sar-Sargoth", "category": "place", "translation": "薩薩戈斯", "notes": "Moredhel stronghold in the Northlands."},
-    {"term": "Makala", "category": "person", "translation": "馬卡拉", "notes": "Tsurani Great One (magician) of the Assembly, DIAL_Z16 antagonist."},
-    {"term": "Narab", "category": "person", "translation": "納拉布", "notes": "Delekhan's advisor/torturer."},
-    {"term": "Liallan", "category": "person", "translation": "莉艾蘭", "notes": "Delekhan's mistress, mentioned only in passing."},
-    {"term": "Moraeulf", "category": "person", "translation": "莫萊伍夫", "notes": "Delekhan's son, mentioned only in passing."},
-    {"term": "Tomas", "category": "person", "translation": "托馬斯", "notes": "Lord of Elvandar, appears briefly commanding Gorath as emissary."},
-    {"term": "Murmandamus", "category": "person", "translation": "穆爾曼達穆斯", "notes": "Previous moredhel leader, killed at Sethanon ten years before the game's events; historical antagonist, referenced not present."},
-    {"term": "Ashen-Shugar", "category": "person", "translation": "灰燼舒加爾", "notes": "A Valheru whose consumed/trapped spirit is released from the Lifestone."},
-    {"term": "Macros the Black", "category": "person", "translation": "黑袍馬克羅斯", "notes": "Legendary sorcerer, referenced in Pug's closing advice to Owyn; not present."},
-    {"term": "Duke Martin", "category": "person", "translation": "馬丁公爵", "notes": "Mentioned helping prepare Northwarden's defense."},
-    {"term": "King Lyam", "category": "person", "translation": "萊亞姆王", "notes": "The King, mentioned in passing (his troops rendezvous at Romney)."},
-    {"term": "Baron Gabot", "category": "person", "translation": "加博特男爵", "notes": "James/Locklear's cover-story employer in Romney; \"Gabot's Folly\" -> 加博特的蠢事."},
-    {"term": "Mara of the Acoma", "category": "person", "translation": "阿科瑪的瑪拉", "notes": "Tsurani noble, leader of the anti-traditionalist faction Makala mentions."},
-    {"term": "Nighthawks", "category": "proper_noun", "translation": "夜鷹會", "notes": "Assassins' guild; \"false Nighthawks\" (impostors framing the real guild) -> 冒牌夜鷹會."},
-    {"term": "Guild of Assassins", "category": "proper_noun", "translation": "刺客公會", "notes": "The (real) assassins' guild Delekhan has co-opted into a spy network."},
-    {"term": "Tsurani", "category": "proper_noun", "translation": "圖蘭尼", "notes": "The empire/people from the other world linked by the rift; used as both noun and adjective, e.g. \"Tsurani magician\" -> 圖蘭尼法師."},
-    {"term": "Assembly (of Magicians)", "category": "proper_noun", "translation": "法師議會", "notes": "Tsurani magicians' governing body."},
-    {"term": "House Acoma", "category": "proper_noun", "translation": "阿科瑪家", "notes": "Tsurani noble house."},
-    {"term": "House Omechan", "category": "proper_noun", "translation": "歐米強家", "notes": "Tsurani noble house, mentioned in the poetry exchange."},
-    {"term": "House Minwanabi", "category": "proper_noun", "translation": "米瓦內比家", "notes": "Tsurani noble house, mentioned in the poetry exchange."},
-    {"term": "Valheru", "category": "proper_noun", "translation": "瓦爾赫魯", "notes": "Ancient dragon-lord race bound within the Lifestone."},
-    {"term": "Lifestone", "category": "proper_noun", "translation": "生命石", "notes": "The magical artifact at the story's climax."},
-    {"term": "Book of Macros", "category": "proper_noun", "translation": "馬克羅斯之書", "notes": "The clue/item that leads Owyn and Gorath onward."},
-    {"term": "rift-machine", "category": "proper_noun", "translation": "裂界機", "notes": "The Tsurani teleportation device hidden in the Dimwood."},
-    {"term": "Spellweavers", "category": "proper_noun", "translation": "織法者", "notes": "Term used as an alarm/exclamation for enemy magic-users."},
-    {"term": "needra", "category": "proper_noun", "translation": "涅德拉", "notes": "Fictional Tsurani livestock animal, used idiomatically (\"needra bull\", \"needra cows\")."},
-    {"term": "Midkemia", "category": "place", "translation": "米德凱米亞", "notes": "The setting's home world/continent name."},
-    {"term": "Thuril", "category": "place", "translation": "圖里爾", "notes": "Region Pug's wife is from (\"Thuril highlander\")."},
-    {"term": "Stardock", "category": "place", "translation": "星塢島", "notes": "Pug's magic academy island."},
-    {"term": "Romney", "category": "place", "translation": "羅姆尼", "notes": "River town, site of the Nighthawks investigation."},
-    {"term": "Tiburn", "category": "place", "translation": "提伯恩", "notes": "Place Owyn mentions having \"pressing business\" -- a joke/excuse, not visited."},
-    {"term": "Highcastle", "category": "place", "translation": "高堡", "notes": ""},
-    {"term": "Ironpass", "category": "place", "translation": "鐵山口", "notes": ""},
-    {"term": "Northwarden", "category": "place", "translation": "北衛城", "notes": ""},
-    {"term": "Malac's Cross", "category": "place", "translation": "馬拉克十字鎮", "notes": ""},
-    {"term": "Darkmoor", "category": "place", "translation": "黑沼鎮", "notes": ""},
-    {"term": "Lyton", "category": "place", "translation": "萊頓", "notes": ""},
-    {"term": "Sethanon", "category": "place", "translation": "賽瑟儂", "notes": "Site of the story's climax (the Lifestone caverns)."},
-    {"term": "Elvandar", "category": "place", "translation": "艾爾凡達", "notes": "Elven forest city, home of Tomas."},
-    {"term": "Black Sheep Tavern", "category": "place", "translation": "黑羊酒館", "notes": "Romney tavern, site of the Kingdom soldiers' massacre."},
-    {"term": "Bitter Sea", "category": "place", "translation": "苦海", "notes": "Sea Pug senses the unnatural storm building over."},
-    {"term": "Timirianya", "category": "place", "translation": "提米里安亞", "notes": "World Pug references as an example of Valheru-caused devastation, mentioned only once."},
-    {"term": "The Six", "category": "proper_noun", "translation": "六賢者", "notes": "The group of Tsurani spellcasters guarding the Lifestone cavern."},
-    {"term": "Kesh / Great Kesh / Keshian", "category": "place", "translation": "凱許 / 大凱許帝國 / 凱許人", "notes": "Rival empire south of the Kingdom; appears frequently in DIAL_Z18 item flavor text."},
-    {"term": "Kelewan", "category": "place", "translation": "凱勒旺", "notes": "The Tsurani home world, reached through the rift."},
-    {"term": "Queg / Quegian", "category": "place", "translation": "奎格 / 奎格人", "notes": "Island empire, source of brandy referenced in item text."},
-    {"term": "Rillanon", "category": "place", "translation": "里蘭儂", "notes": "The Kingdom's royal capital island, mentioned in passing."},
-    {"term": "Shamata", "category": "place", "translation": "沙瑪塔", "notes": "Kingdom garrison town mentioned in a book's item text."},
-    {"term": "Tanneurs", "category": "place", "translation": "坦紐爾", "notes": "Kingdom settlement referenced in intercepted Nighthawk correspondence."},
-    {"term": "Cavall Keep", "category": "place", "translation": "卡瓦爾堡", "notes": "Mentioned once in a treasure ledger."},
-    {"term": "Kenting Rush", "category": "place", "translation": "肯廷拉什", "notes": "Site of a Temple of Kahooli, mentioned in a prayer note."},
-    {"term": "Havenwood", "category": "place", "translation": "海文林", "notes": "Mentioned once as a petitioner's home in a prayer note."},
-    {"term": "Sunset Isles", "category": "place", "translation": "落日群島", "notes": "Mentioned once in a smuggler's note."},
-    {"term": "Grey Towers", "category": "place", "translation": "灰塔", "notes": "Dwarven realm of King Dolgan, mentioned once in a dwarf's note."},
-    {"term": "Ishap", "category": "proper_noun", "translation": "伊夏神", "notes": "God of balance/the unknowable, referenced as the most revered Midkemian deity."},
-    {"term": "Tith / Tith Onanka", "category": "proper_noun", "translation": "提斯神 / 提斯歐南卡", "notes": "War god."},
-    {"term": "Dala", "category": "proper_noun", "translation": "達拉女神", "notes": "Defender goddess."},
-    {"term": "Banath", "category": "proper_noun", "translation": "巴納斯神", "notes": "God of luck and thieves."},
-    {"term": "Sung", "category": "proper_noun", "translation": "頌恩神", "notes": "God of healing, \"Giver of Life, Bearer of Drusala's Staff\"."},
-    {"term": "Kahooli", "category": "proper_noun", "translation": "卡胡利神", "notes": "God petitioned in several comic prayer notes (minor mischief/justice deity)."},
-    {"term": "Lims-Kragma", "category": "proper_noun", "translation": "林絲克拉格瑪", "notes": "Death goddess, referenced as \"the goddess of death\" elsewhere and by name in a spell scroll title."},
-    {"term": "King Dolgan", "category": "person", "translation": "多爾根王", "notes": "Dwarf king of the Grey Towers, mentioned once in a dwarf's recovered note."},
-    {"term": "Tomas", "category": "person", "translation": "托馬斯", "notes": "Already established (Lord of Elvandar) -- also receives several in-item letters in DIAL_Z18 from Pug."},
-    {"term": "Katala", "category": "person", "translation": "卡塔拉", "notes": "Tomas's wife, mentioned once in passing in a letter."},
-    {"term": "Pantathians", "category": "proper_noun", "translation": "潘塔西亞人", "notes": "A serpent-like race referenced once by Pug for comparison."},
-    {"term": "Draken-Korin", "category": "person", "translation": "德拉肯柯林", "notes": "A Valheru name mentioned once, associated with the Lifestone's origin."},
-    {"term": "Silverthorn", "category": "proper_noun", "translation": "銀刺", "notes": "A poisonous plant/venom used on weapons; recurring item name."},
-    {"term": "Guarda Revanche", "category": "proper_noun", "translation": "加爾達復仇劍", "notes": "A legendary cursed sword referenced in an old book."},
-    {"term": "Isunatus", "category": "person", "translation": "伊蘇納圖斯", "notes": "Recipient of a treasure gift, mentioned once in a ledger note (DIAL_Z18)."},
-    {"term": "Killian", "category": "proper_noun", "translation": "基利安", "notes": "Midkemian deity, referenced only in a spell scroll title (\"Wrath Of Killian\", DIAL_Z18)."},
-    {"term": "Eortis", "category": "proper_noun", "translation": "厄提斯", "notes": "Midkemian sea god, referenced only in a spell scroll title (\"Winds of Eortis\", DIAL_Z18)."},
-    {"term": "Guild of Thieves", "category": "proper_noun", "translation": "盜賊公會", "notes": "Krondor's thieves' guild, distinct from the Guild of Assassins; mentioned once in DIAL_Z18 smuggler correspondence."},
-    {"term": "Tanneurs", "category": "place", "translation": "坦紐爾", "notes": "Kingdom settlement, previously established -- recurs frequently in DIAL_Z18 as an ambush/interception site. Do not render as a phonetic variant (e.g. 坦諾斯); keep this exact spelling."},
-    {"term": "Crenard", "category": "person", "translation": "克瑞納德", "notes": "Generic mercenary NPC named in a random-ambush flavor line (DIAL_Z00)."},
-    {"term": "Guild of Death", "category": "proper_noun", "translation": "死亡公會", "notes": "A golden-hawk-emblem assassin guild named in one random-ambush flavor line (DIAL_Z00); distinct from the Guild of Assassins/Nighthawks established elsewhere -- keep as its own separate term, don't merge."},
-    {"term": "Ruthia", "category": "proper_noun", "translation": "露西亞女神", "notes": "Midkemian goddess of luck/chance, referenced once via her cultists in a random-encounter flavor line (DIAL_Z00)."},
-    {"term": "Guiswa", "category": "proper_noun", "translation": "圭斯瓦神", "notes": "\"The red-jawed hunter\", a minor hunter deity referenced by cultists in a random-encounter flavor line (DIAL_Z00)."},
-    {"term": "Milamber", "category": "person", "translation": "米蘭伯", "notes": "Pug's Tsurani magician name, used by Tsurani spellweavers addressing him directly (DIAL_Z00 Sethanon climax scene)."},
-    {"term": "Kulgan", "category": "person", "translation": "庫爾根", "notes": "The magician who first apprenticed Pug at Crydee, mentioned once in Pug's background blurb (DIAL_Z00)."},
-    {"term": "Crydee", "category": "place", "translation": "克萊迪", "notes": "Pug's home duchy/keep in the Western Kingdom, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Great One(s)", "category": "proper_noun", "translation": "至尊法師", "notes": "Tsurani title for a full member of the Assembly of Magicians; used for both Makala and, in flashback, for the Tsurani magicians who trained Pug."},
-    {"term": "William", "category": "person", "translation": "威廉", "notes": "Pug's natural son, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "the Upright Man", "category": "proper_noun", "translation": "正直人", "notes": "Underworld epithet/title for the head of Krondor's thieves' guild -- James's (unacknowledged) biological father, mentioned once in his background blurb (DIAL_Z00). Kept as a literal epithet in quotes, not a real name."},
-    {"term": "Brak Nurr", "category": "proper_noun", "translation": "布拉克努爾", "notes": "A titanic creature encountered in a mine random-encounter (DIAL_Z00)."},
-    {"term": "bulldrake", "category": "proper_noun", "translation": "牛蜥", "notes": "Recurring olive-scaled reptilian monster, smaller cousin of dragons (DIAL_Z00 random encounters)."},
-    {"term": "Riftwar", "category": "proper_noun", "translation": "裂界之戰", "notes": "The earlier Tsurani invasion war (the original Magician trilogy's war), referenced in several character background blurbs (DIAL_Z00) as backstory distinct from the game's own \"Great Rising\" conflict."},
-    {"term": "the Great Rising", "category": "proper_noun", "translation": "大崛起之戰", "notes": "The more recent moredhel/Murmandamus war (ten years before the game, climaxing at Sethanon), referenced repeatedly in character background blurbs (DIAL_Z00). Distinct from the earlier Riftwar."},
-    {"term": "Armengar", "category": "place", "translation": "阿曼加", "notes": "Battle site during the Great Rising where Locklear was decorated for service, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Land's End", "category": "place", "translation": "陸地盡頭", "notes": "Barony held by Locklear's father, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Ardanien (Clan/tribe)", "category": "proper_noun", "translation": "阿爾達尼恩", "notes": "Gorath's moredhel clan/tribe, mentioned in his and Locklear's background blurbs (DIAL_Z00)."},
-    {"term": "Green Heart (forest)", "category": "place", "translation": "綠心林", "notes": "Moredhel homeland forest Gorath's people fled from during the Riftwar, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Great Northern Mountains", "category": "place", "translation": "大北山脈", "notes": "Mountain range Gorath's tribe crossed fleeing the Tsurani, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Beleforte", "category": "person", "translation": "貝勒佛特", "notes": "Owyn's family surname (Count of Tiburn's house), mentioned in his background blurb (DIAL_Z00)."},
-    {"term": "Duke of Euper", "category": "person", "translation": "尤帕公爵", "notes": "Father of the noblewoman Owyn's father hopes he'll marry, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Ran", "category": "place", "translation": "蘭城", "notes": "City where a young Owyn vacationed and hired an illicit magic tutor, mentioned once in his background blurb (DIAL_Z00)."},
-    {"term": "Questor's View", "category": "place", "translation": "尋道崖", "notes": "Signpost destination on the Eggley/Dimwood road network (DIAL_Z02)."},
-    {"term": "Sarth", "category": "place", "translation": "薩斯", "notes": "Monastic settlement home to a community of scribes; \"Vaults of Sarth\" -> 薩斯地窖 (DIAL_Z02)."},
-    {"term": "Brother Marc", "category": "person", "translation": "馬克修士", "notes": "A scribe of Sarth who can help decode/translate documents; \"Brother\" title rendered 修士, placed after the name like Seigneur (DIAL_Z02/Z20/Z30)."},
-    {"term": "Abbot Graves", "category": "person", "translation": "葛瑞夫斯院長", "notes": "Abbot at Malac's Cross, known for scribal/lore knowledge; \"Abbot\" title rendered 院長, placed after the name (DIAL_Z02/Z13/Z18)."},
-    {"term": "Sloop", "category": "place", "translation": "斯魯普", "notes": "Signpost destination near Romney/Lyton (DIAL_Z03)."},
-    {"term": "Ugyne", "category": "person", "translation": "烏格妮", "notes": "Owyn's relation at Cavall Keep, whose safety he worries about after the ambush; later revealed to have a suitor, Navon du Sandau (DIAL_Z03/Z20)."},
-    {"term": "Navon du Sandau", "category": "person", "translation": "納馮．杜桑多", "notes": "A suitor of Ugyne's, linked to the (impostor) Nighthawks (DIAL_Z03/Z20)."},
-    {"term": "Goblin", "category": "proper_noun", "translation": "哥布林", "notes": "Standard fantasy transliteration for the goblin race, distinct from moredhel (OBJINFO.DAT item names, DIAL_Z02 chapter-title background text)."},
-    {"term": "Fadamor", "category": "person", "translation": "法達莫爾", "notes": "Established by the item OBJINFO.DAT#115 \"Fadamor's Formula\" -> 法達莫爾秘方 (also named/quoted directly in DIAL_Z18 flavor text); also a DIAL_Z07 epitaph surname (Orson du Bas Fadamor) -- keep this spelling everywhere, do not shorten to 法達莫."},
-    {"term": "Dalatail", "category": "proper_noun", "translation": "達拉泰爾", "notes": "Established by the item OBJINFO.DAT#114 \"Dalatail Milk\" -> 達拉泰爾聖水 (quoted directly in DIAL_Z18 flavor text); also a DIAL_Z02 epitaph surname (Baylor Dalatail, whose joke epitaph about drinking milk daily appears to be the same in-joke) -- keep this spelling everywhere, do not shorten to 達拉泰."},
-    {"term": "Lewton", "category": "person", "translation": "路頓", "notes": "Established by the item OBJINFO.DAT#116 \"Lewton's Concentrate\" -> 路頓濃縮液 (quoted directly in DIAL_Z18 flavor text as a spellcasting-accuracy potion recommended by Dorcas)."},
-    {"term": "Sarig (\"-sbane\")", "category": "proper_noun", "translation": "薩瑞格", "notes": "Established by the item OBJINFO.DAT#110 \"Sarigsbane\" -> 薩瑞格的剋星, a frost-ward substance applied to armor (quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Coltari", "category": "proper_noun", "translation": "科塔利", "notes": "\"Coltari Poison\" -> 科塔利毒藥, a slow-acting Kelewan (Tsurani-world) poison (OBJINFO.DAT#105, quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Kalem", "category": "person", "translation": "卡倫", "notes": "Author of a treatise on crossbow-bolt trajectory and archery tips (\"Kalem's Dialectic\", OBJINFO.DAT#129), discussed in DIAL_Z18 flavor text."},
-    {"term": "Dorcas", "category": "person", "translation": "多爾卡斯", "notes": "Author of a treatise on magical \"linking\" theory (\"Dorcas' Treatise\", OBJINFO.DAT#128), discussed in DIAL_Z18 flavor text."},
-    {"term": "Nivek", "category": "person", "translation": "尼維克", "notes": "Named on a brass door key (\"Nivek's Key\", OBJINFO.DAT#65); DIAL_Z18 flavor text identifies him as \"West Region treasurer, Krondor\"."},
-    {"term": "Glazer's Guild", "category": "proper_noun", "translation": "玻璃匠公會", "notes": "Romney's glassmakers' guild, sealed items reference it (\"Glazer's Guild Seal\", OBJINFO.DAT#93, quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Guildis Thorn", "category": "proper_noun", "translation": "基爾迪斯棘刺", "notes": "A dwarven nickname for ornate wooden Tsurani-made keys (OBJINFO.DAT#69, quoted directly in DIAL_Z18 flavor text -- keep this exact rendering, not an alternate transliteration)."},
-    {"term": "Eliaem", "category": "proper_noun", "translation": "伊萊安姆", "notes": "A name/word spoken to focus a magical stone's power (\"Eliaem's Heart\", OBJINFO.DAT#9, quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Lassur", "category": "proper_noun", "translation": "拉蘇爾", "notes": "\"Idol of Lassur\" -> 拉蘇爾偶像 (OBJINFO.DAT#12); named alongside the Amulet of the Upright Man in a DIAL_Z18 flavor-text quote -- use 偶像, not 神像, for this item's name."},
-    {"term": "Roric", "category": "person", "translation": "羅瑞克", "notes": "\"Roric's Seal\" (OBJINFO.DAT#15)."},
-    {"term": "Galon 'Griefmaker'", "category": "person", "translation": "蓋隆「悲愴使者」", "notes": "Named sword owner, epithet kept in quotes like \"the Upright Man\" (OBJINFO.DAT#19)."},
-    {"term": "Kinnur", "category": "person", "translation": "金努爾", "notes": "\"Sword of Kinnur\" (OBJINFO.DAT#27)."},
-    {"term": "Euliliko", "category": "person", "translation": "尤利利科", "notes": "Armorer who adapted Tsurani horn-plate techniques for LaMut soldiers' armor (\"Euliliko Armor\", OBJINFO.DAT#45, quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Ralen-Sheb", "category": "person", "translation": "拉倫謝布", "notes": "\"Ward of Ralen-Sheb\" (OBJINFO.DAT#70)."},
-    {"term": "Althafain", "category": "person", "translation": "阿爾薩芬", "notes": "Introduced a frost-ward oil to the Kingdom after frost-blade injuries (\"Althafain's Icer\", OBJINFO.DAT#103, quoted directly in DIAL_Z18 flavor text)."},
-    {"term": "Mitchel Waylander", "category": "person", "translation": "米契爾．韋蘭德", "notes": "\"Mitchel Waylander's Note\" (OBJINFO.DAT#122)."},
-    {"term": "Lorgan", "category": "person", "translation": "洛根", "notes": "\"Lorgan's Journal\" (OBJINFO.DAT#125)."},
-    {"term": "Thiful", "category": "person", "translation": "提福爾", "notes": "Author of a rambling book nominally about bird migrations (\"Thiful's Bird Migrations\", OBJINFO.DAT#132, referenced in DIAL_Z18 flavor text)."},
-    {"term": "Algon Kokoon", "category": "person", "translation": "阿爾岡科昆", "notes": "\"Horn of Algon Kokoon\" (OBJINFO.DAT#11)."},
-    {"term": "Prandur", "category": "person", "translation": "普蘭鐸", "notes": "\"Ring of Prandur\" (OBJINFO.DAT#6)."},
-    {"term": "Bessy", "category": "person", "translation": "貝西", "notes": "\"Bessy Mauler\" crossbow (OBJINFO.DAT#32)."},
-    {"term": "eledhel", "category": "proper_noun", "translation": "伊列德人", "notes": "The \"light elf\" race/faction, home to Elvandar; transliterated to match the moredhel (莫瑞德人) convention rather than translated literally as \"light elf\" (DIAL_Z08)."},
-    {"term": "Teeth of the World", "category": "place", "translation": "世界之齒", "notes": "A named mountain range (canon Riftwar Saga geography), meaning-translated (DIAL_Z05/Z27)."},
-    {"term": "Northlands", "category": "place", "translation": "北境", "notes": "Generic region name for the lands north of the Kingdom, where moredhel forces operate (DIAL_Z05/Z12)."},
-    {"term": "King's Highway", "category": "place", "translation": "御道", "notes": "The Kingdom's major overland road, referenced from the Mac Mordain Cadal mine exit (DIAL_Z10)."},
-    {"term": "Swordmaster", "category": "proper_noun", "translation": "劍術大師", "notes": "Military/guard title, e.g. \"Swordmaster Corby\" (DIAL_Z11)."},
-    {"term": "false Murmandamus", "category": "person", "translation": "冒牌穆爾曼達穆斯", "notes": "The Pantathian who impersonated Murmandamus (established 穆爾曼達穆斯) during the Great Rising, revealed by Pug near the Lifestone; \"false X\" rendered 冒牌X, matching \"false Nighthawks\" -> 冒牌夜鷹會 (DIAL_Z29)."},
-    {"term": "Hakha's Cajunlo", "category": "place", "translation": "哈卡的卡瓊洛", "notes": "A shop name in the Dimwood merchant area (DIAL_Z24)."},
-    {"term": "Touchstone Gems", "category": "place", "translation": "試金石珠寶行", "notes": "Jewelry shop (DIAL_Z24)."},
-    {"term": "The Armory", "category": "place", "translation": "軍械庫", "notes": "Weapon/armor shop, one of several sharing the same flavor text (DIAL_Z24)."},
-    {"term": "Sign of the Sword", "category": "place", "translation": "利劍之徽", "notes": "Weapon/armor shop (DIAL_Z24)."},
-    {"term": "The Forge", "category": "place", "translation": "鍛爐", "notes": "Weapon/armor shop (DIAL_Z24)."},
-    {"term": "Scavenger's Meet", "category": "place", "translation": "拾荒市集", "notes": "Junk/secondhand shop (DIAL_Z24)."},
-    {"term": "Joseph the Animal's", "category": "place", "translation": "「野獸」約瑟夫的店", "notes": "Armor shop named for its owner's nickname (DIAL_Z24)."},
-    {"term": "The Woolen Man", "category": "place", "translation": "羊毛商人", "notes": "General goods shop (DIAL_Z24)."},
-    {"term": "The Fife and Laurel", "category": "place", "translation": "橫笛與月桂", "notes": "A dusty, rarely-visited Dimwood shop (DIAL_Z24)."},
-    {"term": "Morgan Hurley's", "category": "place", "translation": "摩根．赫利的店", "notes": "Weapon/armor shop named for its owner (DIAL_Z24)."},
-    {"term": "Pierce Perry's Weapons", "category": "place", "translation": "皮爾斯．佩里軍火行", "notes": "Weapon shop named for its owner (DIAL_Z24)."},
-    {"term": "Split Tree Goods", "category": "place", "translation": "裂樹雜貨行", "notes": "General goods shop (DIAL_Z24)."},
-    {"term": "Gallowlees' Jewels", "category": "place", "translation": "加羅利斯珠寶行", "notes": "Jewelry shop (DIAL_Z24)."},
-    {"term": "Rygate and Supply", "category": "place", "translation": "萊蓋特雜貨行", "notes": "General goods shop (DIAL_Z24)."},
-    {"term": "Thorgath", "category": "person", "translation": "索爾加斯", "notes": "Gorath's cover alias while travelling incognito with the party (established in TEST.DDX; also appears in DIAL_Z20/Z30/Z31 -- keep consistent wherever the disguise name is used, separate from Gorath's real name)."},
-    {"term": "Lin-Lan", "category": "proper_noun", "translation": "林嵐牌", "notes": "Fictional card game played by gamblers/townsfolk (DIAL_Z21). Even-money wager, dealt cards."},
-    {"term": "Pashawa", "category": "proper_noun", "translation": "帕夏瓦牌", "notes": "Fictional card game played by gamblers/townsfolk (DIAL_Z21), pays 1.5x on a win."},
-    {"term": "Pokiir", "category": "proper_noun", "translation": "波基爾", "notes": "Fictional card game (a poker analogue) played by Keshian mercenaries (DIAL_Z21). Source text renders it as \"óPokiir\" with a leading 0xF3 style/control byte -- keep that literal ó immediately before the transliteration, matching the established convention for this control byte (see DIAL_Z00#9/#12)."},
-    {"term": "Harlech", "category": "place", "translation": "哈勒克", "notes": "Moredhel-held town near Sar-Sargoth that the party must skirt around, avoiding recognition (DIAL_Z06)."},
-    {"term": "Caern", "category": "place", "translation": "凱恩", "notes": "Wilderness map location near Sar-Sargoth/Harlech (DIAL_Z06 map label, not yet seen in narrative text)."},
-    {"term": "Wyke", "category": "place", "translation": "懷克", "notes": "Wilderness map location near Sar-Sargoth/Harlech (DIAL_Z06 map label, not yet seen in narrative text)."},
-    {"term": "Raglam", "category": "place", "translation": "拉格蘭姆", "notes": "Wilderness map location east of Sar-Sargoth (DIAL_Z06 map label \"Raglam EAST\" -> 拉格蘭姆東側, not yet seen in narrative text)."},
-    {"term": "the Protector", "category": "proper_noun", "translation": "守護者", "notes": "Title referenced on several Armengar-defender tombstones (\"Died for the Protector\") near Sar-Sargoth (DIAL_Z06); likely the historical defensive commander of Armengar during Guy du Bas-Tyra's siege."},
-    {"term": "Guy du Bas-Tyra", "category": "person", "translation": "居伊．杜．巴斯泰拉", "notes": "Historical Kingdom noble who burned Armengar; referenced only in passing as the source of the naphtha-caves' underground river's smell persisting \"since the day\" (DIAL_Z06)."},
-    {"term": "Obkhar", "category": "person", "translation": "奧布卡", "notes": "Moredhel prisoner of Venutrier's naphtha caves that Gorath plans to free as a favor/distraction against Delekhan (DIAL_Z06)."},
-    {"term": "Irmelyn", "category": "person", "translation": "伊爾梅琳", "notes": "Off-screen source Gorath cites for information about the naphtha caves (DIAL_Z06); not yet directly encountered."},
-    {"term": "Venutrier", "category": "person", "translation": "維努特里爾", "notes": "Slave trader operating naphtha caves near Sar-Sargoth/Harlech, referred to as \"Venutrier of Lan\" (DIAL_Z06)."},
-    {"term": "Beldogal Clan", "category": "proper_noun", "translation": "貝爾多加氏族", "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."},
-    {"term": "Golbandek Clan", "category": "proper_noun", "translation": "戈爾班德克氏族", "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."},
-    {"term": "Yulvend Clan", "category": "proper_noun", "translation": "尤爾文德氏族", "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."},
-    {"term": "Pobel Clan", "category": "proper_noun", "translation": "波貝爾氏族", "notes": "Moredhel clan; three of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."},
-    {"term": "Mockers", "category": "proper_noun", "translation": "嘲弄幫", "notes": "Krondor's thieves' guild, led by \"the Upright Man\"; James's own background (DIAL_Z14 tavern scene, James investigating the Crawler's key/the Upright Man's death)."},
-    {"term": "the Crawler", "category": "proper_noun", "translation": "爬行者", "notes": "Krondor underworld fence/crime figure James investigates in the DIAL_Z14 tavern scene; has fled to the Sunset Isles after the Upright Man's death."},
-    {"term": "Black Slayers", "category": "proper_noun", "translation": "黑衣殺手", "notes": "A near-unkillable variety of Nighthawk assassin, described directly in DIAL_Z14 tavern dialogue (get back up after being run through)."},
-    {"term": "Kasumi", "category": "person", "translation": "卡蘇米伯爵", "notes": "Tsurani earl/warrior mentioned in passing humiliating Baron Gabot's men at a LaMut archery tourney (DIAL_Z14 tavern flavor text)."},
-    {"term": "Gabot", "category": "person", "translation": "加波特男爵", "notes": "Baron mentioned losing an archery tourney to Earl Kasumi's Tsurani warriors (DIAL_Z14 tavern flavor text)."},
-    {"term": "Silden", "category": "place", "translation": "錫爾登", "notes": "Town blamed for stirring up the Romney/Riverpullers guild conflict (DIAL_Z14 tavern scene, James's conversation about Lord Lyton)."},
-    {"term": "tondill", "category": "proper_noun", "translation": "唐迪爾", "notes": "A violet flower (\"tondill horns\") that needs near-constant sunlight and is hard to grow in salty coastal soil, per Princess Anita's complaints (DIAL_Z14); used by James to hide a powder bag in a search scene."},
-    {"term": "Lyton", "category": "person", "translation": "萊頓勳爵", "notes": "\"Lord Lyton\", employer of a tavern patron James talks to (DIAL_Z14 tavern scene); not directly encountered."},
-    {"term": "Max Feeber", "category": "person", "translation": "麥克斯．費伯", "notes": "\"That greedy bastard out west\" implicated in guild-impersonation trouble near Silden (DIAL_Z14 tavern scene); not directly encountered."},
-    {"term": "Kivo", "category": "person", "translation": "基沃", "notes": "Mocker who dropped the Crawler's key fleeing the sewers after the Upright Man's death (DIAL_Z14 tavern scene, mentioned only)."},
-    {"term": "Brock Noor", "category": "proper_noun", "translation": "布洛克諾爾", "notes": "A dwarf-named monster that collapsed a mine shaft at Mac Mordain Cadal, mentioned in a mercenary's tavern story (DIAL_Z14)."},
-    {"term": "Cullich", "category": "person", "translation": "庫利奇", "notes": "A witch whose empty roadside cottage (\"Cullich's House\") the party investigates before finding the dragon statue (DIAL_Z14); not directly encountered."},
-    {"term": "Rhandra", "category": "proper_noun", "translation": "蘭德拉", "notes": "\"The Flamewyrm Rhandra\", the dragon slain by Delong the Great per the archaic inscription on the dragon statue (DIAL_Z14#9)."},
-    {"term": "Delong the Great", "category": "person", "translation": "戴隆大帝", "notes": "Ancient Kingdom king credited with slaying Malac the Pious and the Flamewyrm Rhandra, per the dragon statue's archaic inscription (DIAL_Z14#9)."},
-    {"term": "Malac the Pious", "category": "person", "translation": "虔信者馬拉克", "notes": "Historical figure slain alongside the Flamewyrm Rhandra by Delong the Great, per the dragon statue's archaic inscription (DIAL_Z14#9)."},
-    {"term": "Anita", "category": "person", "translation": "安妮塔公主", "notes": "Princess Anita, mentioned complaining about tondill flowers being hard to grow in Krondor's coastal soil (DIAL_Z14 tavern scene, referenced only)."},
-    {"term": "Quegian", "category": "proper_noun", "translation": "奎格", "notes": "Adjective/language of Quega, matches the established OBJINFO.DAT#... \"Quegian Brandy\" -> 奎格白蘭地 rendering; also used for the (untranslated, kept verbatim) fake Quegian-language lines in DIAL_Z14's tavern brawl scene."}
+    {
+      "term": "Pug",
+      "category": "person",
+      "translation": "帕格",
+      "notes": "Confirmed official term from the Taiwan Riftwar Saga (魔法師) translation. Legendary archmage; may only be referenced, not a Betrayal at Krondor player character."
+    },
+    {
+      "term": "Owyn",
+      "category": "person",
+      "translation": "歐文",
+      "notes": "Player character, young magician's apprentice."
+    },
+    {
+      "term": "Locklear",
+      "category": "person",
+      "translation": "洛克利爾",
+      "notes": "Player character, king's squire. Title \"Seigneur\" (used as an honorific before his name) renders as 紳爵."
+    },
+    {
+      "term": "Seigneur",
+      "category": "proper_noun",
+      "translation": "紳爵",
+      "notes": "Feudal honorific title, used before a name e.g. \"Seigneur Locklear\" -> 洛克利爾紳爵."
+    },
+    {
+      "term": "Gorath",
+      "category": "person",
+      "translation": "戈拉斯",
+      "notes": "Moredhel defector, escorted by the party. Already used consistently since Phase 5 live testing."
+    },
+    {
+      "term": "James / Seigneur James",
+      "category": "person",
+      "translation": "詹姆士",
+      "notes": "Later-playable character; addressed formally as James/Seigneur James throughout DIAL_Z16 dialogue."
+    },
+    {
+      "term": "Jimmy the Hand",
+      "category": "person",
+      "translation": "神偷吉米",
+      "notes": "Old nickname for James, used casually/in-jokes (\"Jimmy the Hand\", \"Jimmy\"). Same person as James above -- use 詹姆士 for direct address, 吉米 alone or 神偷吉米 only when the source text itself uses the nickname."
+    },
+    {
+      "term": "Gamina",
+      "category": "person",
+      "translation": "蓋米娜",
+      "notes": "Later-playable character, not yet encountered in translated content."
+    },
+    {
+      "term": "Patrus",
+      "category": "person",
+      "translation": "派特魯斯",
+      "notes": "Later-playable character, not yet encountered in translated content."
+    },
+    {
+      "term": "Arutha (conDoin)",
+      "category": "person",
+      "translation": "亞魯莎",
+      "notes": "Prince of Krondor."
+    },
+    {
+      "term": "Delekhan",
+      "category": "person",
+      "translation": "迪勒肯",
+      "notes": "Moredhel warlord, main antagonist."
+    },
+    {
+      "term": "Nago",
+      "category": "person",
+      "translation": "納戈",
+      "notes": "Delekhan's magician assistant."
+    },
+    {
+      "term": "Haseth",
+      "category": "person",
+      "translation": "哈賽斯",
+      "notes": "Referenced in the chapter-1 ambush dialogue (\"Do not struggle so, Haseth\")."
+    },
+    {
+      "term": "moredhel",
+      "category": "proper_noun",
+      "translation": "莫瑞德人",
+      "notes": "The \"dark elf\" race/faction; lowercase common noun in English, treated as a proper noun here."
+    },
+    {
+      "term": "Krondor",
+      "category": "place",
+      "translation": "克朗多",
+      "notes": "Capital city, game's title location. Established since Phase 4/5 POC testing -- keep this exact rendering everywhere."
+    },
+    {
+      "term": "the Kingdom (of the Isles)",
+      "category": "place",
+      "translation": "王國",
+      "notes": "The setting's dominant kingdom."
+    },
+    {
+      "term": "Yabon",
+      "category": "place",
+      "translation": "亞邦",
+      "notes": ""
+    },
+    {
+      "term": "LaMut",
+      "category": "place",
+      "translation": "拉姆特",
+      "notes": ""
+    },
+    {
+      "term": "Zun",
+      "category": "place",
+      "translation": "尊恩",
+      "notes": ""
+    },
+    {
+      "term": "Hawk's Hollow",
+      "category": "place",
+      "translation": "鷹谷",
+      "notes": ""
+    },
+    {
+      "term": "Loriel",
+      "category": "place",
+      "translation": "洛瑞爾",
+      "notes": ""
+    },
+    {
+      "term": "Tyr-Sog",
+      "category": "place",
+      "translation": "泰索格",
+      "notes": ""
+    },
+    {
+      "term": "Inclindel Pass",
+      "category": "place",
+      "translation": "因克林德爾山口",
+      "notes": ""
+    },
+    {
+      "term": "Zun Pass",
+      "category": "place",
+      "translation": "尊恩山口",
+      "notes": ""
+    },
+    {
+      "term": "Mac Mordain Cadal",
+      "category": "place",
+      "translation": "麥克莫丹卡達爾",
+      "notes": "Dwarven mine/underground realm."
+    },
+    {
+      "term": "Eggley",
+      "category": "place",
+      "translation": "艾格利",
+      "notes": ""
+    },
+    {
+      "term": "Dimwood",
+      "category": "place",
+      "translation": "幽暗林",
+      "notes": "Forest, meaning-translated rather than transliterated (\"dim\" + \"wood\")."
+    },
+    {
+      "term": "Sar-Sargoth",
+      "category": "place",
+      "translation": "薩薩戈斯",
+      "notes": "Moredhel stronghold in the Northlands."
+    },
+    {
+      "term": "Makala",
+      "category": "person",
+      "translation": "馬卡拉",
+      "notes": "Tsurani Great One (magician) of the Assembly, DIAL_Z16 antagonist."
+    },
+    {
+      "term": "Narab",
+      "category": "person",
+      "translation": "納拉布",
+      "notes": "Delekhan's advisor/torturer."
+    },
+    {
+      "term": "Liallan",
+      "category": "person",
+      "translation": "莉艾蘭",
+      "notes": "Delekhan's mistress, mentioned only in passing."
+    },
+    {
+      "term": "Moraeulf",
+      "category": "person",
+      "translation": "莫萊伍夫",
+      "notes": "Delekhan's son, mentioned only in passing."
+    },
+    {
+      "term": "Tomas",
+      "category": "person",
+      "translation": "托馬斯",
+      "notes": "Lord of Elvandar, appears briefly commanding Gorath as emissary."
+    },
+    {
+      "term": "Murmandamus",
+      "category": "person",
+      "translation": "穆爾曼達穆斯",
+      "notes": "Previous moredhel leader, killed at Sethanon ten years before the game's events; historical antagonist, referenced not present."
+    },
+    {
+      "term": "Ashen-Shugar",
+      "category": "person",
+      "translation": "灰燼舒加爾",
+      "notes": "A Valheru whose consumed/trapped spirit is released from the Lifestone."
+    },
+    {
+      "term": "Macros the Black",
+      "category": "person",
+      "translation": "黑袍馬克羅斯",
+      "notes": "Legendary sorcerer, referenced in Pug's closing advice to Owyn; not present."
+    },
+    {
+      "term": "Duke Martin",
+      "category": "person",
+      "translation": "馬丁公爵",
+      "notes": "Mentioned helping prepare Northwarden's defense."
+    },
+    {
+      "term": "King Lyam",
+      "category": "person",
+      "translation": "萊亞姆王",
+      "notes": "The King, mentioned in passing (his troops rendezvous at Romney)."
+    },
+    {
+      "term": "Baron Gabot",
+      "category": "person",
+      "translation": "加博特男爵",
+      "notes": "James/Locklear's cover-story employer in Romney; \"Gabot's Folly\" -> 加博特的蠢事."
+    },
+    {
+      "term": "Mara of the Acoma",
+      "category": "person",
+      "translation": "阿科瑪的瑪拉",
+      "notes": "Tsurani noble, leader of the anti-traditionalist faction Makala mentions."
+    },
+    {
+      "term": "Nighthawks",
+      "category": "proper_noun",
+      "translation": "夜鷹會",
+      "notes": "Assassins' guild; \"false Nighthawks\" (impostors framing the real guild) -> 冒牌夜鷹會."
+    },
+    {
+      "term": "Guild of Assassins",
+      "category": "proper_noun",
+      "translation": "刺客公會",
+      "notes": "The (real) assassins' guild Delekhan has co-opted into a spy network."
+    },
+    {
+      "term": "Tsurani",
+      "category": "proper_noun",
+      "translation": "圖蘭尼",
+      "notes": "The empire/people from the other world linked by the rift; used as both noun and adjective, e.g. \"Tsurani magician\" -> 圖蘭尼法師."
+    },
+    {
+      "term": "Assembly (of Magicians)",
+      "category": "proper_noun",
+      "translation": "法師議會",
+      "notes": "Tsurani magicians' governing body."
+    },
+    {
+      "term": "House Acoma",
+      "category": "proper_noun",
+      "translation": "阿科瑪家",
+      "notes": "Tsurani noble house."
+    },
+    {
+      "term": "House Omechan",
+      "category": "proper_noun",
+      "translation": "歐米強家",
+      "notes": "Tsurani noble house, mentioned in the poetry exchange."
+    },
+    {
+      "term": "House Minwanabi",
+      "category": "proper_noun",
+      "translation": "米瓦內比家",
+      "notes": "Tsurani noble house, mentioned in the poetry exchange."
+    },
+    {
+      "term": "Valheru",
+      "category": "proper_noun",
+      "translation": "瓦爾赫魯",
+      "notes": "Ancient dragon-lord race bound within the Lifestone."
+    },
+    {
+      "term": "Lifestone",
+      "category": "proper_noun",
+      "translation": "生命石",
+      "notes": "The magical artifact at the story's climax."
+    },
+    {
+      "term": "Book of Macros",
+      "category": "proper_noun",
+      "translation": "馬克羅斯之書",
+      "notes": "The clue/item that leads Owyn and Gorath onward."
+    },
+    {
+      "term": "rift-machine",
+      "category": "proper_noun",
+      "translation": "裂界機",
+      "notes": "The Tsurani teleportation device hidden in the Dimwood."
+    },
+    {
+      "term": "Spellweavers",
+      "category": "proper_noun",
+      "translation": "織法者",
+      "notes": "Term used as an alarm/exclamation for enemy magic-users."
+    },
+    {
+      "term": "needra",
+      "category": "proper_noun",
+      "translation": "涅德拉",
+      "notes": "Fictional Tsurani livestock animal, used idiomatically (\"needra bull\", \"needra cows\")."
+    },
+    {
+      "term": "Midkemia",
+      "category": "place",
+      "translation": "米德凱米亞",
+      "notes": "The setting's home world/continent name."
+    },
+    {
+      "term": "Thuril",
+      "category": "place",
+      "translation": "圖里爾",
+      "notes": "Region Pug's wife is from (\"Thuril highlander\")."
+    },
+    {
+      "term": "Stardock",
+      "category": "place",
+      "translation": "星塢島",
+      "notes": "Pug's magic academy island."
+    },
+    {
+      "term": "Romney",
+      "category": "place",
+      "translation": "羅姆尼",
+      "notes": "River town, site of the Nighthawks investigation."
+    },
+    {
+      "term": "Tiburn",
+      "category": "place",
+      "translation": "提伯恩",
+      "notes": "Place Owyn mentions having \"pressing business\" -- a joke/excuse, not visited."
+    },
+    {
+      "term": "Highcastle",
+      "category": "place",
+      "translation": "高堡",
+      "notes": ""
+    },
+    {
+      "term": "Ironpass",
+      "category": "place",
+      "translation": "鐵山口",
+      "notes": ""
+    },
+    {
+      "term": "Northwarden",
+      "category": "place",
+      "translation": "北衛城",
+      "notes": ""
+    },
+    {
+      "term": "Malac's Cross",
+      "category": "place",
+      "translation": "馬拉克十字鎮",
+      "notes": ""
+    },
+    {
+      "term": "Darkmoor",
+      "category": "place",
+      "translation": "黑沼鎮",
+      "notes": ""
+    },
+    {
+      "term": "Lyton",
+      "category": "place",
+      "translation": "萊頓",
+      "notes": ""
+    },
+    {
+      "term": "Sethanon",
+      "category": "place",
+      "translation": "賽瑟儂",
+      "notes": "Site of the story's climax (the Lifestone caverns)."
+    },
+    {
+      "term": "Elvandar",
+      "category": "place",
+      "translation": "艾爾凡達",
+      "notes": "Elven forest city, home of Tomas."
+    },
+    {
+      "term": "Black Sheep Tavern",
+      "category": "place",
+      "translation": "黑羊酒館",
+      "notes": "Romney tavern, site of the Kingdom soldiers' massacre."
+    },
+    {
+      "term": "Bitter Sea",
+      "category": "place",
+      "translation": "苦海",
+      "notes": "Sea Pug senses the unnatural storm building over."
+    },
+    {
+      "term": "Timirianya",
+      "category": "place",
+      "translation": "提米里安亞",
+      "notes": "World Pug references as an example of Valheru-caused devastation, mentioned only once."
+    },
+    {
+      "term": "The Six",
+      "category": "proper_noun",
+      "translation": "六賢者",
+      "notes": "The group of Tsurani spellcasters guarding the Lifestone cavern."
+    },
+    {
+      "term": "Kesh / Great Kesh / Keshian",
+      "category": "place",
+      "translation": "凱許 / 大凱許帝國 / 凱許人",
+      "notes": "Rival empire south of the Kingdom; appears frequently in DIAL_Z18 item flavor text."
+    },
+    {
+      "term": "Kelewan",
+      "category": "place",
+      "translation": "凱勒旺",
+      "notes": "The Tsurani home world, reached through the rift."
+    },
+    {
+      "term": "Queg / Quegian",
+      "category": "place",
+      "translation": "奎格 / 奎格人",
+      "notes": "Island empire, source of brandy referenced in item text."
+    },
+    {
+      "term": "Rillanon",
+      "category": "place",
+      "translation": "里蘭儂",
+      "notes": "The Kingdom's royal capital island, mentioned in passing."
+    },
+    {
+      "term": "Shamata",
+      "category": "place",
+      "translation": "沙瑪塔",
+      "notes": "Kingdom garrison town mentioned in a book's item text."
+    },
+    {
+      "term": "Tanneurs",
+      "category": "place",
+      "translation": "坦紐爾",
+      "notes": "Kingdom settlement referenced in intercepted Nighthawk correspondence."
+    },
+    {
+      "term": "Cavall Keep",
+      "category": "place",
+      "translation": "卡瓦爾堡",
+      "notes": "Mentioned once in a treasure ledger."
+    },
+    {
+      "term": "Kenting Rush",
+      "category": "place",
+      "translation": "肯廷拉什",
+      "notes": "Site of a Temple of Kahooli, mentioned in a prayer note."
+    },
+    {
+      "term": "Havenwood",
+      "category": "place",
+      "translation": "海文林",
+      "notes": "Mentioned once as a petitioner's home in a prayer note."
+    },
+    {
+      "term": "Sunset Isles",
+      "category": "place",
+      "translation": "落日群島",
+      "notes": "Mentioned once in a smuggler's note."
+    },
+    {
+      "term": "Grey Towers",
+      "category": "place",
+      "translation": "灰塔",
+      "notes": "Dwarven realm of King Dolgan, mentioned once in a dwarf's note."
+    },
+    {
+      "term": "Ishap",
+      "category": "proper_noun",
+      "translation": "伊夏神",
+      "notes": "God of balance/the unknowable, referenced as the most revered Midkemian deity."
+    },
+    {
+      "term": "Tith / Tith Onanka",
+      "category": "proper_noun",
+      "translation": "提斯神 / 提斯歐南卡",
+      "notes": "War god."
+    },
+    {
+      "term": "Dala",
+      "category": "proper_noun",
+      "translation": "達拉女神",
+      "notes": "Defender goddess."
+    },
+    {
+      "term": "Banath",
+      "category": "proper_noun",
+      "translation": "巴納斯神",
+      "notes": "God of luck and thieves."
+    },
+    {
+      "term": "Sung",
+      "category": "proper_noun",
+      "translation": "頌恩神",
+      "notes": "God of healing, \"Giver of Life, Bearer of Drusala's Staff\"."
+    },
+    {
+      "term": "Kahooli",
+      "category": "proper_noun",
+      "translation": "卡胡利神",
+      "notes": "God petitioned in several comic prayer notes (minor mischief/justice deity)."
+    },
+    {
+      "term": "Lims-Kragma",
+      "category": "proper_noun",
+      "translation": "林絲克拉格瑪",
+      "notes": "Death goddess, referenced as \"the goddess of death\" elsewhere and by name in a spell scroll title."
+    },
+    {
+      "term": "King Dolgan",
+      "category": "person",
+      "translation": "多爾根王",
+      "notes": "Dwarf king of the Grey Towers, mentioned once in a dwarf's recovered note."
+    },
+    {
+      "term": "Tomas",
+      "category": "person",
+      "translation": "托馬斯",
+      "notes": "Already established (Lord of Elvandar) -- also receives several in-item letters in DIAL_Z18 from Pug."
+    },
+    {
+      "term": "Katala",
+      "category": "person",
+      "translation": "卡塔拉",
+      "notes": "Tomas's wife, mentioned once in passing in a letter."
+    },
+    {
+      "term": "Pantathians",
+      "category": "proper_noun",
+      "translation": "潘塔西亞人",
+      "notes": "A serpent-like race referenced once by Pug for comparison."
+    },
+    {
+      "term": "Draken-Korin",
+      "category": "person",
+      "translation": "德拉肯柯林",
+      "notes": "A Valheru name mentioned once, associated with the Lifestone's origin."
+    },
+    {
+      "term": "Silverthorn",
+      "category": "proper_noun",
+      "translation": "銀刺",
+      "notes": "A poisonous plant/venom used on weapons; recurring item name."
+    },
+    {
+      "term": "Guarda Revanche",
+      "category": "proper_noun",
+      "translation": "加爾達復仇劍",
+      "notes": "A legendary cursed sword referenced in an old book."
+    },
+    {
+      "term": "Isunatus",
+      "category": "person",
+      "translation": "伊蘇納圖斯",
+      "notes": "Recipient of a treasure gift, mentioned once in a ledger note (DIAL_Z18)."
+    },
+    {
+      "term": "Killian",
+      "category": "proper_noun",
+      "translation": "基利安",
+      "notes": "Midkemian deity, referenced only in a spell scroll title (\"Wrath Of Killian\", DIAL_Z18)."
+    },
+    {
+      "term": "Eortis",
+      "category": "proper_noun",
+      "translation": "厄提斯",
+      "notes": "Midkemian sea god, referenced only in a spell scroll title (\"Winds of Eortis\", DIAL_Z18)."
+    },
+    {
+      "term": "Guild of Thieves",
+      "category": "proper_noun",
+      "translation": "盜賊公會",
+      "notes": "Krondor's thieves' guild, distinct from the Guild of Assassins; mentioned once in DIAL_Z18 smuggler correspondence. DIAL_Z23 confirms this is the SAME organization as the Mockers (established 嘲弄幫) -- James's own former guild -- just referred to by its formal name in some lines and its slang name in others; keep both renderings but understand them as one group."
+    },
+    {
+      "term": "Tanneurs",
+      "category": "place",
+      "translation": "坦紐爾",
+      "notes": "Kingdom settlement, previously established -- recurs frequently in DIAL_Z18 as an ambush/interception site. Do not render as a phonetic variant (e.g. 坦諾斯); keep this exact spelling."
+    },
+    {
+      "term": "Crenard",
+      "category": "person",
+      "translation": "克瑞納德",
+      "notes": "Generic mercenary NPC named in a random-ambush flavor line (DIAL_Z00)."
+    },
+    {
+      "term": "Guild of Death",
+      "category": "proper_noun",
+      "translation": "死亡公會",
+      "notes": "A golden-hawk-emblem assassin guild named in one random-ambush flavor line (DIAL_Z00); distinct from the Guild of Assassins/Nighthawks established elsewhere -- keep as its own separate term, don't merge."
+    },
+    {
+      "term": "Ruthia",
+      "category": "proper_noun",
+      "translation": "露西亞女神",
+      "notes": "Midkemian goddess of luck/chance, referenced once via her cultists in a random-encounter flavor line (DIAL_Z00)."
+    },
+    {
+      "term": "Guiswa",
+      "category": "proper_noun",
+      "translation": "圭斯瓦神",
+      "notes": "\"The red-jawed hunter\", a minor hunter deity referenced by cultists in a random-encounter flavor line (DIAL_Z00)."
+    },
+    {
+      "term": "Milamber",
+      "category": "person",
+      "translation": "米蘭伯",
+      "notes": "Pug's Tsurani magician name, used by Tsurani spellweavers addressing him directly (DIAL_Z00 Sethanon climax scene)."
+    },
+    {
+      "term": "Kulgan",
+      "category": "person",
+      "translation": "庫爾根",
+      "notes": "The magician who first apprenticed Pug at Crydee, mentioned once in Pug's background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Crydee",
+      "category": "place",
+      "translation": "克萊迪",
+      "notes": "Pug's home duchy/keep in the Western Kingdom, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Great One(s)",
+      "category": "proper_noun",
+      "translation": "至尊法師",
+      "notes": "Tsurani title for a full member of the Assembly of Magicians; used for both Makala and, in flashback, for the Tsurani magicians who trained Pug."
+    },
+    {
+      "term": "William",
+      "category": "person",
+      "translation": "威廉",
+      "notes": "Pug's natural son, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "the Upright Man",
+      "category": "proper_noun",
+      "translation": "正直人",
+      "notes": "Underworld epithet/title for the head of Krondor's thieves' guild -- James's (unacknowledged) biological father, mentioned once in his background blurb (DIAL_Z00). Kept as a literal epithet in quotes, not a real name."
+    },
+    {
+      "term": "Brak Nurr",
+      "category": "proper_noun",
+      "translation": "布拉克努爾",
+      "notes": "A titanic creature encountered in a mine random-encounter (DIAL_Z00)."
+    },
+    {
+      "term": "bulldrake",
+      "category": "proper_noun",
+      "translation": "牛蜥",
+      "notes": "Recurring olive-scaled reptilian monster, smaller cousin of dragons (DIAL_Z00 random encounters)."
+    },
+    {
+      "term": "Riftwar",
+      "category": "proper_noun",
+      "translation": "裂界之戰",
+      "notes": "The earlier Tsurani invasion war (the original Magician trilogy's war), referenced in several character background blurbs (DIAL_Z00) as backstory distinct from the game's own \"Great Rising\" conflict."
+    },
+    {
+      "term": "the Great Rising",
+      "category": "proper_noun",
+      "translation": "大崛起之戰",
+      "notes": "The more recent moredhel/Murmandamus war (ten years before the game, climaxing at Sethanon), referenced repeatedly in character background blurbs (DIAL_Z00). Distinct from the earlier Riftwar."
+    },
+    {
+      "term": "Armengar",
+      "category": "place",
+      "translation": "阿曼加",
+      "notes": "Battle site during the Great Rising where Locklear was decorated for service, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Land's End",
+      "category": "place",
+      "translation": "陸地盡頭",
+      "notes": "Barony held by Locklear's father, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Ardanien (Clan/tribe)",
+      "category": "proper_noun",
+      "translation": "阿爾達尼恩",
+      "notes": "Gorath's moredhel clan/tribe, mentioned in his and Locklear's background blurbs (DIAL_Z00)."
+    },
+    {
+      "term": "Green Heart (forest)",
+      "category": "place",
+      "translation": "綠心林",
+      "notes": "Moredhel homeland forest Gorath's people fled from during the Riftwar, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Great Northern Mountains",
+      "category": "place",
+      "translation": "大北山脈",
+      "notes": "Mountain range Gorath's tribe crossed fleeing the Tsurani, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Beleforte",
+      "category": "person",
+      "translation": "貝勒佛特",
+      "notes": "Owyn's family surname (Count of Tiburn's house), mentioned in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Duke of Euper",
+      "category": "person",
+      "translation": "尤帕公爵",
+      "notes": "Father of the noblewoman Owyn's father hopes he'll marry, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Ran",
+      "category": "place",
+      "translation": "蘭城",
+      "notes": "City where a young Owyn vacationed and hired an illicit magic tutor, mentioned once in his background blurb (DIAL_Z00)."
+    },
+    {
+      "term": "Questor's View",
+      "category": "place",
+      "translation": "尋道崖",
+      "notes": "Signpost destination on the Eggley/Dimwood road network (DIAL_Z02)."
+    },
+    {
+      "term": "Sarth",
+      "category": "place",
+      "translation": "薩斯",
+      "notes": "Monastic settlement home to a community of scribes; \"Vaults of Sarth\" -> 薩斯地窖 (DIAL_Z02)."
+    },
+    {
+      "term": "Brother Marc",
+      "category": "person",
+      "translation": "馬克修士",
+      "notes": "A scribe of Sarth who can help decode/translate documents; \"Brother\" title rendered 修士, placed after the name like Seigneur (DIAL_Z02/Z20/Z30)."
+    },
+    {
+      "term": "Abbot Graves",
+      "category": "person",
+      "translation": "葛瑞夫斯院長",
+      "notes": "Abbot at Malac's Cross, known for scribal/lore knowledge; \"Abbot\" title rendered 院長, placed after the name (DIAL_Z02/Z13/Z18)."
+    },
+    {
+      "term": "Sloop",
+      "category": "place",
+      "translation": "斯魯普",
+      "notes": "Signpost destination near Romney/Lyton (DIAL_Z03)."
+    },
+    {
+      "term": "Ugyne",
+      "category": "person",
+      "translation": "烏格妮",
+      "notes": "Owyn's relation at Cavall Keep, whose safety he worries about after the ambush; later revealed to have a suitor, Navon du Sandau (DIAL_Z03/Z20)."
+    },
+    {
+      "term": "Navon du Sandau",
+      "category": "person",
+      "translation": "納馮．杜桑多",
+      "notes": "A suitor of Ugyne's, linked to the (impostor) Nighthawks (DIAL_Z03/Z20)."
+    },
+    {
+      "term": "Goblin",
+      "category": "proper_noun",
+      "translation": "哥布林",
+      "notes": "Standard fantasy transliteration for the goblin race, distinct from moredhel (OBJINFO.DAT item names, DIAL_Z02 chapter-title background text)."
+    },
+    {
+      "term": "Fadamor",
+      "category": "person",
+      "translation": "法達莫爾",
+      "notes": "Established by the item OBJINFO.DAT#115 \"Fadamor's Formula\" -> 法達莫爾秘方 (also named/quoted directly in DIAL_Z18 flavor text); also a DIAL_Z07 epitaph surname (Orson du Bas Fadamor) -- keep this spelling everywhere, do not shorten to 法達莫."
+    },
+    {
+      "term": "Dalatail",
+      "category": "proper_noun",
+      "translation": "達拉泰爾",
+      "notes": "Established by the item OBJINFO.DAT#114 \"Dalatail Milk\" -> 達拉泰爾聖水 (quoted directly in DIAL_Z18 flavor text); also a DIAL_Z02 epitaph surname (Baylor Dalatail, whose joke epitaph about drinking milk daily appears to be the same in-joke) -- keep this spelling everywhere, do not shorten to 達拉泰."
+    },
+    {
+      "term": "Lewton",
+      "category": "person",
+      "translation": "路頓",
+      "notes": "Established by the item OBJINFO.DAT#116 \"Lewton's Concentrate\" -> 路頓濃縮液 (quoted directly in DIAL_Z18 flavor text as a spellcasting-accuracy potion recommended by Dorcas)."
+    },
+    {
+      "term": "Sarig (\"-sbane\")",
+      "category": "proper_noun",
+      "translation": "薩瑞格",
+      "notes": "Established by the item OBJINFO.DAT#110 \"Sarigsbane\" -> 薩瑞格的剋星, a frost-ward substance applied to armor (quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Coltari",
+      "category": "proper_noun",
+      "translation": "科塔利",
+      "notes": "\"Coltari Poison\" -> 科塔利毒藥, a slow-acting Kelewan (Tsurani-world) poison (OBJINFO.DAT#105, quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Kalem",
+      "category": "person",
+      "translation": "卡倫",
+      "notes": "Author of a treatise on crossbow-bolt trajectory and archery tips (\"Kalem's Dialectic\", OBJINFO.DAT#129), discussed in DIAL_Z18 flavor text."
+    },
+    {
+      "term": "Dorcas",
+      "category": "person",
+      "translation": "多爾卡斯",
+      "notes": "Author of a treatise on magical \"linking\" theory (\"Dorcas' Treatise\", OBJINFO.DAT#128), discussed in DIAL_Z18 flavor text."
+    },
+    {
+      "term": "Nivek",
+      "category": "person",
+      "translation": "尼維克",
+      "notes": "Named on a brass door key (\"Nivek's Key\", OBJINFO.DAT#65); DIAL_Z18 flavor text identifies him as \"West Region treasurer, Krondor\"."
+    },
+    {
+      "term": "Glazer's Guild",
+      "category": "proper_noun",
+      "translation": "玻璃匠公會",
+      "notes": "Romney's glassmakers' guild, sealed items reference it (\"Glazer's Guild Seal\", OBJINFO.DAT#93, quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Guildis Thorn",
+      "category": "proper_noun",
+      "translation": "基爾迪斯棘刺",
+      "notes": "A dwarven nickname for ornate wooden Tsurani-made keys (OBJINFO.DAT#69, quoted directly in DIAL_Z18 flavor text -- keep this exact rendering, not an alternate transliteration)."
+    },
+    {
+      "term": "Eliaem",
+      "category": "proper_noun",
+      "translation": "伊萊安姆",
+      "notes": "A name/word spoken to focus a magical stone's power (\"Eliaem's Heart\", OBJINFO.DAT#9, quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Lassur",
+      "category": "proper_noun",
+      "translation": "拉蘇爾",
+      "notes": "\"Idol of Lassur\" -> 拉蘇爾偶像 (OBJINFO.DAT#12); named alongside the Amulet of the Upright Man in a DIAL_Z18 flavor-text quote -- use 偶像, not 神像, for this item's name."
+    },
+    {
+      "term": "Roric",
+      "category": "person",
+      "translation": "羅瑞克",
+      "notes": "\"Roric's Seal\" (OBJINFO.DAT#15)."
+    },
+    {
+      "term": "Galon 'Griefmaker'",
+      "category": "person",
+      "translation": "蓋隆「悲愴使者」",
+      "notes": "Named sword owner, epithet kept in quotes like \"the Upright Man\" (OBJINFO.DAT#19)."
+    },
+    {
+      "term": "Kinnur",
+      "category": "person",
+      "translation": "金努爾",
+      "notes": "\"Sword of Kinnur\" (OBJINFO.DAT#27)."
+    },
+    {
+      "term": "Euliliko",
+      "category": "person",
+      "translation": "尤利利科",
+      "notes": "Armorer who adapted Tsurani horn-plate techniques for LaMut soldiers' armor (\"Euliliko Armor\", OBJINFO.DAT#45, quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Ralen-Sheb",
+      "category": "person",
+      "translation": "拉倫謝布",
+      "notes": "\"Ward of Ralen-Sheb\" (OBJINFO.DAT#70)."
+    },
+    {
+      "term": "Althafain",
+      "category": "person",
+      "translation": "阿爾薩芬",
+      "notes": "Introduced a frost-ward oil to the Kingdom after frost-blade injuries (\"Althafain's Icer\", OBJINFO.DAT#103, quoted directly in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Mitchel Waylander",
+      "category": "person",
+      "translation": "米契爾．韋蘭德",
+      "notes": "\"Mitchel Waylander's Note\" (OBJINFO.DAT#122)."
+    },
+    {
+      "term": "Lorgan",
+      "category": "person",
+      "translation": "洛根",
+      "notes": "\"Lorgan's Journal\" (OBJINFO.DAT#125)."
+    },
+    {
+      "term": "Thiful",
+      "category": "person",
+      "translation": "提福爾",
+      "notes": "Author of a rambling book nominally about bird migrations (\"Thiful's Bird Migrations\", OBJINFO.DAT#132, referenced in DIAL_Z18 flavor text)."
+    },
+    {
+      "term": "Algon Kokoon",
+      "category": "person",
+      "translation": "阿爾岡科昆",
+      "notes": "\"Horn of Algon Kokoon\" (OBJINFO.DAT#11)."
+    },
+    {
+      "term": "Prandur",
+      "category": "person",
+      "translation": "普蘭鐸",
+      "notes": "\"Ring of Prandur\" (OBJINFO.DAT#6)."
+    },
+    {
+      "term": "Bessy",
+      "category": "person",
+      "translation": "貝西",
+      "notes": "\"Bessy Mauler\" crossbow (OBJINFO.DAT#32)."
+    },
+    {
+      "term": "eledhel",
+      "category": "proper_noun",
+      "translation": "伊列德人",
+      "notes": "The \"light elf\" race/faction, home to Elvandar; transliterated to match the moredhel (莫瑞德人) convention rather than translated literally as \"light elf\" (DIAL_Z08)."
+    },
+    {
+      "term": "Teeth of the World",
+      "category": "place",
+      "translation": "世界之齒",
+      "notes": "A named mountain range (canon Riftwar Saga geography), meaning-translated (DIAL_Z05/Z27)."
+    },
+    {
+      "term": "Northlands",
+      "category": "place",
+      "translation": "北境",
+      "notes": "Generic region name for the lands north of the Kingdom, where moredhel forces operate (DIAL_Z05/Z12)."
+    },
+    {
+      "term": "King's Highway",
+      "category": "place",
+      "translation": "御道",
+      "notes": "The Kingdom's major overland road, referenced from the Mac Mordain Cadal mine exit (DIAL_Z10)."
+    },
+    {
+      "term": "Swordmaster",
+      "category": "proper_noun",
+      "translation": "劍術大師",
+      "notes": "Military/guard title, e.g. \"Swordmaster Corby\" (DIAL_Z11)."
+    },
+    {
+      "term": "false Murmandamus",
+      "category": "person",
+      "translation": "冒牌穆爾曼達穆斯",
+      "notes": "The Pantathian who impersonated Murmandamus (established 穆爾曼達穆斯) during the Great Rising, revealed by Pug near the Lifestone; \"false X\" rendered 冒牌X, matching \"false Nighthawks\" -> 冒牌夜鷹會 (DIAL_Z29)."
+    },
+    {
+      "term": "Hakha's Cajunlo",
+      "category": "place",
+      "translation": "哈卡的卡瓊洛",
+      "notes": "A shop name in the Dimwood merchant area (DIAL_Z24)."
+    },
+    {
+      "term": "Touchstone Gems",
+      "category": "place",
+      "translation": "試金石珠寶行",
+      "notes": "Jewelry shop (DIAL_Z24)."
+    },
+    {
+      "term": "The Armory",
+      "category": "place",
+      "translation": "軍械庫",
+      "notes": "Weapon/armor shop, one of several sharing the same flavor text (DIAL_Z24)."
+    },
+    {
+      "term": "Sign of the Sword",
+      "category": "place",
+      "translation": "利劍之徽",
+      "notes": "Weapon/armor shop (DIAL_Z24)."
+    },
+    {
+      "term": "The Forge",
+      "category": "place",
+      "translation": "鍛爐",
+      "notes": "Weapon/armor shop (DIAL_Z24)."
+    },
+    {
+      "term": "Scavenger's Meet",
+      "category": "place",
+      "translation": "拾荒市集",
+      "notes": "Junk/secondhand shop (DIAL_Z24)."
+    },
+    {
+      "term": "Joseph the Animal's",
+      "category": "place",
+      "translation": "「野獸」約瑟夫的店",
+      "notes": "Armor shop named for its owner's nickname (DIAL_Z24)."
+    },
+    {
+      "term": "The Woolen Man",
+      "category": "place",
+      "translation": "羊毛商人",
+      "notes": "General goods shop (DIAL_Z24)."
+    },
+    {
+      "term": "The Fife and Laurel",
+      "category": "place",
+      "translation": "橫笛與月桂",
+      "notes": "A dusty, rarely-visited Dimwood shop (DIAL_Z24)."
+    },
+    {
+      "term": "Morgan Hurley's",
+      "category": "place",
+      "translation": "摩根．赫利的店",
+      "notes": "Weapon/armor shop named for its owner (DIAL_Z24)."
+    },
+    {
+      "term": "Pierce Perry's Weapons",
+      "category": "place",
+      "translation": "皮爾斯．佩里軍火行",
+      "notes": "Weapon shop named for its owner (DIAL_Z24)."
+    },
+    {
+      "term": "Split Tree Goods",
+      "category": "place",
+      "translation": "裂樹雜貨行",
+      "notes": "General goods shop (DIAL_Z24)."
+    },
+    {
+      "term": "Gallowlees' Jewels",
+      "category": "place",
+      "translation": "加羅利斯珠寶行",
+      "notes": "Jewelry shop (DIAL_Z24)."
+    },
+    {
+      "term": "Rygate and Supply",
+      "category": "place",
+      "translation": "萊蓋特雜貨行",
+      "notes": "General goods shop (DIAL_Z24)."
+    },
+    {
+      "term": "Thorgath",
+      "category": "person",
+      "translation": "索爾加斯",
+      "notes": "Gorath's cover alias while travelling incognito with the party (established in TEST.DDX; also appears in DIAL_Z20/Z30/Z31 -- keep consistent wherever the disguise name is used, separate from Gorath's real name)."
+    },
+    {
+      "term": "Lin-Lan",
+      "category": "proper_noun",
+      "translation": "林嵐牌",
+      "notes": "Fictional card game played by gamblers/townsfolk (DIAL_Z21). Even-money wager, dealt cards."
+    },
+    {
+      "term": "Pashawa",
+      "category": "proper_noun",
+      "translation": "帕夏瓦牌",
+      "notes": "Fictional card game played by gamblers/townsfolk (DIAL_Z21), pays 1.5x on a win."
+    },
+    {
+      "term": "Pokiir",
+      "category": "proper_noun",
+      "translation": "波基爾",
+      "notes": "Fictional card game (a poker analogue) played by Keshian mercenaries (DIAL_Z21). Source text renders it as \"óPokiir\" with a leading 0xF3 style/control byte -- keep that literal ó immediately before the transliteration, matching the established convention for this control byte (see DIAL_Z00#9/#12)."
+    },
+    {
+      "term": "Harlech",
+      "category": "place",
+      "translation": "哈勒克",
+      "notes": "Moredhel-held town near Sar-Sargoth that the party must skirt around, avoiding recognition (DIAL_Z06)."
+    },
+    {
+      "term": "Caern",
+      "category": "place",
+      "translation": "凱恩",
+      "notes": "Wilderness map location near Sar-Sargoth/Harlech (DIAL_Z06 map label, not yet seen in narrative text)."
+    },
+    {
+      "term": "Wyke",
+      "category": "place",
+      "translation": "懷克",
+      "notes": "Wilderness map location near Sar-Sargoth/Harlech (DIAL_Z06 map label, not yet seen in narrative text)."
+    },
+    {
+      "term": "Raglam",
+      "category": "place",
+      "translation": "拉格蘭姆",
+      "notes": "Wilderness map location east of Sar-Sargoth (DIAL_Z06 map label \"Raglam EAST\" -> 拉格蘭姆東側, not yet seen in narrative text)."
+    },
+    {
+      "term": "the Protector",
+      "category": "proper_noun",
+      "translation": "守護者",
+      "notes": "Title referenced on several Armengar-defender tombstones (\"Died for the Protector\") near Sar-Sargoth (DIAL_Z06); likely the historical defensive commander of Armengar during Guy du Bas-Tyra's siege."
+    },
+    {
+      "term": "Guy du Bas-Tyra",
+      "category": "person",
+      "translation": "居伊．杜．巴斯泰拉",
+      "notes": "Historical Kingdom noble who burned Armengar; referenced only in passing as the source of the naphtha-caves' underground river's smell persisting \"since the day\" (DIAL_Z06)."
+    },
+    {
+      "term": "Obkhar",
+      "category": "person",
+      "translation": "奧布卡",
+      "notes": "Moredhel prisoner of Venutrier's naphtha caves that Gorath plans to free as a favor/distraction against Delekhan (DIAL_Z06)."
+    },
+    {
+      "term": "Irmelyn",
+      "category": "person",
+      "translation": "伊爾梅琳",
+      "notes": "Off-screen source Gorath cites for information about the naphtha caves (DIAL_Z06); not yet directly encountered."
+    },
+    {
+      "term": "Venutrier",
+      "category": "person",
+      "translation": "維努特里爾",
+      "notes": "Slave trader operating naphtha caves near Sar-Sargoth/Harlech, referred to as \"Venutrier of Lan\" (DIAL_Z06)."
+    },
+    {
+      "term": "Beldogal Clan",
+      "category": "proper_noun",
+      "translation": "貝爾多加氏族",
+      "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."
+    },
+    {
+      "term": "Golbandek Clan",
+      "category": "proper_noun",
+      "translation": "戈爾班德克氏族",
+      "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."
+    },
+    {
+      "term": "Yulvend Clan",
+      "category": "proper_noun",
+      "translation": "尤爾文德氏族",
+      "notes": "Moredhel clan; two of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."
+    },
+    {
+      "term": "Pobel Clan",
+      "category": "proper_noun",
+      "translation": "波貝爾氏族",
+      "notes": "Moredhel clan; three of its members appear as Terror Stone prisoners near Sar-Sargoth (DIAL_Z06)."
+    },
+    {
+      "term": "Mockers",
+      "category": "proper_noun",
+      "translation": "嘲弄幫",
+      "notes": "Krondor's thieves' guild, led by \"the Upright Man\"; James's own background (DIAL_Z14 tavern scene, James investigating the Crawler's key/the Upright Man's death)."
+    },
+    {
+      "term": "the Crawler",
+      "category": "proper_noun",
+      "translation": "爬行者",
+      "notes": "Krondor underworld fence/crime figure James investigates in the DIAL_Z14 tavern scene; has fled to the Sunset Isles after the Upright Man's death."
+    },
+    {
+      "term": "Black Slayers",
+      "category": "proper_noun",
+      "translation": "黑衣殺手",
+      "notes": "A near-unkillable variety of Nighthawk assassin, described directly in DIAL_Z14 tavern dialogue (get back up after being run through)."
+    },
+    {
+      "term": "Kasumi",
+      "category": "person",
+      "translation": "卡蘇米伯爵",
+      "notes": "Tsurani earl/warrior mentioned in passing humiliating Baron Gabot's men at a LaMut archery tourney (DIAL_Z14 tavern flavor text)."
+    },
+    {
+      "term": "Gabot",
+      "category": "person",
+      "translation": "加波特男爵",
+      "notes": "Baron mentioned losing an archery tourney to Earl Kasumi's Tsurani warriors (DIAL_Z14 tavern flavor text)."
+    },
+    {
+      "term": "Silden",
+      "category": "place",
+      "translation": "錫爾登",
+      "notes": "Town blamed for stirring up the Romney/Riverpullers guild conflict (DIAL_Z14 tavern scene, James's conversation about Lord Lyton)."
+    },
+    {
+      "term": "tondill",
+      "category": "proper_noun",
+      "translation": "唐迪爾",
+      "notes": "A violet flower (\"tondill horns\") that needs near-constant sunlight and is hard to grow in salty coastal soil, per Princess Anita's complaints (DIAL_Z14); used by James to hide a powder bag in a search scene."
+    },
+    {
+      "term": "Lyton",
+      "category": "person",
+      "translation": "萊頓勳爵",
+      "notes": "\"Lord Lyton\", employer of a tavern patron James talks to (DIAL_Z14 tavern scene); not directly encountered."
+    },
+    {
+      "term": "Max Feeber",
+      "category": "person",
+      "translation": "麥克斯．費伯",
+      "notes": "\"That greedy bastard out west\" implicated in guild-impersonation trouble near Silden (DIAL_Z14 tavern scene); not directly encountered."
+    },
+    {
+      "term": "Kivo",
+      "category": "person",
+      "translation": "基沃",
+      "notes": "Mocker who dropped the Crawler's key fleeing the sewers after the Upright Man's death (DIAL_Z14 tavern scene, mentioned only)."
+    },
+    {
+      "term": "Brock Noor",
+      "category": "proper_noun",
+      "translation": "布洛克諾爾",
+      "notes": "A dwarf-named monster that collapsed a mine shaft at Mac Mordain Cadal, mentioned in a mercenary's tavern story (DIAL_Z14)."
+    },
+    {
+      "term": "Cullich",
+      "category": "person",
+      "translation": "庫利奇",
+      "notes": "A witch whose empty roadside cottage (\"Cullich's House\") the party investigates before finding the dragon statue (DIAL_Z14); not directly encountered."
+    },
+    {
+      "term": "Rhandra",
+      "category": "proper_noun",
+      "translation": "蘭德拉",
+      "notes": "\"The Flamewyrm Rhandra\", the dragon slain by Delong the Great per the archaic inscription on the dragon statue (DIAL_Z14#9)."
+    },
+    {
+      "term": "Delong the Great",
+      "category": "person",
+      "translation": "戴隆大帝",
+      "notes": "Ancient Kingdom king credited with slaying Malac the Pious and the Flamewyrm Rhandra, per the dragon statue's archaic inscription (DIAL_Z14#9)."
+    },
+    {
+      "term": "Malac the Pious",
+      "category": "person",
+      "translation": "虔信者馬拉克",
+      "notes": "Historical figure slain alongside the Flamewyrm Rhandra by Delong the Great, per the dragon statue's archaic inscription (DIAL_Z14#9)."
+    },
+    {
+      "term": "Anita",
+      "category": "person",
+      "translation": "安妮塔公主",
+      "notes": "Princess Anita, mentioned complaining about tondill flowers being hard to grow in Krondor's coastal soil (DIAL_Z14 tavern scene, referenced only)."
+    },
+    {
+      "term": "Quegian",
+      "category": "proper_noun",
+      "translation": "奎格",
+      "notes": "Adjective/language of Quega, matches the established OBJINFO.DAT#... \"Quegian Brandy\" -> 奎格白蘭地 rendering; also used for the (untranslated, kept verbatim) fake Quegian-language lines in DIAL_Z14's tavern brawl scene."
+    },
+    {
+      "term": "Silban",
+      "category": "proper_noun",
+      "translation": "席爾班神",
+      "notes": "Midkemian deity, named only as one of the \"moderate\" gods in a priest's ranking of enchantment potency (DIAL_Z13#66); no other characterization given."
+    },
+    {
+      "term": "Astalon",
+      "category": "proper_noun",
+      "translation": "阿斯塔隆神",
+      "notes": "Midkemian deity with a temple in Krondor's palace; James studied there under the late Father Timothy (DIAL_Z13#136/#154). No strong domain description given in-game."
+    },
+    {
+      "term": "Empress Lakeisha",
+      "category": "person",
+      "translation": "拉凱莎女皇",
+      "notes": "Ruler of Kesh, referenced fighting a rebellion near \"the Confederacy\" south of Kesh, in a Temple of Tith priest's battle commentary (DIAL_Z13#152)."
+    },
+    {
+      "term": "Kellan",
+      "category": "person",
+      "translation": "凱蘭",
+      "notes": "Priest at a Temple of Sung, central to the \"dream sendings\" insomnia subplot resolved by exposing the moredhel magician Nago (DIAL_Z13#124-126)."
+    },
+    {
+      "term": "Mariah",
+      "category": "person",
+      "translation": "瑪莉亞",
+      "notes": "Fellow priest mentioned once by Kellan tending to the exhausted high priestess (DIAL_Z13#124/#126); not directly encountered."
+    },
+    {
+      "term": "Beyla",
+      "category": "person",
+      "translation": "貝拉大祭司",
+      "notes": "High Priestess a junior healer-in-training defers all serious healing to (DIAL_Z13#81); not directly encountered."
+    },
+    {
+      "term": "Belandra",
+      "category": "person",
+      "translation": "貝蘭德拉",
+      "notes": "Plump assistant priestess serving the (unnamed) high priestess of Killian in the Eggley-curse/\"the Collector\" subplot (DIAL_Z13#119-120)."
+    },
+    {
+      "term": "Risa",
+      "category": "person",
+      "translation": "麗莎大祭司",
+      "notes": "High Priestess of a Temple of Dala, central to the grain-shortage/blessing subplot (DIAL_Z13#145-150)."
+    },
+    {
+      "term": "Vabon",
+      "category": "person",
+      "translation": "瓦邦",
+      "notes": "Burly priest at Risa's Temple of Dala who helps carry the grain sack (DIAL_Z13#148)."
+    },
+    {
+      "term": "Flendel Halfgate",
+      "category": "person",
+      "translation": "弗蘭德爾．哈夫蓋特",
+      "notes": "Deceased loyal patron of a Temple of Dala; his daughters (eldest possibly Thea) are suggested as a lead for finding grain (DIAL_Z13#147); not directly encountered."
+    },
+    {
+      "term": "Thea",
+      "category": "person",
+      "translation": "蒂雅",
+      "notes": "Possibly the eldest daughter of Flendel Halfgate, mentioned once as an uncertain lead (DIAL_Z13#147); not directly encountered."
+    },
+    {
+      "term": "Devon",
+      "category": "person",
+      "translation": "戴文",
+      "notes": "Source of the \"curse on Eggley\" rumor the party relays to Killian's high priestess, met earlier at the Stranger Tavern in Eggley (DIAL_Z13#120); not directly encountered on-screen."
+    },
+    {
+      "term": "the Collector",
+      "category": "proper_noun",
+      "translation": "收集者",
+      "notes": "Title/epithet of a criminal wanted by a Temple of Killian for defiling their Festival ritual; captured off-screen between encounters (DIAL_Z13#119-122). Kept as a literal epithet, like \"the Upright Man\"."
+    },
+    {
+      "term": "Father Timothy",
+      "category": "person",
+      "translation": "提摩西神父",
+      "notes": "Deceased former Lector of the Temple of Astalon in Krondor, under whom James studied; replaced by Father Francis (DIAL_Z13#136/#154)."
+    },
+    {
+      "term": "Father Francis",
+      "category": "person",
+      "translation": "法蘭西斯神父",
+      "notes": "New Lector of the Temple of Astalon in Krondor, sent from Rillanon to replace the deceased Father Timothy (DIAL_Z13#154)."
+    },
+    {
+      "term": "Father John",
+      "category": "person",
+      "translation": "約翰神父",
+      "notes": "Abbot of Ishap's Abbey at Sarth, credits Brother Anthony and Brother Marc for the abbey's progress (DIAL_Z13#159)."
+    },
+    {
+      "term": "Brother Anthony",
+      "category": "person",
+      "translation": "安東尼修士",
+      "notes": "One of two monks credited by Father John for Ishap's Abbey at Sarth's progress, alongside the previously-established Brother Marc (DIAL_Z13#159); not directly encountered."
+    },
+    {
+      "term": "Haestan",
+      "category": "person",
+      "translation": "哈斯坦",
+      "notes": "Named off-screen attendant a Temple of Kahooli Lector sends to fetch rations for the party (DIAL_Z13#140); not directly encountered."
+    },
+    {
+      "term": "Guiswa (epithet)",
+      "category": "proper_noun",
+      "translation": "紅顎獵神",
+      "notes": "\"The Red Jawed Hunter\", an epithet for Guiswa (established 圭斯瓦神) used when a temple fails to produce its high priestess (DIAL_Z13#110)."
+    },
+    {
+      "term": "Kahooli epithets",
+      "category": "proper_noun",
+      "translation": "逃亡者的怒吼者 / 不倦追獵者",
+      "notes": "\"The Howler After Fugitives\" and \"The Tireless Pursuer\", two epithets for Kahooli (established 卡胡利神) used in the Nighthawks-investigation subplot (DIAL_Z13#136/#140)."
+    },
+    {
+      "term": "Lims-Kragma epithet",
+      "category": "proper_noun",
+      "translation": "收網者",
+      "notes": "\"The Drawer of Nets\", an epithet for Lims-Kragma used by her mute-implied high priestess in the Black Slayers/Nighthawks lore scene (DIAL_Z13#129)."
+    },
+    {
+      "term": "Killian epithet",
+      "category": "proper_noun",
+      "translation": "大地之母",
+      "notes": "\"Earth Mother\", an epithet for Killian used by her high priestess in the Eggley-curse subplot (DIAL_Z13#120/#122); distinct from Dala, who is separately called on for \"goddess blessing\" farewells in other temple scenes."
+    },
+    {
+      "term": "Finn",
+      "category": "person",
+      "translation": "芬恩",
+      "notes": "Off-screen advisor quoted once by a party member about the Inclindel Pass being blocked (DIAL_Z27#7/#10); not directly encountered."
+    },
+    {
+      "term": "High Wold",
+      "category": "place",
+      "translation": "高沃德高地",
+      "notes": "Wide plain/highland region between the Teeth of the World and the Kingdom heartland, mentioned in overland-travel narration (DIAL_Z27#5/#6)."
+    },
+    {
+      "term": "Thunderhell Steppes",
+      "category": "place",
+      "translation": "雷獄草原",
+      "notes": "Northern steppe region giving way to the Teeth of the World mountain range, mentioned once in overland-travel narration (DIAL_Z27#6)."
+    },
+    {
+      "term": "Cutter's Gap",
+      "category": "place",
+      "translation": "割岩隘口",
+      "notes": "A mountain pass the party considers and rejects as blocked during the Northlands trek (DIAL_Z27#32)."
+    },
+    {
+      "term": "Naddur",
+      "category": "person",
+      "translation": "納杜爾",
+      "notes": "Named off-screen dwarf a gruff mine guard references (\"I don't care what Naddur may or may not 'ave told you\") while turning the party away in Mac Mordain Cadal (DIAL_Z27#68); not directly encountered."
+    },
+    {
+      "term": "Bronwynn",
+      "category": "person",
+      "translation": "布朗溫",
+      "notes": "Friend Locklear lost on a previous trip into the Northlands, named alongside Captain Moyiet in a memory he shares with James (DIAL_Z27#30); not directly encountered."
+    },
+    {
+      "term": "Captain Moyiet",
+      "category": "person",
+      "translation": "莫耶特隊長",
+      "notes": "Friend/comrade Locklear lost on a previous trip into the Northlands, named alongside Bronwynn (DIAL_Z27#30); not directly encountered."
+    },
+    {
+      "term": "Corvalis",
+      "category": "person",
+      "translation": "科瓦利斯",
+      "notes": "Owyn's uncle, owner of the estate at Cavall Keep (established 卡瓦爾堡) that Owyn is glad to be travelling toward (DIAL_Z27#20/#28); not directly encountered."
+    },
+    {
+      "term": "Lady Boswich",
+      "category": "person",
+      "translation": "波斯維奇夫人",
+      "notes": "Noblewoman running the mercenary muster near Highcastle/Kenting Rush that Owyn and Gorath must bribe or bluff their way into seeing (DIAL_Z22)."
+    },
+    {
+      "term": "Baron Troville",
+      "category": "person",
+      "translation": "特羅維爾男爵",
+      "notes": "Baron of a Highcastle-area garrison, away in Darkmoor when the party visits; his second-in-command is Baron Kevin (DIAL_Z22)."
+    },
+    {
+      "term": "Baron Kevin",
+      "category": "person",
+      "translation": "凱文男爵",
+      "notes": "Red-haired baron standing in for the absent Baron Troville at a Highcastle-area garrison; gives the party intel and a reward for recovered goblin correspondence (DIAL_Z22)."
+    },
+    {
+      "term": "Lurough",
+      "category": "person",
+      "translation": "陸洛",
+      "notes": "Tavernkeeper of the Dagger 'n Star (established 匕首與星酒館) in the Highcastle muster town, subject of a side-quest to find him black-market alcohol (DIAL_Z22)."
+    },
+    {
+      "term": "Dabney",
+      "category": "person",
+      "translation": "達布尼",
+      "notes": "Mentioned once as having talked down soldiers who threatened to burn Lurough's tavern (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Ian",
+      "category": "person",
+      "translation": "伊恩",
+      "notes": "Rival guild leader named alongside Mitchel Waylander (established 米契爾．韋蘭德) in the Romney Riverpullers'/Glazer's Guild conflict, referenced by mercenaries on the road (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Riverpuller's Guild",
+      "category": "proper_noun",
+      "translation": "縴夫公會",
+      "notes": "Romney bargemen's guild holding an exclusive crown trade agreement, at the center of the guild conflict referenced in DIAL_Z14/Z22 mercenary chatter."
+    },
+    {
+      "term": "Miri",
+      "category": "person",
+      "translation": "蜜莉",
+      "notes": "Servant girl at the Corvalis household who recognizes Owyn and lets the party in (DIAL_Z22)."
+    },
+    {
+      "term": "Gulla",
+      "category": "person",
+      "translation": "古拉",
+      "notes": "Pale-complexioned goblin mercenary leader who negotiates a toll/contract-change price with James and Locklear at a roadway bridge (DIAL_Z22)."
+    },
+    {
+      "term": "Deirgun",
+      "category": "person",
+      "translation": "戴爾岡",
+      "notes": "Goblin named by Gulla as the one who reported the party's approach to him (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Kroldech",
+      "category": "person",
+      "translation": "克洛戴克",
+      "notes": "Moredhel captain who has received final orders for the assault on Northwarden, discussed by moredhel informants in a tavern infiltration scene (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Segersen",
+      "category": "person",
+      "translation": "賽格森",
+      "notes": "Moredhel/Delekhan-allied engineer designing plans for the assault on Northwarden, asked about (and rumored dead) during a tavern infiltration scene (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Palanque",
+      "category": "place",
+      "translation": "帕蘭克",
+      "notes": "Site of a Quegian battle where Segersen was rumored killed, mentioned once (DIAL_Z22)."
+    },
+    {
+      "term": "Laurie",
+      "category": "person",
+      "translation": "勞瑞",
+      "notes": "Minstrel who later became the Duke of Salador (established 薩拉多公爵), referenced by James and Locklear as a childhood story while searching for a different missing minstrel (DIAL_Z22); not present."
+    },
+    {
+      "term": "Duke of Salador",
+      "category": "proper_noun",
+      "translation": "薩拉多公爵",
+      "notes": "Title Laurie (established 勞瑞) later held, referenced once in a tavern conversation (DIAL_Z22)."
+    },
+    {
+      "term": "Abuk",
+      "category": "person",
+      "translation": "阿布克",
+      "notes": "Owner of the magic chest the party found an accountant's roll/note in, brought to moneylender Isunatus (established 伊蘇納圖斯) for verification (DIAL_Z22); not directly encountered."
+    },
+    {
+      "term": "Highcastle Gorge",
+      "category": "place",
+      "translation": "高堡峽谷",
+      "notes": "Gorge near Highcastle (established 高堡) where a collapsed bridge north of Cutter's Gap may strand goblins, per Baron Kevin (DIAL_Z22)."
+    },
+    {
+      "term": "gwali",
+      "category": "proper_noun",
+      "translation": "格瓦利獸",
+      "notes": "Fictional creature invoked in a mercenary's crude joke about what a soldier is staring at (DIAL_Z22); not a real encountered monster, just a colloquial insult."
+    },
+    {
+      "term": "The Six (moredhel council)",
+      "category": "proper_noun",
+      "translation": "六人議會",
+      "notes": "A moredhel command council near the Highcastle/Northlands border that a disguised James claims to be working for as a spy (DIAL_Z22). Deliberately translated differently from the established 六賢者 (\"The Six\", the Tsurani spellcasters guarding the Lifestone cavern in DIAL_Z00/Z29) to avoid conflating the two unrelated groups that happen to share the English name \"The Six\" in the source text."
+    },
+    {
+      "term": "Serpentslayers",
+      "category": "proper_noun",
+      "translation": "屠蛇者",
+      "notes": "The bridge password Gorath uses (claiming it came from Moraeulf/established 莫萊伍夫) to get the party across a moredhel-guarded bridge (DIAL_Z22)."
+    },
+    {
+      "term": "Dark Brothers",
+      "category": "proper_noun",
+      "translation": "黑暗兄弟",
+      "notes": "Derogatory epithet Patrus uses for moredhel/goblin forces collectively during the goblin bridge-toll negotiation (DIAL_Z22)."
+    },
+    {
+      "term": "Father Charity",
+      "category": "proper_noun",
+      "translation": "慈善老爹",
+      "notes": "Midwinter's Festival gift-giving folk figure (a Santa Claus analogue) Owyn compares himself to while surprising Lurough with a wine cask (DIAL_Z22)."
+    },
+    {
+      "term": "Tabar",
+      "category": "person",
+      "translation": "塔巴爾",
+      "notes": "Signature name on a handwritten closure notice tacked to the Candlemaker's Grin tavern door (established 燭匠的笑臉), identified as its proprietor (DIAL_Z22#51); not directly encountered, note-only."
+    },
+    {
+      "term": "Limm",
+      "category": "person",
+      "translation": "林姆",
+      "notes": "James's informant/contact in the Krondor sewers, tells Owyn where James went; part of the palace-escape scene at the start of the Sar-Sargoth rescue chapter (DIAL_Z23)."
+    },
+    {
+      "term": "Lancers",
+      "category": "proper_noun",
+      "translation": "長槍騎兵隊",
+      "notes": "Krondor's royal cavalry/guard unit that impostor Nighthawks hope to lure into the sewers as a pretext to raid the Mockers (DIAL_Z23)."
+    },
+    {
+      "term": "Tomas Megarson",
+      "category": "person",
+      "translation": "托馬斯．梅加森",
+      "notes": "Full name given for Tomas, Lord of Elvandar (established 托馬斯), when Owyn reads about him in one of Pug's journals at the Vaults of Sarth (DIAL_Z23#102). Use plain 托馬斯 elsewhere as already established; this full form is only for this specific reference."
+    },
+    {
+      "term": "Queen Aglaranna",
+      "category": "person",
+      "translation": "亞葛拉蘭娜王后",
+      "notes": "Queen of the eledhel elves of Elvandar (Tomas's wife in Riftwar Saga canon); Gorath cites her kin as ancient enemies of the moredhel when explaining why Elvandar will not welcome him (DIAL_Z23#102); not directly encountered."
+    },
+    {
+      "term": "Prank's Stone",
+      "category": "place",
+      "translation": "普蘭克石鎮",
+      "notes": "Kingdom town, location of a 'Roots 'N Herbs' shop cited as a well-run business example in a trading-strategy book excerpt at the Vaults of Sarth (DIAL_Z23#91)."
+    },
+    {
+      "term": "Wolfram",
+      "category": "place",
+      "translation": "沃夫拉姆",
+      "notes": "Kingdom town, location of an 'Arms of Dala' shop cited in the same Vaults of Sarth trading-strategy excerpt (DIAL_Z23#91)."
+    },
+    {
+      "term": "Father Nathan",
+      "category": "person",
+      "translation": "納森神父",
+      "notes": "Krondor priest/scholar credited with developing a new Silverthorn (established 銀刺) anti-venom, author of the book excerpt read at the Vaults of Sarth (DIAL_Z23#99); not directly encountered."
+    },
+    {
+      "term": "Moraelin",
+      "category": "place",
+      "translation": "莫拉埃林",
+      "notes": "Northlands shore where Silverthorn poison is now mass-harvested, per Father Nathan's book (DIAL_Z23#99)."
+    },
+    {
+      "term": "Black Lake",
+      "category": "place",
+      "translation": "黑湖",
+      "notes": "Site scholars speculate gives Silverthorn its lethality via soil nutrients, per Father Nathan's book (DIAL_Z23#99)."
+    },
+    {
+      "term": "Carse",
+      "category": "place",
+      "translation": "卡斯",
+      "notes": "Site of an early battle against goblins where the 'Invitation' spell was first used by Althafain (established 阿爾薩芬), per a soldier's tactics book at the Vaults of Sarth (DIAL_Z23#106)."
+    },
+    {
+      "term": "Invitation (spell)",
+      "category": "proper_noun",
+      "translation": "邀請術",
+      "notes": "A spell originally dismissed as a magicians' prank, used by Althafain to lure a band of the Dark Brothers (established 黑暗兄弟) into a trap at the battle of Carse (DIAL_Z23#106)."
+    },
+    {
+      "term": "Bordon",
+      "category": "place",
+      "translation": "波爾登",
+      "notes": "Location/army whose military company a healer travelled with, per a healer's journal read at the Vaults of Sarth (DIAL_Z23#96); not otherwise described."
+    }
   ]
 }

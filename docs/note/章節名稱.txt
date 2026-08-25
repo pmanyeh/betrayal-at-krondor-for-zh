@@ -1,0 +1,13 @@
+指的是 DIAL_Z00.DDX 裡的九個章節標題／任務目標橫幅（#291~#299，對應遊戲九個章節開場時顯示的「第 N 章：標題 / 任務目標」提示畫面）：
+
+記錄	章節	內容（英文原文）
+#291	第一章	Into a Dark Night — Escort Gorath to Krondor!
+#292	第二章	Shadow of the Nighthawks — Go to the Black Sheep Tavern in Romney!
+#293	第三章	The Spyglass and the Spider — Solve the mystery of the Spyglass and the Spider!
+#294	第四章	Marked for Death — Escape from the Northlands!
+#295	第五章	When Rivers Run Blood — Defend Northwarden!
+#296	第六章	Betrayal — Find the Book of Macros!
+#297	第七章	The Long Ride — Destroy the moredhel rift machine!
+#298	第八章	Of Lands Afar — Save Pug and Gamina!
+#299	第九章	Mad Gods Rage — Prevent Makala from reaching the Lifestone!
+其餘 DIAL_Z00.DDX 的 409 筆——隨機遭遇/伏擊敘事、存讀檔／Options UI 提示、四位主角背景介紹——都維持中文，不受影響。這 9 筆是玩家在「正式進入每一章」那個瞬間會看到的橫幅，正是會觸發卡死的那個特定畫面。

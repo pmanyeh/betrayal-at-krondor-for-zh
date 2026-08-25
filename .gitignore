@@ -8,11 +8,14 @@ betrayal-at-krondor/
 *.ovl
 *.drv
 *.wri
+*.ddx
+krondor-manual.pdf
 
 # Build and toolchain artifacts
 build/
 dist/
 toolchain/
+scratchpad/
 *.obj
 *.exe
 *.bin
@@ -28,3 +31,4 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+.claude/
