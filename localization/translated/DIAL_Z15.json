@@ -10,8 +10,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "採購櫃檯。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -21,8 +21,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "回到道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -32,8 +32,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "離開這間店。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -44,8 +44,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t仔細檢查這片區域。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -58,8 +58,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這把魯特琴很舊了。\n\t從外觀看來，它大概是被人用來狠狠敲過某個表演不夠好的流浪吟遊詩人的腦袋。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -73,8 +73,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t那位客人回望著@4的目光。\n\t雖然只是隨口攀談，八成不至於招來一刀捅穿肚子的下場，但他在酒館裡見過的怪事多得很。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -89,8 +89,8 @@
         "\\xf1",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這排柱廊很典型。\n\t就跟大多數米德肯米亞的禮拜場所一樣，神殿外觀刻意不做任何裝飾，以免被路過的小偷順手牽走。「我真想知道，這些設計神殿的祭司們，為什麼就是不願意讓人知道裡頭供奉的到底是哪位神明，」@4咕噥道。「掛個牌子有ñ這麼困難嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -104,8 +104,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4打了個呵欠。\n\t「看來這條路通往寢室，」他說。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -119,8 +119,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這棟建築的窗戶很簡陋。\n\t「我敢打賭這裡是間酒館，」@4說。「窗戶老是要換，自然不會花大錢裝。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -131,8 +131,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t前往修理櫃檯。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -147,8 +147,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4仔細打量著這個人。\n\t「我猜那是個客棧老闆，」他對@0低聲說道，指著對方轉動的那一大串各式鑰匙。「這地方或許能提供比我們最近常睡的碎石地更舒服的休息處。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -162,8 +162,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4打量著那位酒保。\n\t雖然光憑外表看不出什麼，但他也找不到立即不信任這個人的理由。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -177,8 +177,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4打量著那位女侍。\n\t雖然光憑外表看不出什麼，但他也找不到立即不信任這個人的理由。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -193,8 +193,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t道路轉了個彎。\n\t@4端詳著眼前的道路，只見它像條巨蛇般蜿蜒遠去，最終沒入一座大城鎮。「拉姆特，」@0說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -207,8 +207,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向拉姆特道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -219,8 +219,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#拉姆特#\t這座城鎮在許多方面看起來就像是酒醉之下的產物；粗糙的矮人棚屋硬生生擠在精緻的精靈店鋪旁，而怪異的圖蘭尼酒館又從一片王國式的民居中冒了出來。城門外的一塊告示牌把這一切總結得很好：凡是造訪拉姆特的人皆平等，因為在拉姆特，人人一樣古怪。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -230,8 +230,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "藍輪旅店。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -242,8 +242,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#藍輪旅店#\t這無疑是鎮上最新開的酒館，藍輪旅店顯得沉靜，跟拉姆特其他店家比起來幾乎有些昏昏欲睡。店內，膚色深沉的客人們把辛苦賺來的金幣拍在桌上，換取藍輪旅店從遙遠的圖蘭努阿尼帝國獨家進口的貨物。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -253,8 +253,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "箭匠商行。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -265,8 +265,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#箭匠商行#\t箭匠商行是依照精靈的品味建造的。店內店外，幾乎沒有一樣東西的用途稱得上是花俏，當然也沒有任何純粹裝飾性的擺設。牆邊，店裡陳列的箭矢與其他射箭用品排得整整齊齊，每樣東西似乎都恰如其分地擺在該在的位置。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -276,8 +276,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "拉姆特駐防要塞。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -289,8 +289,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "@4凝視著河水。\n整體看來，拉姆特河的水流十分平常，不過他不禁猜想，河床底下或許埋著什麼東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -304,8 +304,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t魚群四散而逃。\n\t@4把手伸進冰冷的河水裡，在河床長滿青苔的卵石間摸索，一邊回頭解釋道：「我聽過一句順口溜，說是把錢幣丟進拉姆特河會帶來好運。我想我們分一點運氣，應該不至於招來詛咒吧……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -321,8 +321,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t道路轉了個彎。\n\t走了幾分鐘後，路面開始向海邊傾斜，最終穿過一對鐵門，通往這座公國雄偉的中樞。\n\t「克朗多，」@4嘆了口氣說道，那嘆息裡似乎既有寬慰、又帶著幾分擔憂。「要是有刺客衝著我們來，那他們十之八九會埋伏在這裡跟王宮之間。你怎麼看，戈拉斯？我們現在該進去，還是不要？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -335,8 +335,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向克朗多道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -347,8 +347,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#克朗多#\t海鷗在西部領地首府的天空中盤旋，繞著王宮的城垛畫出一圈圈大膽的弧線，堪堪避開在鹹風中飄揚的親王旗幟。下方，克朗多的市民對這番壯麗的景象幾乎不屑一顧，只顧匆匆忙著自己的事。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -358,8 +358,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往王宮。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -372,8 +372,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t守門官放他們進去了。\n\t他通報了這支小隊的到來，隨後領著他們進入克朗多王宮的圍牆之內……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -384,8 +384,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#王宮#\t王宮的壯麗令人印象深刻，眾人穿過一間又一間的宴會廳、接待室，最後經過一座裝飾得色彩繽紛的健身廳，才終於走進克朗多親王的王座廳，一路上無不流露出讚嘆的神情。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -399,8 +399,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這房間很擁擠。\n\t「洛克，洛克，洛克，」@4喃喃唸著，一邊翻看著這位紳爵亂七八糟堆成一堆的私人物品。「你或許是個出色的劍客，但你的個人整理能力實在有待加強。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -411,8 +411,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t前往洛克利爾的房間。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -426,8 +426,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們可能會被人看見。\n\t@4讓隊伍停下來思考。「別再幫迪勒肯的忙了，他要的幫助已經夠多了。要是我們大搖大擺從王宮正門出去，那還不如乾脆找幾個吹號手走在前頭，向整個王國宣布這件事算了。下水道大概是我們最好的選擇。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -439,8 +439,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#彩虹鸚鵡旅店#\t@4直到踏進房間才發現自己一直凍得發抖，此刻能把厚實的橡木門關在身後，讓他鬆了一口氣。屋裡其他人似乎同樣自在，三三兩兩低聲閒聊著，幾乎沒留意到有新客人進門。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -450,8 +450,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往彩虹鸚鵡旅店。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -461,8 +461,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往阿斯塔隆神龕。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -473,8 +473,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#阿斯塔隆神龕#\t這間冥想室簡樸得近乎清冷，聖爐裡燃燒著沒有熱度的火焰，反倒讓人覺得更加寒冷。禮拜堂的其他地方，隱約傳來一群祭司正在練唱聖歌的聲音。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -484,8 +484,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往下水道。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -499,8 +499,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4領頭往下走。\n\t這段路又陡又險，他兩度差點失足，但最終一行人還是安然抵達了北門下方的一處岩石突出處。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -511,8 +511,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#下水道門#\t這扇門太過厚實，光憑蠻力根本打不開，看來是特意裝設在下水道入口上方，以免異味冒犯經過北門的訪客。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -523,8 +523,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這個洞裡是不是藏著什麼東西？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -535,8 +535,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這個洞裡是不是藏著什麼東西？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -546,8 +546,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "下水道入口。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -559,8 +559,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4深吸一口氣，領著眾人走進臭氣沖天的黑暗之中……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -572,8 +572,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#老鷹商行#\t這間雜貨店的擺設讓人感到熟悉又自在，一切都安排得井井有條，@4只花了片刻工夫就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -583,8 +583,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往老鷹商行。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -598,8 +598,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@0嗤之以鼻。\n\t「克朗多的市集區？」他說道，勉強按捺住笑意。「我們乾脆把所有家當都直接送人算了！那裡的嘲弄幫多得跟粥一樣稠，當地商人自然會跟著哄抬價錢。我們還是到城外去買比較划算。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -616,8 +616,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@0端詳著這條小路。\n\t他順著小路望去，只見道路時起時伏，蜿蜒曲折地通向遠方一座大城鎮。\n\t「馬拉克十字鎮，」@0說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -630,8 +630,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向馬拉克十字鎮道別。\n\t有那麼一陣子，村鎮的聲音與氣味似乎還緊追在後，但隨著他們繼續往山上走，這些感官的餘韻漸漸消散在午後之中……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -642,8 +642,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#馬拉克十字鎮#\t馬拉克十字鎮是座喧鬧繁忙的城鎮，靠著幾世紀積累的繁榮養得肥滋滋的。商店櫥窗裡塞滿了各種奇珍異品，每一樣都只是這座繁忙貿易城鎮每日流通財富的九牛一毛。而俯瞰著這一切的，是那座宏偉的伊夏神修道院，一座幾乎與王國本身一樣古老的神殿。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -654,8 +654,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#王后巷旅店#\t雖然店內光線昏暗，只在角落聚起幾抹微光，氣氛卻顯得歡快，酒館老闆正眉飛色舞地講著調皮搗蛋的故事，逗得那些大概已經聽過幾十遍的客人們笑聲不斷。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -665,8 +665,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "王后巷旅店。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -676,8 +676,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往伊夏神禮拜堂。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -688,8 +688,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#伊夏神禮拜堂#\t這間冥想室簡樸得近乎清冷，聖爐裡燃燒著沒有熱度的火焰，反倒讓人覺得更加寒冷。神殿裡唯一稱得上裝飾的，似乎就是牆上那幅刻著奇特花紋的圖案。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -703,8 +703,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這個木桶臭氣沖天。\n\t「有時候人們會丟掉些最奇怪的東西，」@4說著，一邊搖鬆垃圾桶的蓋子。「說不定裡頭有什麼我們用得上的東西。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -714,8 +714,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "看起來是個大木桶。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -729,8 +729,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4試著往裡頭看。\n\t「有人把裡面用木板封起來了，」他咕噥道。「什麼都看不見。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -744,8 +744,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4試著開門。\n\t門怎麼也打不開，他聳了聳肩。「這門從裡面閂上了，」他說。「我猜那位講師目前只能說到這裡了。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -771,8 +771,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個男人攔下了他們。\n\t「票，」他齜著缺了牙的嘴吼道。@4沒能及時反應過來，他便湊得更近，扯著嗓子喊：「你是ó聾ð了嗎！？我需要看你的講座票。」\n\t「要是我們沒有票呢？」@4回道。\n\t那男人露出令人不快的笑容。他用拇指指了指身後四名體格異常健壯、看起來像是馬拉克十字鎮治安隊的士兵，瞇起眼睛。「你們到底有沒有今晚講座的票？」\n\t「沒有，」@4說著，退回到街上。「我們不想惹麻煩。這就走了。」\n\t大門砰地一聲關上……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -799,8 +799,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個男人在門口收了他們的票。\n\t@4揮開臉前的煙霧，驚訝地發現講堂裡坐了這麼多年輕貴族，大多數人看起來寧可待在對街的酒館裡喝麥酒。他在肩膀與手肘間擠出一條路，先幫歐文與戈拉斯找到了長凳，才在一名穿著繡有紅色石塔徽記外衣的瘦削士兵旁邊坐下——那是高堡的顏色。\n\t後牆邊搭起了一座小講台，四周環繞著搖曳的燭光，把特羅維爾男爵與陪同他的兩名男子的臉映照得帶著一股詭異的昏黃。等到硬木講台終於架設完畢，男爵站起身，環視全場。\n\t「我真希望能在更愉快的情況下發表這番話，但北方的黑暗兄弟又在集結兵力，準備對我們發動另一場圍攻，」男爵緩緩開口道。「我來這裡並非受你們的方丈之邀，而是在等待來自黑沼鎮與薩拉多的志願者，前來高堡加入我的部隊。我們得到消息，莫瑞德人的新王子迪勒肯，已經打出了ó穆爾曼達穆斯ð的戰旗。」\n\t台下的貴族們一陣騷動，這個古老的莫瑞德人名字所代表的意義，這些學子們自然心知肚明。@4環顧室內大多數人的臉孔，明白他們大概在穆爾曼達穆斯率軍攻向賽瑟儂時都還只是孩子，而在那場慘烈的戰役中，多半也失去了父親或叔伯。\n\t「所以我想，這堂課對我們的目的來說會更實際一些，會著重在高堡的防禦上，」特羅維爾繼續說道。「侍從，去把我的地圖拿來……」\n\t此後五個鐘頭，男爵詳述了防禦技巧，以及在北境作戰時已知有用的各種基本戰術。等到他終於精力漸衰，便回答了幾個問題，宣布會議結束，從後方的出口離開了講堂。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -831,8 +831,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個男人在門口收了他們的票。\n\t@4揮開臉前的煙霧，驚訝地發現講堂裡坐了這麼多年輕貴族，大多數人看起來寧可待在對街的酒館裡喝麥酒。儘管如此，他們還是很友善，主動把座位讓給了詹姆士與他的同伴。\n\t「全體起立，恭迎里蘭儂的居伊，王國王座首席顧問，」一名侍從從室內後方宣告道。\n\t經過一段令人不自在的漫長等待，兩名身穿紫色外衣的男子走到簡陋講台前站定，神情肅穆而警戒。緊跟在他們身後的，是一名從束腰外衣到褲子、乃至左眼上的眼罩全都一身黑衣的男子。他從兩名護衛之間走上講台，望著台下眾人，彷彿他們全是他麾下的士兵。看見詹姆士，這位首席顧問臉上浮現一絲笑意。\n\t「看來我不是這裡唯一的首席顧問呢，克朗多的詹姆士，」居伊說道，示意眾人就座。「我很意外亞魯莎親王竟然肯放你出來。」詹姆士聳了聳肩，隨口編了個謊搪塞過去，室內眾人似乎都信了，畢竟大家都跟他一樣，急著想讓講座開始。\n\t幾個鐘頭過去了。在詳盡討論了深陶頓之戰與沙瑪塔要塞之圍後，這位首席顧問結束了他的講課，讓一群聽得目瞪口呆的學生們散去，接著走下講台，來找詹姆士說話。居伊臉上帶著凝重的神情，一手按上了這位紳爵的肩膀。\n\t「算你走運，這間屋子裡大多數人都不認識亞魯莎，」居伊低聲說道，瞥了歐文一眼。「要是他們認識，絕不會相信你是被派去羅姆尼接這個瘦小的侍從的。我也很好奇，你為什麼會跟一個黑暗兄弟同行。」看見這位顧問那隻好眼裡燃著的火光，詹姆士明白這位老人是在一本正經地發問，而他那兩名護衛之所以站得這麼近，也不只是做做樣子。「我不會讓亞魯莎被人出賣。」\n\t等其餘學生都被引出門外後，詹姆士才迅速說明了情況，讓戈拉斯補充他只知道一部分的細節。當他提到夜鷹會與羅姆尼時，這位首席顧問點了點頭。\n\t「亞魯莎親王派你去羅姆尼是對的，」居伊說。「那裡ó確實有一群王國人。幾個月前，我們一聽說那邊的公會出了亂子，我就讓賽維尼公爵派他們過去了。我們懷疑死亡公會牽涉其中。」他抓起自己的斗篷，向護衛示意去查看街道情況。「要是王國裡有誰能找到夜鷹會，那就是那些巴斯泰拉來的人了。這幾年來，他們為王國的大業出了不少力。不過我得提醒你，他們一路走來也樹敵不少。從這裡到黑羊酒館之間，你們得多加小心。」\n\t等護衛示意道路安全無虞後，居伊便離開了，這棟建築的看守人也領著他們走了出去……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -846,8 +846,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這條路又多石又坑坑洞洞。\n\t他望向遠方，只見道路蜿蜒通向一座雄偉的要塞城市。「薩薩戈斯，」@0說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -860,8 +860,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向薩薩戈斯道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -872,8 +872,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#薩薩戈斯#\t雖然一陣寒風捲著塵土在莫瑞德人的堡壘薩薩戈斯周圍打轉，這座古老的城垛上卻沒有積雪也沒有結冰。取而代之的，只有一陣孤寂的呼嘯聲，在從堡壘朝四面八方展開的成千上萬支長矛間低語——每一支長矛上，都插著一顆斬下的頭顱。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -885,8 +885,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#公共廳#\t@4直到踏進房間才發現自己一直凍得發抖，此刻能把厚實的橡木門關在身後，讓他鬆了一口氣。屋裡其他人似乎同樣自在，三三兩兩低聲閒聊著，幾乎沒留意到有新客人進門。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -896,8 +896,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往公共廳。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -907,8 +907,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往地牢。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -919,8 +919,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "那是個頭骨。\n雖然他碰不到它，但他搖了搖插著它的長矛，聽見一陣輕微的喀啦聲，滿意地點了點頭……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -935,8 +935,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4把頭骨搖鬆了。\n\t它像酒杯從桌上翻落一樣掉到地上，把裡頭的東西灑在了莫瑞德人的土地上。@4連忙湊上前去查看，然後才把頭骨放回原位……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -952,8 +952,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t道路轉了個彎。\n\t走了幾分鐘後，路面開始穩定爬升，繞著一座陡峭的岩壁山丘盤旋而上。\n\t「薩斯，」@4說。「我們大概還有時間可以順道拜訪一下，也能替一路上的單調解解悶。要不要去四處看看？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -966,8 +966,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向薩斯道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -978,8 +978,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#薩斯#\t從遠處看，薩斯的伊夏神修道院看起來像座要塞，陡直的圍牆庭院被一座古老的單層主樓所支配。但走近一看便會發現，曾經打鐵鑄劍的地方如今開了間店鋪謀利，曾經士兵集結的地方如今開滿了嬌嫩的花朵。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -989,8 +989,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往圖書館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1001,8 +1001,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#圖書館#\t薩斯地底的藏書室籠罩著一種超凡的寂靜，就連祭司在書架間搜尋時不慎讓書本掉落，或有人打開一本滿是塵埃的古卷時打了個噴嚏，這份完美的寂靜也絲毫不受打擾。彷彿時間本身在此凝固，被困在木製書櫃之間，宛如一本書裡的一頁頁書頁。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1012,8 +1012,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往伊夏神殿。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1024,8 +1024,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#伊夏神殿#\t這間冥想室簡樸得近乎清冷，聖爐裡燃燒著沒有熱度的火焰，反倒讓人覺得更加寒冷。神殿裡唯一稱得上裝飾的，似乎就是牆上那幅刻著奇特花紋的圖案。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1039,8 +1039,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4瞇起眼睛。\n\t不管他怎麼看這幅畫，都看不出它到底想表現些什麼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1051,8 +1051,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#星塢分館#\t歐文瞪大了眼睛，仔細翻看著這間臨時店鋪裡陳列的各種魔法物品。許多物品上都掛著標籤，顯示它們是由星塢島的帕格所主持的魔法學院送來的。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1062,8 +1062,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往星塢分館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1088,8 +1088,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t強光刺得@4睜不開眼。\n\t他尖叫一聲，從正要推開的門口向後彈開，雙手掩面，彷彿在躲避某種巨大的恐怖。他踉蹌後退撞上@5，在這名戰士的臂彎裡瑟瑟發抖。\n\t「魔法，」@4終於喘著氣說道。「可怕，太可怕的魔法了。那感覺就像……就像窺入了一場ó惡夢。有人在門上下了防護咒。」\n\t@5鬆開扶著他的手，狐疑地盯著那扇門。「你有辦法把它驅散嗎？」\n\t@4搖了搖頭。「不，不行。這咒法太強大了。要是我們想進去，得另尋他法才行。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1103,8 +1103,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t道路轉了個彎。\n\t@0順著這條塵土飛揚的小路望去，只見它像河流般繞過幾座小山丘，最終通向一座大城鎮。「羅姆尼，」他說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1117,8 +1117,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向羅姆尼道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1131,8 +1131,8 @@
         "\\xf0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#羅姆尼#\t這座素有「公會之城」之稱的城鎮，鵝卵石街道ó盤根錯節ð，是一座由死巷與窄弄組成的迷宮，往往通向不了任何地方，或是通進聚集著各種聲名狼藉的酒館的死胡同。唯有那條名叫「幽暗里」的黑暗主街，看起來還算歡迎這座怪異城鎮的訪客。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1143,8 +1143,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#黑羊酒館#\t裡頭的陳設十分簡陋。幾張裂了縫的桌子硬塞進大廳裡，勉強可以容納二十五個人，要是大家餓得緊也能擠進三十個。板凳與牆上滿是油膩的污漬，見證著過去那些狂野的日子。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1154,8 +1154,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往黑羊酒館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1167,8 +1167,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#港口交易所#\t這間雜貨店的擺設讓人感到熟悉又自在，一切都安排得井井有條，@4只花了片刻工夫就找到了他感興趣的東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1178,8 +1178,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往港口交易所。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1189,8 +1189,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "看起來是口井。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1205,8 +1205,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t井水很清新。\n\t@4從井裡舀了幾捧水痛快地喝下，順便也拿來潑洗臉和手臂。等他終於覺得神清氣爽，便讓開水桶，好讓@0也能照做。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1220,8 +1220,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這條路沿著山勢向上爬升。\n\t@0停下來喘口氣，朝路的方向比了比，說道：「高堡。你覺得我們該去拜訪一下嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1234,8 +1234,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向高堡道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1246,8 +1246,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#高堡#\t高堡是王國與北方諸國之間衝突的一個嚴峻見證，它的名字來自那座建在山丘上、守衛著這座邊境小鎮的厚重石造工事。遠方的北面，聳立著割岩隘口，那是被稱為「世界之齒」的山脈屏障中少數的缺口之一。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1258,8 +1258,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#遊俠會館#\t雖然店內光線昏暗，只在角落聚起幾抹微光，氣氛卻顯得歡快，酒館老闆正眉飛色舞地講著調皮搗蛋的故事，逗得那些大概已經聽過幾十遍的客人們笑聲不斷。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1269,8 +1269,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往遊俠會館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1282,8 +1282,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#戰械坊#\t@4放眼望去，處處都是擦得發亮的金屬。這間狹小的店鋪擺著琳瑯滿目、令人咋舌的各式武器與盔甲，簡直不亞於任何一座提斯神殿，堪稱戰爭的聖地。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1293,8 +1293,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往戰械坊。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1304,8 +1304,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往城堡。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1315,8 +1315,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往割岩隘口。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1338,8 +1338,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t雨水斜斜地從天而降。\n\t@4深一腳淺一腳地穿過泥濘的隘口，愁眉苦臉地望著一座曾橫跨高堡峽谷的橋樑殘骸。他眨掉眼裡的雨水，望向@0。「這橋被人蓄意破壞了，」他啐了一口。「除非你有別的主意，不然我們得再花三天走回高堡了。」\n\t@0皺起眉頭，搖了搖頭。「我不知道掉頭回北境能ó得到什麼好處。我倒覺得，路被堵住也未嘗不是件好事。」\n\t「我自有我的理由，」@4沒好氣地回嘴，對這趟白跑一趟感到惱火。「我們回高堡吧……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1353,8 +1353,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t道路轉了個彎。\n\t眼前這條路顯然人跡頻繁。@0看著它幾度之字形轉折，一路爬向一座大型駐防要塞。「北衛城，」他說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1367,8 +1367,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向北衛城道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1379,8 +1379,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#北衛城#\t一條險峻狹窄的小路蜿蜒通向北衛城堡壘的正門，窄得幾乎僅容兩人並肩而行。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1390,8 +1390,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往大廳\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1402,8 +1402,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#大廳#\t這座大廳是一位比起實用更愛享樂的男爵留給北衛城的遺產，如今卻仍維持著軍事般的紀律，沒有一個角落沒被擦拭乾淨，也沒有一絲多餘雜物。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1415,8 +1415,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#鐵匠鋪#\t@4放眼望去，處處都是擦得發亮的金屬。這間狹小的店鋪擺著琳瑯滿目、令人咋舌的各式武器與盔甲，簡直不亞於任何一座提斯神殿，堪稱戰爭的聖地。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1426,8 +1426,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往鐵匠鋪。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1441,8 +1441,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4信步走進林中。\n\t他注意到一堆排得可疑的落葉，懷疑底下可能藏著什麼東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1456,8 +1456,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4信步走進林中。\n\t他看見一堆排得可疑的落葉，伸手戳了戳深處，卻鬆了口氣，發現底下沒有留下陷阱。他仍然好奇，便繼續挖了下去……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1471,8 +1471,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t雜草與灌木叢夾道生長。\n\t「這條路通往卡瓦爾堡，」@0說。「你覺得我們該進去四處看看嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1485,8 +1485,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向卡瓦爾堡道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1497,8 +1497,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#卡瓦爾堡#\t卡瓦爾堡就像藏在米德肯米亞鄉間的一件寶物，是肯廷丘陵石礫環抱中一道質樸的陽光。這座牧羊社區四面被低矮的石牆圍住，在大多數方面都樸實無華，唯一稱得上虛榮的，大概就是村莊廣場上那座小噴泉了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1509,8 +1509,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#鴨頭旅店#\t除了幾個抬頭瞥了他們一眼的醉醺醺的鎮民代表，酒館大廳一片安靜。唯有樓上木板傳來不安分的腳步聲，似乎在提醒著還有其他人是清醒著的。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1520,8 +1520,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往鴨頭旅店。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1531,8 +1531,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往卡瓦爾莊園。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1543,8 +1543,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#莊園#\t這座直到不久前還是市長官邸的地方，處處可見近期翻修的痕跡。天花板原本低矮沉重，如今已改建成拱頂，仿照克朗多與薩拉多的宏偉宮殿樣式。毫無疑問，這位伯爵正花著大把大把的錢。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1554,8 +1554,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "仔細檢查這片區域。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1569,8 +1569,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4俯身探向井口。\n\t他往下看不見任何東西，卻聽見水桶隨著深處水面輕輕晃動、傳來一陣輕柔的碰撞聲。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1586,8 +1586,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一塊招牌在風中嘎吱作響。\n\t牌面上畫著十枚金幣，凡是熟悉米德肯米亞金融機構的人一看便懂。\n\t「這是放貸商人，」@4說。「或許我們該去拜訪一下。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1601,8 +1601,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t空氣中瀰漫著難聞的氣味。\n\t@0拿不準自己還想不想再往前走，他順著眼前的道路望去，卻被一層詭異的薄霧擋住了視線。「說不定前面有什麼東西在等著我們，」他說，「你覺得我們該去看看嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1615,8 +1615,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向阿曼加道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1628,8 +1628,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#阿曼加#\t阿曼加破碎的石牆上籠罩著一片喪禮般的死寂，濃重的油煙從地面幽暗的裂縫中升起。拾荒者在這片廢墟中活得如魚得水，靠著撿拾殘存的遺物維生，就像蕈菇附生在某個古老死物腐爛的骨骸上。莫瑞德人終將慢慢奪回這座城市，恢復它古老的名字——ó薩伊斯班迪亞。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1641,8 +1641,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#巨人濃湯酒館#\t@4推門走進房間時，室內的交談聲短暫停了下來，一對外表粗獷的傭兵朝他點了點頭算是回應，隨後似乎又繼續為了一場輸掉的賭注爭論不休。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1652,8 +1652,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往巨人濃湯酒館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1673,8 +1673,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4查看了一番。\n\t他往冒著煙的洞裡窺探，什麼也看不見，但他很確定自己聞到了類似燃油的氣味。他久久凝視著那片黑暗，才轉身回到同伴身邊。\n\t「這裡的地底之火至今仍在燃燒，」他對歐文說道。「十年前，穆爾曼達穆斯攻打這座要塞的時候，據守這座古老莫瑞德人城市的人，寧可放火燒城，也不願讓莫瑞德人再次奪回它。」\n\t「你恨他這麼做嗎？」歐文問道，看見戈拉斯臉上流露出痛苦的神情。\n\t這位莫瑞德人搖了搖頭。「不。就跟我們早該在迪勒肯第一次突襲我們村莊時做的事一樣。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1684,8 +1684,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往瀝青礦坑。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1698,8 +1698,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#瀝青洞穴#\t@4咳了起來。\n洞穴裡濃烈的煙氣幾乎讓他昏過去，他只能往裡走幾步，光線便完全被油煙遮蔽了。不過，他覺得洞口旁的洞壁上似乎有個小洞，或許他伸手就能碰到……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1713,8 +1713,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t好奇心佔了上風。\n\t@4把碎石推到一邊，伸手在洞裡摸索，希望有人曾在這裡留下什麼值錢的東西……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1728,8 +1728,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t「ó瀝青ð，」@4咳嗽著說，一邊抓住一個油膩的瓶頸，感覺到黏糊糊的黑色物質沾上了他的手指。他覺得煙氣開始讓自己受不了了，便踉蹌著離開了那個洞口。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1741,8 +1741,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他在洞的另一頭什麼也摸不到，越是探身向前伸手，就吸進越多從洞裡冒出的煙氣。他被一陣陣咳嗽折磨得站不住腳，踉踉蹌蹌地離開了洞口，得靠@0攙扶才能走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1756,8 +1756,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4瞇起眼睛。\n\t自然光線不佳，加上他的雙眼還沒完全適應黑暗，他實在看不清裡頭究竟有沒有什麼東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1771,8 +1771,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4瞇起眼睛。\n\t自然光線不佳，加上他的雙眼還沒完全適應黑暗，他實在看不清裡頭究竟有沒有什麼東西。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1786,8 +1786,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@0聞到了魚腥味。\n\t「看來這條路會通往錫爾登鎮，」他說。「你覺得我們該進去補給嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1800,8 +1800,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向錫爾登道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1812,8 +1812,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#錫爾登#\t錫爾登的碼頭長年浸泡在魚鱗與海鹽刺鼻的氣味裡，與其說是那些皮膚黝黑、行走在木棧板上的水手的家園，倒更像是一群魚人的巢穴。這裡向來是聲名不佳之徒的聚居地，以與大凱許帝國的奴隸販子暗中交易而聞名。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1825,8 +1825,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#錨首酒館#\t@4推門走進房間時，室內的交談聲短暫停了下來，一對外表粗獷的傭兵朝他點了點頭算是回應，隨後似乎又繼續為了一場輸掉的賭注爭論不休。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1836,8 +1836,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "錨首酒館。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1850,8 +1850,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t那艘船正下錨停泊著。\n\t雖然他能看見幾名水手在甲板上匆忙走動，卻找不到船身上漆著的船名。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1878,8 +1878,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4朝船上喊話。\n\t一名金髮男子出現在船欄邊，朝他們揮了揮手，叮囑他們別靠近正被拉上船的那張漁網。\n\t「這是什麼船？」@4喊道。\n\t「這是ó迷霧ó惡魔號ð，」那水手驕傲地回答，一拳捶在欄杆上。「唯一一艘快到能甩開特倫查德船長的船！我們正準備啟航前往厄提斯島。」\n\t@4想了片刻。「去那座島要多少船資？」\n\t「三十枚金索夫林，」那水手朝下喊道。「你們有興趣同行嗎？要是有的話，就上跳板來吧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1894,8 +1894,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們登上了船。\n\t起錨後不過幾分鐘，ó迷霧ó惡魔號便飛快地穿過那道將厄提斯島與大陸分隔開來的狹窄海峽。經過彷彿永無止境、遠方地平線卻始終沒有拉近的漫長航程，他們終於在一名領港員的協助下靠了岸……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1910,8 +1910,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「雖然我們也想跟你們一起出海，但恐怕我們湊不出這筆錢，」@4說。「或許改天有機會吧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1926,8 +1926,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4搖了搖頭。\n\t「這太貴了，」@4說。「或許改天有機會吧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1948,8 +1948,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4朝船上喊話。\n\t一名金髮男子出現在船欄邊，朝他們揮了揮手，接著雙手攏在嘴邊喊道。「除非你們當中有人急需去見厄提斯島上的女祭司，不然我幫不了你們，」他喊道。「這星期內我得把ó迷霧ó惡魔號準備好出航。你們裡頭有人病得很重嗎？」\n\t「不，只是……」@4結結巴巴地說，卻被大副打斷了。\n\t「抱歉了，各位，」那名漸漸遠去的男子喊道，一邊在甲板上搖起了鈴。「我得讓這些懶骨頭動起來了……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1970,8 +1970,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4朝船上喊話。\n\t一名金髮男子出現在船欄邊，朝他們揮了揮手，接著雙手攏在嘴邊喊道。「除非你們當中有人急需去見厄提斯島上的女祭司，不然我幫不了你們，」他喊道。「這星期內我得把ó迷霧ó惡魔號準備好出航。你們裡頭有人病得很重嗎？」\n\t「不，只是……」@4結結巴巴地說，卻被大副打斷了。\n\t「抱歉了，各位，」那名漸漸遠去的男子喊道，一邊在甲板上搖起了鈴。「我得讓這些懶骨頭動起來了……」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1986,8 +1986,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們登上了船。\n\t起錨後不過幾分鐘，ó迷霧ó惡魔號便飛快地穿過那道將厄提斯島與大陸分隔開來的狹窄海峽。經過彷彿永無止境、遠方地平線卻始終沒有拉近的漫長航程，他們終於在一名領港員的協助下靠了岸……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1998,8 +1998,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#厄提斯島#\t這座島嶼如同棲息在礁岩峭壁間的燕鷗與鴴鳥般神秘，厄提斯神殿的起源籠罩在一片迷霧般的傳說之中。這座荒涼小島上住著基利安神殿分裂出來的一支派別，島上的女祭司們相信，總有一天，她們的祈禱能將這位古老的海神從遺忘中喚醒。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2013,8 +2013,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t香煙裊裊繚繞。\n\t@4朝那扇厚重的木門走去，門扉緊閉，以保護正在進行的任何儀式不受打擾。他拉了拉門邊垂掛的流蘇繩，靜候守門人的回應。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2026,8 +2026,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#厄提斯神殿#\t這間冥想室簡樸得近乎清冷，聖爐裡燃燒著沒有熱度的火焰，反倒讓人覺得更加寒冷。唯有外頭傳來的陣陣海浪拍打聲，還能給@4帶來一絲慰藉。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2041,8 +2041,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4瞇起眼睛。\n\t不管他怎麼看這幅畫，都看不出它到底想表現些什麼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2056,8 +2056,8 @@
         "@0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t眼前這條路透著幾分怪異。\n\t雖然@0說不上來這裡到底哪裡讓他不安，但整片區域瀰漫著一股不祥的氣息，他也不太確定自己還想不想繼續沿著這條塵土飛揚的路走下去。「賽瑟儂就在前面，」他說。「我們該繼續前進、四處看看嗎？」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2070,8 +2070,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t他們向賽瑟儂道別。\n\t走了半個鐘頭後，他們再次回到了主要道路上。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2084,8 +2084,8 @@
         "\\xf3",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "#賽瑟儂#\t賽瑟儂就跟祭司在神殿裡講述的神話傳說一樣，是米德肯米亞傳說中一個舉足輕重的存在，如今卻不過是一座淒涼的鬼鎮。經過一堵爬滿常春藤的低矮磚牆時，牆上用羊血塗寫的字跡令眾人為之一震：ó銘記ó吾等。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2095,8 +2095,8 @@
       "tokens": [
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往廢墟。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2110,8 +2110,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4凝視著那道裂縫。\n\t他站在賽瑟儂祖傳堡壘的瓦礫堆上，眼前成千上萬具被用來填塞地底缺口的莫瑞德人骸骨令他心頭一震。儘管他很想知道下面究竟藏著什麼，卻絲毫不想從這些腐朽的屍體間鑽過去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2125,8 +2125,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t碎石散落一地。\n\t@4湊近了些，試圖看清倒塌的石塊縫隙間有什麼東西，但光憑目視實在看不出個所以然。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2140,8 +2140,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t好奇心佔了上風。\n\t@4雙膝跪地，開始把石塊一塊塊撥開，希望能找到什麼有意思的東西……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2177,8 +2177,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t洛克利爾一邊搖著鐵欄，一邊皺起了臉。\n\t為了讓所有人都活著平安抵達克朗多，他吃盡了苦頭，如今這扇上了鎖的王宮大門，簡直是在傷口上撒鹽。他氣沖沖地朝守門官喊話，用劍柄砸著閘門。\n\t被這陣喧鬧聲驚動，一名身穿克朗多槍騎兵隊制服的年輕人從崗哨走了出來，瞇眼打量著他們，抄起原本靠在內牆上的闊刃斧槍。\n\t「麻煩把這道門打開好嗎？」洛克利爾說。「我們有事要見親王。」\n\t「幫不了你，紳爵，」那名衛兵回答道。「閘門的機關壞了，已經壞了三個晚上。除非你跟你的同伴打算爬牆過去，不然在我們找到閘門的設計圖之前，這裡是進不去的。城堡的工匠氣得快抓狂了。」\n\t洛克利爾聽了心煩意亂，但也不知道還能做什麼。「那能不能麻煩你幫我去請亞魯莎親王出來？這事挺緊急的。」\n\t那衛兵又搖了搖蓬亂的腦袋。「他正在跟星塢島的帕格，還有一個叫馬卡拉的圖蘭尼人開會。他特別交代，除非城堡在他們周圍燒起來，否則不准打擾。」\n\t「那能不能至少幫我找一下詹姆士紳爵……」\n\t那衛兵搖搖頭打斷了他。「已經失蹤兩天了。沒人知道他到底去哪了，但你ó知道詹姆士是什麼樣的人。」\n\t洛克利爾點了點頭。「太清楚了。我的直覺告訴我，他正在追查是誰破壞了這道閘門。」\n\t「破壞？」那衛兵一臉困惑，彷彿從沒想過這個可能。「誰會做這種事？」\n\t「我也不確定，但要是我都想到了，我敢保證詹姆士紳爵也一定想到了。」洛克利爾把劍收回鞘中，向衛兵道別，示意同伴們跟上。\n\t「我有種感覺，要解決我們兩邊的麻煩，唯一的辦法就是走這座城市底下的下水道，」洛克利爾低聲說道，催促著眾人趕往北門。「有條密道能帶我們進入王宮，而且我猜，我們八成也會在下面撞見詹姆士紳爵。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2193,8 +2193,8 @@
         "\\xf0",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t這道閘門壞了。\n\t「ñ我再說一次ð，」洛克利爾強調道，「我有種感覺，要解決我們兩邊的麻煩，唯一的辦法就是走這座城市底下的下水道。有條密道能帶我們進入王宮，而且我猜，我們八成也會在下面撞見詹姆士紳爵。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2210,8 +2210,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4盯著@0。\n\t「我們費了這麼大工夫才避開別人的注意，你不覺得大搖大擺走回大門有點蠢嗎，」@4氣呼呼地說。「趁還沒被人發現，我們趕緊前往羅姆尼吧。」\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2225,8 +2225,8 @@
         "\\x09",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t@4瞇起了眼睛。\n\t一路走來，他太多次發現事情並非表面看起來那樣，因此養成了本能般仔細打量東道主的習慣。不過這一次，他倒是沒發現什麼不對勁的地方。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2246,8 +2246,8 @@
         "@4",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "\t一個滿身刺青的矮人盯著他們看。\n\t他咧嘴一笑，露出一口被銼成鯊魚牙般尖銳的牙齒，那雙黑色的眼睛看起來同樣致命。「óSa óa'kai, óenconsið，」他說道，帶著濃重的凱許口音。他朝附近一張桌子比了個手勢。「請吧，各位。牌局正等著你們。」\n\t@4不想跟這個古怪的食人斯卡沙坎人起爭執，便任由對方領著他到一張擺著一疊波基爾牌的桌子旁……\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]

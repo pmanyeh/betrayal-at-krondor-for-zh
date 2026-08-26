@@ -18,8 +18,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DAY NIGHT\n#\nDRV SAGHO\nOAB FIRMT\nFLC HRUNI\nEPY NGHSK\n#\n明亮的那位只會破曉，從不跌落。\n他的兄弟只會降臨，從不破曉。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -38,8 +38,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HANGMAN\n#\nWORGSEL\nHBNBMSE\nSHINETN\nAAEOTAR\n#\n斯沃拉格，那位聲名遠播的莫瑞德人工匠，\n為自己的作品掛保證，\n直到時間盡頭都不會壞。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -59,8 +59,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FIRE\n#\nWSTE\nAINL\nFORN\nBREH\n#\n它死去時的寒意，\n你很快就會哀悼。\n但即使它死了，\n卻從未真正誕生過。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -79,8 +79,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "RAIN\n#\nRSOE\nSERN\nENAT\nLAIO\n#\n你在田野與城鎮四處可見，\n它永遠爬不起來，\n卻常常落下。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -100,8 +100,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "THE DEAD\n#\nSHT WESD\nOBS DAET\nLEE RIAS\nTRN ORTO\n#\n他們感受不到痛苦，\n沒有悲傷，沒有貪婪。\n他們沒有憤怒，\n沒有仇恨，也沒有需求。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -121,8 +121,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SMOKE\n#\nRMEES\nSHPKT\nTERLR\nALOBE\n#\n雖然容易發現，\n只要任它裊裊升起，\n卻難以看清，\n一旦困在房間裡。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -146,8 +146,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EYES\n#\nAHAE\nTAET\nSYIS\nELNN\n#\n任憑你眼明手快，\n視力再怎麼銳利，\n用你的雙眼，\n也永遠看不見我們。\n除非，偶然間，\n恰好碰上這種情況，\n你看見我們的倒影，\n映在一面鏡子裡。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -166,8 +166,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "RING\n#\nROBN\nOLEG\nSHIE\nTINS\n#\n這是件珍貴的禮物，\n卻沒有起點，也沒有終點，\n正中央，什麼也沒有。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -189,8 +189,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SHADOW\n#\nRHNBFT\nSLEDNW\nAEATOL\nNILORK\n#\n他悄悄地跟蹤著我，\n我跑他也跑，\n我爬他也爬。\n一身黑衣，\n入夜便消失無蹤，\n唯有隨著日出才會回來。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -208,8 +208,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "GLOVES\n#\nSHORAS\nTLLDTR\nGREESH\nAERVEE\n#\n水桶、木桶、籃子、罐子；\n什麼東西必須用空手去填滿？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -230,8 +230,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ARROW\n#\nPSAOS\nLRWTW\nETRHE\nAOSET\n#\n它沒有翅膀，卻能飛翔，\n不用喙、不用牙齒，\n也不用爪子出擊。它尖尖的頭上\n沒有眼睛，\n卻能在空中射殺飛鳥。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -249,8 +249,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "STAIRS\n#\nTERIES\nRHARRE\nSTESTT\nALLOND\n#\n它們上上下下，\n卻從不移動……\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -268,8 +268,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "CANDLE\n#\nRHEDLS\nSTNBET\nTARLAO\nCIGORE\n#\n他越老就變得越短，\n他熄滅後便轉為冰冷。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -289,8 +289,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WIND\n#\nPATD\nNIDE\nAHNS\nWOSH\n#\n再堅固的鎖鏈也困不住它，\n壕溝與城牆也擋不住它的腳步。\n千軍萬馬也打不贏它，\n它輕輕一推，就能把樹木撂倒。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -308,8 +308,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BLOOD\n#\nTROPS\nBHEDT\nCERRD\nOLAOA\n#\n莫瑞德人的兄弟們，讓它如雨落下，\n王國的河流，染成猩紅的痛楚！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -329,8 +329,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "RIVER\n#\nMORIT\nWHATS\nAIVSR\nRRIEE\n#\n它是個不知疲倦的僕役，\n馱著重擔穿越泥濘大地。\n但有一件事誰也強求不了，\n那就是回到它出生的地方。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -350,8 +350,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SWORD\n#\nSOOES\nJHDRI\nEUEST\nMWNGD\n#\n憑著鋒利的機智，\n與尖銳的氣度，\n它能了結爭端，\n無聲無息。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -370,8 +370,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ICE\n#\nTHR\nSCO\nIET\nWSE\n#\n它的力量足以擊碎船隻、\n壓垮屋頂。然而它\n仍然畏懼陽光。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -391,8 +391,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ALCOHOL\n#\nAROOLET\nTLIHHVS\nBOCROOL\nFAEETRE\n#\n今日他在那裡絆你一跤，\n明日他便折磨你不休。\n然而他也在那裡緩解痛苦，\n當你深陷悲傷與哀愁之時。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -414,8 +414,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DELEKHAN\n#\nBREETOEW\nFLRUSNVN\nDOLTRHPR\nAEKOKDAM\n#\n消滅我們的敵人！\n沒有一個生還的敵手，\n能逃過這些島嶼的\n新王之手。他將帶領我們\n邁向榮耀，並為我們的子民\n開闢新的疆土！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -434,8 +434,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TREASURE\n#\nTAALREWL\nPREHOUPB\nOHDASWLE\nSLSEITRX\n#\n莫瑞德人與潘塔西亞人，\n守護著我們的蓋子，\n將她封得密不透風。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -455,8 +455,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HOLE\n#\nRTLE\nSOES\nERRL\nHAVT\n#\n它能困住你，\n但你卻困不住它。\n你挖走的越多，\n它就會變得越大。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -476,8 +476,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "RUST\n#\nTULD\nRSOE\nHESS\nADVT\n#\n它能刺穿最堅固的鎧甲，\n只消一磨就能讓劍崩碎。\n然而縱有這般威力，\n它卻傷不了一根棍棒。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -496,8 +496,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "VICTORY\n#\nSHOTEED\nTICOSIT\nARESOTY\nVARITRS\n#\n光憑這一樣東西，\n你就能擊敗\n即使是最強大的敵人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -521,8 +521,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EYE TO EYE\n#\nRAE IN SOL\nBRS OO TYA\nEOI TE LIQ\nSYN AS EDE\n#\n曾經有三個傻子獻祭，\n只為贏得一場古老的較量。\n多貝奧爾，一位王國少年，\n獻出鮮血作為開端。\n一個哥布林男子，伊索拉特，\n挖出了他垂死的心臟。\n蘇奧爾，多貝的姊妹，贏了，\n她拋棄了自己的靈魂。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -544,8 +544,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "THORN\n#\nSHSTE\nCLIRD\nARAUN\nTEOGS\n#\n他在林子裡染上了它，\n帶著它一路走回家，\n因為他一直找不到它。\n他越是尋找，\n就越能感覺到它。等他終於\n找到了它，卻把它扔了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -565,8 +565,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HOLES\n#\nWEMHI\nGOPTD\nHRLEF\nNHIOS\n#\n一桶雨水\n重達二十磅。\n你必須加入什麼，\n才能讓它只剩十五磅重？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -584,8 +584,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HAIR\n#\nTRKY\nEAIE\nHLLD\nBEER\n#\n王國的傻子生來就缺少，\n這東西，確實少了不少。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -603,8 +603,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EGGS\n#\nEITL\nTOEE\nRGLS\nSNGD\n#\n它們升起時是白色的，\n落下時卻是黃白相間。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -624,8 +624,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "NOTHING\n#\nSOSLPLG\nPLTHNEK\nEHCOINS\nNEIEKSE\n#\n我們愛它勝過生命。\n我們怕它勝過死亡。\n富人渴望擁有它。\n窮人卻擁有得太多。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -646,8 +646,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "KNOCKER\n#\nKLICBTR\nTERTOIE\nAIDECES\nINOLKST\n#\n它從不發問，\n卻要求許多答案。\n別去敲它，除非你\n已經準備好看清\n門的另一邊等著什麼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -669,8 +669,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "CHEST\n#\nSASSU\nTLILT\nCREOS\nAHRIE\n#\n魔法\n死亡\n神殿\n祝福\n安息\n你終於能解開這個謎題了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -688,8 +688,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "MILK\n#\nSOSK\nMRLS\nATOT\nDIDE\n#\n你可以旋轉、繞圈、扭動，\n但它不必移動也能變化。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -707,8 +707,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BARD\n#\nBSRO\nAOTT\nRASN\nFRUD\n#\n誰在玩樂時工作，\n又在工作時玩樂？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -728,8 +728,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DIE\n#\nDOC\nARE\nFEW\nSIN\n#\n亞魯莎親王站在他的高處，\n不必搜尋就能發現我們的軍隊。\n他的部下會倒下，他的城堡也是，\n到那時，亞魯莎親王又能怎麼辦？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -749,8 +749,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SILENCE\n#\nTUVETED\nRPINNCE\nSHOOYSS\nOILSRRY\n#\n名字賦予力量，\n賦予掌控的魔法。\n但有什麼東西，\n一旦被說出名字就會破碎？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -770,8 +770,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WRONG\n#\nPERDE\nWOISD\nTHONS\nIREOG\n#\n人類的語言，\n是能夠學會的。\n但有哪個王國的字，\n永遠被念錯？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -790,8 +790,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "CARDS\n#\nSLLAT\nCARSD\nATIRS\nOUSDE\n#\n被端上了桌，\n被切開、分發，\n卻從未被吃下。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -811,8 +811,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PEACE\n#\nSIADE\nTHOCT\nPRTLS\nAESIY\n#\n寡婦與孤兒，\n父母與親族。\n最常打破這一切的，\n就是暴亂與戰爭。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -832,8 +832,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SHADOW\n#\nTHTATW\nSRAUUY\nWEILSS\nAOVDOE\n#\n它能在水面上移動，\n卻不會飛翔。\n它能在水底下移動，\n卻始終保持乾燥。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -853,8 +853,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WAGON\n#\nRARPE\nWHGMD\nEITEB\nSLCON\n#\n它有舌頭，\n卻不能說話。\n它會跑，\n卻不會走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -874,8 +874,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SAWS\n#\nTIWE\nSREY\nWHIT\nOADS\n#\n我們不需要美酒，\n我們不需要肉食。\n我們擁有鋒利的牙齒，\n卻無法進食。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -894,8 +894,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TABLE\n#\nCLAYS\nSATRE\nIHBID\nTOELO\n#\n別人坐著時，它站著。\n它裝得太滿就會呻吟。\n它有四條腿，卻不會跑。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -915,8 +915,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WALL\n#\nSAMT\nWILS\nPROL\nETUE\n#\n它越過城門，\n卻不必徵求誰的同意。\n它繞著城堡一路延伸，\n卻連一步也沒邁出。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -936,8 +936,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SUNSHINE\n#\nTUORBCTN\nARNNEIAE\nSOLOTENT\nMHTSHYKS\n#\n它從不歇息，從不靜止。\n悄悄地，從一座山移向另一座山。\n它不走、不跑、也不小跑，\n沒有它的地方，一片清涼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -957,8 +957,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "NAME\n#\nTRSE\nPENS\nMAMY\nNIOT\n#\n從父親傳給兒子，\n在兄弟之間共享。\n它的重要無庸置疑，\n卻更常被別人使用。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -977,8 +977,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "NOISE\n#\nBESTD\nSLESE\nNRILT\nFOTOY\n#\n什麼東西總跟著馬車，\n對馬車本身毫無益處，\n但少了它馬車卻動不了？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1000,8 +1000,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "COFFIN\n#\nTAFKTE\nPREFEL\nIOISFS\nCHSEIN\n#\n製作它的人，\n並不想要它。\n買下它的人，\n並不需要它。\n使用它的人，\n卻從未看過它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1019,8 +1019,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "COLTS\n#\nBILET\nTLABN\nCRONE\nSOTTS\n#\n母馬有什麼，\n是母牛所沒有的？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1038,8 +1038,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "OUTSIDE\n#\nTREGCDS\nPLTORWD\nOHISINY\nCUSTEAE\n#\n獵狼犬的這一側，\n毛髮最為濃密。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1059,8 +1059,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "CANDLE\n#\nTAEDIE\nCHNSRT\nILOULD\nBRTHES\n#\n它橙色的眼眸眨動著，\n灼熱的淚水流淌而下。\n但它究竟為何悲傷，\n誰也無從得知。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1080,8 +1080,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BARROW\n#\nETRIOS\nRSWLNW\nOAOHDG\nBUTRTE\n#\n它有兩條腿，\n而這令人費解：\n唯有靜止不動時，\n它們才會碰到地面。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1101,8 +1101,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ONION\n#\nKIIEN\nOEVFE\nSHROP\nTNELS\n#\n她有識趣的朋友，\n也有乏味的敵人。\n人們常為她流淚，\n但她從未讓誰心碎。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1121,8 +1121,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SPIDER\n#\nTRLDRY\nCHATEE\nAPSEOR\nSEISTS\n#\n在這世上，無人能及，\n這位嬌小的織工，他致命的織物\n是如此絲滑又美麗。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1143,8 +1143,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BREATH\n#\nTHTHCS\nPISRFE\nBLEANH\nAROLTG\n#\n你能在冬天看見它，\n夏天卻看不到。\n儘管它輕如\n一根羽毛，就連北地最強大的莫瑞德人\n也無法長久留住它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1163,8 +1163,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "YESTERDAY\n#\nTOLIELIOE\nYHORNRPTS\nSETTHTDRY\nPRSELETAD\n#\n世上每個生靈都見過它。\n但直到他們死去的那天，也不會\n再看到同一個了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1184,8 +1184,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BOTTLE\n#\nCOEVLS\nBRSIRD\nFLTOWE\nASATOT\n#\n王國的士兵會變得像它一樣，\n當劊子手手起刀落之後。\n因為到那時，他們會跟它一樣有頸子，\n頸子上頭卻沒有腦袋。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1205,8 +1205,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "GAUNTLET\n#\nSHUETSEC\nERRVEESE\nGATNLLNT\nCLNBMYOR\n#\n什麼東西\n有著長長的手指，\n緊緊握住我們致命的\n刀劍不放？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1226,8 +1226,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HORSEMAN\n#\nWOTSOMEN\nSERETNSP\nHTHPSIAX\nOCEIEUNW\n#\n六條腿，兩個頭，\n兩隻手，一個長鼻子。\n但無論去哪裡，\n他只用四條腿走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1246,8 +1246,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "COALS\n#\nTHPLE\nPRKSS\nGOLTD\nCEAOY\n#\n買來時是黑色的。\n使用時是紅色的。\n丟棄時是灰色的。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1267,8 +1267,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SECRET\n#\nTEIRAE\nSHOCLT\nCLCEKS\nARLMEY\n#\n一個人擁有它太多，\n它注定屬於兩個人。\n但當兩人變成更多人時，\n它便不復存在。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1287,8 +1287,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FUTURE\n#\nBELUAE\nFRIESD\nSUSTET\nPLTSRR\n#\n它從未存在於過去。\n它此刻也不存在。\n傻子卻永遠等著它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1309,8 +1309,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "THOUGHT\n#\nPHENGSS\nSRPBSHE\nASLUIOD\nTEOVTLT\n#\n什麼東西能遨遊四方、\n無法被囚禁，\n卻又停留在原地？\n正確的答案\n將能打開這個箱子。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1330,8 +1330,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PADDLE\n#\nTASDOY\nPHOSLS\nCREREK\nGIDLCE\n#\n緊緊握在手中，\n如劍一般深深切入。\n每一擊都不見血，\n我們便向前躍去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1350,8 +1350,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SNAIL\n#\nKOSPL\nONETS\nSHAYT\nTELIR\n#\n沒有血、沒有骨，\n它四處遊走，\n卻從未離開過家。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1371,8 +1371,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BELL\n#\nSLCK\nBIWS\nRETL\nARLE\n#\n你能聽見它說話，\n因為它有一根堅硬的舌頭。\n但它無法呼吸，\n因為它沒有肺。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1392,8 +1392,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SHOE\n#\nCHLT\nSLOS\nTEPE\nAIAY\n#\n它有舌頭，\n卻從不說話。\n它沒有腿，\n卻有時會走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1413,8 +1413,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "STOVE\n#\nCHSVD\nWTLOE\nSLISS\nOEOET\n#\n你會去尋找它，\n當飢餓感正濃時。\n它靠四條腿站立，\n還叼著一根煙管。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1434,8 +1434,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "MATTRESS\n#\nBLTERIST\nMEIRTEEY\nCRETSPLD\nAASSEDDS\n#\n它有羽毛，\n卻不會飛。\n靠著腿支撐，\n卻不會走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1456,8 +1456,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SQUARE\n#\nCQATRL\nPHTADK\nSAUDOE\nAEIEPR\n#\n向北走一步。\n向東走兩步。\n向南走兩步。\n向西走兩步。\n再向北走一步。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1477,8 +1477,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SNOWFLAKE\n#\nTNFIFDRKY\nWHRWLEAST\nOREUISCEE\nSEOBTLEOD\n#\n它沒有翅膀卻能飛翔，\n毫無畏懼地落下，\n但只要握在溫暖的手中，\n它很快就會消失無蹤。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1498,8 +1498,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FLEAS\n#\nBLUER\nARERT\nCETAD\nFIOTS\n#\n當牠們被抓住時，\n就會被扔掉。\n當牠們逃脫時，\n你就會癢上一整天。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1518,8 +1518,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "THISTLE\n#\nCESSHDN\nWRITTOL\nOHAESPE\nTILVILP\n#\n他站在路邊，戴著\n紫色的帽子，披著破爛的綠斗篷。\n碰到他的人，都會咒罵他。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1539,8 +1539,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BROOM\n#\nFSAOT\nBIETM\nARRSH\nGLORE\n#\n在屋裡各處，\n他與他的女主人共舞。\n但他總是在工作，\n從不談情說愛。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1559,8 +1559,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PATH\n#\nCICH\nPLTY\nFROM\nGALL\n#\n走遍鄉間各處，\n一路來到你的家門口。\n但你從不曾邀他入內。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1583,8 +1583,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "KEY\n#\nTOB\nHRT\nEEY\nKNI\n#\n斧頭與長劍，\n都幫不了你通過。\n但它加上輕輕一推就能辦到。\n路上有些人\n原本會戰鬥，很快便會喪命，\n若不是它就在手邊，\n讓他們得以進門。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1603,8 +1603,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SURF\n#\nAUOD\nWRIF\nMTVT\nSARY\n#\n日日拍打，\n夜夜擊打，\n從不歇息。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1624,8 +1624,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WATERFALL\n#\nTRYOEUCIE\nOHTRONBOL\nCAIHRAATS\nWEDEMFELT\n#\n這位老者永遠奔流不止，\n卻絲毫不曾移動半分。\n他沒有肺，也沒有喉嚨，\n卻仍有著震天的怒吼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1646,8 +1646,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DICE\n#\nBIEE\nALCK\nDUOH\nOSLY\n#\n你可以信賴它們，儘管\n有些人寧願咒罵\n它們。你也能對它們說盡好話，\n儘管大家都心知肚明，\n那不過是徒勞。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1667,8 +1667,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "LOGS\n#\nTIAD\nLRSE\nIOTG\nDMGS\n#\n它們沒有嘴唇，也沒有舌頭，\n但把新砍的它們送進坑裡，\n當它們死去時你會聽見，\n劈啪、嘶嘶又噴濺。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1688,8 +1688,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FARRIER\n#\nBRIROED\nFALTLAR\nALSOTLS\nCERSIFE\n#\n山谷裡住著一位鞋匠。\n用鋼鐵與釘子製鞋。\n雖然他的貨色十分耐用，\n大家還是少不了要買兩雙。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1709,8 +1709,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BRIDGE\n#\nTHEDTS\nCRINEE\nBOSAGL\nWANHSY\n#\n當它堅固時，\n人們樂意踏上。\n當它單薄時，\n人們心懷恐懼地行走。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1730,8 +1730,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "MIRROR\n#\nVAEOST\nMEREOE\nLISRUS\nHOTTNR\n#\n看著我的正面，\n我是某個人。\n看看我的背面，\n我誰也不是。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1749,8 +1749,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SNARES\n#\nBRATLY\nSKOLSD\nTEIRES\nANBATT\n#\n死者的骨頭，\n能用來捕捉活物。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1769,8 +1769,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TROLLS\n#\nTOTELC\nBROSDV\nCHALSA\nWLPIYS\n#\n離這些醜陋的\n野獸遠一點，牠們殺我們的女人\n和小孩。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1789,8 +1789,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BOOK\n#\nTORA\nBRTK\nCLOS\nSAST\n#\n這是一段旅程，它的路徑\n取決於另一個人的想像，\n想像它會通向何方。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1811,8 +1811,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BLADE\n#\nBRINK\nFOALM\nANFIE\nKLNDG\n#\n第一個是受祝福的。\n第二個是遲緩的。\n第三個是愛玩的。\n第四個是大膽的。\n第五個是勇敢的。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1833,8 +1833,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ASHES\n#\nSLOOY\nAHTED\nCSSWS\nTEHST\n#\n最後一把火燒盡之後，\n風將會吹起。\n而這些早已死去的東西，\n將會覆蓋那些\n尚未死去的人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1854,8 +1854,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ORANGE\n#\nTHAORT\nCRNDDE\nOAINSY\nPMSCGS\n#\n人們把它從家鄉奪走，\n撕開它的果肉，\n啜飲它甜美的汁液，\n再將果皮丟到一旁。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1875,8 +1875,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ICICLE\n#\nLEIELT\nIRTRHL\nGCOHTE\nCACCES\n#\n你常常看見我，\n在林間，也在城裡。\n我的根長在上頭，\n我卻只能向下生長。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1896,8 +1896,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "GRAVE\n#\nSELET\nGHTTS\nDREVR\nALAAE\n#\n一間奇怪的土屋，\n帶來的只有輕蔑。\n然而住在裡頭的人，\n卻從不曾抱怨。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1917,8 +1917,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EYES\n#\nSARD\nTLES\nEHTY\nCYOB\n#\n一對雙生子分居\n一道會聞味道的山脊兩側。\n它們永遠\n無法直視彼此。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1940,8 +1940,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "RAIN\n#\nRIAC\nHRLN\nOOTV\nDAIG\n#\n隨著劍光閃爍、呼喊震天，\n隨著黑暗染污了大地與天空，\n大軍到來，早已抱定必死的決心。\n士兵們穿著閃亮的軍裝倒下，\n戰鬥一旦開打便無路可退，\n唯有大地的懷抱能給予慰藉。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1961,8 +1961,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "STARS\n#\nSARDS\nTLASL\nEHTYM\nCTORA\n#\n縱使身處黑夜，\n舵輪依然能被掌控。\n比起光亮，\n它們更偏愛我們的引路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -1982,8 +1982,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SADDLE\n#\nTHDELY\nCAEDRS\nORBWSE\nSTVIEL\n#\n當它放下時，\n比馬的肚子還低。\n當它抬起時，\n比馬的背還高。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2003,8 +2003,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SPONGE\n#\nCPTEGY\nRRNSTD\nSHITSS\nIEONEE\n#\n頂端有孔洞。\n底部也有孔洞。\n中間還是孔洞。\n但它依然能盛住水。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2024,8 +2024,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BRIARS\n#\nTHIURS\nCLETDT\nORSASE\nBEAROH\n#\n爪子像貓，\n彎曲得像蛇的嘶聲。\n就算拼湊你所有的猜測，\n你也猜不出這是什麼。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2045,8 +2045,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SIEVE\n#\nBREEL\nSHAVE\nALLST\nWIOLD\n#\n圓得像顆蘋果，\n深得像個杯子，\n就算是整片苦海，\n也填不滿它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2065,8 +2065,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DRUM\n#\nTRAK\nBIUP\nDLCM\nEOTH\n#\n雖然我的牛已經死了，\n我仍然不斷地打她。\n她發出的聲響可真吵啊！\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2086,8 +2086,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BUTTON\n#\nCUOHHD\nBLITRY\nPRSPES\nGETEON\n#\n扁得像片葉子，\n圓得像個戒指，\n有兩隻眼睛，\n卻什麼也看不見。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2107,8 +2107,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TRADE MARES\n#\nRWRDL ATJSN\nOENCE TOKOT\nTLIPC MNFEV\nSRANK UARHS\n#\n兩兄弟想比賽一段路程，\n看誰的母馬跑得比較慢。\n既然誰也不想催促自己的馬，\n他們該怎麼做才公平？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2128,8 +2128,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WALNUT\n#\nSAETES\nCTRLUT\nWHLORD\nARSNSY\n#\n樹下有一個盒子，\n裡頭裝著美味的果肉。\n就算存放一個月以上，\n嚐起來依然一樣香甜。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2149,8 +2149,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PIPE\n#\nOHDE\nPLER\nSRPD\nCIST\n#\n它的尾端又圓又中空，\n看起來像被咬過幾口，\n但你很少會見到這東西，\n除非另一端已經點燃。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2170,8 +2170,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DOOR\n#\nBOTN\nDRSE\nELOL\nFSAR\n#\n它不住在屋子裡面，\n也不住在屋子外面。\n大多數人進門時會用它，\n出門時也會再用一次。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2191,8 +2191,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "STAKE\n#\nTEFBT\nSAAMS\nIHOKY\nRTLEE\n#\n雖然比籬笆矮，\n也比欄杆細，\n它依然能拴住一匹馬；\n蹄、鬃毛與尾巴。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2212,8 +2212,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BOOK\n#\nCONS\nBLEE\nGRSK\nIEOT\n#\n雖非植物，卻有葉子。\n雖非野獸，卻有脊梁。\n雖然許多人用不到它，\n它卻比美酒更加珍貴。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2234,8 +2234,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PLOW\n#\nCLIW\nPHAT\nSEOP\nTRSY\n#\n前頭四條腿，後頭兩條腿。\n它的鋼鐵鎧甲被岩石與樹枝\n刮傷、磕出凹痕。\n它仍然辛勤勞作，\n為飢餓的人們提供食糧。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2255,8 +2255,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BULL\n#\nBATI\nTELS\nCREL\nOUST\n#\n田野裡有個嚇人的東西，\n仔細一瞧你會發現，\n它前頭有把乾草叉，\n後頭還拖著一把掃帚。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2274,8 +2274,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PROMISE\n#\nJARMLAY\nPLSITTE\nBRASWSS\nCEOTIET\n#\n我們英勇的首領會信守這個。\n但唯有在他們許下之後。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2295,8 +2295,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DEATH\n#\nTHACK\nDRTTE\nRESHY\nCOUEH\n#\n有一樣東西，一旦你擁有了它，\n就再也無法把它送出去，\n但若你還沒擁有它，至少此刻，\n你能把它送給那些欠債之人？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2315,8 +2315,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DISPUTE\n#\nDSWPSTY\nHISOILE\nLTOHUER\nEAISRID\n#\n擁有它的人生氣，\n失去它的人更生氣，\n贏得它的人卻不再擁有它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2337,8 +2337,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "MUSIC\n#\nRTHIC\nNSSST\nMOILO\nAUTDY\n#\n這神奇的東西，雖然不是\n藥草，卻能安慰虛弱\n與垂死之人。它甚至能用來\n鼓舞軍心，或是讓人\n又哭又笑。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2361,8 +2361,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BUBBLE\n#\nFOBPLY\nPLDSHE\nBRINOS\nEUABIT\n#\n這顆閃閃發亮的圓球\n能浮在水面上，\n重量不會超過\n一根羽毛。\n然而儘管如此輕盈，十個\n巨人\n也永遠拿不起它。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2382,8 +2382,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ROPE\n#\nMBTN\nRVSE\nOOES\nPEPT\n#\n十個巨魔的力氣，\n十個巨魔的長度，\n一個巨魔就能舉起它，\n卻沒有一個巨魔能讓它站起來。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2402,8 +2402,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "OCEAN\n#\nCCASE\nOIEON\nTRBAL\nPHCLS\n#\n一片閃爍的原野延伸至遠方。\n它卻沒有軌跡，\n橫越它也不需要道路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2423,8 +2423,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SHOES\n#\nBDREY\nSLOSL\nHOSLT\nAHEIS\n#\n出發之前，\n你會繫緊這東西。\n停下之後，\n你又會把它解開。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2444,8 +2444,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "DARKNESS\n#\nTATHEENW\nGRETANYB\nDUSKHLSZ\nAIRENOTS\n#\n這吞噬一切的東西，\n確實十分古怪。\n它越是壯大，\n你看見的就越少。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2465,8 +2465,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "LIFE\n#\nPSTE\nHEFS\nAIED\nLTDT\n#\n別對這東西太過依戀。\n少了它，你甚至永遠不會知道\n它已經消失。但小心了朋友，它\n在王國的土地上更容易失去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2485,8 +2485,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EQUALS\n#\nSHTABY\nTINBSL\nWQATLD\nESUEES\n#\n你有什麼東西，\n你每天都看得到，但我們的首領\n卻極少看見？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2510,8 +2510,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "GLAMREDHEL\n#\nRCONCADGSR\nMMAHOOONEY\nATRMGNTARN\nSANDIBURDS\nGEIORIRQUT\nILUVASHELL\nCIESDELAAE\nKRSPMUBHBD\n#\n曾經有三位，\n如今只剩兩位，\n是我們古老的親族，\n是我們親手送往末路的族人。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2530,8 +2530,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "JACKET\n#\nMAOHLL\nJLEKST\nEIRLES\nKOCIOD\n#\n有頸子，卻沒有頭。\n有手臂，卻沒有手。\n有腰身，卻沒有腿。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2551,8 +2551,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SAWDUST\n#\nCEORLIY\nTHNDUES\nALWQRLT\nSATOESE\n#\n一位木匠留下了些木材，\n卻不肯收回去。\n我在他留下的地方看到了木屑，\n卻找不到他那堆木材。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2571,8 +2571,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "NOOSE\n#\nTOSES\nRSODE\nNLLSW\nEATOD\n#\n曾經是活的，如今卻被扭成一圈。\n莫瑞德人與人類都用它，\n來懲罰自己的同類。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2592,8 +2592,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "EGGS\n#\nTOGY\nETET\nLSID\nAGTS\n#\n看不見血肉，\n沒有血，也沒有骨頭，\n但假以時日，\n它們就能自己行走。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2613,8 +2613,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FIRE\n#\nBRRD\nGLFS\nFIAT\nASEE\n#\n被丟進坑裡。\n被鎖在鋼柵欄後頭。\n整夜都有人看守，\n它仍然會熄滅。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2633,8 +2633,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ECHO\n#\nTCKD\nEHHO\nCLOS\nSAWT\n#\n不待呼喚，就會回應\n呼喚它的人。幾秒之內便有回音，\n而且能輕鬆說出所有語言。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2654,8 +2654,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ALPHABET\n#\nWRSHTDEE\nTLATOIAS\nASEPMBST\nBEPOANTY\n#\n這神奇的東西，\n雖然聽起來很荒謬，\n包含了我們所有的字母，\n本身卻只是一個詞。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2674,8 +2674,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "PRIEST\n#\nBRLESD\nPLELHT\nDEITOS\nAOPSUY\n#\n這位王國的傻子已經主持過\n許多樁婚禮。然而他自己\n卻從未結過婚。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2693,8 +2693,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TOWEL\n#\nHLALY\nTEWAT\nROSED\nEDRSL\n#\n這古怪的東西似乎越擦\n就變得越濕。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2712,8 +2712,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "CANE\n#\nTATE\nCHND\nBLIL\nORPS\n#\n雖然它自己也看不見，\n卻能領著盲人好好走路。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2732,8 +2732,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "MOUSER\n#\nQISSHD\nKLATAS\nMUEHTR\nEOUAEY\n#\n什麼東西用四條腿\n走進地窖，\n出來時卻有八條腿？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2753,8 +2753,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "TEMPER\n#\nCLAPVT\nTRMSEE\nSHERLD\nOEPASR\n#\n你必須守住這東西。\n失去它會牽連你的兄弟，\n因為一旦你失去了它，\n別人很快也會跟著失去。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2773,8 +2773,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HONEY\n#\nRSMST\nLANNS\nHEAED\nIOPAY\n#\n雖然是道美味佳餚，\n產自螺旋狀的塔樓，\n卻很少單獨被享用。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2792,8 +2792,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WATER\n#\nPLESR\nWRTED\nSHALT\nCAOAY\n#\n這偉大的東西能被吞下，\n但它也能將我們吞沒。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2813,8 +2813,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "HASTE\n#\nROSET\nLSLSS\nAAORD\nHITTE\n#\n在燃燒的屋子裡，\n最該做的就是這件事。\n而且最好趁早動手，\n免得烈焰再也無法忍受。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2832,8 +2832,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "WEARY\n#\nTIAPY\nCRIRT\nWHOEN\nOERSR\n#\n犁田鋤地，播種收割，\n每個農夫很快就會長出什麼？\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2852,8 +2852,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "ADVICE\n#\nPIESCS\nAHOIED\nCDVCHE\nTRAATY\n#\n人人都樂於給予這東西。\n但當它是由別人給出時，\n卻很少有人願意接受。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2873,8 +2873,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "STRANGER\n#\nCOSAEFIE\nSRISPALT\nPTETNEED\nAHRDRGSR\n#\n你會邀請他進到你家，\n卻對他一無所知。\n一旦你了解了他，\n他就不再是這個東西了。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2895,8 +2895,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "LAKE\n#\nHSKO\nLOLJ\nMAOL\nEISE\n#\n我在他從未待過、\n也不可能存在的地方看見了他。\n然而就在這個地方，\n我看見一張晃動的臉，\n正回望著我。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2916,8 +2916,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "SPURS\n#\nCRETY\nSHUSD\nPPAES\nAIYRT\n#\n我們四處旅行，卻也是囚徒，\n而且被緊緊拘束在靴子上。\n然而無論什麼馬，我們都跟得上，\n卻永遠只能靠步行。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2939,8 +2939,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "GALLOWS\n#\nEHEPETS\nGRASCET\nCLLEBWD\nSAOLONY\n#\n當人們前來與我相見，\n他們的腳步總是沉重。\n我所擁抱的那個人，\n一旦輪到我出手，\n便會旋轉、打轉，\n跳起舞來。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2960,8 +2960,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "FOG\n#\nEOE\nGRA\nFLL\nSAG\n#\n當它湧來時，\n從海面直到岸邊，\n你能看見的只有二十步遠，\n不多也不少。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -2981,8 +2981,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "BARK\n#\nEOEN\nGRAM\nBLLK\nSARB\n#\n像狗對著月亮吠叫，\n或是樹木身上披的鎧甲。\n像是一聲嚴厲的口令，\n又或是海上一艘小小的船。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3008,8 +3008,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "6478\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第一章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3035,8 +3035,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "9216\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第二章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3062,8 +3062,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "7702\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第三章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3089,8 +3089,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "2132\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第四章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3116,8 +3116,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "5052\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第五章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3143,8 +3143,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "0680\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第六章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3170,8 +3170,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "0194\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第七章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3197,8 +3197,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "4743\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第八章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -3224,8 +3224,8 @@
         "\\x0a",
         "\\x00"
       ],
-      "translation": "",
-      "status": "untranslated",
+      "translation": "9995\n#\n1111\n2222\n3333\n4444\n5555\n6666\n7777\n8888\n9999\n0000\n#\n第九章需要\n這組密碼，\n才能讓你\n找到寶藏。\u0000",
+      "status": "translated",
       "notes": ""
     }
   ]
