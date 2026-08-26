@@ -547,7 +547,7 @@
       "term": "Katala",
       "category": "person",
       "translation": "卡塔拉",
-      "notes": "Tomas's wife, mentioned once in passing in a letter."
+      "notes": "Pug's wife, from Thuril (established 圖里爾); dotes on their two children (William and Gamina, both already listed) and is praised for treating every student at Stardock like her own ward (DIAL_Z20). Corrects an earlier session's mislabeling of her as Tomas's wife -- Tomas's wife is Aglaranna (separate entry)."
     },
     {
       "term": "Pantathians",
@@ -1640,6 +1640,432 @@
       "category": "place",
       "translation": "波爾登",
       "notes": "Location/army whose military company a healer travelled with, per a healer's journal read at the Vaults of Sarth (DIAL_Z23#96); not otherwise described."
+    },
+    {
+      "term": "Michele the Healer",
+      "category": "person",
+      "translation": "米歇爾",
+      "notes": "Traveling healer near LaMut who sells cures for 25 sovereigns; a tavern patron suspects she's colluding with Orno the Pale to spread and then 'cure' a fake plague (DIAL_Z31)."
+    },
+    {
+      "term": "Orno the Pale",
+      "category": "person",
+      "translation": "「蒼白」歐諾",
+      "notes": "Man reportedly stricken with an unknown contagion, suspected of colluding with Michele the Healer (DIAL_Z31); render \"the Pale\" as a bracketed epithet before the name."
+    },
+    {
+      "term": "Lucan",
+      "category": "person",
+      "translation": "盧肯",
+      "notes": "Small-time pickpocket/thief who offers to teach lockpicking after being caught red-handed (DIAL_Z31)."
+    },
+    {
+      "term": "Tad Questor",
+      "category": "person",
+      "translation": "塔德．奎斯托",
+      "notes": "Fencing instructor who offers sword lessons for 75 sovereigns; has two young students including Mitch (DIAL_Z31)."
+    },
+    {
+      "term": "Flarr Wygn",
+      "category": "person",
+      "translation": "弗拉爾．威根",
+      "notes": "Old man who tends a warded healing well near his house, claims not to be a magician despite carving magic symbols (DIAL_Z31)."
+    },
+    {
+      "term": "Buck Rausch",
+      "category": "person",
+      "translation": "巴克．勞許",
+      "notes": "River fisherman selling dried trout, shovels, and torches (DIAL_Z31)."
+    },
+    {
+      "term": "Murphy",
+      "category": "person",
+      "translation": "墨菲",
+      "notes": "Very tall man in Wolfram (established 沃夫拉姆), doubles as the town's hangman (DIAL_Z31)."
+    },
+    {
+      "term": "Shoral",
+      "category": "person",
+      "translation": "蕭拉爾",
+      "notes": "Sorcerer who wagers his Lightning Staff (established 雷霆杖) on a three-question riddle game, tricked by Owyn's party (DIAL_Z31)."
+    },
+    {
+      "term": "Gralek",
+      "category": "person",
+      "translation": "格拉萊克",
+      "notes": "Crippled moredhel veteran, lamed in a fortress assault while following Murmandamus, now unable to fight (DIAL_Z31)."
+    },
+    {
+      "term": "Droelek",
+      "category": "person",
+      "translation": "卓艾列克",
+      "notes": "Gorath's late friend, mentioned in a fond memory about a well's construction; left to follow Murmandamus and never returned (DIAL_Z31)."
+    },
+    {
+      "term": "Falan",
+      "category": "person",
+      "translation": "法蘭",
+      "notes": "Dark-skinned elf encountered in an Elvandar treehouse, points the party toward Warleader Tomas (DIAL_Z31)."
+    },
+    {
+      "term": "Delcinad",
+      "category": "person",
+      "translation": "戴爾希納德",
+      "notes": "Tall elf shopkeeper in an Elvandar treehouse shop, boasts of Warleader Tomas as a regular customer (DIAL_Z31)."
+    },
+    {
+      "term": "Blake Puget",
+      "category": "person",
+      "translation": "布雷克．普傑",
+      "notes": "Former scout for King Lyam in Rillanon, hired by the elves as a mercenary guard near Elvandar (DIAL_Z31)."
+    },
+    {
+      "term": "Kellyn",
+      "category": "person",
+      "translation": "凱林",
+      "notes": "Slight, balding historian researching the Valheru and the Sethanon cataclysm, met near Elvandar (DIAL_Z31)."
+    },
+    {
+      "term": "Stellan",
+      "category": "person",
+      "translation": "史戴倫",
+      "notes": "Name signed on tax-record notes found in a moredhel dwelling near Sar-Sargoth (DIAL_Z31); not directly encountered."
+    },
+    {
+      "term": "Rowe",
+      "category": "person",
+      "translation": "羅威",
+      "notes": "Farmer suspected of setting up an ambush in his own barn near Highcastle (DIAL_Z31); not directly encountered on-screen."
+    },
+    {
+      "term": "Belly Khan",
+      "category": "person",
+      "translation": "貝利可汗",
+      "notes": "Goblin chief who sends goblins to raid a moredhel illusionist's spellbooks near Northwarden (DIAL_Z31); not directly encountered."
+    },
+    {
+      "term": "Irlaan",
+      "category": "person",
+      "translation": "伊爾蘭",
+      "notes": "Elderly former Swordmaster (established 劍術大師) of Highcastle, regales the party with old war stories (DIAL_Z31)."
+    },
+    {
+      "term": "Lionel",
+      "category": "person",
+      "translation": "萊昂諾",
+      "notes": "Member of a mercenary raiding party near Dencamp on the Teeth, killed by a troll after his magic-scroll countermeasure worked on goblins but not trolls (DIAL_Z31); not directly encountered, deceased before the party arrives."
+    },
+    {
+      "term": "Marchus",
+      "category": "person",
+      "translation": "馬庫斯",
+      "notes": "Hunter/farmer near Highcastle who found three strange inscribed chests while out hunting (DIAL_Z31); not directly encountered, referenced by his wife."
+    },
+    {
+      "term": "Halfgate (family)",
+      "category": "person",
+      "translation": "哈夫蓋特",
+      "notes": "Established family surname (see Flendel Halfgate and Thea, both already listed). DIAL_Z31 introduces several more siblings living separately near Highcastle: a widow (哈夫蓋特寡婦, unnamed), Gena (吉娜) and her sister Andrea (安德麗雅) who trade a tuning fork for leather leggings, Sara (莎拉) who trades grain for leather leggings, and Larissa (拉莉莎) whose barn door the party frees and who gifts a tuning fork/shell/herb pack in thanks. Keep the shared surname consistent across all of them."
+    },
+    {
+      "term": "Dencamp on the Teeth",
+      "category": "place",
+      "translation": "世界之齒山下的丹肯營地",
+      "notes": "A mercenary camp at the foot of the Teeth of the World (established 世界之齒), where a raiding party is recruiting for a Northlands treasure hunt using changing passwords (DIAL_Z31). Shorten to 丹肯營地 after first mention in a scene."
+    },
+    {
+      "term": "Eldpoint",
+      "category": "place",
+      "translation": "艾爾德角",
+      "notes": "Small town with a pottery shop, a general store called 'Guds', and an inn called 'The Royal Bed' (DIAL_Z31)."
+    },
+    {
+      "term": "Caldara",
+      "category": "place",
+      "translation": "卡爾達拉",
+      "notes": "Place a wounded dwarf near Elvandar says he travelled from (DIAL_Z31); not otherwise described."
+    },
+    {
+      "term": "Nalar's Rib",
+      "category": "place",
+      "translation": "納拉爾之肋",
+      "notes": "A large stone slab/monument near Sar-Sargoth that reacts to an emerald placed in its notch, triggering a dramatic energy burst (DIAL_Z31)."
+    },
+    {
+      "term": "Dragontail (well)",
+      "category": "place",
+      "translation": "龍尾井",
+      "notes": "An elven-marked magical well near Elvandar; mixing its water with Fadamor's Formula (established 法達莫爾秘方) permanently increases strength (DIAL_Z31)."
+    },
+    {
+      "term": "Klapka",
+      "category": "proper_noun",
+      "translation": "克拉普卡",
+      "notes": "Winning call in a dwarven dice game played near Elvandar -- shouted by whoever grabs the other player's stone first after a matching \"double dragon\" roll (DIAL_Z31)."
+    },
+    {
+      "term": "Vooka",
+      "category": "proper_noun",
+      "translation": "沃卡",
+      "notes": "A losing/void roll outcome in the dwarven dice game (established alongside Klapka, DIAL_Z31); two \"vookas\" in a row lose to a single dragon roll."
+    },
+    {
+      "term": "Sumani",
+      "category": "person",
+      "translation": "蘇馬尼",
+      "notes": "Tsurani innkeeper of the Blue Wheel Inn (established 藍輪客棧) in LaMut; a former Patrol Leader of House Shinzawai under Earl Kasumi, stranded in Midkemia since the Rift War, teaches combat lessons (DIAL_Z20)."
+    },
+    {
+      "term": "House Shinzawai",
+      "category": "proper_noun",
+      "translation": "信澤瓦伊家",
+      "notes": "Tsurani noble house Sumani served under Earl Kasumi (DIAL_Z20)."
+    },
+    {
+      "term": "House Anasati",
+      "category": "proper_noun",
+      "translation": "阿納薩堤家",
+      "notes": "Tsurani noble house in conflict with House Acoma (established 阿科瑪家) over succession, temporarily halting rift-gate transport (DIAL_Z20)."
+    },
+    {
+      "term": "Turakamu",
+      "category": "proper_noun",
+      "translation": "圖拉卡姆神",
+      "notes": "Tsurani death god, the punchline deity of a nonsensical Tsurani joke Sumani tells (DIAL_Z20)."
+    },
+    {
+      "term": "Webber locks",
+      "category": "proper_noun",
+      "translation": "韋伯鎖",
+      "notes": "A brand/type of unpickable lock commonly found on abandoned houses near LaMut (DIAL_Z20)."
+    },
+    {
+      "term": "Dubal",
+      "category": "person",
+      "translation": "杜巴爾",
+      "notes": "Talkative dwarf associated with the LaMut garrison, known for haggling skill and tall tales (DIAL_Z20); not directly encountered on-screen in this chapter."
+    },
+    {
+      "term": "Ivan Skaald",
+      "category": "person",
+      "translation": "伊凡．史卡德",
+      "notes": "Innkeeper/barkeep at Malac's Cross (established 馬拉克十字鎮) and enthusiastic chess gambler, wagers emeralds; possibly a relative of Lysle Rigger (DIAL_Z20)."
+    },
+    {
+      "term": "Lysle Rigger",
+      "category": "person",
+      "translation": "萊斯爾．瑞格",
+      "notes": "Krondor sewer contact who confirms the Upright Man's (established 正直人) suspicion that the Crawler (established 爬行者) is not Jocko Radburn (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Jocko Radburn",
+      "category": "person",
+      "translation": "喬科．瑞德本",
+      "notes": "Historical corrupt captain of the watch who besieged Krondor alongside Guy du Bas-Tyra (established 居伊．杜．巴斯泰拉) in James's youth; referenced only in backstory (DIAL_Z20)."
+    },
+    {
+      "term": "Devon / Devonius",
+      "category": "person",
+      "translation": "戴文／戴文尼烏斯",
+      "notes": "Swordmaster and pokiir (established 波基爾) player at The Stranger Tavern (established 陌生人酒館) in Eggley; full Quegian name Devonius. Former mercenary who served the Dauphiness of Queg, sank King Lebeus's flagship with Spitzer, then went independent (DIAL_Z20). Already referenced as a rumor source in DIAL_Z13."
+    },
+    {
+      "term": "Spitzer",
+      "category": "person",
+      "translation": "史畢澤",
+      "notes": "Devon's old comrade-in-arms, boarded the warship Storm's Master with him against King Lebeus's flagship; last seen in Tanneurs (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Storm's Master",
+      "category": "proper_noun",
+      "translation": "「風暴主宰」號",
+      "notes": "The Dauphiness of Queg's war galley Devon and Spitzer used to sink King Lebeus's flagship (DIAL_Z20)."
+    },
+    {
+      "term": "King Lebeus",
+      "category": "person",
+      "translation": "勒比烏斯王",
+      "notes": "King of Queg, referenced as a feared, punitive ruler (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "McCannur",
+      "category": "person",
+      "translation": "麥卡努爾",
+      "notes": "Naddur's brother, a source of news about moredhel pressing the borders near Moraelin (established 莫拉埃林) (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Smokefingers",
+      "category": "person",
+      "translation": "「煙指」",
+      "notes": "Epithet of a prowler/lockpick who moved into Hawk's Hollow (established 鷹谷), no lock in town he hasn't bypassed (DIAL_Z20); not directly encountered, kept as a literal epithet like \"the Upright Man\"."
+    },
+    {
+      "term": "Petrumh",
+      "category": "person",
+      "translation": "佩特魯姆",
+      "notes": "Old woman who left a keg of Keshian ale behind at a tavern near Sarth (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Brother Dominic",
+      "category": "person",
+      "translation": "多明尼克修士",
+      "notes": "Monk at an abbey near Malac's Cross/Queen's Row, studying Quegian civil codes, knowledgeable about spellcasting (DIAL_Z20); distinct from Brother Marc and Brother Anthony at Sarth."
+    },
+    {
+      "term": "Brother Gierom",
+      "category": "person",
+      "translation": "吉羅姆修士",
+      "notes": "Monk at the same abbey as Brother Dominic, tracks weather predictions (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Mac Bourgalan Dok",
+      "category": "place",
+      "translation": "麥克布爾加蘭多克",
+      "notes": "The greatest emerald mine the dwarves ever delved, in caverns beneath Sarth partly underlying the Abbey of Ishap; the region above is called Bourgalan (established Keshian name, matches \"Quegian Fever\" being properly called \"Bourgalan Fever\" per a testy dwarf). Now held by Mejakaar Blackpatch's successors/the Brothers of Ishap (DIAL_Z20)."
+    },
+    {
+      "term": "Mejakaar Blackpatch",
+      "category": "person",
+      "translation": "梅賈卡爾．黑補丁",
+      "notes": "Deceased former lord who moved into the keep built over one entrance to Mac Bourgalan Dok, prompting the dwarves to cede the caverns; long dead by the time of DIAL_Z20, now nominally held by the Brothers of Ishap."
+    },
+    {
+      "term": "Villa Beata",
+      "category": "place",
+      "translation": "貝亞塔別墅",
+      "notes": "Macros the Black's (established 黑袍馬克羅斯) home on Sorcerer's Isle (established 法師之島), referenced in legends held at the Vaults of Sarth (DIAL_Z20)."
+    },
+    {
+      "term": "Sorcerer's Isle",
+      "category": "place",
+      "translation": "法師之島",
+      "notes": "Island home of Macros the Black, site of the Villa Beata (DIAL_Z20)."
+    },
+    {
+      "term": "Babon's Hostel",
+      "category": "place",
+      "translation": "巴本旅舍",
+      "notes": "Inn recommended near Questor's View (established 尋道崖) (DIAL_Z20)."
+    },
+    {
+      "term": "Bywater Inn",
+      "category": "place",
+      "translation": "臨水客棧",
+      "notes": "Old inn recommended near Sarth (DIAL_Z20)."
+    },
+    {
+      "term": "Prince Calin",
+      "category": "person",
+      "translation": "卡林王子",
+      "notes": "Son of Warleader Tomas (established 托馬斯) and Queen Aglaranna (established 亞葛拉蘭娜王后); takes command of Elvandar's border patrols after Tomas is poisoned, teaches Owyn elven stealth and offers to teach Gorath crossbow use, addressing him as \"our cousin\" (moredhel and eledhel being kin) (DIAL_Z20)."
+    },
+    {
+      "term": "Tathar",
+      "category": "person",
+      "translation": "塔薩爾",
+      "notes": "One of Queen Aglaranna's elven Spellweavers (established 織法者) at Elvandar, helps contain wildfires and devises countermeasures against moredhel-controlled wyverns (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Grey Horn",
+      "category": "place",
+      "translation": "灰角山",
+      "notes": "Mountain marking the entrance to a subterranean ancient ruin (a Valheru site) leading toward the heart of Elvandar (DIAL_Z20)."
+    },
+    {
+      "term": "Baron Rossol",
+      "category": "person",
+      "translation": "羅索男爵",
+      "notes": "Deceased predecessor as Huntsmaster of Carse, before Duke Martin's recommendation brought in the current Huntsmaster (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Duke Borric",
+      "category": "person",
+      "translation": "博里克公爵",
+      "notes": "Duke of Crydee (established 克萊迪) who took in Kulgan (established 庫爾根) and Pug in his duchy, cited by Duke Martin as the wisdom behind keeping magicians on staff at Northwarden (DIAL_Z20)."
+    },
+    {
+      "term": "Amos Trask",
+      "category": "person",
+      "translation": "阿莫斯．特拉斯克",
+      "notes": "Admiral of the Western Fleet, a mutual acquaintance of James and Duke Martin, jokingly compared to Patrus (established) for brashness (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Squire Phillip",
+      "category": "person",
+      "translation": "菲力普扈從",
+      "notes": "Leads a counter-attack force stationed at Sethanon; Delekhan's forces know they must get past his men (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Krondor's Glory",
+      "category": "proper_noun",
+      "translation": "「克朗多榮耀」號",
+      "notes": "A ship, subject of an old joke Prince Arutha used to tell his sister Carline about being roped to its mainmast for target practice (DIAL_Z20)."
+    },
+    {
+      "term": "Carline",
+      "category": "person",
+      "translation": "卡琳公主",
+      "notes": "Prince Arutha's sister, referenced only in an old joke about Krondor's Glory (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Corbi",
+      "category": "person",
+      "translation": "科比",
+      "notes": "Soldier quartered at Northwarden, wrote a love letter to a girl named Thea intercepted (harmlessly) during James's guard-duty test of the castle's security (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Master deLacy",
+      "category": "person",
+      "translation": "德拉西大人",
+      "notes": "James and Locklear's former Master of Ceremonies from their days running errands/billets in Krondor, referenced fondly in passing (DIAL_Z20/Z31)."
+    },
+    {
+      "term": "Lorna",
+      "category": "person",
+      "translation": "蘿娜",
+      "notes": "Helps care for the children at the Corvalis Cavall Keep household during the wartime crisis (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Myron",
+      "category": "person",
+      "translation": "麥倫",
+      "notes": "Count Corvalis's solicitor, one of Ugyne's two suitors (neither approved of by her father); lives near Cavall Keep with his daughter Ami. Has a minor claim to nobility via a brother who is an Earl (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Ami",
+      "category": "person",
+      "translation": "艾米",
+      "notes": "Myron's daughter (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Navon Du Sandau / Neville Corvalis",
+      "category": "person",
+      "translation": "納馮．杜桑多／內維爾．科瓦利斯",
+      "notes": "MAJOR REVEAL (DIAL_Z20): Navon du Sandau, Ugyne's suitor (previously listed only as \"linked to the impostor Nighthawks\"), is in fact her brother Neville Corvalis, believed dead in a childhood wine-cellar collapse. Count Corvalis (established 科瓦利斯伯爵) discovered Neville was illegitimate and staged the \"accident\" to remove him from the succession; Neville survived, was taken in by Nighthawks fleeing Prince Arutha, discovered a mind-reading spyglass, and eventually became the Nighthawks' own leader -- using the alias Navon du Sandau (borrowing the name of the drunken workman blamed for the cellar collapse) to insinuate himself back into the family and court his own sister without her knowledge. Defeated and interrogated by James/Jimmy the Hand in this chapter. Keep both names distinct depending on context: characters who know only the cover story call him Navon; the reveal itself uses Neville."
+    },
+    {
+      "term": "Jared",
+      "category": "person",
+      "translation": "賈瑞德",
+      "notes": "A restless ghost's true grave-occupant; an oracle instructs the party to recover his hand from Lyton (established 萊頓) and rebury it in Sethanon's honored-dead ground to end a haunting (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Kadzu",
+      "category": "person",
+      "translation": "卡杜",
+      "notes": "Cook at the Krondor palace kitchens, currently idle since Prince Arutha has been dining privately; Katala fetches pre-made rations from him (DIAL_Z20); not directly encountered on-screen."
+    },
+    {
+      "term": "Dabeh",
+      "category": "person",
+      "translation": "達貝",
+      "notes": "Buyer of Stardock Academy magical exports, lives north of Romney (DIAL_Z20); not directly encountered."
+    },
+    {
+      "term": "Stardock Annex",
+      "category": "place",
+      "translation": "星塢分部",
+      "notes": "An unofficial shop at the Abbey of Ishap at Sarth trading on the Stardock Academy's name, though it has no real ties to the Academy (DIAL_Z20)."
     }
   ]
 }
