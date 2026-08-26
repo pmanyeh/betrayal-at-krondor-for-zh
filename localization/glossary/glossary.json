@@ -2066,6 +2066,450 @@
       "category": "place",
       "translation": "星塢分部",
       "notes": "An unofficial shop at the Abbey of Ishap at Sarth trading on the Stardock Academy's name, though it has no real ties to the Academy (DIAL_Z20)."
+    },
+    {
+      "term": "Feydhir",
+      "category": "person",
+      "translation": "菲德希爾",
+      "notes": "Leader of the kobolds/gnomes near Mac Mordain Cadal, periodically leads holy quests to find their lost dragon-god, per a dwarf's account (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Kobold",
+      "category": "proper_noun",
+      "translation": "科博德",
+      "notes": "Dwarven term for the small dragon-worshipping creatures that humans call gnomes; both terms refer to the same race (DIAL_Z30)."
+    },
+    {
+      "term": "Gnome (creature)",
+      "category": "proper_noun",
+      "translation": "地精",
+      "notes": "Human term for the creatures dwarves call kobolds (科博德); a dwarf explains \"your folk call them gnomes\" (DIAL_Z30). Distinct from any unrelated uses of \"gnome\" elsewhere."
+    },
+    {
+      "term": "Thieves' Highway",
+      "category": "place",
+      "translation": "盜賊大道",
+      "notes": "A passage within the Prince's sewers of Krondor guarded by a young Mockers lookout who answers to the Upright Man (DIAL_Z30)."
+    },
+    {
+      "term": "Nightmaster",
+      "category": "proper_noun",
+      "translation": "守夜頭領",
+      "notes": "A Mockers guild rank/lieutenant title, the sewer gatekeepers answer to him and he in turn answers to the Upright Man (DIAL_Z30)."
+    },
+    {
+      "term": "Rake",
+      "category": "person",
+      "translation": "雷克",
+      "notes": "Mentioned in passing by Devon as one of the few people still in Eggley besides himself (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Festival of the Stranger",
+      "category": "proper_noun",
+      "translation": "陌生人慶典",
+      "notes": "Eggley's local ritual: elders draw lots for who becomes \"The Stranger\", who hands out fake coins (nimptos, 尼普托) and circles the town swinging hemp rope the next morning to signal Killian's blessing (DIAL_Z30, Devon's story)."
+    },
+    {
+      "term": "nimpto",
+      "category": "proper_noun",
+      "translation": "尼普托",
+      "notes": "Fake sovereign coins handed out during Eggley's Festival of the Stranger ritual (DIAL_Z30)."
+    },
+    {
+      "term": "Tamney",
+      "category": "person",
+      "translation": "坦尼",
+      "notes": "Minstrel forcibly stationed at Northwarden by Baron Gabot (established 加博特男爵) as punishment for a romantic scandal; gives music lessons for a fee and requests a bowstring for lute resin (DIAL_Z30). Directly encountered on-screen."
+    },
+    {
+      "term": "the Oracle of the Aal",
+      "category": "person",
+      "translation": "阿爾神諭者",
+      "notes": "Ancient dragon-skinned prophetic being consulted by Pug near Malac's Cross; last of the Aal race, older than dwarves, elves, dragons, and the Valheru (DIAL_Z30). Vulnerable to Makala's Valheru amulet, which can compel her dragon-flesh body even though he cannot control her mind."
+    },
+    {
+      "term": "Lyron-Baktos",
+      "category": "person",
+      "translation": "里隆-巴克托斯",
+      "notes": "Epithet \"Master of Dragons\" -> 群龍之主; ancient Valheru credited with crafting the amulet Makala uses against the Oracle of the Aal (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Rythar",
+      "category": "proper_noun",
+      "translation": "萊薩",
+      "notes": "Paired with Mythar (麥薩) in the Oracle of the Aal's cryptic prophecy to Owyn about a future \"critical juncture\"; meaning left deliberately unexplained in-story (DIAL_Z30)."
+    },
+    {
+      "term": "Mythar",
+      "category": "proper_noun",
+      "translation": "麥薩",
+      "notes": "Paired with Rythar (萊薩) in the Oracle of the Aal's cryptic prophecy to Owyn about a future \"critical juncture\"; meaning left deliberately unexplained in-story (DIAL_Z30)."
+    },
+    {
+      "term": "Queen's Row",
+      "category": "place",
+      "translation": "王后街",
+      "notes": "Street/district in Malac's Cross where Ivan Skaald's tavern and a famous chess match take place (DIAL_Z30)."
+    },
+    {
+      "term": "Briana",
+      "category": "person",
+      "translation": "布莉安娜",
+      "notes": "Duke Martin's wife, referenced in passing by Martin as a joking reason Owyn might be hunting rabbits for a ducal stew (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Lord Hazra-Khan",
+      "category": "person",
+      "translation": "哈茲拉-可汗大人",
+      "notes": "Keshian noble/envoy angered after a Kingdom ship mistakenly sank an Imperial Keshian frigate, mentioned by Duke Martin as the reason King Lyam can't spare attention for Northwarden's battle (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Amelia",
+      "category": "person",
+      "translation": "艾蜜莉亞",
+      "notes": "One of the Duchess (of Yabon)'s daughters, mentioned by Squire Phillip as \"the prettiest\" at a party (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Katherine",
+      "category": "person",
+      "translation": "凱瑟琳",
+      "notes": "One of the Duchess (of Yabon)'s daughters, described by Squire Phillip as fickle like her mother and interested in marrying a conDoin (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Southern Arrow company",
+      "category": "proper_noun",
+      "translation": "南箭連",
+      "notes": "A moredhel military company that fell back from Northwarden with the Tsurani rift machine; Duke Martin infiltrated it disguised as a mercenary (DIAL_Z30)."
+    },
+    {
+      "term": "Wyvern",
+      "category": "proper_noun",
+      "translation": "雙足飛龍",
+      "notes": "Monster Prince Calin credits the party with slaying near an Elvandar border checkpoint (DIAL_Z30 random encounter callback)."
+    },
+    {
+      "term": "Warleader (title)",
+      "category": "proper_noun",
+      "translation": "統帥",
+      "notes": "Military title used before Tomas's name (\"Warleader Tomas\"), Elvandar's supreme military commander (established from earlier chapters, formalized here)."
+    },
+    {
+      "term": "Tsuranuanni Empire",
+      "category": "place",
+      "translation": "圖蘭努安尼帝國",
+      "notes": "Formal name of the Tsurani (established 圖蘭尼) homeland empire on the other side of the rift, mentioned by Sumani at the Blue Wheel Inn (DIAL_Z30)."
+    },
+    {
+      "term": "chocha",
+      "category": "proper_noun",
+      "translation": "巧恰",
+      "notes": "A Tsurani beverage served at Sumani's Blue Wheel Inn in LaMut (DIAL_Z30)."
+    },
+    {
+      "term": "Chochoan",
+      "category": "proper_noun",
+      "translation": "丘丘安",
+      "notes": "A Tsurani deity Sumani invokes as a farewell blessing (\"May Chochoan watch over you\") at the Blue Wheel Inn (DIAL_Z30)."
+    },
+    {
+      "term": "Game of the Council",
+      "category": "proper_noun",
+      "translation": "議會之局",
+      "notes": "Tsurani political intrigue/assassination custom Sumani hopes never becomes commonplace in Midkemia (DIAL_Z30); referenced but not detailed on-screen."
+    },
+    {
+      "term": "Rainbow Parrot",
+      "category": "place",
+      "translation": "彩虹鸚鵡酒館",
+      "notes": "Krondor tavern where Nivek, the West Region treasurer (established 尼維克), can be found drinking (DIAL_Z30)."
+    },
+    {
+      "term": "Six Toe",
+      "category": "place",
+      "translation": "六趾客棧",
+      "notes": "Inn near Sethanon run by/associated with Nia (established 妮雅); mentioned by McCannur and Nivek (DIAL_Z30)."
+    },
+    {
+      "term": "Nia",
+      "category": "person",
+      "translation": "妮雅",
+      "notes": "Woman at the Six Toe inn (六趾客棧) near Sethanon; Nivek's drunken ramblings reveal she was frightened by Max Feeber digging in a graveyard near Sethanon (DIAL_Z30); not directly encountered on-screen."
+    },
+    {
+      "term": "Jared Lycrow",
+      "category": "person",
+      "translation": "賈瑞德．萊克羅",
+      "notes": "Full name of Jared (established 賈瑞德, the restless ghost from DIAL_Z20's haunting subplot); Nivek's drunken story reveals he refused to sell land near Sethanon to Max Feeber (established 麥克斯．費伯) (DIAL_Z30)."
+    },
+    {
+      "term": "Tulan",
+      "category": "place",
+      "translation": "圖藍",
+      "notes": "Lysle Rigger's (established 萊斯爾．瑞格) birthplace, mentioned when he explains he is not James's brother (DIAL_Z30). Transliterated distinctly from Tsurani (established 圖蘭尼) to avoid visual confusion."
+    },
+    {
+      "term": "Glover",
+      "category": "person",
+      "translation": "格洛佛",
+      "notes": "Man in Lyton (established 萊頓) who bought the skeletal \"glory hand\" from Lysle Rigger, later killed by the Crawler's men investigating who was training thieves in magic (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Dyer's Guild",
+      "category": "proper_noun",
+      "translation": "染工公會",
+      "notes": "Romney craft guild allied with the Glazer's Guild (established 玻璃匠公會) against the Riverpullers in the guild war (DIAL_Z30)."
+    },
+    {
+      "term": "Ironmonger's Guild",
+      "category": "proper_noun",
+      "translation": "五金匠公會",
+      "notes": "Romney craft guild whose head the Duke of Romney needs at the negotiating table to end the guild war (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Ursine Ford",
+      "category": "place",
+      "translation": "烏爾辛渡口",
+      "notes": "River crossing at Romney where the labor guilds (north bank) and craft guilds (south bank) are deadlocked during the guild war (DIAL_Z30)."
+    },
+    {
+      "term": "King Rodric",
+      "category": "person",
+      "translation": "羅德里克王",
+      "notes": "Historical Kingdom king proverbial for madness, invoked by Mitchel Waylander (established 米契爾．韋蘭德) as a comparison (\"mad as old King Rodric\") (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "silver spider",
+      "category": "proper_noun",
+      "translation": "銀蜘蛛",
+      "notes": "An assassin's tool associated with the Nighthawks (established 夜鷹會), found on murdered Bas-Tyra soldiers' bodies alongside a brass spyglass (DIAL_Z30)."
+    },
+    {
+      "term": "Carolus",
+      "category": "person",
+      "translation": "卡羅魯斯",
+      "notes": "A boy's late master/caretaker in Romney; told the boy before dying that \"the Collectors\" (established 收容人) would come take him somewhere nice, a euphemism the boy repeats not understanding it means death (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "the Collectors",
+      "category": "proper_noun",
+      "translation": "收容人",
+      "notes": "An orphaned tavern boy's euphemism (taught to him by his late master Carolus, established 卡羅魯斯) for whoever/whatever comes to take dead or dying people to a peaceful place; distinct from the unrelated Eggley \"Collector\" debt-collector character (established 收帳人) -- do not merge the two (DIAL_Z30)."
+    },
+    {
+      "term": "tarweed",
+      "category": "proper_noun",
+      "translation": "焦渴草",
+      "notes": "Non-poisonous herb that induces excessive thirst when mixed into ale, used to get the Bas-Tyra soldiers drunk before the Nighthawks' ambush (DIAL_Z30)."
+    },
+    {
+      "term": "Jason",
+      "category": "person",
+      "translation": "傑森",
+      "notes": "Orphaned boy working at the Black Sheep Tavern (established 黑羊酒館) in Romney; present when Nighthawks massacred the King's men there, gives the party key eyewitness details (DIAL_Z30)."
+    },
+    {
+      "term": "Upside Down Keg",
+      "category": "place",
+      "translation": "倒扣酒桶",
+      "notes": "Establishment in Silden that sent wine to the Bas-Tyra soldiers at the Black Sheep Tavern shortly before the Nighthawk massacre (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Empress Inn",
+      "category": "place",
+      "translation": "女皇客棧",
+      "notes": "Inn near Silden where Abuk (established 阿布克) plans to wait for his delayed trader friend (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Anchorhead Tavern",
+      "category": "place",
+      "translation": "錨首酒館",
+      "notes": "Tavern in Silden; a raven nailed to its doorpost signals the Crawler (established 爬行者) has convened his assistants and strangers should leave town (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Webber lock",
+      "category": "proper_noun",
+      "translation": "韋伯鎖",
+      "notes": "A famously unpickable brand/type of lock, referenced by a locksmith character near Silden (DIAL_Z30)."
+    },
+    {
+      "term": "Caliphad",
+      "category": "person",
+      "translation": "卡里法德",
+      "notes": "Abuk's (established 阿布克) lockpicking master, taught him for five years at Mount Ashunta (established 阿舜塔山) (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Mount Ashunta",
+      "category": "place",
+      "translation": "阿舜塔山",
+      "notes": "Keshian mountain where Abuk (established 阿布克) trained under his master Caliphad (established 卡里法德) (DIAL_Z30)."
+    },
+    {
+      "term": "Kardeji",
+      "category": "person",
+      "translation": "卡爾德吉",
+      "notes": "Abuk's (established 阿布克) father, named in his formal self-introduction (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Joftaz",
+      "category": "person",
+      "translation": "喬夫塔茲",
+      "notes": "Runs the Anchorhead Tavern (established 錨首酒館) in Silden; earlier established as the man Abuk (established 阿布克) sold the brass spyglass to; directly encountered on-screen selling rations (DIAL_Z30)."
+    },
+    {
+      "term": "Night Crawler (ship)",
+      "category": "place",
+      "translation": "夜爬行者號",
+      "notes": "A boat that sometimes harbors in Silden; a dead Nighthawk's ticket for passage to Krondor on it was found by Abuk (established 阿布克) (DIAL_Z30). Deliberately echoes \"the Crawler\" (established 爬行者) in the source text -- keep the echo in translation, don't disambiguate it away."
+    },
+    {
+      "term": "rusalka / rusalki",
+      "category": "proper_noun",
+      "translation": "露莎卡水靈",
+      "notes": "Restless water spirits (\"sisters of Eliaem\", established 伊萊亞姆) that linger near rivers and resist being sent to Lims-Kragma's (established 林斯克拉格瑪) halls; Beyla (established 貝拉) tasks the party with finding and laying them to rest (DIAL_Z30)."
+    },
+    {
+      "term": "Mist Devil (ship)",
+      "category": "place",
+      "translation": "迷霧惡魔號",
+      "notes": "Ship that ferries the party to and from Beyla's (established 貝拉) island temple of Eortis (established 埃奧提斯), sailing out of Silden (DIAL_Z30)."
+    },
+    {
+      "term": "Kat",
+      "category": "person",
+      "translation": "凱特",
+      "notes": "Woman hiding from the Mockers in the Krondor sewers, secretly working against the Crawler (established 爬行者) from within; sends the party to find the Idol of Lassur (established 拉蘇爾神像), knowing it will kill the Crawler within a month of him claiming it (DIAL_Z30)."
+    },
+    {
+      "term": "Idol of Lassur",
+      "category": "proper_noun",
+      "translation": "拉蘇爾神像",
+      "notes": "Bronze statue rumored to grant its owner power over life; actually belongs to Lassur (established 拉蘇爾), an Isalani name for the death goddess Lims-Kragma (established 林斯克拉格瑪) -- any mortal who claims it dies within a month (DIAL_Z30)."
+    },
+    {
+      "term": "Isbandi river",
+      "category": "place",
+      "translation": "伊斯班迪河",
+      "notes": "River an underground stream beneath Venutrier's (established 維努特里爾) mines flows into, part of Gorath and Obkhar's (established 奧布卡) escape route (DIAL_Z30)."
+    },
+    {
+      "term": "Isalani",
+      "category": "proper_noun",
+      "translation": "伊薩拉尼",
+      "notes": "A southern culture/language referenced as the source of \"Lassur\" (established 拉蘇爾), an alternate name for Lims-Kragma (established 林斯克拉格瑪) (DIAL_Z30)."
+    },
+    {
+      "term": "Waani",
+      "category": "proper_noun",
+      "translation": "瓦尼",
+      "notes": "A foreign (to Obkhar/moredhel) word for a magic item that can collapse a Tsurani rift gate when thrown into its maelstrom; Obkhar killed a gate-guarding magician to obtain one and used it, then seeks another (DIAL_Z30)."
+    },
+    {
+      "term": "Lieutenant Finn",
+      "category": "person",
+      "translation": "芬恩中尉",
+      "notes": "Kingdom officer commanding the garrison at Inclindel Pass (established 因克林德爾山口); recurs across multiple chapters reporting on whether the pass is open (DIAL_Z30)."
+    },
+    {
+      "term": "Hadati",
+      "category": "proper_noun",
+      "translation": "哈達提",
+      "notes": "Hardy hillmen people from the Northlands, referenced as fleeing south to Yabon (established 亞邦) during an especially severe winter -- notable because they normally never seek refuge in towns (DIAL_Z30)."
+    },
+    {
+      "term": "Northwarden Pass",
+      "category": "place",
+      "translation": "北衛山口",
+      "notes": "Mountain pass near Northwarden (established 北衛城), suggested by Lieutenant Finn (established 芬恩中尉) as an alternate route when the Inclindel is blocked (DIAL_Z30)."
+    },
+    {
+      "term": "Hershel",
+      "category": "person",
+      "translation": "赫歇爾",
+      "notes": "Old man whose house near the graveyard is where Max Feeber (established 麥克斯．費伯) thinks he dropped the skeletal hand he dug up (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Jack",
+      "category": "person",
+      "translation": "傑克",
+      "notes": "Petrumh's (established 佩特魯姆) late husband, whom she believes was killed by elves near Sethanon amid \"faerie lights\" in the Dimwood (established 幽暗林) (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Dubal An Loch",
+      "category": "person",
+      "translation": "杜巴．安洛克",
+      "notes": "One-eyed dwarf veteran drinking at the Blue Wheel Inn (established 藍輪客棧) in LaMut; rescued Locklear and other refugees from a cellar during the Battle of Sethanon, later reveals Sumani's (established 蘇馬尼) backstory (DIAL_Z30)."
+    },
+    {
+      "term": "Ulam",
+      "category": "person",
+      "translation": "尤拉姆",
+      "notes": "Petrumh's (established 佩特魯姆) friend in Darkmoor (established 黑沼鎮), at whose house she plans to stay (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Charles",
+      "category": "person",
+      "translation": "查爾斯",
+      "notes": "A Tsurani man's adopted Kingdom name (his original Tsurani name considered unpronounceable), works for Duke Martin in Crydee (established 克萊迪) (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Deep Taunton",
+      "category": "place",
+      "translation": "深陶頓",
+      "notes": "Battle referenced in a tactics-lecture anecdote where student Kyle Fischer publicly debated Guy du Bas-Tyra's (established 居伊．杜．巴斯泰拉) tactics (DIAL_Z30)."
+    },
+    {
+      "term": "Isaac",
+      "category": "person",
+      "translation": "艾薩克",
+      "notes": "Roguish con-man and old acquaintance of Locklear and James; eleven years earlier impersonated the Count of Dorgin's son at Arutha's wedding and was exposed/expelled by James, now works odd jobs/schemes along the border (DIAL_Z30)."
+    },
+    {
+      "term": "deLacy",
+      "category": "person",
+      "translation": "德萊西",
+      "notes": "Master of Ceremonies who nearly threw Isaac (established 艾薩克) over the palace walls upon discovering his impersonation, mentioned only in Isaac's reminiscence (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Count of Dorgin",
+      "category": "person",
+      "translation": "多爾金伯爵",
+      "notes": "Nobleman whose son Isaac (established 艾薩克) once impersonated at Arutha's wedding (DIAL_Z30); not directly encountered."
+    },
+    {
+      "term": "Yellow Mule mountain",
+      "category": "place",
+      "translation": "黃騾山",
+      "notes": "Mountain near Sarth and the Temple of Sung (established 頌神神殿), landmark on the way to Rowe's (established 羅威) barn (DIAL_Z30)."
+    },
+    {
+      "term": "Temple of Sung",
+      "category": "place",
+      "translation": "頌神神殿",
+      "notes": "Temple near Sarth (established 薩斯) used as a landmark on the road south, dedicated to Sung (established 頌神) (DIAL_Z30)."
+    },
+    {
+      "term": "Diviner's Halls",
+      "category": "place",
+      "translation": "占卜者廳堂",
+      "notes": "Cave not far from Northwarden containing \"pattern stones\" (established 命紋石) that geomancers use to foretell a person's future; Tamney (established 坦尼) sends the party to fetch one before deciding whether to return to duty (DIAL_Z30)."
+    },
+    {
+      "term": "pattern stone",
+      "category": "proper_noun",
+      "translation": "命紋石",
+      "notes": "Small stones found in the Diviner's Halls (established 占卜者廳堂), used by geomancers to foretell a person's future (DIAL_Z30)."
+    },
+    {
+      "term": "Mocker's Folly",
+      "category": "place",
+      "translation": "嘲弄者的愚行號",
+      "notes": "Ship a Nighthawk (identified by a hawk emblem) booked passage on from Silden to Krondor, per Joftaz (established 喬夫塔茲) (DIAL_Z30)."
+    },
+    {
+      "term": "the Happy Prankster",
+      "category": "proper_noun",
+      "translation": "快活的惡作劇者",
+      "notes": "Epithet for Banath (established 巴納斯神), god of luck and thieves, used by Joftaz (established 喬夫塔茲) (DIAL_Z30)."
     }
   ]
 }
