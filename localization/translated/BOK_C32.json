@@ -1,0 +1,187 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C32.BOK",
+  "entries": [
+    {
+      "id": "C32.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "piders scurried out of the opened chest.",
+      "tokens": [],
+      "translation": "蜘蛛從打開的箱子裡竄了出來。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Careful to avoid the miniature albino menaces, James snatched a fresh-looking scroll out of the box and unrolled it on the floor. As his dark eyes darted across the page, his lips moved in an incantation of places, names, figures and dates.",
+      "tokens": [],
+      "translation": "詹姆士小心避開那些白化的小小威脅，從箱裡抓出一卷看來嶄新的卷軸，在地上攤開。他那雙黑眼睛在紙面上飛快掃過，嘴唇翕動著，唸出一串地名、人名、數字和日期，像在誦咒。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"Northwarden,\" James whispered. \"The attack will come at Northwarden very soon. But...this is all wrong...\"",
+      "tokens": [],
+      "translation": "「北衛城。」詹姆士低聲說。「攻擊很快就會落在北衛城。可是……這全都不對勁……」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "\"What is it?\" Gorath asked, also bending to see the page.",
+      "tokens": [],
+      "translation": "「怎麼了？」戈拉斯問，也俯身去看那張紙。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"These figures. If Delekhan takes a force this small to Northwarden, he hasn't a hope of taking the castle. Far too few soldiers. Baron Gabot will maul him unless Delekhan can bring something serious to bear. What could the moredhel have?\"",
+      "tokens": [],
+      "translation": "「這些數字。要是迪勒肯只帶這麼一小支部隊去北衛城，他根本沒指望拿下那座城堡。兵力遠遠不夠。除非迪勒肯能拿出什麼真正厲害的東西，否則加博特男爵會把他打得落花流水。莫瑞德人手上會有什麼？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"Maybe the Nighthawks have infiltrated the castle.\" Owyn said. \"Why else would they be so helpful to the moredhel unless their own necks were on the line too?\"",
+      "tokens": [],
+      "translation": "「說不定夜鷹會已經滲進城堡裡了。」歐文說。「不然他們何必對莫瑞德人這麼幫忙——除非他們自己的腦袋也一樣懸在線上？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "Paling, James suddenly snatched an ink horn from his pack and began to scribble an addendum to the Nighthawk note.",
+      "tokens": [],
+      "translation": "詹姆士臉色一白，忽然從行囊裡抓出一隻墨角，開始在那張夜鷹會的字條上潦草地補寫一段附註。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "\"It is very important that this note reach Arutha. Although you were not told this, he has stationed an army outside of the Dimwood to await my word about the attack,\" James said, finishing his note. Fixing his gaze on Gorath, he handed it firmly over. \"I want you to make sure that it gets there. I'm going to have to trust you.\"",
+      "tokens": [],
+      "translation": "「這張字條務必送到亞魯莎手上。雖然沒人告訴過你們，他已經在幽暗林外駐紮了一支軍隊，等我傳回關於這場攻擊的音訊。」詹姆士寫完字條說道。他目光牢牢盯住戈拉斯，把字條穩穩遞了過去。「我要你確保它送達。看來我只能信你了。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": "Owyn gaped. \"But what about...\"",
+      "tokens": [],
+      "translation": "歐文張大了嘴。「可是……那你呢……」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#9",
+      "page": 0,
+      "run": 9,
+      "source": "\"I've got to go to Northwarden. If there are Nighthawks in Baron Gabot's castle, we stand a good chance of losing it in an attack. I have to ensure that doesn't happen.",
+      "tokens": [],
+      "translation": "「我得去北衛城。要是加博特男爵的城堡裡有夜鷹會，一旦遭到攻擊，我們很可能就守不住了。我得確保那種事不會發生。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#10",
+      "page": 0,
+      "run": 10,
+      "source": "\"Remember, Arutha is outside the Dimwood forest near Sethanon. When you give him the note, tell him there's a party at Mothers.\"",
+      "tokens": [],
+      "translation": "「記住，亞魯莎在賽瑟儂附近、幽暗林外。你把字條交給他的時候，告訴他『母親那兒有場聚會』。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#11",
+      "page": 0,
+      "run": 11,
+      "source": "\"What?\" Owyn sputtered.",
+      "tokens": [],
+      "translation": "「什麼？」歐文結巴道。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#12",
+      "page": 0,
+      "run": 12,
+      "source": "\"Just do it. I haven't got time to explain. Good luck, the both of you.\"",
+      "tokens": [],
+      "translation": "「照做就是。我沒時間解釋。祝你們兩個好運。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#13",
+      "page": 0,
+      "run": 13,
+      "source": "In a moment the Seigneur was gone, his shadows chasing after him down the long dark tunnel.",
+      "tokens": [],
+      "translation": "轉眼間紳爵便走了，他的身影投下的暗影沿著那條長長的黑暗隧道追在他身後。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#14",
+      "page": 0,
+      "run": 14,
+      "source": "An hour later, Owyn yawned expansively, his vision growing dim with each step taken further down the road. Next to him, Gorath trudged without complaint, his eyes fixed on the dusty cow track.",
+      "tokens": [],
+      "translation": "一小時後，歐文大大地打了個呵欠，每往前多走一步，眼前就更朦朧一分。在他身旁，戈拉斯不發一語地跋涉著，目光緊盯著那條塵土飛揚的牛徑。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#15",
+      "page": 0,
+      "run": 15,
+      "source": "\"Enough, enough.\" Owyn murmured. \"I think my legs are going to crumble. We can't reach Arutha tonight. Let's stop for a while.\"",
+      "tokens": [],
+      "translation": "「夠了，夠了。」歐文喃喃道。「我的腿快要垮了。今晚我們到不了亞魯莎那裡。先停一會兒吧。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#16",
+      "page": 0,
+      "run": 16,
+      "source": "\"Quiet,\" Gorath snapped, seizing Owyn by the arm. Beneath his hood, his feral eyes glowed like blood tinged emeralds. \"Someone's near...\"",
+      "tokens": [],
+      "translation": "「安靜。」戈拉斯厲聲道，一把抓住歐文的手臂。兜帽底下，他那雙野性的眼睛像染了血的翡翠般發亮。「有人靠近……」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C32.BOK#0#17",
+      "page": 0,
+      "run": 17,
+      "source": "Abruptly patches of darkness detached themselves from the woods, ambled into the pale moonlight, huddled onto the roadbed. In the shadows, arrow points gleamed, aligned in deadly sights, quivered...",
+      "tokens": [],
+      "translation": "忽然間，一片片黑暗從林中剝離出來，晃進慘白的月光裡，蜷聚在路面上。陰影中，箭鏃閃著微光，對準了致命的準星，微微顫動……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

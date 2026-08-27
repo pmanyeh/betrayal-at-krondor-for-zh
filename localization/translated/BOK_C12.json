@@ -1,0 +1,127 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C12.BOK",
+  "entries": [
+    {
+      "id": "C12.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he gate swung open.",
+      "tokens": [],
+      "translation": "那道閘門盪開了。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Revolted by the thick scent of excrement in the chamber, Locklear hastened to the ladder affixed on the far wall and ascended its filth slick rungs. Behind him, Gorath and Owyn reluctantly did likewise, gaffing on the noxious vapors in the shaft.",
+      "tokens": [],
+      "translation": "屋裡濃烈的糞臭教洛克利爾一陣作嘔，他急忙奔向固定在對面牆上的梯子，攀上那沾滿污穢、滑膩的橫檔。他身後，戈拉斯和歐文不情願地跟著照做，被豎井裡的惡臭薰得直乾嘔。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"This is nothing,\" Locklear grunted, shoving upwards against a grating. \"All the windows in the palace are open right now. You ought to smell it in the",
+      "tokens": [],
+      "translation": "「這根本不算什麼。」洛克利爾哼了一聲，用力頂開一道柵欄。「王宮裡所有的窗子現在全開著。你真該聞聞",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": " winter",
+      "tokens": [],
+      "translation": "冬天",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": ".\"",
+      "tokens": [],
+      "translation": "的味道。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "Darkness surrounded them as they slithered out of the privy, their only impressions of the chamber provided by the faint flicker of distant firelight. Ten yards before them the hall joined with an elaborate colonnade stretching in either direction.",
+      "tokens": [],
+      "translation": "他們從茅廁裡鑽出來時，四周一片漆黑，對這房間的唯一印象，全來自遠處火光微弱的閃動。他們前方十碼處，這條廳堂連上一列考究的柱廊，向兩側延伸而去。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "\"Somehow I hadn't pictured my first visit to Krondor like this,\" Owyn sighed, falling blindly into step behind Gorath and the Seigneur.",
+      "tokens": [],
+      "translation": "「不知怎的，我沒想過自己頭一回造訪克朗多會是這副光景。」歐文嘆道，摸黑跟在戈拉斯和紳爵身後邁步。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "\"What, you didn't like the",
+      "tokens": [],
+      "translation": "「怎麼，你不喜歡剛才那趟",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": " romantic",
+      "tokens": [],
+      "translation": "浪漫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#9",
+      "page": 0,
+      "run": 9,
+      "source": " tour?\" Locklear chuckled. \"Not many people get to see that way into the palace.\"",
+      "tokens": [],
+      "translation": "的行程嗎？」洛克利爾輕笑。「沒幾個人能見識到那條進王宮的路呢。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#10",
+      "page": 0,
+      "run": 10,
+      "source": "Drawing up short, Locklear's features brightened as he observed a pair of approaching figures lost in conversation. Self-conscious of his bedraggled condition he straightened his uniform and cleared his throat with a stentorian air.",
+      "tokens": [],
+      "translation": "洛克利爾突然收住腳步，看見兩個交談正酣的身影朝這邊走來，臉上一亮。他因自己狼狽的模樣而有些難為情，整了整制服，以洪亮誇張的架勢清了清喉嚨。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C12.BOK#0#11",
+      "page": 0,
+      "run": 11,
+      "source": "\"Greetings Prince Arutha and Master Magician Pug!\"",
+      "tokens": [],
+      "translation": "「亞魯莎王子、法師大師帕格，兩位好！」",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

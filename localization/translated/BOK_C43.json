@@ -1,0 +1,47 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C43.BOK",
+  "entries": [
+    {
+      "id": "C43.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "wyn didn't want to be awake.",
+      "tokens": [],
+      "translation": "歐文並不想醒著。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C43.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Perhaps it was the drugs they had given him or the endless walking that he'd done in the past month and a half. All he could think about was sleeping now, that restful non-existence that interrupted the beatings and the hauling and the exhaustion. He just wanted to sleep but that irritating jangle wouldn't let him. Where was it coming from?",
+      "tokens": [],
+      "translation": "也許是他們餵他服下的藥物，也許是這一個半月來走不完的路。此刻他滿腦子只想睡覺——那種讓毆打、拖行與疲憊都暫時消失的安穩虛無。他只想睡，可那惱人的叮噹聲卻不讓他睡。那聲音究竟是從哪裡傳來的？",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C43.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"Gorath?\" Owyn asked. \"Are you there?\"",
+      "tokens": [],
+      "translation": "「戈拉斯？」歐文問。「你在嗎？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C43.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Suddenly the jangle rattled louder, this time accompanied by a loud creak and a flood of torchlight as bright as the sun. Out of that glowing corona lumbered the largest moredhel he had yet seen...",
+      "tokens": [],
+      "translation": "那叮噹聲忽然響得更兇，這回還伴著一記沉重的嘎吱聲，以及一片亮如白晝的火炬光。從那團光暈中，笨重地走出了他生平所見最巨大的莫瑞德人……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

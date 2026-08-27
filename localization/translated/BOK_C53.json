@@ -1,0 +1,47 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C53.BOK",
+  "entries": [
+    {
+      "id": "C53.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he moredhel thrashed.",
+      "tokens": [],
+      "translation": "那莫瑞德人劇烈掙動。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C53.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "As life dimmed in his horrified eyes he toppled backwards into a wooden balustrade. With an ear splitting shriek the railing sundered into flying splinters, tumbled after his flailing feet as he disappeared into nothingness.",
+      "tokens": [],
+      "translation": "當生命在他驚恐的雙眼中黯淡下去，他向後倒進一道木製欄杆。隨著一聲刺耳欲裂的巨響，欄杆碎成漫天飛散的木屑，跟著他胡亂踢動的雙腳一同翻落，直到他消失在虛空之中。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C53.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Almost too dazed to breathe, James bolted to the wall to sight his fallen opponent. A crumpled heap of armor lay far below, splashed in gore and a spreading stain of red. Close by, a grim looking figure lowered his crossbow and tilted up his shaggy dark head to favor the Seigneur with a rare smile.",
+      "tokens": [],
+      "translation": "詹姆士震懾得幾乎喘不過氣，衝到牆邊俯看墜落的對手。一堆扭曲的鎧甲遠遠躺在下方，濺滿血污，一片猩紅的污漬正不斷擴散。就在近旁，一個面色冷峻的身影放下手中的十字弓，抬起那顆蓬亂的黑髮腦袋，難得地朝紳爵露出一絲微笑。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C53.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Arutha!",
+      "tokens": [],
+      "translation": "亞魯莎！",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

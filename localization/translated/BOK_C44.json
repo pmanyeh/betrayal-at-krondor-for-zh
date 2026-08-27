@@ -1,0 +1,67 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C44.BOK",
+  "entries": [
+    {
+      "id": "C44.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "elekhan stalked away.",
+      "tokens": [],
+      "translation": "迪勒肯大步走開。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C44.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Still rattled by his interrogation, Owyn tried to collect his fuzz coated thoughts into a coherent whole. Thankfully, his wits had provided the lies as needed, but only narrowly had he avoided the impulse to tell everything he knew. It was almost as if he was being prodded, coerced, bewitched...",
+      "tokens": [],
+      "translation": "審問的餘悸未消，歐文試著把裹著一層絨毛似的思緒收攏成完整的一片。所幸他的機智適時供上了謊言，但他也只是勉強壓下了把所知全盤托出的衝動。那感覺，幾乎像是有人在戳弄他、脅迫他、對他施法……",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C44.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Magic?",
+      "tokens": [],
+      "translation": "法術？",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C44.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Astonished he had been unaware of it at the time, the boy looked again at the bulky warrior who now stood whispering over Gorath's limp form. At first he believed Delekhan was incanting a spell, one perhaps intended to coerce the truth from his victim, but after a few moments it became clear the warlord was conversing with his barely conscious friend.",
+      "tokens": [],
+      "translation": "男孩驚訝於自己當時竟毫無察覺，再次望向那名魁梧的戰士——此刻他正俯身在戈拉斯癱軟的身軀上低語。起先他以為迪勒肯在誦念咒語，或許是想逼問出獵物口中的實話，但過了片刻便清楚了：這名戰爭領主是在與他那勉強還有意識的舊友交談。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C44.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"No!\" Gorath croaked, shaking his head.",
+      "tokens": [],
+      "translation": "「不要！」戈拉斯沙啞地叫道，搖著頭。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C44.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"...plans...unfulfilled,\" Delekhan whispered finally. Abruptly he struck...",
+      "tokens": [],
+      "translation": "「……計畫……尚未完成。」迪勒肯終於低聲說道。冷不防地，他出手了……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

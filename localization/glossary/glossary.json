@@ -2510,6 +2510,42 @@
       "category": "proper_noun",
       "translation": "快活的惡作劇者",
       "notes": "Epithet for Banath (established 巴納斯神), god of luck and thieves, used by Joftaz (established 喬夫塔茲) (DIAL_Z30)."
+    },
+    {
+      "term": "Lesser Path / Greater Path",
+      "category": "proper_noun",
+      "translation": "小徑法門／大徑法門",
+      "notes": "Owyn's two magical traditions (BOK C61/C81): the Lesser Path (lesser path cantrips) and the Greater Path (greater path incantations). Rendered 小徑法門 / 大徑法門."
+    },
+    {
+      "term": "Lord of the West",
+      "category": "proper_noun",
+      "translation": "西境之主",
+      "notes": "Prophetic title for Prince Arutha, invoked by the false Murmandamus in the C94 chapter book."
+    },
+    {
+      "term": "the Prophesy",
+      "category": "proper_noun",
+      "translation": "預言",
+      "notes": "The moredhel prophecy (game spells it \"Prophesy\") the false Murmandamus claims to fulfil; rendered plainly as 預言 (BOK C94)."
+    },
+    {
+      "term": "Hochopeppa",
+      "category": "person",
+      "translation": "霍丘佩帕",
+      "notes": "Well-respected member of the Assembly of Magicians (established 法師議會) who already knows something of the Sethanon events and helps Pug reassure the Tsurani (BOK C94); not directly encountered."
+    },
+    {
+      "term": "Prince Consort (Tomas)",
+      "category": "proper_noun",
+      "translation": "王夫",
+      "notes": "Tomas's title at Elvandar as consort to Queen Aglaranna (established 亞葛拉蘭娜王后); \"Prince Consort and Warleader\" -> 王夫兼統帥 (BOK C63)."
+    },
+    {
+      "term": "Moraeulf (Warleader)",
+      "category": "person",
+      "translation": "莫萊伍夫",
+      "notes": "Delekhan's son (established 莫萊伍夫); after Delekhan's death he takes the title Warleader (統帥) and leads the moredhel retreat from Sethanon, then is assassinated by Narab (BOK C94)."
     }
   ]
 }

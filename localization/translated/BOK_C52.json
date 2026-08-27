@@ -1,0 +1,147 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C52.BOK",
+  "entries": [
+    {
+      "id": "C52.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he portcullis creaked.",
+      "tokens": [],
+      "translation": "那道鐵閘門吱嘎作響。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "An ashen faced soldier trembled as he labored at the monolithic peg wheel, his back arched backwards taut as a bowstring as he hauled the iron gate upwards. With a jerk of his neck, he gasped between clenched teeth for James and his companions to hurry inside.",
+      "tokens": [],
+      "translation": "一名面如死灰的士兵在那具巨大的絞盤上使勁，渾身發顫，背脊向後繃得像一根弓弦，把鐵閘往上拽。他猛地一擺脖子，咬著牙喘著氣，示意詹姆士一行人快進來。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Within, a handful of soldiers hurried to various tasks on the battlements and panicked captains attempted to rally the surviving contingents of the day's fighting.",
+      "tokens": [],
+      "translation": "城內，寥寥幾名士兵在雉堞上匆匆忙著各樣差事，慌亂的隊長們試圖重整當天戰鬥中倖存下來的部隊。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "\"Something's wrong,\" James muttered, observing the disarray. \"What's happened?\"",
+      "tokens": [],
+      "translation": "「有些不對勁。」詹姆士看著這片混亂，低聲說道。「出了什麼事？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"Baron Gabot's been murdered, that's what's happened!\" a nearby soldier shouted, glancing up from where he worked feverishly at unplugging a keg of oil. \"We found a bloody nest of Nighthawks in our midst! They murdered the Baron's staff and three of the captains before we cornered 'em in a storeroom.\"",
+      "tokens": [],
+      "translation": "「加博特男爵被謀殺了，這就是出的事！」附近一名士兵一面手忙腳亂地撬開一桶油，一面抬頭喊道。「我們在自己人裡頭揪出一整窩該死的夜鷹會！他們殺光了男爵的幕僚和三名隊長，我們才把他們逼進一間儲藏室。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"Torch those corpses immediately,\" James ordered. \"They might be Black Slayers. Where is Duke Martin?\"",
+      "tokens": [],
+      "translation": "「立刻把那些屍體燒掉。」詹姆士下令。「他們可能是黑衣殺手。馬丁公爵在哪裡？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "\"Don't know. You're the closest thing we have to nobility at the moment. Guess that puts you in command, Seigneur.\"",
+      "tokens": [],
+      "translation": "「不知道。眼下你是我們這兒最接近貴族的人了。我想這下指揮權就落到你頭上了，紳爵。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "James said nothing as a rumble of thunder split the sky.",
+      "tokens": [],
+      "translation": "一聲雷鳴撕裂長空，詹姆士一言不發。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": "Half dead soldiers trumped past, their eyes hollowed with exhaustion as they traded places with equally worn men brought from the dining hall-turned-infirmary. Few men still possessed clothing unstained by blood.",
+      "tokens": [],
+      "translation": "半死不活的士兵拖著腳步列隊走過，雙眼因疲憊而凹陷，換下同樣筋疲力竭、從改作傷兵營的餐廳裡調來的人。身上衣裳未沾血污的，已經沒剩幾個。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#9",
+      "page": 0,
+      "run": 9,
+      "source": "Dour with the turn of events, James eyed the horizon for any sign of help. In all likelihood, the moredhel would attempt to breach the wall today and there was little he could do about it. Nighthawk treachery had silenced their cannons and too many men had fallen in four days of heavy fighting.",
+      "tokens": [],
+      "translation": "事態的發展讓詹姆士神色陰鬱，他望向地平線，尋找任何援兵的跡象。莫瑞德人十之八九會在今天試圖攻破城牆，而他對此幾乎無能為力。夜鷹會的背叛讓他們的火炮啞了火，四天的激戰又折損了太多人。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#10",
+      "page": 0,
+      "run": 10,
+      "source": "\"Attack!\"",
+      "tokens": [],
+      "translation": "「敵襲！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#11",
+      "page": 0,
+      "run": 11,
+      "source": " a voice screamed in the stillness.",
+      "tokens": [],
+      "translation": "一個聲音在寂靜中尖叫。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#12",
+      "page": 0,
+      "run": 12,
+      "source": " \"Attack! Men on the south face!\"",
+      "tokens": [],
+      "translation": "「敵襲！南面城牆有人！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C52.BOK#0#13",
+      "page": 0,
+      "run": 13,
+      "source": "James cast a fuming curse into the sunrise. He might die, but he would send as many moredhel as he could reach into the halls of the Death Goddess before he would go down...",
+      "tokens": [],
+      "translation": "詹姆士朝著日出怒罵了一句。他或許會死，但在倒下之前，他要盡可能多送一些莫瑞德人進死亡女神的殿堂……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

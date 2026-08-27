@@ -1,0 +1,67 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C45.BOK",
+  "entries": [
+    {
+      "id": "C45.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "t was too much to absorb.",
+      "tokens": [],
+      "translation": "這一切多得教人無法消受。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C45.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Even if the events unfurling before him weren't openly damning, Owyn had seen enough to keep him swimming in a sea of doubts, all of them centering on the loyalty of his friend and traveling companion. Worse still, he had to deliver the message to Prince Arutha outside the Dimwood and he would need Gorath's help to do it. Desperately he wished he had time to sort things out, but time was the one commodity he didn't have.",
+      "tokens": [],
+      "translation": "即便眼前接連發生的事並非明白地指證什麼，歐文的所見所聞也足以讓他在疑雲之海中載浮載沉，而這些疑慮全都圍繞著他這位朋友兼旅伴的忠誠。更糟的是，他還得在幽暗林外將訊息送到亞魯莎王子手中，而要辦成這件事，他需要戈拉斯的協助。他多麼希望能有時間把事情理清楚，偏偏時間正是他所沒有的東西。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C45.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"Enjoy your deaths. I know I shall.\" Delekhan's scratchy voice snatched Owyn out of his thoughts, directed his attention to where the moredhel stood in the doorway gesturing to someone in the dungeon corridor. From nowhere a monolithic door swung into place and once again the room was a land of shadows.",
+      "tokens": [],
+      "translation": "「好好享受你們的死亡吧。我知道我會很享受。」迪勒肯沙啞的嗓音把歐文從沉思中拽了出來，將他的注意力引向門口——那莫瑞德人正站在那裡，朝地牢走廊裡的某人打著手勢。不知從哪兒冒出一扇巨石般的門盪回原位，房間再次淪為一片陰影之地。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C45.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Experimentally, Owyn struck the bars of his cage, knowing full well the corroded structure was too solid to yield. But even as his fingertips came away from the metal, the bars began a keening vibration, the iron harmonies evocative of distant temple bells.",
+      "tokens": [],
+      "translation": "歐文試探性地敲了敲牢籠的鐵條，心裡清楚這鏽蝕的結構仍舊堅固得不會屈服。可就在他的指尖離開金屬的那一刻，鐵條開始發出淒厲的顫鳴，那鐵質的和音教人想起遠方的神殿鐘聲。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C45.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "Someone was working magic...",
+      "tokens": [],
+      "translation": "有人正在施展法術……",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C45.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": " and it wasn't him.",
+      "tokens": [],
+      "translation": "——而那人不是他。",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

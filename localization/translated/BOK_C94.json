@@ -1,0 +1,547 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C94.BOK",
+  "entries": [
+    {
+      "id": "C94.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he battle was against them.",
+      "tokens": [],
+      "translation": "這場戰役對他們不利。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Enraged, Warleader Moraeulf growled orders to his terror stricken lieutenants as he reviewed their weakening lines from the safety of an elm shaded hill, watched with fury as his forward ranks of pikemen retreated under an unexpectedly heavy rain of Kingdom longbow fire. In a short while, the combined mass of Prince Arutha's relief forces and the garrison at Sethanon would be in a position to push them into the only quarter of the city where they would be unable to retreat, and then it would only be a matter of hours before they would be forced to surrender or die in a blaze set to flush them out.",
+      "tokens": [],
+      "translation": "統帥莫萊伍夫怒不可遏，在一座榆蔭覆蓋的山丘上安全地審視著己方日漸吃緊的戰線，一面朝嚇得魂不附體的副官們低吼下令，一面怒火中燒地看著前排的長矛兵在王國長弓意料之外的密集箭雨下節節後退。用不了多久，亞魯莎王子的援軍與賽瑟儂守軍合流的大隊人馬，便能把他們逼進全城唯一無路可退的角落，接著只消幾個鐘頭，他們就會被迫投降，或是死在一場為了把他們逼出來而點燃的大火裡。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"Warleader Moraeulf, you must come quickly!\" Hearing a commotion to his left, he muttered a silent curse on Delekhan's head for leading them on this fool's errand, then snapped his attention to a small group of moredhel who were advancing towards him, faces flushed with excitement. Their leader, a scar faced whelp of twenty summers, knelt reverently at his feet before breathlessly delivering his message. \"At the Keep! Your father has taken Prince Arutha! And I believe the marked one is with him! The tide of the battle turns!\"",
+      "tokens": [],
+      "translation": "「統帥莫萊伍夫，您得快來！」聽見左側一陣騷動，他在心裡默默詛咒迪勒肯，怪他領著眾人來幹這樁蠢差事，隨即猛地把注意力轉向一小隊朝他走來、臉上因興奮而漲紅的莫瑞德人。為首的是個滿臉刀疤、不過二十個仲夏大的小子，他恭敬地跪在他腳邊，才上氣不接下氣地遞出他的消息。「在主堡！您父親擒住了亞魯莎王子！我相信那位帶著記號的人也和他在一起！戰局翻轉了！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Stalking skeptically after his messengers, he progressed through a ruined avenue and into a cobbled central square filled with conversing moredhel warriors. Above them, Delekhan mounted the fire blackened parapet walk of the keep, preceded by a mysterious robed figure and the Prince of Krondor, the later bound hand and foot, unable to do anything but follow where he was lead.",
+      "tokens": [],
+      "translation": "他將信將疑地跟在傳令兵身後潛行，穿過一條殘破的大道，走進一座鋪著鵝卵石、擠滿交談中莫瑞德戰士的中央廣場。在他們上方，迪勒肯登上主堡那被火燻黑的雉堞走道，前頭是一個神祕的長袍身影和克朗多的王子，後者手腳都被縛住，除了被人牽著走以外什麼也做不了。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"Brethren!\" Silence fell over the square as the robe clad figure stepped past Arutha and Delekhan and into an archer's turret, a hand placed over his right breast. Ripping open his white garment, he revealed a body made gaunt with hunger, but bearing an unmistakable curling purple birthmark which resembled a dragon and was the mark of legend. Instantly, a chant rose among the moredhel warriors, many of them falling to their knees in ecstatic reverence.",
+      "tokens": [],
+      "translation": "「弟兄們！」那披袍的身影越過亞魯莎和迪勒肯，走進一座弓箭手的角樓，一手按在自己右胸上，廣場頓時一片寂靜。他扯開身上的白袍，露出一具因飢餓而枯槁的身軀，胸口卻有一塊絕不會認錯的、蜷曲的紫色胎記，形似一條巨龍，正是傳說中的記號。莫瑞德戰士之間立刻響起一片誦念聲，許多人狂喜而虔敬地跪倒在地。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"I have returned, O my children!\" Murmandamus shouted from the battlements, revealing a glittering sword of gold, its hilt set with stones of lapis. \"Hidden deep in the chambers of earth below our feet, Prince Arutha sought to keep this",
+      "tokens": [],
+      "translation": "「我回來了，我的孩子們啊！」穆爾曼達穆斯在城垛上高喊，亮出一柄閃閃發光的黃金之劍，劍柄上鑲著天青石。「就藏在我們腳下深邃的地穴之中，亞魯莎王子想把這柄",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": " sword",
+      "tokens": [],
+      "translation": "劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": " from me, from us, the key to our future! For ten years he imprisoned me in the bowels of this hell against my will, but you have freed me,\" he said, sweeping the air with the sword. \"Ten years ago I promised you the dawning of a new age. I was repaid with abandonment. But today I am free, because",
+      "tokens": [],
+      "translation": "從我手中、從我們手中藏起——它是我們未來的鑰匙！整整十年，他違背我的意願，把我囚禁在這座地獄的深處，是你們解放了我。」他說著，揮劍劃過空氣。「十年前我許諾你們一個新紀元的破曉。換來的卻是被人棄之不顧。但今天我自由了，因為",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": " you",
+      "tokens": [],
+      "translation": "你們",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#9",
+      "page": 0,
+      "run": 9,
+      "source": " who followed Delekhan believed in our dream. You have demonstrated your worthiness and loyalty, and as a reward you shall all bear witness to the death of the Lord of the West and the final fulfillment of the Prophesy!\"",
+      "tokens": [],
+      "translation": "——追隨迪勒肯的你們——相信了我們的夢想。你們已經證明了自己的價值與忠誠，作為獎賞，你們全都將親眼見證西境之主的死亡，以及那則預言的最終應驗！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#10",
+      "page": 0,
+      "run": 10,
+      "source": "A dark cheer rippled through the crowd as Murmandamus held the sword aloft and faced Arutha, his lips curled back in a wicked smile as he advanced on the dazed prince. Considering the things that had been done to him, the crowd thought it likely their former leader would execute Arutha slowly, and they were ripe for the spectacle.",
+      "tokens": [],
+      "translation": "穆爾曼達穆斯高舉長劍，轉身面對亞魯莎，嘴角咧開一抹邪惡的笑，朝那名恍惚的王子逼近，人群中盪起一陣陰森的歡呼。想到自己曾遭受的種種對待，群眾認為他們昔日的領袖多半會慢慢處決亞魯莎，而他們早已按捺不住，等著看這場好戲。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#11",
+      "page": 0,
+      "run": 11,
+      "source": "Abruptly Murmandamus halted. Beneath him, the stones of the keep began to tremble, as if the entirety of the structure were being shaken by an invisible hand. His look of proud defiance suddenly turned to outrage.",
+      "tokens": [],
+      "translation": "穆爾曼達穆斯突然停下。他腳下，主堡的石塊開始震顫，彷彿整座建築正被一隻無形的手搖撼。他那副驕傲不屈的神情，霎時轉為勃然大怒。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#12",
+      "page": 0,
+      "run": 12,
+      "source": "\"What treachery is this?\" Murmandamus screamed. \"Who meddles with the Prophesy?\"",
+      "tokens": [],
+      "translation": "「這是什麼詭計？」穆爾曼達穆斯尖聲吼道。「是誰在干擾這則預言？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#13",
+      "page": 0,
+      "run": 13,
+      "source": "As if in answer, thunder pealed overhead, announcing the arrival of a great dragon and rider, the pair seemingly having formed from the very air itself. Floating down from dizzying heights, they descended to a point level with the keep's rooftops, the dragon's wings beating great gales of wind against the crowd.",
+      "tokens": [],
+      "translation": "彷彿是回應，頭頂上雷聲轟然炸響，宣告一頭巨龍與騎手的到來，這一對彷彿是從空氣本身凝聚而成。他們從令人目眩的高處緩緩飄落，降到與主堡屋頂齊平的位置，巨龍的雙翼朝人群搧起陣陣狂風。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#14",
+      "page": 0,
+      "run": 14,
+      "source": "\"The Prophesy is false, Murmandamus, as are you!\" Pug shouted from the dragon's back. \"You have betrayed the folk of the Kingdom and those of your own people for a lie! It is time for your terror to come to an end!\"",
+      "tokens": [],
+      "translation": "「這則預言是假的，穆爾曼達穆斯，你也是！」帕格在龍背上高喊。「你為了一個謊言，背叛了王國的百姓，也背叛了你自己的同胞！你散布的恐怖，該結束了！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#15",
+      "page": 0,
+      "run": 15,
+      "source": "At Pug's command Arutha ducked, narrowly averting death as the dragon skimmed low overhead, lashing the battlements with its titanic whip-like tail, hurling both Murmandamus and Delekhan, screaming like babes, into the horrified hordes who watched far below. Fanning away from the impact of the two, bystanders hastened to escape, fearing a possible second attack from the flying dragon and its equally menacing rider.",
+      "tokens": [],
+      "translation": "帕格一聲令下，亞魯莎低頭一伏，巨龍貼著頭頂低掠而過，以那條巨鞭似的尾巴橫掃城垛，把穆爾曼達穆斯和迪勒肯一同甩了出去——兩人像嬰孩般尖叫著，摔進遠遠在下方觀望的驚駭群眾之中。旁觀者從兩人墜落的衝擊點四散讓開，慌忙逃竄，唯恐那飛龍與同樣可怖的騎手再來第二擊。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#16",
+      "page": 0,
+      "run": 16,
+      "source": "Standing in the midst of the crowd, Moraeulf looked on, void of pain or fear, his voice calm and clear as he addressed a goblin lieutenant who stood near him. \"Gather your kin and call the retreat.\"",
+      "tokens": [],
+      "translation": "莫萊伍夫站在人群當中冷眼旁觀，既無痛苦也無恐懼，對站在近旁的一名哥布林副官開口時，聲音平靜而清晰。「集合你的族人，吹號撤退。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#17",
+      "page": 0,
+      "run": 17,
+      "source": "\"Lord Moraeulf, we may still win!",
+      "tokens": [],
+      "translation": "「莫萊伍夫大人，我們或許還能贏！",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#18",
+      "page": 0,
+      "run": 18,
+      "source": " Lead",
+      "tokens": [],
+      "translation": "帶領",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#19",
+      "page": 0,
+      "run": 19,
+      "source": " us!\"",
+      "tokens": [],
+      "translation": "我們！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#20",
+      "page": 0,
+      "run": 20,
+      "source": "Collaring the green skinned creature, Moraeulf lifted him off his feet. \"I now lead the Nations of the North and my first command is that I shall lead us",
+      "tokens": [],
+      "translation": "莫萊伍夫一把揪住那綠皮生物的衣領，將他整個提離地面。「如今由我統領北方諸邦，而我的第一道命令，就是我要帶領我們",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#21",
+      "page": 0,
+      "run": 21,
+      "source": " home.",
+      "tokens": [],
+      "translation": "回家。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#22",
+      "page": 0,
+      "run": 22,
+      "source": " Call the retreat,\" Moraeulf spat, hurling the goblin backwards. \"The day is theirs, but I must see to something first.\"",
+      "tokens": [],
+      "translation": "吹號撤退。」莫萊伍夫啐道，把那哥布林向後一摔。「今天是他們的了，但我得先去料理一件事。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#23",
+      "page": 0,
+      "run": 23,
+      "source": "Disregarding the panicked warriors who sought egress from the square, Moraeulf picked his way over the burning rubble to where his father lay dead, his wolfish eyes reflecting only the clouds of smoke which drifted through Sethanon. For all his father's grand schemes, for all the things he had thought to accomplish, he was nothing now, nothing but a hulk of dead flesh. He had been a fool to trust the Tsurani magician.",
+      "tokens": [],
+      "translation": "莫萊伍夫不理會那些急著逃出廣場的驚慌戰士，在燃燒的瓦礫堆上擇路而行，走到父親倒斃之處，那雙如狼的眼睛裡只映著飄過賽瑟儂的團團濃煙。父親那些宏大的算計、那些他自以為能成就的事，如今全都化為烏有，只剩下一具龐大的死肉。他當初信任那個圖蘭尼法師，實在是個蠢貨。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#24",
+      "page": 0,
+      "run": 24,
+      "source": "Leaning over the dead body, Moraeulf snatched up the golden sword which Murmandamus had retrieved from the caverns below. Although he knew very little of the Prophesy which had inspired both his father and Murmandamus to their deaths, he had no intention of wasting what little they had gained in the battle. Perhaps when he returned to the Northlands he could still find a way to harness the power of the artifact, assuming it had any powers at all...",
+      "tokens": [],
+      "translation": "莫萊伍夫俯身湊近屍體，一把抄起穆爾曼達穆斯從底下洞穴取回的那柄黃金之劍。儘管那則害得他父親與穆爾曼達穆斯雙雙送命的預言他所知極少，他也無意白白浪費他們在這場戰役中掙得的那一點成果。或許等他回到北境，仍能找出辦法駕馭這件神器的力量——前提是它當真有什麼力量……",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#25",
+      "page": 0,
+      "run": 25,
+      "source": "\"Moraeulf!\"",
+      "tokens": [],
+      "translation": "「莫萊伍夫！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#26",
+      "page": 0,
+      "run": 26,
+      "source": "Turning, the moredhel Warleader had no time to react before the lightning-quick assassin was upon him, driving a knife skillfully through his left eye and deep into his brain, killing him instantly. Without a sound, he crumpled to the ground across his dead father, dropping the sword even before he could raise it.",
+      "tokens": [],
+      "translation": "這名莫瑞德統帥轉過身，還來不及反應，那個快如閃電的刺客已欺到他跟前，一刀俐落地穿過他的左眼，深深刺進腦中，當場要了他的命。他一聲不吭地癱倒在地，橫在死去的父親身上，那柄劍還沒來得及舉起就脫了手。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#27",
+      "page": 0,
+      "run": 27,
+      "source": "Smiling coldly, Narab withdrew his knife and wiped clean the grey flesh from its bone blade, then snatched Murmandamus' prized sword from where it lay abandoned on the ground. One by one he had borne witness to the destruction of his rivals; Gorath of the Ardanien, his own brother Nago, Delekhan and his son Moraeulf, all destroyed by their own greed or inaction. Now there would be the matter of dealing with the bitch Liallan who had been Delekhan's mate, and then he might even claim the throne of Sar-Sargoth for himself, assuming no bastard get of the former warleader claimed the right. It would be of small consequence, however, for now he possessed what they had all sought. Assuming he lived, he would learn to exploit his new found advantage.",
+      "tokens": [],
+      "translation": "納拉布冷冷一笑，抽回匕首，把那骨質刀身上灰白的血肉抹淨，再從地上棄置之處抄起穆爾曼達穆斯那柄珍愛的劍。他的對手一個接一個地被他親眼看著毀滅：阿爾達尼恩的戈拉斯、他自己的兄弟納戈、迪勒肯與他兒子莫萊伍夫，全都毀於自身的貪婪或不作為。接下來就是處理迪勒肯那個做過他伴侶的賤貨莉艾蘭，然後——只要前任統帥沒有哪個私生崽子跳出來主張繼承權——他甚至可以自己去奪下薩薩戈斯的王座。不過那都是小事，因為此刻他已握有他們人人苦求的東西。只要他能活下來，他自會學會如何運用這份新到手的優勢。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#28",
+      "page": 0,
+      "run": 28,
+      "source": "Resheathing his knife in his boot, he spotted a slow moving band of moredhel limping towards the Dimwood, and he hurried to join them, blending in with the crowd in the same manner in which he had come to Sethanon, as an unrecognizable face in a mob of the beaten and the angry.",
+      "tokens": [],
+      "translation": "他把匕首收回靴筒，瞥見一支行動遲緩的莫瑞德隊伍一跛一跛地朝幽暗林去，便匆匆趕上去混入其中，就跟他當初來到賽瑟儂時一樣——在一群戰敗而憤怒的人潮裡，一張認不出來的臉。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#29",
+      "page": 0,
+      "run": 29,
+      "source": "Arutha watched with mild wonder as Pug conjured the Prince's duplicate into nonexistence, then just as quickly eliminated the remarkably life-like illusions of Delekhan and Murmandamus who lay crumpled on the ground below the Keep. The corpse of Delekhan's son would have to be removed later by less arcane means.",
+      "tokens": [],
+      "translation": "亞魯莎帶著幾分驚奇看著帕格施法，把王子的分身化為烏有，接著同樣迅速地抹去了那兩具栩栩如生、癱在主堡下方地上的迪勒肯與穆爾曼達穆斯幻影。至於迪勒肯之子的屍體，稍後就得用不那麼玄奧的手段處理了。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#30",
+      "page": 0,
+      "run": 30,
+      "source": "\"A shame we didn't have you with us at Armengar, cousin Pug,\" Arutha said. \"A performance such as that before Murmandamus' troops might have won us the battle.\"",
+      "tokens": [],
+      "translation": "「可惜阿曼加那一戰你沒跟我們在一起，帕格表親。」亞魯莎說。「在穆爾曼達穆斯的軍隊面前來上這麼一場，說不定就能幫我們贏下那場仗了。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#31",
+      "page": 0,
+      "run": 31,
+      "source": "Pug shook his head. \"Spectacle won't win your battles, but at least it may prevent the Dark Brothers from plotting another attack against Sethanon. With the dozen or more moredhel witnesses you've left alive on the battlefield, most of them should return alive to the Northlands. Having seen their leaders die and possessing the object Murmandamus sought, they'll have little reason to return here.\"",
+      "tokens": [],
+      "translation": "帕格搖了搖頭。「靠場面贏不了你的仗，但至少能讓黑暗兄弟不再謀劃再次攻打賽瑟儂。你在戰場上留了十來個或更多的莫瑞德目擊者活口，他們多半能活著回到北境。既然親眼看著自己的首領死去，手上又握有穆爾曼達穆斯苦求的那樣東西，他們就沒什麼理由再回來這裡了。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#32",
+      "page": 0,
+      "run": 32,
+      "source": "\"Let us hope,\" Arutha said. \"I have little desire to do this again.\"",
+      "tokens": [],
+      "translation": "「但願如此。」亞魯莎說。「我可不太想再來一次。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#33",
+      "page": 0,
+      "run": 33,
+      "source": "\"What about the artifact?\" Owyn asked.",
+      "tokens": [],
+      "translation": "「那件神器怎麼辦？」歐文問。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#34",
+      "page": 0,
+      "run": 34,
+      "source": "\"A useless sword,\" Pug replied with a grin. \"The Oracle of Aal indicated a hidden room where I might find it when I asked for assistance with the plan. Shortly after that moredhel gentleman who picked it up returns to Sar-Sargoth, he will discover it useless and curse the names of both of them for having spilled so much moredhel blood on false prophesies.\"",
+      "tokens": [],
+      "translation": "「一柄沒用的劍罷了。」帕格咧嘴笑道。「我為這計畫求助時，阿爾神諭者指點了一間藏著它的密室。那位撿走它的莫瑞德先生一回到薩薩戈斯沒多久，就會發現它毫無用處，然後咒罵那兩人的名字，怪他們為了虛假的預言潑灑了這麼多莫瑞德人的血。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#35",
+      "page": 0,
+      "run": 35,
+      "source": "Seeing James and Locklear poking about in the ruins near the keep, Arutha scowled. \"I have a feeling those two are going to keep me busy for months with their questions about this place. Fortunately they're loyal---if I tell them the subject is closed, they'll both trust me enough to leave the issue alone.\"",
+      "tokens": [],
+      "translation": "看見詹姆士和洛克利爾在主堡附近的廢墟裡東翻西找，亞魯莎皺起了眉。「我有種預感，這兩個會拿關於這地方的問題纏著我好幾個月。所幸他們忠心——只要我告訴他們這事到此為止，他們倆都會信得過我，把這個問題擱下。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#36",
+      "page": 0,
+      "run": 36,
+      "source": "\"You can always tell them the sword was truly what was buried here,\" Owyn suggested. \"The answer is good enough for the moredhel.\"",
+      "tokens": [],
+      "translation": "「你大可告訴他們，這裡埋著的當真就是那柄劍。」歐文建議道。「這個答案對莫瑞德人來說就夠了。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#37",
+      "page": 0,
+      "run": 37,
+      "source": "Arutha shook his head. \"Locklear will probably forget the matter once he sees a pretty young face in Krondor, but Jimmy is different. He won't accept it, though he will never ask anything more. I don't like that I will have to lie to him. He's as loyal a subject as I've ever had.\"",
+      "tokens": [],
+      "translation": "亞魯莎搖了搖頭。「洛克利爾大概一在克朗多見到哪張年輕漂亮的臉，就把這事忘了，可吉米不一樣。他不會接受這個說法，儘管他絕不會再多問一句。我不喜歡自己非得對他說謊。他是我有過的臣子當中最忠心的一個。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#38",
+      "page": 0,
+      "run": 38,
+      "source": "\"What about the Tsurani?\" Owyn asked. Nodding, Arutha seemed equally concerned with Pug's answer.",
+      "tokens": [],
+      "translation": "「那圖蘭尼人那邊呢？」歐文問。亞魯莎點著頭，看來同樣關心帕格的答覆。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#39",
+      "page": 0,
+      "run": 39,
+      "source": "\"I shall have to talk with them. A well-respected member of the Assembly of Magicians named Hochopeppa already knows something of the event and he will help me assuage their fears,\" Pug said. \"Thankfully they have their hands tied with another bothersome individual at the moment.\"",
+      "tokens": [],
+      "translation": "「我得跟他們談談。法師議會裡有位備受敬重的成員，名叫霍丘佩帕，他對這件事已經知道了一些，他會幫我安撫他們的疑懼。」帕格說。「所幸眼下他們正被另一個麻煩人物纏得脫不開身。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#40",
+      "page": 0,
+      "run": 40,
+      "source": "Satisfied, Arutha said his farewells and moved off to be of assistance in evacuating the remaining soldiers from the area, fearing that some might become too curious and discover things best left unfound. While watching the Prince depart, Pug smiled quietly to himself, gaining Owyn's attention.",
+      "tokens": [],
+      "translation": "亞魯莎聽了滿意，道別後便走開去幫忙把餘下的士兵撤離這一帶，唯恐有人太過好奇，發現一些最好別被發現的東西。看著王子離去，帕格獨自靜靜地笑了，引起了歐文的注意。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#41",
+      "page": 0,
+      "run": 41,
+      "source": "\"You seem pleased about something,\" Owyn said. \"What is it?\"",
+      "tokens": [],
+      "translation": "「你像是為什麼事高興。」歐文說。「是什麼？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#42",
+      "page": 0,
+      "run": 42,
+      "source": "\"You will note that the Prince said nothing about",
+      "tokens": [],
+      "translation": "「你會注意到，王子隻字未提",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#43",
+      "page": 0,
+      "run": 43,
+      "source": " your",
+      "tokens": [],
+      "translation": "你的",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#44",
+      "page": 0,
+      "run": 44,
+      "source": " silence,\" Pug said. \"You know the secret of Sethanon. In all of Midkemia, only Prince Arutha, King Lyam, Duke Martin, Tomas of Elvandar and myself truly know what lies beneath our feet.\" As if to reinforce the point, Pug tapped his staff at Owyn's feet.",
+      "tokens": [],
+      "translation": "緘默，」帕格說。「你知道賽瑟儂的祕密。整個米德凱米亞，真正知道我們腳下埋著什麼的，只有亞魯莎王子、萊亞姆王、馬丁公爵、艾爾凡達的托馬斯，還有我。」彷彿是為了強調這一點，帕格用法杖在歐文腳邊敲了敲。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#45",
+      "page": 0,
+      "run": 45,
+      "source": "\"What are you saying?\"",
+      "tokens": [],
+      "translation": "「你這是什麼意思？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#46",
+      "page": 0,
+      "run": 46,
+      "source": "Smiling, Pug began to lead him down the winding path towards the city's smashed southern gate. \"What that",
+      "tokens": [],
+      "translation": "帕格微笑著，領他沿著蜿蜒的小徑，朝城裡被砸毀的南門走去。「這",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#47",
+      "page": 0,
+      "run": 47,
+      "source": " means",
+      "tokens": [],
+      "translation": "意思",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#48",
+      "page": 0,
+      "run": 48,
+      "source": " is the Prince expects me to guarantee your silence. That will be difficult to do. With you in Tiburn and me at my Academy of Magicians at Stardock, it will require that I make a number of long and tiresome journeys for the sole purpose of ensuring you keep your silence. It seems a waste of time.\" Stopping to look into the sunset, Pug seemed lost in thought. \"Of course, it is possible I",
+      "tokens": [],
+      "translation": "就是，王子指望我來擔保你守口如瓶。這可不好辦。你人在提伯恩，我在星塢島的法師學院，這麼一來，我就得為了確保你保持緘默這一個目的，跑上好幾趟又長又累人的路。看來是白費工夫。」帕格停下腳步，望向落日，像是陷入了沉思。「當然，我也不是",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#49",
+      "page": 0,
+      "run": 49,
+      "source": " could",
+      "tokens": [],
+      "translation": "不能",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#50",
+      "page": 0,
+      "run": 50,
+      "source": " take you on as a student of magic, your living expenses paid in full by Prince Arutha. Are you interested in becoming a true magician, Owyn?\"",
+      "tokens": [],
+      "translation": "收你當個習法的學生，你的一切生活開銷由亞魯莎王子全額支付。你有沒有興趣成為一名真正的法師，歐文？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#51",
+      "page": 0,
+      "run": 51,
+      "source": "Laughing for the first time in a great while, Owyn twirled his staff in his hands. \"I've never wanted anything",
+      "tokens": [],
+      "translation": "歐文好久以來第一次笑了出來，把法杖在手裡轉了轉。「我這輩子想要的，從來就沒有",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#52",
+      "page": 0,
+      "run": 52,
+      "source": " else",
+      "tokens": [],
+      "translation": "別的",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C94.BOK#0#53",
+      "page": 0,
+      "run": 53,
+      "source": "...\"",
+      "tokens": [],
+      "translation": "……」",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

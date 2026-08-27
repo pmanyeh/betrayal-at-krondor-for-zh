@@ -1,0 +1,57 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C46.BOK",
+  "entries": [
+    {
+      "id": "C46.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "Owyn wasted no time.",
+      "tokens": [],
+      "translation": "歐文沒有片刻遲疑。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C46.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Later, he could debate to his heart's content about who it was that had set them free and what their reasons for doing so might be, but at the moment he had no thought in him but finding a means to get them out of the darkened cell alive. Hurrying to Gorath, he freed him of his iron manacles and allowed the moredhel to lean against his shoulder as they limped together towards the heavy dungeon door. Again, tugging at the handle, they found that the lock was undone, another gift from their unknown benefactor.",
+      "tokens": [],
+      "translation": "至於是誰放了他們、對方又為何這麼做，日後他大可盡情推敲，但此刻他心裡只有一個念頭：找出辦法活著離開這座漆黑的牢房。他急忙奔到戈拉斯身邊，替他解開鐵鐐，讓那莫瑞德人倚著自己的肩膀，兩人一跛一跛地朝沉重的地牢門走去。再一次拉動門把，他們發現門鎖已經開了——這是那位不知名恩人的又一份餽贈。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C46.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "\"What about the guard?\" Owyn whispered, allowing Gorath to stand once more on his own.",
+      "tokens": [],
+      "translation": "「守衛怎麼辦？」歐文低聲問，鬆手讓戈拉斯重新自己站穩。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C46.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "Gorath lifted his head and spoke, his speech still slurred by the drugs that had been administered to them. \"Keep moving,\" he said, waving a hand at the door. \"No one is there.\"",
+      "tokens": [],
+      "translation": "戈拉斯抬起頭開口，話音仍因被灌下的藥物而含糊不清。「繼續走。」他說，朝門揮了揮手。「那裡沒有人。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C46.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "Pushing out the door, they found themselves confronting a wide hallway with passages leading in three other directions....",
+      "tokens": [],
+      "translation": "推門而出，他們面前是一條寬闊的走廊，另有三條通道分別通往不同的方向……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

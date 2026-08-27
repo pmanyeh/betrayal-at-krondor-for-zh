@@ -1,0 +1,97 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C71.BOK",
+  "entries": [
+    {
+      "id": "C71.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "ells tolled in the towers of Northwarden.",
+      "tokens": [],
+      "translation": "鐘聲在北衛城的塔樓間鳴響。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Jubilant guards shouted from the walls, slapped backs, exchanged war stories only days old. Already a bard was milling through the crowd, gathering names and places, scribbling them down as fast as he could. Tonight they would gather, and they would drink, and they would pay old Tamney the Minstrel each time he sang their names.",
+      "tokens": [],
+      "translation": "城牆上，狂喜的守衛們高聲吶喊，互拍肩背，交換著不過幾天前的戰場故事。已經有個吟遊詩人在人群中穿梭，蒐集著人名與地名，能寫多快就寫多快地記下來。今晚他們會齊聚一堂，開懷暢飲，每當老吟遊詩人坦尼唱到他們的名字，他們就付他一次錢。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Listening to the general hubbub drifting in through an opened shutter, Seigneur James allowed himself a grim smile as he dropped down to where Arutha and Locklear conferred over a battle map.",
+      "tokens": [],
+      "translation": "詹姆士紳爵聽著從敞開的百葉窗飄進來的喧鬧人聲，任由自己露出一絲冷峻的微笑，走到亞魯莎與洛克利爾正對著一張戰圖商議的地方坐下。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "\"By days end, I warrant that Delekhan will have died on the sword point of every man here,\" James said. \"It's a shame he wasn't really leading that raid.\"",
+      "tokens": [],
+      "translation": "「我敢說，到今天結束之前，迪勒肯已經死在這裡每一個人的劍尖上了。」詹姆士說。「可惜那場突襲並不是真的由他領軍。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"Indeed,\" Arutha agreed, his eyes shrouded as he brooded about something. \"I would like to ask him a few questions.",
+      "tokens": [],
+      "translation": "「的確。」亞魯莎附和道，眼神晦暗，像在思忖著什麼。「我倒想問他幾個問題。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"I leave for Highcastle at noon. Even though the moredhel have turned from here, I am certain that the first of them will be upon our troops there by sunup tomorrow. Fortunately, my army will be there to greet them. Still, I wish I knew what they were up to...\"",
+      "tokens": [],
+      "translation": "「我正午動身前往高堡。儘管莫瑞德人已經從這裡撤走，我敢肯定他們的先頭部隊明天日出前就會攻到我們駐守在那裡的軍隊頭上。所幸我的軍隊會在那裡迎接他們。話雖如此，我真希望知道他們到底在打什麼算盤……」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "Arutha glanced up, startled, as a page boy skidded into the chamber.",
+      "tokens": [],
+      "translation": "一名侍童連滾帶爬地衝進廳裡，亞魯莎吃了一驚，抬起頭來。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "\"Your p-p-ardon my lord!\" the boy stuttered. \"They have captured the moredhel raiding leader!\"",
+      "tokens": [],
+      "translation": "「請、請恕罪，大人！」男孩結結巴巴地說。「他們抓到那個莫瑞德人的突襲首領了！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C71.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": "Without pause, Arutha's eyes hardened. \"Prepare him for questioning.\"",
+      "tokens": [],
+      "translation": "亞魯莎眼神霎時一凜，毫不遲疑。「把他準備好，我要審問。」",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C31.BOK",
+  "entries": [
+    {
+      "id": "C31.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he coppery smell of burning flesh filled the air.",
+      "tokens": [],
+      "translation": "焚燒血肉的銅腥味瀰漫在空氣中。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C31.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Embers leapt from the funeral pyre into the growing dusk, joined the winking points of light that would later become a blaze of crystalline stars. Around the flames villagers gathered in dark clots, their faces overwritten with blank, unreadable expressions. Like moths to a candle they drifted near and mourned and thought and sniffed. They had come to watch the flames feed.",
+      "tokens": [],
+      "translation": "火葬柴堆的餘燼躍入漸濃的暮色，匯入那些閃爍的光點——稍後它們將化為滿天燦亮的星辰。火焰四周，村民聚成一團團黑影，臉上覆著空白而難以解讀的神情。他們像撲燭的飛蛾般湊近，哀悼、沉思、抽著鼻子。他們是來看火焰進食的。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C31.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Gorath's fathomless green eyes nictitated in the firelight as he turned and gazed at Owyn who flinched uncomfortably at his side.",
+      "tokens": [],
+      "translation": "戈拉斯那雙深不見底的綠眼在火光中眨動，他轉過頭，凝視著身旁不自在地縮了一下的歐文。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C31.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "\"There can be no uneasier sleep than a warrior murdered in his cups,\" Gorath said, his voice only slightly louder than the spitting hiss of scorched bone. \"They nipped at the heels of the Nighthawks, be certain of that.\"",
+      "tokens": [],
+      "translation": "「再沒有比在酒醉中遭人謀殺的戰士更不得安眠的了。」戈拉斯說，嗓音只比灼骨的嘶響略高一些。「他們一路緊咬著夜鷹會不放，這點你儘管放心。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C31.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "\"So you think we're getting close?\" Owyn asked.",
+      "tokens": [],
+      "translation": "「這麼說，你覺得我們快追上了？」歐文問。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C31.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "Gorath began to speak, but his words congealed on his lips as his eyes locked with the burning gaze of Seigneur James.",
+      "tokens": [],
+      "translation": "戈拉斯正要開口，話卻凝在唇邊——他的目光與詹姆士紳爵灼灼的注視撞個正著。",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

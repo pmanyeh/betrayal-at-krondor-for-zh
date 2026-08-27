@@ -1,0 +1,97 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C23.BOK",
+  "entries": [
+    {
+      "id": "C23.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "he scroll smelled of dust.",
+      "tokens": [],
+      "translation": "那卷軸散發著塵土的氣味。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "Scrawled in chicken scratches and spider tracks, tiny lines staggered across the moth-eaten paper, indicating the paths that were the major roads within the Kingdom.",
+      "tokens": [],
+      "translation": "細小的線條以歪扭如雞爪、蛛跡般的筆觸潦草地爬過那張蟲蛀的紙面，標示出王國境內作為主要幹道的路徑。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Pointer in hand, Arutha bent over the map and pointed to a large black dot. \"We are here in Krondor. At dawn tomorrow you will leave through the main gate and rendezvous with your escort, Seigneur James. I know you might have preferred Locklear's company, but he has business elsewhere.",
+      "tokens": [],
+      "translation": "亞魯莎手持指示棒，俯身湊近地圖，點向一個大黑點。「我們在這裡，克朗多。明天拂曉，你將從正門離開，與護送你的詹姆士紳爵會合。我知道你或許更想要洛克利爾同行，但他另有要務在身。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": "\"You will head to Romney. Providing one of Delekhan's assassins doesn't slit your throat first, you should reach the Ursine Ford within the month. In Romney you will join a special detachment of King Lyam's soldiers staying at the Black Sheep Tavern. They may be of service to you.\"",
+      "tokens": [],
+      "translation": "「你要前往羅姆尼。只要迪勒肯的刺客沒有先割了你的喉嚨，你應當能在一個月內抵達烏爾辛渡口。在羅姆尼，你會與一支駐紮在黑羊酒館、隸屬萊亞姆王麾下的特遣隊會合。他們或許能幫上你的忙。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": "Nodding, Gorath took in Arutha's advice, listening studiously as the Prince reviewed the details. \"If you find the evidence, I will act only when James has conveyed the information to me. Is that clear? Only when I receive James' word. Until then, I wait.\"",
+      "tokens": [],
+      "translation": "戈拉斯點著頭，把亞魯莎的叮囑聽進心裡，專注地聽王子逐一交代細節。「如果你找到證據，我只會在詹姆士把消息傳到我這裡之後才行動。明白了嗎？只有在我收到詹姆士的通報之後。在那之前，我等著。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "\"Understood,\" Gorath replied.",
+      "tokens": [],
+      "translation": "「明白。」戈拉斯答道。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "\"Good,\" Arutha replied, slapping the surface of the table with his palm. Looking around the council chamber, he noted the wearied expressions of all who sat around the map. \"Why don't you let Gamina and Makala show you around Krondor? I have a few things I need to consider alone.\"",
+      "tokens": [],
+      "translation": "「很好。」亞魯莎應道，一掌拍在桌面上。他環視議事廳，注意到圍在地圖旁眾人臉上疲憊的神情。「不如讓蓋米娜和馬卡拉帶你們在克朗多四處看看？我有幾件事需要獨自思量。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "Reading the offer as a polite dismissal, the worn council members began to file out the door, most glad to be on their feet again following the grueling session. As Pug passed by, however, Arutha snagged his sleeve and drew him back to the table. \"If you don't mind, I would have your council cousin Pug.\"",
+      "tokens": [],
+      "translation": "疲憊的議會成員把這番話聽作客氣的送客令，開始魚貫走出門外，多數人在這場折磨人的會議之後總算樂得重新站起身來。然而帕格經過時，亞魯莎卻扯住他的衣袖，把他拉回桌邊。「若你不介意，我想徵詢你的意見，帕格表親。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C23.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": "\"Certainly,\"  Pug replied, resuming his seat. \"I am all attention.\"",
+      "tokens": [],
+      "translation": "「當然。」帕格答道，重新落座。「我洗耳恭聽。」",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

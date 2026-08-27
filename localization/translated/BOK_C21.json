@@ -1,0 +1,169 @@
+{
+  "format": "BAK_ZH_TRANSLATION",
+  "version": 1,
+  "source_bok": "C21.BOK",
+  "entries": [
+    {
+      "id": "C21.BOK#0#0",
+      "page": 0,
+      "run": 0,
+      "source": "whisper led him through madness.",
+      "tokens": [],
+      "translation": "一縷低語引著他穿過瘋狂。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#1",
+      "page": 0,
+      "run": 1,
+      "source": "He stumbled forward with unfamiliar feet ten times too small to belong to a warrior. There were lights on the hills around him, fires, voices shouting through a downpour of sloshing hoof beats. He reached for his sword then remembered that he hadn't a sword that night. He had only been a boy of twelve Midsummers. Only a boy and yet he led the ragged remains of his father's tribe.",
+      "tokens": [],
+      "translation": "他踩著一雙陌生的腳向前踉蹌，那雙腳小得不及戰士該有的十分之一。四周山丘上有燈火、有篝火，有人聲穿過潑濺的馬蹄聲如驟雨般傳來。他伸手去拔劍，這才想起那一夜他根本沒有劍。他當時不過是個十二個仲夏大的男孩。只是個男孩，卻已領著父親部族殘破的餘眾。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#2",
+      "page": 0,
+      "run": 2,
+      "source": "Who leads the moredhel?",
+      "tokens": [],
+      "translation": "是誰在領導莫瑞德人？",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#3",
+      "page": 0,
+      "run": 3,
+      "source": " the whispering voice insisted in his head.",
+      "tokens": [],
+      "translation": "那低語的聲音在他腦中緊追不放。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#4",
+      "page": 0,
+      "run": 4,
+      "source": " I must see more.",
+      "tokens": [],
+      "translation": "我必須看得更多。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#5",
+      "page": 0,
+      "run": 5,
+      "source": "Years. A river of men coursed together in a bleeding tide and he was amidst them. Screams rang. A howling figure silhouetted himself against the moon and brandished a bloody sword aloft. The wolfish figure screamed words of wrath and damnation as he cleaved his way through his moredhel brothers. He was Delekhan, former general of Murmandamus, leader of the unified tribes of the Northlands, and he was the enemy...",
+      "tokens": [],
+      "translation": "歲月流轉。一條人河匯成一道淌血的潮水一同奔湧，而他就在其中。慘叫聲四起。一個嚎叫的身影襯著月光顯出剪影，高舉一柄血劍。那狼一般的身影一路劈開自己的莫瑞德同胞，口中嘶吼著憤怒與詛咒的話語。他就是迪勒肯，穆爾曼達穆斯昔日的大將，北地各部族統一後的領袖——而他就是敵人……",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#6",
+      "page": 0,
+      "run": 6,
+      "source": "Gorath!\n",
+      "tokens": [
+        "\\x0a"
+      ],
+      "translation": "戈拉斯！\n",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#7",
+      "page": 0,
+      "run": 7,
+      "source": "The memory detonated into a million fading thoughts, each fleeing after the faint echoes of a weak whisper. Before him now there was a new image, the face of a fair young girl whose pale blue eyes watched him with weary interest. There were others too, all seated like himself around a polished council table, all studying, all dissecting. And Gorath was the object of their scrutiny.",
+      "tokens": [],
+      "translation": "那段記憶炸裂成千百萬個逐漸消褪的念頭，每一個都追著一縷微弱低語的殘響逃散而去。此刻他眼前浮現一幅新的畫面：一名白皙年輕的少女的臉，她那雙淺藍色的眼睛帶著疲憊的興味注視著他。還有其他人，都跟他一樣圍坐在一張光潔的議事桌旁，都在研究、都在剖析。而戈拉斯正是他們審視的對象。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#8",
+      "page": 0,
+      "run": 8,
+      "source": "\"I cannot find the truth, my Prince,\" the tired girl whispered finally, quietly. \"His mind is...chaotic. I find images but I cannot hold them long enough to understand.\"",
+      "tokens": [],
+      "translation": "「我找不到真相，王子殿下。」疲憊的少女終於靜靜地低語。「他的心智……一片混亂。我能捕捉到影像，卻無法握住得夠久、久到足以理解。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#9",
+      "page": 0,
+      "run": 9,
+      "source": "Narrowing his dark eyes, Prince Arutha glared at Gorath. \"He hides his thoughts?\"",
+      "tokens": [],
+      "translation": "亞魯莎王子瞇起那雙黑眼睛，怒視著戈拉斯。「他在隱藏自己的念頭？」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#10",
+      "page": 0,
+      "run": 10,
+      "source": "\"Gorath is moredhel.\" Pug quickly interceded for his exhausted daughter. \"Even with Gamina's exceptional talent for sensing thoughts, his mind may have many innate psychic defenses. I may need to send for one of my advanced students...\"",
+      "tokens": [],
+      "translation": "「戈拉斯是莫瑞德人。」帕格連忙替精疲力竭的女兒說話。「就算有蓋米娜這份感知思緒的非凡天賦，他的心智也可能天生就有許多念力防禦。我或許得派人去請我一位進階的學生來……」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#11",
+      "page": 0,
+      "run": 11,
+      "source": "\"No need to disturb studies, master magician Pug. The moredhel speaks truly.\"",
+      "tokens": [],
+      "translation": "「不必打擾學業，法師大師帕格。這莫瑞德人說的是實話。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#12",
+      "page": 0,
+      "run": 12,
+      "source": "Council members exchanged surprised glances then turned their attention to the aged magician seated next to Pug. Lowering his eyes, the man made a dismissive gesture.",
+      "tokens": [],
+      "translation": "議會成員彼此交換著驚訝的眼神，隨即把注意力轉向坐在帕格身旁那名年邁的法師。那人垂下目光，做了個不以為意的手勢。",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#13",
+      "page": 0,
+      "run": 13,
+      "source": "\"Forgive me, I do not mean to presume, but I have looked into his mind as well,\" Makala continued. \"War in the Kingdom would have many wide ranging effects, not the least of which could lead to a disruption of trade between our two worlds. My Emperor of Tsuranuanni would be most displeased if our rift-making secrets were seized by barbarians in warfare.\"",
+      "tokens": [],
+      "translation": "「請恕我冒昧，我並非有意僭越，但我也窺探過他的心智。」馬卡拉接著說。「王國若起戰事，將牽動許多層面，其中絕非最不重要的一點，便是可能中斷我們兩個世界之間的貿易。倘若我方製造裂界的祕密在戰亂中被蠻族奪去，圖蘭努安尼的皇帝陛下必定極為不悅。」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#14",
+      "page": 0,
+      "run": 14,
+      "source": "Gorath glowered at the Tsurani magician. \"Trading agreements notwithstanding, the moredhel watch your borders, Nighthawks spy on your imperial cousins and before the snows there shall be an army come to the Kingdom! Heed my words Prince of Krondor! You must prepare your troops!\"",
+      "tokens": [],
+      "translation": "戈拉斯怒瞪著這名圖蘭尼法師。「貿易協定且擱一邊——莫瑞德人正盯著你們的邊境，夜鷹會在刺探你們那些皇室表親，而在初雪之前，必有一支大軍開進王國！聽我一句，克朗多的王子！你必須整備你的軍隊！」",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "C21.BOK#0#15",
+      "page": 0,
+      "run": 15,
+      "source": "Anger flashed in the thunderheads of Arutha's eyes as he rose to his feet...",
+      "tokens": [],
+      "translation": "亞魯莎眼中如雷雲般翻湧的怒意霎時一閃，他起身站了起來……",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}
