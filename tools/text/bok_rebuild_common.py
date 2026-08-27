@@ -14,10 +14,12 @@ from build_font import encode_string
 
 try:  # Direct script execution
     from bok_extract import extract_bok_data
+    from bok_layout import adjust_for_chinese
     from bok_pack import pack_bok_data, validate_bok_data
     from ddx_rebuild_common import extract_tokens
 except ModuleNotFoundError:  # ``from tools.text...`` in unit tests
     from tools.text.bok_extract import extract_bok_data
+    from tools.text.bok_layout import adjust_for_chinese
     from tools.text.bok_pack import pack_bok_data, validate_bok_data
     from tools.text.ddx_rebuild_common import extract_tokens
 
@@ -38,8 +40,21 @@ def iter_runs(extracted: dict[str, Any]):
                 yield page["index"], item["run_index"], item
 
 
-def build_bok_file(bok_path: Path, json_path: Path, out_path: Path, mapping_path: Path) -> dict[str, int]:
-    """Build, validate, then write one localized BOK file."""
+def build_bok_file(bok_path: Path, json_path: Path, out_path: Path, mapping_path: Path,
+                   line_height: int = 18, spare_pages: int = 0) -> dict[str, int]:
+    """Build, validate, then write one localized BOK file.
+
+    `line_height` raises the 0xF1 layout blocks' nLineHeight so 16px Chinese
+    glyphs get real leading (the shipped value 15 makes translated lines
+    touch). A per-book page-flow simulation shows every chapter book still
+    fits its existing page count at 18.
+
+    `spare_pages` appends blank overflow pages -- DISABLED by default
+    (spare_pages=0). Appending pages to a .BOK was observed to corrupt the
+    world-renderer's palette-remap state (garbage stripes on the travel map
+    after a book with spares had rendered); root cause not yet pinned. The
+    transform and its tests are kept for future investigation only.
+    """
     bok_name = bok_path.name
     extracted = extract_bok_data(bok_path.read_bytes())
 
@@ -83,6 +98,8 @@ def build_bok_file(bok_path: Path, json_path: Path, out_path: Path, mapping_path
         item["text"] = encode_string(entry["translation"], char_to_id).decode("latin1")
         applied += 1
 
+    layout_stats = adjust_for_chinese(extracted, line_height=line_height, spare_pages=spare_pages)
+
     packed = pack_bok_data(extracted)
     validate_bok_data(packed, label=str(out_path))
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -92,4 +109,5 @@ def build_bok_file(bok_path: Path, json_path: Path, out_path: Path, mapping_path
         "skipped_untranslated": skipped_untranslated,
         "skipped_token_mismatch": skipped_token_mismatch,
         "skipped_source_drift": skipped_source_drift,
+        **layout_stats,
     }

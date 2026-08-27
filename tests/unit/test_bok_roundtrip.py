@@ -14,6 +14,7 @@ import unittest
 from pathlib import Path
 
 from tools.text.bok_extract import extract_bok_data
+from tools.text.bok_layout import append_overflow_pages, raise_line_height
 from tools.text.bok_pack import pack_bok_data, validate_bok_data
 
 
@@ -70,6 +71,49 @@ class TestBokRoundTrip(unittest.TestCase):
                 [it.get("text") for it in a["stream"]],
                 [it.get("text") for it in b["stream"]],
             )
+
+    def test_raise_line_height(self):
+        extracted = extract_bok_data(_synthetic_bok())
+        changed = raise_line_height(extracted, target=18)
+        self.assertEqual(changed, 2)  # both paragraphs' layout blocks
+        for pg in extracted["pages"]:
+            for it in pg["stream"]:
+                if it["kind"] == "layout":
+                    lh = int.from_bytes(bytes.fromhex(it["hex"])[4:6], "little", signed=True)
+                    self.assertEqual(lh, 18)
+        # idempotent / never lowers
+        self.assertEqual(raise_line_height(extracted, target=15), 0)
+        packed = pack_bok_data(extracted)
+        validate_bok_data(packed, "line-height")
+
+    def test_append_overflow_pages_rechains_tail(self):
+        extracted = extract_bok_data(_synthetic_bok())
+        tail_before = extracted["pages"][-1]
+        orig_next, orig_ptr = tail_before["wNextPageNumber"], tail_before["wPagePointer"]
+        added = append_overflow_pages(extracted, count=2)
+        self.assertEqual(added, 2)
+        self.assertEqual(extracted["page_count"], 4)
+
+        pages = extracted["pages"]
+        # old tail now points at the first spare, next == ptr (engine's terminate check)
+        old_tail = pages[1]
+        self.assertEqual(old_tail["wNextPageNumber"], old_tail["wPagePointer"])
+        self.assertEqual(old_tail["wNextPageNumber"], pages[2]["wPageNumber"])
+        # spares are blank and linked; the last one carries the original terminator
+        for sp in pages[2:]:
+            self.assertEqual([i["kind"] for i in sp["stream"]], ["end"])
+            self.assertEqual(sp["wImageCount"], 0)
+        self.assertEqual(pages[2]["wNextPageNumber"], pages[3]["wPageNumber"])
+        self.assertEqual(pages[3]["wNextPageNumber"], orig_next)
+        self.assertEqual(pages[3]["wPagePointer"], orig_ptr)
+
+        validate_bok_data(pack_bok_data(extracted), "overflow-pages")
+
+    def test_append_overflow_pages_skips_nonstandard_tail(self):
+        extracted = extract_bok_data(_synthetic_bok())
+        extracted["pages"][-1]["wNextPageNumber"] = 99  # points nowhere, not a terminator
+        self.assertEqual(append_overflow_pages(extracted, count=2), 0)
+        self.assertEqual(extracted["page_count"], 2)
 
     def test_real_game_bok_roundtrips(self):
         rmf_path = Path(r"d:\git\betrayal-at-krondor-for-zh\betrayal-at-krondor\krondor.rmf")
