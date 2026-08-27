@@ -38,7 +38,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
-## 3. BOK 書籍系統（Phase 7，C11 試點已完成並實機驗收，其餘 21 章待翻）
+## 3. BOK 書籍系統（Phase 7，全部 22 章已翻譯部署；C11 實機驗收過，其餘 21 章待實機看）
 
 - **SOURCE**：`krondor.001` 內的 22 個 `Cxx.BOK` 章節書籍檔（觸發點：`SRC/GAME/GMAIN.C: gmain_play_chapter_intro`，檔名樣板 `"C00.BOK"` + chapter/part 偏移）。
 - **FORMAT**：全新私有二進位格式——`u32` 總長 + 頁面目錄 + 每頁 56-byte 頁首（文字避開矩形、圖片清單）+ 帶控制標籤的文字流（`0xF4`=樣式區塊、`0xF1`=版面區塊、`0xF3`=保留 no-op、`0xF0`=結束符）。共用資源：`BOOK.FNT`／`BOOK.SCX`／`BOOK.BMX`／`BOOK.PAL`。
@@ -46,7 +46,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - **PACKABLE**：是。`tools/text/bok_pack.py`（＋`bok_rebuild_common.py`／`bok_translate.py` scaffold/build pipeline，跟 DDX 對稱）。BOK 導覽靠邏輯頁號不靠檔案 offset，所以中文變長／變短都行，packer 會重算頁 offset 表與檔長 header。全 22 個原版 BOK round-trip 位元組完全一致。
 - **RUNTIME PATH**：`BOOKTEXT.C` 自己刻的逐 byte 排版/換行/齊行邏輯（`booktext_draw_glyph_kerned`／`booktext_layout_rndr_one_line`／`booktext_compute_justify_spacing`／`booktext_render_line_aligned`），**繞過** `font_draw_text_far()`。
 - **CHINESE READY**：**是**（upstream commit `b066d52`）。那三個 byte-walk 迴圈已加 `0x80`–`0xDF` 雙位元組配對支援，繪圖走 `font_draw_zh_glyph()`（新增 `booktext_draw_zh_pair_kerned()` helper）；ASCII 書本文字不動、仍用 `BOOK.FNT`；`VMCODE.OVL`／`SX.OVL` 維持 byte-identical。
-- **STATUS**：**C11.BOK（第一章開場書，14 段）已翻譯部署並在 DOSBox-X 實機驗收通過**——齊行／換行／段距／全形標點／翻頁都正常。剩：(1) 其餘 21 個章節書純翻譯；(2) 左上角放大首字圖——設計決定已定為「重繪成中文首字點陣圖」，需另寫 `BOOK.BMX` 影像 codec（目前仍暫留英文燙金字母）；(3) CJK 行首標點避頭尾未做（與 DDX 同一引擎層限制）。細節見 `HANDOFF.md`。
+- **STATUS**：**全部 22 個 `Cxx.BOK`（294 筆文字 run）已翻譯部署**（`localization/translated/BOK_C*.json`、`bok_rebuild_all.py` 批次重建、`dist/test_v100_zh/BOK_BUILD_MANIFEST.json`）。**C11 在 DOSBox-X 實機驗收通過**——齊行／換行／段距／全形標點／翻頁都正常；其餘 21 檔尚未實機看過。剩：(1) 21 檔實機驗收；(2) 左上角放大首字圖——設計決定已定為「重繪成中文首字點陣圖」，需另寫 `BOOK.BMX` 影像 codec（目前中文首字留在文字流裡，圖仍是英文燙金字母）；(3) CJK 行首標點避頭尾未做（與 DDX 同一引擎層限制）。細節見 `HANDOFF.md`。
 
 ---
 
