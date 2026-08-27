@@ -1,0 +1,21 @@
+{
+  "name": "Cutscene Parchment Dialogue",
+  "runs": [
+    {
+      "text": "戈拉斯",
+      "x": 208,
+      "y": 240,
+      "max_width": 224,
+      "align": "center",
+      "color": "#e8d176"
+    },
+    {
+      "text": "但你該慶幸我不想。死亡女神會待你更加仁慈。",
+      "x": 72,
+      "y": 298,
+      "max_width": 496,
+      "line_height": 19,
+      "color": "#e8d176"
+    }
+  ]
+}

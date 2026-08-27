@@ -1,0 +1,22 @@
+{
+  "name": "Map Chapter / Objective Banner",
+  "clear_rects": [
+    {
+      "x": 34,
+      "y": 320,
+      "w": 306,
+      "h": 58,
+      "color": "#5a4020"
+    }
+  ],
+  "runs": [
+    {
+      "text": "第一章：踏入黑暗之夜\n護送戈拉斯前往克朗多！",
+      "x": 42,
+      "y": 328,
+      "max_width": 290,
+      "line_height": 24,
+      "color": "#000000"
+    }
+  ]
+}

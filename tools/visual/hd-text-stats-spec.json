@@ -1,0 +1,30 @@
+{
+  "name": "Character Stats UI",
+  "clear_rects": [
+    {
+      "x": 146,
+      "y": 260,
+      "w": 224,
+      "h": 120,
+      "color": "#846b4c"
+    }
+  ],
+  "runs": [
+    {
+      "text": "洛克利爾",
+      "x": 148,
+      "y": 264,
+      "max_width": 220,
+      "align": "center",
+      "color": "#000000"
+    },
+    {
+      "text": "生命值：  55\n耐力：    0\n速度：    4\n力量：    17",
+      "x": 154,
+      "y": 288,
+      "max_width": 210,
+      "line_height": 22,
+      "color": "#000000"
+    }
+  ]
+}

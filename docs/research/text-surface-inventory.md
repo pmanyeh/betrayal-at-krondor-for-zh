@@ -151,12 +151,13 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
-## 8. 隊伍角色名字（不是文字資源，暫不處理）
+## 8. 隊伍角色名字（2026-08-27 已完成翻譯）
 
-- **SOURCE**：`GameState.characterNames[6][10]`，從存檔 `TEMP.GAM` 用 `res_fread_far` 直接讀進二進位欄位（`SYS/BOOT.C`／`GAME/STATE/GSTATE.C`）。**原始碼裡沒有任何字串常數**，不是 DDX/BOK/MenuPage 資源，現有 extract/pack 工具完全碰不到。
-- **FORMAT**：固定 10-byte 欄位，格式來源（存檔預設範本從哪裡來）尚未調查。
-- **CHINESE READY**：不適用（非資源檔文字）。
-- **STATUS**：暫不處理（使用者決定保留英文），如需處理需另開一個「存檔格式」調查專案，不在本文件範圍內。
+- **SOURCE**：`GameState.characterNames[6][10]`，從 `TEMP.GAM`／`STARTUP.GAM` 用 `gstate_temp_file_read_at` 把整個 `GameState` 結構當一塊記憶體 blob 直接讀進來（`SYS/BOOT.C`／`GAME/STATE/GSTATE.C`）。**原始碼裡沒有任何字串常數**——`Locklear`／`Gorath`／`Owyn`／`Pug`／`James`／`Patrus` 這幾個 ASCII 名字完全不在 `KRONDOR.EXE` 裡，是純遊戲資料。
+- **格式來源已查明**：原始未修改遊戲資料夾 `betrayal-at-krondor/startup.gam` 就是這份「新遊戲」範本，六個角色名字固定從 offset 159 起、每個 10-byte 一個欄位、依 `CharacterId` 順序（`GMAIN.H`）排列，NUL 補滿到 10 bytes；`TEMP.GAM`（執行期存檔／續存 swap file）與所有 `SAVE*.GAM` 存檔都是同一份 `GameState` 佈局的複本（只是 offset 因額外 header 而不同，例如某次遊玩中的 `TEMP.GAM` 是 offset 59），用同一個固定 ASCII 名字＋NUL 的位元組樣式即可可靠地動態定位，不需要寫死絕對位址。
+- **渲染路徑已確認相容中文，不需改引擎**：這個欄位有兩個顯示路徑——駐紮營地角色名單畫面（`SCREENS/ENCAMP.C` 的 `font_draw_text_ds`）跟對話發言者標籤（`DIALOG.C` 透過 `strcpy` 複製進 `g_speaker_names[6][32]`）——兩者最終都會走到 `font_draw_text_far()`，也就是全遊戲 DDX 文字共用的同一支渲染函式，`c >= 0x80 && c <= 0xDF` 判斷雙位元組中文 lead byte 的邏輯本來就在，完全不用額外修改。另外 `DIALOG.C` 裡有一段依 `g_speaker_names[idx][0] == 'A' || == 'O'`（英文冠詞 a/an）跟名字最後一個字母是否為 `h`/`y`（英文複數/所有格變化）的舊有文法邏輯，因為中文編碼的 lead/trail byte 值永遠不會等於這些 ASCII 字母，這段邏輯對中文名字會自然跳過、不會誤觸發，不需要處理。
+- **編碼驗證**：六個詞彙表既有譯名（洛克利爾／戈拉斯／歐文／帕格／詹姆士／派特魯斯，2 bytes/字 + 1 byte NUL 終止）全部落在 9 bytes 以內，舒服塞進既有的 10-byte 欄位，不需要放大結構體、不影響其後欄位的 offset。
+- **STATUS**：已完成。新增工具 `tools/text/patch_character_names.py`（動態搜尋原始 ASCII 名字＋NUL 樣式定位欄位、驗證欄位內容跟長度、原地替換成中文編碼＋NUL 補滿，檔案總長度不變），已套用到 `dist/test_v100_zh/startup.gam`、`TEMP.GAM`，以及 `GAMES/` 底下全部既有測試存檔（共 40 個檔案），修改前的版本備份在 `scratchpad/gam_backup_pre_hero_names/`。**原始未修改的 `betrayal-at-krondor/startup.gam` 完全沒有被動到**，符合「絕不修改原始遊戲資料夾」的鐵律。尚未在實機（DOSBox-X）上驗證顯示效果，見 `HANDOFF.md`「待處理」。
 
 ---
 
