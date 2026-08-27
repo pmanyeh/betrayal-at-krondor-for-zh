@@ -38,15 +38,15 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
-## 3. BOK 書籍系統（Phase 7，前置調查已完成，尚未動工）
+## 3. BOK 書籍系統（Phase 7，C11 試點已完成並實機驗收，其餘 21 章待翻）
 
 - **SOURCE**：`krondor.001` 內的 22 個 `Cxx.BOK` 章節書籍檔（觸發點：`SRC/GAME/GMAIN.C: gmain_play_chapter_intro`，檔名樣板 `"C00.BOK"` + chapter/part 偏移）。
 - **FORMAT**：全新私有二進位格式——`u32` 總長 + 頁面目錄 + 每頁 56-byte 頁首（文字避開矩形、圖片清單）+ 帶控制標籤的文字流（`0xF4`=樣式區塊、`0xF1`=版面區塊、`0xF3`=保留 no-op、`0xF0`=結束符）。共用資源：`BOOK.FNT`／`BOOK.SCX`／`BOOK.BMX`／`BOOK.PAL`。
-- **EXTRACTABLE**：可用既有 `bak rmf extract` 挖出原始 bytes，但**目前沒有任何工具能解析內部結構**（頁面/樣式/文字流需要從零寫 parser，比照 `ddx_extract.py` 的方式）。
-- **PACKABLE**：否，需要從零開發（比照 `ddx_pack.py`）。
-- **RUNTIME PATH**：`BOOKTEXT.C` 呼叫的是底層 `font_render_glyph_or_ctrl()`（**繞過** `font_draw_text_far()`），只認得 `0xE0`/`0xF0` 開頭的樣式控制碼，其餘位元組一律當單位元組英文字元繪製；`booktext_draw_glyph_kerned`／`booktext_layout_rndr_one_line` 是自己刻的一套逐 byte 排版/換行/齊行邏輯。
-- **CHINESE READY**：**否**——需要改 `BOOKTEXT.C` 原始碼教它認得雙位元組配對（或改成呼叫已支援中文的 `textwrap_draw_aligned`）。
-- **STATUS**：未動工。左上角放大首字母是獨立圖片（`BOOK.BMX` 圖庫），中文沒有對應概念，需要設計決策（重畫圖或整個拿掉）。工程量 = 新工具（parser/packer）+ 引擎改動（雙位元組支援）+ 設計決策，不能只算翻譯量。
+- **EXTRACTABLE**：是。`tools/text/bok_extract.py`／`bok_extract_pristine.py` 已完整解析內部結構（頁面目錄／頁首導覽欄位／避讓矩形／圖片記錄／控制標籤文字流）。
+- **PACKABLE**：是。`tools/text/bok_pack.py`（＋`bok_rebuild_common.py`／`bok_translate.py` scaffold/build pipeline，跟 DDX 對稱）。BOK 導覽靠邏輯頁號不靠檔案 offset，所以中文變長／變短都行，packer 會重算頁 offset 表與檔長 header。全 22 個原版 BOK round-trip 位元組完全一致。
+- **RUNTIME PATH**：`BOOKTEXT.C` 自己刻的逐 byte 排版/換行/齊行邏輯（`booktext_draw_glyph_kerned`／`booktext_layout_rndr_one_line`／`booktext_compute_justify_spacing`／`booktext_render_line_aligned`），**繞過** `font_draw_text_far()`。
+- **CHINESE READY**：**是**（upstream commit `b066d52`）。那三個 byte-walk 迴圈已加 `0x80`–`0xDF` 雙位元組配對支援，繪圖走 `font_draw_zh_glyph()`（新增 `booktext_draw_zh_pair_kerned()` helper）；ASCII 書本文字不動、仍用 `BOOK.FNT`；`VMCODE.OVL`／`SX.OVL` 維持 byte-identical。
+- **STATUS**：**C11.BOK（第一章開場書，14 段）已翻譯部署並在 DOSBox-X 實機驗收通過**——齊行／換行／段距／全形標點／翻頁都正常。剩：(1) 其餘 21 個章節書純翻譯；(2) 左上角放大首字圖——設計決定已定為「重繪成中文首字點陣圖」，需另寫 `BOOK.BMX` 影像 codec（目前仍暫留英文燙金字母）；(3) CJK 行首標點避頭尾未做（與 DDX 同一引擎層限制）。細節見 `HANDOFF.md`。
 
 ---
 
@@ -171,7 +171,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 ## 10. Phase 8 Acceptance 對照
 
 - [x] 已盤點 DDX dialog（§2，Phase 6 既有基礎設施）
-- [x] 已盤點 BOK books（§3，Phase 7 前置調查）
+- [x] 已盤點 BOK books（§3，Phase 7；codec＋引擎已完成，C11 試點實機驗收通過，其餘 21 章待翻）
 - [x] 已盤點 UI labels（§4 MenuPage/NamedTable/DialogWidget 資源家族；§4a 話題詢問選單 `KEYWORD.DAT`）
 - [x] 已盤點 inventory（§5 INVENTOR.C/INVINSP.C）
 - [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5；物品簡短名稱＝§4c `OBJINFO.DAT`，已完成翻譯，`wName_split_off` 斷行仍待實機驗證）
