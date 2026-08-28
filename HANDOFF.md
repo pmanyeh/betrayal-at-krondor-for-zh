@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-27（BOK 書籍系統：codec＋`BOOKTEXT.C` 雙位元組引擎改動＋全部 22 個章節書翻譯部署；C11 實機驗收通過，其餘 21 檔待實機看）
+**最後更新：** 2026-08-29（場景畫面「離開」按鈕＋說明翻頁：`TOWNSCN.C` 大改，村莊／王宮實機驗收通過）。前一輪：BOK 書籍系統 codec＋`BOOKTEXT.C` 雙位元組＋22 章翻譯部署（C11 實機過，其餘待看）。
 
 **這份文件刻意保持精簡，設計成每個新 session 開始前整份讀完就好。** 完整的逐 session 歷史敘事（每個 bug 怎麼定位根因、怎麼修、學到什麼教訓）都搬到 [docs/HANDOFF_ARCHIVE.md](docs/HANDOFF_ARCHIVE.md) 了——只有在需要追查某個舊問題的細節（例如「這個 bug 之前是怎麼修的」）時才去那份用關鍵字搜尋進去讀一小段，不需要整份讀過。**下方每次有新進度，把對應項目從「待處理」搬到別處或刪掉，不要只往後面加，保持這份文件短小。**
 
@@ -17,7 +17,7 @@
     - 另外發現一種**先前章節沒出現過的樣式標記字元 `á`（0xE1）**，用於帕格與歐文之間的「心靈感應／念力交談」段落（entry #429），處理方式跟 `ã` 完全相同（逐字元湊長度），只是換一個標記位元組。
     - 這章新增了一批專有名詞（加米娜、卡爾贊、潘納斯提安登、提米里安雅、達沙梵、蘇塔卡米、阿爾瑪洛達卡、瓦爾赫魯等），**尚未回填進 `glossary.json`**，見下方「待處理」。
     - 跟 `DIAL_Z15` 一樣，`\t`／`\n`／`@N`／`\x00` 及所有樣式標記 token 都用 `extract_tokens()` 逐筆自動比對驗證過，362 筆全部 0 個 token-mismatch fallback。
-- **部署狀態**：全部 32 個章節確認部署在 `dist/test_v100_zh/`（2026-08-26 用 `DDX_BUILD_MANIFEST.json` 的 `applied` 欄位重新驗證過，不是只看文件敘述——之前一度誤判過，詳見 archive §16.1。這次驗證：32 個檔案、5,931 筆全數套用、0 個 skipped_token_mismatch、0 個 skipped_source_drift）。`dist/test_v100_zh/krondor.exe` 目前對應 upstream 子模組 commit `e3d9ef9`，含 2026-08-25 那輪修的 6 個中文專屬引擎 bug（`#Name#` 標題解析截斷、兩處分頁邏輯缺口、標題橫幅蓋內文、多餘空行、螢幕雜訊迴歸——細節見 archive §16）。`DIAL_Z30`（跟先前的 `DIAL_Z20`／`Z31`／`Z19`／`Z17`／`Z15` 一樣）尚未在實機（DOSBox-X）上實際跑過驗收，只跑過 build/validate 的離線驗證。
+- **部署狀態**：全部 32 個章節確認部署在 `dist/test_v100_zh/`（2026-08-26 用 `DDX_BUILD_MANIFEST.json` 的 `applied` 欄位重新驗證過，不是只看文件敘述——之前一度誤判過，詳見 archive §16.1。這次驗證：32 個檔案、5,931 筆全數套用、0 個 skipped_token_mismatch、0 個 skipped_source_drift）。`dist/test_v100_zh/krondor.exe` 目前 = `e3d9ef9`（含 2026-08-25 那輪修的 6 個中文專屬引擎 bug：`#Name#` 標題解析截斷、兩處分頁邏輯缺口、標題橫幅蓋內文、多餘空行、螢幕雜訊迴歸，細節見 archive §16）+ `b066d52`（BOOKTEXT 雙位元組）+ `c801185`~`15ccd73`（TOWNSCN 離開按鈕／說明翻頁），**458064 bytes，`VMCODE.OVL`／`SX.OVL` byte-identical**。`DIAL_Z30`（跟先前的 `DIAL_Z20`／`Z31`／`Z19`／`Z17`／`Z15` 一樣）尚未在實機（DOSBox-X）上實際跑過驗收，只跑過 build/validate 的離線驗證。
 - 字庫 **5656 個 ID 槽位**（實際 **3381** 個相異字元），全真倚天點陣、零 fallback。詞彙表 `glossary.json` 共 **418** 筆。
 - **全遊戲 DDX 對話翻譯進度：5,931 / 5,931（100%）。** 剩餘工作只剩 `TEST.json`（1 筆）的打包，見下方「待處理」。
 - **BOK 書籍系統：全部 22 個章節書已翻譯部署**（2026-08-27，原本 [text-surface-inventory.md §3](docs/research/text-surface-inventory.md) 標「未動工」的一整塊，Phase 7）。C11 試點（codec＋引擎＋實機驗收）之後，其餘 21 個章節書（`C12`/`C21`/`C23`/`C31`/`C32`/`C41`/`C43`~`C46`/`C51`~`C53`/`C61`/`C63`/`C71`/`C81`/`C83`/`C91`/`C92`/`C94`）一次翻完——共 **294 筆文字 run**，`bok_rebuild_all.py` 批次重建 0 個 token-mismatch／0 個 source-drift，全數部署為 `dist/test_v100_zh/` 底下的 loose `Cxx.BOK`（manifest：`dist/test_v100_zh/BOK_BUILD_MANIFEST.json`）。部署前的全字庫涵蓋率掃描抓到 **38 個新增中文字**沒收錄，已用 `build_font.py --from-translations` 重新產生字庫（5656 → **5694 個 ID 槽位**），DDX 譯文不受影響（只 append）。`glossary.json` +6 筆（小徑／大徑法門、西境之主、預言、霍丘佩帕、王夫、統帥莫萊伍夫），共 **424** 筆。**只有 C11 在實機上跑過**——其餘 21 個章節書只跑過 round-trip／build／字庫離線驗證，尚未實機驗收（章節開場書只在對應章節轉場時觸發，需要對應章節邊界的存檔才看得到；用中途存檔無法重播）。分割 run（inline `F4` 強調區塊把一句話拆成三段，例如 C12「你真該聞聞／冬天／的味道」）翻譯時已確保重組後語句通順、強調詞完整。以下三件事仍未做：
@@ -29,8 +29,19 @@
   - **已知 & 待辦**（見下方「其他待辦」）：(1) 首字放大圖目前仍是英文燙金字母（互動式暫留，等 BMX codec，設計決定已定為「重繪成中文首字」）；(2) CJK 行首標點（`。」？`）未做避頭尾，跟 DDX 那條「孤兒行／孤立標點」是同一個引擎層限制，非迴歸；(3) 21 檔 BOK 尚未實機驗收（含 `C32`／`C63`／`C83` 行距 18 下最後一句是否被截）；(4) 加 `.BOK` 頁面會壞 world-render，根因未明。
   - **踩過的坑**：一開始把「開工前的 git 備份」做成把 upstream 那批**未提交的 VESA/EVG 原生 CJK POC WIP**（`video_init(9)`、`font_draw_evg_native_poc()`、`EVG.ASM`）一起 commit 進去，結果編出來的 exe 帶了 VESA POC、`VMCODE.OVL` 也 diverge。已解開：upstream 現在是 `e3d9ef9` → `b066d52`（只有 `BOOKTEXT.C`），VESA POC 退回成 working-tree 未提交狀態（原本就是這樣）。WSL 編譯 clone（`~/krondor-build`）的 VESA WIP 也還原了，且多留一份 `stash@{0}` 當保險（確認實驗沒壞後可 `git stash drop`）。**教訓：備份未提交 WIP 時，不同來源的實驗改動要分開，不要一鍋 commit。**
 - **隊伍六名固定角色的名字已翻譯部署**（2026-08-27，原本 Phase 8 盤點標記「暫不處理」的 §8，見 [text-surface-inventory.md §8](docs/research/text-surface-inventory.md)）：`Locklear`／`Gorath`／`Owyn`／`Pug`／`James`／`Patrus` 這六個名字**不是 DDX/BOK 資源，原始碼裡也沒有任何字串常數**，是直接烙在遊戲資料檔（`STARTUP.GAM`「新遊戲」範本＋`TEMP.GAM`／`SAVE*.GAM` 存檔）裡的固定 10-byte／欄位二進位資料。查明來源後確認：(1) 顯示路徑（駐紮營地角色名單、對話發言者標籤）最終都走 `font_draw_text_far()`，跟全部 DDX 文字共用同一支已支援雙位元組中文的渲染函式，不需要改引擎；(2) 詞彙表既有譯名（洛克利爾／戈拉斯／歐文／帕格／詹姆士／派特魯斯）全部在 9 bytes 以內，塞得進既有的 10-byte 欄位，不需要放大結構體。新增工具 `tools/text/patch_character_names.py`（動態定位＋驗證＋原地替換，檔案長度不變），已套用到 `dist/test_v100_zh/startup.gam`、`TEMP.GAM`，以及 `GAMES/` 底下全部既有測試存檔（共 40 個檔案，修改前備份在 `scratchpad/gam_backup_pre_hero_names/`）。原始未修改的 `betrayal-at-krondor/startup.gam` 沒有被動到。**尚未在實機上驗證顯示效果**（見下方「待處理」）。
+- **場景畫面（村莊／寺廟／客棧／王宮…）的「離開」按鈕＋說明翻頁已完成並實機驗收**（2026-08-29，`upstream` commit `c801185`~`15ccd73`，只改 `TOWNSCN.C`，`VMCODE.OVL`／`SX.OVL` 維持 byte-identical，krondor.exe 458064 bytes）。這是使用者提的一整塊 UX 改動——起因是中文說明比英文長、一個框塞不下要翻頁，但原本點畫面沒有「翻頁」這個動作，點下方一律觸發「離開」，文本永遠看不完。做法：
+  - **右上角「離開」按鈕**：畫在上緣羊皮紙（`draw_rect_filled` + `font_draw_text_far("離開")`），熱區是**整條上緣**（`0,0,320,24`），排在 menupage 的**第 0 位**（先被 hit-test，贏過任何延伸到角落的 NPC 熱區）。
+  - **原本的底部「離開條」**（每個場景最後一個 actor，寬又低的矩形 `~(0,114,316,83)`）在組 menupage 熱區時用**矩形形狀**判斷丟掉（不是只看 `cKind`——王宮 `GDS2B` 的離開條是 `cKind==2`）。
+  - **點「離開」＝跑那條離開 actor 的真實 dispatch**（不是寫死的 `nExitScene`）：`townscene_load` 掃描時記下該 actor 的 `index+0x80` 存進 `s_exitBarAction`，按鈕的 `wAction_id` 就設成它；左鍵點按鈕會落進既有的「啟動」分支（非右鍵「檢視」分支），照原樣播 `dwAltDialogKey`、依結果 remap `di`、再離開。王宮就是靠這個播出「不能從正門走、走下水道」那段（`DIAL_Z15` node 1500147）。ESC 也 remap 到 `s_exitBarAction`。
+  - **說明翻頁改成熱區**（`wAction_id==2`，rect = 下方 `y 130..200` 整條，排在**最後**讓 NPC 熱區優先）：點文字區前進一頁、翻到底再點回第一頁；**不阻塞**，NPC／商店／旅店／離開隨時可點。翻頁在場景**淡入之後**才跑（進場時 palette 是黑的，`palette_screen_clear_black()` 會把 page2 也清黑，翻頁若在淡入前跑，除了最後一頁全是黑的）。翻頁之間用 `cga_save_rect_to_buffer`／`cga_rect_paste_from_buffer` 存/貼「乾淨說明區」快照來清舊字（重跑 idle 動畫會讓只做 ambient overlay 的場景底圖沒被重畫）。
+  - 標題 `#…#` 掃描改成 CJK pair-aware（trail byte 可能是 `0x23`）。
+  - **教訓**：(a) menupage 熱區 **hit-test 取第一個命中**，要贏過別人就排前面；(b) actor dispatch 分左鍵「啟動」／右鍵「檢視」兩條分支（`menupage_state_0e7c() == 2` 判斷），離開這種動作是「啟動」分支；(c) 進場淡入期間 palette 全黑，任何需要玩家看畫面的互動都要等 `palette_fade_in` 之後。
 
 ## 待處理 / 已知問題
+
+### ⚠️ 對話模式點「Good bye」會當機——下一輪要修
+
+使用者回報：進入 NPC 對話（`Ask about` 話題選單那個模式）後，點「Good bye」結束對話時遊戲當機。尚未調查。相關檔案推測：`SRC/DIALOG/ASKABOUT.C`（`"GoodBye"` 硬編碼字串在 L310、話題選單迴圈 `askabout_menu_page_run_selection()`）、`SRC/DIALOG/DIALOG.C`。可能跟中文話題選單、或結束對話時的清理/還原路徑有關。下一輪 session 專門處理這個。
 
 ### ⚠️ 分頁「孤兒行／孤立標點」——尚未解決
 
@@ -66,11 +77,15 @@
 - **重要**：`uv sync` / `uv run` 絕對不能在 `/mnt/d/...`（Windows 掛載磁碟）上跑，DrvFs 對 `utime`/硬連結操作會直接報錯（`Operation not permitted` / `Invalid cross-device link`）。一定要在 WSL 原生檔案系統上跑，跑完再把 `work/KRONDOR.EXE` 複製回 Windows 端。
 
 ### 重新編譯的標準流程
-1. 在 `upstream/betrayal-at-krondor/bak/SRC/...`（Windows 端）修改 C 原始碼，commit。
-2. `wsl -e bash -lc "cd ~/krondor-build && git pull --ff-only"`
+**⚠️ WSL 編譯 clone（`~/krondor-build`）目前有一批未提交的 VESA/EVG POC WIP**（`EVG.ASM`／`VIDDRV.C`／`FONT.C`／`BOOT.C` 等 8 檔＋`VSV.ASM` 未追蹤），是使用者另一條平行實驗。它會擋 `git pull --ff-only`，所以每次編譯要先 stash、編完再還原。另外 `~/krondor-build` 還留了一個 `stash@{0}`（"VESA/EVG native-CJK WIP - parked for BOK C11 build"）是早期 pop 衝突留下的重複保險，跟現在的 working tree 內容相同，使用者確認實驗沒壞後可 `git stash drop`。**別把這批 WIP 一起 commit 進去**（教訓：2026-08-27 誤把它包進「備份」commit，編出來的 exe 帶了 `video_init(9)` VESA POC，`VMCODE.OVL` 也 diverge）。
+1. 在 `upstream/betrayal-at-krondor/bak/SRC/...`（Windows 端）改 C 原始碼、`git add <該檔> && git commit`（只 add 你改的檔，別 `git add -A`）。
+2. `wsl -e bash -lc "cd ~/krondor-build && git stash push -u -m wip && git pull --ff-only"`
 3. `wsl -e bash -lc "cd ~/krondor-build && export BAK_TOOLCHAIN=/home/pmanyeh/bak-toolchain && export PATH=\$HOME/.local/bin:\$PATH && uv run bak build"`（增量編譯，通常一兩分鐘）
-4. 看到 `❌ KRONDOR.EXE: size differs` 是**正常的**——這個檢查是設計來抓「不小心改壞」用的，只要 `VMCODE.OVL`/`SX.OVL` 都還是 `✅ BYTE-IDENTICAL` 就代表工具鏈跟連結沒問題，是我們自己故意改了 `KRONDOR.EXE`。
-5. 先關掉 DOSBox-X（不然 `work/KRONDOR.EXE` 複製會被鎖檔擋掉），再 `cp ~/krondor-build/work/KRONDOR.EXE /mnt/d/git/betrayal-at-krondor-for-zh/dist/test_v100_zh/krondor.exe`。
+4. 看到 `❌ KRONDOR.EXE: size differs` 是**正常的**——只要 `VMCODE.OVL`/`SX.OVL` 都還是 `✅ BYTE-IDENTICAL` 就代表工具鏈跟連結沒問題，是我們自己故意改了 `KRONDOR.EXE`。
+5. `cp ~/krondor-build/work/KRONDOR.EXE scratchpad/KRONDOR_xxx.EXE`（先複製到 scratchpad，因為 DOSBox-X 常鎖住 dist 的 exe）。
+6. 還原 WSL clone：`wsl -e bash -lc "cd ~/krondor-build && git reset --hard e3d9ef9 && git stash pop"`（回到 VESA WIP 狀態）。
+7. 關掉 DOSBox-X（`Get-Process dosbox-x | Stop-Process -Force`，常有殘留行程），再 `cp scratchpad/KRONDOR_xxx.EXE dist/test_v100_zh/krondor.exe`。
+8. 目前 `dist/test_v100_zh/krondor.exe` = `e3d9ef9` + `b066d52`（BOOKTEXT 雙位元組）+ `c801185`~`15ccd73`（TOWNSCN 離開按鈕／翻頁），458064 bytes。
 
 ### DOSBox-X 啟動
 - 執行檔：`D:\git\DOSBox-X-AI\build-memory\dosbox-x.exe`
