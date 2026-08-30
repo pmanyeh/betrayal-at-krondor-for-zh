@@ -947,3 +947,61 @@ session 一開始檢查 `dist/test_v100_zh/DDX_BUILD_MANIFEST.json`，發現這�
 ### 16.8 本次 session 沒有處理翻譯內容
 
 跟 §12～§15 不同，這次 session 全程是 C 引擎 bug 修正，沒有翻譯任何新章節。累計已翻譯／已部署狀態沿用 §15.4 的數字不變：**22 個** DDX 章節檔、1809 筆對話，剩餘約 4,122 筆待翻，下一個最小的候選依序是 `DIAL_Z17`（152）→`Z15`（159）→`Z19`（362）→`Z31`（374）→`Z20`（867）→`Z30`（2208）。`dist/test_v100_zh/krondor.exe` 目前對應 upstream 子模組 commit `e3d9ef9`（含本節全部 6 個實質性修正，2 個臨時除錯 commit 已在後續 commit 裡清掉程式碼但仍留在 git 歷史裡）。
+
+
+## 17. 2026-08-30 Session：資源檔翻譯大推進（法術／怪物名／地圖地名／遊戲選單）＋選單按鈕小字＋MenuPage `menupage_free` 地雷
+
+這是一次「把 `text-surface-inventory.md` §4／§4b 那一整塊沒動過的 `.dat` 資源檔一次做掉」的 session。全程模式一致：**逆向格式 → 寫 append-only 或 pool-rebuild 的小 codec（scaffold/status/build）＋單元測試 → 翻譯（大量沿用 glossary）→ 該用小字型的畫面在對應 C 檔包 `g_bSmallZhMode` → WSL 重編 → 部署 loose 檔＋新 exe → 更新 HANDOFF/inventory**。`VMCODE.OVL`／`SX.OVL` 全程 byte-identical。
+
+### 17.1 新增的資源 codec（全部 `tools/text/`，介面比照 `objinfo_translate.py`）
+
+| codec | 檔案 | 重建策略 | 測試 |
+|---|---|---|---|
+| `spell_translate.py` | `SPELLS.DAT`（45 法術名）／`SPELLDOC.DAT`（315 說明列）／`INVSPELL.DAT`（38 法術書條目） | append-only（原 blob 不動、只改已翻 offset）；引擎端 `cspell_subsystem_unload` 用載入時存的指標直接 free，所以安全 | `test_spell_translate.py`（6） |
+| `mnames_translate.py` | `MNAMES.DAT`（64 槽，40 真名＋24 `INVALID MONSTER` 佔位） | append-only；`combatenc_mnames_lookup_dest` 用區域變數指標 free，安全 | `test_mnames_translate.py`（6） |
+| `fmap_translate.py` | `fmap_twn.dat`（33 城鎮標籤，`檔頭 + 每筆 長度｜名字｜X｜Y`，無 offset 表） | 逐筆改寫長度前綴；`fmap_hotspots_unload` 逐 label free，安全 | `test_fmap_translate.py`（6） |
+| `menupage_translate.py` | 52 個 `req_*.dat`＋`contents.dat`（`28B 檔頭含 title offset｜u16 按鈕數｜每按鈕 0x21B 含 3 個字串 offset｜u16 blobSize｜字串池`） | **整個字串池重建**（見 §17.4 地雷）；未翻的檔 byte-identical | `test_menupage_translate.py`（5） |
+
+全套件單元測試 69 → **92** 通過。
+
+### 17.2 翻譯內容
+
+- **法術系統**：45 法術名（全譯，`glossary.json` 新 `spell` 分類 45 筆；`DIAL_Z20` 曾把 Skyfire→『天火術』、Flamecast→『擲焰術』，沿用）＋188 個 SPELLDOC 說明列（公式化：`消耗：X 生命／體力`／`傷害：N x 消耗`／`持續：N 分鐘 x 消耗`／`視線：需要／不需`＋效果句；乘號一律用 ASCII x 避開 lesson #7 的區段外靜默漏字）＋38 個法術書條目（依 `spellIdx` 對應同一法術名）。SPELLDOC 有 127 個原版空白列，依設計留空。
+- **怪物名**（`MNAMES.DAT`）：40 個真名，隊員沿用既有譯名，其餘 32 個回填 `glossary.json` 新 `creature` 分類（`moredhel warrior`→莫瑞德戰士、`Servitor of Lims-Kragma`→林絲克拉格瑪僕役、各種 Giant/Ogre/Wyvern…）。這是「觀察敵人」講評對白裡 `@` token 展開的來源（`DIALOG.C` case 17 → `combatenc_mnames_lookup_dest` → `g_speaker_names[]`）。
+- **大地圖城鎮標籤**（`fmap_twn.dat`）：33 個，32 個直接沿用 glossary `place` 譯名（`Lyton` 挑 place 的「萊頓」不是 person 的「萊頓勳爵」），`Dencamp-On-The-Teeth` 新譯「世界之齒紮營地」（與 `DIAL_Z13` 地點標題一致；`DIAL_Z31` 內文用「丹肯營地」，屬既有不一致，glossary 已加註）。
+- **遊戲選單**（`req_*.dat`）：255 標籤／167 相異，只翻 **11 個玩家畫面共 53 標籤**（`req_opt0/opt1` 主選單／暫停選單、`req_pref`、`req_save`/`req_load`、`req_heal`、`req_inv`/`req_inv2`、`req_gi`、`req_info` 的「離開」、`req_tele` 傳送目的地 12 處）。約 40 個場景編輯器／作弊 `req_*` 檔（`REQ_DBUG`／`REQ_GE*`／`REQ_TE1~15`／`REQ_ZONE`／`REQ_KNOC`／`REQ_CHET`）**掃描但不翻**——正常玩家永遠看不到。
+
+### 17.3 引擎小字改動（`upstream` `f4cd826`→`dbf3288`，7 個 commit）
+
+同一手法（函式內 save/set `g_bSmallZhMode = 1`、每個 return 前還原），含 `%d` 的硬編碼字串換中文 byte literal 時用相鄰字串常數把 `%d` 隔開，避免 C 的 `\x` 十六進位跳脫吃到後面的字元：
+
+- **`f4cd826` `CSPELL.C`**：戰鬥施法面板 `cspell_list_draw_castable()`（法術名清單，10px 行距）＋`cspell_info_panel_show()`（資訊面板，11px 行距）→ 小字；三行硬編碼 `Cost/Damage/Health-Stamina` 中文化（後兩者執行期會蓋掉 SPELLDOC 對應行）。
+- **`1993e61` `CBENC.C`**：「觀察敵人」屬性擲骰面板 `combatenc_anim_actor_stat_rolls()`（8 個 `Health:/Stamina:/…` 標籤，數值欄在 +50px）→ 小字＋2 字中文標籤。**注意**：這個面板顯示幾行是 `RND(100) <= 觀察者的「鑑定」技能（stat index 8）` 的隨機檢定，不是 bug，跟翻譯無關（`combatenc_stat_roll_draw_line` 的 `if (roll > stat) return;` 我沒動）。
+- **`46d03e2` `COMBAT.C`**：三個 `combat_arena_*` 底部 HUD 面板（近戰 `Thrust/Swing/Damage/Accuracy/Left/Right`；遠攻／施法瞄準 `Choose a target/Accuracy:/Damage:/quarrels remaining`）→ 小字＋中文標籤。
+- **`229ece5` `FMAP.C`**：一行——`g_wFmapLabelRectH` 下限拉到 17，讓 hover 切城鎮時擦舊標籤的 save/restore 矩形蓋得住 16px 中文字，否則殘影。
+- **`0cfa32c` `WIDGET.C`**：`widget_button_render_full()` + `widget_draw_text_button()` 兩條按鈕標籤繪製路徑包小字 → **全遊戲所有選單按鈕**中文走 10×10（按鈕 ~15px 高塞不下 16px）。
+- **`dbf3288` `MODALSCR.C`**：`modalscreen_inv_draw_gold_amount()`（旅店住宿／休息確認畫面上緣 party-stats 面板的「隊伍金幣 X金幣 Y銀盾」行）→ 小字（標籤 16px 5 字會撞進右邊 60px 處的金額）。
+
+`krondor.exe`：458736（session 開始，`bd9d4b4`）→ … → **458816**（`dbf3288`）。字庫：`ZH16.DAT` 只 +1 字（fullwidth solidus，法術說明用）；`ZHSTAT.DAT` 797 → **943 glyph**（法術 903 → 戰鬥面板 908 → MNAMES 926 → 選單 943）。`build_small_font.py` 標準來源清單現為 `UI_HARDCODED`＋`KEYWORD`＋`CHARACTER_NAMES`＋`OBJINFO`＋`SPELLS`＋`MNAMES`＋`MENUPAGE`＋`--ddx-title-dir`。`glossary.json` 424 → **501** 筆（新增 `spell` 45、`creature` 32）。
+
+### 17.4 地雷（已修）：MenuPage `.dat` 不能用 append-only 重建——`MEM:34` 一開遊戲就閃退
+
+第一版 `menupage_translate.py` 比照法術／MNAMES 用 append-only（保留原 blob、只把已翻 offset 指到尾端新增字串）。部署後**一開遊戲載入 `req_opt0.dat` 就 `MEM:34 (Heap Corrupt!)` + Null pointer assignment 閃退**（掉回 DOS）。
+
+- **先 bisect**：把 11 個 loose `req_*.dat` 移走、保留新 exe＋新 ZHSTAT → 開機正常跑到片頭。確認是 `.dat` 檔的問題，不是引擎／字庫。
+- **根因**：`MENUPAGE.C: menupage_free()` **不記錄字串池的 malloc 起點**，而是掃過 title＋所有按鈕的三個標籤指標、**取最小值**當 `stringBlob` 基底來 `my_free()`（`galloc_zfree`）。append-only 會讓原本在 blob offset 0 的字串變成孤兒（沒有標籤再指它），最小指標於是變成 `stringBlob + N`，`free()` 一個非塊首的內部指標 → 堆積損毀。`MEM:34` 是**滯後偵測**——`galloc_safe_zcalloc()` 每次配置前跑 `heapcheck()`，是下一次載入其他 `.dat` 時才報出來（跟先前那次 DDX offset bug 同樣的滯後特徵）。
+- **修法**（commit `18e48ec`）：`_build_one` 改成**整個字串池重建**（已翻＋未翻全部重新排、去重），依「title→各按鈕」參照順序排，保證 offset 0 一定有活字串，`menupage_free()` 就能正確反推基底。未翻的檔走 byte-identical 快速路徑。實機驗證：主選單顯示中文（開始新遊戲／讀取進度／偏好設定／章節目錄／退出至 DOS），連續跑 20+ 秒不閃退。
+- **教訓（已寫進 HANDOFF「踩過的坑」）**：**新資源格式寫 codec 前，先看引擎怎麼 `free` 它**——如果是「從內容反推 buffer 基底」（取最小指標之類），就不能 append-only，必須整池重建並保證基底位置有活字串。`spell`／`mnames`／`fmap` 三個 codec 不受影響，因為它們的引擎端是用載入時存下的指標直接 free 或逐筆 free。
+
+### 17.5 編譯環境現況（跟 HANDOFF 舊敘述對不上，已更新）
+
+- Windows `upstream/betrayal-at-krondor`：HEAD 從 session 初的 `bd9d4b4` 推進到 `dbf3288`。working tree 有一批**未 commit 的 VESA/EVG POC WIP**（`EVG.ASM`／`FONT.C`／`FONT.H`／`BOOT.C`），是使用者另一條平行實驗，**別動、別 commit**。`origin` = `https://github.com/canassa/betrayal-at-krondor.git`（別人的 BaK 重建專案，這份是本機工作副本、zh 改動一律只留本機不 push）。
+- WSL `~/krondor-build`：master 落後 Windows `upstream` 很多（`566e11c`，落後 33+ commit），但**線性落後可 fast-forward、沒有分岔**。working tree 有 7 個未 commit 檔（`DIALOG.C`／`FONT.C`／`TEXTWRAP.C`／`DOSMEM.C`／`EMSDET.C`／`VTHUNKS.ASM`／`gfx169d.h`）＋未追蹤的 `toolchain/`，也是平行實驗。**標準循環**：Windows 端 `git add <改的檔> && git commit`（別 `-A`）→ WSL `git stash push -u` → `git pull --ff-only` → `uv run bak build`（看到 `KRONDOR.EXE: size differs` 是正常的，只要兩個 OVL `BYTE-IDENTICAL`）→ 複製 `work/KRONDOR.EXE` → WSL `git reset --hard 566e11c && git stash pop`（還原成落後狀態＋parked WIP）。這一整套 session 內跑了 6 輪，每輪都乾淨。
+
+### 17.6 部署與驗收狀態
+
+`dist/test_v100_zh/` 新增／更新：`SPELLS.DAT`／`SPELLDOC.DAT`／`INVSPELL.DAT`／`MNAMES.DAT`／`fmap_twn.dat`／11 個小寫 `req_*.dat`／`ZH16.DAT`／`ZHSTAT.DAT`／`krondor.exe`（458816），各有對應 `*_BUILD_MANIFEST.json`。部署前的舊字庫／exe 備份在 `scratchpad/dist_backup_pre_{spells,combat,mnames,fmap,menu}/`。
+
+- **已實機確認**：主選單中文顯示＋不再 `MEM:34` 閃退（`18e48ec` 修完後）；大地圖城鎮標籤中文（使用者回「地圖的部分，應該OK了」）；戰鬥施法面板／觀察敵人面板／近戰 HUD 前一版（使用者回「看起來 OK」，還在多試）。
+- **待完整實機驗收**（HANDOFF「其他待辦」§9–12）：法術三畫面（施法選單資訊面板爆行與否、效果句最長「持續打擊全體對手至死」有沒有出框）、`MNAMES` 敵人名內文銜接、`fmap` 城鎮間移動殘影／上緣切字、遊戲選單其餘畫面（暫停選單／存讀檔／偏好設定／傳送清單／旅店住宿「隊伍金幣」行）。
+- **本 session 沒碰**的仍待做：選單大標題（背景圖畫死）、`lbl_*.dat`（NamedTable，Preferences 設定項文字）、`contents.dat` 章名、`cred.dat` 片尾、BOK 首字放大圖、BOK 21 章實機驗收、`DLGWIDG.C` DialogWidget、密碼盤字母、`TEST.json` 打包。

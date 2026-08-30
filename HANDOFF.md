@@ -213,3 +213,4 @@ python tools/text/ddx_rebuild_all.py --manifest dist/test_v100_zh/DDX_BUILD_MANI
 - §10～§11：撿屍／物件說明停住、戰鬥後升級訊息空白死機（皆 RESOLVED）。
 - §12～§15：逐次翻譯 session（`DIAL_Z06`／`Z21`／`Z14`／`Z13`／`Z27`／`Z22`／`Z23`），含 DOSBox-X MCP 除錯工具設定、逐字元樣式排版工具、`DIAL_Z16` 既有 token-mismatch bug 修正。
 - §16：2026-08-24~25 這輪——補完真正的部署、`#Name#` 標題解析截斷、兩處分頁邏輯缺口（`ttmscript_show_dialog_action()`／`dialog_show_by_key()`）、標題橫幅蓋內文、多餘空行、螢幕雜訊迴歸，以及還沒解決的分頁孤兒行問題。
+- §17：2026-08-30 這輪——資源檔翻譯大推進：新增 `spell_translate.py`／`mnames_translate.py`／`fmap_translate.py`／`menupage_translate.py` 四支 codec，翻掉法術系統三檔、`MNAMES.DAT` 怪物名、`fmap_twn.dat` 大地圖城鎮標籤、11 個玩家可見的 `req_*.dat` 遊戲選單；`CSPELL/CBENC/COMBAT/FMAP/WIDGET/MODALSCR` 六個 C 檔加小字（`upstream f4cd826`→`dbf3288`）；踩到並修好「MenuPage `.dat` 不能 append-only 重建，否則 `menupage_free()` 取最小指標當基底 → free 內部指標 → `MEM:34` 一開遊戲閃退」的地雷。
