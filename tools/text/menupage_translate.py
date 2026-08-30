@@ -187,38 +187,76 @@ def cmd_status(args: argparse.Namespace) -> None:
 
 def _build_one(orig: bytes, rows: dict[tuple[int, str], str], char_to_id: dict) -> tuple[bytes, int, int]:
     """rows maps (entry_index, slot) -> translated string. slot 'title' uses
-    entry_index 0. Returns (bytes, applied, skipped_too_long)."""
+    entry_index 0. Returns (bytes, applied, skipped_too_long).
+
+    The whole string pool is rebuilt, not appended to. menupage_free()
+    recovers the malloc base of the string blob by taking the *minimum* of
+    every non-NULL label pointer, so the pool must be laid out with a
+    referenced string at offset 0 -- an append-only rebuild orphans the
+    original offset-0 string and makes menupage_free() my_free() an interior
+    pointer, corrupting the heap (MEM:34). Emitting the pool in
+    title-then-entry reference order keeps a live string at offset 0.
+    """
     (count,) = struct.unpack_from("<H", orig, HEADER_SIZE)
     entries_start = HEADER_SIZE + 2
     blob_off = entries_start + count * ENTRY_SIZE
-    (blob_size,) = struct.unpack_from("<H", orig, blob_off)
-    blob = bytearray(orig[blob_off + 2: blob_off + 2 + blob_size])
-    out = bytearray(orig[:blob_off])  # header + entry table, patched in place below
 
+    if not rows:
+        return orig, 0, 0  # byte-identical fast path
+
+    (title_off,) = struct.unpack_from("<H", orig, TITLE_OFF)
+    orig_blob = orig[blob_off + 2:]
+
+    def local(n: int, slot: str) -> str | None:
+        off = title_off if slot == "title" else \
+            struct.unpack_from("<H", orig, entries_start + n * ENTRY_SIZE + SLOT_OFFSETS[slot])[0]
+        return _resolve(orig_blob, off)
+
+    # every slot in the file, in the order menupage_free scans them, with the
+    # translation substituted where we have one.
+    slots: list[tuple[int, str]] = [(0, "title")]
+    for i in range(count):
+        slots += [(i, "label"), (i, "primary"), (i, "alt")]
+
+    pool = bytearray()
+    interned: dict[bytes, int] = {}
+    new_off: dict[tuple[int, str], int] = {}
     applied = skipped_long = 0
-
-    def repoint(file_off: int, text: str) -> None:
-        nonlocal applied, skipped_long
-        encoded = encode_string(text, char_to_id) + b"\0"
-        new_off = len(blob)
-        if new_off + len(encoded) > 0xFFFF:
-            print(f"warning: menupage string pool would exceed a 16-bit offset; "
-                  f"keeping {text!r}", file=sys.stderr)
-            skipped_long += 1
-            return
-        blob.extend(encoded)
-        struct.pack_into("<H", out, file_off, new_off)
-        applied += 1
-
-    for (n, slot), text in rows.items():
-        if slot == "title":
-            repoint(TITLE_OFF, text)
+    for key in slots:
+        src = local(*key)
+        if src is None:
+            continue
+        zh = rows.get(key)
+        if zh is not None:
+            data = encode_string(zh, char_to_id)
+            if len(data) > 200:  # sanity guard; menu labels are tiny
+                print(f"warning: menupage label {zh!r} encodes to {len(data)} bytes; "
+                      f"keeping English", file=sys.stderr)
+                skipped_long += 1
+                data = src.encode("latin1")
+            else:
+                applied += 1
         else:
-            base = entries_start + n * ENTRY_SIZE
-            repoint(base + SLOT_OFFSETS[slot], text)
+            data = src.encode("latin1")
+        data += b"\0"
+        if data not in interned:
+            if len(pool) + len(data) > 0xFFFF:
+                raise ValueError("menupage string pool exceeds a 16-bit offset")
+            interned[data] = len(pool)
+            pool.extend(data)
+        new_off[key] = interned[data]
 
-    out.extend(struct.pack("<H", len(blob)))
-    out.extend(blob)
+    out = bytearray(orig[:blob_off])
+    struct.pack_into("<H", out, TITLE_OFF,
+                     new_off.get((0, "title"), title_off) if title_off != NONE else NONE)
+    for i in range(count):
+        base = entries_start + i * ENTRY_SIZE
+        for slot, rel in SLOT_OFFSETS.items():
+            cur = struct.unpack_from("<H", orig, base + rel)[0]
+            struct.pack_into("<H", out, base + rel,
+                             new_off.get((i, slot), cur) if cur != NONE else NONE)
+    out.extend(struct.pack("<H", len(pool)))
+    out.extend(pool)
     return bytes(out), applied, skipped_long
 
 
