@@ -89,17 +89,16 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
-## 4b. 大地圖城鎮標籤（`fmap_twn.dat`，新發現，尚未動工）
+## 4b. 大地圖城鎮標籤（`fmap_twn.dat`，已完成翻譯＋一行引擎修正）
 
 呼應 §9 原先列為待確認的開放項目，已追查完成：世界地圖（`FMAP.C`）上顯示的城鎮名稱標籤，來源是另一個獨立資源檔 `fmap_twn.dat`，同樣不屬於 DDX，也不是 §4 的 MenuPage 系列（沒有共用同一個 loader）。
 
 - **SOURCE**：`KRONDOR.RMF` 內的 `fmap_twn.dat`，由 [`SRC/SCREENS/FMAP.C:227`](file:///d:/git/betrayal-at-krondor-for-zh/upstream/betrayal-at-krondor/bak/SRC/SCREENS/FMAP.C#L227) `fmap_twn_load()` 讀取。
 - **FORMAT**：檔頭 `地圖寬(u16)/地圖高(u16)/熱區寬(u16)/熱區高(u16)/城鎮數(u16)`，接著每筆城鎮記錄依序是 `字串長度(u16) + 字串本文 + X座標(u16) + Y座標(u16)`——**沒有 offset 表**，比 §4a 的 `KEYWORD.DAT` 更簡單，是純序列式的長度前綴字串。
-- **EXTRACTABLE**：可用既有 `bak rmf` 工具撈出原始 bytes，內部結構解析工具尚不存在，但格式最簡單、最容易寫。
-- **PACKABLE**：否，需要從零開發，但因格式單純，工程量是本文件所有「需要額外工程」項目裡最小的。
+- **EXTRACTABLE / PACKABLE**：是——`tools/text/fmap_translate.py`（`scaffold`／`status`／`build`，比照 `mnames_translate.py`；每筆記錄改寫 `字串長度` 即可，全未翻時 byte-identical）。單元測試 `tests/unit/test_fmap_translate.py`。
 - **RUNTIME PATH**：`FMAP.C:160/183/193` 呼叫 `font_draw_text_ds`／`font_text_width_ds`，與其餘介面共用同一套已支援中文的繪圖/量測函式。
-- **CHINESE READY**：渲染層是；資源層否（需要 `fmap_twn.dat` 專用 parser/packer）。
-- **STATUS**：未動工。建議與 §4a `KEYWORD.DAT` 一起排進「先做最簡單格式」的批次，作為 §4 通用 codec 開發前的練習/驗證案例。
+- **CHINESE READY**：是。
+- **STATUS**：**已完成**（2026-08-30）。33 個城鎮名全譯（`localization/translated/FMAP_TWN.json`，32 個沿用 glossary `place` 譯名），部署 loose `dist/test_v100_zh/fmap_twn.dat`（manifest `FMAP_TWN_BUILD_MANIFEST.json`）。另需一行引擎修正（`upstream 229ece5`，`FMAP.C`：`g_wFmapLabelRectH` 下限拉到 17，讓 hover 切城鎮時的 label-erase 矩形蓋得住 16px 中文字，否則會殘影；OVL byte-identical）。右下角「Exit」按鈕是 `req_fmap.dat`（§4 MenuPage 家族），不含在內。待實機驗收。
 
 ---
 
@@ -186,7 +185,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5；物品簡短名稱＝§4c `OBJINFO.DAT`，已完成翻譯，`wName_split_off` 斷行仍待實機驗證）
 - [x] 已盤點 spell names/descriptions（§4 spells.dat/spelldoc.dat/InvSpell.dat）—— **已翻譯部署**（`tools/text/spell_translate.py`，2026-08-30，待實機驗收）
 - [x] 已盤點 character names（§8，確認為存檔二進位欄位、暫不處理）
-- [x] 已盤點 location names（§4b `fmap_twn.dat` 大地圖城鎮標籤；其餘地名多半走 DDX）
+- [x] 已盤點 location names（§4b `fmap_twn.dat` 大地圖城鎮標籤——**已翻譯部署**，2026-08-30；其餘地名多半走 DDX）
 - [x] 已盤點 combat messages（§5 CACTOR.C 硬編碼提示 ＋ §4 combat.dat/shoot.dat 選單 ＋ §4 已完成的 `CBENC.C`／`COMBAT.C` HUD 面板硬編碼標籤 ＋ `MNAMES.DAT` 怪物名稱表，後者已翻譯部署）
 - [x] 已盤點 system messages（§7，證實已併入 DDX 基礎設施）
 - [x] 已盤點 save/load UI（§4 req_load.dat/req_save.dat/lbl_load.dat/lbl_save.dat/in_save.dat）

@@ -1,0 +1,337 @@
+{
+  "format": "BAK_ZH_FMAP_TWN_TRANSLATION",
+  "version": 1,
+  "source_file": "fmap_twn.dat",
+  "entries": [
+    {
+      "id": "FMAP_TWN.DAT#0",
+      "index": 0,
+      "source": "LaMut",
+      "x": 106,
+      "y": 86,
+      "translation": "拉姆特",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#1",
+      "index": 1,
+      "source": "Zun",
+      "x": 112,
+      "y": 95,
+      "translation": "尊恩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#2",
+      "index": 2,
+      "source": "Hawk's Hollow",
+      "x": 130,
+      "y": 102,
+      "translation": "鷹谷",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#3",
+      "index": 3,
+      "source": "Loriel",
+      "x": 139,
+      "y": 82,
+      "translation": "洛瑞爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#4",
+      "index": 4,
+      "source": "Tyr-Sog",
+      "x": 145,
+      "y": 68,
+      "translation": "泰索格",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#5",
+      "index": 5,
+      "source": "Yabon",
+      "x": 120,
+      "y": 73,
+      "translation": "亞邦",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#6",
+      "index": 6,
+      "source": "Questor's View",
+      "x": 140,
+      "y": 116,
+      "translation": "尋道崖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#7",
+      "index": 7,
+      "source": "Sarth",
+      "x": 155,
+      "y": 127,
+      "translation": "薩斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#8",
+      "index": 8,
+      "source": "Krondor",
+      "x": 167,
+      "y": 147,
+      "translation": "克朗多",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#9",
+      "index": 9,
+      "source": "Tanneurs",
+      "x": 177,
+      "y": 131,
+      "translation": "坦紐爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#10",
+      "index": 10,
+      "source": "Eggley",
+      "x": 175,
+      "y": 122,
+      "translation": "艾格利",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#11",
+      "index": 11,
+      "source": "Darkmoor",
+      "x": 198,
+      "y": 141,
+      "translation": "黑沼鎮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#12",
+      "index": 12,
+      "source": "Malac's Cross",
+      "x": 208,
+      "y": 141,
+      "translation": "馬拉克十字鎮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#13",
+      "index": 13,
+      "source": "Sethanon",
+      "x": 202,
+      "y": 127,
+      "translation": "賽瑟儂",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#14",
+      "index": 14,
+      "source": "Lyton",
+      "x": 221,
+      "y": 129,
+      "translation": "萊頓",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#15",
+      "index": 15,
+      "source": "Silden",
+      "x": 240,
+      "y": 134,
+      "translation": "錫爾登",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#16",
+      "index": 16,
+      "source": "Sloop",
+      "x": 244,
+      "y": 114,
+      "translation": "斯魯普",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#17",
+      "index": 17,
+      "source": "Romney",
+      "x": 255,
+      "y": 112,
+      "translation": "羅姆尼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#18",
+      "index": 18,
+      "source": "Prank's Stone",
+      "x": 253,
+      "y": 89,
+      "translation": "普蘭克石鎮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#19",
+      "index": 19,
+      "source": "Cavall Keep",
+      "x": 237,
+      "y": 78,
+      "translation": "卡瓦爾堡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#20",
+      "index": 20,
+      "source": "Kenting Rush",
+      "x": 239,
+      "y": 63,
+      "translation": "肯廷拉什",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#21",
+      "index": 21,
+      "source": "Eldpoint",
+      "x": 180,
+      "y": 70,
+      "translation": "艾爾德角",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#22",
+      "index": 22,
+      "source": "Highcastle",
+      "x": 196,
+      "y": 66,
+      "translation": "高堡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#23",
+      "index": 23,
+      "source": "Wolfram",
+      "x": 208,
+      "y": 68,
+      "translation": "沃夫拉姆",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#24",
+      "index": 24,
+      "source": "Dencamp-On-The-Teeth",
+      "x": 223,
+      "y": 52,
+      "translation": "世界之齒紮營地",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#25",
+      "index": 25,
+      "source": "Northwarden",
+      "x": 235,
+      "y": 44,
+      "translation": "北衛城",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#26",
+      "index": 26,
+      "source": "Raglam",
+      "x": 199,
+      "y": 30,
+      "translation": "拉格蘭姆",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#27",
+      "index": 27,
+      "source": "Wyke",
+      "x": 185,
+      "y": 42,
+      "translation": "懷克",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#28",
+      "index": 28,
+      "source": "Caern",
+      "x": 181,
+      "y": 27,
+      "translation": "凱恩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#29",
+      "index": 29,
+      "source": "Sar-Sargoth",
+      "x": 166,
+      "y": 23,
+      "translation": "薩薩戈斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#30",
+      "index": 30,
+      "source": "Harlech",
+      "x": 142,
+      "y": 37,
+      "translation": "哈勒克",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#31",
+      "index": 31,
+      "source": "Armengar",
+      "x": 138,
+      "y": 51,
+      "translation": "阿曼加",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "FMAP_TWN.DAT#32",
+      "index": 32,
+      "source": "Caldara",
+      "x": 58,
+      "y": 79,
+      "translation": "卡爾達拉",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

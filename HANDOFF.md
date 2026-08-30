@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-30（法術系統三檔全譯；戰鬥面板小字型化＋硬編碼字串中文化——`CSPELL.C`／`CBENC.C`／`COMBAT.C`，`upstream 46d03e2`、`krondor.exe` 458768 bytes；新增 `MNAMES.DAT` 怪物名稱表翻譯——40 名，`mnames_translate.py` codec，部署 loose 檔、不用重編。皆待完整實機驗收）。先前：GoodBye 修正與 Ask About 選項翻譯／小字型已實機驗收。
+**最後更新：** 2026-08-30（法術系統三檔全譯；戰鬥面板小字化＋硬編碼中文化——`CSPELL.C`／`CBENC.C`／`COMBAT.C`；`MNAMES.DAT` 怪物名 40 個；`fmap_twn.dat` 大地圖城鎮標籤 33 個（＋`FMAP.C` 一行修 label-erase 矩形高度）。`upstream 229ece5`、`krondor.exe` 458784 bytes。主線翻譯已於 `86f9d93` checkpoint commit。皆待完整實機驗收）。先前：GoodBye 修正與 Ask About 選項翻譯／小字型已實機驗收。
 
 **這份文件刻意保持精簡，設計成每個新 session 開始前整份讀完就好。** 完整的逐 session 歷史敘事（每個 bug 怎麼定位根因、怎麼修、學到什麼教訓）都搬到 [docs/HANDOFF_ARCHIVE.md](docs/HANDOFF_ARCHIVE.md) 了——只有在需要追查某個舊問題的細節（例如「這個 bug 之前是怎麼修的」）時才去那份用關鍵字搜尋進去讀一小段，不需要整份讀過。**下方每次有新進度，把對應項目從「待處理」搬到別處或刪掉，不要只往後面加，保持這份文件短小。**
 
@@ -68,6 +68,16 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 - **部署**：loose `SPELLS.DAT`／`SPELLDOC.DAT`／`INVSPELL.DAT`（`res_fopen` 先找 loose 再翻 RMF）＋`ZH16.DAT`／`ZHSTAT.DAT`＋新 `krondor.exe` → `dist/test_v100_zh/`，manifest：`dist/test_v100_zh/SPELL_BUILD_MANIFEST.json`。部署前 `dist` 的舊字庫／exe 備份在 `scratchpad/dist_backup_pre_spells/`。**尚未實機驗收**——見下方「其他待辦」。
 - **編譯環境註記**：這次重編發現 WSL clone `~/krondor-build` 的 master 落後 Windows `upstream` 很多（`566e11c`，落後 33 個 commit），但是**線性落後可 fast-forward、沒有分岔**。標準循環仍可用：Windows 端 `git add <改的檔> && git commit` → WSL `git stash push -u` → `git pull --ff-only` → `uv run bak build` → 複製 `work/KRONDOR.EXE` → WSL `git reset --hard 566e11c && git stash pop`（還原成落後狀態＋那 7 個 parked WIP 檔）。WSL working tree 那 7 個未 commit 檔（`DIALOG.C`／`FONT.C`／`TEXTWRAP.C`／`DOSMEM.C`／`EMSDET.C`／`VTHUNKS.ASM`／`gfx169d.h`）＋`toolchain/` 是使用者另一條平行實驗，別動、別 commit。
 
+### ✅ `fmap_twn.dat` 大地圖城鎮標籤——已翻譯部署（含一行引擎修正），待實機驗收
+
+旅行大地圖（`FMAP.C`）上各地點的城鎮名（`Eldpoint`／`Krondor`…）。全遊戲最簡單的文字容器：`u16 mapW／mapH／熱區W／熱區H／城鎮數` 檔頭，接著每筆 `u16 字串長度（含 NUL）｜字串本文｜u16 X｜u16 Y`——**沒有 offset 表、沒有 dedup**。`fmap_twn_load()` 依 `len` 逐筆 `galloc`＋讀取，所以名字長度自由；標籤走 `font_draw_text_ds`／`font_text_width_ds`（已支援中文、寬字回報 16px，置中與 rect 寬度自動對）。
+
+- **新工具 `tools/text/fmap_translate.py`**（`scaffold`／`status`／`build`，全未翻時 byte-identical）＋`tests/unit/test_fmap_translate.py`（6 項）。
+- **翻譯**：`localization/translated/FMAP_TWN.json` **33 個城鎮名全譯**，32 個直接沿用 `glossary.json` 既有 `place` 譯名（`Lyton` 有 place／person 兩條，取 place 的「萊頓」），只有 `Dencamp-On-The-Teeth` 是新的——地圖標籤用精簡的「世界之齒紮營地」（跟 `DIAL_Z13` 地點標題橫幅一致；`DIAL_Z31` 內文用「丹肯營地」，屬既有不一致，glossary 已加註）。build 0 fallback。
+- **引擎修正**（`upstream 229ece5`，只改 `FMAP.C` 一行：`g_wFmapLabelRectH` 下限拉到 17）。原本 `g_wFmapLabelRectH = pFont_height[0] + 1`（≈10px，ASCII 字高），但標籤是 16px 中文——hover 切換城鎮時用來擦掉舊標籤的 save/restore 矩形太矮，中文名下緣會殘影。拉到 17 蓋滿。副作用：標籤位置比原本高約 7px（`labelY = townY - rectH`），無妨。`VMCODE.OVL`／`SX.OVL` byte-identical。
+- **部署**：loose `dist/test_v100_zh/fmap_twn.dat`（455 bytes，比原 511 小，中文名較短）＋新 `krondor.exe` 458784 bytes（SHA-256 `881938d418a128639a79e0218e7dfc7180bb8d8d433d9c20a26d23641edac229`）。`ZH16.DAT`／`ZHSTAT.DAT` 不變（76 個相異字全在字庫；大字渲染）。manifest：`FMAP_TWN_BUILD_MANIFEST.json`。舊 exe 備份 `scratchpad/dist_backup_pre_fmap/`。
+- **待做**：地圖右下角「Exit」按鈕是 `req_fmap.dat`（MenuPage 家族），不在這次範圍，要等 §4 通用 codec。
+
 ### ✅ `MNAMES.DAT` 怪物/敵人類型名稱表——已翻譯部署，待實機驗收
 
 戰鬥中「觀察敵人」講評對白（DDX record `0x84`／`0x85`，由 `combatenc_anim_actor_stat_rolls()` 播）內文裡的「moredhel warrior」之類敵人名，來源是 `MNAMES.DAT`——一張 64 槽的怪物類型名稱表，`combatenc_mnames_lookup_dest()`（`CBENC.C`）依 `creatureType` 索引撈出，`DIALOG.C` case 17 展開 `@` token 時 `strcpy` 進 `g_speaker_names[slot]`（`[6][32]` buffer）就地插進內文；每個敵方戰鬥單位的 `.name`（`CBENC.C:100`）也是同一來源。走 DDX 文字路徑（已支援中文），**不用改引擎**。
@@ -104,6 +114,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
    - (d) **戰鬥中近戰 HUD**（`COMBAT.C combat_arena_hud_melee_panel`）——底部小面板 `刺擊／揮砍`、`傷害`、`命中`、`左鍵／右鍵` 三欄不重疊。
    - (e) **戰鬥中遠攻／施法瞄準**（`combat_arena_draw_tgt_info_hud`／`_panel`）——`選擇目標`、`命中：`、`傷害：`、`剩餘弩箭`（弩箭數不足時那行）小字排版；施法瞄準時中間那行法術名（已中文）置中是否正常。
 10. **`MNAMES.DAT` 怪物名實機驗收**（見上方「MNAMES.DAT 怪物…」）：loose `MNAMES.DAT` 已部署，不用重編。要驗：戰鬥中「觀察敵人」講評對白裡的敵人名（例如「莫瑞德戰士」）是否正確顯示中文、內文銜接是否通順；戰鬥 UI 其他顯示敵人名的地方（若有）也順帶看。留意 `冥界召喚師`／`公種雙足飛龍` 這類 5-6 字長名在內文裡斷行是否正常。
+11. **`fmap_twn.dat` 大地圖城鎮標籤實機驗收**（見上方「fmap_twn.dat…」）：新 exe（458784）已部署。要驗：旅行大地圖上滑鼠移到各城鎮，標籤是否顯示中文名、**在城鎮間移動時舊標籤有沒有殘影**（`FMAP.C` rect 高度修正的重點）、標籤置中與位置是否正常、地圖上緣附近的城鎮（薩薩戈斯／凱恩／拉格蘭姆）標籤會不會被切到。右下角「Exit」鈕仍是英文（`req_fmap.dat`，待 §4 codec）。
 
 ## 環境設置（下個 session 不用重裝，但要知道在哪）
 

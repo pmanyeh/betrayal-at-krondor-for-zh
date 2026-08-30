@@ -1771,7 +1771,7 @@
       "term": "Dencamp on the Teeth",
       "category": "place",
       "translation": "世界之齒山下的丹肯營地",
-      "notes": "A mercenary camp at the foot of the Teeth of the World (established 世界之齒), where a raiding party is recruiting for a Northlands treasure hunt using changing passwords (DIAL_Z31). Shorten to 丹肯營地 after first mention in a scene."
+      "notes": "A mercenary camp at the foot of the Teeth of the World (established 世界之齒), where a raiding party is recruiting for a Northlands treasure hunt using changing passwords (DIAL_Z31). Shorten to 丹肯營地 after first mention in a scene. Travel-map label (fmap_twn.dat) uses the compact form 世界之齒紮營地 (matches the DIAL_Z13 location-title banner); DIAL_Z31 body text uses 丹肯營地 / 世界之齒山下的丹肯營地 -- a known inconsistency to reconcile."
     },
     {
       "term": "Eldpoint",
