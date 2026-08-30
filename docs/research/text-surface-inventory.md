@@ -50,7 +50,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 ---
 
-## 4. MenuPage / NamedTable / DialogWidget 資源系統（新發現，尚未動工）
+## 4. MenuPage / NamedTable / DialogWidget 資源系統（MenuPage 玩家可見部分已完成；NamedTable／DialogWidget 未動）
 
 涵蓋主選單、存讀檔、Options、片尾名單、法術選單、戰鬥行動選單、城鎮/地圖選單等幾乎所有按鈕與選單標籤。**先前懷疑「主選單是預渲染圖片」的推測已被排除**——確認是真正的文字資源，只是走一套獨立於 DDX/BOK 的資源系統。
 
@@ -60,7 +60,9 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - **PACKABLE**：否，需要從零開發，但因為多個檔案共用同一套手法，可望寫出一套通用 codec 涵蓋大部分檔案，比 DDX 簡單。
 - **RUNTIME PATH**：最終走 `font_draw_text_far`／`font_draw_text_ds` 或其包裝函式，**已支援中文**。
 - **CHINESE READY**：渲染層是；**資源層否**（需要新 parser/packer）。
-- **STATUS**：大部分未動工。建議工程順序：先盤點每個 `.dat` 的確切記錄大小/欄位配置，再寫通用 codec，逐一驗證/批次翻譯——工程量級與 DDX pipeline 相當，但檔案格式更簡單、檔案數量更多。
+- **STATUS**：
+  - **✅ MenuPage（`req_*.dat`）玩家可見部分已完成**（2026-08-30，細節在 `HANDOFF.md`「遊戲選單 `req_*.dat`」一節）。通用 codec `tools/text/menupage_translate.py`（格式：`28B 檔頭含 title offset｜u16 按鈕數｜每按鈕 0x21B 含 3 個字串 offset｜u16 blobSize｜字串池`）＋`test_menupage_translate.py`。52 個 `req_*.dat`＋`contents.dat` 全掃（255 標籤／167 相異），只翻 **11 個玩家畫面共 53 標籤**（主選單／存讀檔／偏好設定／治療／物品欄分堆／傳送清單）；約 40 個場景編輯器／作弊 `req_*` 檔（`REQ_DBUG`／`REQ_GE*`／`REQ_TE*`／`REQ_ZONE`／`REQ_KNOC`／`REQ_CHET`）**掃描但不翻**。引擎：`WIDGET.C` 的 `widget_button_render_full`／`widget_draw_text_button` 包 `g_bSmallZhMode`（`upstream 0cfa32c`，全遊戲選單按鈕中文走 10×10；OVL byte-identical）。部署 11 個 loose 檔＋新 exe，manifest `MENUPAGE_BUILD_MANIFEST.json`。待實機驗收。
+  - **未做**：選單大標題（背景圖）、`lbl_*.dat`（NamedTable，Preferences 設定項文字）、`contents.dat` 章名（來源在別處）、`cred.dat` 片尾、`DLGWIDG.C` DialogWidget。
 - **✅ 已完成的部分——法術系統三檔**（2026-08-30，細節在 `HANDOFF.md`「法術系統翻譯」一節）：
   - `spells.dat`（45 法術名）／`spelldoc.dat`（45×7 說明列）／`InvSpell.dat`（6 系別面板法術書清單）已用新工具 `tools/text/spell_translate.py`（`scaffold`／`status`／`build`）全部翻譯部署為 `dist/test_v100_zh/` 底下的 loose 檔（manifest：`SPELL_BUILD_MANIFEST.json`）。這三檔各有自己的格式（**不是** MenuPage 的 `0x21`-byte 記錄格式），`spell_translate.py` 各別處理。
   - `spell.dat`／`req_cast.dat` 掃過確認**無可見文字**（純版面／熱區），不需翻譯。
@@ -180,7 +182,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 
 - [x] 已盤點 DDX dialog（§2，Phase 6 既有基礎設施）
 - [x] 已盤點 BOK books（§3，Phase 7；codec＋引擎已完成，C11 試點實機驗收通過，其餘 21 章待翻）
-- [x] 已盤點 UI labels（§4 MenuPage/NamedTable/DialogWidget 資源家族；§4a 話題詢問選單 `KEYWORD.DAT`）
+- [x] 已盤點 UI labels（§4 MenuPage/NamedTable/DialogWidget 資源家族——**MenuPage `req_*.dat` 玩家可見部分已翻譯部署**，2026-08-30；NamedTable `lbl_*` 與 DialogWidget 未做；§4a 話題詢問選單 `KEYWORD.DAT` 已完成）
 - [x] 已盤點 inventory（§5 INVENTOR.C/INVINSP.C）
 - [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5；物品簡短名稱＝§4c `OBJINFO.DAT`，已完成翻譯，`wName_split_off` 斷行仍待實機驗證）
 - [x] 已盤點 spell names/descriptions（§4 spells.dat/spelldoc.dat/InvSpell.dat）—— **已翻譯部署**（`tools/text/spell_translate.py`，2026-08-30，待實機驗收）
@@ -188,7 +190,7 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - [x] 已盤點 location names（§4b `fmap_twn.dat` 大地圖城鎮標籤——**已翻譯部署**，2026-08-30；其餘地名多半走 DDX）
 - [x] 已盤點 combat messages（§5 CACTOR.C 硬編碼提示 ＋ §4 combat.dat/shoot.dat 選單 ＋ §4 已完成的 `CBENC.C`／`COMBAT.C` HUD 面板硬編碼標籤 ＋ `MNAMES.DAT` 怪物名稱表，後者已翻譯部署）
 - [x] 已盤點 system messages（§7，證實已併入 DDX 基礎設施）
-- [x] 已盤點 save/load UI（§4 req_load.dat/req_save.dat/lbl_load.dat/lbl_save.dat/in_save.dat）
+- [x] 已盤點 save/load UI（§4 req_load.dat/req_save.dat 按鈕**已翻**；lbl_load.dat/lbl_save.dat/in_save.dat 為 NamedTable，未做）
 - [x] 已盤點 chapter titles（§4 contents.dat；BOK 章節開場文字見 §3）
 - [x] 已盤點 image-embedded text（§3 BOK 放大首字母；§7 picklock 純圖示；§9 MENULBL.C 已確認為圖片機制，僅呼叫場景待資料檔調查）
 
