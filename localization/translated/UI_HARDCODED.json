@@ -387,6 +387,153 @@
       "translation": "隊伍金幣：",
       "status": "translated",
       "notes": "Encampment-screen gold total label."
+    },
+    {
+      "id": "ASKABOUT.C#askabout_menu_page_build:GoodBye",
+      "source": "GoodBye",
+      "translation": "道別",
+      "status": "translated",
+      "notes": "Fixed final button in the Ask About topic grid; rendered with the 10x10 Chinese menu font."
+    },
+    {
+      "id": "ASKABOUT.C#askabout_build_party_select_menu:Cancel",
+      "source": "Cancel",
+      "translation": "取消",
+      "status": "translated",
+      "notes": "Final choice in the dialogue party-selection menu."
+    },
+    {
+      "id": "ASKABOUT.C#askabout_dialog_run:asked_about",
+      "source": " asked about:",
+      "translation": "詢問：",
+      "status": "translated",
+      "notes": "Appended directly to the localized speaker name in the Ask About title bubble."
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Health:",
+      "source": "Health:",
+      "translation": "生命：",
+      "status": "translated",
+      "notes": "Combat observe-enemy stat panel label; small-font, value column 50px right."
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Stamina:",
+      "source": "Stamina:",
+      "translation": "體力：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Speed:",
+      "source": "Speed:",
+      "translation": "速度：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Strength:",
+      "source": "Strength:",
+      "translation": "力量：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Missle:",
+      "source": "Missle:",
+      "translation": "弩弓：",
+      "status": "translated",
+      "notes": "Original string is misspelled 'Missle'; this is the crossbow-accuracy row."
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Melee:",
+      "source": "Melee:",
+      "translation": "近戰：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Cast:",
+      "source": "Cast:",
+      "translation": "施法：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "CBENC.C#combatenc_anim_actor_stat_rolls:Defense:",
+      "source": "Defense:",
+      "translation": "防禦：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Thrust",
+      "source": "Thrust",
+      "translation": "刺擊",
+      "status": "translated",
+      "notes": "Combat melee HUD panel; small-font, cramped 3-column layout (left value / centre label / right value)."
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Swing",
+      "source": "Swing",
+      "translation": "揮砍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Damage",
+      "source": "Damage",
+      "translation": "傷害",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Accuracy",
+      "source": "Accuracy",
+      "translation": "命中",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Left",
+      "source": "Left",
+      "translation": "左鍵",
+      "status": "translated",
+      "notes": "Left mouse button = thrust attack; Right = swing."
+    },
+    {
+      "id": "COMBAT.C#combat_arena_hud_melee_panel:Right",
+      "source": "Right",
+      "translation": "右鍵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_draw_tgt_info_hud:Choose a target",
+      "source": "Choose a target",
+      "translation": "選擇目標",
+      "status": "translated",
+      "notes": "Combat spell/ranged targeting panel prompt; small-font."
+    },
+    {
+      "id": "COMBAT.C#combat_arena_draw_tgt_info_hud:Accuracy:",
+      "source": "Accuracy:",
+      "translation": "命中：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_draw_tgt_info_hud:Damage:",
+      "source": "Damage:",
+      "translation": "傷害：",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "COMBAT.C#combat_arena_draw_tgt_info_panel:quarrels remaining",
+      "source": "quarrels remaining",
+      "translation": "剩餘弩箭",
+      "status": "translated",
+      "notes": "Shown after the bolt count in the ranged targeting panel; small-font."
     }
   ]
 }

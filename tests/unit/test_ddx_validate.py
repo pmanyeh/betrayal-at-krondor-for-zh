@@ -66,6 +66,50 @@ class TestDdxValidation(unittest.TestCase):
         summary = validate_ddx_data(payload)
         self.assertEqual(summary["external_choice_targets"], 1)
 
+    def test_rejects_dangling_dialog_return_target(self):
+        payload = pack_ddx_data({
+            "dir_entries": [(1000, 0)],
+            "records": [{
+                "orig_offset": 0,
+                "style": 0,
+                "speaker_id": 0,
+                "flags": 0,
+                "choices": [],
+                "opcodes": [{
+                    "wOp": 0x10,
+                    "nA1": 0x1234,
+                    "nA2": 0,
+                    "nA3": 0,
+                    "nA4": 0,
+                }],
+                "text": "English\x00",
+            }],
+        })
+        with self.assertRaisesRegex(DdxValidationError, "opcode 0 return target"):
+            validate_ddx_data(payload)
+
+    def test_accepts_global_keyed_dialog_return_target(self):
+        payload = pack_ddx_data({
+            "dir_entries": [(1000, 0)],
+            "records": [{
+                "orig_offset": 0,
+                "style": 0,
+                "speaker_id": 0,
+                "flags": 0,
+                "choices": [],
+                "opcodes": [{
+                    "wOp": 0x10,
+                    "nA1": 0x00C4,
+                    "nA2": 0x8000,
+                    "nA3": 0,
+                    "nA4": 0,
+                }],
+                "text": "English\x00",
+            }],
+        })
+        summary = validate_ddx_data(payload)
+        self.assertEqual(summary["external_return_targets"], 1)
+
     def test_rebuild_refuses_partial_input_without_touching_output(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

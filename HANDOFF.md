@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-29（場景畫面「離開」按鈕＋說明翻頁：`TOWNSCN.C` 大改，村莊／王宮實機驗收通過）。前一輪：BOK 書籍系統 codec＋`BOOKTEXT.C` 雙位元組＋22 章翻譯部署（C11 實機過，其餘待看）。
+**最後更新：** 2026-08-30（法術系統三檔全譯；戰鬥面板小字型化＋硬編碼字串中文化——`CSPELL.C`／`CBENC.C`／`COMBAT.C`，`upstream 46d03e2`、`krondor.exe` 458768 bytes；新增 `MNAMES.DAT` 怪物名稱表翻譯——40 名，`mnames_translate.py` codec，部署 loose 檔、不用重編。皆待完整實機驗收）。先前：GoodBye 修正與 Ask About 選項翻譯／小字型已實機驗收。
 
 **這份文件刻意保持精簡，設計成每個新 session 開始前整份讀完就好。** 完整的逐 session 歷史敘事（每個 bug 怎麼定位根因、怎麼修、學到什麼教訓）都搬到 [docs/HANDOFF_ARCHIVE.md](docs/HANDOFF_ARCHIVE.md) 了——只有在需要追查某個舊問題的細節（例如「這個 bug 之前是怎麼修的」）時才去那份用關鍵字搜尋進去讀一小段，不需要整份讀過。**下方每次有新進度，把對應項目從「待處理」搬到別處或刪掉，不要只往後面加，保持這份文件短小。**
 
@@ -18,7 +18,7 @@
     - 這章新增了一批專有名詞（加米娜、卡爾贊、潘納斯提安登、提米里安雅、達沙梵、蘇塔卡米、阿爾瑪洛達卡、瓦爾赫魯等），**尚未回填進 `glossary.json`**，見下方「待處理」。
     - 跟 `DIAL_Z15` 一樣，`\t`／`\n`／`@N`／`\x00` 及所有樣式標記 token 都用 `extract_tokens()` 逐筆自動比對驗證過，362 筆全部 0 個 token-mismatch fallback。
 - **部署狀態**：全部 32 個章節確認部署在 `dist/test_v100_zh/`（2026-08-26 用 `DDX_BUILD_MANIFEST.json` 的 `applied` 欄位重新驗證過，不是只看文件敘述——之前一度誤判過，詳見 archive §16.1。這次驗證：32 個檔案、5,931 筆全數套用、0 個 skipped_token_mismatch、0 個 skipped_source_drift）。`dist/test_v100_zh/krondor.exe` 目前 = `e3d9ef9`（含 2026-08-25 那輪修的 6 個中文專屬引擎 bug：`#Name#` 標題解析截斷、兩處分頁邏輯缺口、標題橫幅蓋內文、多餘空行、螢幕雜訊迴歸，細節見 archive §16）+ `b066d52`（BOOKTEXT 雙位元組）+ `c801185`~`15ccd73`（TOWNSCN 離開按鈕／說明翻頁），**458064 bytes，`VMCODE.OVL`／`SX.OVL` byte-identical**。`DIAL_Z30`（跟先前的 `DIAL_Z20`／`Z31`／`Z19`／`Z17`／`Z15` 一樣）尚未在實機（DOSBox-X）上實際跑過驗收，只跑過 build/validate 的離線驗證。
-- 字庫 **5656 個 ID 槽位**（實際 **3381** 個相異字元），全真倚天點陣、零 fallback。詞彙表 `glossary.json` 共 **418** 筆。
+- 主字庫 `ZH16.DAT` **5695 glyph**（`zh_mapping.json` **3420** 個相異字元；法術 +1 `／`，戰鬥面板標籤＋怪物名的字全都已在字庫內），全真倚天點陣、零 fallback。小字庫 `ZHSTAT.DAT` **926 glyph／20382 bytes**（797 →法術 903 →戰鬥面板 908 →`MNAMES` 926）。詞彙表 `glossary.json` 共 **501** 筆（`spell` 45 筆、`creature` 32 筆）。`UI_HARDCODED.json` **76 筆**（含 CBENC/COMBAT 戰鬥面板硬編碼標籤 18 筆——改原始碼套用、不走 packer，但列進去 `build_small_font.py` 才會收字）。**`build_small_font.py` 標準來源清單現為**：`UI_HARDCODED.json`＋`KEYWORD.json`＋`CHARACTER_NAMES.json`＋`OBJINFO.json`＋`SPELLS.json`＋`MNAMES.json`＋`--ddx-title-dir localization/translated`。**注意**：`build_font.py`／`build_small_font.py` 的預設輸出是相對路徑（`ZH16.DAT`／`zh_mapping.json`，會落在 repo 根目錄，且沒有既有 map 當 base 時會 `--fresh` 全部重編 ID），一定要帶 `--output-font localization/generated/ZH16.DAT --output-map localization/generated/zh_mapping.json`。
 - **全遊戲 DDX 對話翻譯進度：5,931 / 5,931（100%）。** 剩餘工作只剩 `TEST.json`（1 筆）的打包，見下方「待處理」。
 - **BOK 書籍系統：全部 22 個章節書已翻譯部署**（2026-08-27，原本 [text-surface-inventory.md §3](docs/research/text-surface-inventory.md) 標「未動工」的一整塊，Phase 7）。C11 試點（codec＋引擎＋實機驗收）之後，其餘 21 個章節書（`C12`/`C21`/`C23`/`C31`/`C32`/`C41`/`C43`~`C46`/`C51`~`C53`/`C61`/`C63`/`C71`/`C81`/`C83`/`C91`/`C92`/`C94`）一次翻完——共 **294 筆文字 run**，`bok_rebuild_all.py` 批次重建 0 個 token-mismatch／0 個 source-drift，全數部署為 `dist/test_v100_zh/` 底下的 loose `Cxx.BOK`（manifest：`dist/test_v100_zh/BOK_BUILD_MANIFEST.json`）。部署前的全字庫涵蓋率掃描抓到 **38 個新增中文字**沒收錄，已用 `build_font.py --from-translations` 重新產生字庫（5656 → **5694 個 ID 槽位**），DDX 譯文不受影響（只 append）。`glossary.json` +6 筆（小徑／大徑法門、西境之主、預言、霍丘佩帕、王夫、統帥莫萊伍夫），共 **424** 筆。**只有 C11 在實機上跑過**——其餘 21 個章節書只跑過 round-trip／build／字庫離線驗證，尚未實機驗收（章節開場書只在對應章節轉場時觸發，需要對應章節邊界的存檔才看得到；用中途存檔無法重播）。分割 run（inline `F4` 強調區塊把一句話拆成三段，例如 C12「你真該聞聞／冬天／的味道」）翻譯時已確保重組後語句通順、強調詞完整。以下三件事仍未做：
   - **BOK 文字 codec**（`tools/text/bok_extract.py`／`bok_pack.py`／`bok_rebuild_common.py`／`bok_translate.py`／`bok_extract_pristine.py`，跟 DDX pipeline 對稱）。`Cxx.BOK` 格式已完整逆向：`u32 檔長 + i16 頁數 + 每頁 u32 blob 相對 offset + 56-byte BookPage 頁首（`Rect` + 9 個 u16 導覽欄位）+ 避讓矩形 + 圖片記錄 + `0xF1`版面(17B)／`0xF4`樣式(11B)／`0xF3`hook(3B)／`0xF0`結束 控制標籤文字流`。跟 DDX 不同，BOK 導覽全靠邏輯頁號（`wPageNumber`），不靠檔案 offset，所以中文變長／變短都行——`bok_pack.py` 會重算頁 offset 表與檔長 header。全 22 個原版 BOK round-trip 位元組完全一致（`tests/unit/test_bok_roundtrip.py` 3 個測試）。**全部 22 個 BOK 檔的文字都只掛在第一頁的文字流上，其餘頁是引擎 render 時才填的溢流承接頁**——一個檔等於一段連續文字流，總量約 48 KB 英文／294 段落。
@@ -39,9 +39,43 @@
 
 ## 待處理 / 已知問題
 
-### ⚠️ 對話模式點「Good bye」會當機——下一輪要修
+### ✅ 對話模式 GoodBye 異常——已修復並實機驗收
 
-使用者回報：進入 NPC 對話（`Ask about` 話題選單那個模式）後，點「Good bye」結束對話時遊戲當機。尚未調查。相關檔案推測：`SRC/DIALOG/ASKABOUT.C`（`"GoodBye"` 硬編碼字串在 L310、話題選單迴圈 `askabout_menu_page_run_selection()`）、`SRC/DIALOG/DIALOG.C`。可能跟中文話題選單、或結束對話時的清理/還原路徑有關。下一輪 session 專門處理這個。
+根因不是 `ASKABOUT.C` 清理，而是 `ddx_pack.py` 過去漏掉 `DdxOp 0x10` 的 32-bit 對話返回位址重映射。中文改變 record 長度後，`DIAL_Z30` 的 111 個本地返回目標全指向舊位址；點 GoodBye 因此返回錯誤記錄，先出現空白人物／重複話題頁，之後才當機。packer 現已重映射 `nA1:nA2`，validator 也會拒絕未落在 record boundary 的本地返回目標；32 個 DDX 已全量重建，單元測試 66 項通過，使用者冷啟動後確認 GoodBye 正常退出。
+
+Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYWORD.json`（171 個話題＋36 個通用選項），部署 loose `KEYWORD.DAT`；`GoodBye`／`Cancel`／`asked about:` 改為「道別」／「取消」／「詢問：」。`ASKABOUT.C` 讓所有對話選項按鈕使用 10×10 小中文字；這一版暫時讓標題與本文維持大字。完整單元測試目前 68 項通過。使用者重新開啟 BIOS 虛擬化後，WSL2/KVM 正式重編成功（upstream commit `5bc1574`）：`KRONDOR.EXE` 458128 bytes、SHA-256 `AF01A9FE09982EA34EB42804F90A7CEE76DF118C26EDF56ACC7558C783D0FFAE`；`VMCODE.OVL`／`SX.OVL` 仍 BYTE-IDENTICAL。新版 EXE、`KEYWORD.DAT`、`ZHSTAT.DAT` 已部署到 `dist/test_v100_zh/`，待使用者實機確認畫面與點選行為。
+
+使用者已實機確認上述選項翻譯、小字型與「道別」運作正常。接著將 `dialog_draw_speech_bubble()` 本身設為只在函式內暫時啟用 `g_bSmallZhMode`，所以同一泡泡區不論內容來自 Ask About 組字、DDX `#title#`、runtime 發言者名字或城鎮說明標題，中文都會用 10×10 小字，呼叫結束即恢復原狀，不影響正文。`build_small_font.py --ddx-title-dir localization/translated` 只擷取 115 個已翻 DDX `#title#` 的 283 個相異字，不把整篇正文塞進線性搜尋的小字庫；另新增 `CHARACTER_NAMES.json` 涵蓋六名隊員。`ZHSTAT.DAT` 現為 745 glyphs／16400 bytes。upstream commit `29a3751`，新版 `KRONDOR.EXE` 458144 bytes、SHA-256 `5C44F1F44055B999CE04CB0A524AE77E82FA2FE5E9C46AEE73BA14CEC754E47A`；兩個 OVL 再次 BYTE-IDENTICAL，69 項單元測試通過，已部署待實機驗收。
+
+實機隨後抓到兩個字庫／資源涵蓋缺口：(1) 章節頁面是 DIAL_Z00 九筆整段使用 10×10 的特殊 panel，不是 `#title#`，先前建置器漏收而掉字；現改為同時收錄 notes 明確標記 `10x10 Chinese font path` 的完整記錄，章節 9 筆逐字檢查 0 missing，使用者重啟後確認恢復。(2) `Squire Phillip`／`Sumani` 等非 hardcode，而是 `KEYWORD.DAT` 槽 300–346 的 runtime speaker-name table；47 名已依現有 DDX／glossary 譯名全數翻譯。`KEYWORD.DAT` 現為 254 translated／0 source drift，逐槽編碼＋小字形覆蓋檢查 0 error；`ZHSTAT.DAT` 現為 797 glyphs／17544 bytes。兩項皆為資源修正，不需再重編 EXE。
+
+### ✅ 法術系統翻譯（SPELLS/SPELLDOC/INVSPELL）＋戰鬥面板小字化——已重編部署，待實機驗收
+
+`text-surface-inventory.md` §4「MenuPage/NamedTable 資源家族」裡的法術相關檔案，是 §4 這一整塊第一個真正動工的部分。
+
+- **新工具 `tools/text/spell_translate.py`**（`scaffold`／`status`／`build`，一支涵蓋三檔）＋`tests/unit/test_spell_translate.py`（6 項）。三個資源檔格式：
+  - `SPELLS.DAT`：`u16 count + 45×22B SpellDef（u16 pName offset + 10×i16）+ u16 長度欄位（原檔存整檔長度、引擎超額配置後 short-read，重建時照抄）+ NUL 字串池`。45 個法術名，戰鬥施法選單用。
+  - `SPELLDOC.DAT`：`u16 rowCount(=45×7) + rowCount×u32 offset + u16 長度欄位 + 字串池（有共用子字串）`。每個法術 7 列：標題＋6 行說明（Cost／Damage／Duration／Line of sight／效果句）。**注意 `CSPELL.C: cspell_info_panel_show()` 會在執行期用硬編碼字串蓋掉可施放法術的第 1、2 行**（計算後的 Cost／Damage），所以那兩行的 SPELLDOC 譯文常看不到。
+  - `INVSPELL.DAT`：6 個系別面板，每面板 `u16 icon + u16 count + count×(char name[24] + u16 spellIdx)`。角色資訊畫面的「法術書」清單，24B 固定名稱欄（中文需 ≤23B）。
+  - `SPELL.DAT`／`REQ_CAST.DAT`：純版面／熱區，**無文字**。
+- **重建策略**：`SPELLS.DAT`／`SPELLDOC.DAT` 用 append-only（原字串池位元組完全不動，只把已翻列的 offset 改指向尾端新增字串）→ 全未翻時 build 出來與原檔 byte-identical（build 內建此斷言）。`INVSPELL.DAT` 24B 欄位就地替換（比照 `objinfo`）。安全防線：SPELLDOC 每行 ≤58B、INVSPELL 名稱 ≤23B、整檔 <0x8000（避開引擎 `alloc_far((long)(int)blobLen)` 符號轉換）、source-drift 自動 fallback 英文。
+- **翻譯**：`localization/translated/SPELLS.json` 398 筆——45 法術名（全譯，另回填 `glossary.json` 新 `spell` 分類 45 筆）＋188 說明列（127 筆為原版空白列，依設計留空）＋38 法術書條目（依 `spellIdx` 對應同一法術名，INVSPELL 少數英文拼法不一致如 Life Drain vs Strength Drain 一律統一）。build 0 fallback／0 source-drift。說明列走公式化對照（`消耗：1-20 生命／體力`、`傷害：3 x 消耗`、`持續：48 分鐘 x 消耗`、`視線：需要／不需`）——`×` 一律用 ASCII `x`（原文本來就是 `3 x Cost`），避開 lesson #7 的區段外靜默漏字。
+- **引擎改動**（`upstream` `f4cd826`→`1993e61`→`46d03e2`，`VMCODE.OVL`／`SX.OVL` 全程 BYTE-IDENTICAL，`KRONDOR.EXE` 458768 bytes、SHA-256 `27d2119f226ccde749139e1b397f555324f81e1abbd75f098306f7bc55ebd6e4`）。統一手法：比照 `ASKABOUT.C` 在 draw 函式內 `savedSmallZhMode = g_bSmallZhMode; g_bSmallZhMode = 1; …; g_bSmallZhMode = savedSmallZhMode;`（每個 return 前都要還原），硬編碼英文字串換成中文 byte literal（含 `%d` 的用相鄰字串常數隔開，避免 `\x` 吃掉後續 hex digit；不含 `%d` 的每個 byte 都寫成 `\xNN` 即可）：
+  - **`f4cd826` `CSPELL.C`**：戰鬥施法畫面 167×89 面板的 `cspell_list_draw_castable()`（可施放法術名清單、10px 行距）＋`cspell_info_panel_show()`（資訊面板、11px 行距），16px 中文會上下重疊 → 小字。三行硬編碼 `Cost: %d Health+Stamina`／`Damage: %d`／`Health/Stamina: %d of %d`（後兩者執行期會蓋掉 SPELLDOC 對應行）→ `消耗：%d 生命／體力`／`傷害：%d`／`生命／體力：%d／%d`。
+  - **`1993e61` `CBENC.C`**：戰鬥中「觀察敵人」的屬性擲骰面板 `combatenc_anim_actor_stat_rolls()`（`Health:`／`Stamina:`／`Speed:`／`Strength:`／`Missle:`(原文拼錯)／`Melee:`／`Cast:`／`Defense:`，10px 行距、數值欄在 +50px），→ `生命：`／`體力：`／`速度：`／`力量：`／`弩弓：`／`近戰：`／`施法：`／`防禦：`（2 字＋全形冒號，30px，穩穩在數值欄左側）。
+  - **`46d03e2` `COMBAT.C`**：三個 `combat_arena_*` 底部羊皮紙 HUD 面板——`combat_arena_hud_melee_panel()`（`Thrust`／`Swing`／`Damage`／`Accuracy`／`Left`／`Right` → `刺擊`／`揮砍`／`傷害`／`命中`／`左鍵`／`右鍵`，3 欄式：左值｜置中標籤｜右值）；`combat_arena_draw_tgt_info_hud()` 與 `combat_arena_draw_tgt_info_panel()`（施法／遠攻瞄準面板：`Choose a target`／`Accuracy:`／`Damage:`／`quarrels remaining` → `選擇目標`／`命中：`／`傷害：`／`剩餘弩箭`）。`font_text_width_ds()` 在小字模式回報 10px/字，置中／靠右計算會自動對。
+- **角色資訊畫面的法術書清單（`charscreen_draw_spell_book_actor`，`textwrap_draw_aligned`、30px 面板）本來就容得下大字，不受這次影響**——但使用者另一條平行工作已把角色資訊畫面的「法術」按鈕（`req_info.dat` entry 2）也改用小字（`upstream 9773c90`／`bd9d4b4`）。
+- **部署**：loose `SPELLS.DAT`／`SPELLDOC.DAT`／`INVSPELL.DAT`（`res_fopen` 先找 loose 再翻 RMF）＋`ZH16.DAT`／`ZHSTAT.DAT`＋新 `krondor.exe` → `dist/test_v100_zh/`，manifest：`dist/test_v100_zh/SPELL_BUILD_MANIFEST.json`。部署前 `dist` 的舊字庫／exe 備份在 `scratchpad/dist_backup_pre_spells/`。**尚未實機驗收**——見下方「其他待辦」。
+- **編譯環境註記**：這次重編發現 WSL clone `~/krondor-build` 的 master 落後 Windows `upstream` 很多（`566e11c`，落後 33 個 commit），但是**線性落後可 fast-forward、沒有分岔**。標準循環仍可用：Windows 端 `git add <改的檔> && git commit` → WSL `git stash push -u` → `git pull --ff-only` → `uv run bak build` → 複製 `work/KRONDOR.EXE` → WSL `git reset --hard 566e11c && git stash pop`（還原成落後狀態＋那 7 個 parked WIP 檔）。WSL working tree 那 7 個未 commit 檔（`DIALOG.C`／`FONT.C`／`TEXTWRAP.C`／`DOSMEM.C`／`EMSDET.C`／`VTHUNKS.ASM`／`gfx169d.h`）＋`toolchain/` 是使用者另一條平行實驗，別動、別 commit。
+
+### ✅ `MNAMES.DAT` 怪物/敵人類型名稱表——已翻譯部署，待實機驗收
+
+戰鬥中「觀察敵人」講評對白（DDX record `0x84`／`0x85`，由 `combatenc_anim_actor_stat_rolls()` 播）內文裡的「moredhel warrior」之類敵人名，來源是 `MNAMES.DAT`——一張 64 槽的怪物類型名稱表，`combatenc_mnames_lookup_dest()`（`CBENC.C`）依 `creatureType` 索引撈出，`DIALOG.C` case 17 展開 `@` token 時 `strcpy` 進 `g_speaker_names[slot]`（`[6][32]` buffer）就地插進內文；每個敵方戰鬥單位的 `.name`（`CBENC.C:100`）也是同一來源。走 DDX 文字路徑（已支援中文），**不用改引擎**。
+
+- **格式**：`u16 count｜count×u16 offset（相對 blob）｜u16 尺寸欄（原檔存整檔長度、引擎超額配置＋EOF 截斷，重建照抄）｜NUL 字串池（有 dedup——24 個 `INVALID MONSTER` 佔位槽共用一個字串）`。跟 `SPELLS.DAT` 家族同型。
+- **新工具 `tools/text/mnames_translate.py`**（`scaffold`／`status`／`build`，append-only：原 blob 位元組不動、只改寫已翻槽的 offset，全未翻時 build 出來 byte-identical）＋`tests/unit/test_mnames_translate.py`（6 項）。
+- **翻譯**：`localization/translated/MNAMES.json`，**40 個真名全譯**（24 個 `INVALID MONSTER` 佔位不動）。隊員名沿用既有譯名（戈拉斯／歐文／洛克利爾／帕格／派特魯斯／詹姆士），其餘 32 個怪物名回填 `glossary.json` 新 `creature` 分類。`moredhel warrior`→莫瑞德戰士、`moredhel spellcaster`→莫瑞德施法者、`Black Slayer`→黑衣殺手、`Nighthawk`→夜鷹刺客、`Servitor of Lims-Kragma`→林絲克拉格瑪僕役、各種 Giant/Ogre/Wyvern、`Great One`→至尊法師 等。build 0 fallback。
+- **部署**：loose `dist/test_v100_zh/MNAMES.DAT` ＋ 重建的 `ZHSTAT.DAT`（908→926 glyph，加了 `MNAMES.json` 當來源以防敵人名走 speaker-bubble 小字路徑）。`ZH16.DAT` 不變（103 個相異字全在字庫；原本要用的 `嫗`／`雛` 已改成 `巫婆`／`幼體雙足飛龍` 避免加冷僻字）。manifest：`dist/test_v100_zh/MNAMES_BUILD_MANIFEST.json`。舊 `ZHSTAT` 備份 `scratchpad/dist_backup_pre_mnames/`。**不用重編 EXE。**
 
 ### ⚠️ 分頁「孤兒行／孤立標點」——尚未解決
 
@@ -63,6 +97,13 @@
 7. **BOK 首字放大圖改中文（設計決定已拍板：重繪成中文首字點陣圖）**：需要新寫 `BOOK.BMX` 影像 codec（IFF `BMP:INF:/BIN:/VGA:/AMG:` chunk＋BAK 專有壓縮，可參考 xbak/OpenBAK 文件），解出全部 19 張圖、只重編對應 index、用 `build_font.py` 的倚天點陣器把每章中文首字放大到約 72×80 套 `BOOK.PAL` 顏色回填；`bok_pack.py` 對應把該段文字開頭那個字移除（原文就是靠圖補首字母，中文翻譯目前把首字留在文字裡）。每章的中文首字＝該檔 `#0#0` run 開頭第一個字（例如 C11=「血」、C43/C46=「歐」、C94=「這」）。這是整個 BOK 工作剩下最大的單一新元件。
 8. **BOK 行首標點避頭尾（選作）**：`BOOKTEXT.C`／DDX 兩條路徑都沒做 CJK 避頭尾，行首可能出現 `。」？`。跟「孤兒行／孤立標點」是同一層問題，若要做建議兩條路徑一起。
 5. **隊伍角色名字實機驗證**：`Locklear`／`Gorath`／`Owyn`／`Pug`／`James`／`Patrus` 已翻譯部署（見上方「目前狀態」），但還沒在 DOSBox-X 實機上確認過顯示效果——優先看駐紮營地角色名單畫面跟對話發言者標籤兩處是否都正確顯示中文名字、沒有殘留英文或亂碼。
+9. **法術系統＋戰鬥面板實機驗收**（見上方「法術系統翻譯」）：資源檔＋`CSPELL.C`／`CBENC.C`／`COMBAT.C` 已部署（`krondor.exe` 458768 bytes），尚未在 DOSBox-X 完整驗過（使用者 2026-08-30 已快速看過施法面板、觀察敵人面板、melee HUD 面板前一版，回報「看起來 OK」但還在多試）。要驗的畫面：
+   - (a) **戰鬥中施法畫面**——選會法術的角色（歐文／帕格）開施法選單：滑鼠移到法術符文上看**資訊面板**（標題＋消耗／傷害／視線／效果行）小字不重疊、Cost/Damage 行是中文；移開看**可施放法術名清單**小字不重疊。重點：89px 高面板在法術多的系別會不會爆行、`持續打擊全體對手至死`(10 字) 有沒有超出右緣。
+   - (b) **角色資訊畫面 → 法術書**——6 個系別面板法術名清單（大字，`INVSPELL.DAT`）。
+   - (c) **戰鬥中「觀察敵人」**（`CBENC.C`）——上方羊皮紙屬性面板 `生命：／體力：／速度：／力量：／弩弓：／近戰：／施法：／防禦：` 小字、標籤不壓到數值欄。
+   - (d) **戰鬥中近戰 HUD**（`COMBAT.C combat_arena_hud_melee_panel`）——底部小面板 `刺擊／揮砍`、`傷害`、`命中`、`左鍵／右鍵` 三欄不重疊。
+   - (e) **戰鬥中遠攻／施法瞄準**（`combat_arena_draw_tgt_info_hud`／`_panel`）——`選擇目標`、`命中：`、`傷害：`、`剩餘弩箭`（弩箭數不足時那行）小字排版；施法瞄準時中間那行法術名（已中文）置中是否正常。
+10. **`MNAMES.DAT` 怪物名實機驗收**（見上方「MNAMES.DAT 怪物…」）：loose `MNAMES.DAT` 已部署，不用重編。要驗：戰鬥中「觀察敵人」講評對白裡的敵人名（例如「莫瑞德戰士」）是否正確顯示中文、內文銜接是否通順；戰鬥 UI 其他顯示敵人名的地方（若有）也順帶看。留意 `冥界召喚師`／`公種雙足飛龍` 這類 5-6 字長名在內文裡斷行是否正常。
 
 ## 環境設置（下個 session 不用重裝，但要知道在哪）
 

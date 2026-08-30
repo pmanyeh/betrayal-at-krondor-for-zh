@@ -2546,6 +2546,468 @@
       "category": "person",
       "translation": "莫萊伍夫",
       "notes": "Delekhan's son (established 莫萊伍夫); after Delekhan's death he takes the title Warleader (統帥) and leads the moredhel retreat from Sethanon, then is assassinated by Narab (BOK C94)."
+    },
+    {
+      "term": "Dragon's Breath",
+      "category": "spell",
+      "translation": "龍息術",
+      "notes": "Battle-magic spell (SPELLS.DAT / SPELLDOC.DAT); wreathes an area in thick fog."
+    },
+    {
+      "term": "Dannon's Delusions",
+      "category": "spell",
+      "translation": "丹農幻影",
+      "notes": "Spell; conjures an illusory decoy fighter. \"Dannon\" transliterated 丹農 (this spell is its only appearance)."
+    },
+    {
+      "term": "Candle Glow",
+      "category": "spell",
+      "translation": "燭光術",
+      "notes": "Spell; makes light underground. Paired opposite Stardusk 星暮術 (above-ground light)."
+    },
+    {
+      "term": "Despair Thy Eyes",
+      "category": "spell",
+      "translation": "致盲術",
+      "notes": "Spell; blinds the target briefly. English title is poetic; rendered by effect."
+    },
+    {
+      "term": "Flamecast",
+      "category": "spell",
+      "translation": "擲焰術",
+      "notes": "Spell; area fire damage. Matches the rendering already used in DIAL_Z20 flavor text."
+    },
+    {
+      "term": "Skyfire",
+      "category": "spell",
+      "translation": "天火術",
+      "notes": "Spell; strikes a metal-bearing opponent. Matches the rendering already used in DIAL_Z20 flavor text."
+    },
+    {
+      "term": "Hocho's Haven",
+      "category": "spell",
+      "translation": "霍丘庇護",
+      "notes": "Spell; shields the target from damage. \"Hocho\" tied to Hochopeppa 霍丘佩帕."
+    },
+    {
+      "term": "Gift of Sung",
+      "category": "spell",
+      "translation": "頌恩之賜",
+      "notes": "Spell; transfers Health/Stamina. Sung 頌恩神, god of healing."
+    },
+    {
+      "term": "Scent of Sarig",
+      "category": "spell",
+      "translation": "薩瑞格之嗅",
+      "notes": "Spell; lets the caster smell out trapped chests. Sarig 薩瑞格, god of thieves."
+    },
+    {
+      "term": "Bane of Black Slayers",
+      "category": "spell",
+      "translation": "黑衣剋星",
+      "notes": "Spell; extra-effective against Black Slayers 黑衣殺手. Shortened from 黑衣殺手剋星 to fit the cast panel."
+    },
+    {
+      "term": "Eagle Wing",
+      "category": "spell",
+      "translation": "鷹翼術",
+      "notes": "Spell (name only; no description rows in SPELLDOC.DAT)."
+    },
+    {
+      "term": "Eyes of Ishap",
+      "category": "spell",
+      "translation": "伊夏之眼",
+      "notes": "Spell; senses vessels. Ishap 伊夏神, god of balance."
+    },
+    {
+      "term": "Nightfingers",
+      "category": "spell",
+      "translation": "夜指術",
+      "notes": "Spell; lets the caster steal items. Also spelled \"Night Fingers\" in SPELLDOC/INVSPELL."
+    },
+    {
+      "term": "Grief of 1000 Nights",
+      "category": "spell",
+      "translation": "千夜之悲",
+      "notes": "Spell; holds an opponent in place."
+    },
+    {
+      "term": "Mirrorwall",
+      "category": "spell",
+      "translation": "鏡牆術",
+      "notes": "Spell; reflects projectile spells. Also spelled \"Mirror Wall\"."
+    },
+    {
+      "term": "Touch of Lims-Kragma",
+      "category": "spell",
+      "translation": "林絲之觸",
+      "notes": "Spell; instantly kills one enemy. Lims-Kragma 林絲克拉格瑪, death goddess; shortened to 林絲 for the panel."
+    },
+    {
+      "term": "River Song",
+      "category": "spell",
+      "translation": "河歌術",
+      "notes": "Spell; summons Rusalki 露莎卡水靈."
+    },
+    {
+      "term": "The Unseen",
+      "category": "spell",
+      "translation": "不見者",
+      "notes": "Spell; senses food. Title rendered literally rather than by effect."
+    },
+    {
+      "term": "Nacre Cicatrix",
+      "category": "spell",
+      "translation": "珠貝之疤",
+      "notes": "Spell; senses magic items. \"Nacre\" (mother-of-pearl) + \"cicatrix\" (scar), rendered literally."
+    },
+    {
+      "term": "Wrath of Killian",
+      "category": "spell",
+      "translation": "基利安之怒",
+      "notes": "Spell; earthquake trap. Killian 基利安, Midkemian deity."
+    },
+    {
+      "term": "Unfortunate Flux",
+      "category": "spell",
+      "translation": "厄運流變",
+      "notes": "Spell; summons sprites to attack an enemy."
+    },
+    {
+      "term": "Mad God's Rage",
+      "category": "spell",
+      "translation": "狂神之怒",
+      "notes": "Spell; strikes all opponents until dead, and may kill the caster."
+    },
+    {
+      "term": "Mind Melt",
+      "category": "spell",
+      "translation": "灼神術",
+      "notes": "Spell; damages an opponent's psyche."
+    },
+    {
+      "term": "Skin of the Dragon",
+      "category": "spell",
+      "translation": "龍鱗術",
+      "notes": "Spell; invisible armor."
+    },
+    {
+      "term": "Aether Bridge",
+      "category": "spell",
+      "translation": "以太之橋",
+      "notes": "Spell (name only; no description rows in SPELLDOC.DAT)."
+    },
+    {
+      "term": "Steelfire",
+      "category": "spell",
+      "translation": "鋼火術",
+      "notes": "Spell; adds fire damage to a blade."
+    },
+    {
+      "term": "Stardusk",
+      "category": "spell",
+      "translation": "星暮術",
+      "notes": "Spell; makes light above ground. Matches DIAL_Z18 (rendered there as a single glyph); paired opposite Candle Glow 燭光術."
+    },
+    {
+      "term": "Winds of Eortis",
+      "category": "spell",
+      "translation": "厄提斯之風",
+      "notes": "Spell; pushes a target away. Eortis 厄提斯, sea god."
+    },
+    {
+      "term": "Firestorm",
+      "category": "spell",
+      "translation": "火風暴",
+      "notes": "Spell; strikes every target in line of sight."
+    },
+    {
+      "term": "Gambit of the Eight",
+      "category": "spell",
+      "translation": "八賢佈局",
+      "notes": "Spell; lays a magic 'mine'. \"the Eight\" rendered 八賢; effect rendered 佈局."
+    },
+    {
+      "term": "Invitation",
+      "category": "spell",
+      "translation": "引誘術",
+      "notes": "Spell; pulls a target toward the caster."
+    },
+    {
+      "term": "Thoughts Like Clouds",
+      "category": "spell",
+      "translation": "亂思如雲",
+      "notes": "Spell; confuses enemy spellcasters."
+    },
+    {
+      "term": "Final Rest",
+      "category": "spell",
+      "translation": "終末安息",
+      "notes": "Spell; affects Black Slayers 黑衣殺手 and Nighthawks 夜鷹會."
+    },
+    {
+      "term": "Dawn of Truth",
+      "category": "spell",
+      "translation": "真實破曉",
+      "notes": "Spell (name only; no description rows in SPELLDOC.DAT)."
+    },
+    {
+      "term": "Union",
+      "category": "spell",
+      "translation": "通解術",
+      "notes": "Spell; lets the caster read written moredhel 莫瑞德文."
+    },
+    {
+      "term": "And the Light Shall Lie",
+      "category": "spell",
+      "translation": "光影欺敵",
+      "notes": "Spell; makes the caster appear to be moredhel. Poetic title rendered by effect."
+    },
+    {
+      "term": "The Fetters of Rime",
+      "category": "spell",
+      "translation": "寒霜枷鎖",
+      "notes": "Spell; freezes opponents. \"Rime\" (frost) 寒霜 + \"fetters\" 枷鎖. Also spelled \"Fetters of Rime\"."
+    },
+    {
+      "term": "Black Nimbus",
+      "category": "spell",
+      "translation": "黑雲術",
+      "notes": "Spell; deactivates trap crystals."
+    },
+    {
+      "term": "Arachnos",
+      "category": "spell",
+      "translation": "蛛網術",
+      "notes": "Spell (name only; no description rows). Name evokes a spider's web."
+    },
+    {
+      "term": "Grave's Disquiet",
+      "category": "spell",
+      "translation": "墓穴不寧",
+      "notes": "Spell (name only; no description rows in SPELLDOC.DAT)."
+    },
+    {
+      "term": "Asphyxiation",
+      "category": "spell",
+      "translation": "窒息術",
+      "notes": "Spell (name only; no description rows in SPELLDOC.DAT)."
+    },
+    {
+      "term": "Thy Master's Will",
+      "category": "spell",
+      "translation": "主宰之命",
+      "notes": "Spell; forces Wyverns 雙足飛龍 to retreat; needs a wyvern egg. Also spelled \"Thy Masters Will\"."
+    },
+    {
+      "term": "Strength Drain",
+      "category": "spell",
+      "translation": "力量汲取",
+      "notes": "Spell; drains a victim's strength to the caster. INVSPELL.DAT labels the same spell \"Life Drain\" -- unified to this rendering."
+    },
+    {
+      "term": "Summon Riftmare",
+      "category": "spell",
+      "translation": "召喚裂界魘",
+      "notes": "Spell (name only; no description rows). \"Rift\" 裂界 + \"mare\" (nightmare) 魘."
+    },
+    {
+      "term": "Evil Seek",
+      "category": "spell",
+      "translation": "逐惡術",
+      "notes": "Spell; strikes more than one target."
+    },
+    {
+      "term": "moredhel warrior",
+      "category": "creature",
+      "translation": "莫瑞德戰士",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "moredhel spellcaster",
+      "category": "creature",
+      "translation": "莫瑞德施法者",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Black Slayer",
+      "category": "creature",
+      "translation": "黑衣殺手",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Nighthawk",
+      "category": "creature",
+      "translation": "夜鷹刺客",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "rogue",
+      "category": "creature",
+      "translation": "盜賊",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Pantathian",
+      "category": "creature",
+      "translation": "潘塔西亞人",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Panth Tiandn",
+      "category": "creature",
+      "translation": "潘斯提安登",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Spellweaver",
+      "category": "creature",
+      "translation": "織法者",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Servitor of Lims-Kragma",
+      "category": "creature",
+      "translation": "林絲克拉格瑪僕役",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Tor Giant",
+      "category": "creature",
+      "translation": "托爾巨人",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Rogue Mage",
+      "category": "creature",
+      "translation": "叛法師",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Deep Giant",
+      "category": "creature",
+      "translation": "深地巨人",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Cave Giant",
+      "category": "creature",
+      "translation": "洞穴巨人",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Rime Giant",
+      "category": "creature",
+      "translation": "寒霜巨人",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Sentinel Ogre",
+      "category": "creature",
+      "translation": "哨衛食人魔",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Highland Ogre",
+      "category": "creature",
+      "translation": "高地食人魔",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "scorpion",
+      "category": "creature",
+      "translation": "蠍子",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Bulldrake Wyvern",
+      "category": "creature",
+      "translation": "公種雙足飛龍",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Grandsire Wyvern",
+      "category": "creature",
+      "translation": "祖種雙足飛龍",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Hatchling Wyvern",
+      "category": "creature",
+      "translation": "幼體雙足飛龍",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "spider",
+      "category": "creature",
+      "translation": "蜘蛛",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "beasthound",
+      "category": "creature",
+      "translation": "獸犬",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "troll",
+      "category": "creature",
+      "translation": "巨魔",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Dread",
+      "category": "creature",
+      "translation": "駭懼獸",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Witch Hag",
+      "category": "creature",
+      "translation": "巫婆",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "goblin",
+      "category": "creature",
+      "translation": "哥布林",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Wind Elemental",
+      "category": "creature",
+      "translation": "風元素",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Quegian pirate",
+      "category": "creature",
+      "translation": "奎格海盜",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Rusalki",
+      "category": "creature",
+      "translation": "露莎卡水靈",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Shade",
+      "category": "creature",
+      "translation": "幽魂",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Nethermander",
+      "category": "creature",
+      "translation": "冥界召喚師",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
+    },
+    {
+      "term": "Great One",
+      "category": "creature",
+      "translation": "至尊法師",
+      "notes": "Combat creature-type name (MNAMES.DAT); shown in the assess-enemy dialogue and combat UI."
     }
   ]
 }

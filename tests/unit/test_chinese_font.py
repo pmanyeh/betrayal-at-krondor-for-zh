@@ -7,9 +7,13 @@ Verifies:
 """
 
 import struct
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from tools.font.build_font import POC_GLYPHS, build_zh_font
+from tools.font.build_small_font import chars_from_ddx_small_text
 
 
 class TestChineseFont(unittest.TestCase):
@@ -47,6 +51,34 @@ class TestChineseFont(unittest.TestCase):
             self.assertEqual(len(glyph_bytes), 32)
             # Check non-empty
             self.assertTrue(any(b != 0 for b in glyph_bytes))
+
+    def test_small_font_ddx_title_collection_excludes_body_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "DIAL_Z01.json").write_text(
+                json.dumps(
+                    {
+                        "entries": [
+                            {
+                                "status": "translated",
+                                "translation": "#城鎮標題#這些內文字形不應收錄",
+                            },
+                            {"status": "translated", "translation": "沒有標題的正文"},
+                            {
+                                "status": "translated",
+                                "translation": "章節面板完整文字",
+                                "notes": "Uses the chapter-banner 10x10 Chinese font path.",
+                            },
+                            {"status": "untranslated", "translation": "#忽略#正文"},
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            chars = set(chars_from_ddx_small_text(root))
+            self.assertEqual(chars, set("城鎮標題章節面板完整文字"))
+            self.assertNotIn("內", chars)
 
 
 if __name__ == "__main__":

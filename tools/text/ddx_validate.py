@@ -50,6 +50,8 @@ def validate_ddx_data(payload: bytes, *, label: str = "DDX") -> dict[str, int]:
 
     local_choice_targets = 0
     external_choice_targets = 0
+    local_return_targets = 0
+    external_return_targets = 0
     for record in records:
         for choice_index, choice in enumerate(record["choices"]):
             target = choice["nA3"] | (choice["nA4"] << 16)
@@ -70,6 +72,23 @@ def validate_ddx_data(payload: bytes, *, label: str = "DDX") -> dict[str, int]:
                     "not a record boundary"
                 )
 
+        for opcode_index, opcode in enumerate(record["opcodes"]):
+            if opcode["wOp"] != 0x10:
+                continue
+            target = opcode["nA1"] | (opcode["nA2"] << 16)
+            if target == 0:
+                continue
+            if target & 0x80000000:
+                external_return_targets += 1
+                continue
+            local_return_targets += 1
+            if target not in offsets:
+                errors.append(
+                    f"record {record['rec_index']} at {record['orig_offset']:#x}, "
+                    f"opcode {opcode_index} return target points to {target:#x}, "
+                    "not a record boundary"
+                )
+
     if errors:
         details = "\n  - ".join(errors)
         raise DdxValidationError(f"{label}: structural validation failed:\n  - {details}")
@@ -79,6 +98,8 @@ def validate_ddx_data(payload: bytes, *, label: str = "DDX") -> dict[str, int]:
         "directory_entries": len(data["dir_entries"]),
         "local_choice_targets": local_choice_targets,
         "external_choice_targets": external_choice_targets,
+        "local_return_targets": local_return_targets,
+        "external_return_targets": external_return_targets,
     }
 
 
@@ -106,7 +127,9 @@ def main() -> None:
             f"OK {path}: {summary['records']} records, "
             f"{summary['directory_entries']} directory entries, "
             f"{summary['local_choice_targets']} local choice targets, "
-            f"{summary['external_choice_targets']} global/keyed targets"
+            f"{summary['external_choice_targets']} global/keyed choice targets, "
+            f"{summary['local_return_targets']} local return targets, "
+            f"{summary['external_return_targets']} global/keyed return targets"
         )
 
     if failures:

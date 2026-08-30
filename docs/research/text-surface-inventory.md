@@ -60,23 +60,32 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - **PACKABLE**：否，需要從零開發，但因為多個檔案共用同一套手法，可望寫出一套通用 codec 涵蓋大部分檔案，比 DDX 簡單。
 - **RUNTIME PATH**：最終走 `font_draw_text_far`／`font_draw_text_ds` 或其包裝函式，**已支援中文**。
 - **CHINESE READY**：渲染層是；**資源層否**（需要新 parser/packer）。
-- **STATUS**：未動工。建議工程順序：先盤點每個 `.dat` 的確切記錄大小/欄位配置，再寫通用 codec，逐一驗證/批次翻譯——工程量級與 DDX pipeline 相當，但檔案格式更簡單、檔案數量更多。
+- **STATUS**：大部分未動工。建議工程順序：先盤點每個 `.dat` 的確切記錄大小/欄位配置，再寫通用 codec，逐一驗證/批次翻譯——工程量級與 DDX pipeline 相當，但檔案格式更簡單、檔案數量更多。
+- **✅ 已完成的部分——法術系統三檔**（2026-08-30，細節在 `HANDOFF.md`「法術系統翻譯」一節）：
+  - `spells.dat`（45 法術名）／`spelldoc.dat`（45×7 說明列）／`InvSpell.dat`（6 系別面板法術書清單）已用新工具 `tools/text/spell_translate.py`（`scaffold`／`status`／`build`）全部翻譯部署為 `dist/test_v100_zh/` 底下的 loose 檔（manifest：`SPELL_BUILD_MANIFEST.json`）。這三檔各有自己的格式（**不是** MenuPage 的 `0x21`-byte 記錄格式），`spell_translate.py` 各別處理。
+  - `spell.dat`／`req_cast.dat` 掃過確認**無可見文字**（純版面／熱區），不需翻譯。
+  - 引擎：`CSPELL.C` 的戰鬥施法面板（`cspell_list_draw_castable`／`cspell_info_panel_show`）比照 `ASKABOUT.C` 加 `g_bSmallZhMode` 小字化，並中文化三行硬編碼 Cost/Damage/Health-Stamina（`upstream f4cd826`）。後續 `CBENC.C`（觀察敵人屬性擲骰面板）＋`COMBAT.C`（三個 `combat_arena_*` 底部 HUD 面板：近戰面板、遠攻/施法瞄準面板）同樣加 `g_bSmallZhMode` 並中文化其硬編碼標籤（`upstream 1993e61`／`46d03e2`，OVL 全程 byte-identical）。角色資訊畫面的「法術」按鈕另由平行工作處理（`upstream 9773c90`／`bd9d4b4`）。
+  - 待實機驗收。
+- **✅ 已完成的部分——`MNAMES.DAT` 怪物/敵人類型名稱表**（2026-08-30，細節在 `HANDOFF.md`「MNAMES.DAT 怪物…」一節；這是本盤點原本沒列到的第五條獨立文字路徑——不是 DDX、不是 §4 MenuPage 家族、也不是 §4a `KEYWORD.DAT`）：
+  - 戰鬥「觀察敵人」講評對白內文裡的敵人名（`moredhel warrior` 等）來源。`combatenc_mnames_lookup_dest()`（`CBENC.C`）依 `creatureType` 撈字串，`DIALOG.C` case 17 展開 `@` token 塞進 `g_speaker_names[]`；每個敵方戰鬥單位的 `.name` 也是同一表。走 DDX 文字路徑（已支援中文），**不用改引擎**。
+  - 格式：`u16 count｜count×u16 offset｜u16 尺寸欄｜NUL 字串池（dedup）`，64 槽（40 真名＋24 `INVALID MONSTER` 佔位）。新工具 `tools/text/mnames_translate.py`（append-only，全未翻時 byte-identical）＋`tests/unit/test_mnames_translate.py`。
+  - 40 名全譯（`localization/translated/MNAMES.json`），32 個非隊員怪物名回填 `glossary.json` 新 `creature` 分類。部署 loose `dist/test_v100_zh/MNAMES.DAT`＋重建 `ZHSTAT.DAT`（926 glyph），manifest `MNAMES_BUILD_MANIFEST.json`。待實機驗收。
 
 `SRC/UI/MENULBL.C`（`menulbl_scroll_step_and_draw`）是另一套獨立的「捲動標籤圖片」機制，透過 `blit_sprite_indirect` 逐格 blit `ImageRecord`，**不是文字繪製**，服務於 `SRC/SCRIPT/TTM.C` 劇本腳本系統的某種通用捲動元件；本次未追查其實際呼叫來源腳本，不確定是否有玩家可見的文字用途，留待後續確認。
 
 ---
 
-## 4a. 話題詢問選單（Ask About / Keyword System，新發現，尚未動工）
+## 4a. 話題詢問選單（Ask About / Keyword System，已完成資源與引擎修改）
 
 對話畫面下方常見的「`<角色> asked about:`」話題選單格（見玩家截圖：`Nearest Town`／`Inns`／`GoodBye` 等按鈕），**不屬於 DDX 系統**，是第三條獨立的文字路徑——先前誤以為「DDX 對話系統已完成」涵蓋所有對話互動，這裡是明確的例外，補列於此。
 
 - **SOURCE**：`KRONDOR.RMF`／`KRONDOR.001` 內的 `KEYWORD.DAT`（獨立資源檔，話題關鍵字字串表）；另有硬編碼於 [`SRC/DIALOG/ASKABOUT.C`](file:///d:/git/betrayal-at-krondor-for-zh/upstream/betrayal-at-krondor/bak/SRC/DIALOG/ASKABOUT.C) 的固定字串 `"GoodBye"`（L310）、`"Cancel"`（L456）、`" asked about:"`（L331，跟角色名字組合成標題列）。
-- **FORMAT**：`askabout_keyword_table_load()`（L46-66）讀取手法——開頭 `u16` 元素數量，接著 `count` 個 `u16` offset（載入時就地修正成絕對指標，指向同一塊記憶體內接續的字串池）。跟 §4 MenuPage 系列同一套「字串池 + offset 修補」手法，是第七個重複實作此手法的檔案。
-- **EXTRACTABLE**：可用既有 `bak rmf` 工具撈出 `KEYWORD.DAT` 原始 bytes，**內部結構解析工具尚不存在**。
-- **PACKABLE**：否，需要從零開發，格式邏輯簡單（單一扁平字串表，無巢狀結構）。
+- **FORMAT**：檔頭是 `u16 total_size`、`u16 count`，接著 `count` 個以檔頭為基準的 `u16 offset`，最後是 NUL 結尾字串池；載入後 `askabout_keyword_table_load()` 會把 offset 就地修成絕對指標。原檔共 346 槽，包含空槽與共用字串。
+- **EXTRACTABLE / PACKABLE**：是。`tools/text/keyword_translate.py` 提供 `scaffold`／`status`／`build`，重建時保留穩定的一基索引、空槽與重複字串語意，並檢查檔長、offset、NUL 結尾及 source drift。單元測試在 `tests/unit/test_keyword_translate.py`。
 - **RUNTIME PATH**：話題按鈕清單透過 `askabout_menu_page_run_selection()`（L459 起）／`menupage_draw_entries()` 繪製——與 §4 MenuPage 家族**共用同一套繪圖函式**，最終仍是 `font_draw_text_ds`。
-- **CHINESE READY**：渲染層是（與 §4 相同）；**資源層否**（需要 `KEYWORD.DAT` 專用 parser/packer）；硬編碼的 `"GoodBye"`／`"Cancel"`／`" asked about:"` 則可直接改原始碼（同 §5 做法）。
-- **STATUS**：未動工。工程量小於 §4 全體（單一扁平檔案，無需處理多種記錄佈局），建議可與 §5 硬編碼字串一起排進「快速可完成」的批次，或併入 §4 的通用 codec 開發一併處理。
+- **CHINESE READY**：是。`localization/translated/KEYWORD.json` 已翻譯 171 個話題、36 個通用對話選項，以及 47 個 runtime 發言者姓名（槽 300–346）；純數字段維持原資料。`ASKABOUT.C` 的 `GoodBye`／`Cancel`／標題後綴也已改為「道別」／「取消」／「詢問：」。
+- **小字型**：`ASKABOUT.C` 只在話題格與 DDX 選擇按鈕的寬度計算、初繪、按下與重繪期間啟用 `g_bSmallZhMode`，中文固定走 10×10 `ZHSTAT.DAT`；標題泡泡與對話本文不受影響。upstream commit `5bc1574` 已用 WSL2/Borland 工具鏈重編並部署（`KRONDOR.EXE` 458128 bytes；兩個 OVL byte-identical），待實機畫面驗收。
+- **標題泡泡小字型**：後續 upstream commit `29a3751` 把 `g_bSmallZhMode` 的 save／set／restore 放進共用 `dialog_draw_speech_bubble()`，因此 Ask About 標題、DDX `#title#`、runtime 人名與城鎮標題都走 10×10 中文字，來源是否硬編碼已無差別。`build_small_font.py --ddx-title-dir` 收 DDX `#title#` 與明確標記使用 10×10 的章節面板，另以 `CHARACTER_NAMES.json` 收六名隊員名字；修正章節頁漏字及補齊 47 名 runtime speaker 後，小字庫為 797 glyphs／17544 bytes。新版 EXE 458144 bytes，兩個 OVL byte-identical。
 
 ---
 
@@ -175,10 +184,10 @@ Phase 6（DDX 對話）與 Phase 7（BOK 書籍）已各自有獨立文件（見
 - [x] 已盤點 UI labels（§4 MenuPage/NamedTable/DialogWidget 資源家族；§4a 話題詢問選單 `KEYWORD.DAT`）
 - [x] 已盤點 inventory（§5 INVENTOR.C/INVINSP.C）
 - [x] 已盤點 item names/descriptions（物品風味文字＝DDX_Z18 已完成；物品欄位標籤＝§5；物品簡短名稱＝§4c `OBJINFO.DAT`，已完成翻譯，`wName_split_off` 斷行仍待實機驗證）
-- [x] 已盤點 spell names/descriptions（§4 spells.dat/spelldoc.dat/InvSpell.dat）
+- [x] 已盤點 spell names/descriptions（§4 spells.dat/spelldoc.dat/InvSpell.dat）—— **已翻譯部署**（`tools/text/spell_translate.py`，2026-08-30，待實機驗收）
 - [x] 已盤點 character names（§8，確認為存檔二進位欄位、暫不處理）
 - [x] 已盤點 location names（§4b `fmap_twn.dat` 大地圖城鎮標籤；其餘地名多半走 DDX）
-- [x] 已盤點 combat messages（§5 CACTOR.C 硬編碼提示 ＋ §4 combat.dat/shoot.dat 選單）
+- [x] 已盤點 combat messages（§5 CACTOR.C 硬編碼提示 ＋ §4 combat.dat/shoot.dat 選單 ＋ §4 已完成的 `CBENC.C`／`COMBAT.C` HUD 面板硬編碼標籤 ＋ `MNAMES.DAT` 怪物名稱表，後者已翻譯部署）
 - [x] 已盤點 system messages（§7，證實已併入 DDX 基礎設施）
 - [x] 已盤點 save/load UI（§4 req_load.dat/req_save.dat/lbl_load.dat/lbl_save.dat/in_save.dat）
 - [x] 已盤點 chapter titles（§4 contents.dat；BOK 章節開場文字見 §3）

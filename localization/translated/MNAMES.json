@@ -1,0 +1,519 @@
+{
+  "format": "BAK_ZH_MNAMES_TRANSLATION",
+  "version": 1,
+  "source_file": "MNAMES.DAT",
+  "entries": [
+    {
+      "id": "MNAMES.DAT#0",
+      "index": 0,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#1",
+      "index": 1,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#2",
+      "index": 2,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#3",
+      "index": 3,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#4",
+      "index": 4,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#5",
+      "index": 5,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#6",
+      "index": 6,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#7",
+      "index": 7,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#8",
+      "index": 8,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#9",
+      "index": 9,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#10",
+      "index": 10,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#11",
+      "index": 11,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#12",
+      "index": 12,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#13",
+      "index": 13,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#14",
+      "index": 14,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#15",
+      "index": 15,
+      "source": "Gorath",
+      "translation": "戈拉斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#16",
+      "index": 16,
+      "source": "Owyn",
+      "translation": "歐文",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#17",
+      "index": 17,
+      "source": "Locklear",
+      "translation": "洛克利爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#18",
+      "index": 18,
+      "source": "moredhel warrior",
+      "translation": "莫瑞德戰士",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#19",
+      "index": 19,
+      "source": "Brak Nurr",
+      "translation": "布拉克努爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#20",
+      "index": 20,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#21",
+      "index": 21,
+      "source": "moredhel spellcaster",
+      "translation": "莫瑞德施法者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#22",
+      "index": 22,
+      "source": "Black Slayer",
+      "translation": "黑衣殺手",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#23",
+      "index": 23,
+      "source": "Nighthawk",
+      "translation": "夜鷹刺客",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#24",
+      "index": 24,
+      "source": "rogue",
+      "translation": "盜賊",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#25",
+      "index": 25,
+      "source": "Pantathian",
+      "translation": "潘塔西亞人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#26",
+      "index": 26,
+      "source": "Panth Tiandn",
+      "translation": "潘斯提安登",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#27",
+      "index": 27,
+      "source": "Spellweaver",
+      "translation": "織法者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#28",
+      "index": 28,
+      "source": "Servitor of Lims-Kragma",
+      "translation": "林絲克拉格瑪僕役",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#29",
+      "index": 29,
+      "source": "Tor Giant",
+      "translation": "托爾巨人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#30",
+      "index": 30,
+      "source": "Rogue Mage",
+      "translation": "叛法師",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#31",
+      "index": 31,
+      "source": "Deep Giant",
+      "translation": "深地巨人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#32",
+      "index": 32,
+      "source": "Cave Giant",
+      "translation": "洞穴巨人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#33",
+      "index": 33,
+      "source": "Rime Giant",
+      "translation": "寒霜巨人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#34",
+      "index": 34,
+      "source": "Sentinel Ogre",
+      "translation": "哨衛食人魔",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#35",
+      "index": 35,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#36",
+      "index": 36,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#37",
+      "index": 37,
+      "source": "Highland Ogre",
+      "translation": "高地食人魔",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#38",
+      "index": 38,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#39",
+      "index": 39,
+      "source": "scorpion",
+      "translation": "蠍子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#40",
+      "index": 40,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#41",
+      "index": 41,
+      "source": "Bulldrake Wyvern",
+      "translation": "公種雙足飛龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#42",
+      "index": 42,
+      "source": "Grandsire Wyvern",
+      "translation": "祖種雙足飛龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#43",
+      "index": 43,
+      "source": "Hatchling Wyvern",
+      "translation": "幼體雙足飛龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#44",
+      "index": 44,
+      "source": "spider",
+      "translation": "蜘蛛",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#45",
+      "index": 45,
+      "source": "Pug",
+      "translation": "帕格",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#46",
+      "index": 46,
+      "source": "beasthound",
+      "translation": "獸犬",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#47",
+      "index": 47,
+      "source": "Patrus",
+      "translation": "派特魯斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#48",
+      "index": 48,
+      "source": "troll",
+      "translation": "巨魔",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#49",
+      "index": 49,
+      "source": "Dread",
+      "translation": "駭懼獸",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#50",
+      "index": 50,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#51",
+      "index": 51,
+      "source": "James",
+      "translation": "詹姆士",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#52",
+      "index": 52,
+      "source": "Witch Hag",
+      "translation": "巫婆",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#53",
+      "index": 53,
+      "source": "goblin",
+      "translation": "哥布林",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#54",
+      "index": 54,
+      "source": "Wind Elemental",
+      "translation": "風元素",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#55",
+      "index": 55,
+      "source": "Quegian pirate",
+      "translation": "奎格海盜",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#56",
+      "index": 56,
+      "source": "Rusalki",
+      "translation": "露莎卡水靈",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#57",
+      "index": 57,
+      "source": "Shade",
+      "translation": "幽魂",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#58",
+      "index": 58,
+      "source": "Nethermander",
+      "translation": "冥界召喚師",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#59",
+      "index": 59,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#60",
+      "index": 60,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#61",
+      "index": 61,
+      "source": "Great One",
+      "translation": "至尊法師",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "MNAMES.DAT#62",
+      "index": 62,
+      "source": "INVALID MONSTER",
+      "translation": "",
+      "status": "untranslated",
+      "notes": "placeholder slot -- never displayed for a real creature"
+    },
+    {
+      "id": "MNAMES.DAT#63",
+      "index": 63,
+      "source": "moredhel spellcaster",
+      "translation": "莫瑞德施法者",
+      "status": "translated",
+      "notes": ""
+    }
+  ]
+}

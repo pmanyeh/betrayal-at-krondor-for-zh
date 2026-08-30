@@ -1,0 +1,1712 @@
+{
+  "format": "BAK_ZH_KEYWORD_TRANSLATION",
+  "version": 1,
+  "source_file": "KEYWORD.DAT",
+  "entry_count": 346,
+  "notes": "Player-visible topic labels (1–171), generic dialogue choices (256–291), and the runtime speaker-name table (300–346) are localized. Numeric constants remain byte-for-byte source data.",
+  "entries": [
+    {
+      "id": "KEYWORD.DAT#1",
+      "index": 1,
+      "source": "Nearest Town",
+      "translation": "最近城鎮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#2",
+      "index": 2,
+      "source": "Inns",
+      "translation": "旅店",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#3",
+      "index": 3,
+      "source": "Empty Houses",
+      "translation": "空屋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#4",
+      "index": 4,
+      "source": "Hands",
+      "translation": "手",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#5",
+      "index": 5,
+      "source": "Lost Items",
+      "translation": "遺失物品",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#6",
+      "index": 6,
+      "source": "Supplies",
+      "translation": "補給品",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#7",
+      "index": 7,
+      "source": "The Fife",
+      "translation": "笛子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#8",
+      "index": 8,
+      "source": "Craig",
+      "translation": "克雷格",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#9",
+      "index": 9,
+      "source": "Waani",
+      "translation": "瓦尼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#10",
+      "index": 10,
+      "source": "Dimwood",
+      "translation": "幽暗林",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#11",
+      "index": 11,
+      "source": "Grain",
+      "translation": "穀物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#12",
+      "index": 12,
+      "source": "Highcastle",
+      "translation": "高堡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#13",
+      "index": 13,
+      "source": "Rift Gates",
+      "translation": "裂隙之門",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#14",
+      "index": 14,
+      "source": "Sumani",
+      "translation": "蘇馬尼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#15",
+      "index": 15,
+      "source": "Combat",
+      "translation": "戰鬥",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#16",
+      "index": 16,
+      "source": "Food",
+      "translation": "食物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#17",
+      "index": 17,
+      "source": "Armor Repair",
+      "translation": "修理護甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#18",
+      "index": 18,
+      "source": "Makala",
+      "translation": "馬卡拉",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#19",
+      "index": 19,
+      "source": "Lodging",
+      "translation": "住宿",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#20",
+      "index": 20,
+      "source": "Joke",
+      "translation": "笑話",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#21",
+      "index": 21,
+      "source": "Thefts",
+      "translation": "竊案",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#22",
+      "index": 22,
+      "source": "Grey Warriors",
+      "translation": "灰衣戰士",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#23",
+      "index": 23,
+      "source": "Roads",
+      "translation": "道路",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#24",
+      "index": 24,
+      "source": "Haggling",
+      "translation": "議價",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#25",
+      "index": 25,
+      "source": "The Note",
+      "translation": "那張紙條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#26",
+      "index": 26,
+      "source": "Brak Nurr",
+      "translation": "布拉克努爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#27",
+      "index": 27,
+      "source": "Temples",
+      "translation": "神殿",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#28",
+      "index": 28,
+      "source": "Wordlocks",
+      "translation": "文字鎖",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#29",
+      "index": 29,
+      "source": "Armor Repair",
+      "translation": "修理護甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#30",
+      "index": 30,
+      "source": "Dubal's Note",
+      "translation": "杜巴的紙條",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#31",
+      "index": 31,
+      "source": "Rhuargh's room",
+      "translation": "魯阿格的房間",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#32",
+      "index": 32,
+      "source": "Swords",
+      "translation": "劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#33",
+      "index": 33,
+      "source": "Sarth",
+      "translation": "薩斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#34",
+      "index": 34,
+      "source": "Armor",
+      "translation": "護甲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#35",
+      "index": 35,
+      "source": "Battle Sites",
+      "translation": "戰場遺址",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#36",
+      "index": 36,
+      "source": "Pits",
+      "translation": "坑洞",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#37",
+      "index": 37,
+      "source": "Elvandar",
+      "translation": "艾爾凡達",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#38",
+      "index": 38,
+      "source": "Hawk's Hollow",
+      "translation": "鷹谷",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#39",
+      "index": 39,
+      "source": "Traps",
+      "translation": "陷阱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#40",
+      "index": 40,
+      "source": "Mind Readers",
+      "translation": "讀心者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#41",
+      "index": 41,
+      "source": "Safe Passage",
+      "translation": "安全通行",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#42",
+      "index": 42,
+      "source": "His Spying",
+      "translation": "他的間諜活動",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#43",
+      "index": 43,
+      "source": "Stolen Gems",
+      "translation": "被竊寶石",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#44",
+      "index": 44,
+      "source": "Chests",
+      "translation": "寶箱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#45",
+      "index": 45,
+      "source": "Nago",
+      "translation": "納戈",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#46",
+      "index": 46,
+      "source": "Weapon Repair",
+      "translation": "修理武器",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#47",
+      "index": 47,
+      "source": "Last Orders",
+      "translation": "最後命令",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#48",
+      "index": 48,
+      "source": "The Festival",
+      "translation": "慶典",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#49",
+      "index": 49,
+      "source": "Pokiir",
+      "translation": "波基爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#50",
+      "index": 50,
+      "source": "A Game",
+      "translation": "一場遊戲",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#51",
+      "index": 51,
+      "source": "Self Defense",
+      "translation": "自我防衛",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#52",
+      "index": 52,
+      "source": "Mercenaries",
+      "translation": "傭兵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#53",
+      "index": 53,
+      "source": "Moredhel",
+      "translation": "莫瑞德人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#54",
+      "index": 54,
+      "source": "Stellan",
+      "translation": "史戴倫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#55",
+      "index": 55,
+      "source": "News",
+      "translation": "消息",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#56",
+      "index": 56,
+      "source": "The Fever",
+      "translation": "熱病",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#57",
+      "index": 57,
+      "source": "Buildings",
+      "translation": "建築",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#58",
+      "index": 58,
+      "source": "Spitzer",
+      "translation": "史畢澤",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#59",
+      "index": 59,
+      "source": "Stealth",
+      "translation": "潛行",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#60",
+      "index": 60,
+      "source": "Locked Door",
+      "translation": "上鎖的門",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#61",
+      "index": 61,
+      "source": "Idol Of Lassur",
+      "translation": "拉蘇爾神像",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#62",
+      "index": 62,
+      "source": "Picklocks",
+      "translation": "開鎖器",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#63",
+      "index": 63,
+      "source": "Silden",
+      "translation": "錫爾登",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#64",
+      "index": 64,
+      "source": "Keys",
+      "translation": "鑰匙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#65",
+      "index": 65,
+      "source": "Upright Man",
+      "translation": "正直之人",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#66",
+      "index": 66,
+      "source": "Items",
+      "translation": "物品",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#67",
+      "index": 67,
+      "source": "Scrying",
+      "translation": "占卜",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#68",
+      "index": 68,
+      "source": "The Six",
+      "translation": "六賢者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#69",
+      "index": 69,
+      "source": "Illusion",
+      "translation": "幻術",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#70",
+      "index": 70,
+      "source": "Moraeulf",
+      "translation": "莫萊伍夫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#71",
+      "index": 71,
+      "source": "Another Spell",
+      "translation": "另一道法術",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#72",
+      "index": 72,
+      "source": "Escape",
+      "translation": "逃脫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#73",
+      "index": 73,
+      "source": "Rift Machine",
+      "translation": "裂隙機器",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#74",
+      "index": 74,
+      "source": "Passwords",
+      "translation": "密碼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#75",
+      "index": 75,
+      "source": "The Six",
+      "translation": "六賢者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#76",
+      "index": 76,
+      "source": "Food",
+      "translation": "食物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#77",
+      "index": 77,
+      "source": "Delekhan",
+      "translation": "迪勒肯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#78",
+      "index": 78,
+      "source": "Nalar's Rib",
+      "translation": "納拉爾之肋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#79",
+      "index": 79,
+      "source": "Freedom",
+      "translation": "自由",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#80",
+      "index": 80,
+      "source": "The Battle",
+      "translation": "那場戰役",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#81",
+      "index": 81,
+      "source": "The Six",
+      "translation": "六賢者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#82",
+      "index": 82,
+      "source": "Double",
+      "translation": "替身",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#83",
+      "index": 83,
+      "source": "Food",
+      "translation": "食物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#84",
+      "index": 84,
+      "source": "Lodging",
+      "translation": "住宿",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#85",
+      "index": 85,
+      "source": "Abbaye Ishap",
+      "translation": "伊沙普修道院",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#86",
+      "index": 86,
+      "source": "Statue",
+      "translation": "雕像",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#87",
+      "index": 87,
+      "source": "Lost & found",
+      "translation": "失物招領",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#88",
+      "index": 88,
+      "source": "Chess",
+      "translation": "西洋棋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#89",
+      "index": 89,
+      "source": "Challenge",
+      "translation": "挑戰",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#90",
+      "index": 90,
+      "source": "En Passah",
+      "translation": "過路兵",
+      "status": "translated",
+      "notes": "Chess term: en passant; the shipped source spells it “En Passah”."
+    },
+    {
+      "id": "KEYWORD.DAT#91",
+      "index": 91,
+      "source": "Abbar's Gambit",
+      "translation": "阿巴爾的策略",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#92",
+      "index": 92,
+      "source": "Advice",
+      "translation": "建議",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#93",
+      "index": 93,
+      "source": "Petrumh",
+      "translation": "佩特魯姆",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#94",
+      "index": 94,
+      "source": "Nighthawks",
+      "translation": "夜鷹會",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#95",
+      "index": 95,
+      "source": "Count Corvalis",
+      "translation": "科瓦利斯伯爵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#96",
+      "index": 96,
+      "source": "Neville Corvalis",
+      "translation": "內維爾身分",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#97",
+      "index": 97,
+      "source": "Navon",
+      "translation": "納馮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#98",
+      "index": 98,
+      "source": "Kenting Rush",
+      "translation": "肯廷拉什",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#99",
+      "index": 99,
+      "source": "Food",
+      "translation": "食物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#100",
+      "index": 100,
+      "source": "Lodging",
+      "translation": "住宿",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#101",
+      "index": 101,
+      "source": "Prince Calin",
+      "translation": "卡林王子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#102",
+      "index": 102,
+      "source": "Clear Roads",
+      "translation": "道路暢通",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#103",
+      "index": 103,
+      "source": "Caldara",
+      "translation": "卡爾達拉",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#104",
+      "index": 104,
+      "source": "Survival",
+      "translation": "生存",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#105",
+      "index": 105,
+      "source": "Ancient Ruin",
+      "translation": "古代遺跡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#106",
+      "index": 106,
+      "source": "Wyverns",
+      "translation": "雙足飛龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#107",
+      "index": 107,
+      "source": "Elvandar",
+      "translation": "艾爾凡達",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#108",
+      "index": 108,
+      "source": "Sleeping Glades",
+      "translation": "沉睡林間",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#109",
+      "index": 109,
+      "source": "Wyverns",
+      "translation": "雙足飛龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#110",
+      "index": 110,
+      "source": "Enemy Activity",
+      "translation": "敵軍動向",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#111",
+      "index": 111,
+      "source": "Duke Martin",
+      "translation": "馬丁公爵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#112",
+      "index": 112,
+      "source": "Helping Out",
+      "translation": "幫忙",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#113",
+      "index": 113,
+      "source": "Locklear",
+      "translation": "洛克利爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#114",
+      "index": 114,
+      "source": "Casting",
+      "translation": "施法",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#115",
+      "index": 115,
+      "source": "Road South",
+      "translation": "南方道路",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#116",
+      "index": 116,
+      "source": "Bad Weather",
+      "translation": "惡劣天候",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#117",
+      "index": 117,
+      "source": "Mine",
+      "translation": "礦坑",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#118",
+      "index": 118,
+      "source": "Magic",
+      "translation": "魔法",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#119",
+      "index": 119,
+      "source": "Nighthawks",
+      "translation": "夜鷹會",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#120",
+      "index": 120,
+      "source": "Spells",
+      "translation": "法術",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#121",
+      "index": 121,
+      "source": "Abbar's Turn",
+      "translation": "阿巴爾的回合",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#122",
+      "index": 122,
+      "source": "Macros",
+      "translation": "魔法典籍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#123",
+      "index": 123,
+      "source": "Vaults",
+      "translation": "地下寶庫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#124",
+      "index": 124,
+      "source": "Inns",
+      "translation": "旅店",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#125",
+      "index": 125,
+      "source": "Crossbows",
+      "translation": "弩",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#126",
+      "index": 126,
+      "source": "Rift Machine",
+      "translation": "裂隙機器",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#127",
+      "index": 127,
+      "source": "Sethanon",
+      "translation": "賽瑟儂",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#128",
+      "index": 128,
+      "source": "Supplies",
+      "translation": "補給品",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#129",
+      "index": 129,
+      "source": "Goblins",
+      "translation": "哥布林",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#130",
+      "index": 130,
+      "source": "Poisoning",
+      "translation": "下毒",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#131",
+      "index": 131,
+      "source": "Baron Gabot",
+      "translation": "加博特男爵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#132",
+      "index": 132,
+      "source": "Plans",
+      "translation": "計畫",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#133",
+      "index": 133,
+      "source": "Northwarden",
+      "translation": "北衛城",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#134",
+      "index": 134,
+      "source": "Animals",
+      "translation": "動物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#135",
+      "index": 135,
+      "source": "Dragons",
+      "translation": "龍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#136",
+      "index": 136,
+      "source": "News",
+      "translation": "消息",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#137",
+      "index": 137,
+      "source": "Her Father",
+      "translation": "她父親",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#138",
+      "index": 138,
+      "source": "Neville",
+      "translation": "內維爾",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#139",
+      "index": 139,
+      "source": "Unpleasant past",
+      "translation": "不堪的過去",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#140",
+      "index": 140,
+      "source": "The Murder",
+      "translation": "那起謀殺",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#141",
+      "index": 141,
+      "source": "Family Legends",
+      "translation": "家族傳說",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#142",
+      "index": 142,
+      "source": "Sword",
+      "translation": "劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#143",
+      "index": 143,
+      "source": "Alcohol",
+      "translation": "酒",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#144",
+      "index": 144,
+      "source": "Message",
+      "translation": "訊息",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#145",
+      "index": 145,
+      "source": "Murder",
+      "translation": "謀殺",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#146",
+      "index": 146,
+      "source": "News",
+      "translation": "消息",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#147",
+      "index": 147,
+      "source": "Gamina",
+      "translation": "蓋米娜",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#148",
+      "index": 148,
+      "source": "Food",
+      "translation": "食物",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#149",
+      "index": 149,
+      "source": "Magic Supplies",
+      "translation": "魔法補給品",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#150",
+      "index": 150,
+      "source": "The Keep",
+      "translation": "城堡",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#151",
+      "index": 151,
+      "source": "Finances",
+      "translation": "財務",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#152",
+      "index": 152,
+      "source": "Nighthawks",
+      "translation": "夜鷹會",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#153",
+      "index": 153,
+      "source": "Navon",
+      "translation": "納馮",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#154",
+      "index": 154,
+      "source": "Kahooli Priests",
+      "translation": "卡胡利祭司",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#155",
+      "index": 155,
+      "source": "Assessment",
+      "translation": "鑑定",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#156",
+      "index": 156,
+      "source": "Gorath",
+      "translation": "戈拉斯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#157",
+      "index": 157,
+      "source": "Delekhan",
+      "translation": "迪勒肯",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#158",
+      "index": 158,
+      "source": "Murder",
+      "translation": "謀殺",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#159",
+      "index": 159,
+      "source": "Bk of Macros",
+      "translation": "魔法典籍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#160",
+      "index": 160,
+      "source": "Sword",
+      "translation": "劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#161",
+      "index": 161,
+      "source": "Pug",
+      "translation": "帕格",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#162",
+      "index": 162,
+      "source": "Ghosts",
+      "translation": "鬼魂",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#163",
+      "index": 163,
+      "source": "Sword",
+      "translation": "劍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#164",
+      "index": 164,
+      "source": "Count Corvalis",
+      "translation": "科瓦利斯伯爵",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#165",
+      "index": 165,
+      "source": "Excommunicate",
+      "translation": "革除教籍",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#166",
+      "index": 166,
+      "source": "Lurough",
+      "translation": "陸洛",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#167",
+      "index": 167,
+      "source": "Kahooli",
+      "translation": "卡胡利神",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#168",
+      "index": 168,
+      "source": "Wyvern's Egg",
+      "translation": "雙足飛龍蛋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#169",
+      "index": 169,
+      "source": "His Name",
+      "translation": "他的名字",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#170",
+      "index": 170,
+      "source": "The Accident",
+      "translation": "那場意外",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#171",
+      "index": 171,
+      "source": "Chess",
+      "translation": "西洋棋",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#256",
+      "index": 256,
+      "source": "Yes",
+      "translation": "是",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#257",
+      "index": 257,
+      "source": "No",
+      "translation": "否",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#258",
+      "index": 258,
+      "source": "Enter",
+      "translation": "進入",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#259",
+      "index": 259,
+      "source": "Leave",
+      "translation": "離開",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#260",
+      "index": 260,
+      "source": "Accept",
+      "translation": "接受",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#261",
+      "index": 261,
+      "source": "Decline",
+      "translation": "婉拒",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#262",
+      "index": 262,
+      "source": "Haggle",
+      "translation": "議價",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#263",
+      "index": 263,
+      "source": "Buy",
+      "translation": "購買",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#264",
+      "index": 264,
+      "source": "Sell",
+      "translation": "出售",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#265",
+      "index": 265,
+      "source": "OK",
+      "translation": "確定",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#266",
+      "index": 266,
+      "source": "Cancel",
+      "translation": "取消",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#267",
+      "index": 267,
+      "source": "Use again",
+      "translation": "再次使用",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#268",
+      "index": 268,
+      "source": "Done",
+      "translation": "完成",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#269",
+      "index": 269,
+      "source": "Talk",
+      "translation": "交談",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#270",
+      "index": 270,
+      "source": "Petition",
+      "translation": "祈求",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#271",
+      "index": 271,
+      "source": "Bless",
+      "translation": "祝福",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#272",
+      "index": 272,
+      "source": "Cure",
+      "translation": "治療",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#273",
+      "index": 273,
+      "source": "Spoon",
+      "translation": "親熱",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#274",
+      "index": 274,
+      "source": "Bawdy",
+      "translation": "葷段子",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#275",
+      "index": 275,
+      "source": "Ship",
+      "translation": "船",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#276",
+      "index": 276,
+      "source": "Sumani",
+      "translation": "蘇馬尼",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#277",
+      "index": 277,
+      "source": "North",
+      "translation": "北",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#278",
+      "index": 278,
+      "source": "South",
+      "translation": "南",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#279",
+      "index": 279,
+      "source": "East",
+      "translation": "東",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#280",
+      "index": 280,
+      "source": "West",
+      "translation": "西",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#281",
+      "index": 281,
+      "source": "Pay",
+      "translation": "支付",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#282",
+      "index": 282,
+      "source": "Fight",
+      "translation": "戰鬥",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#283",
+      "index": 283,
+      "source": "Retreat",
+      "translation": "撤退",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#284",
+      "index": 284,
+      "source": "Bluff",
+      "translation": "虛張聲勢",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#285",
+      "index": 285,
+      "source": "Reject",
+      "translation": "拒絕",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#286",
+      "index": 286,
+      "source": "Use",
+      "translation": "使用",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#287",
+      "index": 287,
+      "source": "Lie",
+      "translation": "說謊",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#288",
+      "index": 288,
+      "source": "Future",
+      "translation": "未來",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#289",
+      "index": 289,
+      "source": "Rumors",
+      "translation": "傳聞",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#290",
+      "index": 290,
+      "source": "The Dead",
+      "translation": "死者",
+      "status": "translated",
+      "notes": ""
+    },
+    {
+      "id": "KEYWORD.DAT#291",
+      "index": 291,
+      "source": "Stay",
+      "translation": "留下",
+      "status": "translated",
+      "notes": ""
+    },
+    {"id": "KEYWORD.DAT#300", "index": 300, "source": "Navon du Sandau", "translation": "納馮．杜桑多", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#301", "index": 301, "source": "Ugyne Corvalis", "translation": "烏格妮．科瓦利斯", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#302", "index": 302, "source": "Count Corvalis", "translation": "科瓦利斯伯爵", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#303", "index": 303, "source": "Anap-Banis", "translation": "阿納普．巴尼斯", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#304", "index": 304, "source": "Peter the Grey", "translation": "「灰袍」彼得", "status": "translated", "notes": "Matches DIAL_Z30."},
+    {"id": "KEYWORD.DAT#305", "index": 305, "source": "Cullich", "translation": "庫利奇", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#306", "index": 306, "source": "Moraeulf", "translation": "莫萊伍夫", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#307", "index": 307, "source": "Brother Marc", "translation": "馬克修士", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#308", "index": 308, "source": "Naddur Ban Dok", "translation": "納杜爾．班多克", "status": "translated", "notes": "Matches DIAL_Z18/Z20."},
+    {"id": "KEYWORD.DAT#309", "index": 309, "source": "Limm", "translation": "林姆", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#310", "index": 310, "source": "Devon", "translation": "戴文", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#311", "index": 311, "source": "Baron Gabot", "translation": "加博特男爵", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#312", "index": 312, "source": "Ivan Skaald", "translation": "伊凡．史卡德", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#313", "index": 313, "source": "Oracle of Aal", "translation": "阿爾神諭者", "status": "translated", "notes": "Matches BOK_C94."},
+    {"id": "KEYWORD.DAT#314", "index": 314, "source": "Duke Martin", "translation": "馬丁公爵", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#315", "index": 315, "source": "Calin", "translation": "卡林王子", "status": "translated", "notes": "Established glossary title retained for clarity."},
+    {"id": "KEYWORD.DAT#316", "index": 316, "source": "Liallan", "translation": "莉艾蘭", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#317", "index": 317, "source": "Squire Phillip", "translation": "菲力普扈從", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#318", "index": 318, "source": "Sumani", "translation": "蘇馬尼", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#319", "index": 319, "source": "McCannur Ban Dok", "translation": "麥卡努爾．班多克", "status": "translated", "notes": "Matches DIAL_Z20."},
+    {"id": "KEYWORD.DAT#320", "index": 320, "source": "Nivek", "translation": "尼維克", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#321", "index": 321, "source": "Lysle Rigger", "translation": "萊斯爾．瑞格", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#322", "index": 322, "source": "Venutrier of Lan", "translation": "蘭恩的維努特里爾", "status": "translated", "notes": "Matches DIAL_Z06/Z30."},
+    {"id": "KEYWORD.DAT#323", "index": 323, "source": "Katala", "translation": "卡塔拉", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#324", "index": 324, "source": "Mitchel Waylander", "translation": "米契爾．韋蘭德", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#325", "index": 325, "source": "Jason", "translation": "傑森", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#326", "index": 326, "source": "Abuk", "translation": "阿布克", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#327", "index": 327, "source": "Beyla", "translation": "貝拉大祭司", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#328", "index": 328, "source": "Kat", "translation": "凱特", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#329", "index": 329, "source": "Obkhar", "translation": "奧布卡", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#330", "index": 330, "source": "Finn", "translation": "芬恩", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#331", "index": 331, "source": "Max Feeber", "translation": "麥克斯．費伯", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#332", "index": 332, "source": "Petrumh", "translation": "佩特魯姆", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#333", "index": 333, "source": "Dubal An Loch", "translation": "杜巴．安洛克", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#334", "index": 334, "source": "Abbot Graves", "translation": "葛瑞夫斯院長", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#335", "index": 335, "source": "Isaac", "translation": "艾薩克", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#336", "index": 336, "source": "Rowe", "translation": "羅威", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#337", "index": 337, "source": "Irmelyn", "translation": "伊爾梅琳", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#338", "index": 338, "source": "Tamney the Minstrel", "translation": "吟遊詩人坦尼", "status": "translated", "notes": "Matches BOK_C71/DIAL_Z30."},
+    {"id": "KEYWORD.DAT#339", "index": 339, "source": "Joftaz", "translation": "喬夫塔茲", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#340", "index": 340, "source": "Nia", "translation": "妮雅", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#341", "index": 341, "source": "Arutha", "translation": "亞魯莎", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#342", "index": 342, "source": "Narab", "translation": "納拉布", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#343", "index": 343, "source": "Delekhan", "translation": "迪勒肯", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#344", "index": 344, "source": "Makala", "translation": "馬卡拉", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#345", "index": 345, "source": "Tomas", "translation": "托馬斯", "status": "translated", "notes": "Runtime speaker-name table."},
+    {"id": "KEYWORD.DAT#346", "index": 346, "source": "Moredhel", "translation": "莫瑞德人", "status": "translated", "notes": "Runtime speaker-name table."}
+  ]
+}

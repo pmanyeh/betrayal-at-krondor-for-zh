@@ -16,9 +16,10 @@ from tools.text.ddx_pack import pack_ddx_data
 
 
 class TestDdxRoundTrip(unittest.TestCase):
-    def test_repack_remaps_full_32_bit_child_offset_only(self):
-        """Choice targets are 32-bit offsets; opcode operands are not pointers."""
+    def test_repack_remaps_choice_and_dialog_return_offsets(self):
+        """Choice and opcode-0x10 targets are independent 32-bit offsets."""
         old_child_offset = 0x00012345
+        old_return_offset = 0x00023456
         data = {
             "dir_entries": [(100001, 0x00010000)],
             "records": [
@@ -34,13 +35,22 @@ class TestDdxRoundTrip(unittest.TestCase):
                         "nA3": old_child_offset & 0xFFFF,
                         "nA4": old_child_offset >> 16,
                     }],
-                    "opcodes": [{
-                        "wOp": 6,
-                        "nA1": 12,
-                        "nA2": 160,
-                        "nA3": 0x2345,
-                        "nA4": 30,
-                    }],
+                    "opcodes": [
+                        {
+                            "wOp": 6,
+                            "nA1": 12,
+                            "nA2": 160,
+                            "nA3": 0x2345,
+                            "nA4": 30,
+                        },
+                        {
+                            "wOp": 0x10,
+                            "nA1": old_return_offset & 0xFFFF,
+                            "nA2": old_return_offset >> 16,
+                            "nA3": 7,
+                            "nA4": 8,
+                        },
+                    ],
                     "text": "parent\x00",
                 },
                 {
@@ -52,14 +62,27 @@ class TestDdxRoundTrip(unittest.TestCase):
                     "opcodes": [],
                     "text": "child\x00",
                 },
+                {
+                    "orig_offset": old_return_offset,
+                    "style": 0,
+                    "speaker_id": 0,
+                    "flags": 0,
+                    "choices": [],
+                    "opcodes": [],
+                    "text": "return\x00",
+                },
             ],
         }
 
         extracted = extract_ddx_data(pack_ddx_data(data))
         child_offset = extracted["records"][1]["orig_offset"]
+        return_offset = extracted["records"][2]["orig_offset"]
         choice = extracted["records"][0]["choices"][0]
+        return_op = extracted["records"][0]["opcodes"][1]
         self.assertEqual(choice["nA3"] | (choice["nA4"] << 16), child_offset)
         self.assertEqual(extracted["records"][0]["opcodes"][0]["nA3"], 0x2345)
+        self.assertEqual(return_op["nA1"] | (return_op["nA2"] << 16), return_offset)
+        self.assertEqual((return_op["nA3"], return_op["nA4"]), (7, 8))
 
     def test_synthetic_roundtrip(self):
         """Build a synthetic DDX binary with keyed and child records, verify exact byte round-trip."""

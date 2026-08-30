@@ -1,0 +1,13 @@
+{
+  "format": "BAK_ZH_CHARACTER_NAMES",
+  "version": 1,
+  "notes": "The six fixed party names patched into STARTUP.GAM and save files. Included in the sparse small font because dialog speaker bubbles render these runtime strings.",
+  "entries": [
+    {"id": "CharacterId#0", "source": "Locklear", "translation": "洛克利爾", "status": "translated", "notes": ""},
+    {"id": "CharacterId#1", "source": "Gorath", "translation": "戈拉斯", "status": "translated", "notes": ""},
+    {"id": "CharacterId#2", "source": "Owyn", "translation": "歐文", "status": "translated", "notes": ""},
+    {"id": "CharacterId#3", "source": "Pug", "translation": "帕格", "status": "translated", "notes": ""},
+    {"id": "CharacterId#4", "source": "James", "translation": "詹姆士", "status": "translated", "notes": ""},
+    {"id": "CharacterId#5", "source": "Patrus", "translation": "派特魯斯", "status": "translated", "notes": ""}
+  ]
+}
