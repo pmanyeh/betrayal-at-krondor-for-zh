@@ -72,6 +72,7 @@
 使用者在某神殿場景（頌恩神殿，2026-08-31 測 WASD 時發現）點右上「離開」或按 ESC，畫面「閃退後遊戲重啟」——實際是被強制推進到下一章的章節轉場。**跟當天的 WASD/平移/紮營改動無關**（那些只動 3D 世界迴圈與帳篷 action_id）；根因在先前「場景離開按鈕」功能（`TOWNSCN.C`，`c801185`~`15ccd73`）。
 
 - **路徑**：`townscene_load()`（[TOWNSCN.C:161-165](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C)）用啟發式找「離開條」actor：`(rect 寬≥200 && y≥100 && 高≥40) || cKind==0xf || cKind==3` 就把 `s_exitBarAction = i+0x80`，**迴圈沒有 `break`，取最後一個符合的**。點「離開」／ESC → `action = s_exitBarAction` → `di = pA->cKind`。若掃到的是 `cKind==0xf` 的劇情 actor → [TOWNSCN.C:753](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C) `di==0xf` → `g_gameState.nWorldLoopExitRequest = 1` → 世界迴圈回傳 `exit_mode = 5` → `GMAIN.C:204` `savegame_chapter_start_dispatch(g_nChapterAtLoopExit + 1)`＝**跳下一章**。
+- **範圍**：使用者實測**城鎮（村莊／城市）的「離開」與 ESC 都正常**，目前只有神殿會誤跳章 → 佐證問題是神殿 GDS 特有的 `cKind==0xf` actor 被「取最後一個」規則選到。
 - **推測**：這個神殿的 actor 清單裡「正常離開 actor（`cKind==3`）」後面還有一個 `cKind==0xf` 的 actor，被「取最後一個」規則覆蓋掉。
 - **下一步**：先把該神殿的 GDS 場景檔（`townscene_load` 組檔名 `GDS<章><sub字母>.DAT`，用 `bak rmf extract`）抽出來看 actor 清單，確認上述推測。修法方向：讓啟發式優先鎖定 `cKind==3`／寬band actor，`cKind==0xf` 只在沒有更好候選時才採用（或找到後 `break`）。會動到先前已驗收的王宮／村莊離開行為，要重編 + 重測王宮（「不能走正門」對白）／村莊／神殿三種場景。
 
