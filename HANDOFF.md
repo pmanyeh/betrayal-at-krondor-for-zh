@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**行走操控：A/D 轉向、Q/E 平移、T 紮營**；**神殿「離開」閃退根因＝`alloc_far` 傳統記憶體耗盡，已用 UMB 後援修好**，`DOSMEM.C`＋`CZONE.C`＋conf `[dos]` 區塊；殘留：「隊伍能力提升」訊息缺字既有 bug 待查；先前：發布用「免安裝整合包」工具鏈）
+**最後更新：** 2026-08-31（**行走操控：A/D 轉向、Q/E 平移、T 紮營**；**神殿「離開」閃退＝`alloc_far` 傳統記憶體耗盡，已用 UMB 後援修好**（`DOSMEM.C`＋`CZONE.C`＋conf `[dos]` 區塊）；**「隊伍能力提升」訊息缺字＝小字庫漏 6 字，已補建**（`DIAL_Z21.json` notes 標記＋重建 `ZHSTAT.DAT`）；先前：發布用「免安裝整合包」工具鏈）
 
 - **免安裝整合包架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python 3.12.10）＋`dosbox-x/`（GPLv2，`dosbox-x-v2026.08.02` win64）——兩者都是官方原始二進位、下載時驗證雜湊、跟原版遊戲版權無關可合法重新散布＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」，整個資料夾可搬移。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。**完整的出包標準流程（何時該重跑哪支腳本、驗證步驟、已知地雷）見新文件 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)。**
 - **新手輕鬆開局存檔**（`GAMES/Plus.G01/`，`tools/release/build_starter_save.py`）：裡面兩個存檔點，`SAVE01.GAM` 起始金幣調成 1000（其餘不動）、`SAVE02.GAM` 是使用者自己另一輪遊玩的章節 1 進度（只套中文姓名 patch，金幣/進度保留原樣，已跟使用者確認是自己玩出來的、不是別人提供，沒有授權疑慮）。**踩過的雷**：第一版直接拿 `STARTUP.GAM` 改，實機讀取會閃退（`cannot load gi block` / Null pointer assignment）——`GMAIN.C: gmain_start_dispatch()` 顯示 New Game 與 Load Game 雖然都走 `savegame_read()`，但 `STARTUP.GAM` 原版只走過 New Game 路徑，缺了 Load Game 預期已存在的某些狀態（很可能是 `shared_inventory`/`ground_pile` 相關區域）。改成一律以本專案自己過去測試留下、已知能正常 Load Game 讀取的真實存檔當基準（`tools/release/starter_save_base/`），只 patch 需要的欄位，其餘原封不動。金幣欄位 offset（file offset 102、4-byte signed LE）推導與交叉驗證方式見指令碼 docstring。**這兩份存檔都還沒有實機重新驗證過**（session 當下 DOSBox-X AI bridge 沒有連線中的遊戲程序）——下次有機會請優先確認「讀取進度→Plus」兩個存檔點都不閃退、`SAVE01` 金幣顯示 1000。
@@ -79,13 +79,14 @@
 - **需搭配 conf**：`dosmem_enable_umb_alloc` 需要 host DOS 有 UMB 可 link，`dist/dosbox_zh_test.conf` 已加 `[dos]` 區塊（`dos=high,umb`）。**發布整合包（`dist/release_v100_zh/`）內附的 DOSBox-X conf 也要同步加這個 `[dos]` 區塊**，否則 UMB 後援失效、缺口 3KB 的臨界場景仍會崩——出包流程 `docs/workflows/release-packaging.md` 待補這一項。
 - **部署**：`dist/test_v100_zh/krondor.exe` = **458992 bytes**、SHA-256 `fc86dd01a907a74db784962c24ccdfe27a071166d73eaf9ef5c89e17a7fb5ac7`。舊 exe 備份 `scratchpad/krondor_pre_umbfix.exe`。**使用者實機確認：頌恩神殿離開不再崩潰。** 待做：多進出幾個城鎮/神殿、正常長時間玩，確認沒有別的臨界場景。
 
-### ⚠️ 「隊伍的 @1 能力提升了。」系統訊息缺字＋截斷——既有問題，待修（與記憶體修法無關）
+### ✅ 「隊伍的各項能力都提升了。」訊息缺字——小字庫漏字，已補建部署
 
-戰鬥後單一技能提升時（`DIAL_Z21.DDX#0`，`The party's @1 ability has increased.` → 「隊伍的@1能力提升了。」，node 0x200b32），實機顯示成「隊伍的　　能力　提」——`@1`（技能名）位置空白、「升了。」被截掉。用外科手術版記憶體修法後**仍重現**，且換 `8e86f32` 也有，屬既有 bug。
+戰鬥後能力提升訊息（`DIAL_Z21.DDX#0`~`#3`，node 0x200b30-0x200b33）實機顯示成「隊伍的　　能力　提」。**不是截斷、不是 `@1` token 問題**——是小字庫 `ZHSTAT.DAT` 缺 `各`(1281)／`項`(1347)／`都`(165)／`升`(3127)／`了`(91)／`。`(8) 這 6 個 glyph，小字模式下缺字靜默顯示成空白（archive line 485 記過的坑）。
 
-- **`@1` 來源**：`DIALOG.C` token 展開 `case 27`／`case 29` → `_fstrcpy(g_speaker_names[...], g_abStatNames[lEvtArgAuxValue])`。`g_abStatNames[16][15]`（`DIALOG.C:25`，已翻中文 byte-pair）。`lEvtArgAuxValue` 由 `evtcond_pty_dirty_flags_process()`（`EVTCOND.C:319`）的 `for (slot_idx=2; slot_idx<0x11; slot_idx++)` 設定；`STAT.C:300` 寫 SKILL_IMPROVED 事件時排除 `stat_idx==0x10`，所以 `lEvtArgAuxValue` 實際範圍 2..15，`g_abStatNames[2..15]` 都是合法的 2-CJK 字串——**索引沒有越界，`@1` 空白的真因還沒查出來**。
-- **§11 只驗過複數版**：archive §11（RESOLVED）修的是這個訊息框（`flags=0x0014`、rect `(70,40,180,35)`、28px 可用高）放不下兩行 16px 中文 → 對這個精確版位啟用 `g_bSmallZhMode` 小字。但當時只實機驗 `#1`「隊伍的各項能力都提升了。」（**無 `@1`**）。含 `@1` 的 `#0`／`#2` 從沒驗過——螢幕上的字看起來還是 16px 大字（小字觸發沒中？），加上 `@1` 空白，導致溢出只顯一行、其餘截斷。
-- **優先度低**：非崩潰、非死機（archive §11 的死機已修），只是這個不常見的系統訊息顯示不對。下一步方向：查 `#0`／`#2` 的 record flags/rect 是否跟 `#1` 一致（小字觸發是精確比對）、以及 `@1` 走的是 `case 27` 還是 `29`、`g_speaker_names` slot 對不對。
+- **為什麼掉字**：archive §11 對這個訊息框（`flags=0x0014`、rect `(70,40,180,35)`、28px 可用高放不下兩行 16px 中文）強制啟用 `g_bSmallZhMode` 小字。§11 當時驗過是好的，但之後 `ZHSTAT.DAT` 為法術／怪物名／選單重建過多次，而 `build_small_font.py` 的 `--ddx-title-dir` 只抓 DDX `#title#` 正文，抓不到這個訊息的正文字，這 6 個字就掉出去了。
+- **修法（純資源）**：`DIAL_Z21.json#0`~`#3` 的 `notes` 加上觸發字串「`10x10 Chinese font path`」，`chars_from_ddx_small_text()` 就會收錄這 4 筆的完整正文。重建 `ZHSTAT.DAT`：**943 → 949 glyph（20888 bytes）**，deploy 到 `dist/test_v100_zh/`。**不用重編 exe。** commit `78b54b3`。
+- **教訓補充**：archive §11 只實機驗了 `#1`「隊伍的各項能力都提升了。」——但那是**在當時的小字庫來源清單下**驗的。小字庫來源清單後來變過，任何「被 DIALOG.C 強制切小字的 DDX 訊息」如果正文字沒進 `build_small_font.py` 的收字範圍，都會這樣掉字。**新的規則：凡是 DIALOG.C／ASKABOUT.C 等強制小字的 DDX 記錄，都要在 `notes` 標「10x10 Chinese font path」。**
+- **待實機複驗**：DOSBox-X 已完整重啟（讓新 `ZHSTAT.DAT` 重載進 EMS）。要驗戰鬥後能力提升訊息完整顯示「隊伍的各項能力都提升了。」。含 `@1` 的 `#0`／`#2`（單一技能）順帶看 `@1`（技能名，來自 `g_abStatNames`，走 `UI_HARDCODED.json` 收字）有沒有正常。
 
 ### ✅ 對話模式 GoodBye 異常——已修復並實機驗收
 
