@@ -203,24 +203,30 @@ def write_game_data_placeholder(release_dir: Path) -> None:
     print(f"[OK] 已建立 {game_data_dir}")
 
 
-# Hand-curated "easy start" save (see tools/release/starter_save/), shipped so
-# new players can skip the harder opening: New Game -> watch the intro -> Load
-# Game -> pick this slot. This is project-authored content, not an extracted
-# original asset, so it's carved out of the blanket *.gam .gitignore rule.
+# Hand-curated "easy start" saves (see tools/release/starter_save/ and
+# build_starter_save.py), shipped so new players can skip the harder opening:
+# New Game -> watch the intro -> Load Game -> pick this slot. This is
+# project-authored content, not an extracted original asset, so it's carved
+# out of the blanket *.gam .gitignore rule. The whole slot directory is
+# copied as a unit -- it may hold more than one SAVE0N.GAM checkpoint.
 STARTER_SAVE_SRC = Path(__file__).resolve().parent / "starter_save"
-STARTER_SAVE_RELPATH = Path("GAMES") / "NewGamePlus.G01" / "SAVE00.GAM"
-STARTER_SAVE_SLOT_NAME = "NewGamePlus"
+STARTER_SAVE_SLOT_RELPATH = Path("GAMES") / "Plus.G01"
+STARTER_SAVE_SLOT_NAME = "Plus"
 
 
-def write_starter_save(release_dir: Path) -> None:
-    src = STARTER_SAVE_SRC / STARTER_SAVE_RELPATH
-    if not src.exists():
-        print(f"[跳過] 沒有內附新手存檔（{src} 不存在）")
-        return
-    dest = release_dir / "game_data" / STARTER_SAVE_RELPATH
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(src, dest)
-    print(f"[OK] 已內附新手存檔：game_data/{STARTER_SAVE_RELPATH.as_posix()}")
+def write_starter_save(release_dir: Path) -> list[Path]:
+    src_dir = STARTER_SAVE_SRC / STARTER_SAVE_SLOT_RELPATH
+    if not src_dir.is_dir():
+        print(f"[跳過] 沒有內附新手存檔（{src_dir} 不存在）")
+        return []
+    dest_dir = release_dir / "game_data" / STARTER_SAVE_SLOT_RELPATH
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    shipped = []
+    for src in sorted(src_dir.glob("*.GAM")):
+        shutil.copy2(src, dest_dir / src.name)
+        shipped.append(dest_dir / src.name)
+    print(f"[OK] 已內附新手存檔：game_data/{STARTER_SAVE_SLOT_RELPATH.as_posix()}/ 底下 {len(shipped)} 個存檔點")
+    return shipped
 
 
 def check_dosboxx(release_dir: Path) -> bool:
@@ -278,11 +284,11 @@ dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 
 新手輕鬆開局（optional）
 ------------------------
-整合包內附一個以原版 STARTUP.GAM 為基礎另外準備的存檔，唯一差別是起始
-金幣從 0 調成 1000，其餘（章節進度、角色能力、隨身物品）跟正常開新遊戲
-完全一樣。想用的話：開新遊戲，看完 Intro 過場後，到主選單選「讀取進度」，
-選讀取「NewGamePlus」這個存檔即可；不想用的話直接開新遊戲照玩即可，不
-影響任何東西。
+整合包內附一個「Plus」存檔，裡面有兩個存檔點：存檔 1 起始金幣調成 1000、
+其餘跟正常開新遊戲完全一樣；存檔 2 是多探索了一些的進度，開局手邊會有
+更多資源可用。想用的話：開新遊戲，看完 Intro 過場後，到主選單選「讀取
+進度」，選讀取「Plus」底下想要的存檔點即可；不想用的話直接開新遊戲照玩
+即可，不影響任何東西。
 
 解除安裝
 --------
@@ -311,11 +317,12 @@ def check_game_data_is_empty(release_dir: Path) -> None:
     Only the placeholder text file and the known starter-save subtree
     (both written by this script, never by a developer manually) are allowed."""
     game_data_dir = release_dir / "game_data"
-    allowed_files = {game_data_dir / "把遊戲資料放這裡.txt", game_data_dir / STARTER_SAVE_RELPATH}
+    starter_save_slot_dir = game_data_dir / STARTER_SAVE_SLOT_RELPATH
+    placeholder = game_data_dir / "把遊戲資料放這裡.txt"
     unexpected = [
         p.relative_to(game_data_dir).as_posix()
         for p in game_data_dir.rglob("*")
-        if p.is_file() and p not in allowed_files
+        if p.is_file() and p != placeholder and starter_save_slot_dir not in p.parents
     ]
     if unexpected:
         raise SystemExit(
