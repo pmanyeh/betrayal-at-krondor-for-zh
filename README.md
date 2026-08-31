@@ -67,7 +67,7 @@ python -m unittest discover -s tests/unit -v
 
 整合包還內附官方預先編譯的 **DOSBox-X**（GPLv2 開源 DOS 模擬器）與**可嵌入版 Python**（PSF 授權），兩者都跟原版遊戲無關、可以合法重新散布。使用者不需要自己另外裝 Python 或 DOS 模擬器：解壓整合包 → 把遊戲檔案丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」開始玩，整個資料夾可以直接搬到別的地方。
 
-開發端依序執行 `tools/release/build_exe_patch.py`（產生 EXE 補丁）、`tools/release/vendor_dosboxx.py`（下載並驗證雜湊後內附 DOSBox-X）、`tools/release/vendor_python_embed.py`（下載並驗證雜湊後內附可嵌入版 Python）、`tools/release/package_release.py`（組出完整整合包 `dist/release_v100_zh/`）。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
+開發端出包的標準流程（何時要重跑哪支腳本、驗證步驟）見 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)；最常用的一行是 `python tools/release/package_release.py`，組出完整整合包到 `dist/release_v100_zh/`。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
 
 ## 致謝
 

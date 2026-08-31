@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**物品詳情「種族加成」名稱字形映射修正**；發布用「免安裝整合包」工具鏈輸出仍在 `dist/release_v100_zh/`）
+**最後更新：** 2026-08-31（**物品詳情「種族加成」名稱字形映射修正**；發布用「免安裝整合包」工具鏈輸出仍在 `dist/release_v100_zh/`；新增出包標準流程文件 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)，寫清楚每次翻譯/EXE 更新後該重跑哪幾支 `tools/release/*.py`、什麼時候不用重跑、驗證步驟跟目前踩過的地雷，之後接手的人直接看那份就好，不用再從 commit log 拼湊）
 
 - **架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python，`vendor_python_embed.py` 固定版本 3.12.10、下載後驗證雜湊）＋`dosbox-x/`（GPLv2，`vendor_dosboxx.py` 固定版本 `dosbox-x-v2026.08.02` win64、同樣驗證雜湊）＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，並在打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。
 - **踩過的坑**（皆已修好並重新驗證）：(1) `.bat` 檔用純 LF 寫出會被 `cmd.exe` 解析器打散，`package_release.py` 現在強制輸出 CRLF；(2) 有些 Windows 機器開了 `NoDefaultCurrentDirectoryInExePath` 安全性原則，會讓批次檔裡「裸檔名」呼叫執行檔失效，`玩遊戲.bat` 已改成明確寫 `.\dosbox-x.exe`；(3) DOSBox-X 2026.08.02 版拿掉了舊版 `cputype=486_slow` 這個值，改用最接近的 `486_prefetch`；(4) `zh_krondor.conf` 原本是 `vendor_dosboxx.py`（有快取、不會每次重跑）順手寫進去的，改設定不會生效到已快取的輸出——現在改成 `package_release.py` 每次都重新從 template 寫入，避免這種靜默過期。
