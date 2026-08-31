@@ -57,6 +57,16 @@ python -m unittest discover -s tests/unit -v
 
 **本專案不散布原版遊戲資產。** 若要實際建置、測試修改後的 `KRONDOR.EXE`，需要自行提供合法取得的遊戲資料檔（原版光碟、數位重製版等）。`.gitignore` 已排除遊戲資料相關的副檔名與資料夾，避免誤 commit 進版本控制。
 
+## 如何取得中文化版本
+
+基於上述「不散布原版遊戲資產」的原則，發布的中文化「補丁」本身**不包含**任何原版遊戲檔案，也不包含編譯好的 `KRONDOR.EXE`——`KRONDOR.EXE` 是重編出來的原版商業執行檔衍生物，同樣不直接發布。實際發布內容分三部分：
+
+- **`KRONDOR.EXE` 二進位差異補丁**：使用者拿自己合法版本的 v1.00 Floppy 版（1993-06-16）EXE，在本機套用差異補丁重建出中文版，安裝程式會先驗證雜湊值，版本不符會直接中止、不動任何檔案。
+- **`STARTUP.GAM` 隊伍角色名**：對使用者自己的存檔範本檔做原地欄位替換，同樣不隨附任何 `.GAM` 檔。
+- **翻譯資源檔**（DDX/BOK/DAT/字型等）：這些是本專案工具從翻譯內容重新產生的全新檔案，直接以 loose 覆蓋檔形式複製進遊戲目錄（引擎本身支援 loose 檔優先於封裝檔的載入順序）。
+
+開發端用 `tools/release/build_exe_patch.py` 產生 EXE 補丁、`tools/release/package_release.py` 組出完整發布包（`dist/release_v100_zh/`），使用者端只要執行裡面免 Python 套件依賴的 `installer.py` 即可安裝／解除安裝。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
+
 ## 致謝
 
 - [`canassa/betrayal-at-krondor`](https://github.com/canassa/betrayal-at-krondor) — 原始碼還原與 byte-perfect 重建工具鏈，本專案所有中文化修改都建立在這份工作之上，是整個計畫能成立的基礎。

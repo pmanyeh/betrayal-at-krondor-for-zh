@@ -1,0 +1,46 @@
+MIT License
+
+Copyright (c) 2026 pmanyeh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+The MIT License above covers only the original work in this repository: the
+Traditional Chinese translation text, the font/text/DDX/BOK/release tooling
+under `tools/`, build scripts, tests, and documentation.
+
+It does NOT grant any rights to third-party material, namely:
+
+- *Betrayal at Krondor* itself -- its game code, data, artwork, audio, and
+  text -- which remains the property of its original copyright holders
+  (Dynamix / Sierra and their successors). This project is an unofficial,
+  non-commercial fan translation and is not affiliated with, endorsed by, or
+  sponsored by them.
+- The reverse-engineered C source tree vendored under `upstream/` (from
+  [`canassa/betrayal-at-krondor`](https://github.com/canassa/betrayal-at-krondor)),
+  which carries its own MIT license for that project's original work, subject
+  to the same third-party disclaimer -- see `upstream/betrayal-at-krondor/LICENSE`.
+
+Consistent with this, this project never distributes original game assets or
+a compiled `KRONDOR.EXE`. Release artifacts under `dist/release_v100_zh/`
+(see `tools/release/`) ship only a binary diff patch plus newly-authored
+translated resource files, meant to be applied by end users to their own
+legally obtained copy of the game -- see `README.md` and
+`dist/release_v100_zh/README_安裝說明.txt` for details.
