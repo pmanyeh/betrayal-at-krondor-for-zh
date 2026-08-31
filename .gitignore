@@ -11,6 +11,10 @@ betrayal-at-krondor/
 *.ddx
 krondor-manual.pdf
 
+# Exception: a hand-curated "easy start" save shipped intentionally in release
+# bundles (project-authored content, not an extracted/original game asset).
+!tools/release/starter_save/**/*.GAM
+
 # Build and toolchain artifacts
 build/
 dist/

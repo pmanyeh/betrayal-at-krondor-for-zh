@@ -1,7 +1,9 @@
 """Developer-side tool: assemble the complete end-user "免安裝整合包" release.
 
 Builds `dist/release_v100_zh/` as a self-contained, portable folder:
-    game_data/                        -- empty; the end user drops their own
+    game_data/                        -- empty (besides an optional curated
+                                          "easy start" save, see starter_save/);
+                                          the end user drops their own
                                           legally-owned original game files here
     python-embed/                     -- vendored embeddable Python (vendor_python_embed.py)
     dosbox-x/                         -- vendored DOSBox-X (vendor_dosboxx.py)
@@ -201,6 +203,26 @@ def write_game_data_placeholder(release_dir: Path) -> None:
     print(f"[OK] 已建立 {game_data_dir}")
 
 
+# Hand-curated "easy start" save (see tools/release/starter_save/), shipped so
+# new players can skip the harder opening: New Game -> watch the intro -> Load
+# Game -> pick this slot. This is project-authored content, not an extracted
+# original asset, so it's carved out of the blanket *.gam .gitignore rule.
+STARTER_SAVE_SRC = Path(__file__).resolve().parent / "starter_save"
+STARTER_SAVE_RELPATH = Path("GAMES") / "NewGamePlus.G01" / "SAVE00.GAM"
+STARTER_SAVE_SLOT_NAME = "NewGamePlus"
+
+
+def write_starter_save(release_dir: Path) -> None:
+    src = STARTER_SAVE_SRC / STARTER_SAVE_RELPATH
+    if not src.exists():
+        print(f"[跳過] 沒有內附新手存檔（{src} 不存在）")
+        return
+    dest = release_dir / "game_data" / STARTER_SAVE_RELPATH
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, dest)
+    print(f"[OK] 已內附新手存檔：game_data/{STARTER_SAVE_RELPATH.as_posix()}")
+
+
 def check_dosboxx(release_dir: Path) -> bool:
     dosboxx_dir = release_dir / "dosbox-x"
     if not (dosboxx_dir / "dosbox-x.exe").exists():
@@ -254,6 +276,14 @@ dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 「玩遊戲.bat」就會啟動中文版遊戲。整個資料夾可以直接搬到別的地方，
 不影響運作。
 
+新手輕鬆開局（optional）
+------------------------
+整合包內附一個以原版 STARTUP.GAM 為基礎另外準備的存檔，唯一差別是起始
+金幣從 0 調成 1000，其餘（章節進度、角色能力、隨身物品）跟正常開新遊戲
+完全一樣。想用的話：開新遊戲，看完 Intro 過場後，到主選單選「讀取進度」，
+選讀取「NewGamePlus」這個存檔即可；不想用的話直接開新遊戲照玩即可，不
+影響任何東西。
+
 解除安裝
 --------
 雙擊「安裝中文化.bat」旁的命令列視窗執行：
@@ -278,15 +308,20 @@ def write_readme(release_dir: Path) -> None:
 def check_game_data_is_empty(release_dir: Path) -> None:
     """Safety net: game_data/ must never ship with real game files in it --
     that would mean accidentally distributing original copyrighted assets.
-    Only the placeholder text file dropped by write_game_data_placeholder()
-    is allowed."""
+    Only the placeholder text file and the known starter-save subtree
+    (both written by this script, never by a developer manually) are allowed."""
     game_data_dir = release_dir / "game_data"
-    unexpected = [p.name for p in game_data_dir.iterdir() if p.name != "把遊戲資料放這裡.txt"]
+    allowed_files = {game_data_dir / "把遊戲資料放這裡.txt", game_data_dir / STARTER_SAVE_RELPATH}
+    unexpected = [
+        p.relative_to(game_data_dir).as_posix()
+        for p in game_data_dir.rglob("*")
+        if p.is_file() and p not in allowed_files
+    ]
     if unexpected:
         raise SystemExit(
             f"拒絕打包：{game_data_dir} 裡有非預期的檔案，可能是開發測試時不小心放了真的遊戲資料進去：\n"
             f"  {unexpected}\n"
-            "先清空 game_data/（只留下說明檔）再重新 package。"
+            "先清空 game_data/（只留下說明檔跟新手存檔）再重新 package。"
         )
     print("[OK] game_data/ 確認乾淨（沒有夾帶原版遊戲資料）")
 
@@ -313,6 +348,7 @@ def main() -> None:
     write_bat("play_launcher.bat.template", RELEASE_DIR / "玩遊戲.bat")
     write_bat("install_launcher.bat.template", RELEASE_DIR / "安裝中文化.bat")
     write_game_data_placeholder(RELEASE_DIR)
+    write_starter_save(RELEASE_DIR)
     check_dosboxx(RELEASE_DIR)
     check_python_embed(RELEASE_DIR)
     write_readme(RELEASE_DIR)

@@ -18,7 +18,9 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "font"))
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(REPO_ROOT / "tools" / "font"))
 from build_font import encode_string  # noqa: E402
 
 SLOT_WIDTH = 10
@@ -43,10 +45,13 @@ def patch(data: bytes, char_to_id: dict[str, int]) -> bytes:
         if idx == -1:
             raise ValueError(f"Could not find original name {eng!r} in file")
         slot = bytes(data[idx : idx + SLOT_WIDTH])
-        if slot[: len(eng)] != eng.encode("ascii") or any(b != 0 for b in slot[len(eng) :]):
+        # Some saves leave stale bytes after the terminating NUL instead of
+        # zero-filling the rest of the fixed-width slot.  Those bytes are not
+        # part of the C string and are safe to replace along with the slot.
+        if slot[: len(eng) + 1] != needle:
             raise ValueError(
                 f"Unexpected slot bytes for {eng!r} at offset {idx}: {slot!r} "
-                "(expected name + zero padding to 10 bytes)"
+                "(expected a NUL-terminated name inside the 10-byte slot)"
             )
         encoded = encode_string(zh, char_to_id)
         if len(encoded) + 1 > SLOT_WIDTH:
@@ -63,7 +68,8 @@ def main() -> None:
         raise SystemExit(1)
     in_path, out_path = sys.argv[1], sys.argv[2]
 
-    mapping = json.loads(Path("localization/generated/zh_mapping.json").read_text(encoding="utf-8"))
+    mapping_path = REPO_ROOT / "localization" / "generated" / "zh_mapping.json"
+    mapping = json.loads(mapping_path.read_text(encoding="utf-8"))
     char_to_id = mapping["char_to_id"]
 
     data = Path(in_path).read_bytes()
