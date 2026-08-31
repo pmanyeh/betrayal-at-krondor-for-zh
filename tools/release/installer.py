@@ -54,6 +54,17 @@ def backup_file(path: Path, backup_dir: Path) -> str:
     return dest.name
 
 
+def backup_path(path: Path, backup_dir: Path) -> str:
+    """Like backup_file, but also handles directories (e.g. a bundled dosbox-x/)."""
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    dest = backup_dir / path.name
+    if path.is_dir():
+        shutil.copytree(path, dest)
+    else:
+        shutil.copy2(path, dest)
+    return dest.name
+
+
 # ---------------------------------------------------------------------------
 # EXE patch
 # ---------------------------------------------------------------------------
@@ -200,6 +211,54 @@ def remove_resources(game_dir: Path, filenames: list[str], backup_dir: Path) -> 
 
 
 # ---------------------------------------------------------------------------
+# Bundled DOSBox-X + launcher (optional -- older release packages may not have it)
+# ---------------------------------------------------------------------------
+
+DOSBOXX_DIRNAME = "dosbox-x"
+LAUNCHER_NAME = "玩遊戲.bat"
+
+
+def install_dosboxx(game_dir: Path, release_dir: Path, backup_dir: Path) -> bool:
+    src_dosboxx = release_dir / DOSBOXX_DIRNAME
+    src_launcher = release_dir / LAUNCHER_NAME
+    if not src_dosboxx.is_dir() or not src_launcher.is_file():
+        print("[跳過] 這份發布包沒有內附 DOSBox-X，需要自行準備 DOS 模擬器。")
+        return False
+
+    dest_dosboxx = game_dir / DOSBOXX_DIRNAME
+    if dest_dosboxx.exists():
+        backup_path(dest_dosboxx, backup_dir)
+        shutil.rmtree(dest_dosboxx)
+    shutil.copytree(src_dosboxx, dest_dosboxx)
+
+    dest_launcher = game_dir / LAUNCHER_NAME
+    if dest_launcher.exists():
+        backup_path(dest_launcher, backup_dir)
+    shutil.copy2(src_launcher, dest_launcher)
+
+    print(f"[OK] 已附上 DOSBox-X，可雙擊遊戲目錄裡的 {LAUNCHER_NAME} 啟動遊戲")
+    return True
+
+
+def restore_dosboxx(game_dir: Path, backup_dir: Path) -> None:
+    dest_dosboxx = game_dir / DOSBOXX_DIRNAME
+    backed_up_dosboxx = backup_dir / DOSBOXX_DIRNAME
+    if dest_dosboxx.exists():
+        shutil.rmtree(dest_dosboxx)
+    if backed_up_dosboxx.exists():
+        shutil.copytree(backed_up_dosboxx, dest_dosboxx)
+
+    dest_launcher = game_dir / LAUNCHER_NAME
+    backed_up_launcher = backup_dir / LAUNCHER_NAME
+    if backed_up_launcher.exists():
+        shutil.copy2(backed_up_launcher, dest_launcher)
+    elif dest_launcher.exists():
+        dest_launcher.unlink()
+
+    print(f"[OK] {DOSBOXX_DIRNAME}／{LAUNCHER_NAME}：已還原成安裝前的狀態")
+
+
+# ---------------------------------------------------------------------------
 # Top-level install / uninstall
 # ---------------------------------------------------------------------------
 
@@ -218,6 +277,7 @@ def do_install(game_dir: Path, release_dir: Path) -> None:
     exe_installed = install_exe_patch(game_dir, release_dir, backup_dir)
     gam_installed = install_gam_patch(game_dir, release_dir, backup_dir)
     resource_files = install_resources(game_dir, release_dir, backup_dir)
+    dosboxx_installed = install_dosboxx(game_dir, release_dir, backup_dir)
 
     install_manifest = {
         "format": "bak-zh-install-manifest",
@@ -227,6 +287,7 @@ def do_install(game_dir: Path, release_dir: Path) -> None:
         "exe_patched": exe_installed,
         "gam_patched": gam_installed,
         "resource_files": resource_files,
+        "dosboxx_installed": dosboxx_installed,
     }
     (game_dir / INSTALL_MANIFEST_NAME).write_text(
         json.dumps(install_manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
@@ -246,6 +307,8 @@ def do_uninstall(game_dir: Path) -> None:
     restore_exe(game_dir, backup_dir)
     restore_gam(game_dir, backup_dir)
     remove_resources(game_dir, manifest["resource_files"], backup_dir)
+    if manifest.get("dosboxx_installed"):
+        restore_dosboxx(game_dir, backup_dir)
 
     manifest_path.unlink()
     print(f"\n解除安裝完成。備份目錄 {backup_dir.name} 保留未刪除，可自行清理。")

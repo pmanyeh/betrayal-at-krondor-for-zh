@@ -173,6 +173,21 @@ def write_installer_files(release_dir: Path) -> None:
     print("[OK] 已複製 installer.py / bspatch_apply.py")
 
 
+def write_launcher(release_dir: Path) -> None:
+    dest = release_dir / "玩遊戲.bat"
+    shutil.copy2(TOOLS_RELEASE_DIR / "play_launcher.bat.template", dest)
+    print(f"[OK] 已寫入 {dest.name}")
+
+
+def check_dosboxx(release_dir: Path) -> bool:
+    dosboxx_dir = release_dir / "dosbox-x"
+    if not (dosboxx_dir / "dosbox-x.exe").exists():
+        print("[警告] 找不到 dist/release_v100_zh/dosbox-x/，發布包不會內附 DOSBox-X。先跑 tools/release/vendor_dosboxx.py 再重新 package。")
+        return False
+    print("[OK] 已內附 DOSBox-X")
+    return True
+
+
 README_TEXT = """\
 Betrayal at Krondor 繁體中文化 -- 安裝說明
 ==========================================
@@ -192,6 +207,14 @@ Betrayal at Krondor 繁體中文化 -- 安裝說明
    例如：
        python installer.py --game-dir "C:\\Games\\BetrayalAtKrondor"
 4. 完成後，被改動的檔案都備份在遊戲目錄底下的 _zh_backup_<時間戳記> 資料夾。
+
+開始玩
+------
+這份補丁內附 DOSBox-X（免費開源的 DOS 模擬器，跟本補丁沒有從屬關係，授權
+條款見遊戲目錄下 dosbox-x\\COPYING_dosbox-x）。安裝完成後，直接雙擊遊戲
+目錄裡新增的「玩遊戲.bat」就會啟動中文版遊戲，不需要另外安裝或設定
+DOSBox。已經有自己慣用 DOSBox 設定的玩家可以忽略這個捷徑，比照原本的
+方式手動啟動 KRONDOR.EXE 即可。
 
 解除安裝
 --------
@@ -232,6 +255,8 @@ def main() -> None:
     build_resources(RELEASE_DIR / "resources")
     build_gam_patch(RELEASE_DIR / "gam_patch")
     write_installer_files(RELEASE_DIR)
+    write_launcher(RELEASE_DIR)
+    check_dosboxx(RELEASE_DIR)
     write_readme(RELEASE_DIR)
     make_zip(RELEASE_DIR)
     print(f"\n完成：{RELEASE_DIR}")

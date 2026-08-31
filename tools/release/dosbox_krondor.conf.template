@@ -1,0 +1,28 @@
+[dosbox]
+# Krondor consumes raw keyboard scancodes. Host IME composition can swallow
+# ENTER/key-up and mouse events until the DOSBox-X window loses focus.
+ime=false
+
+[sdl]
+windowresolution=1280x800
+output=opengl
+
+[render]
+aspect=true
+scaler=none
+
+[cpu]
+core=normal
+cputype=486_slow
+cycles=12000
+
+[sblaster]
+sbtype=sbpro2
+sbbase=220
+irq=7
+dma=1
+
+[autoexec]
+@mount c ..
+@c:
+@krondor.exe

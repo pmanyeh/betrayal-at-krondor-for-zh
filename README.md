@@ -65,7 +65,9 @@ python -m unittest discover -s tests/unit -v
 - **`STARTUP.GAM` 隊伍角色名**：對使用者自己的存檔範本檔做原地欄位替換，同樣不隨附任何 `.GAM` 檔。
 - **翻譯資源檔**（DDX/BOK/DAT/字型等）：這些是本專案工具從翻譯內容重新產生的全新檔案，直接以 loose 覆蓋檔形式複製進遊戲目錄（引擎本身支援 loose 檔優先於封裝檔的載入順序）。
 
-開發端用 `tools/release/build_exe_patch.py` 產生 EXE 補丁、`tools/release/package_release.py` 組出完整發布包（`dist/release_v100_zh/`），使用者端只要執行裡面免 Python 套件依賴的 `installer.py` 即可安裝／解除安裝。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
+發布包還會內附官方預先編譯的 **DOSBox-X**（GPLv2 授權的開源 DOS 模擬器，跟原版遊戲無關，可以合法重新散布）與一個雙擊即可啟動的「玩遊戲.bat」，讓使用者不用自己另外找/裝 DOS 模擬器。
+
+開發端依序執行 `tools/release/build_exe_patch.py`（產生 EXE 補丁）、`tools/release/vendor_dosboxx.py`（下載並驗證雜湊後內附 DOSBox-X）、`tools/release/package_release.py`（組出完整發布包 `dist/release_v100_zh/`），使用者端只要執行裡面免 Python 套件依賴的 `installer.py` 即可安裝／解除安裝。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
 
 ## 致謝
 
@@ -73,5 +75,5 @@ python -m unittest discover -s tests/unit -v
 - [`old-games/bak-translation-tools`](https://github.com/old-games/bak-translation-tools) — 原由 Andrey Fedoseev 開發、後由 Old-Games.RU 社群維護的 DDX / FNT / BOK 等資源格式研究工具，是本專案早期格式調查的重要參考。
 - [`xavieran/BaKGL`](https://github.com/xavieran/BaKGL) — 現代 OpenGL 重製專案，作為文字/資源格式與遊戲行為的輔助研究參考（目前戰鬥系統尚未完成，本專案未採用其作為主要 runtime）。
 - xBaK — 更早期的開源重製／逆向工程成果，BaKGL 與 `canassa/betrayal-at-krondor` 皆承認其研究貢獻；本專案僅在還原原始碼無法回答問題時，作為次要的歷史參考。
-- [DOSBox-X](https://github.com/joncampbell123/dosbox-x) — 本專案所有實機驗證都在 DOSBox-X 上執行。
+- [DOSBox-X](https://github.com/joncampbell123/dosbox-x) — 本專案所有實機驗證都在 DOSBox-X 上執行，發布包也內附官方預先編譯的 DOSBox-X（GPLv2，見 `tools/release/vendor_dosboxx.py`）方便使用者直接開玩。
 - [`pmanyeh/DOSBox-X-MCP-Debugger`](https://github.com/pmanyeh/DOSBox-X-MCP-Debugger) — 基於 DOSBox-X 打造、可由 AI agent 操作的除錯/自動化驗證分支（截圖、按鍵模擬、記憶體讀寫等），本專案每一輪中文渲染的實機驗證都靠它自動化完成。

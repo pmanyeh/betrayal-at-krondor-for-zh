@@ -1,0 +1,9 @@
+@echo off
+chcp 65001 >nul
+cd /d "%~dp0dosbox-x"
+if not exist dosbox-x.exe (
+    echo 找不到 dosbox-x\dosbox-x.exe，安裝可能不完整，請重新執行 installer.py。
+    pause
+    exit /b 1
+)
+dosbox-x.exe -conf zh_krondor.conf
