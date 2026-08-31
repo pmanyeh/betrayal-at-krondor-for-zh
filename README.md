@@ -59,15 +59,15 @@ python -m unittest discover -s tests/unit -v
 
 ## 如何取得中文化版本
 
-基於上述「不散布原版遊戲資產」的原則，發布的中文化「補丁」本身**不包含**任何原版遊戲檔案，也不包含編譯好的 `KRONDOR.EXE`——`KRONDOR.EXE` 是重編出來的原版商業執行檔衍生物，同樣不直接發布。實際發布內容分三部分：
+基於上述「不散布原版遊戲資產」的原則，發布的中文化「免安裝整合包」本身**不包含**任何原版遊戲檔案，也不包含編譯好的 `KRONDOR.EXE`——`KRONDOR.EXE` 是重編出來的原版商業執行檔衍生物，同樣不直接發布。整合包內容分三部分：
 
-- **`KRONDOR.EXE` 二進位差異補丁**：使用者拿自己合法版本的 v1.00 Floppy 版（1993-06-16）EXE，在本機套用差異補丁重建出中文版，安裝程式會先驗證雜湊值，版本不符會直接中止、不動任何檔案。
+- **`KRONDOR.EXE` 二進位差異補丁**：使用者把自己合法版本的 v1.00 Floppy 版（1993-06-16）遊戲檔案放進整合包的 `game_data/` 資料夾，在本機套用差異補丁重建出中文版，安裝程式會先驗證雜湊值，版本不符會直接中止、不動任何檔案。
 - **`STARTUP.GAM` 隊伍角色名**：對使用者自己的存檔範本檔做原地欄位替換，同樣不隨附任何 `.GAM` 檔。
-- **翻譯資源檔**（DDX/BOK/DAT/字型等）：這些是本專案工具從翻譯內容重新產生的全新檔案，直接以 loose 覆蓋檔形式複製進遊戲目錄（引擎本身支援 loose 檔優先於封裝檔的載入順序）。
+- **翻譯資源檔**（DDX/BOK/DAT/字型等）：這些是本專案工具從翻譯內容重新產生的全新檔案，直接以 loose 覆蓋檔形式複製進 `game_data/`（引擎本身支援 loose 檔優先於封裝檔的載入順序）。
 
-發布包還會內附官方預先編譯的 **DOSBox-X**（GPLv2 授權的開源 DOS 模擬器，跟原版遊戲無關，可以合法重新散布）與一個雙擊即可啟動的「玩遊戲.bat」，讓使用者不用自己另外找/裝 DOS 模擬器。
+整合包還內附官方預先編譯的 **DOSBox-X**（GPLv2 開源 DOS 模擬器）與**可嵌入版 Python**（PSF 授權），兩者都跟原版遊戲無關、可以合法重新散布。使用者不需要自己另外裝 Python 或 DOS 模擬器：解壓整合包 → 把遊戲檔案丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」開始玩，整個資料夾可以直接搬到別的地方。
 
-開發端依序執行 `tools/release/build_exe_patch.py`（產生 EXE 補丁）、`tools/release/vendor_dosboxx.py`（下載並驗證雜湊後內附 DOSBox-X）、`tools/release/package_release.py`（組出完整發布包 `dist/release_v100_zh/`），使用者端只要執行裡面免 Python 套件依賴的 `installer.py` 即可安裝／解除安裝。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
+開發端依序執行 `tools/release/build_exe_patch.py`（產生 EXE 補丁）、`tools/release/vendor_dosboxx.py`（下載並驗證雜湊後內附 DOSBox-X）、`tools/release/vendor_python_embed.py`（下載並驗證雜湊後內附可嵌入版 Python）、`tools/release/package_release.py`（組出完整整合包 `dist/release_v100_zh/`）。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
 
 ## 致謝
 
@@ -77,3 +77,4 @@ python -m unittest discover -s tests/unit -v
 - xBaK — 更早期的開源重製／逆向工程成果，BaKGL 與 `canassa/betrayal-at-krondor` 皆承認其研究貢獻；本專案僅在還原原始碼無法回答問題時，作為次要的歷史參考。
 - [DOSBox-X](https://github.com/joncampbell123/dosbox-x) — 本專案所有實機驗證都在 DOSBox-X 上執行，發布包也內附官方預先編譯的 DOSBox-X（GPLv2，見 `tools/release/vendor_dosboxx.py`）方便使用者直接開玩。
 - [`pmanyeh/DOSBox-X-MCP-Debugger`](https://github.com/pmanyeh/DOSBox-X-MCP-Debugger) — 基於 DOSBox-X 打造、可由 AI agent 操作的除錯/自動化驗證分支（截圖、按鍵模擬、記憶體讀寫等），本專案每一輪中文渲染的實機驗證都靠它自動化完成。
+- [Python](https://www.python.org/) — 發布整合包內附官方「可嵌入版」（embeddable package，PSF 授權）Python，見 `tools/release/vendor_python_embed.py`，讓使用者不用自己另外安裝 Python 就能跑安裝程式。

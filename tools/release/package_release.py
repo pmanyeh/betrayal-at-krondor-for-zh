@@ -1,10 +1,16 @@
-"""Developer-side tool: assemble the complete end-user release package.
+"""Developer-side tool: assemble the complete end-user "免安裝整合包" release.
 
-Builds `dist/release_v100_zh/`, containing:
+Builds `dist/release_v100_zh/` as a self-contained, portable folder:
+    game_data/                        -- empty; the end user drops their own
+                                          legally-owned original game files here
+    python-embed/                     -- vendored embeddable Python (vendor_python_embed.py)
+    dosbox-x/                         -- vendored DOSBox-X (vendor_dosboxx.py)
     installer.py, bspatch_apply.py    -- the end-user installer (stdlib only)
     exe_patch/                        -- KRONDOR.EXE binary diff (via build_exe_patch)
     gam_patch/character_names.json    -- STARTUP.GAM hero-name field patch data
     resources/                        -- translated loose resource files
+    安裝中文化.bat                     -- one click: runs installer.py against game_data/
+    玩遊戲.bat                         -- one click: launches dosbox-x mounting game_data/
     README_安裝說明.txt                -- Traditional Chinese install instructions
 
 Deliberately does NOT touch `dist/test_v100_zh/` beyond reading from it, and
@@ -15,7 +21,9 @@ to a short explicit list only for the couple of older resource families that
 predate the manifest convention).
 
 Usage:
-    python tools/release/build_exe_patch.py   # first, produces exe_patch/
+    python tools/release/build_exe_patch.py      # first, produces exe_patch/
+    python tools/release/vendor_dosboxx.py       # produces dosbox-x/
+    python tools/release/vendor_python_embed.py  # produces python-embed/
     python tools/release/package_release.py
 """
 
@@ -173,15 +181,24 @@ def write_installer_files(release_dir: Path) -> None:
     print("[OK] 已複製 installer.py / bspatch_apply.py")
 
 
-def write_launcher(release_dir: Path) -> None:
-    dest = release_dir / "玩遊戲.bat"
+def write_bat(template_name: str, dest: Path) -> None:
     # cmd.exe's batch parser is CRLF-sensitive -- a bare LF can get merged into
     # the next token instead of acting as a line break (e.g. `cd /d "...dosbox-x"`
     # silently losing its `cd /d` and leaving a bare `dosbox-x"` as the "command").
     # Force CRLF regardless of how the template file itself is stored on disk.
-    text = (TOOLS_RELEASE_DIR / "play_launcher.bat.template").read_text(encoding="utf-8")
+    text = (TOOLS_RELEASE_DIR / template_name).read_text(encoding="utf-8")
     dest.write_bytes(text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8"))
     print(f"[OK] 已寫入 {dest.name}（CRLF）")
+
+
+def write_game_data_placeholder(release_dir: Path) -> None:
+    game_data_dir = release_dir / "game_data"
+    game_data_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(
+        TOOLS_RELEASE_DIR / "game_data_placeholder.txt.template",
+        game_data_dir / "把遊戲資料放這裡.txt",
+    )
+    print(f"[OK] 已建立 {game_data_dir}")
 
 
 def check_dosboxx(release_dir: Path) -> bool:
@@ -189,41 +206,58 @@ def check_dosboxx(release_dir: Path) -> bool:
     if not (dosboxx_dir / "dosbox-x.exe").exists():
         print("[警告] 找不到 dist/release_v100_zh/dosbox-x/，發布包不會內附 DOSBox-X。先跑 tools/release/vendor_dosboxx.py 再重新 package。")
         return False
-    print("[OK] 已內附 DOSBox-X")
+    # vendor_dosboxx.py's output is cached and only re-extracted when the
+    # pinned DOSBox-X version changes, so the conf is written fresh here on
+    # every package run instead -- otherwise editing dosbox_krondor.conf.template
+    # would silently not reach the shipped file until someone happens to
+    # re-run vendor_dosboxx.py too.
+    shutil.copy2(TOOLS_RELEASE_DIR / "dosbox_krondor.conf.template", dosboxx_dir / "zh_krondor.conf")
+    print("[OK] 已內附 DOSBox-X（zh_krondor.conf 已用最新版本重新產生）")
+    return True
+
+
+def check_python_embed(release_dir: Path) -> bool:
+    python_embed_dir = release_dir / "python-embed"
+    if not (python_embed_dir / "python.exe").exists():
+        print(
+            "[警告] 找不到 dist/release_v100_zh/python-embed/，發布包不會內附 Python，使用者需要自己裝。"
+            "先跑 tools/release/vendor_python_embed.py 再重新 package。"
+        )
+        return False
+    print("[OK] 已內附可嵌入版 Python")
     return True
 
 
 README_TEXT = """\
-Betrayal at Krondor 繁體中文化 -- 安裝說明
-==========================================
+Betrayal at Krondor 繁體中文化 -- 免安裝整合包使用說明
+======================================================
 
-這是一份「補丁」，不含任何原版遊戲檔案。你需要自備合法取得的
-《Betrayal at Krondor》v1.00 Floppy 版（1993 年 6 月 16 日發行）。
+這是一份「免安裝整合包」，本身不含任何原版遊戲檔案，也不含 KRONDOR.EXE。
+你需要自備合法取得的《Betrayal at Krondor》v1.00 Floppy 版
+（1993 年 6 月 16 日發行）。
 
 目前只支援這個版本，不支援光碟版（v1.02）或其他數位重製版本 -- 安裝程式
-會先檢查你的 KRONDOR.EXE 雜湊值，版本不符會直接中止，不會動到任何檔案。
+會先檢查 KRONDOR.EXE 雜湊值，版本不符會直接中止，不會動到任何檔案。
 
 安裝步驟
 --------
-1. 安裝 Python 3（https://www.python.org/），或確認電腦上已經有。
-2. 打開命令列，切換到這個資料夾。
-3. 執行：
-       python installer.py --game-dir "你的遊戲安裝目錄"
-   例如：
-       python installer.py --game-dir "C:\\Games\\BetrayalAtKrondor"
-4. 完成後，被改動的檔案都備份在遊戲目錄底下的 _zh_backup_<時間戳記> 資料夾。
+1. 把你的遊戲檔案（krondor.exe、krondor.001、krondor.rmf、startup.gam……
+   等等，整個原版遊戲資料夾的內容）複製到這個整合包裡的 game_data\\ 資料夾。
+2. 雙擊「安裝中文化.bat」。內附可嵌入版 Python，不需要自己另外安裝 Python
+   或任何套件。
+3. 完成後，被改動的檔案都備份在 game_data\\_zh_backup_<時間戳記> 資料夾。
 
 開始玩
 ------
-這份補丁內附 DOSBox-X（免費開源的 DOS 模擬器，跟本補丁沒有從屬關係，授權
-條款見遊戲目錄下 dosbox-x\\COPYING_dosbox-x）。安裝完成後，直接雙擊遊戲
-目錄裡新增的「玩遊戲.bat」就會啟動中文版遊戲，不需要另外安裝或設定
-DOSBox。已經有自己慣用 DOSBox 設定的玩家可以忽略這個捷徑，比照原本的
-方式手動啟動 KRONDOR.EXE 即可。
+內附 DOSBox-X（免費開源的 DOS 模擬器，跟本補丁沒有從屬關係，授權條款見
+dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
+「玩遊戲.bat」就會啟動中文版遊戲。整個資料夾可以直接搬到別的地方，
+不影響運作。
 
 解除安裝
 --------
-       python installer.py --game-dir "你的遊戲安裝目錄" --uninstall
+雙擊「安裝中文化.bat」旁的命令列視窗執行：
+       python-embed\\python.exe installer.py --uninstall
 
 免責聲明
 --------
@@ -239,6 +273,22 @@ GitHub repo 的 LICENSE 檔案。
 def write_readme(release_dir: Path) -> None:
     (release_dir / "README_安裝說明.txt").write_text(README_TEXT, encoding="utf-8")
     print("[OK] 已寫入 README_安裝說明.txt")
+
+
+def check_game_data_is_empty(release_dir: Path) -> None:
+    """Safety net: game_data/ must never ship with real game files in it --
+    that would mean accidentally distributing original copyrighted assets.
+    Only the placeholder text file dropped by write_game_data_placeholder()
+    is allowed."""
+    game_data_dir = release_dir / "game_data"
+    unexpected = [p.name for p in game_data_dir.iterdir() if p.name != "把遊戲資料放這裡.txt"]
+    if unexpected:
+        raise SystemExit(
+            f"拒絕打包：{game_data_dir} 裡有非預期的檔案，可能是開發測試時不小心放了真的遊戲資料進去：\n"
+            f"  {unexpected}\n"
+            "先清空 game_data/（只留下說明檔）再重新 package。"
+        )
+    print("[OK] game_data/ 確認乾淨（沒有夾帶原版遊戲資料）")
 
 
 def make_zip(release_dir: Path) -> Path:
@@ -260,9 +310,13 @@ def main() -> None:
     build_resources(RELEASE_DIR / "resources")
     build_gam_patch(RELEASE_DIR / "gam_patch")
     write_installer_files(RELEASE_DIR)
-    write_launcher(RELEASE_DIR)
+    write_bat("play_launcher.bat.template", RELEASE_DIR / "玩遊戲.bat")
+    write_bat("install_launcher.bat.template", RELEASE_DIR / "安裝中文化.bat")
+    write_game_data_placeholder(RELEASE_DIR)
     check_dosboxx(RELEASE_DIR)
+    check_python_embed(RELEASE_DIR)
     write_readme(RELEASE_DIR)
+    check_game_data_is_empty(RELEASE_DIR)
     make_zip(RELEASE_DIR)
     print(f"\n完成：{RELEASE_DIR}")
 

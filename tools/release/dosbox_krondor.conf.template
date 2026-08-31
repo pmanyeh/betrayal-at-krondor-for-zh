@@ -26,6 +26,6 @@ irq=7
 dma=1
 
 [autoexec]
-@mount c ..
+@mount c ../game_data
 @c:
 @krondor.exe

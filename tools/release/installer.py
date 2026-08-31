@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
 """Betrayal at Krondor 繁體中文化 -- 安裝／解除安裝程式
 
-只依賴標準函式庫（不需要 pip install 任何套件）。使用者必須自備合法取得的
-v1.00 Floppy 版（1993-06-16）遊戲檔案；本安裝程式不包含、也不會下載任何
-原版遊戲資產 -- 只會：
+只依賴標準函式庫（不需要 pip install 任何套件；免安裝整合包內附的
+python-embed/ 就能直接跑）。使用者必須自備合法取得的 v1.00 Floppy 版
+（1993-06-16）遊戲檔案，放進本程式旁邊的 game_data/ 資料夾；本安裝程式不
+包含、也不會下載任何原版遊戲資產 -- 只會：
 
-  1. 對使用者自己的 KRONDOR.EXE 套用二進位差異補丁（bspatch_apply.py）。
-  2. 對使用者自己的 STARTUP.GAM 做隊伍角色英文名 -> 中文名的原地欄位替換。
-  3. 把中文化資源檔（DDX/BOK/DAT/字型等 loose 覆蓋檔）複製進遊戲目錄。
+  1. 對 game_data/ 裡的 KRONDOR.EXE 套用二進位差異補丁（bspatch_apply.py）。
+  2. 對 game_data/ 裡的 STARTUP.GAM 做隊伍角色英文名 -> 中文名的原地欄位替換。
+  3. 把中文化資源檔（DDX/BOK/DAT/字型等 loose 覆蓋檔）複製進 game_data/。
 
 執行前會先驗證 KRONDOR.EXE 的雜湊是否符合已知的 v1.00 基準版本，不符合就
 直接中止、不改動任何檔案。所有被覆蓋的檔案都會先備份，可用 --uninstall
 還原。
 
-用法：
-    python installer.py --game-dir "C:\\Games\\BetrayalAtKrondor"
-    python installer.py --game-dir "C:\\Games\\BetrayalAtKrondor" --uninstall
+用法（一般情況下不用帶任何參數，直接雙擊「安裝中文化.bat」即可）：
+    python installer.py
+    python installer.py --uninstall
+    python installer.py --game-dir "C:\\其他位置\\game_data"   # 進階/測試用
 """
 
 from __future__ import annotations
@@ -51,17 +53,6 @@ def backup_file(path: Path, backup_dir: Path) -> str:
     backup_dir.mkdir(parents=True, exist_ok=True)
     dest = backup_dir / path.name
     shutil.copy2(path, dest)
-    return dest.name
-
-
-def backup_path(path: Path, backup_dir: Path) -> str:
-    """Like backup_file, but also handles directories (e.g. a bundled dosbox-x/)."""
-    backup_dir.mkdir(parents=True, exist_ok=True)
-    dest = backup_dir / path.name
-    if path.is_dir():
-        shutil.copytree(path, dest)
-    else:
-        shutil.copy2(path, dest)
     return dest.name
 
 
@@ -211,88 +202,48 @@ def remove_resources(game_dir: Path, filenames: list[str], backup_dir: Path) -> 
 
 
 # ---------------------------------------------------------------------------
-# Bundled DOSBox-X + launcher (optional -- older release packages may not have it)
-# ---------------------------------------------------------------------------
-
-DOSBOXX_DIRNAME = "dosbox-x"
-LAUNCHER_NAME = "玩遊戲.bat"
-
-
-def install_dosboxx(game_dir: Path, release_dir: Path, backup_dir: Path) -> bool:
-    src_dosboxx = release_dir / DOSBOXX_DIRNAME
-    src_launcher = release_dir / LAUNCHER_NAME
-    if not src_dosboxx.is_dir() or not src_launcher.is_file():
-        print("[跳過] 這份發布包沒有內附 DOSBox-X，需要自行準備 DOS 模擬器。")
-        return False
-
-    dest_dosboxx = game_dir / DOSBOXX_DIRNAME
-    if dest_dosboxx.exists():
-        backup_path(dest_dosboxx, backup_dir)
-        shutil.rmtree(dest_dosboxx)
-    shutil.copytree(src_dosboxx, dest_dosboxx)
-
-    dest_launcher = game_dir / LAUNCHER_NAME
-    if dest_launcher.exists():
-        backup_path(dest_launcher, backup_dir)
-    shutil.copy2(src_launcher, dest_launcher)
-
-    print(f"[OK] 已附上 DOSBox-X，可雙擊遊戲目錄裡的 {LAUNCHER_NAME} 啟動遊戲")
-    return True
-
-
-def restore_dosboxx(game_dir: Path, backup_dir: Path) -> None:
-    dest_dosboxx = game_dir / DOSBOXX_DIRNAME
-    backed_up_dosboxx = backup_dir / DOSBOXX_DIRNAME
-    if dest_dosboxx.exists():
-        shutil.rmtree(dest_dosboxx)
-    if backed_up_dosboxx.exists():
-        shutil.copytree(backed_up_dosboxx, dest_dosboxx)
-
-    dest_launcher = game_dir / LAUNCHER_NAME
-    backed_up_launcher = backup_dir / LAUNCHER_NAME
-    if backed_up_launcher.exists():
-        shutil.copy2(backed_up_launcher, dest_launcher)
-    elif dest_launcher.exists():
-        dest_launcher.unlink()
-
-    print(f"[OK] {DOSBOXX_DIRNAME}／{LAUNCHER_NAME}：已還原成安裝前的狀態")
-
-
-# ---------------------------------------------------------------------------
 # Top-level install / uninstall
+#
+# DOSBox-X + 玩遊戲.bat are NOT copied anywhere -- in the "免安裝整合包" layout
+# they live permanently at release_dir/dosbox-x and release_dir/玩遊戲.bat,
+# next to game_data/, and dosbox-x's own conf mounts "../game_data" directly.
 # ---------------------------------------------------------------------------
 
 
 def do_install(game_dir: Path, release_dir: Path) -> None:
     exe_path = find_ci(game_dir, "krondor.exe")
     if exe_path is None:
-        raise SystemExit(f"{game_dir} 底下找不到 KRONDOR.EXE，請確認這是合法的遊戲安裝目錄。")
+        raise SystemExit(
+            f"{game_dir} 底下找不到 KRONDOR.EXE。\n"
+            "請先把你合法取得的《Betrayal at Krondor》v1.00 Floppy 版遊戲檔案\n"
+            f"（krondor.exe、krondor.001、krondor.rmf、startup.gam 等全部檔案）複製到：\n  {game_dir}\n"
+            "再重新執行「安裝中文化.bat」。"
+        )
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_dir = game_dir / f"_zh_backup_{timestamp}"
 
-    print(f"遊戲目錄：{game_dir}")
+    print(f"遊戲資料目錄：{game_dir}")
     print(f"備份目錄：{backup_dir}\n")
 
     exe_installed = install_exe_patch(game_dir, release_dir, backup_dir)
     gam_installed = install_gam_patch(game_dir, release_dir, backup_dir)
     resource_files = install_resources(game_dir, release_dir, backup_dir)
-    dosboxx_installed = install_dosboxx(game_dir, release_dir, backup_dir)
 
     install_manifest = {
         "format": "bak-zh-install-manifest",
-        "version": 1,
+        "version": 2,
         "installed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "backup_dir": backup_dir.name,
         "exe_patched": exe_installed,
         "gam_patched": gam_installed,
         "resource_files": resource_files,
-        "dosboxx_installed": dosboxx_installed,
     }
     (game_dir / INSTALL_MANIFEST_NAME).write_text(
         json.dumps(install_manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    print(f"\n安裝完成。若要解除安裝，執行：\n  python installer.py --game-dir \"{game_dir}\" --uninstall")
+    print("\n安裝完成，可以雙擊上一層的「玩遊戲.bat」開始玩。")
+    print("若要解除安裝，執行：\n  python installer.py --uninstall")
 
 
 def do_uninstall(game_dir: Path) -> None:
@@ -307,8 +258,6 @@ def do_uninstall(game_dir: Path) -> None:
     restore_exe(game_dir, backup_dir)
     restore_gam(game_dir, backup_dir)
     remove_resources(game_dir, manifest["resource_files"], backup_dir)
-    if manifest.get("dosboxx_installed"):
-        restore_dosboxx(game_dir, backup_dir)
 
     manifest_path.unlink()
     print(f"\n解除安裝完成。備份目錄 {backup_dir.name} 保留未刪除，可自行清理。")
@@ -316,7 +265,13 @@ def do_uninstall(game_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--game-dir", required=True, type=Path, help="遊戲安裝目錄（含 KRONDOR.EXE 的那個資料夾）")
+    release_dir = Path(__file__).resolve().parent
+    parser.add_argument(
+        "--game-dir",
+        type=Path,
+        default=release_dir / "game_data",
+        help="遊戲資料目錄，預設是本程式旁邊的 game_data/（進階/測試用可覆蓋）",
+    )
     parser.add_argument("--uninstall", action="store_true", help="還原成安裝前的狀態")
     args = parser.parse_args()
 
@@ -327,7 +282,6 @@ def main() -> None:
     if args.uninstall:
         do_uninstall(game_dir)
     else:
-        release_dir = Path(__file__).resolve().parent
         do_install(game_dir, release_dir)
 
 

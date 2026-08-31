@@ -24,7 +24,6 @@ import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-TOOLS_RELEASE_DIR = Path(__file__).resolve().parent
 CACHE_DIR = REPO_ROOT / "dist" / "_vendor_cache"
 RELEASE_DIR = REPO_ROOT / "dist" / "release_v100_zh"
 
@@ -100,7 +99,11 @@ def extract_dosboxx(zip_path: Path, dest_dir: Path) -> None:
                 shutil.copyfileobj(src, out)
 
     (dest_dir / "NOTICE_DOSBOX-X.txt").write_text(NOTICE_TEXT, encoding="utf-8")
-    shutil.copy2(TOOLS_RELEASE_DIR / "dosbox_krondor.conf.template", dest_dir / "zh_krondor.conf")
+    # zh_krondor.conf is intentionally NOT written here -- this script's output
+    # is cached and only re-run when the pinned DOSBox-X version changes, so a
+    # conf baked in here would silently go stale whenever dosbox_krondor.conf.template
+    # is edited. package_release.py's write_dosbox_conf() writes it fresh every
+    # time instead.
 
     exe = dest_dir / "dosbox-x.exe"
     if not exe.exists():
