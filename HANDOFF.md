@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**發布用「免安裝整合包」工具鏈**，`tools/release/`，輸出 `dist/release_v100_zh/`）
+**最後更新：** 2026-08-31（**物品詳情「種族加成」名稱字形映射修正**；發布用「免安裝整合包」工具鏈輸出仍在 `dist/release_v100_zh/`）
 
 - **架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python，`vendor_python_embed.py` 固定版本 3.12.10、下載後驗證雜湊）＋`dosbox-x/`（GPLv2，`vendor_dosboxx.py` 固定版本 `dosbox-x-v2026.08.02` win64、同樣驗證雜湊）＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，並在打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。
 - **踩過的坑**（皆已修好並重新驗證）：(1) `.bat` 檔用純 LF 寫出會被 `cmd.exe` 解析器打散，`package_release.py` 現在強制輸出 CRLF；(2) 有些 Windows 機器開了 `NoDefaultCurrentDirectoryInExePath` 安全性原則，會讓批次檔裡「裸檔名」呼叫執行檔失效，`玩遊戲.bat` 已改成明確寫 `.\dosbox-x.exe`；(3) DOSBox-X 2026.08.02 版拿掉了舊版 `cputype=486_slow` 這個值，改用最接近的 `486_prefetch`；(4) `zh_krondor.conf` 原本是 `vendor_dosboxx.py`（有快取、不會每次重跑）順手寫進去的，改設定不會生效到已快取的輸出——現在改成 `package_release.py` 每次都重新從 template 寫入，避免這種靜默過期。
@@ -12,6 +12,7 @@
 
 ## 目前狀態
 
+- **物品詳情「種族加成」亂碼已修正並重編部署，待實機複驗**（2026-08-31）：使用者在「精靈鎧甲」詳情畫面發現 `Racial Mod: Elf` 顯示成「種族加成：親接」。`localization/translated/UI_HARDCODED.json` 的翻譯來源原本就正確（`Tsurani / Elf / Dwarf / Human` → `圖蘭尼 / 精靈 / 矮人 / 人類`）；真正原因是 `INVINSP.C:invinspect_render_details()` 內三個種族名稱仍使用舊版 `zh_mapping.json` 的硬編碼 byte pair。依目前正式 mapping 解碼後，舊值實際會顯示成 `籃躬— / 親接 / 競人 / 人類`，所以前三項全數重新編碼，`人類` 原本正確、未動。整個 More Info 區塊的其餘硬編碼中文字串亦逐項反向解碼核對，只有這三項過期。引擎原始碼提交為 `upstream/betrayal-at-krondor` **`8e86f32`**（只改 `bak/SRC/SCREENS/INVINSP.C` 3 行）；Borland 工具鏈重編成功，`VMCODE.OVL`／`SX.OVL` 維持 BYTE-IDENTICAL。新版 `dist/test_v100_zh/krondor.exe` 為 **458816 bytes**、SHA-256 **`762aad46f36f0eee1100610a41ac946aa2ff18ee92fee039fd6faf9721b1b77b`**。發布補丁 `dist/release_v100_zh/exe_patch/krondor_v100_zh.bspatch` 已重建（36465 bytes，SHA-256 `82cdb2fb0dbc391a1f60b2c888dad407da8e92048ff3d5cb1419861465438fef`），以內建 `bspatch_apply.py` 從乾淨 v1.00 EXE 往返套用後與目標 EXE byte-identical；`tests/unit/test_bspatch_apply.py` **3 passed**。WSL 編譯 clone 的既有 VESA/EVG WIP 已完整 stash/pop 還原，Windows upstream 工作樹原有的 4 個 VESA/字型實驗修改也未被納入這次 commit。
 - **全遊戲 DDX 對話翻譯已全數完成並跑過驗證流程**：32 個 DDX 章節檔（`DIAL_Z00`～`DIAL_Z31` 全數，含先前敘述遺漏的 `Z09`／`Z16`／`Z18`／`Z25`／`Z26`／`Z28`），共 **5,931** 筆對話，加上 `OBJINFO.DAT` 物品名稱系統（137 筆）、`UI_HARDCODED.json` 硬編碼字串（55 筆）。`TEST.json`（1 筆）已翻完但**還沒打包**，缺一份乾淨的 `TEST.DDX` 可以對（見下方「待處理」）。
   - `DIAL_Z30`（2208 筆）是全遊戲最大的一批翻譯，也是收官之作——內容橫跨北衛城圍城戰備（芬恩中尉／馬丁公爵／坦尼吟遊詩人的逃兵抉擇與音樂課）、羅姆尼公會戰爭與夜鷹會謀殺案調查（米契爾．韋蘭德／傑森／銀蜘蛛與黃銅望遠鏡線索）、馬拉克十字鎮潘塔西亞人圍城與葛雷夫斯院長的真實身分反轉、錫爾登地下情報網（阿布克的開鎖教學／喬夫塔茲的銀蜘蛛情報交易）、埃奧提斯神殿治療支線（貝拉／露莎卡水靈）、戈拉斯與奧布卡（實為堂表兄弟替死）的礦坑逃脫、帕格夫人凱塔拉與馬克羅斯之書的追查，以及貫穿全篇的萊斯爾．瑞格（詹姆士失散雙胞胎）身世線。新增 70 餘個專有名詞已全數回填進 `glossary.json`。含大量 `ó`／`ñ`／`ð` 局部強調標記，其中一首完整的〈北衛城的豬〉打油詩（entry #2716）靠逐句拆解湊出跟原文一致的 69 個 `ó` 標記數量。2208 筆全部 0 個 token-mismatch fallback。**部署前的全字庫涵蓋率掃描抓到 88 個新增中文字沒收錄在字庫裡**，已用 `build_font.py --from-translations` 重新產生字庫補齊，字庫從 5503 個 ID 槽位（3293 相異字）擴充到 **5656 個 ID 槽位（3381 相異字）**。
   - `DIAL_Z20`（867 筆）是目前為止最大的一批翻譯——拉姆特／艾格利／薩斯／馬拉克十字鎮／卡瓦爾堡／北衛城／艾爾凡達等地的支線劇情大合集，劇情密度極高：圖蘭尼客棧老闆蘇馬尼的格鬥／討價還價課程、矮人礦坑（含大量口音體矮人台詞，比照 archive 既有慣例用語氣粗獷但不刻意造字的方式呈現）、薩斯地窖藏書任務、北衛城圍城前置戰備（含派特魯斯／馬丁公爵／詹姆士／洛克利爾的軍務支線）、艾爾凡達精靈王子卡林的隱匿術與十字弓教學，以及**烏格妮．科瓦利斯的追求者「納馮．杜桑多」其實是她「亡故」多年的哥哥內維爾、如今是夜鷹會頭目的重大劇情反轉**（詳見 `glossary.json` 新條目）。翻譯過程中順手修正了詞彙表一處既有誤植——`Katala` 先前誤記為托馬斯之妻，經本章對話明確證實她其實是帕格之妻（多爾根王之妻是亞葛拉蘭娜王后，兩人在此之前未被清楚區分過）。含少量 `ñ`／`ó` 局部強調標記，867 筆全部 0 個 token-mismatch fallback。新增 40 餘個專有名詞已全數回填進 `glossary.json`。**部署前的全字庫涵蓋率掃描抓到 77 個新增中文字沒收錄在字庫裡**，已用 `build_font.py --from-translations` 重新產生字庫補齊，字庫從 3216 字擴充到 3293 字。
@@ -159,7 +160,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 5. `cp ~/krondor-build/work/KRONDOR.EXE scratchpad/KRONDOR_xxx.EXE`（先複製到 scratchpad，因為 DOSBox-X 常鎖住 dist 的 exe）。
 6. 還原 WSL clone：`wsl -e bash -lc "cd ~/krondor-build && git reset --hard e3d9ef9 && git stash pop"`（回到 VESA WIP 狀態）。
 7. 關掉 DOSBox-X（`Get-Process dosbox-x | Stop-Process -Force`，常有殘留行程），再 `cp scratchpad/KRONDOR_xxx.EXE dist/test_v100_zh/krondor.exe`。
-8. 目前 `dist/test_v100_zh/krondor.exe` = `e3d9ef9` + `b066d52`（BOOKTEXT 雙位元組）+ `c801185`~`15ccd73`（TOWNSCN 離開按鈕／翻頁），458064 bytes。
+8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `8e86f32` 重編，458816 bytes，SHA-256 `762aad46f36f0eee1100610a41ac946aa2ff18ee92fee039fd6faf9721b1b77b`；最後一項改動是 `INVINSP.C` 種族名稱 glyph code 修正。
 
 ### DOSBox-X 啟動
 - 執行檔：`D:\git\DOSBox-X-AI\build-memory\dosbox-x.exe`
