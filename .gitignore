@@ -12,8 +12,10 @@ betrayal-at-krondor/
 krondor-manual.pdf
 
 # Exception: a hand-curated "easy start" save shipped intentionally in release
-# bundles (project-authored content, not an extracted/original game asset).
+# bundles (project-authored content, not an extracted/original game asset),
+# plus the project's own verified-loadable QA save it's built from.
 !tools/release/starter_save/**/*.GAM
+!tools/release/starter_save_base/**/*.GAM
 
 # Build and toolchain artifacts
 build/
