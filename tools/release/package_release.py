@@ -175,8 +175,13 @@ def write_installer_files(release_dir: Path) -> None:
 
 def write_launcher(release_dir: Path) -> None:
     dest = release_dir / "玩遊戲.bat"
-    shutil.copy2(TOOLS_RELEASE_DIR / "play_launcher.bat.template", dest)
-    print(f"[OK] 已寫入 {dest.name}")
+    # cmd.exe's batch parser is CRLF-sensitive -- a bare LF can get merged into
+    # the next token instead of acting as a line break (e.g. `cd /d "...dosbox-x"`
+    # silently losing its `cd /d` and leaving a bare `dosbox-x"` as the "command").
+    # Force CRLF regardless of how the template file itself is stored on disk.
+    text = (TOOLS_RELEASE_DIR / "play_launcher.bat.template").read_text(encoding="utf-8")
+    dest.write_bytes(text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8"))
+    print(f"[OK] 已寫入 {dest.name}（CRLF）")
 
 
 def check_dosboxx(release_dir: Path) -> bool:

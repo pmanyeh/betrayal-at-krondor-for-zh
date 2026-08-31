@@ -6,4 +6,4 @@ if not exist dosbox-x.exe (
     pause
     exit /b 1
 )
-dosbox-x.exe -conf zh_krondor.conf
+".\dosbox-x.exe" -conf zh_krondor.conf

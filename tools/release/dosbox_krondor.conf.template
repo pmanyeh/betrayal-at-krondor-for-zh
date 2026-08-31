@@ -13,7 +13,10 @@ scaler=none
 
 [cpu]
 core=normal
-cputype=486_slow
+# DOSBox-X 2026.08.02 dropped the older "486_slow" cputype name that
+# dist/dosbox_zh_test.conf was originally tested against; 486_prefetch is the
+# closest still-supported equivalent (486-class timing, not the fastest core).
+cputype=486_prefetch
 cycles=12000
 
 [sblaster]
