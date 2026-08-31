@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**行走操控：A/D 轉向、Q/E 平移、T 紮營**，`WORLDLP.C`＋`WORLDMOV.C`＋loose `req_main.dat`；同時發現神殿「離開」誤跳章的既有 bug 待修；先前：發布用「免安裝整合包」工具鏈、物品詳情「種族加成」字形修正）
+**最後更新：** 2026-08-31（**行走操控：A/D 轉向、Q/E 平移、T 紮營**；**神殿「離開」閃退根因＝`alloc_far` 傳統記憶體耗盡，已用 UMB 後援修好**，`DOSMEM.C`＋`CZONE.C`＋conf `[dos]` 區塊；殘留：「隊伍能力提升」訊息缺字既有 bug 待查；先前：發布用「免安裝整合包」工具鏈）
 
 - **免安裝整合包架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python 3.12.10）＋`dosbox-x/`（GPLv2，`dosbox-x-v2026.08.02` win64）——兩者都是官方原始二進位、下載時驗證雜湊、跟原版遊戲版權無關可合法重新散布＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」，整個資料夾可搬移。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。**完整的出包標準流程（何時該重跑哪支腳本、驗證步驟、已知地雷）見新文件 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)。**
 - **新手輕鬆開局存檔**（`GAMES/Plus.G01/`，`tools/release/build_starter_save.py`）：裡面兩個存檔點，`SAVE01.GAM` 起始金幣調成 1000（其餘不動）、`SAVE02.GAM` 是使用者自己另一輪遊玩的章節 1 進度（只套中文姓名 patch，金幣/進度保留原樣，已跟使用者確認是自己玩出來的、不是別人提供，沒有授權疑慮）。**踩過的雷**：第一版直接拿 `STARTUP.GAM` 改，實機讀取會閃退（`cannot load gi block` / Null pointer assignment）——`GMAIN.C: gmain_start_dispatch()` 顯示 New Game 與 Load Game 雖然都走 `savegame_read()`，但 `STARTUP.GAM` 原版只走過 New Game 路徑，缺了 Load Game 預期已存在的某些狀態（很可能是 `shared_inventory`/`ground_pile` 相關區域）。改成一律以本專案自己過去測試留下、已知能正常 Load Game 讀取的真實存檔當基準（`tools/release/starter_save_base/`），只 patch 需要的欄位，其餘原封不動。金幣欄位 offset（file offset 102、4-byte signed LE）推導與交叉驗證方式見指令碼 docstring。**這兩份存檔都還沒有實機重新驗證過**（session 當下 DOSBox-X AI bridge 沒有連線中的遊戲程序）——下次有機會請優先確認「讀取進度→Plus」兩個存檔點都不閃退、`SAVE01` 金幣顯示 1000。
@@ -67,14 +67,25 @@
 - **編譯部署**：新 `dist/test_v100_zh/krondor.exe` = **458928 bytes**、SHA-256 **`1d365fe982f2968ae704f8768f676655b44083e88acbe456ac68915585f95f35`**。逐版備份：`scratchpad/krondor_pre_wasd.exe`（`8e86f32`，動任何操控前）／`krondor_pre_strafe.exe`（`1b2196b`）／`krondor_pre_qeswap.exe`（`c4b9775`）。WSL clone 已還原成 VESA WIP parked 狀態。
 - **還沒細驗**：站在道路上（按 R 進入單步行走）時 Q/E 平移＝沒反應（預期）；平移撞牆的擋住音效；平移方向是否 Q 左 E 右（若相反＝`WORLDMOV.C` 的 `90` ↔ `-90` 對調）。
 
-### ⚠️ 神殿場景點「離開」／按 ESC 會誤跳下一章——待修（與 WASD 無關）
+### ✅ 神殿場景點「離開」／按 ESC 閃退重開——根因＝傳統記憶體耗盡，已修（`alloc_far` UMB 後援）
 
-使用者在某神殿場景（頌恩神殿，2026-08-31 測 WASD 時發現）點右上「離開」或按 ESC，畫面「閃退後遊戲重啟」——實際是被強制推進到下一章的章節轉場。**跟當天的 WASD/平移/紮營改動無關**（那些只動 3D 世界迴圈與帳篷 action_id）；根因在先前「場景離開按鈕」功能（`TOWNSCN.C`，`c801185`~`15ccd73`）。
+使用者 2026-08-31 測 WASD 時發現：頌恩神殿場景點右上「離開」或按 ESC，「閃退後遊戲立刻重開」（實為整台 DOS 虛擬機三重錯誤重置 → autoexec 重跑 `krondor.exe`）。**跟當天的 WASD/平移/紮營改動無關**——換回動任何操控前的 `8e86f32` exe 一樣崩潰。城鎮離開正常、只有這個神殿中獎。
 
-- **路徑**：`townscene_load()`（[TOWNSCN.C:161-165](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C)）用啟發式找「離開條」actor：`(rect 寬≥200 && y≥100 && 高≥40) || cKind==0xf || cKind==3` 就把 `s_exitBarAction = i+0x80`，**迴圈沒有 `break`，取最後一個符合的**。點「離開」／ESC → `action = s_exitBarAction` → `di = pA->cKind`。若掃到的是 `cKind==0xf` 的劇情 actor → [TOWNSCN.C:753](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C) `di==0xf` → `g_gameState.nWorldLoopExitRequest = 1` → 世界迴圈回傳 `exit_mode = 5` → `GMAIN.C:204` `savegame_chapter_start_dispatch(g_nChapterAtLoopExit + 1)`＝**跳下一章**。
-- **範圍**：使用者實測**城鎮（村莊／城市）的「離開」與 ESC 都正常**，目前只有神殿會誤跳章 → 佐證問題是神殿 GDS 特有的 `cKind==0xf` actor 被「取最後一個」規則選到。
-- **推測**：這個神殿的 actor 清單裡「正常離開 actor（`cKind==3`）」後面還有一個 `cKind==0xf` 的 actor，被「取最後一個」規則覆蓋掉。
-- **下一步**：先把該神殿的 GDS 場景檔（`townscene_load` 組檔名 `GDS<章><sub字母>.DAT`，用 `bak rmf extract`）抽出來看 actor 清單，確認上述推測。修法方向：讓啟發式優先鎖定 `cKind==3`／寬band actor，`cKind==0xf` 只在沒有更好候選時才採用（或找到後 `break`）。會動到先前已驗收的王宮／村莊離開行為，要重編 + 重測王宮（「不能走正門」對白）／村莊／神殿三種場景。
+**根因（逐段 on-screen 印值二分定位）**：離開任何城鎮/神殿時，世界迴圈的 `zone_refresh_visible(0)` → `zone_load_audio_proximity()` → **`czone_subsystem_init()`（`CZONE.C`）** 會用 `alloc_far()`（DOS INT 21h/48h）要一塊 `0xf308`＝**62216 bytes 的連續傳統記憶體**。中文化版累積加進的引擎程式碼（`krondor.exe` 從原版 453904 → 458928，+5KB 常駐）＋中文 DDX 記錄約英文兩倍大，讓這塊配置在**部分場景退出時剛好差 ~3KB**（實測 `largest_free=59232` vs `need=62216`）。`alloc_far` 失敗回傳 **segment 0 的假指標**（`0000:E808`，`p` 在後續 `p += 300` 迴圈裡從 `0000:0000` 走出來的），`czone_load_actors()` 透過它寫入 → 踩爛低位記憶體/IVT → VM 重置。**這是 archive §5.0／§16 記過的同一類「翻譯內容變多 → 傳統記憶體不足 → `alloc_far` 失敗」，只是這次是 czone pool 而非字庫。**
+
+- **DOSBox 設定調校無效**：`dist/dosbox_zh_test.conf` 加 `[dos] dos=high,umb shellhigh=true` 後，`MEM` 顯示啟動時傳統記憶體已有 611K free（DOS 全在 HMA、COMMAND.COM 在 UMB）——已經是天花板，缺口是**執行期**遊戲自己吃掉的。
+- **修法**（`upstream` commit **`870a87f`**，`DOSMEM.C`＋`DOSMEM.H`＋`CZONE.C`，`VMCODE.OVL`／`SX.OVL` byte-identical）：新增 `alloc_far_umb(size)`——**只在這一次呼叫**期間 link DOS UMB chain（INT 21h AX=5803h BX=1）＋設配置策略為 first-fit high-then-low（AX=5801h BX=80h），配置完立刻把兩者都還原成預設（策略 0、UMB unlink）。`czone_subsystem_init` 那行 `alloc_far(sz,0)` 改叫 `alloc_far_umb(sz)`。**其他所有配置（DDX／字型／貼圖…）完全不受影響。** 這塊 62KB 於是會先用那 ~77KB 閒置 UMB，補回缺口還有大量餘裕；`czone_cache_evict_lru_slot` 的 `_freemem` 釋放 UMB 區塊照常運作。
+  - 先前有一版（`17e0f24`）是在 `main()` 開頭全域改策略——會讓別的緩衝區也跑進 UMB，實測仍有「隊伍能力提升」訊息缺字（見下），改成現在這個外科手術版後**缺字依舊**，證實缺字是既有問題、非此修法造成。
+- **需搭配 conf**：`dosmem_enable_umb_alloc` 需要 host DOS 有 UMB 可 link，`dist/dosbox_zh_test.conf` 已加 `[dos]` 區塊（`dos=high,umb`）。**發布整合包（`dist/release_v100_zh/`）內附的 DOSBox-X conf 也要同步加這個 `[dos]` 區塊**，否則 UMB 後援失效、缺口 3KB 的臨界場景仍會崩——出包流程 `docs/workflows/release-packaging.md` 待補這一項。
+- **部署**：`dist/test_v100_zh/krondor.exe` = **458992 bytes**、SHA-256 `fc86dd01a907a74db784962c24ccdfe27a071166d73eaf9ef5c89e17a7fb5ac7`。舊 exe 備份 `scratchpad/krondor_pre_umbfix.exe`。**使用者實機確認：頌恩神殿離開不再崩潰。** 待做：多進出幾個城鎮/神殿、正常長時間玩，確認沒有別的臨界場景。
+
+### ⚠️ 「隊伍的 @1 能力提升了。」系統訊息缺字＋截斷——既有問題，待修（與記憶體修法無關）
+
+戰鬥後單一技能提升時（`DIAL_Z21.DDX#0`，`The party's @1 ability has increased.` → 「隊伍的@1能力提升了。」，node 0x200b32），實機顯示成「隊伍的　　能力　提」——`@1`（技能名）位置空白、「升了。」被截掉。用外科手術版記憶體修法後**仍重現**，且換 `8e86f32` 也有，屬既有 bug。
+
+- **`@1` 來源**：`DIALOG.C` token 展開 `case 27`／`case 29` → `_fstrcpy(g_speaker_names[...], g_abStatNames[lEvtArgAuxValue])`。`g_abStatNames[16][15]`（`DIALOG.C:25`，已翻中文 byte-pair）。`lEvtArgAuxValue` 由 `evtcond_pty_dirty_flags_process()`（`EVTCOND.C:319`）的 `for (slot_idx=2; slot_idx<0x11; slot_idx++)` 設定；`STAT.C:300` 寫 SKILL_IMPROVED 事件時排除 `stat_idx==0x10`，所以 `lEvtArgAuxValue` 實際範圍 2..15，`g_abStatNames[2..15]` 都是合法的 2-CJK 字串——**索引沒有越界，`@1` 空白的真因還沒查出來**。
+- **§11 只驗過複數版**：archive §11（RESOLVED）修的是這個訊息框（`flags=0x0014`、rect `(70,40,180,35)`、28px 可用高）放不下兩行 16px 中文 → 對這個精確版位啟用 `g_bSmallZhMode` 小字。但當時只實機驗 `#1`「隊伍的各項能力都提升了。」（**無 `@1`**）。含 `@1` 的 `#0`／`#2` 從沒驗過——螢幕上的字看起來還是 16px 大字（小字觸發沒中？），加上 `@1` 空白，導致溢出只顯一行、其餘截斷。
+- **優先度低**：非崩潰、非死機（archive §11 的死機已修），只是這個不常見的系統訊息顯示不對。下一步方向：查 `#0`／`#2` 的 record flags/rect 是否跟 `#1` 一致（小字觸發是精確比對）、以及 `@1` 走的是 `case 27` 還是 `29`、`g_speaker_names` slot 對不對。
 
 ### ✅ 對話模式 GoodBye 異常——已修復並實機驗收
 
@@ -190,7 +201,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 5. `cp ~/krondor-build/work/KRONDOR.EXE scratchpad/KRONDOR_xxx.EXE`（先複製到 scratchpad，因為 DOSBox-X 常鎖住 dist 的 exe）。
 6. 還原 WSL clone：`wsl -e bash -lc "cd ~/krondor-build && git reset --hard e3d9ef9 && git stash pop"`（回到 VESA WIP 狀態）。
 7. 關掉 DOSBox-X（`Get-Process dosbox-x | Stop-Process -Force`，常有殘留行程），再 `cp scratchpad/KRONDOR_xxx.EXE dist/test_v100_zh/krondor.exe`。
-8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `5a1df68` 重編，458928 bytes，SHA-256 `1d365fe982f2968ae704f8768f676655b44083e88acbe456ac68915585f95f35`；最後一項改動是 `WORLDLP.C` 行走操控（A/D 轉向、Q/E 平移、T 紮營）。前幾版：`c4b9775` 同功能但 A/D 平移、`1b2196b` WASD 等同方向鍵 458832 bytes、`8e86f32` `INVINSP.C` 種族名稱 glyph code 修正 458816 bytes。同時部署 loose `req_main.dat`（帳篷圖示 action_id 0x12→0x14）。
+8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `870a87f` 重編，**458992 bytes**，SHA-256 `fc86dd01a907a74db784962c24ccdfe27a071166d73eaf9ef5c89e17a7fb5ac7`；最後一項改動是 `alloc_far_umb()` UMB 後援（修神殿離開閃退）。前幾版：`5a1df68` WASD 行走操控 458928 bytes、`c4b9775` 同功能但 A/D 平移、`1b2196b` WASD 等同方向鍵 458832 bytes、`8e86f32` `INVINSP.C` 種族名稱 glyph code 修正 458816 bytes。同時部署 loose `req_main.dat`（帳篷圖示 action_id 0x12→0x14）。**`dist/dosbox_zh_test.conf` 新增 `[dos]` 區塊（`dos=high,umb`），UMB 後援需要它。**
 
 ### DOSBox-X 啟動
 - 執行檔：`D:\git\DOSBox-X-AI\build-memory\dosbox-x.exe`
