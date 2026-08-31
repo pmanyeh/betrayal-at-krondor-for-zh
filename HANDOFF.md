@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**新增發布用「免安裝整合包」工具鏈**，`tools/release/` → `dist/release_v100_zh/`；**物品詳情「種族加成」名稱字形映射修正**）
+**最後更新：** 2026-08-31（**新增 WASD 行走移動鍵**，`WORLDLP.C`，等同方向鍵；先前：發布用「免安裝整合包」工具鏈 `tools/release/` → `dist/release_v100_zh/`；物品詳情「種族加成」名稱字形映射修正）
 
 - **免安裝整合包架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python 3.12.10）＋`dosbox-x/`（GPLv2，`dosbox-x-v2026.08.02` win64）——兩者都是官方原始二進位、下載時驗證雜湊、跟原版遊戲版權無關可合法重新散布＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」，整個資料夾可搬移。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。**完整的出包標準流程（何時該重跑哪支腳本、驗證步驟、已知地雷）見新文件 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)。**
 - **新手輕鬆開局存檔**（`GAMES/Plus.G01/`，`tools/release/build_starter_save.py`）：裡面兩個存檔點，`SAVE01.GAM` 起始金幣調成 1000（其餘不動）、`SAVE02.GAM` 是使用者自己另一輪遊玩的章節 1 進度（只套中文姓名 patch，金幣/進度保留原樣，已跟使用者確認是自己玩出來的、不是別人提供，沒有授權疑慮）。**踩過的雷**：第一版直接拿 `STARTUP.GAM` 改，實機讀取會閃退（`cannot load gi block` / Null pointer assignment）——`GMAIN.C: gmain_start_dispatch()` 顯示 New Game 與 Load Game 雖然都走 `savegame_read()`，但 `STARTUP.GAM` 原版只走過 New Game 路徑，缺了 Load Game 預期已存在的某些狀態（很可能是 `shared_inventory`/`ground_pile` 相關區域）。改成一律以本專案自己過去測試留下、已知能正常 Load Game 讀取的真實存檔當基準（`tools/release/starter_save_base/`），只 patch 需要的欄位，其餘原封不動。金幣欄位 offset（file offset 102、4-byte signed LE）推導與交叉驗證方式見指令碼 docstring。**這兩份存檔都還沒有實機重新驗證過**（session 當下 DOSBox-X AI bridge 沒有連線中的遊戲程序）——下次有機會請優先確認「讀取進度→Plus」兩個存檔點都不閃退、`SAVE01` 金幣顯示 1000。
@@ -45,6 +45,15 @@
   - **教訓**：(a) menupage 熱區 **hit-test 取第一個命中**，要贏過別人就排前面；(b) actor dispatch 分左鍵「啟動」／右鍵「檢視」兩條分支（`menupage_state_0e7c() == 2` 判斷），離開這種動作是「啟動」分支；(c) 進場淡入期間 palette 全黑，任何需要玩家看畫面的互動都要等 `palette_fade_in` 之後。
 
 ## 待處理 / 已知問題
+
+### ✅ WASD 行走移動鍵——已編譯部署，待實機驗收
+
+使用者要求在行走探索畫面加入 WASD 控制方向，等同現有方向鍵。查證（見 archive 註記或直接看下列 commit）：WASD 掃描碼 `W=0x11`／`A=0x1e`／`S=0x1f`／`D=0x20` 在行走主迴圈 `WORLDLP.C` 完全沒用到；戰鬥為滑鼠／menupage 驅動也沒用到；唯一把 `S`／`D` 當鍵盤輸入的是主選單／暫停選單／偏好設定（`MAINMENU.C`：`S`=儲存、`D`=退出至 DOS／預設值），`W`／`A` 全遊戲沒當輸入過。移動鍵只在 world loop 生效，選單畫面不移動，故不衝突。
+
+- **引擎改動**（`upstream/betrayal-at-krondor` commit **`1b2196b`**，只改 `bak/SRC/GAME/WORLD/WORLDLP.C`，+4 行）：在 `world3d_main_loop()` 的 `switch (action_id)` 主 dispatch 裡，四個掃描碼各加一個 fall-through case——`0x11`→`0x48`（前進）、`0x1f`→`0x50`（後退）、`0x1e`→`0x4b`（左轉）、`0x20`→`0x4d`（右轉）。方向鍵原行為完全保留（純新增），`refusal_mode`（被劇情擋住不能動時播 `dialog_play_record`）等分支自動共用。
+- **hold 行為的差異**：方向鍵長按走的是 `focused_entry` + `g_nFrameTickCountdown` 的自訂連續移動；WASD 走 `menupage_run` 回傳原始掃描碼那條路徑，長按靠 DOS BIOS typematic 自動重複（約 0.5s 延遲後才連發）。功能等價（同樣的移動、同樣的 refusal 處理），但長按手感略有不同。若要完全一致需在 `case 0:` 的 key-repeat 狀態機裡另加 `key_is_down()` 判斷，較侵入，先觀望使用者實測回饋。
+- **編譯部署**：WSL clone fast-forward 到 `1b2196b` 編譯，`VMCODE.OVL`／`SX.OVL` BYTE-IDENTICAL。新 `dist/test_v100_zh/krondor.exe` = **458832 bytes**、SHA-256 **`6d643d3e87f6734bfeaf2ddbaac575911a1ff26fefbff0f8b00bc0c4e8c12a99`**。舊 exe 備份 `scratchpad/krondor_pre_wasd.exe`。WSL clone 已 `git reset --hard e3d9ef9 && git stash pop` 還原成 VESA WIP parked 狀態。
+- **待實機驗收**：DOSBox-X 已於 session 當下開著。要驗：行走畫面 `W`／`S`／`A`／`D` 分別前進／後退／左轉／右轉，方向鍵仍正常，長按 WASD 能連續移動（可接受 typematic 延遲），被劇情擋住時 WASD 也會觸發「不能往那走」的對話。
 
 ### ✅ 對話模式 GoodBye 異常——已修復並實機驗收
 
@@ -160,7 +169,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 5. `cp ~/krondor-build/work/KRONDOR.EXE scratchpad/KRONDOR_xxx.EXE`（先複製到 scratchpad，因為 DOSBox-X 常鎖住 dist 的 exe）。
 6. 還原 WSL clone：`wsl -e bash -lc "cd ~/krondor-build && git reset --hard e3d9ef9 && git stash pop"`（回到 VESA WIP 狀態）。
 7. 關掉 DOSBox-X（`Get-Process dosbox-x | Stop-Process -Force`，常有殘留行程），再 `cp scratchpad/KRONDOR_xxx.EXE dist/test_v100_zh/krondor.exe`。
-8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `8e86f32` 重編，458816 bytes，SHA-256 `762aad46f36f0eee1100610a41ac946aa2ff18ee92fee039fd6faf9721b1b77b`；最後一項改動是 `INVINSP.C` 種族名稱 glyph code 修正。
+8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `1b2196b` 重編，458832 bytes，SHA-256 `6d643d3e87f6734bfeaf2ddbaac575911a1ff26fefbff0f8b00bc0c4e8c12a99`；最後一項改動是 `WORLDLP.C` 加 WASD 行走移動鍵（前一版 `8e86f32` 是 `INVINSP.C` 種族名稱 glyph code 修正，458816 bytes）。
 
 ### DOSBox-X 啟動
 - 執行檔：`D:\git\DOSBox-X-AI\build-memory\dosbox-x.exe`
