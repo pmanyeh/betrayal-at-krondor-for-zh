@@ -13,7 +13,7 @@
       ],
       "translation": "隊伍的@1能力提升了。\u0000",
       "status": "translated",
-      "notes": ""
+      "notes": "Party-ability-increase system message; DIALOG.C forces the small 10x10 Chinese font path for this box (flags 0x0014, rect (70,40,180,35))."
     },
     {
       "id": "DIAL_Z21.DDX#1",
@@ -24,7 +24,7 @@
       ],
       "translation": "隊伍的各項能力都提升了。\u0000",
       "status": "translated",
-      "notes": ""
+      "notes": "Party-ability-increase system message; DIALOG.C forces the small 10x10 Chinese font path for this box (flags 0x0014, rect (70,40,180,35))."
     },
     {
       "id": "DIAL_Z21.DDX#2",
@@ -37,7 +37,7 @@
       ],
       "translation": "@的@1能力提升了。\u0000",
       "status": "translated",
-      "notes": ""
+      "notes": "Party-ability-increase system message; DIALOG.C forces the small 10x10 Chinese font path for this box (flags 0x0014, rect (70,40,180,35))."
     },
     {
       "id": "DIAL_Z21.DDX#3",
@@ -49,7 +49,7 @@
       ],
       "translation": "@的各項能力都提升了。\u0000",
       "status": "translated",
-      "notes": ""
+      "notes": "Party-ability-increase system message; DIALOG.C forces the small 10x10 Chinese font path for this box (flags 0x0014, rect (70,40,180,35))."
     },
     {
       "id": "DIAL_Z21.DDX#4",
