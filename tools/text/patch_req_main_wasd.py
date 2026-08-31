@@ -5,12 +5,12 @@ shortcuts through the same MenuPage action ids in REQ_MAIN.DAT. Entry 8 is the
 Camp (tent) icon and ships with action id 0x12, which is also the scan code for
 the 'E' key -- so pressing 'E' or clicking the tent both opened Encamp.
 
-The WASD/QE control scheme puts turn-right on 'E'. To free 0x12 up we move the
+The WASD/QE control scheme puts strafe-right on 'E'. To free 0x12 up we move the
 Camp icon's action id to 0x14 (the 'T' scan code). After this patch:
 
   * clicking the tent icon returns 0x14  -> WORLDLP.C `case 0x14` -> encamp_run()
   * pressing 'T' matches entry 8         -> same encamp path
-  * pressing 'E' matches no entry        -> raw 0x12 -> `case 0x12` -> turn right
+  * pressing 'E' matches no entry        -> raw 0x12 -> `case 0x12` -> strafe right
 
 Only entry 8's u16 action id changes; the file length and every other field
 stay byte-identical. Region-map screen (MAP.C / REQ_MAP.DAT) is a separate

@@ -1,6 +1,6 @@
 # 交接備忘錄 (Session Handoff Memo)
 
-**最後更新：** 2026-08-31（**行走操控改 WASD/QE + A/D 平移 + T 紮營**，`WORLDLP.C`＋`WORLDMOV.C`＋loose `req_main.dat`；先前：WASD 等同方向鍵、發布用「免安裝整合包」工具鏈、物品詳情「種族加成」字形修正）
+**最後更新：** 2026-08-31（**行走操控：A/D 轉向、Q/E 平移、T 紮營**，`WORLDLP.C`＋`WORLDMOV.C`＋loose `req_main.dat`；同時發現神殿「離開」誤跳章的既有 bug 待修；先前：發布用「免安裝整合包」工具鏈、物品詳情「種族加成」字形修正）
 
 - **免安裝整合包架構**：`game_data/`（空，玩家把自己合法取得的 v1.00 Floppy 版遊戲檔案丟進來）＋內附的 `python-embed/`（PSF 授權可嵌入版 Python 3.12.10）＋`dosbox-x/`（GPLv2，`dosbox-x-v2026.08.02` win64）——兩者都是官方原始二進位、下載時驗證雜湊、跟原版遊戲版權無關可合法重新散布＋`installer.py`（純標準函式庫，內嵌自寫的 `bspatch_apply.py` BSDIFF4 patch-apply，不需要 `pip install`）。玩家流程：解壓整合包 → 遊戲資料丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」，整個資料夾可搬移。全程不散布任何原版資產或編譯好的 EXE——`build_exe_patch.py` 只發布 EXE 二進位差異補丁，`installer.py` 在使用者自己的 `game_data/krondor.exe` 上套用並驗證雜湊，版本不符會安全中止、不動任何檔案；`STARTUP.GAM` 角色名同樣是原地欄位替換，不隨附 `.GAM` 檔。`package_release.py` 從 `dist/test_v100_zh/` 的 `*_BUILD_MANIFEST.json` 抓已翻譯資源檔清單組出 74 個 loose 覆蓋檔，打包前檢查 `game_data/` 沒有夾帶真的遊戲資料（防止開發測試時不小心把原版資產包進發布 zip）。頂層新增 `LICENSE`（比照 upstream 寫法）。**完整的出包標準流程（何時該重跑哪支腳本、驗證步驟、已知地雷）見新文件 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)。**
 - **新手輕鬆開局存檔**（`GAMES/Plus.G01/`，`tools/release/build_starter_save.py`）：裡面兩個存檔點，`SAVE01.GAM` 起始金幣調成 1000（其餘不動）、`SAVE02.GAM` 是使用者自己另一輪遊玩的章節 1 進度（只套中文姓名 patch，金幣/進度保留原樣，已跟使用者確認是自己玩出來的、不是別人提供，沒有授權疑慮）。**踩過的雷**：第一版直接拿 `STARTUP.GAM` 改，實機讀取會閃退（`cannot load gi block` / Null pointer assignment）——`GMAIN.C: gmain_start_dispatch()` 顯示 New Game 與 Load Game 雖然都走 `savegame_read()`，但 `STARTUP.GAM` 原版只走過 New Game 路徑，缺了 Load Game 預期已存在的某些狀態（很可能是 `shared_inventory`/`ground_pile` 相關區域）。改成一律以本專案自己過去測試留下、已知能正常 Load Game 讀取的真實存檔當基準（`tools/release/starter_save_base/`），只 patch 需要的欄位，其餘原封不動。金幣欄位 offset（file offset 102、4-byte signed LE）推導與交叉驗證方式見指令碼 docstring。**這兩份存檔都還沒有實機重新驗證過**（session 當下 DOSBox-X AI bridge 沒有連線中的遊戲程序）——下次有機會請優先確認「讀取進度→Plus」兩個存檔點都不閃退、`SAVE01` 金幣顯示 1000。
@@ -46,18 +46,34 @@
 
 ## 待處理 / 已知問題
 
-### ✅ WASD/QE 行走操控 + A/D 平移——已編譯部署，待實機驗收
+### ✅ WASD/QE 行走操控 + Q/E 平移 + T 紮營——已實機驗收（大致）
 
-分兩步做完。**第一步（commit `1b2196b`）**：WASD 等同方向鍵（W/S 前後、A/D 左右轉），使用者實機測 OK。**第二步（commit `c4b9775`，現行版本）**：改成現代 FPS 佈局——**W/S 前後、A/D 左右平移、Q/E 左右轉、T 紮營**（紮營原本是 E）。方向鍵 ↑↓←→ 全部原封不動保留。
+3D 行走探索畫面的鍵盤操控。方向鍵 ↑↓←→ 全程原封不動保留，以下為新增的鍵：
 
-- **查證**：WASD/QE/T 掃描碼（`W=0x11 A=0x1e S=0x1f D=0x20 Q=0x10 E=0x12 T=0x14`）在 `WORLDLP.C` 行走主迴圈裡，只有 `E=0x12` 原本就是紮營（`encamp_run()`），其餘全沒用到。戰鬥為滑鼠／menupage 驅動不受影響。選單畫面的 `S`=儲存／`D`=退出 DOS（`MAINMENU.C`）與此無關（移動鍵只在 world loop 生效）。`區域地圖`畫面（`MAP.C`，按 M 進入）是另一套獨立 dispatch，**沒有**改，那裡 E 仍是紮營、也沒有 WASD/平移。
-- **引擎改動**（`upstream/betrayal-at-krondor` commit **`c4b9775`**，改 `WORLDLP.C` + `WORLDMOV.C`，共 +32 行）：
-  - `WORLDMOV.C`：`worldmove_step_free_move()` 新增 `mode==2`→`heading + R3D_DEG(90)`（左平移）、`mode==3`→`heading + R3D_DEG(-90)`（右平移），沿用既有的 `worldmove_probe_walkable_at()` 碰撞探測與位移路徑（步長＝`g_nWorldStepSpeed`，跟前進一樣）。`worldmove_party_attempt_move()` 開頭加：`(mode==2||mode==3) && g_gameState.nWorldStepPending != 0` → `return 0`（**道路鎖定時忽略平移**，靜默、不播擋住音效）。撞牆的「沿牆滑行」fallback 是 `mode==1` 限定，平移撞牆＝單純停住＋擋住音效，符合預期。
-  - `WORLDLP.C` 主 dispatch：`0x1e`(A)→`worldmove_party_attempt_move(2)`、`0x20`(D)→`(3)`（比照前進 case 的結構，成功後呼叫 `worldloop_set_flag_8b_preds()`）；`0x10`(Q) 併入 `0x4b`(←) 左轉、`0x12`(E) 併入 `0x4d`(→) 右轉；`0x12` 原本的 `encamp_run()` 分支整段搬到新的 `case 0x14`(T)。refusal 對白沿用既有 DDX record（平移左／Q／← 用 `0xe1`，平移右／E／→ 用 `0xe2`），不需新資料。
-- **資源改動**：`REQ_MAIN.DAT` 的螢幕圖示列裡「紮營帳篷」圖示（entry 8）action_id 原本也是 `0x12`——引擎把圖示點擊和鍵盤捷徑走同一組 action_id，不改的話點帳篷會變成右轉。用 `tools/text/patch_req_main_wasd.py` 把 entry 8 的 action_id 就地改成 `0x14`（單一 u16、檔長不變、非 offset 欄位），部署為 loose `dist/test_v100_zh/req_main.dat`（494 bytes，只差 1 byte @0x128）。改完：點帳篷→`0x14`→紮營、按 T→match entry 8→紮營、按 E→不 match 任何 entry→raw `0x12`→右轉。
-- **hold 行為**：Q/E/A/D/T 走 `menupage_run` 回傳原始掃描碼那條路徑，長按靠 DOS BIOS typematic 自動重複（約 0.5s 延遲後連發），跟方向鍵的 `focused_entry`+`g_nFrameTickCountdown` 自訂連發手感略不同。使用者第一步已接受此差異。
-- **編譯部署**：WSL clone fast-forward 到 `c4b9775` 編譯，`VMCODE.OVL`／`SX.OVL` BYTE-IDENTICAL。新 `dist/test_v100_zh/krondor.exe` = **458928 bytes**、SHA-256 **`3f2294d5f5142aaf334a21454fa43a6f4f8baa8df0e5749007314646e9e180a2`**。舊 exe 備份 `scratchpad/krondor_pre_strafe.exe`（第一步版本 `scratchpad/krondor_pre_wasd.exe`）。WSL clone 已還原成 VESA WIP parked 狀態。
-- **待實機驗收**：DOSBox-X session 當下開著。要驗：(1) A/D 是**平移**（身體平行移動、朝向不變），不是轉身；平移方向對（A 往左、D 往右，若相反就是 `WORLDMOV.C` 的 `90` ↔ `-90` 對調）；(2) Q/E 轉向正常；(3) **點螢幕上的帳篷圖示**仍能開紮營畫面（不是變成右轉）；(4) T 鍵開紮營；(5) E 鍵是右轉、不再開紮營；(6) 站在道路上（`R` 鍵進入單步行走狀態後）按 A/D 平移＝沒反應（預期）；(7) 平移撞牆會停下並有擋住音效；(8) 方向鍵四個方向都還正常。
+| 鍵 | 掃描碼 | 動作 |
+|---|---|---|
+| W / S | `0x11` / `0x1f` | 前進 / 後退（`worldmove_party_attempt_move` mode 1 / 4）|
+| A / D | `0x1e` / `0x20` | 左轉 / 右轉（`worldmove_apply_turn_step` 2 / 3）|
+| Q / E | `0x10` / `0x12` | 左平移 / 右平移（mode 2 / 3，新增）|
+| T | `0x14` | 紮營（原本掛在 E）|
+
+- **迭代過程**：`1b2196b` WASD 等同方向鍵（實機 OK）→ `c4b9775` 加平移、當時放 A/D、轉向移到 Q/E → 使用者實測覺得「道路鎖定時 A/D 平移被忽略」在主要鍵上手感怪 → `5a1df68`（現行）把轉向換回 A/D、平移降級到次要的 Q/E。使用者已測：方向都對、帳篷圖示與 T 鍵開紮營正常。
+- **引擎改動**（`upstream` 最終 commit **`5a1df68`**，改 `WORLDLP.C` + `WORLDMOV.C`）：
+  - `WORLDMOV.C`：`worldmove_step_free_move()` 新增 `mode==2`→`heading + R3D_DEG(90)`（左平移）、`mode==3`→`heading + R3D_DEG(-90)`（右平移），沿用既有 `worldmove_probe_walkable_at()` 碰撞探測與位移（步長＝`g_nWorldStepSpeed`，同前進）。`worldmove_party_attempt_move()` 開頭加 `(mode==2||mode==3) && g_gameState.nWorldStepPending != 0` → `return 0`（**道路鎖定時靜默忽略平移**）。撞牆「沿牆滑行」fallback 是 `mode==1` 限定，平移撞牆＝停住＋擋住音效。
+  - `WORLDLP.C` 主 dispatch：`0x10`(Q)→`worldmove_party_attempt_move(2)`、`0x12`(E)→`(3)`；`0x1e`(A) 併入 `0x4b`(←) 左轉、`0x20`(D) 併入 `0x4d`(→) 右轉；`0x12` 原本的 `encamp_run()` 整段搬到新的 `case 0x14`(T)。refusal 對白沿用既有 DDX record（左向用 `0xe1`、右向用 `0xe2`），不需新資料。
+- **資源改動（仍需要）**：`REQ_MAIN.DAT` 螢幕圖示列的「紮營帳篷」圖示（entry 8）action_id 原本是 `0x12`——引擎讓圖示點擊與鍵盤捷徑共用 action_id，不改的話點帳篷會觸發 E 鍵的動作（平移右）。`tools/text/patch_req_main_wasd.py` 把 entry 8 就地改成 `0x14`（單一 u16、檔長不變），部署 loose `dist/test_v100_zh/req_main.dat`（494 bytes，只差 1 byte @0x128）。改完：點帳篷／按 T→`0x14`→紮營；按 E→不 match 任何 entry→raw `0x12`→右平移。
+- **`區域地圖`畫面（`MAP.C`，按 M 進入）沒有改**：那是另一套獨立 dispatch，E 仍是紮營、REQ_MAP.DAT entry 8 仍是 `0x12`，也沒有 WASD/平移。屬既有不一致、非迴歸。
+- **hold 行為**：WASD/QE/T 走 `menupage_run` 回傳原始掃描碼那條路徑，長按靠 DOS BIOS typematic 自動重複（約 0.5s 延遲後連發），跟方向鍵的 `focused_entry`+`g_nFrameTickCountdown` 自訂連發手感略不同。使用者已接受。
+- **編譯部署**：新 `dist/test_v100_zh/krondor.exe` = **458928 bytes**、SHA-256 **`1d365fe982f2968ae704f8768f676655b44083e88acbe456ac68915585f95f35`**。逐版備份：`scratchpad/krondor_pre_wasd.exe`（`8e86f32`，動任何操控前）／`krondor_pre_strafe.exe`（`1b2196b`）／`krondor_pre_qeswap.exe`（`c4b9775`）。WSL clone 已還原成 VESA WIP parked 狀態。
+- **還沒細驗**：站在道路上（按 R 進入單步行走）時 Q/E 平移＝沒反應（預期）；平移撞牆的擋住音效；平移方向是否 Q 左 E 右（若相反＝`WORLDMOV.C` 的 `90` ↔ `-90` 對調）。
+
+### ⚠️ 神殿場景點「離開」／按 ESC 會誤跳下一章——待修（與 WASD 無關）
+
+使用者在某神殿場景（頌恩神殿，2026-08-31 測 WASD 時發現）點右上「離開」或按 ESC，畫面「閃退後遊戲重啟」——實際是被強制推進到下一章的章節轉場。**跟當天的 WASD/平移/紮營改動無關**（那些只動 3D 世界迴圈與帳篷 action_id）；根因在先前「場景離開按鈕」功能（`TOWNSCN.C`，`c801185`~`15ccd73`）。
+
+- **路徑**：`townscene_load()`（[TOWNSCN.C:161-165](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C)）用啟發式找「離開條」actor：`(rect 寬≥200 && y≥100 && 高≥40) || cKind==0xf || cKind==3` 就把 `s_exitBarAction = i+0x80`，**迴圈沒有 `break`，取最後一個符合的**。點「離開」／ESC → `action = s_exitBarAction` → `di = pA->cKind`。若掃到的是 `cKind==0xf` 的劇情 actor → [TOWNSCN.C:753](upstream/betrayal-at-krondor/bak/SRC/SCREENS/TOWNSCN.C) `di==0xf` → `g_gameState.nWorldLoopExitRequest = 1` → 世界迴圈回傳 `exit_mode = 5` → `GMAIN.C:204` `savegame_chapter_start_dispatch(g_nChapterAtLoopExit + 1)`＝**跳下一章**。
+- **推測**：這個神殿的 actor 清單裡「正常離開 actor（`cKind==3`）」後面還有一個 `cKind==0xf` 的 actor，被「取最後一個」規則覆蓋掉。
+- **下一步**：先把該神殿的 GDS 場景檔（`townscene_load` 組檔名 `GDS<章><sub字母>.DAT`，用 `bak rmf extract`）抽出來看 actor 清單，確認上述推測。修法方向：讓啟發式優先鎖定 `cKind==3`／寬band actor，`cKind==0xf` 只在沒有更好候選時才採用（或找到後 `break`）。會動到先前已驗收的王宮／村莊離開行為，要重編 + 重測王宮（「不能走正門」對白）／村莊／神殿三種場景。
 
 ### ✅ 對話模式 GoodBye 異常——已修復並實機驗收
 
@@ -173,7 +189,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 5. `cp ~/krondor-build/work/KRONDOR.EXE scratchpad/KRONDOR_xxx.EXE`（先複製到 scratchpad，因為 DOSBox-X 常鎖住 dist 的 exe）。
 6. 還原 WSL clone：`wsl -e bash -lc "cd ~/krondor-build && git reset --hard e3d9ef9 && git stash pop"`（回到 VESA WIP 狀態）。
 7. 關掉 DOSBox-X（`Get-Process dosbox-x | Stop-Process -Force`，常有殘留行程），再 `cp scratchpad/KRONDOR_xxx.EXE dist/test_v100_zh/krondor.exe`。
-8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `c4b9775` 重編，458928 bytes，SHA-256 `3f2294d5f5142aaf334a21454fa43a6f4f8baa8df0e5749007314646e9e180a2`；最後一項改動是 `WORLDLP.C`＋`WORLDMOV.C` 的 WASD/QE + A/D 平移操控（前幾版：`1b2196b` WASD 等同方向鍵 458832 bytes、`8e86f32` `INVINSP.C` 種族名稱 glyph code 修正 458816 bytes）。同時部署 loose `req_main.dat`（帳篷圖示 action_id 0x12→0x14）。
+8. 目前 `dist/test_v100_zh/krondor.exe` 由 Windows upstream `5a1df68` 重編，458928 bytes，SHA-256 `1d365fe982f2968ae704f8768f676655b44083e88acbe456ac68915585f95f35`；最後一項改動是 `WORLDLP.C` 行走操控（A/D 轉向、Q/E 平移、T 紮營）。前幾版：`c4b9775` 同功能但 A/D 平移、`1b2196b` WASD 等同方向鍵 458832 bytes、`8e86f32` `INVINSP.C` 種族名稱 glyph code 修正 458816 bytes。同時部署 loose `req_main.dat`（帳篷圖示 action_id 0x12→0x14）。
 
 ### DOSBox-X 啟動
 - 執行檔：`D:\git\DOSBox-X-AI\build-memory\dosbox-x.exe`
