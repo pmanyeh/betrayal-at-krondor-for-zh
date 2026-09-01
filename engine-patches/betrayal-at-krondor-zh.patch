@@ -1353,7 +1353,7 @@ index 64617354ec57df08bb0d82a542375aafebecd1cc..0e3e858c89d3e7329158d358bf199447
      }
  }
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..c212bbf2bb1ad0a834b5efbc87fd4605640d877e 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f8653698ddba462 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -256,6 +256,7 @@ short far world3d_main_loop(void) {
@@ -1419,6 +1419,20 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..c212bbf2bb1ad0a834b5efbc87fd4605
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe5, 1);
                      goto post_dispatch;
+@@ -383,7 +409,12 @@ short far world3d_main_loop(void) {
+                 }
+                 redraw_menu = 1;
+             after_move:
+-                render_dirty = 1;
++                /* Raw WASD/QE scan codes do not match the arrow-button action IDs,
++                   so menupage_run() does not mark the menu dirty for them.  Road
++                   availability may have changed after a successful move; redraw
++                   the menu as well as the 3D scene so entry 4 reflects its newly
++                   computed enable state. */
++                redraw_menu = render_dirty = 1;
+                 goto post_dispatch;
+             default:
+                 break;
 diff --git a/bak/SRC/GAME/WORLD/WORLDMOV.C b/bak/SRC/GAME/WORLD/WORLDMOV.C
 index bb3169b7c6b195af9fb2c1b396bece79e161c4f2..4068d86a08396efc88057001cafe9674f2960715 100644
 --- a/bak/SRC/GAME/WORLD/WORLDMOV.C

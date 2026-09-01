@@ -76,3 +76,4 @@ ce0456485a923d5332e9c062df48254870cd0030 Polish spell browser selection and desc
 890ccd78caafb9baa4ddb968688385e17fea3275 Use full-size text in spell descriptions
 3c31a9f0d628ee907dad0aaa45289e84a10a2774 Refine full-size spell description layout
 a15bacae465d80bac7cd57c88afc37a0dd0c123f Widen spell description column
+65c7985569e82ce7913dd9c1d93a07638f02704d Fix road-follow button refresh for WASD controls

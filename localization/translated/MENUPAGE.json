@@ -71,6 +71,15 @@
       "notes": "Additional cheat-chest button. Enables g_cfgKnockKnock for the current process and closes the chest; it does not modify resource.cfg."
     }
   ],
+  "action_overrides": [
+    {
+      "file": "REQ_MAIN.DAT",
+      "entry": 8,
+      "expected_action_id": 18,
+      "action_id": 20,
+      "notes": "Keep the walk-screen Camp icon on T (0x14), because E (0x12) is strafe-right in the localized control scheme."
+    }
+  ],
   "entries": [
     {
       "id": "REQ_CHET.DAT#0#primary",

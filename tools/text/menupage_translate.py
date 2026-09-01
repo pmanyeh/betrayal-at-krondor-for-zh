@@ -55,6 +55,7 @@ HEADER_SIZE = 28
 TITLE_OFF = 18
 ENTRY_SIZE = 0x21
 SLOT_OFFSETS = {"label": 19, "primary": 21, "alt": 23}
+ACTION_ID_OFF = 2
 NONE = 0xFFFF
 
 
@@ -164,6 +165,8 @@ def cmd_scaffold(args: argparse.Namespace) -> None:
     }
     if existing_data.get("injected_entries"):
         result["injected_entries"] = existing_data["injected_entries"]
+    if existing_data.get("action_overrides"):
+        result["action_overrides"] = existing_data["action_overrides"]
     out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
 
     uniq = len({e["source"] for e in entries})
@@ -320,6 +323,29 @@ def _inject_entries(payload: bytes, specs: list[dict[str, Any]], char_to_id: dic
     return bytes(out)
 
 
+def _override_actions(payload: bytes, specs: list[dict[str, Any]]) -> bytes:
+    """Apply declarative MenuEntry action-id changes with source validation."""
+    if not specs:
+        return payload
+
+    out = bytearray(payload)
+    (count,) = struct.unpack_from("<H", out, HEADER_SIZE)
+    for spec in specs:
+        entry = int(spec["entry"])
+        if not 0 <= entry < count:
+            raise ValueError(f"action override entry {entry} is out of range for {count} entries")
+        action_off = HEADER_SIZE + 2 + entry * ENTRY_SIZE + ACTION_ID_OFF
+        (current,) = struct.unpack_from("<H", out, action_off)
+        expected = int(spec["expected_action_id"])
+        replacement = int(spec["action_id"])
+        if current != expected:
+            raise ValueError(
+                f"action override entry {entry} is {current:#x}, expected {expected:#x}"
+            )
+        struct.pack_into("<H", out, action_off, replacement)
+    return bytes(out)
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     pristine = Path(args.pristine_dir)
     out_dir = Path(args.out_dir)
@@ -331,6 +357,9 @@ def cmd_build(args: argparse.Namespace) -> None:
     injections_by_file: dict[str, list[dict[str, Any]]] = {}
     for spec in catalog.get("injected_entries", []):
         injections_by_file.setdefault(spec["file"], []).append(spec)
+    overrides_by_file: dict[str, list[dict[str, Any]]] = {}
+    for spec in catalog.get("action_overrides", []):
+        overrides_by_file.setdefault(spec["file"], []).append(spec)
     by_file: dict[str, dict[tuple[int, str], str]] = {}
     by_file_src: dict[str, dict[tuple[int, str], str]] = {}
     for e in tr:
@@ -358,10 +387,12 @@ def cmd_build(args: argparse.Namespace) -> None:
                 total_drift += 1
 
         built, applied, skipped_long = _build_one(orig, rows, char_to_id)
+        built = _override_actions(built, overrides_by_file.get(fname, []))
         built = _inject_entries(built, injections_by_file.get(fname, []), char_to_id)
         # validate + round-trip guarantee
         decode_menupage(built)
-        if applied == 0 and not injections_by_file.get(fname) and built != orig:
+        if (applied == 0 and not injections_by_file.get(fname)
+                and not overrides_by_file.get(fname) and built != orig):
             raise AssertionError(f"{fname}: no translations applied but rebuild differs from input")
         (out_dir / path.name).write_bytes(built)
         total_applied += applied

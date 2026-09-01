@@ -63,11 +63,12 @@ class TestMenupageBuild(unittest.TestCase):
         (self.pris / "REQ_OPT1.DAT").write_bytes(make_menupage(None, ENTRIES))
         (self.pris / "REQ_DBUG.DAT").write_bytes(make_menupage(None, [(None, "Done", None)]))
 
-    def _build(self, entries, mapping, injected_entries=None):
+    def _build(self, entries, mapping, injected_entries=None, action_overrides=None):
         cat = self.root / "MENUPAGE.json"
         mpath = self.root / "map.json"
         cat.write_text(json.dumps({"entries": entries,
-                                   "injected_entries": injected_entries or []},
+                                   "injected_entries": injected_entries or [],
+                                   "action_overrides": action_overrides or []},
                                   ensure_ascii=False), encoding="utf-8")
         mpath.write_text(json.dumps({"char_to_id": mapping}), encoding="utf-8")
         mp.cmd_build(argparse.Namespace(
@@ -114,6 +115,33 @@ class TestMenupageBuild(unittest.TestCase):
                   mp.HEADER_SIZE + 2 + 2 * mp.ENTRY_SIZE]
         self.assertEqual(struct.unpack_from("<H", rec, 2)[0], 0x83)
         self.assertEqual(struct.unpack_from("<hhhh", rec, 11), (40, 130, 240, 20))
+
+    def test_action_override_changes_only_the_declared_entry(self):
+        original = (self.pris / "REQ_OPT1.DAT").read_bytes()
+        entry = 1
+        action_off = mp.HEADER_SIZE + 2 + entry * mp.ENTRY_SIZE + mp.ACTION_ID_OFF
+        original = bytearray(original)
+        struct.pack_into("<H", original, action_off, 0x12)
+        (self.pris / "REQ_OPT1.DAT").write_bytes(original)
+
+        self._build([], {}, action_overrides=[{
+            "file": "REQ_OPT1.DAT", "entry": entry,
+            "expected_action_id": 0x12, "action_id": 0x14,
+        }])
+
+        built = (self.out / "REQ_OPT1.DAT").read_bytes()
+        self.assertEqual(struct.unpack_from("<H", built, action_off)[0], 0x14)
+        self.assertEqual([i for i, (a, b) in enumerate(zip(original, built)) if a != b],
+                         [action_off])
+        self.assertEqual((self.out / "REQ_DBUG.DAT").read_bytes(),
+                         (self.pris / "REQ_DBUG.DAT").read_bytes())
+
+    def test_action_override_rejects_unexpected_source_value(self):
+        with self.assertRaisesRegex(ValueError, "expected 0x12"):
+            self._build([], {}, action_overrides=[{
+                "file": "REQ_OPT1.DAT", "entry": 0,
+                "expected_action_id": 0x12, "action_id": 0x14,
+            }])
 
 
 if __name__ == "__main__":

@@ -1,4 +1,8 @@
-"""Rebind the walk-screen Camp button so the 'E' key can become turn-right.
+"""Legacy one-off repair for rebinding the walk-screen Camp button to T.
+
+The canonical MenuPage build now declares this override in MENUPAGE.json and
+applies it through menupage_translate.py. This script remains useful for
+repairing an already-built test directory without rebuilding every menu file.
 
 The 3D world loop (WORLDLP.C) resolves on-screen icon clicks and keyboard
 shortcuts through the same MenuPage action ids in REQ_MAIN.DAT. Entry 8 is the
