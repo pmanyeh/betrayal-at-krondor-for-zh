@@ -874,7 +874,7 @@
       ],
       "translation": "\t@被仔細端詳了一番。\n\t「這得花上我們好幾個鐘頭,再說祭司也得想辦法維持生計。以你們的情況,我們需要用上不少聖油與蠟燭……@0應該夠支付這次的服務費用。」\u0000",
       "status": "translated",
-      "notes": ""
+      "notes": "10x10 Chinese font path: temple-healing price quote uses a compact fixed-height panel."
     },
     {
       "id": "DIAL_Z13.DDX#65",
