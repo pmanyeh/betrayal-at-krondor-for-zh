@@ -63,10 +63,12 @@ class TestMenupageBuild(unittest.TestCase):
         (self.pris / "REQ_OPT1.DAT").write_bytes(make_menupage(None, ENTRIES))
         (self.pris / "REQ_DBUG.DAT").write_bytes(make_menupage(None, [(None, "Done", None)]))
 
-    def _build(self, entries, mapping):
+    def _build(self, entries, mapping, injected_entries=None):
         cat = self.root / "MENUPAGE.json"
         mpath = self.root / "map.json"
-        cat.write_text(json.dumps({"entries": entries}, ensure_ascii=False), encoding="utf-8")
+        cat.write_text(json.dumps({"entries": entries,
+                                   "injected_entries": injected_entries or []},
+                                  ensure_ascii=False), encoding="utf-8")
         mpath.write_text(json.dumps({"char_to_id": mapping}), encoding="utf-8")
         mp.cmd_build(argparse.Namespace(
             pristine_dir=str(self.pris), json_path=str(cat), out_dir=str(self.out),
@@ -96,6 +98,22 @@ class TestMenupageBuild(unittest.TestCase):
                       "status": "translated"}], {"儲": 0})
         page = mp.decode_menupage((self.out / "REQ_OPT1.DAT").read_bytes())
         self.assertEqual(page["entries"][0]["primary"], "Save")
+
+    def test_injected_button_clones_style_and_sets_action_rect_and_text(self):
+        mapping = {"啟": 0, "動": 1}
+        self._build([], mapping, [{
+            "file": "REQ_OPT1.DAT", "insert_at": 1, "copy_entry": 0,
+            "action_id": 0x83, "rect": [40, 130, 240, 20], "primary": "啟動",
+        }])
+        raw = (self.out / "REQ_OPT1.DAT").read_bytes()
+        page = mp.decode_menupage(raw)
+        self.assertEqual(page["count"], 4)
+        self.assertEqual(page["entries"][1]["primary"],
+                         mp.encode_string("啟動", mapping).decode("latin1"))
+        rec = raw[mp.HEADER_SIZE + 2 + mp.ENTRY_SIZE:
+                  mp.HEADER_SIZE + 2 + 2 * mp.ENTRY_SIZE]
+        self.assertEqual(struct.unpack_from("<H", rec, 2)[0], 0x83)
+        self.assertEqual(struct.unpack_from("<hhhh", rec, 11), (40, 130, 240, 20))
 
 
 if __name__ == "__main__":

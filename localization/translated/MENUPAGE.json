@@ -55,6 +55,22 @@
     "REQ_TELE.DAT",
     "REQ_ZONE.DAT"
   ],
+  "injected_entries": [
+    {
+      "file": "REQ_CHET.DAT",
+      "insert_at": 2,
+      "copy_entry": 0,
+      "action_id": 131,
+      "rect": [
+        40,
+        130,
+        240,
+        20
+      ],
+      "primary": "啟動進階密技中心",
+      "notes": "Additional cheat-chest button. Enables g_cfgKnockKnock for the current process and closes the chest; it does not modify resource.cfg."
+    }
+  ],
   "entries": [
     {
       "id": "REQ_CHET.DAT#0#primary",
@@ -62,9 +78,9 @@
       "entry": 0,
       "slot": "primary",
       "source": "Heal all characters",
-      "translation": "",
-      "status": "untranslated",
-      "notes": ""
+      "translation": "治療所有角色",
+      "status": "translated",
+      "notes": "Cheat chest menu; rendered with the shared 10x10 MenuPage button font."
     },
     {
       "id": "REQ_CHET.DAT#1#primary",
@@ -72,9 +88,9 @@
       "entry": 1,
       "slot": "primary",
       "source": "Get imporant items for chapter",
-      "translation": "",
-      "status": "untranslated",
-      "notes": ""
+      "translation": "取得本章重要物品",
+      "status": "translated",
+      "notes": "Cheat chest menu. The English resource misspells 'important' as 'imporant'."
     },
     {
       "id": "REQ_CHET.DAT#2#primary",
@@ -82,9 +98,9 @@
       "entry": 2,
       "slot": "primary",
       "source": "Done cheating",
-      "translation": "",
-      "status": "untranslated",
-      "notes": ""
+      "translation": "離開密技中心",
+      "status": "translated",
+      "notes": "Cheat chest menu exit button."
     },
     {
       "id": "REQ_DBUG.DAT#0#primary",
@@ -622,9 +638,9 @@
       "entry": 0,
       "slot": "primary",
       "source": "Get: 500 Gold",
-      "translation": "",
-      "status": "untranslated",
-      "notes": ""
+      "translation": "取得 5000 金幣",
+      "status": "translated",
+      "notes": "The label says 500 in the original resource, but TOWNSCN.C actually adds 5000 gold."
     },
     {
       "id": "REQ_KNOC.DAT#1#primary",
@@ -632,8 +648,8 @@
       "entry": 1,
       "slot": "primary",
       "source": "Get: Any Items",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "取得任意物品",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -642,8 +658,8 @@
       "entry": 2,
       "slot": "primary",
       "source": "Get: Stats",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "調整角色能力",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -652,8 +668,8 @@
       "entry": 3,
       "slot": "primary",
       "source": "Get: Next Chapter",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "前往下一章",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -662,8 +678,8 @@
       "entry": 4,
       "slot": "primary",
       "source": "All: Health",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "治療全隊",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -672,8 +688,8 @@
       "entry": 5,
       "slot": "primary",
       "source": "All: Spells",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "學會所有法術",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -682,8 +698,8 @@
       "entry": 6,
       "slot": "primary",
       "source": "All: Teleports",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "開放所有傳送地點",
+      "status": "translated",
       "notes": ""
     },
     {
@@ -692,8 +708,8 @@
       "entry": 7,
       "slot": "primary",
       "source": "All Done",
-      "translation": "",
-      "status": "untranslated",
+      "translation": "離開密技中心",
+      "status": "translated",
       "notes": ""
     },
     {

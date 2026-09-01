@@ -114,8 +114,10 @@ def cmd_scaffold(args: argparse.Namespace) -> None:
 
     out_path = Path(args.out) if args.out else _DEFAULT_JSON
     existing: dict[str, dict[str, Any]] = {}
+    existing_data: dict[str, Any] = {}
     if out_path.exists():
-        for e in json.loads(out_path.read_text(encoding="utf-8")).get("entries", []):
+        existing_data = json.loads(out_path.read_text(encoding="utf-8"))
+        for e in existing_data.get("entries", []):
             existing[e["id"]] = e
 
     entries: list[dict[str, Any]] = []
@@ -154,12 +156,15 @@ def cmd_scaffold(args: argparse.Namespace) -> None:
               f"{' ...' if len(drifted) > 10 else ''}", file=sys.stderr)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps({
+    result = {
         "format": "BAK_ZH_MENUPAGE_TRANSLATION",
         "version": 1,
         "source_files": [p.name.upper() for p in files],
         "entries": entries,
-    }, indent=2, ensure_ascii=False), encoding="utf-8")
+    }
+    if existing_data.get("injected_entries"):
+        result["injected_entries"] = existing_data["injected_entries"]
+    out_path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
 
     uniq = len({e["source"] for e in entries})
     translated = sum(1 for e in entries if e["status"] == "translated")
@@ -260,13 +265,72 @@ def _build_one(orig: bytes, rows: dict[tuple[int, str], str], char_to_id: dict) 
     return bytes(out), applied, skipped_long
 
 
+def _inject_entries(payload: bytes, specs: list[dict[str, Any]], char_to_id: dict) -> bytes:
+    """Insert explicitly declared buttons after the normal translated rebuild.
+
+    Each injected entry clones an existing record for its widget styling, then
+    replaces its action, rectangle, and label pointers. Existing blob offsets
+    remain valid because the string pool stays in place and the new strings are
+    appended; unlike translation-by-append, this cannot orphan blob offset 0.
+    """
+    if not specs:
+        return payload
+
+    (count,) = struct.unpack_from("<H", payload, HEADER_SIZE)
+    entries_start = HEADER_SIZE + 2
+    blob_off = entries_start + count * ENTRY_SIZE
+    (blob_size,) = struct.unpack_from("<H", payload, blob_off)
+    records = [bytearray(payload[entries_start + i * ENTRY_SIZE:
+                                 entries_start + (i + 1) * ENTRY_SIZE])
+               for i in range(count)]
+    blob = bytearray(payload[blob_off + 2:blob_off + 2 + blob_size])
+
+    for spec in specs:
+        insert_at = int(spec["insert_at"])
+        copy_entry = int(spec["copy_entry"])
+        if not 0 <= insert_at <= len(records):
+            raise ValueError(f"injected entry insert_at {insert_at} is out of range")
+        if not 0 <= copy_entry < len(records):
+            raise ValueError(f"injected entry copy_entry {copy_entry} is out of range")
+        rec = bytearray(records[copy_entry])
+        struct.pack_into("<H", rec, 2, int(spec["action_id"]))
+        rect = spec["rect"]
+        if len(rect) != 4:
+            raise ValueError("injected entry rect must be [x, y, width, height]")
+        struct.pack_into("<hhhh", rec, 11, *(int(v) for v in rect))
+
+        for slot, rel in SLOT_OFFSETS.items():
+            text = spec.get(slot)
+            if text is None:
+                struct.pack_into("<H", rec, rel, NONE)
+                continue
+            encoded = encode_string(text, char_to_id) + b"\0"
+            if len(blob) + len(encoded) > 0xFFFF:
+                raise ValueError("menupage string pool exceeds a 16-bit offset")
+            struct.pack_into("<H", rec, rel, len(blob))
+            blob.extend(encoded)
+        records.insert(insert_at, rec)
+
+    out = bytearray(payload[:HEADER_SIZE])
+    out.extend(struct.pack("<H", len(records)))
+    for rec in records:
+        out.extend(rec)
+    out.extend(struct.pack("<H", len(blob)))
+    out.extend(blob)
+    return bytes(out)
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     pristine = Path(args.pristine_dir)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     char_to_id = json.loads(Path(args.mapping).read_text(encoding="utf-8"))["char_to_id"]
 
-    tr = json.loads(Path(args.json_path).read_text(encoding="utf-8")).get("entries", [])
+    catalog = json.loads(Path(args.json_path).read_text(encoding="utf-8"))
+    tr = catalog.get("entries", [])
+    injections_by_file: dict[str, list[dict[str, Any]]] = {}
+    for spec in catalog.get("injected_entries", []):
+        injections_by_file.setdefault(spec["file"], []).append(spec)
     by_file: dict[str, dict[tuple[int, str], str]] = {}
     by_file_src: dict[str, dict[tuple[int, str], str]] = {}
     for e in tr:
@@ -294,9 +358,10 @@ def cmd_build(args: argparse.Namespace) -> None:
                 total_drift += 1
 
         built, applied, skipped_long = _build_one(orig, rows, char_to_id)
+        built = _inject_entries(built, injections_by_file.get(fname, []), char_to_id)
         # validate + round-trip guarantee
         decode_menupage(built)
-        if applied == 0 and built != orig:
+        if applied == 0 and not injections_by_file.get(fname) and built != orig:
             raise AssertionError(f"{fname}: no translations applied but rebuild differs from input")
         (out_dir / path.name).write_bytes(built)
         total_applied += applied

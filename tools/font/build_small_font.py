@@ -38,6 +38,11 @@ def chars_from_translations(paths: list[Path]) -> list[str]:
             for ch in entry.get("translation", ""):
                 if ord(ch) >= 0x2E80:
                     chars.setdefault(ch, None)
+        for entry in data.get("injected_entries", []):
+            for field in ("label", "primary", "alt"):
+                for ch in entry.get(field, "") or "":
+                    if ord(ch) >= 0x2E80:
+                        chars.setdefault(ch, None)
     return list(chars)
 
 

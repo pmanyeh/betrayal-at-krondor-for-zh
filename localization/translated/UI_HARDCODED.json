@@ -604,6 +604,20 @@
       "translation": "瀕死",
       "status": "translated",
       "notes": "Character-sheet active condition; rendered in red with the 10x10 small font."
+    },
+    {
+      "id": "TOWNSCN.C#townscene_draw_cheat_heading:CHEAT_CENTRAL",
+      "source": "-> CHEAT CENTRAL <-",
+      "translation": "-> 密技中心 <-",
+      "status": "translated",
+      "notes": "Cheat menu heading; rendered with the 10x10 small font. ASCII arrows are retained because the current Chinese mapping does not contain arrow glyphs."
+    },
+    {
+      "id": "TOWNSCN.C#townscene_draw_cheat_heading:Enjoy_with_caution",
+      "source": "Enjoy with caution...",
+      "translation": "請謹慎使用……",
+      "status": "translated",
+      "notes": "Cheat menu warning; rendered with the 10x10 small font."
     }
   ]
 }
