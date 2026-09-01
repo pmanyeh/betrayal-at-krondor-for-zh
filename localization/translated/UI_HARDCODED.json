@@ -534,6 +534,27 @@
       "translation": "剩餘弩箭",
       "status": "translated",
       "notes": "Shown after the bolt count in the ranged targeting panel; small-font."
+    },
+    {
+      "id": "INVINSP.C#invinspect_quantity_picker_dlg:Give",
+      "source": "Give: ",
+      "translation": "給予：",
+      "status": "translated",
+      "notes": "Quantity-picker dynamic label prefix; rendered with the 10x10 small font."
+    },
+    {
+      "id": "INVINSP.C#invinspect_quantity_picker_dlg:NoneCancel",
+      "source": "None: (Cancel)",
+      "translation": "無（取消）",
+      "status": "translated",
+      "notes": "Quantity-picker zero-value state; rendered with the 10x10 small font."
+    },
+    {
+      "id": "INVINSP.C#invinspect_quantity_picker_dlg:All",
+      "source": " (All)",
+      "translation": "（全部）",
+      "status": "translated",
+      "notes": "Quantity-picker maximum-value suffix; rendered with the 10x10 small font."
     }
   ]
 }
