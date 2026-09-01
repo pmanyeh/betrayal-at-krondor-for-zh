@@ -14,9 +14,15 @@ from `DIALOG.C` and `EVTCOND.C`; `?` marks anything unverified.
   readers to trace a quest's progress gates.
 - `_effects.md` -- the subset of nodes that hand out spells / stats /
   items / party changes / encounter completions.
+- `_significant.md` -- the noise-filtered flag subset (drops global
+  state and dead-end chatter), each with its setter/reader dialogue
+  text inline. This is the worksheet: walk it top to bottom, name the
+  quest clusters, strike the rows that are just conversation state.
 
 ## Turning this into a quest list
 
+0. Walk `_significant.md`. Most quests are one flag SET by the NPC who
+   asks, and branched on by the NPC who pays out.
 1. Pick a chapter. Skim `_effects.md` for that chapter's payoffs.
 2. For each payoff node, open its `DIAL_Zxx.md` section, read the text,
    note the flags it SETs.

@@ -233,12 +233,43 @@ def is_reward_node(effects: list[str]) -> bool:
     return any(any(k in e for k in REWARD_KEYS) for e in effects)
 
 
-def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
+def load_gds_gates(gds_dir: Path) -> dict[int, set[str]]:
+    """GDS town-scene actor gates -- event_id -> {GDSxx#actor}.
+
+    TownSceneActor is 36 bytes packed (see tools/text/patch_req_main_wasd.py
+    era work); nGateEventId is the short at actor offset +30. gate 0 or 1 means
+    'no gate'. Most actors gate on wChapterMask instead, so this is sparse.
+    """
+    import struct
+    HDR, ACT = 41, 36
+    out: dict[int, set[str]] = defaultdict(set)
+    for p in sorted(gds_dir.glob("GDS*.DAT")):
+        b = p.read_bytes()
+        if len(b) < 2:
+            continue
+        size = struct.unpack_from("<H", b, 0)[0]
+        body = b[2:2 + size]
+        if len(body) < HDR:
+            continue
+        n = struct.unpack_from("<h", body, 27)[0]
+        for i in range(n):
+            off = HDR + i * ACT
+            if off + ACT > len(body):
+                break
+            gate = struct.unpack_from("<h", body, off + 30)[0]
+            if gate not in (0, 1):
+                out[gate].add(f"{p.stem}#{i}")
+    return out
+
+
+def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path, gds_dir: Path | None = None) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     translations = load_translations(translated_dir)
+    gds_gates = load_gds_gates(gds_dir) if gds_dir and gds_dir.is_dir() else {}
 
-    flag_writes: dict[int, list[str]] = defaultdict(list)
-    flag_reads: dict[int, list[str]] = defaultdict(list)
+    flag_writes: dict[int, set[str]] = defaultdict(set)
+    flag_reads: dict[int, set[str]] = defaultdict(set)
+    rec_info: dict[str, dict] = {}          # tag -> {stem,node,speaker,effects,branches,text,payoff}
     reward_rows: list[str] = []
     summary_rows: list[str] = []
 
@@ -266,10 +297,10 @@ def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
                 if op["wOp"] == 4:
                     for x in (op["nA1"], op["nA2"], op["nA3"]):
                         if x and not (x in (0x7534, 0x7538) or x >= 56000):
-                            flag_writes[x].append(f"{tag} = {op['nA4']}")
+                            flag_writes[x].add(tag)
                             n_flagwrite += 1
                 if op["wOp"] == 14 and op["nA1"]:
-                    flag_writes[op["nA1"]].append(f"{tag} = 1 (timer)")
+                    flag_writes[op["nA1"]].add(tag)
 
             branches = []
             for c in r["choices"]:
@@ -277,7 +308,7 @@ def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
                 tgt = _u32(c["nA1"], c["nA2"])
                 branches.append(f"[{cond}] -> node {tgt}" + ("" if tgt else " (no jump)"))
                 if c["wCond"] and not (c["wCond"] >= 56000):
-                    flag_reads[c["wCond"]].append(f"{tag} (branch)")
+                    flag_reads[c["wCond"]].add(tag)
 
             # only emit a section for keyed nodes or records with real content
             if node is None and not effects and not branches:
@@ -285,6 +316,11 @@ def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
 
             text = tx.get(ridx, "")
             excerpt = (text[:TEXT_EXCERPT] + "...") if len(text) > TEXT_EXCERPT else text
+            rec_info[tag] = {
+                "stem": stem, "node": node, "speaker": r["speaker_id"],
+                "effects": effects, "branches": branches, "text": text,
+                "payoff": is_reward_node(effects),
+            }
 
             head = f"## node {node}  ({tag})" if node is not None else f"### (sub) {tag}"
             lines.append(head)
@@ -316,15 +352,67 @@ def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
     # _flags.md
     fl = ["# Event-flag cross reference", "",
           "Every event-flag id touched by a DDX choice condition or a SET opcode.",
-          "`written by` = a wOp 4 / wOp 14 SET; `read by` = a DdxChoice branch condition.", ""]
-    for fid in sorted(set(flag_writes) | set(flag_reads)):
+          "`written by` = a wOp 4 / wOp 14 SET; `read by` = a DdxChoice branch condition;",
+          "`GDS gate` = a town-scene actor that only appears while the flag is in range.", ""]
+    for fid in sorted(set(flag_writes) | set(flag_reads) | set(gds_gates)):
         fl.append(f"## flag {fid:#06x}  ({fid})")
         if flag_writes.get(fid):
-            fl.append("- written by: " + ", ".join(sorted(set(flag_writes[fid]))))
+            fl.append("- written by: " + ", ".join(sorted(flag_writes[fid])))
         if flag_reads.get(fid):
-            fl.append("- read by: " + ", ".join(sorted(set(flag_reads[fid]))))
+            fl.append("- read by: " + ", ".join(sorted(flag_reads[fid])))
+        if gds_gates.get(fid):
+            fl.append("- GDS gate: " + ", ".join(sorted(gds_gates[fid])))
         fl.append("")
     (out_dir / "_flags.md").write_text("\n".join(fl), encoding="utf-8")
+
+    # _significant.md -- the noise-filtered subset, with setter/reader text so a
+    # human can label each cluster as a quest (or discard it as chatter).
+    def significant(fid: int) -> bool:
+        nread = len(flag_reads.get(fid, ()))
+        if nread > 30:            # day/night, chapter parity, global speaker state
+            return False
+        gates_reward = any(rec_info.get(t, {}).get("payoff") for t in flag_reads.get(fid, ()))
+        n_write_files = len({t.split("#")[0] for t in flag_writes.get(fid, ())})
+        return bool(gds_gates.get(fid)) or gates_reward or n_write_files >= 2 or nread >= 3
+
+    def brief(tag: str) -> str:
+        ri = rec_info.get(tag)
+        if not ri:
+            return f"{tag} (no text / sub-record)"
+        eff = "; ".join(e for e in ri["effects"]
+                        if any(k in e for k in REWARD_KEYS) or "ACTION" in e or "SET flag" in e)
+        t = ri["text"][:180].replace("\n", " ")
+        bits = [tag]
+        if ri["node"] is not None:
+            bits.append(f"node {ri['node']}")
+        if eff:
+            bits.append(f"**{eff}**")
+        head = "  ".join(bits)
+        return f"{head}\n      {t}" if t else head
+
+    sig = sorted(f for f in (set(flag_writes) | set(flag_reads) | set(gds_gates)) if significant(f))
+    sg = ["# Significant story flags", "",
+          f"{len(sig)} of {len(set(flag_writes) | set(flag_reads))} flags survive the noise filter",
+          "(drop flags read by >30 nodes = global state; keep flags that gate a",
+          "reward node, gate a GDS town actor, are set in >=2 DDX files, or are read",
+          "by >=3 nodes). Still a mix of real quests and dense-area conversation",
+          "state -- walk it, name the quest clusters, discard the chatter.", ""]
+    for fid in sig:
+        sg.append(f"## flag {fid:#06x}  ({fid})")
+        rd = len(flag_reads.get(fid, ()))
+        wf = len({t.split('#')[0] for t in flag_writes.get(fid, ())})
+        sg.append(f"- {len(flag_writes.get(fid, ()))} setters ({wf} files), {rd} readers"
+                  + ("  [GDS gate]" if gds_gates.get(fid) else ""))
+        if flag_writes.get(fid):
+            sg.append("- SET by:")
+            sg += [f"    - {brief(t)}" for t in sorted(flag_writes[fid])]
+        if flag_reads.get(fid):
+            sg.append("- branched on by:")
+            sg += [f"    - {brief(t)}" for t in sorted(flag_reads[fid])]
+        if gds_gates.get(fid):
+            sg.append("- gates GDS actor(s): " + ", ".join(sorted(gds_gates[fid])))
+        sg.append("")
+    (out_dir / "_significant.md").write_text("\n".join(sg), encoding="utf-8")
 
     # _effects.md
     ef = ["# Reward / progression nodes", "",
@@ -348,8 +436,14 @@ def analyse(ddx_dir: Path, translated_dir: Path, out_dir: Path) -> None:
           "  This is the story state machine: follow a flag from its writer to its",
           "  readers to trace a quest's progress gates.",
           "- `_effects.md` -- the subset of nodes that hand out spells / stats /",
-          "  items / party changes / encounter completions.", "",
+          "  items / party changes / encounter completions.",
+          "- `_significant.md` -- the noise-filtered flag subset (drops global",
+          "  state and dead-end chatter), each with its setter/reader dialogue",
+          "  text inline. This is the worksheet: walk it top to bottom, name the",
+          "  quest clusters, strike the rows that are just conversation state.", "",
           "## Turning this into a quest list", "",
+          "0. Walk `_significant.md`. Most quests are one flag SET by the NPC who",
+          "   asks, and branched on by the NPC who pays out.",
           "1. Pick a chapter. Skim `_effects.md` for that chapter's payoffs.",
           "2. For each payoff node, open its `DIAL_Zxx.md` section, read the text,",
           "   note the flags it SETs.",
@@ -392,9 +486,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--ddx-dir", type=Path, default=REPO / "scratchpad" / "pristine")
     ap.add_argument("--translated-dir", type=Path, default=REPO / "localization" / "translated")
+    ap.add_argument("--gds-dir", type=Path, default=REPO / "scratchpad" / "gds",
+                    help="extracted GDSxx.DAT town scenes (for actor gate flags); optional")
     ap.add_argument("--out", type=Path, default=REPO / "docs" / "research" / "quest-map")
     args = ap.parse_args()
-    analyse(args.ddx_dir, args.translated_dir, args.out)
+    analyse(args.ddx_dir, args.translated_dir, args.out, args.gds_dir)
 
 
 if __name__ == "__main__":
