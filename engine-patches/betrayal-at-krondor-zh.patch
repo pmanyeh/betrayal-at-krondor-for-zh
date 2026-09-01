@@ -1,0 +1,3211 @@
+diff --git a/bak/INCLUDE/gfx169d.h b/bak/INCLUDE/gfx169d.h
+index 657aa192c09ea43e66c0aabfd90482817cdc6444..eaa76fabf67913e28101de13a04b0260facf5186 100644
+--- a/bak/INCLUDE/gfx169d.h
++++ b/bak/INCLUDE/gfx169d.h
+@@ -1,16 +1,21 @@
+ #ifndef GFX169D_H
+ #define GFX169D_H
+ 
++#include <dos.h>
++
+ extern unsigned char far g_abCursorPaletteLut[256];
+ 
+ extern unsigned char far g_abFogRemapTable[2560];
+ 
+-#ifdef V102CD
+-#define FOG_REMAP_TAB_OFF 0x66
+-#define CURSOR_REMAP_TAB_OFF 0xa66
+-#else
+-#define FOG_REMAP_TAB_OFF 0x5c
+-#define CURSOR_REMAP_TAB_OFF 0xa5c
+-#endif
++/*
++ * POLYRAST.ASM indexes these CS-resident tables with a near offset.  Their
++ * offsets were historically constant in the shipped 1.00/1.02 link layouts,
++ * but TLINK is free to choose a different paragraph frame after any resident
++ * code-size change.  Use the linker's far-symbol fixup instead of baking the
++ * original offsets into every caller; FP_OFF still folds to the original
++ * constants in byte-identical builds.
++ */
++#define FOG_REMAP_TAB_OFF FP_OFF(&g_abFogRemapTable[0])
++#define CURSOR_REMAP_TAB_OFF FP_OFF(&g_abCursorPaletteLut[0])
+ 
+ #endif
+diff --git a/bak/SRC/CHAR/CHARSCRN.C b/bak/SRC/CHAR/CHARSCRN.C
+index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf40c09b50 100644
+--- a/bak/SRC/CHAR/CHARSCRN.C
++++ b/bak/SRC/CHAR/CHARSCRN.C
+@@ -15,16 +15,18 @@
+ #include "SRC/GFX/SPRITE/RECTSPR.H"
+ #include "SRC/GFX/RASTER/PRESENT.H"
+ #include "SRC/INPUT/KEYBOARD.H"
++#include "SRC/INPUT/MOUSE.H"
+ #include "SRC/GFX/SCREEN/SCREEN.H"
+ #include "SRC/UI/WIDGET.H"
+ #include "SRC/UI/MENUPAGE.H"
++#include "SRC/UI/TEXTWRAP.H"
+ #include "SRC/GFX/PALETTE/PALETTE.H"
+ #include "SRC/GAME/STATE/GSTATE.H"
+ #include "SRC/CHAR/STAT.H"
+ #include "SRC/DIALOG/DIALOG.H"
+ #include "SRC/DIALOG/ASKABOUT.H"
+-#include "SRC/UI/TEXTWRAP.H"
+ #include "SRC/SCREENS/INVENTOR.H"
++#include "SRC/GFX/FONT/FONT.H"
+ #include "statname.h"
+ 
+ char g_dialog_in_char_screen = 0;
+@@ -36,64 +38,317 @@ struct SpellRecord {
+     int idx;
+ };
+ 
+-static void charscreen_draw_spell_book_actor(Combatant *actor, unsigned char far *pal_scratch) {
++#define SPELLBOOK_SCHOOL_COUNT 6
++#define SPELLBOOK_MAX_SPELLS 8
++#define SPELLBOOK_DOC_ROWS 7
++#define SPELLBOOK_DOC_ROW_LEN 60
++#define SPELLBOOK_LIST_X 0x30
++#define SPELLBOOK_LIST_XMAX 0x7e
++#define SPELLBOOK_LIST_BOX_WIDTH 0x50
++#define SPELLBOOK_DOC_X 0x80
++#define SPELLBOOK_DOC_WIDTH 0xbe
++#define SPELLBOOK_ZH_ADVANCE 15
++
++static int g_spellbookIcons[SPELLBOOK_SCHOOL_COUNT];
++static struct SpellRecord g_spellbookSpells[SPELLBOOK_MAX_SPELLS];
++static char g_spellbookDocRows[SPELLBOOK_DOC_ROWS][SPELLBOOK_DOC_ROW_LEN];
++static char g_spellbookDocText[400];
++
++static void far charscreen_spellbook_draw_line(unsigned char far *text, int x, int y) {
++    while (*text != 0) {
++        if (*text >= 0x80 && *text <= 0xdf && text[1] != 0) {
++            font_draw_zh_glyph(*text, text[1], x, y);
++            x += SPELLBOOK_ZH_ADVANCE;
++            text += 2;
++        } else {
++            x += font_draw_char(*text, x, y);
++            text++;
++        }
++    }
++}
++
++static int charscreen_spellbook_load_school(Combatant *actor, int selected_school) {
+     int row;
+     int spell_icon;
+     int spell_count;
+-    int first;
++    int known_count;
+     ResFile *file;
+     struct SpellRecord spell_rec;
+-    register int panel_y;
+     register int spell_idx;
+ 
+-    if (gstate_actor_is_caster(actor) != 0) {
+-        file = res_fopen("InvSpell.dat", "rb");
+-        g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage1Base;
+-        g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+-        gfx_present_dispatch(0, 0, 0x140, 200);
+-        for (row = 1; row <= 6; row++) {
+-            *g_pMainScratchBuf = '\0';
+-            res_fread(&spell_icon, 1, 2, file);
+-            res_fread(&spell_count, 1, 2, file);
+-            panel_y = row * 0x20 - 0x1b;
+-            g_graphics_context.bGfx_fill_enabled = '\x01';
+-            g_graphics_context.bGfx_fill_color = g_graphics_context.bGfx_outline_color = '\0';
+-            draw_rect_filled(7, panel_y + 1, 0x27, 0x1e);
+-            g_graphics_context.bGfx_fill_color = '\x11';
+-            g_graphics_context.bGfx_outline_color = 0x8e;
+-            draw_rect_filled(6, panel_y, 0x27, 0x1e);
+-            resblit_sprite(g_pButtonSpriteUp[spell_icon], 9, panel_y + 1);
+-            spell_idx = 0;
+-            first = 1;
+-            if (spell_idx < spell_count) {
+-                do {
+-                    res_fread(&spell_rec, 1, 0x1a, file);
+-                    if (((1 << (spell_rec.idx % 0x10)) &
+-                         actor->spellsKnown[spell_rec.idx / 0x10]) != 0) {
+-                        if (first == 0) {
+-                            _fstrcat((char far *)g_pMainScratchBuf, ", ");
+-                        }
+-                        _fstrcat((char far *)g_pMainScratchBuf, spell_rec.name);
+-                        first = 0;
+-                    }
+-                    spell_idx++;
+-                } while (spell_idx < spell_count);
++    known_count = 0;
++    file = res_fopen("InvSpell.dat", "rb");
++    if (file == (ResFile *)0)
++        return 0;
++    for (row = 0; row < SPELLBOOK_SCHOOL_COUNT; row++) {
++        res_fread(&spell_icon, 1, 2, file);
++        res_fread(&spell_count, 1, 2, file);
++        g_spellbookIcons[row] = spell_icon;
++        for (spell_idx = 0; spell_idx < spell_count; spell_idx++) {
++            res_fread(&spell_rec, 1, 0x1a, file);
++            if (row == selected_school && known_count < SPELLBOOK_MAX_SPELLS &&
++                ((1 << (spell_rec.idx % 0x10)) &
++                 actor->spellsKnown[spell_rec.idx / 0x10]) != 0) {
++                g_spellbookSpells[known_count++] = spell_rec;
+             }
+-            g_graphics_context.bText_fg_color = '\x01';
+-
+-            textwrap_draw_aligned((long)g_pMainScratchBuf, 0x33, panel_y + 1, 0x109, 0x1e, 0, 0x10,
+-                                  0);
+-            g_graphics_context.bText_fg_color = '\n';
+-            textwrap_draw_aligned((long)g_pMainScratchBuf, 0x32, panel_y, 0x109, 0x1e, 0, 0x10, 0);
+         }
++    }
++    res_fclose(file);
++    return known_count;
++}
++
++static void charscreen_spellbook_load_doc(int spell_idx) {
++    int doc_count;
++    int first_row;
++    int row;
++    int pos;
++    int ch;
++    int narrative_started;
++    unsigned int blob_len;
++    long offsets[SPELLBOOK_DOC_ROWS];
++    long blob_start;
++    ResFile *file;
++
++    for (row = 0; row < SPELLBOOK_DOC_ROWS; row++)
++        g_spellbookDocRows[row][0] = '\0';
++    g_spellbookDocText[0] = '\0';
++    file = res_fopen("SpellDoc.dat", "rb");
++    if (file == (ResFile *)0)
++        return;
++    res_fread(&doc_count, 2, 1, file);
++    first_row = spell_idx * SPELLBOOK_DOC_ROWS;
++    if (first_row < 0 || first_row + SPELLBOOK_DOC_ROWS > doc_count) {
+         res_fclose(file);
++        return;
++    }
++    res_fseek(file, 2L + (long)first_row * 4L, SEEK_SET);
++    res_fread(offsets, 4, SPELLBOOK_DOC_ROWS, file);
++    res_fseek(file, 2L + (long)doc_count * 4L, SEEK_SET);
++    res_fread(&blob_len, 2, 1, file);
++    blob_start = 4L + (long)doc_count * 4L;
++    for (row = 0; row < SPELLBOOK_DOC_ROWS; row++) {
++        if (offsets[row] >= (long)blob_len)
++            continue;
++        res_fseek(file, blob_start + offsets[row], SEEK_SET);
++        pos = 0;
++        while (pos < SPELLBOOK_DOC_ROW_LEN - 1) {
++            ch = res_fgetc(file);
++            if (ch <= 0)
++                break;
++            g_spellbookDocRows[row][pos++] = (char)ch;
++        }
++        g_spellbookDocRows[row][pos] = '\0';
++    }
++    res_fclose(file);
++    for (row = 1; row <= 4; row++) {
++        if (g_spellbookDocRows[row][0] != '\0') {
++            if (g_spellbookDocText[0] != '\0')
++                strcat(g_spellbookDocText, "\n");
++            strcat(g_spellbookDocText, g_spellbookDocRows[row]);
++        }
++    }
++    narrative_started = 0;
++    for (row = 5; row < SPELLBOOK_DOC_ROWS; row++) {
++        if (g_spellbookDocRows[row][0] != '\0') {
++            if (narrative_started == 0) {
++                if (g_spellbookDocText[0] != '\0')
++                    strcat(g_spellbookDocText, "\n\n");
++                narrative_started = 1;
++            } else {
++                strcat(g_spellbookDocText, "\n");
++            }
++            strcat(g_spellbookDocText, g_spellbookDocRows[row]);
++        }
++    }
++}
++
++static void charscreen_spellbook_draw(int school, int selected, int known_count) {
++    int row;
++    int panel_y;
++    int y;
++    char savedSmallZhMode;
++    char savedMixedZhMode;
++    ClipRect savedClip;
++    char savedClipEnabled;
++
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage1Base;
++    g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++    gfx_present_dispatch(0, 0, 0x140, 200);
++    g_graphics_context.bGfx_fill_enabled = 1;
++    for (row = 0; row < SPELLBOOK_SCHOOL_COUNT; row++) {
++        panel_y = row * 0x20 + 5;
++        g_graphics_context.bGfx_fill_color = 0;
++        g_graphics_context.bGfx_outline_color = 0;
++        draw_rect_filled(7, panel_y + 1, 0x27, 0x1e);
++        g_graphics_context.bGfx_fill_color = 0x11;
++        g_graphics_context.bGfx_outline_color = row == school ? 0x89 : 0x8e;
++        draw_rect_filled(6, panel_y, 0x27, 0x1e);
++        resblit_sprite(g_pButtonSpriteUp[g_spellbookIcons[row]], 9, panel_y + 1);
++    }
++
++    savedClipEnabled = g_graphics_context.bClip_enabled;
++    savedClip = g_graphics_context.clip;
++    g_graphics_context.bClip_enabled = 1;
++    g_graphics_context.clip.xmin = SPELLBOOK_LIST_X;
++    g_graphics_context.clip.xmax = SPELLBOOK_LIST_XMAX;
++    g_graphics_context.clip.ymin = 0;
++    g_graphics_context.clip.ymax = 199;
++    for (row = 0; row < known_count; row++) {
++        y = 8 + row * 0x17;
++        if (row == selected) {
++            g_graphics_context.bGfx_fill_color = 0x11;
++            g_graphics_context.bGfx_outline_color = 10;
++            draw_rect_filled(SPELLBOOK_LIST_X - 2, y - 2, SPELLBOOK_LIST_BOX_WIDTH, 0x14);
++        }
++        g_graphics_context.bText_fg_color = 1;
++        charscreen_spellbook_draw_line((unsigned char far *)g_spellbookSpells[row].name,
++                                       SPELLBOOK_LIST_X + 1, y + 1);
++        g_graphics_context.bText_fg_color = 10;
++        charscreen_spellbook_draw_line((unsigned char far *)g_spellbookSpells[row].name,
++                                       SPELLBOOK_LIST_X, y);
++    }
++    g_graphics_context.clip.xmin = SPELLBOOK_DOC_X;
++    g_graphics_context.clip.xmax = 0x13d;
++    if (known_count > 0) {
++        charscreen_spellbook_load_doc(g_spellbookSpells[selected].idx);
++        g_graphics_context.bText_fg_color = 1;
++        charscreen_spellbook_draw_line((unsigned char far *)g_spellbookSpells[selected].name,
++                                       SPELLBOOK_DOC_X + 1, 9);
++        g_graphics_context.bText_fg_color = 10;
++        charscreen_spellbook_draw_line((unsigned char far *)g_spellbookSpells[selected].name,
++                                       SPELLBOOK_DOC_X, 8);
++        savedSmallZhMode = g_bSmallZhMode;
++        savedMixedZhMode = g_bMixedZhMode;
++        g_bSmallZhMode = 0;
++        g_bMixedZhMode = 1;
++        g_graphics_context.bText_fg_color = 1;
++        textwrap_draw_aligned((long)g_spellbookDocText, SPELLBOOK_DOC_X + 1, 0x21,
++                              SPELLBOOK_DOC_WIDTH, 0xa2, 4, 0, 0);
++        g_graphics_context.bText_fg_color = 10;
++        textwrap_draw_aligned((long)g_spellbookDocText, SPELLBOOK_DOC_X, 0x20,
++                              SPELLBOOK_DOC_WIDTH, 0xa2, 4, 0, 0);
++        g_bMixedZhMode = savedMixedZhMode;
++        g_bSmallZhMode = savedSmallZhMode;
++    }
++    g_graphics_context.clip = savedClip;
++    g_graphics_context.bClip_enabled = savedClipEnabled;
++}
++
++static void charscreen_draw_spell_book_actor(Combatant *actor, unsigned char far *pal_scratch) {
++    int school;
++    int selected;
++    int known_count;
++    int redraw;
++    int done;
++    int row;
++    unsigned int scancode;
++    short cursor_x;
++    short cursor_y;
++
++    if (gstate_actor_is_caster(actor) != 0) {
++        school = 0;
++        selected = 0;
++        known_count = charscreen_spellbook_load_school(actor, school);
++        charscreen_spellbook_draw(school, selected, known_count);
+         g_pPalQueuedForFlip = pal_scratch = chunk_load_into_slot("INVENTOR.PAL");
+         g_nPalBlendMode = 0;
+         screen_frame_present();
+         screen_frame_sync_buffers_rect(0, 200);
+         cache_release(pal_scratch);
+-        while (dialog_poll_arrow_or_button() == 0) {
+-            screen_frame_present();
++        dialog_input_wait_release(1, 1);
++        redraw = 0;
++        done = 0;
++        while (done == 0) {
++            if (redraw != 0) {
++                known_count = charscreen_spellbook_load_school(actor, school);
++                if (known_count == 0)
++                    selected = 0;
++                else if (selected >= known_count)
++                    selected = known_count - 1;
++                charscreen_spellbook_draw(school, selected, known_count);
++                screen_frame_present();
++                screen_frame_sync_buffers_rect(0, 200);
++                redraw = 0;
++            } else {
++                screen_frame_present();
++            }
++            scancode = kbhit_read() >> 8;
++            if (scancode == 0x01) {
++                done = 1;
++            } else if (scancode == 0x4b) {
++                school = (school + SPELLBOOK_SCHOOL_COUNT - 1) % SPELLBOOK_SCHOOL_COUNT;
++                selected = 0;
++                redraw = 1;
++            } else if (scancode == 0x4d) {
++                school = (school + 1) % SPELLBOOK_SCHOOL_COUNT;
++                selected = 0;
++                redraw = 1;
++            } else if (scancode == 0x48 && known_count > 0) {
++                selected = (selected + known_count - 1) % known_count;
++                redraw = 1;
++            } else if (scancode == 0x50 && known_count > 0) {
++                selected = (selected + 1) % known_count;
++                redraw = 1;
++            }
++            if (g_mouse_installed != 0) {
++                if (mouse_button_pressed(1) != 0) {
++                    done = 1;
++                } else if (mouse_button_pressed(0) != 0) {
++                    screen_cursor_get_position(&cursor_x, &cursor_y);
++                    if (cursor_x >= 6 && cursor_x <= 0x2c) {
++                        for (row = 0; row < SPELLBOOK_SCHOOL_COUNT; row++) {
++                            if (cursor_y >= row * 0x20 + 5 &&
++                                cursor_y < row * 0x20 + 0x23) {
++                                school = row;
++                                selected = 0;
++                                redraw = 1;
++                            }
++                        }
++                    } else if (cursor_x >= SPELLBOOK_LIST_X - 2 &&
++                               cursor_x <= SPELLBOOK_LIST_XMAX) {
++                        row = (cursor_y - 6) / 0x17;
++                        if (cursor_y >= 6 && row >= 0 && row < known_count) {
++                            selected = row;
++                            redraw = 1;
++                        }
++                    }
++                    dialog_input_wait_release(1, 0);
++                }
++            }
++        }
++        dialog_input_wait_release(1, 1);
++    }
++}
++
++static void far charscreen_draw_small_zh_label(unsigned char far *text, int x, int y, int fg_color,
++                                               int shadow_color) {
++    unsigned char far *p;
++    int dx;
++
++    if (shadow_color >= -1) {
++        g_graphics_context.bText_fg_color = shadow_color >= 0 ? (unsigned char)shadow_color : 0;
++        p = text;
++        dx = x + 1;
++        while (*p != 0) {
++            if ((unsigned char)*p >= 0x80 && (unsigned char)*p <= 0xDF) {
++                dx += font_draw_zh_glyph_small(*p, p[1], dx, y + 1);
++                p += 2;
++            } else {
++                dx += font_draw_char(*p, dx, y + 1);
++                p++;
++            }
++        }
++    }
++    g_graphics_context.bText_fg_color = fg_color >= 0 ? (unsigned char)fg_color : 0x9f;
++    p = text;
++    dx = x;
++    while (*p != 0) {
++        if ((unsigned char)*p >= 0x80 && (unsigned char)*p <= 0xDF) {
++            dx += font_draw_zh_glyph_small(*p, p[1], dx, y);
++            p += 2;
++        } else {
++            dx += font_draw_char(*p, dx, y);
++            p++;
+         }
+     }
+ }
+@@ -119,11 +374,10 @@ static void far charscreen_draw_sheet_stat_row(int stat_idx, int value, int part
+         sprintf(buf, "N/A");
+     }
+     if (improved != 0) {
+-        invui_draw_text_aligned_shadow(g_abStatNames[stat_idx], x_base + 0x14, y_pos - 1, 0, 0x89,
+-                                       0x8f);
++        charscreen_draw_small_zh_label(g_abStatNames[stat_idx], x_base + 0x14, y_pos - 1, 0x89, 0x8f);
+         invui_draw_text_aligned_shadow((unsigned char far *)buf, x_base + 0x71, y_pos - 1, 2, 0x89, 0x8f);
+     } else {
+-        invui_draw_text_aligned_shadow(g_abStatNames[stat_idx], x_base + 0x14, y_pos - 1, 0, 10, 1);
++        charscreen_draw_small_zh_label(g_abStatNames[stat_idx], x_base + 0x14, y_pos - 1, 10, 1);
+         invui_draw_text_aligned_shadow((unsigned char far *)buf, x_base + 0x71, y_pos - 1, 2, 10, 1);
+     }
+     if (value < 0) {
+@@ -172,34 +426,47 @@ static void far charscreen_draw_stat_row(int stat_idx, int cur_val, int max_val,
+     char buf[10];
+     unsigned short improved;
+ 
+-    y = stat_idx * 0xb + 0x1c;
++    y = stat_idx * 0xb + 0x21;
+     skillIdx = party_slot * 0x11 + stat_idx;
+     improved = gstate_event_read(SKILL_IMPROVED(skillIdx));
+     fgColor = improved ? 0x89 : -1;
+     shadowColor = improved ? 0x8f : -1;
+     gstate_event_write(SKILL_IMPROVED(skillIdx), 0);
+-    invui_draw_text_aligned_shadow(g_abStatNames[stat_idx], 0x69, y, 0, fgColor, shadowColor);
++    charscreen_draw_small_zh_label(g_abStatNames[stat_idx], 0x69, y, fgColor, shadowColor);
+     sprintf(buf, "%d", cur_val);
+     invui_draw_text_aligned_shadow((unsigned char far *)buf, 0xa4, y, 2, fgColor, shadowColor);
+     if (stat_idx <= 1) {
+-        invui_draw_text_aligned_shadow((unsigned char far *)"of", 0xaa, y, 0, fgColor, shadowColor);
++        invui_draw_text_aligned_shadow((unsigned char far *)"/", 0xaa, y, 0, fgColor, shadowColor);
+         sprintf(buf, "%d", max_val);
+         invui_draw_text_aligned_shadow((unsigned char far *)buf, 0xc2, y, 2, fgColor, shadowColor);
+     }
+ }
+ 
++static void charscreen_info_draw_page(MenuPage *page) {
++    char savedSmallZhMode;
++
++    /* REQ_INFO's only localized menu-entry label is the spell-book button.
++     * Draw its menu page in the compact font so 法術 fits the original
++     * Spells button without changing the separately rendered sheet text. */
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    menupage_draw(page);
++    g_bSmallZhMode = savedSmallZhMode;
++}
++
+ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party_slot,
+                                      int full_sheet, unsigned char far *pal_buf) {
+     int condCount;
+     char buf[80];
+     MenuEntry stack_me;
+     int i;
++    char savedSmallZhMode;
+ 
+     charscreen_recalc_condition_tick();
+     g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage1Base;
+     g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+     gfx_present_dispatch(0, 0, 0x140, 200);
+-    menupage_draw(page);
++    charscreen_info_draw_page(page);
+     g_graphics_context.bClip_enabled = 1;
+     g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
+     g_graphics_context.clip.ymax = 199;
+@@ -214,13 +481,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+     resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x19], 0x130, 9, 2);
+     resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 9, 0);
+     resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 0x4e, 1);
+-    invui_draw_text_aligned_shadow((unsigned char far *)"Ratings:", 0x5f, 0xe, 0, -1, -1);
++    charscreen_draw_small_zh_label((unsigned char far *)"\x86\x21\x88\x61\x87\x5a", 0x5f, 0xe, -1, -1);
+     stack_me = page->pEntries[2];
+     stack_me.bActive_flag = 1;
+     stack_me.pPrimary_label = actor->name;
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     widget_dispatch_by_type(&stack_me, -0xe4, 0, 0);
+-    invui_draw_text_aligned_shadow((unsigned char far *)"Condition:", 0xd2, 0xe, 0, -1, -1);
++    g_bSmallZhMode = savedSmallZhMode;
++    charscreen_draw_small_zh_label((unsigned char far *)"\x91\x20\x8f\x6a\x87\x5a", 0xd2, 0xe, -1, -1);
+     i = condCount = 0;
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     for (; i < 7; i++) {
+         if ((char)g_gameState.abActorStatusRanks[party_slot][i] > 0) {
+             sprintf(buf, "%Fs (%d%)", g_aConditionInfo[i].pName,
+@@ -229,8 +501,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+                                            0x8f);
+         }
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+     if (condCount == 0) {
+-        invui_draw_text_aligned_shadow((unsigned char far *)"Normal", 0xdc, 0x1c, 0, -1, -1);
++        invui_draw_text_aligned_shadow((unsigned char far *)"\x87\x51\x89\x49", 0xdc, 0x21, 0, -1, -1);
+     }
+     if (full_sheet != 0) {
+         resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x18], 2, 0x6b, 0);
+@@ -269,6 +542,11 @@ void charscreen_info_loop(Combatant *actor) {
+     slot = gstate_find_party_slot(actor);
+     if (slot >= 0) {
+         page = menupage_load("req_info.dat");
++        /* REQ_INFO.DAT entry 2 is the spell-book button.  Keep this
++         * localized here until the menu-resource string pools have a
++         * dedicated translator/packer.  "Spells" has enough storage for
++         * the four encoded bytes of the Chinese label. */
++        strcpy(page->pEntries[2].pPrimary_label, "\x83\x7b\x83\x7e"); /* 法術 */
+         menupage_begin(page);
+         g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage1Base;
+         resblit_load_pal_or_stream("DIALOG.SCR");
+@@ -298,7 +576,7 @@ void charscreen_info_loop(Combatant *actor) {
+                         }
+                     }
+                     g_nPalBlendMode = 0;
+-                    menupage_draw(page);
++                    charscreen_info_draw_page(page);
+                     screen_frame_present();
+                     screen_frame_sync_buffers_rect(0, 200);
+                     if (firstDraw != 0) {
+diff --git a/bak/SRC/CHAR/STAT.C b/bak/SRC/CHAR/STAT.C
+index 8570554112b75a37705b6d7a1bdc43493111a1bb..d1c55e6b8fc2d03f7f31938940dbd9e77dbb6563 100644
+--- a/bak/SRC/CHAR/STAT.C
++++ b/bak/SRC/CHAR/STAT.C
+@@ -83,10 +83,13 @@ void stat_actor_recalc_equip_bonuses(Combatant *actor) {
+ }
+ 
+ ConditionInfo far g_aConditionInfo[7] = {
+-    {"Sick", 1, -1, {0, 0, 0, 0}},     {"Plagued", 1, -2, {0, 0, 0, 0}},
+-    {"Poisoned", 1, -3, {0, 0, 0, 0}}, {"Drunk", -2, 0, {-14, -60, 0, 0}},
+-    {"Healing", -3, 1, {0, 0, 0, 0}},  {"Starving", 0, -2, {0, 0, 0, 0}},
+-    {"Near-death", 0, 0, {0, 0, 0, 0}}};
++    {"\x82\x54\x81\x77", 1, -1, {0, 0, 0, 0}},
++    {"\x96\x43\x96\x44", 1, -2, {0, 0, 0, 0}},
++    {"\x81\x27\x86\x22", 1, -3, {0, 0, 0, 0}},
++    {"\x87\x3e\x95\x56", -2, 0, {-14, -60, 0, 0}},
++    {"\x81\x75\x92\x58\x81\x27", -3, 1, {0, 0, 0, 0}},
++    {"\x9e\x3e\x91\x59", 0, -2, {0, 0, 0, 0}},
++    {"\x96\x24\x82\x3e", 0, 0, {0, 0, 0, 0}}};
+ 
+ unsigned int stat_actor_get(Combatant *actor, int stat_idx, int mode) {
+     unsigned int value;
+diff --git a/bak/SRC/COMBAT/ACTOR/CACTOR.C b/bak/SRC/COMBAT/ACTOR/CACTOR.C
+index 94c8a86a78e14e8dcbd1ac89a80dd9e63cac6cff..2539890f5c4007f1688e4553ada33668129876a3 100644
+--- a/bak/SRC/COMBAT/ACTOR/CACTOR.C
++++ b/bak/SRC/COMBAT/ACTOR/CACTOR.C
+@@ -1610,32 +1610,36 @@ void far combat_actor_draw_stats_panel(Combatant *actor) {
+     unsigned int strength;
+     int x;
+     int y;
++    char savedSmallZhMode;
+ 
+     if (actor != (Combatant *)0 && !!actor->charSlot) {
+         g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+         resblit_sprite_frame(g_pHeadsBmxAssetTable[(int)actor->charSlot - 1], 0xe, 0x8f, 0);
+         blit_sprite_indirect((unsigned short)*g_parch_bmx, 0x49, 0x81, 0);
+         g_graphics_context.bText_fg_color = 0;
++        savedSmallZhMode = g_bSmallZhMode;
++        g_bSmallZhMode = 1;
+         y = 0x84;
+         x = 0x82 - (font_text_width_ds(actor->name) >> 1);
+         font_draw_text_ds(actor->name, x, y);
+         y += 0xc;
+         itoa(stat_actor_get(actor, 0, 0), numStr, 10);
+-        font_draw_text_ds("Health:", 0x4e, y);
++        font_draw_text_ds("\x82\x54\x82\x37\x88\x64", 0x4e, y);
+         font_draw_text_ds(numStr, 0x85, y);
+         y += 0xa;
+         itoa(stat_actor_get(actor, 1, 0), numStr, 10);
+-        font_draw_text_ds("Stamina:", 0x4e, y);
++        font_draw_text_ds("\x84\x69\x84\x34", 0x4e, y);
+         font_draw_text_ds(numStr, 0x85, y);
+         y += 0xa;
+         itoa(stat_actor_get(actor, 2, 0), numStr, 10);
+-        font_draw_text_ds("Speed:", 0x4e, y);
++        font_draw_text_ds("\x8a\x59\x8c\x72", 0x4e, y);
+         font_draw_text_ds(numStr, 0x85, y);
+         y += 0xa;
+         strength = stat_actor_get(actor, 3, 0);
+         itoa(strength, numStr, 10);
+-        font_draw_text_ds("Strength:", 0x4e, y);
++        font_draw_text_ds("\x84\x34\x84\x35", 0x4e, y);
+         font_draw_text_ds(numStr, 0x85, y);
++        g_bSmallZhMode = savedSmallZhMode;
+     }
+ }
+ 
+diff --git a/bak/SRC/COMBAT/ARENA/COMBAT.C b/bak/SRC/COMBAT/ARENA/COMBAT.C
+index d0ff8a10cd37176cdd1deb3047ac47b74e296cea..2ec0fc2c3e0576df1853edcb2c28c6c8d54b910e 100644
+--- a/bak/SRC/COMBAT/ARENA/COMBAT.C
++++ b/bak/SRC/COMBAT/ARENA/COMBAT.C
+@@ -1095,6 +1095,7 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
+     int val;
+     int accuracy;
+     char *pStr;
++    char savedSmallZhMode;
+     char buf[30];
+ 
+     if (param_2 > -1) {
+@@ -1110,11 +1111,13 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
+     g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+     blit_sprite_indirect((unsigned short)*g_parch_bmx, 0x49, 0x81, 0);
+     g_graphics_context.bText_fg_color = 0;
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     {
+         register int x;
+         int y;
+ 
+-        pStr = "Choose a target";
++        pStr = "\x86\x3e\x8a\x30\x88\x56\x88\x57"; /* 選擇目標 */
+         x = 0x82 - (font_text_width_ds(pStr) >> 1);
+         y = 0x84;
+         font_draw_text_ds(pStr, x, y);
+@@ -1128,7 +1131,7 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
+         if ((((param_1 != (Combatant *)0x0) && (spellDef != (SpellDef *)0x0)) &&
+              (spellDef->nSpell_kind == 0)) &&
+             (param_2 != 0x2c)) {
+-            pStr = "Accuracy:";
++            pStr = "\x82\x37\x81\x27\x87\x5a"; /* 命中： */
+             font_draw_text_ds(pStr, x, y);
+             accuracy = combatenc_compute_hit_chance(g_current_actor, param_1,
+                                                     stat_actor_get(g_current_actor, 7, 0), -1);
+@@ -1137,7 +1140,7 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
+             font_draw_text_ds(buf, x, y);
+             x += font_text_width_ds(buf) + 1;
+             font_draw_text_ds("%", x, y);
+-            pStr = "Damage:";
++            pStr = "\x84\x56\x85\x4c\x87\x5a"; /* 傷害： */
+             x = 0x4e;
+             y += 0xa;
+             font_draw_text_ds(pStr, x, y);
+@@ -1147,6 +1150,7 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
+             font_draw_text_ds(buf, x, y);
+         }
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ void far combat_arena_draw_tgt_info_panel(void) {
+@@ -1155,6 +1159,7 @@ void far combat_arena_draw_tgt_info_panel(void) {
+     int dmg;
+     int kindIdx;
+     char *pStr;
++    char savedSmallZhMode;
+     char buf[30];
+     int accuracy;
+     int x;
+@@ -1184,7 +1189,9 @@ void far combat_arena_draw_tgt_info_panel(void) {
+     g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+     blit_sprite_indirect((unsigned short)*g_parch_bmx, 0x49, 0x81, 0);
+     g_graphics_context.bText_fg_color = 0;
+-    pStr = (char *)"Choose a target";
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    pStr = (char *)"\x86\x3e\x8a\x30\x88\x56\x88\x57"; /* 選擇目標 */
+     x = 0x82 - (font_text_width_ds(pStr) >> 1);
+     y = 0x84;
+     font_draw_text_ds(pStr, x, y);
+@@ -1202,7 +1209,7 @@ void far combat_arena_draw_tgt_info_panel(void) {
+     x = 0x4e;
+     y += 12;
+     if (target != (Combatant *)0x0) {
+-        pStr = (char *)"Accuracy:";
++        pStr = (char *)"\x82\x37\x81\x27\x87\x5a"; /* 命中： */
+         font_draw_text_ds(pStr, x, y);
+         accuracy = combatenc_compute_hit_chance(g_current_actor, target,
+                                                 stat_actor_get(g_current_actor, 5, 0) +
+@@ -1216,7 +1223,7 @@ void far combat_arena_draw_tgt_info_panel(void) {
+         font_draw_text_ds(buf, x, y);
+         x += font_text_width_ds(buf) + 1;
+         font_draw_text_ds("%", x, y);
+-        pStr = "Damage:";
++        pStr = "\x84\x56\x85\x4c\x87\x5a"; /* 傷害： */
+         x = 0x4e;
+         y += 10;
+         font_draw_text_ds(pStr, x, y);
+@@ -1224,20 +1231,23 @@ void far combat_arena_draw_tgt_info_panel(void) {
+         itoa(dmg, buf, 10);
+         x = 0x99;
+         font_draw_text_ds(buf, x, y);
++        g_bSmallZhMode = savedSmallZhMode;
+         return;
+     }
+     x += 5;
+-    pStr = (char *)"quarrels remaining";
++    pStr = (char *)"\x85\x20\x85\x65\x90\x4f\x8e\x6a"; /* 剩餘弩箭 */
+     itoa(combat_actor_cnt_qrls_kind(g_current_actor, kindIdx), buf, 10);
+     font_draw_text_ds(buf, x, y);
+     x += font_text_width_ds(buf) + 4;
+     font_draw_text_ds(pStr, x, y);
++    g_bSmallZhMode = savedSmallZhMode;
+     return;
+ }
+ 
+ void far combat_arena_hud_melee_panel(void) {
+     char numBuf[6];
+     char *pStr;
++    char savedSmallZhMode;
+     int hideSwing;
+     ItemRecord far *weapon;
+     int target;
+@@ -1257,8 +1267,10 @@ void far combat_arena_hud_melee_panel(void) {
+     } else {
+         hideSwing = 1;
+     }
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     g_graphics_context.bText_fg_color = 0;
+-    pStr = "Thrust";
++    pStr = "\x81\x33\x83\x6c"; /* 刺擊 */
+     x = 0x53;
+     y = 0x86;
+     font_draw_text_ds(pStr, x, y);
+@@ -1267,13 +1279,13 @@ void far combat_arena_hud_melee_panel(void) {
+     g_graphics_context.bGfx_outline_color = 3;
+     draw_line(x, y + 0xb, x + 0x5e, y + 0xb);
+     if (!hideSwing) {
+-        pStr = "Swing";
++        pStr = "\x85\x2e\x8f\x7d"; /* 揮砍 */
+         n = font_text_width_ds(pStr);
+         x = 0x73 - n;
+         x += 0x3f;
+         font_draw_text_ds(pStr, x, y);
+     }
+-    pStr = "Damage";
++    pStr = "\x84\x56\x85\x4c"; /* 傷害 */
+     n = font_text_width_ds(pStr);
+     x = 0x82 - (n >> 1);
+     y += 0xf;
+@@ -1295,7 +1307,7 @@ void far combat_arena_hud_melee_panel(void) {
+     itoa(x, numBuf, 10);
+     x = 0x53;
+     font_draw_text_ds(numBuf, x, y);
+-    pStr = "Accuracy";
++    pStr = "\x82\x37\x81\x27"; /* 命中 */
+     n = font_text_width_ds(pStr);
+     x = 0x82 - (n >> 1);
+     y += 0xa;
+@@ -1318,17 +1330,18 @@ void far combat_arena_hud_melee_panel(void) {
+     font_draw_text_ds(numBuf, x, y);
+     x += font_text_width_ds(numBuf) + 1;
+     font_draw_text_ds("%", x, y);
+-    pStr = "Left";
++    pStr = "\x91\x7e\x95\x52"; /* 左鍵 */
+     x = 0x53;
+     y += 0xc;
+     font_draw_text_ds(pStr, x, y);
+     if (!hideSwing) {
+-        pStr = "Right";
++        pStr = "\x92\x20\x95\x52"; /* 右鍵 */
+         n = font_text_width_ds(pStr);
+         x = 0x73 - n;
+         x += 0x3f;
+         font_draw_text_ds(pStr, x, y);
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ static void far combat_arena_menu_refr_avail(Combatant *actor) {
+diff --git a/bak/SRC/COMBAT/ENC/CBENC.C b/bak/SRC/COMBAT/ENC/CBENC.C
+index fd09e156bb1e49f726a2d9fba53454fd3568c635..23577f8f77b5be405aeab36c01f33d97900f468a 100644
+--- a/bak/SRC/COMBAT/ENC/CBENC.C
++++ b/bak/SRC/COMBAT/ENC/CBENC.C
+@@ -306,6 +306,7 @@ static void far combatenc_stat_roll_draw_line(char *label, int stat_val, int *px
+ 
+ void far combatenc_anim_actor_stat_rolls(Combatant *actor) {
+     int stat_anim_state[3];
++    char savedSmallZhMode;
+ 
+     stat_anim_state[2] = 0x44;
+     stat_anim_state[1] = 0x46;
+@@ -316,36 +317,39 @@ void far combatenc_anim_actor_stat_rolls(Combatant *actor) {
+         g_gameState.nEvtArgActor0 = g_current_actor->charSlot + -1;
+         g_gameState.nEvtArgAux1 = actor->inner->creatureType;
+         dialog_play_record(0x84, 0);
++        savedSmallZhMode = g_bSmallZhMode;
++        g_bSmallZhMode = 1;
+         while (stat_anim_state[0] == 0) {
+-            combatenc_stat_roll_draw_line("Health:", (int)stat_actor_get(actor, 0, 0),
++            combatenc_stat_roll_draw_line("\x82\x54\x82\x37\x87\x5a", (int)stat_actor_get(actor, 0, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 0,
+                                           &stat_anim_state[0]);
+-            combatenc_stat_roll_draw_line("Stamina:", (int)stat_actor_get(actor, 1, 0),
++            combatenc_stat_roll_draw_line("\x84\x69\x84\x34\x87\x5a", (int)stat_actor_get(actor, 1, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 0,
+                                           &stat_anim_state[0]);
+-            combatenc_stat_roll_draw_line("Speed:", (int)stat_actor_get(actor, 2, 0),
++            combatenc_stat_roll_draw_line("\x8a\x59\x8c\x72\x87\x5a", (int)stat_actor_get(actor, 2, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 0,
+                                           &stat_anim_state[0]);
+-            combatenc_stat_roll_draw_line("Strength:", (int)stat_actor_get(actor, 3, 0),
++            combatenc_stat_roll_draw_line("\x84\x34\x84\x35\x87\x5a", (int)stat_actor_get(actor, 3, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 0,
+                                           &stat_anim_state[0]);
+             if (combatenc_show_missile_stat_row(actor) != 0) {
+-                combatenc_stat_roll_draw_line("Missle:", (int)stat_actor_get(actor, 5, 0),
++                combatenc_stat_roll_draw_line("\x90\x4f\x86\x77\x87\x5a", (int)stat_actor_get(actor, 5, 0),
+                                               &stat_anim_state[1], &stat_anim_state[2], 1,
+                                               &stat_anim_state[0]);
+             }
+-            combatenc_stat_roll_draw_line("Melee:", (int)stat_actor_get(actor, 6, 0),
++            combatenc_stat_roll_draw_line("\x87\x72\x84\x4d\x87\x5a", (int)stat_actor_get(actor, 6, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 1,
+                                           &stat_anim_state[0]);
+             if (combatenc_actor_can_cast_spells(actor, 0) != 0) {
+-                combatenc_stat_roll_draw_line("Cast:", (int)stat_actor_get(actor, 7, 0),
++                combatenc_stat_roll_draw_line("\x8e\x56\x83\x7b\x87\x5a", (int)stat_actor_get(actor, 7, 0),
+                                               &stat_anim_state[1], &stat_anim_state[2], 1,
+                                               &stat_anim_state[0]);
+             }
+-            combatenc_stat_roll_draw_line("Defense:", (int)stat_actor_get(actor, 4, 0),
++            combatenc_stat_roll_draw_line("\x88\x60\x8d\x61\x87\x5a", (int)stat_actor_get(actor, 4, 0),
+                                           &stat_anim_state[1], &stat_anim_state[2], 1,
+                                           &stat_anim_state[0]);
+         }
++        g_bSmallZhMode = savedSmallZhMode;
+         dialog_play_record(0x85, 0);
+     }
+ }
+diff --git a/bak/SRC/COMBAT/SPELL/CSPELL.C b/bak/SRC/COMBAT/SPELL/CSPELL.C
+index c671493b630a739c32492abae4512dc0437d0ac6..3a790ecaeace68cc238a103be9a07e20dd42184b 100644
+--- a/bak/SRC/COMBAT/SPELL/CSPELL.C
++++ b/bak/SRC/COMBAT/SPELL/CSPELL.C
+@@ -1886,6 +1886,7 @@ static void cspell_menu_present_panel(void) {
+ }
+ 
+ static void far cspell_list_draw_castable(Combatant *caster) {
++    char savedSmallZhMode;
+     int x;
+     int textW;
+     char *text;
+@@ -1893,6 +1894,8 @@ static void far cspell_list_draw_castable(Combatant *caster) {
+     int y;
+ 
+     cspell_menu_present_panel();
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     y = 0x1a;
+     g_graphics_context.bText_fg_color = '\0';
+     i = 0;
+@@ -1907,6 +1910,7 @@ static void far cspell_list_draw_castable(Combatant *caster) {
+         }
+         i = i + 1;
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+     return;
+ }
+ 
+@@ -1921,6 +1925,7 @@ static void cspell_strcpy_far_src(char *dst, char far *src) {
+ 
+ static void cspell_info_panel_show(int spell_index, int has_cost, Combatant *actor) {
+     char line_buf[60];
++    char savedSmallZhMode;
+     int spell_row;
+     int line;
+     int damage;
+@@ -1932,6 +1937,8 @@ static void cspell_info_panel_show(int spell_index, int has_cost, Combatant *act
+     line = 1;
+     damage = cspell_compute_effect_magnitude((Combatant *)0, has_cost, spell_index);
+     cspell_menu_present_panel();
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     g_graphics_context.bText_fg_color = 0;
+     spell_row = spell_index * 7;
+ 
+@@ -1944,11 +1951,11 @@ static void cspell_info_panel_show(int spell_index, int has_cost, Combatant *act
+     x = 0x8d;
+     while (line < 7) {
+         if (line == 1 && has_cost != 0) {
+-            sprintf(line_buf, "Cost: %d Health+Stamina", has_cost);
++            sprintf(line_buf, "\x81\x49\x87\x73\x87\x5a" "%d" "\x20\x82\x54\x82\x37\xa3\x7e\x84\x69\x84\x34", has_cost);
+             font_draw_text_ds(line_buf, x, y);
+             y += 0xb;
+         } else if (line == 2 && damage != 0 && damage != 1000) {
+-            sprintf(line_buf, "Damage: %d", damage);
++            sprintf(line_buf, "\x84\x56\x85\x4c\x87\x5a" "%d", damage);
+             font_draw_text_ds(line_buf, x, y);
+             y += 0xb;
+         } else {
+@@ -1975,10 +1982,11 @@ static void cspell_info_panel_show(int spell_index, int has_cost, Combatant *act
+         x = 0x8d;
+         hp_cur = stat_actor_get(actor, 0x10, 0);
+         hp_max = stat_actor_get(actor, 0x10, 1);
+-        sprintf(line_buf, "Health/Stamina:  %d of %d", hp_cur, hp_max);
++        sprintf(line_buf, "\x82\x54\x82\x37\xa3\x7e\x84\x69\x84\x34\x87\x5a" "%d" "\xa3\x7e" "%d", hp_cur, hp_max);
+         font_draw_text_ds(line_buf, x, y);
+         break;
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ static int far cspell_hotspot_cursor_in_range(int min_index, int max_index) {
+diff --git a/bak/SRC/DIALOG/ASKABOUT.C b/bak/SRC/DIALOG/ASKABOUT.C
+index e2a740548f6359593a3d1901651cc1cba55f41ed..066f0a57ad77def0f3c3d9ce7777e697d948121d 100644
+--- a/bak/SRC/DIALOG/ASKABOUT.C
++++ b/bak/SRC/DIALOG/ASKABOUT.C
+@@ -307,7 +307,7 @@ static int far askabout_menu_page_build(unsigned char far *keyword_table) {
+         entries[i].wClick_flags = 2;
+     }
+ 
+-    entries[last].pPrimary_label = "GoodBye";
++    entries[last].pPrimary_label = "\x80\x25\x86\x26"; /* 道別 */
+     entries[last].wWidget_type = 6;
+     entries[last].wAction_id = 1;
+     entries[last].rect.x = 0xed;
+@@ -318,6 +318,7 @@ static int far askabout_menu_page_build(unsigned char far *keyword_table) {
+ 
+ int far askabout_dialog_run(unsigned char far *keyword_table, char *npc_name) {
+     char speechText[80];
++    char savedSmallZhMode;
+     unsigned short needsRedraw;
+     MenuPage *page;
+     unsigned int result;
+@@ -328,11 +329,15 @@ int far askabout_dialog_run(unsigned char far *keyword_table, char *npc_name) {
+     askabout_keyword_table_load();
+     if (askabout_menu_page_build(keyword_table) != 0) {
+         strcpy(speechText, npc_name);
+-        strcat(speechText, " asked about:");
++        strcat(speechText, "\x9d\x2b\x85\x51\x87\x5a"); /* 詢問： */
+         page = g_pKeywordMenuScratch;
++        savedSmallZhMode = g_bSmallZhMode;
++        g_bSmallZhMode = 1;
+         menupage_begin(page);
+         menupage_draw(page);
++        g_bSmallZhMode = savedSmallZhMode;
+         dialog_draw_speech_bubble((unsigned char far *)speechText, 0);
++        g_bSmallZhMode = 1;
+         screen_frame_present();
+         screen_frame_sync_buffers_rect(0, 200);
+         do {
+@@ -353,11 +358,13 @@ int far askabout_dialog_run(unsigned char far *keyword_table, char *npc_name) {
+             }
+         } while ((result != 1) && (choiceIdx < 0));
+         menupage_end(page);
++        g_bSmallZhMode = savedSmallZhMode;
+     }
+     return choiceIdx;
+ }
+ 
+ static void far askabout_menu_wdg_build_global(DDXRecord far *record) {
++    char savedSmallZhMode;
+     int maxw;
+     short nHeight;
+     short nWidth;
+@@ -384,6 +391,8 @@ static void far askabout_menu_wdg_build_global(DDXRecord far *record) {
+     page->pEntries = (MenuEntry *)(g_pKeywordMenuScratch + 1);
+     page->wEntry_count = record->bCnt1;
+ 
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     i = maxw = 0;
+     for (; i < (int)page->wEntry_count;) {
+         memset(&entries[i], 0, 0x21);
+@@ -408,9 +417,11 @@ static void far askabout_menu_wdg_build_global(DDXRecord far *record) {
+         entries[i].rect.height = g_graphics_context.pFont_height[0] + 4;
+         entries[i].wClick_flags = 2;
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ static void far askabout_build_party_select_menu(DDXRecord far *record) {
++    char savedSmallZhMode;
+     int max_width;
+     short nHeight;
+     short nWidth;
+@@ -435,6 +446,8 @@ static void far askabout_build_party_select_menu(DDXRecord far *record) {
+     page->pEntries = (MenuEntry *)(g_pKeywordMenuScratch + 1);
+     page->wEntry_count = (int)g_gameState.partySize + 1;
+     memset(src, 0, page->wEntry_count * 0x21);
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     i = max_width = 0;
+     for (; i < (int)page->wEntry_count; i++) {
+         src[i].pPrimary_label = gstate_party_member_record(i)->name;
+@@ -453,10 +466,12 @@ static void far askabout_build_party_select_menu(DDXRecord far *record) {
+         src[i].rect.height = g_graphics_context.pFont_height[0] + 4;
+         src[i].wClick_flags = 2;
+     }
+-    src[i - 1].pPrimary_label = "Cancel"; /* i == wEntry_count after loop */
++    src[i - 1].pPrimary_label = "\x8a\x40\x81\x49"; /* 取消; i == wEntry_count */
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ int far askabout_menu_page_run_selection(DDXRecord far *record) {
++    char savedSmallZhMode;
+     unsigned short needsRedraw;
+     MenuPage *page;
+     unsigned int result;
+@@ -466,6 +481,8 @@ int far askabout_menu_page_run_selection(DDXRecord far *record) {
+     selected = -1;
+     needsRedraw = 1;
+     askabout_keyword_table_load();
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     if ((record->wFlags & 0x1000) != 0) {
+         askabout_build_party_select_menu(record);
+     } else {
+@@ -523,5 +540,6 @@ int far askabout_menu_page_run_selection(DDXRecord far *record) {
+         selected = 0;
+     }
+     menupage_end(page);
++    g_bSmallZhMode = savedSmallZhMode;
+     return selected;
+ }
+diff --git a/bak/SRC/DIALOG/DIALOG.C b/bak/SRC/DIALOG/DIALOG.C
+index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..18ad5ae8c03a3b9b4eb4caa95f312fcfe608195a 100644
+--- a/bak/SRC/DIALOG/DIALOG.C
++++ b/bak/SRC/DIALOG/DIALOG.C
+@@ -23,9 +23,22 @@
+ #include "statname.h"
+ 
+ unsigned char far g_abStatNames[16][15] = {
+-    "Health",      "Stamina",       "Speed",      "Strength",   "Defense",     "Accy: Crossbow",
+-    "Accy: Melee", "Accy: Casting", "Assessment", "Armorcraft", "Weaponcraft", "Barding",
+-    "Haggling",    "Lockpick",      "Scouting",   "Stealth"};
++    "\x82\x54\x82\x37\x88\x64",
++    "\x84\x69\x84\x34",
++    "\x8a\x59\x8c\x72",
++    "\x84\x34\x84\x35",
++    "\x88\x60\x8d\x61",
++    "\x90\x4f\x86\x77\x82\x37\x81\x27",
++    "\x87\x72\x84\x4d\x82\x37\x81\x27",
++    "\x8e\x56\x83\x7b\x82\x37\x81\x27",
++    "\x97\x2d\x83\x58",
++    "\x85\x30\x90\x5e\x8e\x59\x8e\x5a",
++    "\x8d\x3b\x8c\x67\x8e\x59\x8e\x5a",
++    "\x82\x59\x83\x7e",
++    "\x87\x58\x82\x33",
++    "\x82\x2c\x85\x2b",
++    "\x97\x2e\x89\x55",
++    "\x86\x76\x81\x28"};
+ 
+ #include "SRC/DIALOG/DIALOG.H"
+ #include "SRC/SYS/RAND.H"
+@@ -362,9 +375,12 @@ void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
+ }
+ 
+ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
++    char savedSmallZhMode;
+     int width;
+     int leftX;
+ 
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
+     g_graphics_context.clip.xmax = 0x13f;
+     g_graphics_context.clip.ymax = 199;
+@@ -395,6 +411,7 @@ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
+         g_graphics_context.bText_fg_color = 0xa;
+         font_draw_text_far(text, 0xa0 - font_text_pixel_width(text) / 2, y_offset + 0x6c);
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ static void far dialog_assign_rand_cmbt_name(int slot_index, int param_2, int param_3) {
+@@ -535,7 +552,7 @@ void far dialog_cmbt_name_assign_kind(int slot, int kind, int aux, int name_toke
+         break;
+ 
+     case 28:
+-        strcpy(g_speaker_names[slot], g_bIsRestEncounter != 0 ? "tavernkeeper" : "shopkeeper");
++        strcpy(g_speaker_names[slot], g_bIsRestEncounter != 0 ? "\x87\x3e\x89\x3c\x86\x4a\x96\x41" : "\x91\x73\x8a\x4f");
+         break;
+ 
+     case 29:
+@@ -560,7 +577,9 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+     char *pName;
+     char *pEnd;
+     unsigned int flags;
++    int bTitleBanner;
+ 
++    bTitleBanner = 0;
+     pStyle = dialog_resolve_style(record);
+     nScratchLen = 0;
+     dialog_apply_style_state(record, applied);
+@@ -578,16 +597,57 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+         int nTitleY = applied[1] + pStyle->header[7];
+         text++;
+         pTitle = text;
+-        while (*text != '\0' && *text != '#')
++        /* A Chinese character's second byte can itself equal '#' (0x23) --
++           e.g. glyph id 483 encodes to lead 0x83, trail 0x23 -- so scanning
++           byte-by-byte for the closing '#' can stop mid-character on a
++           trail byte, truncating the name and leaking the real closing '#'
++           (and the second half of the last name character) into the body
++           text. Skip lead/trail pairs as a unit, same as the body-text loop
++           below, so only a true single-byte '#' ends the title. */
++        while (*text != '\0' && *text != '#') {
++            if ((unsigned char)*text >= 0x80 && (unsigned char)*text <= 0xDF && text[1] != '\0')
++                text++;
+             text++;
++        }
+         *text = '\0';
+         text++;
+         if (record->bStyle != 1) {
++            bTitleBanner = 1;
+             sprintf(buf, "- %Fs -", pTitle);
+             g_graphics_context.bText_fg_color = 1;
+             font_draw_text_far(buf, (centerX + 1) - font_text_pixel_width(buf) / 2, nTitleY + 1);
+             g_graphics_context.bText_fg_color = 10;
+             font_draw_text_far(buf, centerX - font_text_pixel_width(buf) / 2, nTitleY);
++            if (*text == '\n') {
++                /* Every "#Name#\n\t..." record carries this newline purely
++                   to put a visual gap between the title and the body below
++                   it in the original narrow font. At a 16px Chinese line
++                   height it becomes a whole wasted blank line -- on a short
++                   box that can be the entire first page, as seen live (a
++                   page showing only the title, with the real text pushed to
++                   page 2). The banner already gets its own clearance from
++                   the applied[1]+=17 adjustment below, so this blank line
++                   is now redundant on top of that -- but ONLY for the
++                   banner style: the speech-bubble style (bStyle==1, handled
++                   in the other branch, deliberately left untouched) relies
++                   on this exact newline as its only source of clearance
++                   from the bubble, and dropping it there reproduced the
++                   bubble overlapping the first body line live. Peek ahead
++                   for a CJK lead byte rather than keying off
++                   g_bMixedZhMode, which isn't computed until the body has
++                   already been copied below. */
++                char far *p = text + 1;
++                int isChinese = 0;
++                while (*p != '\0') {
++                    if ((unsigned char)*p >= 0x80 && (unsigned char)*p <= 0xDF) {
++                        isChinese = 1;
++                        break;
++                    }
++                    p++;
++                }
++                if (isChinese)
++                    text++;
++            }
+         } else {
+             sprintf(buf, "%Fs", pTitle);
+             dialog_draw_speech_bubble(buf, 10);
+@@ -595,15 +655,36 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+     }
+ 
+     while (*text != '\0') {
++        if ((unsigned char)*text >= 0x80 && (unsigned char)*text <= 0xDF) {
++            g_pMainScratchBuf[nScratchLen] = *text;
++            nScratchLen++;
++            text++;
++            if (*text != '\0') {
++                g_pMainScratchBuf[nScratchLen] = *text;
++                nScratchLen++;
++                text++;
++            }
++            continue;
++        }
+         if (*text == '@') {
+-            if (isdigit((char)text[1])) {
++            /* text[1] can be the lead byte of a Chinese character (high bit
++               set); isdigit() is undefined behavior for negative values
++               other than EOF, and Borland's char is signed, so casting to
++               (char) here fed isdigit() a negative index into its lookup
++               table for any "@" placed directly before Chinese text with no
++               separating space -- an out-of-bounds read that could
++               spuriously read nonzero, misrouting into the digit-indexed
++               "@0"-"@4" branch below with a wildly out-of-range idx. Cast to
++               unsigned char so the argument is always a valid 0-255 index. */
++            if (isdigit((unsigned char)text[1])) {
+                 text++;
+                 _ES = ((unsigned *)&text)[1];
+                 _EBX = *(unsigned long *)&text;
+                 idx = (char)*(char _es *)_BX - '0';
+                 if (g_speaker_kinds[idx] == (char)0xfe) {
+                     if ((g_speaker_names[idx][0] == 'A' || g_speaker_names[idx][0] == 'O') &&
+-                        tolower((char)g_pMainScratchBuf[nScratchLen - 2]) == 'a') {
++                        nScratchLen >= 2 &&
++                        tolower((unsigned char)g_pMainScratchBuf[nScratchLen - 2]) == 'a') {
+                         pName = g_speaker_names[idx];
+                         _fstrcpy(g_pMainScratchBuf + (nScratchLen - 1), "n ");
+                         nScratchLen++;
+@@ -634,6 +715,42 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+     }
+ 
+     g_pMainScratchBuf[nScratchLen] = '\0';
++    {
++        int i;
++        unsigned char c;
++        g_bMixedZhMode = 0;
++        g_bSmallZhMode = 0;
++        for (i = 0; i < nScratchLen; i++) {
++            c = (unsigned char)g_pMainScratchBuf[i];
++            if (c >= 0x80 && c <= 0xDF) {
++                g_bMixedZhMode = 1;
++                break;
++            }
++        }
++        /* The chapter banners and post-combat ability notifications are
++           compact, multi-line panels designed around the original small
++           font.  Their usable heights cannot hold two 16-pixel Chinese
++           lines, so use the 10x10 UI glyphs there.  Ordinary dialogue keeps
++           the standard 16x16 glyphs. */
++        if (g_bMixedZhMode && record->wFlags == 0x4014 && applied[0] == 12 &&
++            applied[1] == 160 && applied[3] == 30) {
++            g_bSmallZhMode = 1;
++        } else if (g_bMixedZhMode && record->wFlags == 0x0014 &&
++                   applied[0] == 70 && applied[1] == 40 &&
++                   applied[2] == 180 && applied[3] == 35) {
++            g_bSmallZhMode = 1;
++        } else if (g_bMixedZhMode && record->wFlags == 0x0010 &&
++                   applied[0] == 20 && applied[1] == 75 &&
++                   applied[2] == 280 && applied[3] == 90) {
++            /* The temple-healing price quote (DIAL_Z13 node 1300077) is
++               drawn inside the character screen, whose lower buttons leave
++               room for only three standard Chinese lines.  Its exact frame
++               override is unique across the shipped DDX records; use the
++               compact UI glyphs so the quoted price and closing sentence do
++               not disappear below the panel. */
++            g_bSmallZhMode = 1;
++        }
++    }
+     flags = pStyle->header[6];
+     if (record->wFlags & 4)
+         flags = flags & 0xf8 | 2;
+@@ -641,6 +758,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+     applied[1] += pStyle->header[7];
+     applied[2] -= pStyle->header[9] + pStyle->header[10];
+     applied[3] -= pStyle->header[7] + pStyle->header[8];
++    if (bTitleBanner && g_bMixedZhMode) {
++        /* The "- Name -" banner above (nTitleY = original applied[1] +
++           header[7]) lands at exactly the same Y the body text starts at
++           here, one line above where we now are. That was fine for the
++           original narrow font -- its glyphs are short enough not to reach
++           down into the first body line -- but a Chinese title uses a full
++           16px-tall cell that runs straight into the body's first line.
++           Push the body down (and shrink its height budget to match) by one
++           Chinese line so the two never overlap, regardless of how tall
++           this particular record's box happens to be. */
++        int shift = applied[3] < 17 ? applied[3] : 17;
++        if (shift > 0) {
++            applied[1] += shift;
++            applied[3] -= shift;
++        }
++    }
+     if (record->wFlags & 0x200) {
+ 
+         ((int *)&pTitle)[1] =
+@@ -661,14 +794,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+     g_graphics_context.bText_fg_color = fg_color >= 0 ? (unsigned char)fg_color : pStyle->header[2];
+     textwrap_draw_aligned((long)g_pMainScratchBuf, applied[0] + x_off, applied[1] + y_off,
+                           applied[2], applied[3], 1, flags, scroll_start);
++    g_bMixedZhMode = 0;
++    g_bSmallZhMode = 0;
+ }
+ 
+ int far dialog_show_by_key(unsigned long key, int interactive) {
+     int rect[4];
+     DDXRecord far *record;
+     int iResult;
++    int i;
+ 
+     iResult = 1;
++    /* Directly displayed records (used by scripted ambient events) do not
++       pass through dialog_play_record(), which normally initializes the
++       @0..@5 speaker-name table.  Initialize it here so placeholders in
++       those records resolve to the active party names as intended. */
++    dialog_combatant_name_table_init();
+     if ((record = dialog_load_record_by_key(key, 0)) != 0) {
+         if (record->wFlags & 0x20)
+             interactive = 1;
+@@ -682,7 +823,27 @@ int far dialog_show_by_key(unsigned long key, int interactive) {
+         if (interactive) {
+             screen_frame_present();
+             screen_frame_sync_buffers_rect(0, 200);
+-            iResult = dialog_wait_for_acknowledge(g_wTextWrapXAccum, record->wFlags, 1, 1);
++            i = 0;
++            /* Unlike dialog_play_record()'s wBody_len branch, this function
++               used to draw once and wait once, with no way to show text
++               textwrap_draw_aligned() had to defer to a second page. That
++               was never reached in English, where the box always fit the
++               whole line -- Chinese glyphs need a full 16px-tall cell each
++               (vs. the original ~9px-tall Latin ones), so the same box now
++               holds far fewer lines and genuinely overflows here. Loop the
++               same way dialog_play_record() does: keep waiting and
++               redrawing at the next scroll offset while lines remain. */
++            for (;;) {
++                iResult = dialog_wait_for_acknowledge(
++                    g_wTextWrapXAccum, g_wTextWrapLinesRemaining != 0 ? 0 : record->wFlags, 1, 1);
++                if (g_wTextWrapLinesRemaining == 0)
++                    break;
++                i += g_wTextWrapLinesDrawn;
++                dialog_frame_draw(record, (int far *)rect);
++                dialog_render_text_with_tokens(record, (unsigned char far *)0, -1, 0, 0, i);
++                screen_frame_present();
++                screen_frame_sync_buffers_rect(0, 200);
++            }
+             dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
+             screen_frame_present();
+             dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
+diff --git a/bak/SRC/GAME/STATE/GSTATE.C b/bak/SRC/GAME/STATE/GSTATE.C
+index 64617354ec57df08bb0d82a542375aafebecd1cc..0e3e858c89d3e7329158d358bf199447e4f04944 100644
+--- a/bak/SRC/GAME/STATE/GSTATE.C
++++ b/bak/SRC/GAME/STATE/GSTATE.C
+@@ -458,33 +458,30 @@ void gstate_format_money(char *buf, long gold, int mode) {
+     long s = gold % 10;
+ 
+     if (mode == 0) {
+-        sprintf(buf, "%ld.%ld gold", g, s);
++        sprintf(buf, "%ld.%ld\x82\x6b\x91\x52", g, s);
+     } else if (mode == 1) {
+         if (s != 0) {
+             if (g != 0) {
+-                sprintf(buf, "%ld gold %ld silver", g, s);
++                sprintf(buf, "%ld\x82\x6b\x91\x52 %ld\x89\x43\x93\x6e", g, s);
+             } else {
+-                sprintf(buf, "%ld silver", s);
++                sprintf(buf, "%ld\x89\x43\x93\x6e", s);
+             }
+         } else {
+-            sprintf(buf, "%ld gold", g);
++            sprintf(buf, "%ld\x82\x6b\x91\x52", g);
+         }
+     } else {
+         if (s != 0) {
+             if (g > 1) {
+-                sprintf(buf, "%ld sovereigns and %ld royal", g, s);
++                sprintf(buf, "%ld\x82\x6b\x91\x52 %ld\x89\x43\x93\x6e", g, s);
+             } else {
+                 if (g != 0) {
+-                    sprintf(buf, "%ld sovereign and %ld royal", g, s);
++                    sprintf(buf, "%ld\x82\x6b\x91\x52 %ld\x89\x43\x93\x6e", g, s);
+                 } else {
+-                    sprintf(buf, "%ld royal", s);
++                    sprintf(buf, "%ld\x89\x43\x93\x6e", s);
+                 }
+             }
+-            if (s > 1) {
+-                strcat(buf, "s");
+-            }
+         } else {
+-            sprintf(buf, "%ld sovereign%c", g, g > 1 ? 's' : 0);
++            sprintf(buf, "%ld\x82\x6b\x91\x52", g);
+         }
+     }
+ }
+diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..c212bbf2bb1ad0a834b5efbc87fd4605640d877e 100644
+--- a/bak/SRC/GAME/WORLD/WORLDLP.C
++++ b/bak/SRC/GAME/WORLD/WORLDLP.C
+@@ -256,6 +256,7 @@ short far world3d_main_loop(void) {
+             }
+ 
+             switch (action_id) {
++            case 0x11:
+             case 0x48:
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xdf, 1);
+@@ -267,6 +268,7 @@ short far world3d_main_loop(void) {
+                     goto after_move;
+                 }
+                 goto post_dispatch;
++            case 0x1f:
+             case 0x50:
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xe0, 1);
+@@ -278,6 +280,29 @@ short far world3d_main_loop(void) {
+                     goto after_move;
+                 }
+                 goto post_dispatch;
++            case 0x10:
++                if (refusal_mode != 0) {
++                    dialog_play_record(0xe1, 1);
++                    goto post_dispatch;
++                }
++                hotspot_active = worldmove_party_attempt_move(2);
++                if (hotspot_active != 0) {
++                    worldloop_set_flag_8b_preds();
++                    goto after_move;
++                }
++                goto post_dispatch;
++            case 0x12:
++                if (refusal_mode != 0) {
++                    dialog_play_record(0xe2, 1);
++                    goto post_dispatch;
++                }
++                hotspot_active = worldmove_party_attempt_move(3);
++                if (hotspot_active != 0) {
++                    worldloop_set_flag_8b_preds();
++                    goto after_move;
++                }
++                goto post_dispatch;
++            case 0x1e:
+             case 0x4b:
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xe1, 1);
+@@ -285,6 +310,7 @@ short far world3d_main_loop(void) {
+                 }
+                 worldmove_apply_turn_step(2);
+                 goto after_move;
++            case 0x20:
+             case 0x4d:
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xe2, 1);
+@@ -325,7 +351,7 @@ short far world3d_main_loop(void) {
+                 fmap_screen_run();
+                 g_nSceneReloadPending = 1;
+                 goto post_dispatch;
+-            case 0x12:
++            case 0x14:
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xe5, 1);
+                     goto post_dispatch;
+diff --git a/bak/SRC/GAME/WORLD/WORLDMOV.C b/bak/SRC/GAME/WORLD/WORLDMOV.C
+index bb3169b7c6b195af9fb2c1b396bece79e161c4f2..4068d86a08396efc88057001cafe9674f2960715 100644
+--- a/bak/SRC/GAME/WORLD/WORLDMOV.C
++++ b/bak/SRC/GAME/WORLD/WORLDMOV.C
+@@ -93,6 +93,10 @@ int far worldmove_party_attempt_move(int mode) {
+     short step;
+     int result;
+ 
++    if ((mode == 2 || mode == 3) && g_gameState.nWorldStepPending != 0) {
++        return 0;
++    }
++
+     step = g_nWorldStepSpeed;
+     saved_crossing_kind = g_nWorldCrossingKind;
+     saved_crossing_coord = g_dwWorldCrossingCoord;
+@@ -341,6 +345,10 @@ int far worldmove_step_free_move(WorldPos *pos, int heading, long step, int mode
+ 
+     if (mode == 4) {
+         heading = heading + R3D_DEG(-180);
++    } else if (mode == 2) {
++        heading = heading + R3D_DEG(90);
++    } else if (mode == 3) {
++        heading = heading + R3D_DEG(-90);
+     }
+     if (worldmove_probe_walkable_at(pos, heading, step, &kind, &coord) != 0) {
+         worldmove_vec2_rotate_add_q14(&pos->xy.nWorld_x, heading, step);
+diff --git a/bak/SRC/GFX/FONT/FONT.C b/bak/SRC/GFX/FONT/FONT.C
+index 5e664b21cf8beb4f38cc7386e3db6f8a750d503e..3ec5c20cfa3221b72bf7c2ba1041a32ebc73fcc1 100644
+--- a/bak/SRC/GFX/FONT/FONT.C
++++ b/bak/SRC/GFX/FONT/FONT.C
+@@ -7,6 +7,10 @@
+ #include "SRC/GFX/FONT/FONT.H"
+ #include "SRC/GFX/RASTER/DRAWLINE.H"
+ #include "SRC/GFX/RASTER/PIXEL.H"
++#include "SRC/IO/RESFAR.H"
++#include "SRC/IO/RESOURCE.H"
++#include "SRC/SYS/DOSMEM.H"
++#include "SRC/SYS/EMS.H"
+ 
+ unsigned char g_font_underline_offset[20];
+ int far *g_font_glyph_offset_table[20];
+@@ -17,6 +21,215 @@ unsigned char g_font_format[20];
+ unsigned char g_abFontColorRemap[5] = {0x00, 0x01, 0x02, 0x03, 0x04};
+ unsigned char g_saved_text_fg_color = 0xff;
+ 
++unsigned char far *g_pZhFontBitmap = (unsigned char far *)0L;
++unsigned short g_nZhFontGlyphCount = 0;
++unsigned char far *g_pZhAsciiBitmap = (unsigned char far *)0L;
++int g_nZhFontEmsChain = 0;
++char g_bMixedZhMode = 0;
++char g_bSmallZhMode = 0;
++
++static void font_restore_planar_write_mask(void) {
++    /* The VGA/EGA putpixel vtable entry selects one sequencer plane per
++       pixel and deliberately leaves that Map Mask behind.  Text drawing is
++       immediately followed by whole-rectangle buffer synchronisation, which
++       assumes all four planes are writable.  Restore the conventional 0Fh
++       mask for planar A000h framebuffers; packed/CGA renderers use another
++       segment and must not receive VGA sequencer I/O. */
++    if ((g_graphics_context.wGfxBlitDstPage & 0xf000) == 0xa000)
++        outpw(0x3c4, 0x0f02);
++}
++
++void font_init_chinese(void) {
++    ResFile *file;
++    char magic[4];
++    unsigned short ver, count;
++    unsigned char w, h, base_lead, pad[5];
++    unsigned long cjk_size;
++    unsigned long remaining;
++    unsigned long file_off;
++    unsigned char far *dst;
++    unsigned int chunk;
++
++    /* g_pZhAsciiBitmap (not g_pZhFontBitmap) is the "already initialized"
++       sentinel: in EMS mode g_pZhFontBitmap is deliberately never set, but
++       the ASCII block is always allocated conventionally either way. */
++    if (g_pZhAsciiBitmap != (unsigned char far *)0L) return;
++    file = res_fopen("ZH16.DAT", "rb");
++    if (file != (ResFile *)0) {
++        res_fread(magic, 4, 1, file);
++        res_fread(&ver, 2, 1, file);
++        res_fread(&w, 1, 1, file);
++        res_fread(&h, 1, 1, file);
++        res_fread(&count, 2, 1, file);
++        res_fread(&base_lead, 1, 1, file);
++        res_fread(pad, 5, 1, file);
++        if (magic[0] == 'Z' && magic[1] == 'H' && magic[2] == 'F' && magic[3] == 'N') {
++            g_nZhFontGlyphCount = count;
++            cjk_size = (unsigned long)count * 32L;
++
++            /* The CJK bitmap block grows with translated vocabulary (well
++               past 32K once the whole game is translated) and is never
++               freed for the rest of the session -- too large to keep
++               permanently resident in the scarce <640K conventional pool
++               alongside everything else the engine needs for interactive
++               gameplay. Prefer EMS (already used elsewhere for image
++               resources, see EMSIMG.C) and stream it in a page at a time;
++               fall back to conventional memory only when no EMS driver is
++               present. */
++            g_nZhFontEmsChain = g_ems_present ? ems_alloc_pages(cjk_size) : 0;
++            if (g_nZhFontEmsChain != 0) {
++                remaining = cjk_size;
++                file_off = 0L;
++                while (remaining > 0L) {
++                    chunk = (remaining > 16384L) ? 16384 : (unsigned int)remaining;
++                    dst = ems_map_at_offset(g_nZhFontEmsChain, file_off);
++                    res_fread_far(dst, 1L, (long)chunk, file);
++                    file_off += (unsigned long)chunk;
++                    remaining -= (unsigned long)chunk;
++                }
++            } else {
++                g_pZhFontBitmap = (unsigned char far *)alloc_far(cjk_size, 0L);
++                if (g_pZhFontBitmap != (unsigned char far *)0L &&
++                    FP_SEG(g_pZhFontBitmap) >= 0x0100) {
++                    res_fread_far(g_pZhFontBitmap, 1L, cjk_size, file);
++                } else {
++                    g_pZhFontBitmap = (unsigned char far *)0L;
++                }
++            }
++
++            g_pZhAsciiBitmap = (unsigned char far *)alloc_far(4096L, 0L);
++            if (g_pZhAsciiBitmap != (unsigned char far *)0L &&
++                FP_SEG(g_pZhAsciiBitmap) >= 0x0100) {
++                res_fread_far(g_pZhAsciiBitmap, 1L, 4096L, file);
++            } else {
++                g_pZhAsciiBitmap = (unsigned char far *)0L;
++            }
++        }
++        res_fclose(file);
++    }
++}
++
++unsigned char far *g_pZhFontSmallBitmap = (unsigned char far *)0L;
++unsigned short g_nZhFontSmallCount = 0;
++
++static void font_init_chinese_small(void) {
++    ResFile *file;
++    char magic[4];
++    unsigned short ver, count;
++    unsigned char cell_w, cell_h;
++    unsigned long size;
++    unsigned long remaining;
++    unsigned long file_off;
++    unsigned char far *dst;
++    unsigned int chunk;
++    int ems_chain;
++
++    if (g_pZhFontSmallBitmap != (unsigned char far *)0L) return;
++    file = res_fopen("ZHSTAT.DAT", "rb");
++    if (file != (ResFile *)0) {
++        res_fread(magic, 4, 1, file);
++        res_fread(&ver, 2, 1, file);
++        res_fread(&cell_w, 1, 1, file);
++        res_fread(&cell_h, 1, 1, file);
++        res_fread(&count, 2, 1, file);
++        if (magic[0] == 'Z' && magic[1] == 'H' && magic[2] == 'S' && magic[3] == 'M') {
++            g_nZhFontSmallCount = count;
++            size = (unsigned long)count * 22L;
++            ems_chain = g_ems_present ? ems_alloc_pages(size) : 0;
++            if (ems_chain != 0) {
++                /* Conventional blocks are segment:0000.  Store an EMS chain
++                   marker as 0000:chain in the existing pointer so the fixed
++                   DGROUP/BSS layout does not gain another global variable. */
++                g_pZhFontSmallBitmap = (unsigned char far *)(unsigned long)(unsigned)ems_chain;
++                remaining = size;
++                file_off = 0L;
++                while (remaining > 0L) {
++                    chunk = (remaining > 16384L) ? 16384 : (unsigned int)remaining;
++                    dst = ems_map_at_offset(ems_chain, file_off);
++                    res_fread_far(dst, 1L, (long)chunk, file);
++                    file_off += (unsigned long)chunk;
++                    remaining -= (unsigned long)chunk;
++                }
++            } else {
++                g_pZhFontSmallBitmap = (unsigned char far *)alloc_far(size, 0L);
++            }
++            if (ems_chain == 0 && g_pZhFontSmallBitmap != (unsigned char far *)0L &&
++                FP_SEG(g_pZhFontSmallBitmap) >= 0x0100) {
++                res_fread_far(g_pZhFontSmallBitmap, 1L, size, file);
++            } else if (ems_chain == 0 && FP_SEG(g_pZhFontSmallBitmap) < 0x0100) {
++                g_pZhFontSmallBitmap = (unsigned char far *)0L;
++            }
++        }
++        res_fclose(file);
++    }
++}
++
++unsigned int font_draw_zh_glyph_small(int lead, int trail, int x, int y) {
++    unsigned int gid;
++    int lead_idx, trail_idx;
++    unsigned char far *entry;
++    unsigned char far *glyph_ptr;
++    unsigned short i, entry_gid;
++    unsigned int row, col;
++    unsigned char bit_mask, byte_val;
++
++    if (g_pZhFontSmallBitmap == (unsigned char far *)0L) {
++        font_init_chinese_small();
++    }
++    if (g_pZhFontSmallBitmap == (unsigned char far *)0L) {
++        return 10;
++    }
++
++    lead_idx = (unsigned char)lead - 0x80;
++    if (trail >= 0x20 && trail <= 0x7E) {
++        trail_idx = trail - 0x20;
++    } else if (trail >= 0x80 && trail <= 0xDF) {
++        trail_idx = 95 + (trail - 0x80);
++    } else {
++        return 10;
++    }
++    gid = (unsigned int)lead_idx * 160 + trail_idx;
++
++    glyph_ptr = (unsigned char far *)0L;
++    if (FP_SEG(g_pZhFontSmallBitmap) == 0) {
++        /* ZHSTAT currently fits within the four contiguous 16K EMS page-frame
++           slots mapped by ems_map_at_offset(), so all 22-byte records remain
++           directly searchable even when one straddles a logical page. */
++        entry = ems_map_at_offset(FP_OFF(g_pZhFontSmallBitmap), 0L);
++    } else {
++        entry = g_pZhFontSmallBitmap;
++    }
++    for (i = 0; i < g_nZhFontSmallCount; i++) {
++        entry_gid = *(unsigned short far *)entry;
++        if (entry_gid == gid) {
++            glyph_ptr = entry + 2;
++            break;
++        }
++        entry += 22;
++    }
++    if (glyph_ptr == (unsigned char far *)0L) {
++        return 10;
++    }
++
++    row = 0;
++    while (row < 10) {
++        col = 0;
++        while (col < 10) {
++            byte_val = glyph_ptr[col >> 3];
++            bit_mask = 0x80 >> (col & 7);
++            if ((byte_val & bit_mask) != 0) {
++                putpixel(x + col, y, (char)g_graphics_context.bText_fg_color);
++            }
++            col++;
++        }
++        glyph_ptr += 2;
++        row++;
++        y++;
++    }
++    font_restore_planar_write_mask();
++    return 10;
++}
++
+ int far font_activate(int slot) {
+     unsigned long ref;
+     unsigned char far **p;
+@@ -83,14 +296,28 @@ int font_text_pixel_width(char far *str) {
+     int total;
+     int has_width_table;
+     int idx;
++    unsigned char c, trail;
+     total = 0;
+     has_width_table = (*(unsigned long *)&g_font_glyph_offset_table[0] != 0);
+     while (*str != '\0') {
+-        idx = (unsigned char)*str - g_graphics_context.pFont_base_char[0];
+-        str++;
+-        if (idx >= 0 && idx < g_graphics_context.pFont_glyph_count[0]) {
+-            total += has_width_table ? g_font_width_table[0][idx]
+-                                     : g_graphics_context.pFont_glyph_width_bits[0];
++        c = (unsigned char)*str;
++        if (c >= 0x80 && c <= 0xDF) {
++            str++;
++            trail = (unsigned char)*str;
++            if (trail != '\0') {
++                str++;
++                total += g_bSmallZhMode ? 10 : 16;
++            }
++        } else if (g_bMixedZhMode && !g_bSmallZhMode && c >= 0x20 && c < 0x80) {
++            str++;
++            total += 8;
++        } else {
++            idx = c - g_graphics_context.pFont_base_char[0];
++            str++;
++            if (idx >= 0 && idx < g_graphics_context.pFont_glyph_count[0]) {
++                total += has_width_table ? g_font_width_table[0][idx]
++                                         : g_graphics_context.pFont_glyph_width_bits[0];
++            }
+         }
+     }
+     return total;
+@@ -294,25 +521,147 @@ int font_render_glyph_or_ctrl(char ch, int x, int y) {
+     return width;
+ }
+ 
++unsigned int font_draw_zh_glyph(int lead, int trail, int x, int y) {
++    unsigned int gid;
++    int lead_idx, trail_idx;
++    unsigned char far *glyph_ptr;
++    unsigned int row, col;
++    unsigned char bit_mask, byte_val;
++    int pixel_x;
++    PutpixelFn putpixel_fp;
++
++    if (g_pZhAsciiBitmap == (unsigned char far *)0L) {
++        font_init_chinese();
++    }
++    if (g_pZhAsciiBitmap == (unsigned char far *)0L) {
++        return 16;
++    }
++
++    lead_idx = (unsigned char)lead - 0x80;
++    if (trail >= 0x20 && trail <= 0x7E) {
++        trail_idx = trail - 0x20;
++    } else if (trail >= 0x80 && trail <= 0xDF) {
++        trail_idx = 95 + (trail - 0x80);
++    } else {
++        return 16;
++    }
++    gid = (unsigned int)lead_idx * 160 + trail_idx;
++    if (gid >= g_nZhFontGlyphCount) {
++        return 16;
++    }
++
++    if (g_nZhFontEmsChain != 0) {
++        /* 32-byte glyphs never straddle a 16K EMS page boundary (16384 is a
++           multiple of 32), so a single map call always yields the whole
++           glyph contiguously in the mapped page-frame window. */
++        glyph_ptr = ems_map_at_offset(g_nZhFontEmsChain, (long)gid * 32L);
++    } else {
++        glyph_ptr = g_pZhFontBitmap + (unsigned long)gid * 32L;
++    }
++
++    if (x < g_graphics_context.clip.xmin || y < g_graphics_context.clip.ymin ||
++        (unsigned int)g_graphics_context.clip.xmax < (unsigned int)(x + 16) ||
++        (unsigned int)g_graphics_context.clip.ymax < (unsigned int)(y + 16)) {
++        putpixel_fp = putpixel;
++    } else {
++        putpixel_fp = (PutpixelFn)g_renderer_vtable.pfn_putpixel;
++    }
++
++    row = 0;
++    while (row < 16) {
++        col = 0;
++        while (col < 16) {
++            byte_val = glyph_ptr[col >> 3];
++            bit_mask = 0x80 >> (col & 7);
++            pixel_x = x + col;
++            if ((byte_val & bit_mask) != 0) {
++                (*putpixel_fp)(pixel_x, y, (char)g_graphics_context.bText_fg_color);
++            }
++            col++;
++        }
++        glyph_ptr += 2;
++        row++;
++        y++;
++    }
++    font_restore_planar_write_mask();
++    return 16;
++}
++
++unsigned int font_draw_eten_ascii_glyph(unsigned char ch, int x, int y) {
++    unsigned char far *glyph_ptr;
++    unsigned int row, col;
++    unsigned char byte_val;
++    int pixel_x;
++    PutpixelFn putpixel_fp;
++
++    if (g_pZhAsciiBitmap == (unsigned char far *)0L) {
++        return 8;
++    }
++    glyph_ptr = g_pZhAsciiBitmap + (unsigned long)ch * 16L;
++
++    if (x < g_graphics_context.clip.xmin || y < g_graphics_context.clip.ymin ||
++        (unsigned int)g_graphics_context.clip.xmax < (unsigned int)(x + 8) ||
++        (unsigned int)g_graphics_context.clip.ymax < (unsigned int)(y + 16)) {
++        putpixel_fp = putpixel;
++    } else {
++        putpixel_fp = (PutpixelFn)g_renderer_vtable.pfn_putpixel;
++    }
++
++    row = 0;
++    while (row < 16) {
++        byte_val = glyph_ptr[row];
++        col = 0;
++        while (col < 8) {
++            pixel_x = x + col;
++            if ((byte_val & (0x80 >> col)) != 0) {
++                (*putpixel_fp)(pixel_x, y, (char)g_graphics_context.bText_fg_color);
++            }
++            col++;
++        }
++        row++;
++        y++;
++    }
++    font_restore_planar_write_mask();
++    return 8;
++}
++
+ void font_draw_text_ds(char *text, int x, int y) {
+     font_draw_text_far((unsigned char far *)text, x, y);
+     return;
+ }
+ 
+ void font_draw_text_far(char far *text, int x, int y) {
++    unsigned char c, trail;
+     g_saved_text_fg_color = g_graphics_context.bText_fg_color;
+     font_render_glyph_or_ctrl(-0x10, 0, 0);
+     if (text != (char far *)0) {
+         while (*text != '\0') {
+-            if (*text == ' ') {
+-                font_render_glyph_or_ctrl(-0x10, 0, 0);
+-            }
+-            if (*text == '\t') {
+-                x += g_nTabWidth;
++            c = (unsigned char)*text;
++            if (c >= 0x80 && c <= 0xDF) {
++                trail = (unsigned char)*(text + 1);
++                if (trail != '\0') {
++                    if (g_bSmallZhMode) {
++                        x += font_draw_zh_glyph_small(c, trail, x, y);
++                    } else {
++                        x += font_draw_zh_glyph(c, trail, x, y);
++                    }
++                    text += 2;
++                } else {
++                    text++;
++                }
+             } else {
+-                x += font_render_glyph_or_ctrl(*text, x, y);
++                if (*text == ' ') {
++                    font_render_glyph_or_ctrl(-0x10, 0, 0);
++                }
++                if (*text == '\t') {
++                    x += g_nTabWidth;
++                } else if (g_bMixedZhMode && !g_bSmallZhMode && c >= 0x20 && c < 0x80) {
++                    x += font_draw_eten_ascii_glyph(c, x, y);
++                } else {
++                    x += font_render_glyph_or_ctrl(*text, x, y);
++                }
++                ++text;
+             }
+-            ++text;
+         }
+         font_render_glyph_or_ctrl(-0x10, 0, 0);
+     }
+@@ -322,6 +671,48 @@ void font_draw_text_far(char far *text, int x, int y) {
+ int font_glyph_metrics(register int ch, unsigned int *out_width, unsigned int *out_height) {
+     unsigned int width;
+     register unsigned int height;
++    unsigned char c;
++
++    c = (unsigned char)ch;
++    if (c >= 0x80 && c <= 0xDF) {
++        if (out_width != 0) {
++            *out_width = g_bSmallZhMode ? 10 : 16;
++        }
++        if (out_height != 0) {
++            *out_height = g_bSmallZhMode ? 10 : 16;
++        }
++        return 1;
++    }
++    if (c >= 0xE0) {
++        /* Style/color control bytes (font_render_glyph_or_ctrl handles the
++           same 0xE0-0xFF range as pure state toggles that draw nothing),
++           but this width function -- used by textwrap's line-wrap math, a
++           separate code path -- never special-cased them, so a control byte
++           got measured against the base ASCII glyph table like a real
++           printable character. Harmless in English, where dialog boxes are
++           wide enough that one mismeasured zero-width byte rarely shifts a
++           wrap decision; in Chinese mode, where boxes hold far fewer
++           characters per line, this could strand a lone control byte on
++           its own wrapped line (and, via pagination, its own page).
++           Reported live on DIAL_Z16 node 1600029, a translated "\xf3" byte
++           before a place name. */
++        if (out_width != 0) {
++            *out_width = 0;
++        }
++        if (out_height != 0) {
++            *out_height = 0;
++        }
++        return 0;
++    }
++    if (g_bMixedZhMode && !g_bSmallZhMode && c >= 0x20 && c < 0x80) {
++        if (out_width != 0) {
++            *out_width = 8;
++        }
++        if (out_height != 0) {
++            *out_height = 16;
++        }
++        return 1;
++    }
+ 
+     width = 0;
+     ch -= (unsigned int)g_graphics_context.pFont_base_char[0];
+diff --git a/bak/SRC/GFX/FONT/FONT.H b/bak/SRC/GFX/FONT/FONT.H
+index 515bd5a45283e986a63a1acbb9f4ef2035b93ef9..dc4253311cb086e8a1e7b99f74a782a73c8ef27e 100644
+--- a/bak/SRC/GFX/FONT/FONT.H
++++ b/bak/SRC/GFX/FONT/FONT.H
+@@ -22,5 +22,15 @@ extern int font_render_glyph_or_ctrl(char ch, int x, int y);
+ extern void font_draw_text_ds(char *text, int x, int y);
+ extern void font_draw_text_far(char far *text, int x, int y);
+ extern int font_glyph_metrics(int ch, unsigned int *out_width, unsigned int *out_height);
++extern unsigned char far *g_pZhFontBitmap;
++extern unsigned short g_nZhFontGlyphCount;
++extern unsigned char far *g_pZhAsciiBitmap;
++extern int g_nZhFontEmsChain;
++extern char g_bMixedZhMode;
++extern char g_bSmallZhMode;
++extern void font_init_chinese(void);
++extern unsigned int font_draw_zh_glyph(int lead, int trail, int x, int y);
++extern unsigned int font_draw_eten_ascii_glyph(unsigned char ch, int x, int y);
++extern unsigned int font_draw_zh_glyph_small(int lead, int trail, int x, int y);
+ 
+ #endif
+diff --git a/bak/SRC/R3D/SCENE/CZONE.C b/bak/SRC/R3D/SCENE/CZONE.C
+index bd88f498569e6525137e86da98f43408f1665dcc..532fce9b095922786054bb1d962913995ac0e22a 100644
+--- a/bak/SRC/R3D/SCENE/CZONE.C
++++ b/bak/SRC/R3D/SCENE/CZONE.C
+@@ -30,7 +30,7 @@ void far czone_subsystem_init(void) {
+ 
+     list = galloc_safe_zcalloc(0x5a);
+     sz = 0xf308;
+-    p = (WorldObject far *)alloc_far(sz, 0);
++    p = (WorldObject far *)alloc_far_umb(sz);
+     i = 0;
+     do {
+         list->bZone = 0;
+diff --git a/bak/SRC/SCREENS/BOOKTEXT.C b/bak/SRC/SCREENS/BOOKTEXT.C
+index d2c42ae329a321335adfd21f80ff93e7d46af44f..7e2b82f0fe8d0bd498337f1a10901317ef1baded 100644
+--- a/bak/SRC/SCREENS/BOOKTEXT.C
++++ b/bak/SRC/SCREENS/BOOKTEXT.C
+@@ -128,6 +128,10 @@ static void booktext_compute_justify_spacing(int remaining_pixels) {
+                 pCur += 3;
+                 break;
+             }
++        } else if ((unsigned char)*pCur >= 0x80 && (unsigned char)*pCur <= 0xDF &&
++                   *(pCur + 1) != '\0') {
++            chars++;
++            pCur += 2;
+         } else {
+             if (*pCur == 0x20) {
+                 spaces++;
+@@ -198,6 +202,19 @@ static int booktext_draw_glyph_kerned(char ch, int x, int y) {
+     return x;
+ }
+ 
++static int booktext_draw_zh_pair_kerned(int lead, int trail, int x, int y) {
++    font_draw_zh_glyph(lead, trail, x, y + g_pBookViewer->nBaselineYOff);
++    x += 16 + (g_pBookViewer->wStyleFlags & 2);
++    if (g_pBookViewer->nJustifyOn != 0) {
++        x += g_pBookViewer->nCharExtra;
++        if ((g_pBookViewer->nCharExtraCount -= 50) < 0) {
++            x++;
++            g_pBookViewer->nCharExtraCount = g_pBookViewer->nCharExtraStep;
++        }
++    }
++    return x;
++}
++
+ static void booktext_render_line_aligned(void) {
+     unsigned char huge *pCur;
+     int wordHook;
+@@ -244,6 +261,11 @@ static void booktext_render_line_aligned(void) {
+                 bookview_text_render_hook_noop(wordHook);
+                 break;
+             }
++        } else if ((unsigned char)*pCur >= 0x80 && (unsigned char)*pCur <= 0xDF &&
++                   *(pCur + 1) != '\0') {
++            g_pBookViewer->nCursorX = booktext_draw_zh_pair_kerned(
++                *pCur, *(pCur + 1), g_pBookViewer->nCursorX, g_pBookViewer->nLineY1);
++            pCur += 2;
+         } else {
+             if (wordHook != 0) {
+                 bookview_text_render_hook_noop(wordHook);
+@@ -333,6 +355,25 @@ static int booktext_layout_rndr_one_line(BookPage far *pPage) {
+             } while (g_pBookViewer->nLineHeightActual < 0xf);
+         }
+ 
++        if ((unsigned char)*pCur >= 0x80 && (unsigned char)*pCur <= 0xDF && *(pCur + 1) != '\0') {
++            xCur += 16 + (style.wStyleFlags & 2);
++            if (g_pBookViewer->nLineHeightActual < xCur) {
++                /* Wrap before this glyph; the previous iteration already left
++                   pBreakSave one byte before it. If nothing fit yet (a lone
++                   glyph wider than the run), step past the pair anyway so
++                   pResumeSave never splits a lead/trail pair. */
++                done = 1;
++                if (g_pBookViewer->pBreakSave == g_pBookViewer->pCurChar)
++                    g_pBookViewer->pBreakSave = pCur + 1;
++            } else {
++                /* Every boundary between wide glyphs is a legal wrap point. */
++                g_pBookViewer->pBreakSave = pCur + 1;
++                g_pBookViewer->nLineWidthCur = xCur;
++            }
++            pCur += 2;
++            continue;
++        }
++
+         font_glyph_metrics((char)*pCur, &width, &height);
+         xCur += (int)(width + (style.wStyleFlags & 2));
+         if (g_pBookViewer->nLineHeightActual < xCur)
+diff --git a/bak/SRC/SCREENS/ENCAMP.C b/bak/SRC/SCREENS/ENCAMP.C
+index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..0b5fb12ac9c817adddee4d0bed592b89a4476262 100644
+--- a/bak/SRC/SCREENS/ENCAMP.C
++++ b/bak/SRC/SCREENS/ENCAMP.C
+@@ -476,11 +476,13 @@ void far encamp_draw_party_stats(void) {
+     unsigned int rations;
+     int x;
+     int y;
++    char savedSmallZhMode;
+ 
+     g_graphics_context.bText_fg_color = '\0';
+     g_graphics_context.bText_style_flags = '\x01';
+     g_graphics_context.bClip_enabled = '\0';
+     iVar1 = 0;
++    g_bSmallZhMode = 1;
+     do {
+         x = (g_anEncampStatColX[iVar1] + 0x86) -
+             (font_text_width_ds(g_apszEncampStatColHeaders[iVar1]) >> 1);
+@@ -488,6 +490,7 @@ void far encamp_draw_party_stats(void) {
+         font_draw_text_ds(g_apszEncampStatColHeaders[iVar1], x, y);
+         iVar1 = iVar1 + 1;
+     } while (iVar1 < 2);
++    g_bSmallZhMode = 0;
+     p = 0;
+     goto LAB_check;
+ LAB_body:
+@@ -506,7 +509,10 @@ LAB_body:
+         (g_gameState.abActorStatusRanks[iVar1][6] != '\0')) {
+         g_graphics_context.bText_fg_color = 'k';
+     }
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     font_draw_text_ds(g_gameState.characterNames[iVar1], 0x8b, y);
++    g_bSmallZhMode = savedSmallZhMode;
+     g_graphics_context.bText_fg_color = '\0';
+     iVar1 = 0;
+     do {
+@@ -538,6 +544,6 @@ LAB_check:
+     return;
+ }
+ 
+-char *g_apszEncampStatColHeaders[2] = {"Health/Stamina", "Rations"};
+-char *g_pszHpSeparator = " of ";
++char *g_apszEncampStatColHeaders[2] = {"\x82\x54\x82\x37\x2f\x84\x69\x84\x34", "\x80\x7c\x92\x42"};
++char *g_pszHpSeparator = " / ";
+ unsigned short g_anEncampStatColX[2] = {0x0054, 0x0090};
+diff --git a/bak/SRC/SCREENS/FMAP.C b/bak/SRC/SCREENS/FMAP.C
+index 133572d3cb3778c6ce776676fe2a299a6efb259d..4101ec9a36ef2c987d58b928307204fd987f966a 100644
+--- a/bak/SRC/SCREENS/FMAP.C
++++ b/bak/SRC/SCREENS/FMAP.C
+@@ -262,6 +262,14 @@ void fmap_twn_load(void) {
+     }
+     res_fclose(file);
+     g_wFmapLabelRectH = g_graphics_context.pFont_height[0] + 1;
++    /* The town labels are drawn with font_draw_text_ds, which renders CJK
++       town names 16px tall regardless of the ASCII font height; the
++       save/restore rect that erases a label on hover-off must be tall
++       enough to cover them or the bottom of a Chinese name ghosts on the
++       map when the cursor moves between towns. */
++    if (g_wFmapLabelRectH < 17) {
++        g_wFmapLabelRectH = 17;
++    }
+     g_pFmapLabelRectBuf =
+         alloc_far((unsigned long)(unsigned short)rect_byte_size(g_wFmapLabelRectW, g_wFmapLabelRectH), 0L);
+     g_pFmapIconTable = resblit_load_asset_table("fmap_icn.bmp", 0);
+diff --git a/bak/SRC/SCREENS/INVENTOR.C b/bak/SRC/SCREENS/INVENTOR.C
+index bf2cdde8b1a6428dbfd10668af2f560bf1a9d7b7..edbb4916df5013cc0794bdbfe0a9e668795c3d91 100644
+--- a/bak/SRC/SCREENS/INVENTOR.C
++++ b/bak/SRC/SCREENS/INVENTOR.C
+@@ -449,6 +449,7 @@ static void invui_grid_render(MenuPage *page, Actor far *actor, short selected_s
+                 text_x = e->rect.x + pg->rect.x + e->rect.width / 2;
+                 text_ym1 = e->rect.y + pg->rect.y + e->rect.height - 1;
+                 item_value = itemtbl_compute_value(slot);
++                g_bSmallZhMode = 1;
+                 sprintf(buf, "%Fs", (char far *)item);
+                 if (item->wName_split_off != 0) {
+                     item->pName[item->wName_split_off] = '\0';
+@@ -476,22 +477,23 @@ static void invui_grid_render(MenuPage *page, Actor far *actor, short selected_s
+                                                text_ym1 - g_graphics_context.pFont_height[0] * 2, 1,
+                                                -1, -1);
+                 if (item_value < 0) {
+-                    sprintf(buf, "Unavailable");
++                    sprintf(buf, "\x82\x24\x83\x7b\x8b\x30\x82\x33");
+                 } else {
+                     long g = item_value / 10;
+                     long r = item_value % 10;
+                     if (r != 0) {
+                         if (g != 0)
+-                            sprintf(buf, "%ld gold %ld silver", g, r);
++                            sprintf(buf, "%ld\x82\x6b\x91\x52 %ld\x89\x43\x93\x6e", g, r);
+                         else
+-                            sprintf(buf, "%ld silver", r);
++                            sprintf(buf, "%ld\x89\x43\x93\x6e", r);
+                     } else {
+-                        sprintf(buf, "%ld gold", g);
++                        sprintf(buf, "%ld\x82\x6b\x91\x52", g);
+                     }
+                 }
+                 invui_draw_text_aligned_shadow((char far *)buf, text_x,
+                                                text_ym1 - g_graphics_context.pFont_height[0], 1, -1,
+                                                -1);
++                g_bSmallZhMode = 0;
+             } else {
+                 if ((item->wFlags & 0x1000) != 0 && (item->wFlags & 8) != 0) {
+                     int text_x, text_ym1;
+@@ -626,6 +628,13 @@ int far invui_handle_item_drag(MenuPage *page, Actor far *actor, int selected_sl
+     MenuEntry *hovered;
+     Actor far *party_actor;
+ 
++    /* This handler owns the left-button select/drag gesture only.  Letting a
++       right-button press enter it makes the final menupage_run() below race
++       with the outer inventory loop for the release event.  A quick release
++       is then consumed here and the outer loop never opens item inspection. */
++    if (menupage_state_0e7c() != 1)
++        return 0;
++
+     phase = 0;
+     init_cx = screen_cursor_get_x();
+     init_cy = screen_cursor_get_y();
+diff --git a/bak/SRC/SCREENS/INVINSP.C b/bak/SRC/SCREENS/INVINSP.C
+index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f658301559 100644
+--- a/bak/SRC/SCREENS/INVINSP.C
++++ b/bak/SRC/SCREENS/INVINSP.C
+@@ -7,19 +7,25 @@
+ #include "structs.h"
+ #include "SRC/SCREENS/INVINSP.H"
+ #include "SRC/GFX/SPRITE/RECTSPR.H"
++#include "SRC/GFX/DRIVER/VTHUNKS.H"
++#include "SRC/GFX/DRIVER/VIDINIT.H"
+ #include "SRC/INPUT/KEYBOARD.H"
+ #include "SRC/GFX/RASTER/DRAWLINE.H"
++#include "SRC/GFX/RASTER/PRESENT.H"
+ #include "SRC/GFX/SCREEN/SCREEN.H"
+ #include "SRC/UI/MENUPAGE.H"
+ #include "SRC/DIALOG/DIALOG.H"
+ #include "SRC/SCREENS/INVENTOR.H"
+ #include "SRC/GAME/ACTOR/ITEMTBL.H"
++#include "SRC/GFX/FONT/FONT.H"
+ 
+ DDXRecord g_invInspectPanelDdx = {0x05, 0x0000, 0x0000, 0x00, 0x01, 0x0001};
+ unsigned char g_abInvInspectPanelDdxStyle[10] = {0x06, 0x00, 0x67, 0x00, 0x0b,
+                                                  0x00, 0xcc, 0x00, 0x79, 0x00};
+ 
+ static void far invinspect_dialog_panel_render(MenuPage *panel, int present_now) {
++    char savedSmallZhMode;
++
+     g_graphics_context.bGfx_fill_enabled = 1;
+     g_graphics_context.bGfx_fill_color = (g_graphics_context.bGfx_outline_color = 0);
+ 
+@@ -48,8 +54,11 @@ static void far invinspect_dialog_panel_render(MenuPage *panel, int present_now)
+     draw_line(panel->rect.x + panel->rect.width - 1, panel->rect.y,
+               panel->rect.x + panel->rect.width - 1, panel->rect.y + panel->rect.height - 1);
+ 
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     invui_draw_text_aligned_shadow((unsigned char far *)panel->pTitle, panel->rect.x + panel->nTitle_x,
+                                    panel->rect.y + panel->nTitle_y, 1, -1, -1);
++    g_bSmallZhMode = savedSmallZhMode;
+ 
+     if (present_now != 0) {
+         screen_frame_present();
+@@ -87,13 +96,13 @@ int far invinspect_quantity_picker_dlg(ItemSlot far *item, int param_2, int para
+         do {
+             do {
+                 if (dirty != 0) {
+-                    strcpy(label, "Give: ");
++                    strcpy(label, "\x82\x4b\x91\x24\x87\x5a");
+                     if (value == 0) {
+-                        strcpy(label, "None: (Cancel)");
++                        strcpy(label, "\x82\x24\x9a\x31\x8a\x40\x81\x49\x9a\x32");
+                     } else {
+                         itoa(value, label + 6, 10);
+                         if (value == maxValue) {
+-                            strcat(label, " (All)");
++                            strcat(label, "\x9a\x31\x85\x47\x88\x3e\x9a\x32");
+                         }
+                     }
+                     menupage_draw(page);
+@@ -180,17 +189,51 @@ static void far invinspect_animate_item_move(ImageRecord *sprite, int x, int y,
+                                              int dst_y, unsigned int flags) {
+     int dx;
+     int dy;
+-
++    int prev_x;
++    int prev_y;
++    int save_x;
++    int save_y;
++    int clean_source_pages;
++    int source_x;
++    int source_y;
++
++    prev_x = prev_y = -999;
++    source_x = x < 0 ? 0 : x;
++    source_y = y < 0 ? 0 : y;
++    clean_source_pages =
++        (x == g_nInvSelItemAnchorX && y == g_nInvSelItemAnchorY) ? 2 : 0;
+     g_graphics_context.bGfx_fill_enabled = '\x01';
+     g_graphics_context.bGfx_fill_color = (g_graphics_context.bGfx_outline_color = '\0');
+     do {
++        if (clean_source_pages != 0) {
++            g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage1Base;
++            g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++            gfx_present_dispatch(source_x, source_y, sprite->nWidth, sprite->nHeight);
++            clean_source_pages--;
++        }
+         draw_rect_filled(0xd, 0xb, 0x126, 0x79);
++        save_x = x < 0 ? 0 : x;
++        save_y = y < 0 ? 0 : y;
++        g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
++        cga_save_rect_to_buffer(g_pCursorSaveBufActive, save_x, save_y, sprite->nWidth,
++                                sprite->nHeight);
+         invui_blit_spr_ckey_dflt_size(sprite, x, y, -1, -1);
+         if (flags != 0) {
+             invui_status_icons_render(flags, x + g_nInvSelItemIconDx + 1,
+                                       y + g_nInvSelItemIconDy + 1);
+         }
+         screen_frame_present();
++        g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++        g_pCursorSaveBufActive =
++            ((unsigned char huge *)g_pCursorSaveBufActive == (unsigned char huge *)g_pCursorSaveBufA)
++                ? g_pCursorSaveBufB
++                : g_pCursorSaveBufA;
++        if (prev_x != -999) {
++            cga_rect_paste_from_buffer(g_pCursorSaveBufActive, prev_x, prev_y, sprite->nWidth,
++                                       sprite->nHeight);
++        }
++        prev_x = save_x;
++        prev_y = save_y;
+         if ((dx = dst_x - x) != 0) {
+             if (dx > 0) {
+                 x += dx / 0xc + 1;
+@@ -207,11 +250,31 @@ static void far invinspect_animate_item_move(ImageRecord *sprite, int x, int y,
+         }
+     } while ((dx != 0) || (dy != 0));
+     draw_rect_filled(0xd, 0xb, 0x126, 0x79);
++    save_x = x < 0 ? 0 : x;
++    save_y = y < 0 ? 0 : y;
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
++    cga_save_rect_to_buffer(g_pCursorSaveBufActive, save_x, save_y, sprite->nWidth,
++                            sprite->nHeight);
+     invui_blit_spr_ckey_dflt_size(sprite, x, y, -1, -1);
+     if (flags != 0) {
+         invui_status_icons_render(flags, x + g_nInvSelItemIconDx + 1, y + g_nInvSelItemIconDy + 1);
+     }
+     screen_frame_present();
++    g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++    g_pCursorSaveBufActive =
++        ((unsigned char huge *)g_pCursorSaveBufActive == (unsigned char huge *)g_pCursorSaveBufA)
++            ? g_pCursorSaveBufB
++            : g_pCursorSaveBufA;
++    if (prev_x != -999) {
++        cga_rect_paste_from_buffer(g_pCursorSaveBufActive, prev_x, prev_y, sprite->nWidth,
++                                   sprite->nHeight);
++    }
++    /* Keep the hidden page in step with the final animation frame.  The mouse
++       cursor is normally sitting over the item that was right-clicked; after
++       a flip its background restore can otherwise put an earlier item frame
++       back onto the hidden page, which becomes a visible ghost on the next
++       present. */
++    screen_frame_sync_buffers_rect(0xb, 0x79);
+     return;
+ }
+ 
+@@ -237,42 +300,43 @@ static void far invinspect_render_details(ItemSlot far *item, int affecting) {
+     dialog_frame_draw(dlg, (int far *)frameRect);
+     dialog_freemem_if_not_null((unsigned char far *)dlg);
+ 
++    g_bSmallZhMode = 1;
+     if ((irec->wCategory == 1) || (irec->wCategory == 3)) {
+         x = 0x73;
+         y += (irec->wCategory == 3) * 10;
+-        invui_draw_text_aligned_shadow((char far *)"Thrust", x + 0x55, y, 1, 0, 0xb);
+-        invui_draw_text_aligned_shadow((char far *)"Swing", x + 0x96, y, 1, 0, 0xb);
++        invui_draw_text_aligned_shadow((char far *)"\x89\x62\x81\x33", x + 0x55, y, 1, 0, 0xb);
++        invui_draw_text_aligned_shadow((char far *)"\x85\x2e\x8f\x7d", x + 0x96, y, 1, 0, 0xb);
+         invui_draw_text_aligned_shadow((char far *)"________", x + 0x55, y + 3, 1, 0, 0xb);
+         invui_draw_text_aligned_shadow((char far *)"________", x + 0x96, y + 3, 1, 0, 0xb);
+         y += 0xf;
+-        invui_draw_text_aligned_shadow((char far *)"Base Dmg:", x, y, 0, 0, 0xb);
+-        sprintf(buf, "%d+Strength", irec->nThrust_damage);
++        invui_draw_text_aligned_shadow((char far *)"\x92\x38\x95\x34\x84\x56\x85\x4c\x87\x5a", x, y, 0, 0, 0xb);
++        sprintf(buf, "%d+\x84\x34\x84\x35", irec->nThrust_damage);
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x55, y, 1, -1, -1);
+-        sprintf(buf, "%d+Strength", irec->nSwing_damage);
++        sprintf(buf, "%d+\x84\x34\x84\x35", irec->nSwing_damage);
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x96, y, 1, -1, -1);
+         y += 0xa;
+-        invui_draw_text_aligned_shadow((char far *)"Accuracy:", x, y, 0, 0, 0xb);
+-        sprintf(buf, "%d+Skill", irec->nAttack_or_range_long);
++        invui_draw_text_aligned_shadow((char far *)"\x82\x37\x81\x27\x87\x5a", x, y, 0, 0, 0xb);
++        sprintf(buf, "%d+\x8b\x6d\x8e\x62", irec->nAttack_or_range_long);
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x55, y, 1, -1, -1);
+-        sprintf(buf, "%d+Skill", irec->nDefense_or_range_close);
++        sprintf(buf, "%d+\x8b\x6d\x8e\x62", irec->nDefense_or_range_close);
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x96, y, 1, -1, -1);
+     } else {
+         if ((irec->wCategory == 2) || ((item->item_id >= 0x24) && (item->item_id <= 0x2b))) {
+             y += 0x19;
+-            invui_draw_text_aligned_shadow((char far *)"Base Damage:", x, y, 0, 0, 0xb);
++            invui_draw_text_aligned_shadow((char far *)"\x92\x38\x95\x34\x84\x56\x85\x4c\x87\x5a", x, y, 0, 0, 0xb);
+             sprintf(buf, "%d+%s", irec->nSwing_damage,
+-                    irec->wCategory == 2 ? "Quarrel" : "CrossBow");
++                    irec->wCategory == 2 ? "\x90\x4f\x8e\x6a" : "\x90\x4f");
+             invui_draw_text_aligned_shadow((char far *)buf, x + 0x46, y, 0, -1, -1);
+             y += 0xa;
+-            invui_draw_text_aligned_shadow((char far *)"Accuracy:", x, y, 0, 0, 0xb);
+-            sprintf(buf, "%d+%s+Skill", irec->nDefense_or_range_close,
+-                    irec->wCategory == 2 ? "Quarrel" : "CrossBow");
++            invui_draw_text_aligned_shadow((char far *)"\x82\x37\x81\x27\x87\x5a", x, y, 0, 0, 0xb);
++            sprintf(buf, "%d+%s+\x8b\x6d\x8e\x62", irec->nDefense_or_range_close,
++                    irec->wCategory == 2 ? "\x90\x4f\x8e\x6a" : "\x90\x4f");
+         } else {
+             if (irec->wCategory != 4)
+                 goto LAB_5a82_079b;
+             x += 0xf;
+             y += 0xf;
+-            invui_draw_text_aligned_shadow((char far *)"Armor Mod:", x, y, 0, 0, 0xb);
++            invui_draw_text_aligned_shadow((char far *)"\x85\x30\x90\x5e\x84\x3e\x82\x52\x87\x5a", x, y, 0, 0, 0xb);
+             sprintf(buf, "%d%%", irec->nDefense_or_range_close);
+         }
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x46, y, 0, -1, -1);
+@@ -283,18 +347,18 @@ LAB_5a82_079b:
+     if ((irec->wCategory == 1) || (irec->wCategory == 4)) {
+         y += 6;
+         invui_draw_text_aligned_shadow(
+-            (char far *)(irec->wCategory == 1 ? "Active Mods:" : "Resistances:"), x, y, 0, 0, 0xb);
++            (char far *)(irec->wCategory == 1 ? "\x90\x63\x84\x3e\x87\x76\x86\x42\x87\x5a" : "\x8c\x42\x88\x61\x87\x5a"), x, y, 0, 0, 0xb);
+ 
+-        sprintf(buf, "%s%s%s%s%s%s%s", (item->flags & 0x1f80) ? "" : "None",
+-                (item->flags & 0x80) ? "Poisoned " : "", (item->flags & 0x400) ? "Frosted " : "",
+-                (item->flags & 0x100) ? "Flaming " : "", (item->flags & 0x200) ? "Steelfired " : "",
+-                (item->flags & 0x800) ? "Enhanced" : "", (item->flags & 0x1000) ? "Enhanced" : "");
++        sprintf(buf, "%s%s%s%s%s%s%s", (item->flags & 0x1f80) ? "" : "\x82\x24",
++                (item->flags & 0x80) ? "\x90\x7a\x86\x22" : "", (item->flags & 0x400) ? "\x93\x54\x93\x4b" : "",
++                (item->flags & 0x100) ? "\x90\x79\x8c\x64" : "", (item->flags & 0x200) ? "\x90\x7a\x90\x7b" : "",
++                (item->flags & 0x800) ? "\x89\x24\x8b\x7c" : "", (item->flags & 0x1000) ? "\x89\x24\x8b\x7c" : "");
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x46, y, 0, -1, -1);
+ 
+         y += 0xa;
+-        invui_draw_text_aligned_shadow((char far *)"Bless Type:", x, y, 0, 0, 0xb);
++        invui_draw_text_aligned_shadow((char far *)"\x8c\x4d\x8c\x4e\x85\x60\x97\x6b\x87\x5a", x, y, 0, 0, 0xb);
+ 
+-        sprintf(buf, "%s%s%s%s", (item->flags & 0xe000) ? "" : "None",
++        sprintf(buf, "%s%s%s%s", (item->flags & 0xe000) ? "" : "\x82\x24",
+                 (item->flags & 0x2000) ? "#1 (+5%)" : "", (item->flags & 0x4000) ? "#2 (+10%)" : "",
+                 (item->flags & 0x8000) ? "#3 (+15%)" : "");
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x46, y, 0, -1, -1);
+@@ -303,22 +367,23 @@ LAB_5a82_079b:
+ 
+     if (irec->wRace_mask != 0) {
+         y += 6;
+-        invui_draw_text_aligned_shadow((char far *)"Racial Mod:", x, y, 0, 0, 0xb);
++        invui_draw_text_aligned_shadow((char far *)"\x83\x75\x84\x76\x84\x3e\x82\x52\x87\x5a", x, y, 0, 0, 0xb);
+         sprintf(buf, "%s",
+-                irec->wRace_mask == 1   ? "Tsurani"
+-                : irec->wRace_mask == 2 ? "Elf"
+-                : irec->wRace_mask == 4 ? "Dwarf"
+-                                        : "Human");
++                irec->wRace_mask == 1   ? "\x87\x64\x87\x5d\x87\x66"
++                : irec->wRace_mask == 2 ? "\x89\x4b\x83\x77"
++                : irec->wRace_mask == 4 ? "\x8f\x57\x82\x2a"
++                                        : "\x82\x2a\x8b\x39");
+         invui_draw_text_aligned_shadow((char far *)buf, x + 0x46, y, 0, -1, -1);
+         y += 0xa;
+     }
+ 
+     if (irec->wPlayer_stat_mask != 0) {
+         y += 6;
+-        sprintf(buf, "%s player statistics", affecting != 0 ? "Affecting" : "Can affect");
++        sprintf(buf, "%s\x8a\x46\x86\x5a\x86\x21\x88\x61", affecting != 0 ? "\x87\x51\x94\x28\x8b\x44" : "\x84\x2d\x94\x28\x8b\x44");
+         invui_draw_text_aligned_shadow((char far *)buf, x, y, 0, -1, -1);
+         y += 0xa;
+     }
++    g_bSmallZhMode = 0;
+ 
+     if (y != 0x1e) {
+         screen_frame_present();
+@@ -349,6 +414,7 @@ void far invinspect_item_flow(ItemSlot far *item, int affecting, MenuPage *page)
+     invinspect_animate_item_move(sprite, g_nInvSelItemAnchorX, g_nInvSelItemAnchorY, dstX, dstY,
+                                  item->flags);
+ 
++    g_bSmallZhMode = 1;
+     if (irec->wName_split_off != 0) {
+         irec->pName[irec->wName_split_off] = '\0';
+         invui_draw_text_aligned_shadow((char far *)irec, 0x3a, 0xf, 1, -1, -1);
+@@ -360,36 +426,39 @@ void far invinspect_item_flow(ItemSlot far *item, int affecting, MenuPage *page)
+     }
+ 
+     if (((irec->wFlags & 0x8000) != 0) || (irec->wCategory == 7)) {
+-        sprintf(buf, "Amount: %d", (unsigned int)item->condition);
+-        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x23, 1, -1, -1);
++        sprintf(buf, "\x81\x23\x84\x35\x87\x5a%d", (unsigned int)item->condition);
++        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x25, 1, -1, -1);
+     } else if (((irec->wFlags & 0x2000) != 0) && (irec->wCategory != 0x11)) {
+-        sprintf(buf, "Uses left: %d", (unsigned int)item->condition);
+-        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x23, 1, -1, -1);
++        sprintf(buf, "\x85\x20\x85\x65\x84\x62\x81\x23\x87\x5a%d", (unsigned int)item->condition);
++        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x25, 1, -1, -1);
+     } else if (((irec->wFlags & 0x1000) != 0) && ((irec->wSub_flags & 4) != 0)) {
+-        sprintf(buf, "Value Rating: %d%", (unsigned int)item->condition);
+-        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x23, 1, -1, -1);
++        sprintf(buf, "\x82\x33\x88\x64\x8c\x27\x85\x60\x87\x5a%d%%", (unsigned int)item->condition);
++        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x25, 1, -1, -1);
+     } else if ((irec->wFlags & 0x1000) != 0) {
+-        sprintf(buf, "Condition: %d%%", (unsigned int)item->condition);
+-        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x23, 1, -1, -1);
++        sprintf(buf, "\x88\x2f\x8b\x2a\x8c\x72\x87\x5a%d%%", (unsigned int)item->condition);
++        invui_draw_text_aligned_shadow((char far *)buf, 0x3a, 0x25, 1, -1, -1);
+     }
++    g_bSmallZhMode = 0;
+ 
+     buf[0] = '\0';
+     if (affecting != 0) {
+         if (((item->flags & 0x40) != 0) || (irec->wPlayer_stat_mask != 0)) {
+-            strcpy(buf, "Using");
++            strcpy(buf, "\x86\x7b\x83\x53\x81\x27");
+             if ((item->flags & 0x30) != 0) {
+-                strcat(buf, ", ");
++                strcat(buf, "\x86\x41");
+             }
+         }
+     }
+ 
+     if ((item->flags & 0x10) != 0) {
+-        strcat(buf, "Broken");
++        strcat(buf, "\x81\x3e\x8f\x34\x86\x5c");
+     } else if ((item->flags & 0x20) != 0) {
+-        strcat(buf, "Repairable");
++        strcat(buf, "\x84\x2d\x92\x50\x90\x31");
+     }
+ 
++    g_bSmallZhMode = 1;
+     invui_draw_text_aligned_shadow((char far *)buf, 0x3b, 0x65, 1, -1, -1);
++    g_bSmallZhMode = 0;
+     screen_frame_present();
+     screen_frame_sync_buffers_rect(0xb, 0x79);
+ 
+diff --git a/bak/SRC/SCREENS/MODALSCR.C b/bak/SRC/SCREENS/MODALSCR.C
+index 6f7a9133f09eefd8bac839c9d87261debf140b3b..4f1a0054648a687f2f40a0f51d80b520b3635c23 100644
+--- a/bak/SRC/SCREENS/MODALSCR.C
++++ b/bak/SRC/SCREENS/MODALSCR.C
+@@ -115,7 +115,7 @@ static void far modalscreen_teleport_dest_sel(MenuPage *page, ImageRecord **asse
+         invui_draw_text_aligned_shadow((unsigned char far *)page->pEntries[sel_city - 1].pPrimary_label,
+                                        0x3c, 0x74, 1, 10, 1);
+         resblit_sprite(asset_tbl[sel_city - 1], 0x3c - asset_tbl[sel_city - 1]->nWidth / 2, 0x7f);
+-        sprintf(buf, "%d sovereigns", cost / 10);
++        sprintf(buf, "%d\x82\x6b\x91\x52", cost / 10);
+         invui_draw_text_aligned_shadow((unsigned char far *)buf, 0x26, 0xb4, 0, 10, 1);
+     }
+     i = 0;
+@@ -686,6 +686,7 @@ void modalscreen_inventory_request(unsigned int category_mask, int discount_pct)
+ 
+ static void modalscreen_inv_draw_gold_amount(void) {
+     char szAmount[40];
++    char savedSmallZhMode;
+     register int x;
+     register int y;
+ 
+@@ -694,10 +695,16 @@ static void modalscreen_inv_draw_gold_amount(void) {
+     g_graphics_context.bClip_enabled = 0;
+     g_graphics_context.bText_fg_color = 0;
+     g_graphics_context.bText_style_flags = 1;
+-    font_draw_text_ds("Party Gold:", x, y);
++    /* The party-stats panel above this line already draws in the 10x10
++       font; the "隊伍金幣" label at 16px runs into the money string 60px
++       to its right. Match the panel and draw this line small too. */
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    font_draw_text_ds("\x85\x78\x87\x5e\x82\x6b\x91\x52\x87\x5a", x, y);
+     x += 60;
+     gstate_format_money(szAmount, g_gameState.nParty_gold, 1);
+     font_draw_text_ds(szAmount, x, y);
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ void modalscreen_rest_until_time(Actor far *pActor) {
+diff --git a/bak/SRC/SCREENS/TOWNSCN.C b/bak/SRC/SCREENS/TOWNSCN.C
+index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d91304133c3d3bf 100644
+--- a/bak/SRC/SCREENS/TOWNSCN.C
++++ b/bak/SRC/SCREENS/TOWNSCN.C
+@@ -34,8 +34,40 @@
+ #include "SRC/GAME/ACTOR/ACTORREC.H"
+ #include "SRC/R3D/SCENE/ZONE.H"
+ #include "SRC/SCREENS/CIPHER.H"
++#include "SRC/GFX/SPRITE/RECTSPR.H"
++#include "SRC/GFX/FONT/FONT.H"
++#include "SRC/SCREENS/BOOKVIEW.H"
++#include "SRC/GFX/DRIVER/VTHUNKS.H"
++#include "SRC/GFX/DRIVER/VIDINIT.H"
++#include "SRC/SYS/DOSMEM.H"
++#include "SRC/SYS/CFGPARSE.H"
+ #include "defines.h"
+ 
++/* Dedicated "leave scene" button: a compact panel in the top-right
++   parchment margin, above the scene picture. It replaces the scene's old
++   full-width bottom Exit hotspot, which blanketed the description-text area
++   and swallowed the click that should page the -- now often multi-page --
++   Chinese narration.  ESC still leaves the scene through the same
++   action == TOWNSCENE_LEAVE_ACTION path. */
++#define TOWNSCENE_EXIT_BTN_X 0x10e /* button glyphs */
++#define TOWNSCENE_EXIT_BTN_Y 0x03
++#define TOWNSCENE_EXIT_BTN_W 0x2e
++#define TOWNSCENE_EXIT_BTN_H 0x14
++/* Hotspot: the whole empty parchment strip above the scene picture, so the
++   leave click can't be lost to cursor-hotspot offset or a mis-sized rect. */
++#define TOWNSCENE_EXIT_HOT_X 0x00
++#define TOWNSCENE_EXIT_HOT_Y 0x00
++#define TOWNSCENE_EXIT_HOT_W 0x140
++#define TOWNSCENE_EXIT_HOT_H 0x18
++#define TOWNSCENE_LEAVE_ACTION 1
++#define TOWNSCENE_PAGE_ACTION 2    /* click the description strip -> next text page */
++#define TOWNSCENE_MENU_ENTRY_CAP 21 /* REQ_GDS.DAT declares 21 MenuEntry slots */
++#define TOWNSCENE_DESC_Y 0x82      /* description strip: y 130..199, wiped between pages */
++#define TOWNSCENE_DESC_H 0x46
++
++static unsigned char far s_szTownExitLabel[] = "\x84\x26\x82\x2c"; /* 離開 */
++static unsigned char far *s_townDescClean = 0; /* clean-strip snapshot for paging */
++static int s_exitBarAction = -1;  /* dropped exit bar's action id (idx+0x80), -1 if none */
+ 
+ unsigned short g_dialog_anim_channel;
+ 
+@@ -77,6 +109,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+     static char g_szTownSceneFilenameSuffix[6] = "?.DAT";
+     char fname[16];
+     int i;
++    int exitCursor;
+     unsigned int size;
+     MenuEntry *pEntry;
+     ResFile *file;
+@@ -111,9 +144,48 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+         }
+     }
+ 
+-    pEntry = g_pTownMenuPage->pEntries;
++    /* Find the shipped exit bar (last active wide lower-band actor).  The
++       leave button borrows its cursor and, on click, runs *its* dispatch --
++       so a bar with a dwAltDialogKey (e.g. the palace "you can't just walk
++       out the front door" bubble) still fires. */
++    exitCursor = 5;
++    s_exitBarAction = -1;
+     pActor = g_pCurrentTownScene->pAActors;
++    for (i = 0; i < g_pCurrentTownScene->nActorCount; i++, pActor++) {
++        if (!((preserve != 0) ||
++              ((pActor->wChapterMask & (1 << (g_gameState.nChapter - 1))) == 0)))
++            continue;
++        if (!((pActor->nGateEventId == 0) ||
++              (((unsigned int)pActor->nGateMin <= gstate_event_read(pActor->nGateEventId)) &&
++               (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))))
++            continue;
++        if ((pActor->rect.width >= 200 && pActor->rect.y >= 100 && pActor->rect.height >= 40) ||
++            pActor->cKind == 0xf || pActor->cKind == 3) {
++            exitCursor = pActor->nCursorShape - 1;
++            s_exitBarAction = i + 0x80;
++        }
++    }
++
++    pEntry = g_pTownMenuPage->pEntries;
+     g_pTownMenuPage->wEntry_count = 0;
++
++    /* Entry 0: the top-right leave button.  First in the list so it wins the
++       hit-test against any actor hotspot that reaches the top-right corner
++       (action id 1 -> nExitScene, the same target ESC uses). */
++    pEntry->wWidget_type = 0;
++    pEntry->wEnable_gate = 0;
++    pEntry->wClick_flags = 0;
++    pEntry->rect.x = TOWNSCENE_EXIT_HOT_X - g_pTownMenuPage->rect.x;
++    pEntry->rect.y = TOWNSCENE_EXIT_HOT_Y - g_pTownMenuPage->rect.y;
++    pEntry->rect.width = TOWNSCENE_EXIT_HOT_W;
++    pEntry->rect.height = TOWNSCENE_EXIT_HOT_H;
++    pEntry->wCursor_shape = exitCursor;
++    pEntry->wAction_id =
++        (s_exitBarAction >= 0x80) ? (unsigned short)s_exitBarAction : TOWNSCENE_LEAVE_ACTION;
++    g_pTownMenuPage->wEntry_count++;
++    pEntry++;
++
++    pActor = g_pCurrentTownScene->pAActors;
+     for (i = 0; i < g_pCurrentTownScene->nActorCount; i++) {
+         g_pCurrentTownScene->pAActors[i].pDdxRecord =
+             (preserve != 0) ? (void far *)dialog_load_record_by_key(
+@@ -123,6 +195,13 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+             if ((pActor->nGateEventId == 0) ||
+                 (((unsigned int)pActor->nGateMin <= gstate_event_read(pActor->nGateEventId)) &&
+                  (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))) {
++                /* Drop the wide lower-band exit bar (rect ~(0,114,316,83) in
++                   every shipped scene): that band is now "click to page the
++                   description", and leaving is the top-right button. */
++                if ((pActor->rect.width >= 200 && pActor->rect.y >= 100 &&
++                     pActor->rect.height >= 40) ||
++                    pActor->cKind == 0xf || pActor->cKind == 3)
++                    goto skip_entry;
+                 pEntry->rect.x = pActor->rect.x - g_pTownMenuPage->rect.x;
+                 pEntry->rect.y = pActor->rect.y - g_pTownMenuPage->rect.y;
+                 pEntry->rect.width = pActor->rect.width;
+@@ -131,11 +210,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+                 pEntry->wAction_id = i + 0x80;
+                 g_pTownMenuPage->wEntry_count++;
+                 pEntry++;
++            skip_entry:;
+             }
+         }
+         pActor->cClickCount = '\0';
+         pActor = pActor + 1;
+     }
++    if (g_pTownMenuPage->wEntry_count < TOWNSCENE_MENU_ENTRY_CAP) {
++        /* Last: click anywhere on the description strip pages its text.  Added
++           last so actor hotspots that dip into this band still win. */
++        pEntry->wWidget_type = 0;
++        pEntry->wEnable_gate = 0;
++        pEntry->wClick_flags = 0;
++        pEntry->rect.x = 0 - g_pTownMenuPage->rect.x;
++        pEntry->rect.y = TOWNSCENE_DESC_Y - g_pTownMenuPage->rect.y;
++        pEntry->rect.width = 0x140;
++        pEntry->rect.height = 200 - TOWNSCENE_DESC_Y;
++        pEntry->wCursor_shape = 0;
++        pEntry->wAction_id = TOWNSCENE_PAGE_ACTION;
++        g_pTownMenuPage->wEntry_count++;
++        pEntry++;
++    }
+ 
+     g_pCurrentTownScene->pDdxRecord =
+         (void far *)dialog_load_record_by_key(g_pCurrentTownScene->dwDialogKey, 0);
+@@ -195,25 +290,89 @@ static void far townscene_shop_menu_close(void) {
+     return;
+ }
+ 
+-static void far townscene_dlg_play_rec_bubble(DDXRecord far *record) {
++static void far townscene_draw_exit_button(void) {
++    g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
++    g_graphics_context.clip.xmax = 0x13f;
++    g_graphics_context.clip.ymax = 199;
++    g_graphics_context.bClip_enabled = 1;
++    g_graphics_context.bGfx_fill_enabled = 1;
++    g_graphics_context.bGfx_outline_color = 0xf;
++    g_graphics_context.bGfx_fill_color = 0xb;
++    draw_rect_filled(TOWNSCENE_EXIT_BTN_X, TOWNSCENE_EXIT_BTN_Y, TOWNSCENE_EXIT_BTN_W,
++                     TOWNSCENE_EXIT_BTN_H);
++    g_graphics_context.bText_fg_color = 1;
++    font_draw_text_far((char far *)s_szTownExitLabel, TOWNSCENE_EXIT_BTN_X + 6,
++                       TOWNSCENE_EXIT_BTN_Y + 3);
++    g_graphics_context.bText_fg_color = 0xf;
++    font_draw_text_far((char far *)s_szTownExitLabel, TOWNSCENE_EXIT_BTN_X + 5,
++                       TOWNSCENE_EXIT_BTN_Y + 2);
++}
++
++/* Locate the body text of a description record, splitting off and
++   NUL-terminating any "#title#" prefix.  Idempotent: a second call sees the
++   opening '#' but stops at the '\0' already written over the closing one. */
++static void far townscene_dlg_split_title(DDXRecord far *record, unsigned char far **outBody,
++                                          unsigned char far **outTitle) {
+     unsigned char far *p;
+-    unsigned char far *start_text;
+ 
+-    if (record != (DDXRecord far *)0) {
+-        p = (unsigned char far *)record + (unsigned int)record->bCnt1 * 10 +
+-            (unsigned int)record->bCnt2 * 10 + 9;
+-        townscene_anim_channel_play_sync(g_dialog_anim_channel);
+-        if (*p == '#') {
+-            p++;
+-            start_text = p;
+-            while (*p != '\0' && *p != '#')
++    p = (unsigned char far *)record + (unsigned int)record->bCnt1 * 10 +
++        (unsigned int)record->bCnt2 * 10 + 9;
++    *outTitle = (unsigned char far *)0;
++    if (*p == '#') {
++        p++;
++        *outTitle = p;
++        /* A Chinese title character's trail byte can itself be 0x23 ('#');
++           skip lead/trail pairs as a unit so only a real single-byte '#'
++           closes the title (same fix as DIALOG.C's title parser). */
++        while (*p != '\0' && *p != '#') {
++            if ((unsigned char)*p >= 0x80 && (unsigned char)*p <= 0xDF && p[1] != '\0')
+                 p++;
+-            *p = '\0';
+             p++;
+-            dialog_draw_speech_bubble(start_text, 0);
+         }
+-        dialog_combatant_name_table_init();
+-        dialog_render_text_with_tokens(record, p, -1, 0, 0, 0);
++        *p = '\0';
++        p++;
++    }
++    *outBody = p;
++}
++
++/* Stash the clean description strip from page2 (which must currently hold
++   the freshly composited scene, no text).  Later pages paste it back to
++   wipe stale text without re-running the idle anim -- on scenes whose anim
++   only advances an ambient overlay that left the picture un-redrawn. */
++static void far townscene_dlg_snapshot_strip(void) {
++    if (s_townDescClean == (unsigned char far *)0)
++        s_townDescClean = (unsigned char far *)alloc_far(
++            (unsigned long)rect_byte_size(0x140, TOWNSCENE_DESC_H), 0L);
++    if (s_townDescClean != (unsigned char far *)0) {
++        g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
++        cga_save_rect_to_buffer(s_townDescClean, 0, TOWNSCENE_DESC_Y, 0x140, TOWNSCENE_DESC_H);
++    }
++}
++
++/* Draw one page of a description at `scroll` lines in.  Always wipes the
++   strip to the snapshot first, so this is safe to call repeatedly from the
++   hotspot loop (paging is a hotspot now, not a blocking sub-loop). */
++static void far townscene_dlg_draw_page(DDXRecord far *record, int scroll) {
++    unsigned char far *body;
++    unsigned char far *title;
++
++    townscene_dlg_split_title(record, &body, &title);
++    if (s_townDescClean != (unsigned char far *)0)
++        cga_rect_paste_from_buffer(s_townDescClean, 0, TOWNSCENE_DESC_Y, 0x140, TOWNSCENE_DESC_H);
++    if (title != (unsigned char far *)0)
++        dialog_draw_speech_bubble((char far *)title, 0);
++    dialog_combatant_name_table_init();
++    dialog_render_text_with_tokens(record, (char far *)body, -1, 0, 0, scroll);
++    townscene_draw_exit_button();
++}
++
++static void far townscene_dlg_play_rec_bubble(DDXRecord far *record) {
++    if (record != (DDXRecord far *)0) {
++        townscene_anim_channel_play_sync(g_dialog_anim_channel);
++        townscene_dlg_snapshot_strip();
++        townscene_dlg_draw_page(record, 0);
++    } else {
++        townscene_draw_exit_button();
+     }
+     return;
+ }
+@@ -319,12 +478,14 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+     unsigned short savedBlendMode;
+     unsigned char far *pPalSaved;
+     int needRefresh;
++    int scrollDesc;
+     TownSceneActor *pA;
+     int di;
+ 
+     fadeFlag = 1;
+     dialogLoaded = 0;
+     exitFlag = 0;
++    scrollDesc = 0;
+     sceneIdx = scene_index;
+     savedMusic = audio_music_play(-999);
+     musicTrack = -1;
+@@ -409,17 +570,41 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+                 screen_frame_present();
+                 screen_frame_sync_buffers_rect(0, 200);
+             }
++            scrollDesc = 0;
+         }
+ 
+-        /* Menu-run loop: block on the menu until the user picks an action. */
++        /* Menu-run loop: block until the user picks an action.  Clicking the
++           description strip (action id TOWNSCENE_PAGE_ACTION) pages its text
++           and stays in the loop, so the scene stays interactive while a
++           multi-page Chinese description is being read. */
+         while (action == 0) {
+             action = menupage_run(g_pTownMenuPage, (unsigned short *)&idx);
++            if (action == TOWNSCENE_PAGE_ACTION) {
++                if (g_wTextWrapLinesRemaining != 0)
++                    scrollDesc += g_wTextWrapLinesDrawn;
++                else
++                    scrollDesc = 0;
++                if (scrollDesc != 0 || g_wTextWrapLinesRemaining != 0) {
++                    townscene_dlg_draw_page(g_pCurrentTownScene->pDdxRecord, scrollDesc);
++                    screen_frame_present();
++                    screen_frame_sync_buffers_rect(0, 200);
++                }
++                action = 0;
++            }
+             if (screen_input_poll_confirm_cancel() == 2) {
+                 screen_cursor_set_shape(3);
+             }
+             screen_frame_present();
+         }
+ 
++        /* ESC / the leave button resolve to the scene's exit-bar actor when
++           it has one, so its dispatch runs exactly as a *left* click on the
++           old bottom bar would have (the "activate" branch below, i.e.
++           dwAltDialogKey bubble + di remap + leave -- not the right-click
++           "examine" branch). */
++        if (action == TOWNSCENE_LEAVE_ACTION && s_exitBarAction >= 0x80)
++            action = s_exitBarAction;
++
+         /* action < 0x80 skips the actor dispatch below. */
+         if (action >= 0x80) {
+ 
+@@ -647,10 +832,12 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+                     screen_frame_present();
+                     screen_frame_sync_buffers_rect(0, 200);
+                 }
++                scrollDesc = 0;
+             }
+         } /* end if (action >= 0x80) */
+ 
+-        /* The action < 0x80 skip lands here: handle the "leave scene" action. */
++        /* Fallback for scenes with no exit-bar actor (action stayed 1):
++           leave straight to nExitScene, as ESC always did. */
+         if (action == 1) {
+             townscene_anim_channel_play_sync(g_pCurrentTownScene->nExitAnim);
+             g_pPendingPalette = 0;
+@@ -681,6 +868,20 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+     g_nMapReloadPending = 1;
+ }
+ 
++static void townscene_draw_cheat_heading(void) {
++    char savedSmallZhMode;
++
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    invui_draw_text_aligned_shadow(
++        (unsigned char far *)"\x2d\x3e\x20\x87\x57\x8b\x6d\x81\x27\x83\x76\x20\x3c\x2d",
++        0xa0, 0x14, 1, 10, 1);
++    invui_draw_text_aligned_shadow(
++        (unsigned char far *)"\x8d\x4b\x8b\x3a\x8b\x3b\x86\x7b\x83\x53\x80\x7e\x80\x7e",
++        0xa0, 0x23, 1, 10, 1);
++    g_bSmallZhMode = savedSmallZhMode;
++}
++
+ void far townscene_cheat_menu_screen(void) {
+     unsigned int sel;
+     unsigned short redraw;
+@@ -696,10 +897,7 @@ void far townscene_cheat_menu_screen(void) {
+     screen_render_main_frame("DIALOG.SCX");
+     do {
+         if (redraw != 0) {
+-            invui_draw_text_aligned_shadow((unsigned char far *)"-> CHEAT CENTRAL <-", 0xa0, 0x14, 1, 10,
+-                                           1);
+-            invui_draw_text_aligned_shadow((unsigned char far *)"Enjoy with caution...", 0xa0, 0x23, 1, 10,
+-                                           1);
++            townscene_draw_cheat_heading();
+             menupage_draw(page);
+             screen_frame_present();
+             screen_frame_sync_buffers_rect(0, 200);
+@@ -773,10 +971,7 @@ void far townscene_chest_open_with_cipher(void) {
+             screen_render_main_frame("DIALOG.SCX");
+             do {
+                 if (redraw != 0) {
+-                    invui_draw_text_aligned_shadow((unsigned char far *)"-> CHEAT CENTRAL <-", 0xa0, 0x14,
+-                                                   1, 10, 1);
+-                    invui_draw_text_aligned_shadow((unsigned char far *)"Enjoy with caution...", 0xa0, 0x23,
+-                                                   1, 10, 1);
++                    townscene_draw_cheat_heading();
+                     menupage_draw(page);
+                     screen_frame_present();
+                     screen_frame_sync_buffers_rect(0, 200);
+@@ -791,6 +986,12 @@ void far townscene_chest_open_with_cipher(void) {
+                     cmbinv_inventory_screen_run(actor, 0, 0);
+                     screen_render_main_frame("DIALOG.SCX");
+                     break;
++                case 0x83:
++                    /* Session-only alternative to the resource.cfg unlock.
++                     * Leave the chest after enabling the 3-D world hotkey. */
++                    g_cfgKnockKnock = TRUE;
++                    sel = 1;
++                    break;
+                 case 0x31:
+                     if (key_is_down(0x2a) != 0)
+                         break;
+diff --git a/bak/SRC/SCRIPT/TTMDLG.C b/bak/SRC/SCRIPT/TTMDLG.C
+index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36ccc7eb247b 100644
+--- a/bak/SRC/SCRIPT/TTMDLG.C
++++ b/bak/SRC/SCRIPT/TTMDLG.C
+@@ -14,6 +14,7 @@
+ #include "SRC/GFX/SPRITE/BLITAA.H"
+ #include "SRC/DIALOG/DIALOG.H"
+ #include "SRC/SCRIPT/ADSCRIPT.H"
++#include "SRC/SCREENS/BOOKVIEW.H"
+ 
+ unsigned short g_wScriptEnhancedAuxFlag = 0x0000;
+ unsigned short g_nScriptEnhancedOpcodeDispatchEnabled = 0x0000;
+@@ -78,6 +79,7 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
+     case 3: {
+         long key;
+         PDdxRecord rec;
++        int i;
+ 
+         key = (long)arg + 1600000;
+         g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
+@@ -86,17 +88,35 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
+         g_graphics_context.clip.xmax = 0x13f;
+         if (rec = dialog_load_record_by_key((unsigned long)key, 0)) {
+             font_activate(g_wGameFontSlot);
+-            g_graphics_context.wGfxBlitSrcPage = g_wVgaScratchPageBase;
+-            g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+-            gfx_present_dispatch(0, 0x73, 0x140, 0x55);
+-            dialog_render_text_with_tokens(rec, (char far *)0, -1, 0, 0, 0);
+-            g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
+-            g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaFrontPageBase;
+-            gfx_present_dispatch(0, 0x73, 0x140, 0x55);
+-            g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
+-            adscript_rndr_blit_other_page(0, 0x73, 0x140, 0x55);
+-            if (mode != 3)
++            i = 0;
++            /* This draws once and waited once, with no way to show a
++               deferred second page -- fine in English, where the fixed
++               0x140x0x55 strip always held the whole line at the narrow
++               ~9px-tall font. Chinese needs a full 16px-tall glyph cell per
++               character, so the same strip now holds far fewer lines and
++               can genuinely need more than one page (confirmed live via
++               DIAL_Z16 node 1600006/1600007, the Arutha/Locklear palace
++               scene). Loop the same way dialog_show_by_key() and
++               dialog_play_record() already do: keep waiting and redrawing
++               at the next scroll offset while lines remain. mode==3 keeps
++               its original no-wait, single-draw behavior untouched. */
++            for (;;) {
++                g_graphics_context.wGfxBlitSrcPage = g_wVgaScratchPageBase;
++                g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++                gfx_present_dispatch(0, 0x73, 0x140, 0x55);
++                dialog_render_text_with_tokens(rec, (char far *)0, -1, 0, 0, i);
++                g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
++                g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaFrontPageBase;
++                gfx_present_dispatch(0, 0x73, 0x140, 0x55);
++                g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++                adscript_rndr_blit_other_page(0, 0x73, 0x140, 0x55);
++                if (mode == 3)
++                    break;
+                 dialog_wait_for_acknowledge(100, 0, 1, 0);
++                if (g_wTextWrapLinesRemaining == 0)
++                    break;
++                i += g_wTextWrapLinesDrawn;
++            }
+             return dialog_freemem_if_not_null((unsigned char far *)rec);
+         }
+         break;
+diff --git a/bak/SRC/SYS/DOSMEM.C b/bak/SRC/SYS/DOSMEM.C
+index eebcc8ee9ce7f720c1f6bfacacdc24cb7043e4a7..d3910600d359f5e447220604da74d3339ced9dd0 100644
+--- a/bak/SRC/SYS/DOSMEM.C
++++ b/bak/SRC/SYS/DOSMEM.C
+@@ -15,6 +15,28 @@
+ #include "SRC/SYS/DOSMEM.H"
+ #include "SRC/SYS/FARPTR.H" /* memset_far — referenced only in inline asm below */
+ 
++void far *alloc_far_umb(unsigned long size) {
++    void far *block;
++
++    asm mov ax, 5803h;
++    asm mov bx, 0001h;
++    asm int INT_DOS;
++    asm mov ax, 5801h;
++    asm mov bx, 0080h;
++    asm int INT_DOS;
++
++    block = alloc_far(size, 0);
++
++    asm mov ax, 5801h;
++    asm xor bx, bx;
++    asm int INT_DOS;
++    asm mov ax, 5803h;
++    asm xor bx, bx;
++    asm int INT_DOS;
++
++    return block;
++}
++
+ void far *alloc_far(unsigned long size, long flags) {
+     asm mov ax, word ptr size + 2;
+     asm mov bx, word ptr size;
+diff --git a/bak/SRC/SYS/DOSMEM.H b/bak/SRC/SYS/DOSMEM.H
+index 2349fe3dc1652bdbc1d83433a87396f9a26b3669..011f6b76cdfa51acbcf4b360c61f7edabdf09efc 100644
+--- a/bak/SRC/SYS/DOSMEM.H
++++ b/bak/SRC/SYS/DOSMEM.H
+@@ -40,6 +40,29 @@
+  */
+ extern void far *alloc_far(unsigned long size, long flags);
+ 
++/**
++ * @brief One-shot @ref alloc_far that may be satisfied from Upper Memory.
++ *
++ * @details Temporarily links the DOS UMB chain (INT 21h AX=5803h, BX=1) and
++ *          switches the allocation strategy to "first fit, high then low" (INT
++ *          21h AX=5801h, BX=80h) for a single @ref alloc_far call, then restores
++ *          both to their defaults (first-fit low, UMB unlinked). The one block
++ *          is placed in a free upper-memory region when one is large enough,
++ *          and in conventional memory otherwise; every other allocation in the
++ *          program is unaffected. A no-op in effect where the host DOS exposes
++ *          no UMBs.
++ *
++ *          Used only for czone_subsystem_init()'s ~62 KB world-object pool: the
++ *          localized build's extra resident code leaves the largest free
++ *          conventional block a few KB short of it on some scene exits, and a
++ *          failed AH=48h there returns a segment-0 pointer that the caller
++ *          writes through.
++ *
++ * @param[in] size  Block size in bytes, rounded up to the next paragraph.
++ * @return    Far pointer segment:0000 to the block, or NULL on failure.
++ */
++extern void far *alloc_far_umb(unsigned long size);
++
+ /**
+  * @brief Release a block obtained from @ref alloc_far back to DOS (INT 21h AH=49h).
+  *
+diff --git a/bak/SRC/UI/MENUPAGE.C b/bak/SRC/UI/MENUPAGE.C
+index 2da1703d83ba6e17512a2edc4f930396b22b0c1e..642556bceeef998d9625b54a916f84b999cb93d3 100644
+--- a/bak/SRC/UI/MENUPAGE.C
++++ b/bak/SRC/UI/MENUPAGE.C
+@@ -441,8 +441,19 @@ int far menupage_input_poll(MenuPage *page, unsigned short *out_consumed) {
+     g_wMenuDragSubMode = 0;
+     g_wMenuDragState = 0;
+     input = screen_input_poll_confirm_cancel();
+-    if (page->wWants_screen_save != 2 && key_is_down(0x1c))
++    if (page->wWants_screen_save != 2 && input == 2 && key_is_down(0x1c)) {
++        /* A host IME can deliver ENTER's make code to the DOS guest while
++           consuming its break code.  The stale key state used to override
++           every real right click as a left click.  A physical right click
++           is unambiguous, so let it recover the stale ENTER/menu gesture. */
++        g_key_state[0x1c] = 0;
++        if (prevDragState == 1) {
++            prevDragState = 0;
++            prevAnchor = (MenuEntry *)0;
++        }
++    } else if (page->wWants_screen_save != 2 && input == 0 && key_is_down(0x1c)) {
+         input = 1;
++    }
+     while ((int)page->wEntry_count > i) {
+         if (widget->wEnable_gate == 0) {
+             if (widget->wWidget_type != 2)
+diff --git a/bak/SRC/UI/TEXTWRAP.C b/bak/SRC/UI/TEXTWRAP.C
+index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c443da4e10 100644
+--- a/bak/SRC/UI/TEXTWRAP.C
++++ b/bak/SRC/UI/TEXTWRAP.C
+@@ -12,12 +12,14 @@ struct textline {
+ };
+ 
+ static int far textwrap_is_break_point(long text, int line_start, int pos) {
+-    char ch;
++    unsigned char ch;
+     int i;
+ 
+-    ch = toupper(*((char far *)((char huge *)text + pos)));
++    ch = (unsigned char)*((char far *)((char huge *)text + pos));
+     if (ch == ' ')
+         return 1;
++    if (ch >= 0x80 && ch <= 0xDF)
++        return 1;
+     if (isalpha(ch) == 0)
+         goto fail;
+     if (pos - line_start <= 3)
+@@ -41,6 +43,7 @@ int far textwrap_compute_lines(long text, int max_width, int *out_lines, int max
+     int count;
+     unsigned int width;
+     unsigned int height;
++    unsigned char c;
+ 
+ #define CH(i) (*((char far *)((char huge *)text + (i))))
+ 
+@@ -51,13 +54,27 @@ int far textwrap_compute_lines(long text, int max_width, int *out_lines, int max
+         line_width = 0;
+         no_break = 1;
+         while (CH(pos) != '\0' && CH(pos) != '\n') {
+-            font_glyph_metrics(CH(pos), &width, &height);
+-            if (max_width < (int)(line_width + width))
+-                break;
+-            line_width += (int)width;
+-            if (textwrap_is_break_point(text, line_start, pos))
++            c = (unsigned char)CH(pos);
++            if (c >= 0x80 && c <= 0xDF) {
++                if (CH(pos + 1) == '\0') {
++                    pos++;
++                    break;
++                }
++                width = g_bSmallZhMode ? 10 : 16;
++                if (max_width < (int)(line_width + width))
++                    break;
++                line_width += (int)width;
+                 no_break = 0;
+-            pos++;
++                pos += 2;
++            } else {
++                font_glyph_metrics(CH(pos), &width, &height);
++                if (max_width < (int)(line_width + width))
++                    break;
++                line_width += (int)width;
++                if (textwrap_is_break_point(text, line_start, pos))
++                    no_break = 0;
++                pos++;
++            }
+         }
+         if (CH(pos) != '\0' && CH(pos) != '\n' && !no_break) {
+             while (pos != line_start && textwrap_is_break_point(text, line_start, pos) == 0)
+@@ -104,6 +121,11 @@ void textwrap_draw_aligned(long text, int x, int y, int max_width, int max_heigh
+     register int fl = first_line;
+ 
+     line_height = g_graphics_context.pFont_height[0];
++    if (g_bSmallZhMode) {
++        line_height = 10;
++    } else if (g_bMixedZhMode && line_height < 16) {
++        line_height = 16;
++    }
+     hoff = 0;
+     voff = 0;
+     if ((f & 0) != 0)
+@@ -112,14 +134,35 @@ void textwrap_draw_aligned(long text, int x, int y, int max_width, int max_heigh
+     else
+         count = textwrap_compute_lines(text, max_width, (int *)lines, 0x5a);
+ 
+-    for (g_wTextWrapLinesRemaining = 0;
+-         max_height <
+-         (int)((line_height + line_spacing) * ((count - fl) - g_wTextWrapLinesRemaining) -
+-               line_spacing);
+-         g_wTextWrapLinesRemaining++) {
+-    }
+-    if (g_wTextWrapLinesRemaining == 1) {
+-        g_wTextWrapLinesRemaining++;
++    /* Split the remaining text into equal-sized pages instead of greedily
++       maxing out each page and leaving whatever is left for the next one.
++       Greedy filling can strand a lone short final page -- one line, or
++       even a single trailing punctuation mark, alone on its own screen
++       (reported live: DIAL_Z16 nodes whose Chinese text needs one more
++       page than the DDX-authored box was tuned for in English). Balancing
++       is strictly bounded by `capacity`, the same "how many lines fit"
++       figure the old greedy loop computed, so a page here can never hold
++       more lines than the box was already proven to fit -- this can only
++       change how the remainder is divided across pages, never push text
++       past the box or into space the old code wasn't already using. */
++    {
++        int total = count - fl;
++        int capacity = 0;
++        int drawn;
++
++        while (capacity < total &&
++               max_height >= (int)((line_height + line_spacing) * (capacity + 1) - line_spacing))
++            capacity++;
++
++        if (capacity == 0) {
++            drawn = 0;
++        } else if (total <= capacity) {
++            drawn = total;
++        } else {
++            int pages = (total + capacity - 1) / capacity;
++            drawn = (total + pages - 1) / pages;
++        }
++        g_wTextWrapLinesRemaining = (unsigned short)(total - drawn);
+     }
+     g_wTextWrapXAccum = 0;
+     g_wTextWrapLinesDrawn = (count - g_wTextWrapLinesRemaining) - fl;
+diff --git a/bak/SRC/UI/WIDGET.C b/bak/SRC/UI/WIDGET.C
+index 2af1c575ddcd15c8ab21b24fb094261af92bafa3..172bfe29971aef11b9f44be9affb54799933b946 100644
+--- a/bak/SRC/UI/WIDGET.C
++++ b/bak/SRC/UI/WIDGET.C
+@@ -271,6 +271,7 @@ void widget_button_render_full(MenuEntry *button, int x, int y, int pressed, int
+     int hx;
+     int span;
+     char *text;
++    char savedSmallZhMode;
+     int i;
+ 
+     base_color = button->wBase_color;
+@@ -303,6 +304,11 @@ void widget_button_render_full(MenuEntry *button, int x, int y, int pressed, int
+         } else {
+             text = button->pAlt_label;
+         }
++        /* Menu buttons are ~15px tall, tuned for the ASCII font; a 16px CJK
++           label spills past the bevel. Draw button labels with the 10x10
++           font so the centring math and the glyph both fit. */
++        savedSmallZhMode = g_bSmallZhMode;
++        g_bSmallZhMode = 1;
+         if (button->wBase_color == 0xa9) {
+             if (pressed != 0) {
+                 uiwidget_draw_text_shadowed(text, 0xaa, 0xae,
+@@ -321,6 +327,7 @@ void widget_button_render_full(MenuEntry *button, int x, int y, int pressed, int
+                                             (font_text_width_ds(text) >> 1) + 1,
+                                         by + (button->rect.height >> 1) - 4);
+         }
++        g_bSmallZhMode = savedSmallZhMode;
+     } else {
+         if (button->wWidget_type == 0 || (button->wWidget_type == 1 && button->wSub_state != 0)) {
+             widget_blit_button_sprite(button->wSprite_base + (pressed != 0), bx, by, sprite_set, 1,
+@@ -354,6 +361,7 @@ void widget_draw_text_button(MenuEntry *widget, int x, int y, int pressed) {
+     int shadowColor;
+     int outline_color;
+     int fill_color;
++    char savedSmallZhMode;
+ 
+     x += widget->rect.x;
+     y += widget->rect.y;
+@@ -387,6 +395,8 @@ void widget_draw_text_button(MenuEntry *widget, int x, int y, int pressed) {
+     draw_line(x, y + widget->rect.height - 1, x + widget->rect.width - 1,
+               y + widget->rect.height - 1);
+ 
++    savedSmallZhMode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
+     x += (widget->rect.width >> 1) - (font_text_width_ds(widget->pPrimary_label) >> 1);
+     y += (widget->rect.height >> 1) - 4;
+ 
+@@ -399,6 +409,7 @@ void widget_draw_text_button(MenuEntry *widget, int x, int y, int pressed) {
+         g_graphics_context.bText_fg_color = textColor;
+         font_draw_text_ds(widget->pPrimary_label, x, y - 1);
+     }
++    g_bSmallZhMode = savedSmallZhMode;
+ }
+ 
+ void widget_draw_iconbox(MenuEntry *widget, int x, int y, int pressed, int sprite_flags) {

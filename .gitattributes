@@ -1,0 +1,3 @@
+engine-patches/*.patch text eol=lf -whitespace
+engine-patches/commits.txt text eol=lf
+engine-patches/*.md text eol=lf

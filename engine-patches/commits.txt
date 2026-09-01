@@ -1,0 +1,78 @@
+2dcb2b0f7cf60f68f11b99c7a6c453dfa1a66a66 feat(font): add chinese 16x16 glyph rendering and text wrapping support
+90be31b1686db6e12f2db4dd8f3abf49fcdad94c fix(font): use 16px line height when a wrapped line contains chinese glyphs
+e7f94c030745827adbeb8cb82c979c9fb124a888 fix(dialog): skip chinese lead/trail byte pairs in token scanner
+1276b58e99907dd5aaf305279148dade96347edf feat(font): render latin text through the chinese font's own ETen glyphs when mixed
+4b681d38edee5e4a06a2c1e22dbaa5beb8357629 fix(font): treat a dangling chinese lead byte at string end as zero-width
+378050c1333a56e657660a562157b0af537d2246 font: store CJK glyph bitmap in EMS instead of conventional memory
+0e2f249921da8018032c18121a9dc9ed242fcacd fix(dialog): stop feeding isdigit()/tolower() a negative Chinese lead byte
+c7feb11f0a4bbddb91de91a5679998a306cbdb31 zh: translate g_abStatNames to Traditional Chinese
+f38a089cdc8aab7d9a5edb166ef41afad0b9ab01 zh: fix stat-row line pitch overlap on the character sheet
+12b9a1467e25875eddce7246f3d96b535675730b zh: add a small-cell Chinese font for the character sheet stat box
+42f6fd475d89736a3cd190339fed104ea7feb660 zh: use the small font for the sheet skill list; translate remaining charscreen labels
+8ddc763a4ccc3eb8d6bb46819ef3825e35d5ba2a zh: nudge the primary-stat rows down slightly under the Ratings: header
+d0af98c6e595cda47dccf7bf38aff84a4acdeab0 zh: fix g_bMixedZhMode leaking past the dialogue box that set it
+47d0a32c42119395944b9ed3eb262e6b6fd6cb32 fix: bound the line-fit loop in textwrap_draw_aligned to stop the unsigned underflow hang
+4ecd59dd2536016148186f70e1686396f4967c8d fix: guard the @N-name-expansion out-of-bounds read in dialog_render_text_with_tokens
+bddbfe0b7fe890146d1446c19cf41a587656dd24 zh: add g_bSmallZhMode for chapter banners; init speaker names for scripted dialog_show_by_key calls
+ddb10ea23f611ef85ea8232a7fd4b33ef18c0515 zh: use the small font for the Ratings:/Condition: panel headers
+78a0ad1e9c8d626c75c53ee271bbce20f8c3a7f7 zh: use the small font for the inventory grid's item name/condition line
+62c8bb1b8edc5e11c3ce88dd8925143d37044fe6 zh: translate hardcoded currency/speaker strings (shopkeeper, gold/silver/sovereign/royal, Unavailable)
+591d041d6ada7f6786f76292cdcc9dc19b31a84b zh: extend the inventory grid's small-font scope to the price line
+9ec0558e7d283df38ea83e7a869311289951ad74 zh: translate the item-inspect panel's name/stat/condition labels
+284b7aee9d828b4479bc3aa30c9b43c7c0d5b79f zh: include FONT.H in INVINSP.C for g_bSmallZhMode
+566e11c31f730105fcd76868cc191d6922b7338f zh: translate the item More-Info detail popup, encampment stat headers, and Party Gold label
+4da895bfd32917c41f01dd9d9946c9acbe935359 fix: stabilize Chinese rendering and dialog pagination
+51c293d14fb5fbca8303ed65ee3011262f02ae19 fix: DIALOG.C title-parsing loop truncates names when a CJK trail byte equals '#'
+563480c11deb1087435a3a945706b6a25e12cd77 debug: temporarily log textwrap_draw_aligned() pagination math to ZHDBG.LOG
+df5d1e6e1fb6627aaa99102af644cea588d177f7 debug: log pagination do-while break condition to ZHDBG.LOG (temp)
+7d95e613075669187c270a7690a0429a13fdbb54 fix: dialog_show_by_key() never paginated multi-line cutscene text
+5cbb93deb688697c4ab805d2cee7023af6ab9778 debug: log dialog_show_by_key() entry + pagination loop iterations (temp)
+3816255ee2dc1e3e22139bb36f8489cade19ef08 fix: ttmscript_show_dialog_action() (mode 0) never paginated multi-line text
+33b8f05806367b68aa9ee82f1f61ca743c8afa29 fix: Chinese title banner overlaps first line of body text
+a777647b40012feee7bbf889f24d78bda33a39fd fix: drop the redundant title-separator newline in Chinese dialog text
+d831ae95c9772bdc40f4b49fe9fa4015199def7d fix: scope the title-newline skip to the banner style only
+b899d9232cf928e60afa1831ba9198a46b59ed09 fix: clamp the banner-title vertical shift to the box's actual height
+77528e68f59ebaef7dc9c72c7e40b8853ebd8f5c fix: font_glyph_metrics() doesn't treat 0xE0-0xFF as zero-width control bytes
+e3d9ef985f59c1f4c92cf10b3e13916e08d039e4 fix: balance page splits instead of greedily maxing each page
+b066d529cf16762825cac66c095ef256a38429c0 feat(book): double-byte (CJK) support in the BOK text renderer
+c801185c6e9b629de979ab4a9f88cffce7e928e8 feat(townscene): dedicated leave button + paginated location description
+167641076cedc683e4c45d7da2c1371cb609bfcc fix(townscene): stop the leave-button feature blanking the scene + folding cKind==3
+c224e1aea488a4271103a31ef7942aeab6523b8c fix(townscene): run description pagination after the fade-in, not during it
+5f6c16f448156446e3677b23e6c44aea60a7dd23 fix(townscene): make description paging a hotspot, not a blocking loop
+214345360cecfe229f6941682caec18f43c42d07 fix(townscene): drop the lower-band exit bar by rect, not just cKind
+eb5d08f7a257e8a8e2ec9e78b6f823aedf511dd1 fix(townscene): put the leave button first so it wins the hit-test
+7983502c431b94de5bf42549f9bc794692c36c41 fix(townscene): leave hotspot = the whole top parchment strip
+15ccd731526cdec1a401d26f21efaf1961381b52 fix(townscene): leave button runs the exit-bar actor's real dispatch
+5bc15747327c7c2da151fee7a1d93a1d32772f93 feat(dialog): localize choices with small Chinese font
+29a37514992b847521bb458960b71f6b065ab72f feat(dialog): render speech-bubble labels with small Chinese font
+695ad9ce9e84f51de3bdc015baa0e05f5bb59061 fix: preserve inventory right-click inspect events
+9f6ca2ffcdc0da95ce54ca65114c6d995d6a5a28 fix: recover menu input from IME-stuck Enter
+c5946f55d588970f6463dde083c29f2f9e6da941 Fix item inspect animation ghosting
+17c1b18f1e176cc600718f0e6fe9b676eb91b828 Restore backgrounds during item inspect animation
+d56cf8d4aa51d7afa547938e096559923a079bcc Clear item source before inspect animation
+950f7f60b61d980b53e9f44b908a2684fc65bd7f Use small Chinese text for party status names
+9773c90bf220bb6c7a752300a8826e059b51cbe1 Localize character spell button
+bd9d4b4c29d9d44fd312d84ba3a9f3e96c1dc5f3 Render character spell button with small font
+f4cd826583377b46767b8170722beab45e719eb2 zh: small font + localized cost/damage lines in the combat spell panel
+1993e611ceafdc0705cb26d347700cc74f60597a zh: small font + localized labels in the combat observe-enemy stat panel
+46d03e20f395fee125950491a3052e605a99fd6d zh: small font + localized labels in the combat targeting HUD panels
+229ece5ce1639fa5cd9491a37e405fecd3e6cdfd zh: size the travel-map label-erase rect for 16px CJK town names
+0cfa32cff761495be4c95b11129e55f73a68ff05 zh: draw menu button labels with the small Chinese font
+dbf328815ebfa39c69eca060c4af7be0ac9fb8e0 zh: draw the inn/rest "Party Gold" line with the small Chinese font
+8e86f32335a86494e54deab9e52f7a983d9c3ae7 fix: refresh inventory race name glyph codes
+1b2196bd863bebde246ea5faeb47603a44b9abb7 zh: accept WASD as world-movement keys alongside the arrow keys
+c4b9775988cc41c661c8428ced725db6533c0881 zh: WASD/QE control scheme with A/D strafe in the 3D world
+5a1df684ac74c002e46a0a4c515aeb158d0fddad zh: swap strafe to Q/E, keep turn on A/D
+17e0f24748bcfc207d33d8ebcf16a29bb4bd3fd3 fix: let alloc_far() fall back to upper memory when conventional is short
+870a87f15683e0b8f5576ece3a3660af1f4c9bb6 fix: confine the UMB alloc fallback to czone_subsystem_init's pool
+96ee8b9ff233d99663e4e9ac1939c8732c369ab0 fix(dialog): fit temple healing quote in compact panel
+c9880a31cf1c566799da82e83b69ba456612227e fix(inventory): localize quantity picker labels
+ba90bd070b2ba46d5803a4bfc7e27e56a54bcb6d fix(character): localize active condition names
+86129d647d3d312a3136814bf04cdcc5c287aec7 Translate cheat menu heading
+9fc2b19286d923a001c68169f663401d6a24bd65 Unlock advanced cheats from chest menu
+f12b00d9d9cde6391ee26588bd31fd587ffb6aef Fix full-size spell book list layout
+745c68480a5c4971c9afd77b0caf3dc3576c86aa Add interactive spell reference browser
+ce0456485a923d5332e9c062df48254870cd0030 Polish spell browser selection and descriptions
+890ccd78caafb9baa4ddb968688385e17fea3275 Use full-size text in spell descriptions
+3c31a9f0d628ee907dad0aaa45289e84a10a2774 Refine full-size spell description layout
+a15bacae465d80bac7cd57c88afc37a0dd0c123f Widen spell description column

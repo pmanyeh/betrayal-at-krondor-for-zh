@@ -35,11 +35,12 @@
 
 ```
 localization/generated/   已產生的中文字型與編碼對照表（正式產物）
+engine-patches/            可重建全部中文化引擎修改的合併 Git 補丁與提交清單
 tools/font/                字型產生工具（ZH16.DAT）與中文編碼（encode/decode）
 tools/text/                DDX 對話檔 extract / pack 工具
 tests/unit/                對照原始碼演算法的 deterministic 單元測試
 docs/                       各階段驗證文件、架構決策紀錄
-upstream/                   還原專案原始碼的本地 clone（獨立 git repo，不隨本專案 push）
+upstream/                   還原專案原始碼的本地 clone（獨立 git repo；修改以 engine-patches/ 保存）
 dist/                       本機測試用產物（gitignored，隨時可能被覆寫，非正式產物）
 ```
 

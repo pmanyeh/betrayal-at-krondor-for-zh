@@ -196,7 +196,7 @@ Ask About 翻譯也已接續完成：新增 `keyword_translate.py` codec、`KEYW
 ### 編譯用的 WSL 原生 clone
 - 位置：`~/krondor-build`（WSL 原生 ext4 檔案系統，**不是** `/mnt/d/...`）。
 - 這是 `upstream/betrayal-at-krondor` 的 clone，`origin` 指向 Windows 端的 `/mnt/d/git/betrayal-at-krondor-for-zh/upstream/betrayal-at-krondor/.`。
-- **永久規則：絕對不要向上游 `canassa/betrayal-at-krondor` push，也不要再嘗試 push。** Windows 端 `upstream/betrayal-at-krondor` 的 `origin` 指向原作者的還原保存專案，只供 fetch／比對；本專案的中文化引擎提交依既定慣例永久保留在本機獨立 repo。若日後需要將這些引擎提交備份到雲端，必須由使用者另行明確指定自己的 fork／遠端，不能推往 `canassa`。
+- **永久規則：絕對不要向上游 `canassa/betrayal-at-krondor` push，也不要再嘗試 push。** Windows 端 `upstream/betrayal-at-krondor` 的 `origin` 指向原作者的還原保存專案，只供 fetch／比對；本專案的中文化引擎提交依既定慣例永久保留在本機獨立 repo。已提交的完整引擎修改另以 [`engine-patches/`](engine-patches/) 的 binary-safe 合併 Git patch＋78 筆提交清單保存在本主專案並推送雲端；目前固定範圍為上游 `1fc2a69` 到最終 `a15baca`，套用後 tree 必須等於 `41f17f008ec867f77a662a6e0c7cfde6f22b643b`。若日後需要保存完整引擎 Git 歷史，必須由使用者另行明確指定自己的 fork／遠端，不能推往 `canassa`。
 - **重要**：`uv sync` / `uv run` 絕對不能在 `/mnt/d/...`（Windows 掛載磁碟）上跑，DrvFs 對 `utime`/硬連結操作會直接報錯（`Operation not permitted` / `Invalid cross-device link`）。一定要在 WSL 原生檔案系統上跑，跑完再把 `work/KRONDOR.EXE` 複製回 Windows 端。
 
 ### 重新編譯的標準流程
