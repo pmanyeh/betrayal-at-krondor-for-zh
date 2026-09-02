@@ -91,3 +91,16 @@ d0ed9ec68ad5ccc9a349549210c4cb15f4548b58 Show learned spell counts by school
 cc5b09bfdc02dff30b60aff62239b5b75c0e56f4 Protect autosave folder from manual writes
 f3da652a3d8ae47dfea2530b40a3d2344cfd0254 Sort autosave entries by header title
 8585fb3326287ca76c2c1afc1c76be1e750a22b1 Recognize DOS-normalized autosave folder names
+1bed08aef7c4b608de59a7a1ca6893eb1fd6e6dc feat: mark discovered zone entrances on map
+1935736bbfc28e6b3221a3903b35738fa38db17c fix: discover and project distant map landmarks
+d0a1b3fa2a6899b0c3bc71b36bce654c172813f9 fix: use renderer transform for map landmark markers
+973b1b5d20f5fe20114b6a08471a8922e28d501d fix: include DOS far-pointer helpers for map markers
+30b5f46c0a61c683d0e3e5d80bd18e5432613bbd debug: expose map landmark overlay stages
+e268bc4bfd11456a451daaf526b3a993cd2d31ec fix: pass valid segment to landmark projection
+485ec4017348846b85809604af6155c120e7d5bf debug: log map landmark projection values
+e561e379fa6313791884997853e001440e3978c2 fix: keep discovered landmarks visible on map edges
+eab7f731185f183f58c4a4d35b0c8e6323557439 debug: capture visible cave scene objects
+916be1f320e60e37eb0351243b0033e592a89264 fix: anchor discovered cave marker to scenery
+980881f8de05d0f125b862e7154fcacb9ec431f4 fix: place cave marker at entrance surface
+397902a524923b14c8561a0d34570b88caa60fd0 fix: align cave marker with entrance
+6fcffc032e93c1352c3e81adaa1c25acaa9be904 fix: enable modern movement controls on map
