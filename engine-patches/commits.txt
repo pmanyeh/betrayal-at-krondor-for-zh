@@ -87,3 +87,7 @@ f230e38b967562300c3584de15faf0068453b4a4 Use typed far-memory release for hotspo
 f276f57fe6a95576dfb529cb4ed34b052e1c46b2 Clip interactable outlines to world viewport
 d0ed9ec68ad5ccc9a349549210c4cb15f4548b58 Show learned spell counts by school
 83e3140fce89d0504449a694374d8be2e93dda9e Fix spellbook empty-state encoding
+96df3988dad3c82ccd0fd7bc524c09d948fd8a9e Add rotating autosave system
+cc5b09bfdc02dff30b60aff62239b5b75c0e56f4 Protect autosave folder from manual writes
+f3da652a3d8ae47dfea2530b40a3d2344cfd0254 Sort autosave entries by header title
+8585fb3326287ca76c2c1afc1c76be1e750a22b1 Recognize DOS-normalized autosave folder names
