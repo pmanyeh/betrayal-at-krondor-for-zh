@@ -17,8 +17,8 @@ Camp icon's action id to 0x14 (the 'T' scan code). After this patch:
   * pressing 'E' matches no entry        -> raw 0x12 -> `case 0x12` -> strafe right
 
 Only entry 8's u16 action id changes; the file length and every other field
-stay byte-identical. Region-map screen (MAP.C / REQ_MAP.DAT) is a separate
-dispatch and keeps 'E' = Encamp there.
+stay byte-identical. The region-map screen now uses the same WASD/QE controls,
+and its REQ_MAP.DAT Camp entry is patched by the canonical MenuPage build.
 
 Usage:
     python tools/text/patch_req_main_wasd.py
