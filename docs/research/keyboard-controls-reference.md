@@ -25,10 +25,13 @@ Extracted directly from `upstream/betrayal-at-krondor/bak/SRC/` — every `key_i
 | ↓ | Step backward 後退一步 |
 | ← | Turn left 左轉 |
 | → | Turn right 右轉 |
+| W / S | Step forward / backward 前進／後退一步 |
+| A / D | Turn left / right 左轉／右轉 |
+| Q / E | Sidestep left / right 向左／向右平移 |
 | R | Follow the road forward, one tile per press 沿著道路走（偵測到可通行道路時，每按一次前進一格） |
 | Enter | Confirm / activate 確認／啟用 |
 | Esc | Back / cancel 返回／取消 |
-| Tab | Next menu widget 切換到下一個選單項目 |
+| Tab | In exploration, hold to show interactable outlines; in other menus, move to the next widget 探索時按住顯示可互動框；其他選單切換到下一個項目 |
 
 ## World-Map Exploration 世界地圖移動
 
@@ -41,11 +44,15 @@ Extracted directly from `upstream/betrayal-at-krondor/bak/SRC/` — every `key_i
 | ↓ | Move the party backward one step 隊伍後退一步 | WORLDLP.C:270 |
 | ← | Turn the party left 隊伍左轉 | WORLDLP.C:281 |
 | → | Turn the party right 隊伍右轉 | WORLDLP.C:288 |
+| W / S | Move the party forward / backward 隊伍前進／後退 | WORLDLP.C |
+| A / D | Turn the party left / right 隊伍左轉／右轉 | WORLDLP.C |
+| Q / E | Sidestep left / right 隊伍向左／向右平移 | WORLDLP.C |
 | R | Auto-step forward along a detected road, one tile per press 沿著道路走 | WORLDLP.C:295 |
+| Tab（按住） | Show the current interactive object outlines; releasing Tab removes them 顯示目前可互動物件框線，放開即隱藏 | WORLDLP.C |
 | C | Cast a spell 施放法術 | WORLDLP.C:306 |
 | M | Open the local zone map 開啟區域地圖 | WORLDLP.C:316 |
 | F | Open the full world map 開啟世界地圖 | WORLDLP.C:324 |
-| E | Open the encampment screen 開啟紮營畫面 | WORLDLP.C:328 |
+| T | Open the encampment screen 開啟紮營畫面 | WORLDLP.C |
 | B | Save a bookmark 儲存書籤 | WORLDLP.C:336 |
 | O | Open the Options / main menu 開啟選項/主選單 | WORLDLP.C:343 |
 | 1 / 2 / 3 | Select a party member — opens inventory, or the character sheet if held with Shift 選取隊伍成員（開物品欄；按住 Shift 改開角色面板） | WORLDLP.C:355 |
@@ -65,6 +72,12 @@ Extracted directly from `upstream/betrayal-at-krondor/bak/SRC/` — every `key_i
 | N | Toggle non-rotating map mode *(CD build only)* 切換「地圖不旋轉」模式（僅 CD 版） | MAP.C:377 |
 | 2 / 3 / 4 | Select a party member, same Shift behavior as world map 選取隊伍成員，Shift 行為同世界地圖 | MAP.C:405 |
 | Esc | Exit the map screen 離開地圖畫面 | MAP.C:420 |
+
+## Town / Interior Scenes 城鎮／室內場景
+
+Hold **Tab** to outline every currently active person/object hotspot; release it to return to the clean scene. No hover text is shown. The dedicated leave strip and description paging area are deliberately not outlined.
+
+按住 **Tab** 可框出目前有效的所有人物／物件熱區，放開後恢復乾淨畫面；不再顯示滑鼠懸停文字提示，離開按鈕區與說明文字翻頁區刻意不列入框線。
 
 ## Combat — Action Menu 戰鬥行動選單
 

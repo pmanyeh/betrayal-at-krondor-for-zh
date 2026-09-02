@@ -77,3 +77,13 @@ ce0456485a923d5332e9c062df48254870cd0030 Polish spell browser selection and desc
 3c31a9f0d628ee907dad0aaa45289e84a10a2774 Refine full-size spell description layout
 a15bacae465d80bac7cd57c88afc37a0dd0c123f Widen spell description column
 65c7985569e82ce7913dd9c1d93a07638f02704d Fix road-follow button refresh for WASD controls
+003153b021128a3582bda3490f406bb9cb4ccaa7 Add contextual hotspot hints
+68485a921df1eb8b44a53a72d358bb4e051c6e27 Fix contextual hint encoding
+0b5cf872eddbfa0f11c45782639a79a3a96e22f7 Keep hotspot overlays stable across page flips
+f230e38b967562300c3584de15faf0068453b4a4 Use typed far-memory release for hotspot snapshot
+5609771f08488480d6d8a0db9d65ce453f962b60 Refresh world hit tests before showing overlays
+888f5cf2df46e4ad967e836d5956db3f6d979df2 Refresh interactable objects when holding H
+3d26c2f8d61766be3339d56d86c0d848854c1019 Use Tab-only interactable outlines
+f276f57fe6a95576dfb529cb4ed34b052e1c46b2 Clip interactable outlines to world viewport
+d0ed9ec68ad5ccc9a349549210c4cb15f4548b58 Show learned spell counts by school
+83e3140fce89d0504449a694374d8be2e93dda9e Fix spellbook empty-state encoding

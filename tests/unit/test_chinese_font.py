@@ -12,8 +12,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.font.build_font import POC_GLYPHS, build_zh_font
-from tools.font.build_small_font import chars_from_ddx_small_text
+from tools.font.build_font import POC_GLYPHS, build_zh_font, decode_string, encode_string
+from tools.font.build_small_font import chars_from_ddx_small_text, chars_from_translations
 
 
 class TestChineseFont(unittest.TestCase):
@@ -79,6 +79,45 @@ class TestChineseFont(unittest.TestCase):
             chars = set(chars_from_ddx_small_text(root))
             self.assertEqual(chars, set("城鎮標題章節面板完整文字"))
             self.assertNotIn("內", chars)
+
+    def test_generated_small_font_covers_every_small_ui_source(self):
+        repo = Path(__file__).resolve().parents[2]
+        translated = repo / "localization" / "translated"
+        source_names = [
+            "UI_HARDCODED.json",
+            "KEYWORD.json",
+            "CHARACTER_NAMES.json",
+            "OBJINFO.json",
+            "SPELLS.json",
+            "MNAMES.json",
+            "MENUPAGE.json",
+        ]
+        chars = set(chars_from_translations([translated / name for name in source_names]))
+        chars.update(chars_from_ddx_small_text(translated))
+
+        mapping = json.loads(
+            (repo / "localization" / "generated" / "zh_mapping.json").read_text(encoding="utf-8")
+        )["char_to_id"]
+        font_data = (repo / "localization" / "generated" / "ZHSTAT.DAT").read_bytes()
+        magic, version, width, height, count = struct.unpack_from("<4sHBBH", font_data)
+        self.assertEqual((magic, version, width, height), (b"ZHSM", 1, 10, 10))
+        entry_size = 2 + ((width + 7) // 8) * height
+        glyph_ids = {
+            struct.unpack_from("<H", font_data, 10 + i * entry_size)[0]
+            for i in range(count)
+        }
+        missing = sorted(ch for ch in chars if mapping[ch] not in glyph_ids)
+        self.assertEqual(missing, [], f"ZHSTAT.DAT is missing small-UI glyphs: {''.join(missing)}")
+
+    def test_spellbook_not_learned_hardcoded_bytes(self):
+        repo = Path(__file__).resolve().parents[2]
+        mapping = json.loads(
+            (repo / "localization" / "generated" / "zh_mapping.json").read_text(encoding="utf-8")
+        )["char_to_id"]
+        encoded = encode_string("尚未學習", mapping)
+        self.assertEqual(encoded, bytes.fromhex("97 3b 82 21 8e 41 86 3a"))
+        decoded = decode_string(encoded, {glyph_id: ch for ch, glyph_id in mapping.items()})
+        self.assertEqual(decoded, "尚未學習")
 
 
 if __name__ == "__main__":

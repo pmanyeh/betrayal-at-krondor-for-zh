@@ -618,6 +618,13 @@
       "translation": "請謹慎使用……",
       "status": "translated",
       "notes": "Cheat menu warning; rendered with the 10x10 small font."
+    },
+    {
+      "id": "CHARSCRN.C#charscreen_spellbook_draw:not_learned",
+      "source": "Not learned",
+      "translation": "尚未學習",
+      "status": "translated",
+      "notes": "Shown in the spell-school list area when the selected school has no learned spells."
     }
   ]
 }

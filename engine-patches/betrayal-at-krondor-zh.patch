@@ -32,7 +32,7 @@ index 657aa192c09ea43e66c0aabfd90482817cdc6444..eaa76fabf67913e28101de13a04b0260
  
  #endif
 diff --git a/bak/SRC/CHAR/CHARSCRN.C b/bak/SRC/CHAR/CHARSCRN.C
-index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf40c09b50 100644
+index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553e81a0679 100644
 --- a/bak/SRC/CHAR/CHARSCRN.C
 +++ b/bak/SRC/CHAR/CHARSCRN.C
 @@ -15,16 +15,18 @@
@@ -55,7 +55,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
  #include "statname.h"
  
  char g_dialog_in_char_screen = 0;
-@@ -36,64 +38,317 @@ struct SpellRecord {
+@@ -36,64 +38,346 @@ struct SpellRecord {
      int idx;
  };
  
@@ -72,9 +72,12 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
 +#define SPELLBOOK_ZH_ADVANCE 15
 +
 +static int g_spellbookIcons[SPELLBOOK_SCHOOL_COUNT];
++static int g_spellbookKnownCounts[SPELLBOOK_SCHOOL_COUNT];
 +static struct SpellRecord g_spellbookSpells[SPELLBOOK_MAX_SPELLS];
 +static char g_spellbookDocRows[SPELLBOOK_DOC_ROWS][SPELLBOOK_DOC_ROW_LEN];
 +static char g_spellbookDocText[400];
++static unsigned char far s_szSpellbookNotLearned[] =
++    "\x97\x3b\x82\x21\x8e\x41\x86\x3a"; /* 尚未學習 */
 +
 +static void far charscreen_spellbook_draw_line(unsigned char far *text, int x, int y) {
 +    while (*text != 0) {
@@ -140,12 +143,14 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
 +        res_fread(&spell_icon, 1, 2, file);
 +        res_fread(&spell_count, 1, 2, file);
 +        g_spellbookIcons[row] = spell_icon;
++        g_spellbookKnownCounts[row] = 0;
 +        for (spell_idx = 0; spell_idx < spell_count; spell_idx++) {
 +            res_fread(&spell_rec, 1, 0x1a, file);
-+            if (row == selected_school && known_count < SPELLBOOK_MAX_SPELLS &&
-+                ((1 << (spell_rec.idx % 0x10)) &
++            if (((1 << (spell_rec.idx % 0x10)) &
 +                 actor->spellsKnown[spell_rec.idx / 0x10]) != 0) {
-+                g_spellbookSpells[known_count++] = spell_rec;
++                g_spellbookKnownCounts[row]++;
++                if (row == selected_school && known_count < SPELLBOOK_MAX_SPELLS)
++                    g_spellbookSpells[known_count++] = spell_rec;
              }
 -            g_graphics_context.bText_fg_color = '\x01';
 -
@@ -228,6 +233,10 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
 +    int row;
 +    int panel_y;
 +    int y;
++    int badge_x;
++    int badge_y;
++    int text_width;
++    char count_text[4];
 +    char savedSmallZhMode;
 +    char savedMixedZhMode;
 +    ClipRect savedClip;
@@ -246,6 +255,18 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
 +        g_graphics_context.bGfx_outline_color = row == school ? 0x89 : 0x8e;
 +        draw_rect_filled(6, panel_y, 0x27, 0x1e);
 +        resblit_sprite(g_pButtonSpriteUp[g_spellbookIcons[row]], 9, panel_y + 1);
++        sprintf(count_text, "%d", g_spellbookKnownCounts[row]);
++        badge_x = 0x21;
++        badge_y = panel_y + 0x12;
++        g_graphics_context.bGfx_fill_color = 0;
++        g_graphics_context.bGfx_outline_color = 10;
++        draw_rect_filled(badge_x, badge_y, 10, 10);
++        savedSmallZhMode = g_bSmallZhMode;
++        g_bSmallZhMode = 1;
++        text_width = font_text_pixel_width(count_text);
++        g_graphics_context.bText_fg_color = 10;
++        font_draw_text_ds(count_text, badge_x + (10 - text_width) / 2, badge_y + 1);
++        g_bSmallZhMode = savedSmallZhMode;
 +    }
 +
 +    savedClipEnabled = g_graphics_context.bClip_enabled;
@@ -268,6 +289,14 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
 +        g_graphics_context.bText_fg_color = 10;
 +        charscreen_spellbook_draw_line((unsigned char far *)g_spellbookSpells[row].name,
 +                                       SPELLBOOK_LIST_X, y);
++    }
++    if (known_count == 0) {
++        g_graphics_context.bText_fg_color = 1;
++        charscreen_spellbook_draw_line(s_szSpellbookNotLearned,
++                                       SPELLBOOK_LIST_X + 1, 9);
++        g_graphics_context.bText_fg_color = 10;
++        charscreen_spellbook_draw_line(s_szSpellbookNotLearned,
++                                       SPELLBOOK_LIST_X, 8);
 +    }
 +    g_graphics_context.clip.xmin = SPELLBOOK_DOC_X;
 +    g_graphics_context.clip.xmax = 0x13d;
@@ -416,7 +445,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
          }
      }
  }
-@@ -119,11 +374,10 @@ static void far charscreen_draw_sheet_stat_row(int stat_idx, int value, int part
+@@ -119,11 +403,10 @@ static void far charscreen_draw_sheet_stat_row(int stat_idx, int value, int part
          sprintf(buf, "N/A");
      }
      if (improved != 0) {
@@ -430,7 +459,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
          invui_draw_text_aligned_shadow((unsigned char far *)buf, x_base + 0x71, y_pos - 1, 2, 10, 1);
      }
      if (value < 0) {
-@@ -172,34 +426,47 @@ static void far charscreen_draw_stat_row(int stat_idx, int cur_val, int max_val,
+@@ -172,34 +455,47 @@ static void far charscreen_draw_stat_row(int stat_idx, int cur_val, int max_val,
      char buf[10];
      unsigned short improved;
  
@@ -482,7 +511,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
      g_graphics_context.bClip_enabled = 1;
      g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
      g_graphics_context.clip.ymax = 199;
-@@ -214,13 +481,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+@@ -214,13 +510,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x19], 0x130, 9, 2);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 9, 0);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 0x4e, 1);
@@ -503,7 +532,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
      for (; i < 7; i++) {
          if ((char)g_gameState.abActorStatusRanks[party_slot][i] > 0) {
              sprintf(buf, "%Fs (%d%)", g_aConditionInfo[i].pName,
-@@ -229,8 +501,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+@@ -229,8 +530,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
                                             0x8f);
          }
      }
@@ -514,7 +543,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
      }
      if (full_sheet != 0) {
          resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x18], 2, 0x6b, 0);
-@@ -269,6 +542,11 @@ void charscreen_info_loop(Combatant *actor) {
+@@ -269,6 +571,11 @@ void charscreen_info_loop(Combatant *actor) {
      slot = gstate_find_party_slot(actor);
      if (slot >= 0) {
          page = menupage_load("req_info.dat");
@@ -526,7 +555,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..f63e1a945701a82b6e6d7fb4d206aecf
          menupage_begin(page);
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage1Base;
          resblit_load_pal_or_stream("DIALOG.SCR");
-@@ -298,7 +576,7 @@ void charscreen_info_loop(Combatant *actor) {
+@@ -298,7 +605,7 @@ void charscreen_info_loop(Combatant *actor) {
                          }
                      }
                      g_nPalBlendMode = 0;
@@ -1353,10 +1382,147 @@ index 64617354ec57df08bb0d82a542375aafebecd1cc..0e3e858c89d3e7329158d358bf199447
      }
  }
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f8653698ddba462 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1c3172ff83dfc347b3107e1b35401ba2d197cef0 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
-@@ -256,6 +256,7 @@ short far world3d_main_loop(void) {
+@@ -15,6 +15,7 @@
+ #include "SRC/R3D/SCENE/WORLDHIT.H"
+ #include "SRC/GFX/SCREEN/SCREEN.H"
+ #include "SRC/UI/MENUPAGE.H"
++#include "SRC/UI/DLGWIDG.H"
+ #include "SRC/GFX/PALETTE/PALETTE.H"
+ #include "SRC/DIALOG/EVTCOND.H"
+ #include "SRC/GAME/STATE/GSTATE.H"
+@@ -41,6 +42,44 @@ MenuPage *g_pReqMainPage = {0};
+ short g_nSceneReloadPending = 0;
+ short g_nHotspotActivateRequest = 0;
+ 
++#define CONTEXT_HOTSPOT_SCANCODE 0x0f /* Tab */
++
++static int worldloop_context_overlay_wanted(void) {
++    return key_is_down(CONTEXT_HOTSPOT_SCANCODE) != 0;
++}
++
++static void worldloop_context_overlay_draw(void) {
++    int i;
++    int x;
++    int y;
++    int x2;
++    int y2;
++    int viewport_x2;
++    int viewport_y2;
++    Rect far *r;
++
++    /* Compose on the back page before the flip.  The caller then copies the
++       visible result back to the other page, keeping both VGA pages identical
++       while Tab is held instead of alternating clean/outlined frames. */
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    viewport_x2 = g_world_widget->viewport.x + g_world_widget->viewport.width;
++    viewport_y2 = g_world_widget->viewport.y + g_world_widget->viewport.height;
++    for (i = 0; i < (int)g_nHitTestEntryCount; i++) {
++        r = &g_pWorldHitTestTable[i].rect;
++        x = (r->x < g_world_widget->viewport.x) ? g_world_widget->viewport.x : r->x;
++        y = (r->y < g_world_widget->viewport.y) ? g_world_widget->viewport.y : r->y;
++        x2 = r->x + r->width;
++        y2 = r->y + r->height;
++        if (x2 > viewport_x2)
++            x2 = viewport_x2;
++        if (y2 > viewport_y2)
++            y2 = viewport_y2;
++        if (x2 > x && y2 > y)
++            uiwidget_hotspot_outline_draw(x, y, x2 - x, y2 - y, 0xf);
++    }
++}
++
+ void far worldloop_req_main_screen_load(void) {
+     g_pReqMainPage = menupage_load("req_main.dat");
+     map_req_map_screen_load();
+@@ -73,6 +112,8 @@ short far world3d_main_loop(void) {
+        hotspot_active to DI. */
+     register int render_dirty;   /* party-dirty / render-scene flag */
+     register int hotspot_active; /* hotspot / descent / entered flag */
++    int context_overlay_drawn;
++    int context_overlay_wanted;
+ 
+     exit_mode = 0;
+     keep_running = 1;
+@@ -82,6 +123,7 @@ short far world3d_main_loop(void) {
+     redraw_caption = 0;
+     pending_events = 0;
+     key_repeat_armed = 0;
++    context_overlay_drawn = 0;
+     focused_entry = (MenuEntry *)0;
+     g_nHotspotActivateRequest = 0;
+     g_bZoneEntryInProgress = 0;
+@@ -140,11 +182,20 @@ short far world3d_main_loop(void) {
+             redraw_menu = 0;
+             redraw_caption = 0;
+             render_dirty = 0;
++            context_overlay_drawn = 0;
+             goto skip_render;
+         }
+         if (g_bZoneEntryInProgress != 0)
+             goto skip_render;
+ 
++        context_overlay_wanted = worldloop_context_overlay_wanted();
++        /* Re-render on every overlay-state transition so releasing Tab restores
++           a clean page.  Tab must use the hit-test renderer: the ordinary scene
++           renderer does not rebuild WorldHotspot, so it can otherwise outline
++           an object from the previous view or interaction. */
++        if (context_overlay_drawn != context_overlay_wanted)
++            render_dirty = 1;
++
+         g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
+             g_graphics_context.wVgaPage2Base;
+         if (redraw_menu != 0) {
+@@ -154,9 +205,14 @@ short far world3d_main_loop(void) {
+             spellfx_draw_events_caption();
+         }
+         if (render_dirty != 0) {
+-            world_render_scene_dispatch(hotspot_active);
++            if (context_overlay_wanted != 0)
++                world_render_tick_objects();
++            else
++                world_render_scene_dispatch(hotspot_active);
+             uiwidget_compass_draw();
+         }
++        if (context_overlay_wanted != 0)
++            worldloop_context_overlay_draw();
+         screen_frame_present();
+         g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
+             g_graphics_context.wVgaPage2Base;
+@@ -168,10 +224,11 @@ short far world3d_main_loop(void) {
+             spellfx_draw_events_caption();
+             redraw_caption = 0;
+         }
+-        if (render_dirty != 0) {
++        if (render_dirty != 0 || context_overlay_wanted != 0) {
+             screen_frame_sync_buffers_rect(0xb, 0x80);
+             render_dirty = 0;
+         }
++        context_overlay_drawn = context_overlay_wanted;
+     skip_render:
+ 
+         if (g_gameState.ground_pile->itemCount != '\0') {
+@@ -203,7 +260,15 @@ short far world3d_main_loop(void) {
+                 hotspot_active = 0;
+             }
+             g_dwDialogInputCooldown = 0;
+-            action_id = menupage_run(g_pReqMainPage, &redraw_menu);
++            /* Tab is reserved for held interactable outlines in exploration;
++               do not let the generic menu navigator move the mouse cursor. */
++            if (key_is_down(CONTEXT_HOTSPOT_SCANCODE) != 0) {
++                g_key_scancode = 0;
++                g_key_ascii = 0;
++                action_id = 0;
++            } else {
++                action_id = menupage_run(g_pReqMainPage, &redraw_menu);
++            }
+             prev_focused_entry = focused_entry;
+             focused_entry = menupage_focused_entry();
+             if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
+@@ -256,6 +321,7 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
@@ -1364,7 +1530,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f865369
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +268,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +333,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -1372,7 +1538,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f865369
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +280,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +345,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -1402,7 +1568,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f865369
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +310,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +375,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -1410,7 +1576,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f865369
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -325,7 +351,7 @@ short far world3d_main_loop(void) {
+@@ -325,7 +416,7 @@ short far world3d_main_loop(void) {
                  fmap_screen_run();
                  g_nSceneReloadPending = 1;
                  goto post_dispatch;
@@ -1419,7 +1585,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4b1871a1a5690ef3497ea42a6f865369
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe5, 1);
                      goto post_dispatch;
-@@ -383,7 +409,12 @@ short far world3d_main_loop(void) {
+@@ -383,7 +474,12 @@ short far world3d_main_loop(void) {
                  }
                  redraw_menu = 1;
              after_move:
@@ -2511,10 +2677,18 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..4f1a0054648a687f2f40a0f51d80b520
  
  void modalscreen_rest_until_time(Actor far *pActor) {
 diff --git a/bak/SRC/SCREENS/TOWNSCN.C b/bak/SRC/SCREENS/TOWNSCN.C
-index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d91304133c3d3bf 100644
+index a48aa290c865bb895d5de6e6a8f84b6c31505657..b985abac1b85d3791b99eefcb6d47a76534907e8 100644
 --- a/bak/SRC/SCREENS/TOWNSCN.C
 +++ b/bak/SRC/SCREENS/TOWNSCN.C
-@@ -34,8 +34,40 @@
+@@ -19,6 +19,7 @@
+ #include "SRC/INPUT/KEYBOARD.H"
+ #include "SRC/GFX/SCREEN/SCREEN.H"
+ #include "SRC/UI/MENUPAGE.H"
++#include "SRC/UI/DLGWIDG.H"
+ #include "SRC/GFX/PALETTE/PALETTE.H"
+ #include "SRC/AUDIO/CHAN/AUDSETIN.H"
+ #include "SRC/GAME/STATE/GSTATE.H"
+@@ -34,8 +35,42 @@
  #include "SRC/GAME/ACTOR/ACTORREC.H"
  #include "SRC/R3D/SCENE/ZONE.H"
  #include "SRC/SCREENS/CIPHER.H"
@@ -2525,6 +2699,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
 +#include "SRC/GFX/DRIVER/VIDINIT.H"
 +#include "SRC/SYS/DOSMEM.H"
 +#include "SRC/SYS/CFGPARSE.H"
++#include "SRC/UI/UIWIDGET.H"
  #include "defines.h"
  
 +/* Dedicated "leave scene" button: a compact panel in the top-right
@@ -2551,11 +2726,72 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
 +
 +static unsigned char far s_szTownExitLabel[] = "\x84\x26\x82\x2c"; /* 離開 */
 +static unsigned char far *s_townDescClean = 0; /* clean-strip snapshot for paging */
++static unsigned char far *s_townContextClean = 0; /* clean scene under transient hints */
 +static int s_exitBarAction = -1;  /* dropped exit bar's action id (idx+0x80), -1 if none */
  
  unsigned short g_dialog_anim_channel;
  
-@@ -77,6 +109,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -44,6 +79,59 @@ MenuPage *g_pTownMenuPage = {0};
+ short g_nTownSceneAnimHandle = -1;
+ unsigned short g_dialog_in_scene = 0x0000;
+ 
++#define TOWNSCENE_CONTEXT_SCANCODE 0x0f /* Tab */
++
++static int townscene_context_overlay_wanted(void) {
++    if (s_townContextClean == (unsigned char far *)0)
++        return 0;
++    return key_is_down(TOWNSCENE_CONTEXT_SCANCODE) != 0;
++}
++
++static void townscene_context_snapshot_clean(void) {
++    if (s_townContextClean == (unsigned char far *)0)
++        s_townContextClean = (unsigned char far *)alloc_far(
++            (unsigned long)rect_byte_size(0x140, 200), 0L);
++    if (s_townContextClean != (unsigned char far *)0) {
++        g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
++        cga_save_rect_to_buffer(s_townContextClean, 0, 0, 0x140, 200);
++    }
++}
++
++static void townscene_context_restore_back(void) {
++    if (s_townContextClean == (unsigned char far *)0)
++        return;
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    cga_rect_paste_from_buffer(s_townContextClean, 0, 0, 0x140, 200);
++}
++
++static void townscene_context_clear_both_pages(void) {
++    townscene_context_restore_back();
++    screen_frame_present();
++    screen_frame_sync_buffers_rect(0, 200);
++}
++
++static void townscene_context_overlay_draw(void) {
++    int i;
++    int x;
++    int y;
++    MenuEntry *entry;
++
++    /* Compose into the back page before flipping.  The caller synchronizes
++       the visible composite to the other page, preventing clean/outlined
++       pages from alternating while Tab remains held. */
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    entry = g_pTownMenuPage->pEntries + 1;
++    for (i = 1; i < (int)g_pTownMenuPage->wEntry_count; i++, entry++) {
++        if (entry->wAction_id < 0x80)
++            continue;
++        x = g_pTownMenuPage->rect.x + entry->rect.x;
++        y = g_pTownMenuPage->rect.y + entry->rect.y;
++        uiwidget_hotspot_outline_draw(x, y, entry->rect.width, entry->rect.height, 0xf);
++    }
++}
++
+ static void far townscene_story_actors_destr(void) {
+     int actor;
+ 
+@@ -77,6 +165,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
      static char g_szTownSceneFilenameSuffix[6] = "?.DAT";
      char fname[16];
      int i;
@@ -2563,7 +2799,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
      unsigned int size;
      MenuEntry *pEntry;
      ResFile *file;
-@@ -111,9 +144,48 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -111,9 +200,48 @@ static int far townscene_load(int chapter, int sub, int preserve) {
          }
      }
  
@@ -2613,7 +2849,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
      for (i = 0; i < g_pCurrentTownScene->nActorCount; i++) {
          g_pCurrentTownScene->pAActors[i].pDdxRecord =
              (preserve != 0) ? (void far *)dialog_load_record_by_key(
-@@ -123,6 +195,13 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -123,6 +251,13 @@ static int far townscene_load(int chapter, int sub, int preserve) {
              if ((pActor->nGateEventId == 0) ||
                  (((unsigned int)pActor->nGateMin <= gstate_event_read(pActor->nGateEventId)) &&
                   (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))) {
@@ -2627,7 +2863,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
                  pEntry->rect.x = pActor->rect.x - g_pTownMenuPage->rect.x;
                  pEntry->rect.y = pActor->rect.y - g_pTownMenuPage->rect.y;
                  pEntry->rect.width = pActor->rect.width;
-@@ -131,11 +210,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -131,11 +266,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
                  pEntry->wAction_id = i + 0x80;
                  g_pTownMenuPage->wEntry_count++;
                  pEntry++;
@@ -2655,7 +2891,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
  
      g_pCurrentTownScene->pDdxRecord =
          (void far *)dialog_load_record_by_key(g_pCurrentTownScene->dwDialogKey, 0);
-@@ -195,25 +290,89 @@ static void far townscene_shop_menu_close(void) {
+@@ -195,25 +346,89 @@ static void far townscene_shop_menu_close(void) {
      return;
  }
  
@@ -2759,11 +2995,13 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
      }
      return;
  }
-@@ -319,12 +478,14 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -319,12 +534,17 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      unsigned short savedBlendMode;
      unsigned char far *pPalSaved;
      int needRefresh;
 +    int scrollDesc;
++    int contextOverlayDrawn;
++    int contextOverlayWanted;
      TownSceneActor *pA;
      int di;
  
@@ -2771,14 +3009,17 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
      dialogLoaded = 0;
      exitFlag = 0;
 +    scrollDesc = 0;
++    contextOverlayDrawn = 0;
      sceneIdx = scene_index;
      savedMusic = audio_music_play(-999);
      musicTrack = -1;
-@@ -409,17 +570,41 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -409,17 +629,68 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                  screen_frame_present();
                  screen_frame_sync_buffers_rect(0, 200);
              }
++            townscene_context_snapshot_clean();
 +            scrollDesc = 0;
++            contextOverlayDrawn = 0;
          }
  
 -        /* Menu-run loop: block on the menu until the user picks an action. */
@@ -2787,7 +3028,20 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
 +           and stays in the loop, so the scene stays interactive while a
 +           multi-page Chinese description is being read. */
          while (action == 0) {
-             action = menupage_run(g_pTownMenuPage, (unsigned short *)&idx);
+-            action = menupage_run(g_pTownMenuPage, (unsigned short *)&idx);
++            /* Tab is reserved for held interactable outlines in town scenes;
++               do not let the generic menu navigator move the mouse cursor. */
++            if (key_is_down(TOWNSCENE_CONTEXT_SCANCODE) != 0) {
++                g_key_scancode = 0;
++                g_key_ascii = 0;
++                action = 0;
++            } else {
++                action = menupage_run(g_pTownMenuPage, (unsigned short *)&idx);
++            }
++            if (action != 0 && contextOverlayDrawn != 0) {
++                townscene_context_clear_both_pages();
++                contextOverlayDrawn = 0;
++            }
 +            if (action == TOWNSCENE_PAGE_ACTION) {
 +                if (g_wTextWrapLinesRemaining != 0)
 +                    scrollDesc += g_wTextWrapLinesDrawn;
@@ -2797,13 +3051,27 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
 +                    townscene_dlg_draw_page(g_pCurrentTownScene->pDdxRecord, scrollDesc);
 +                    screen_frame_present();
 +                    screen_frame_sync_buffers_rect(0, 200);
++                    townscene_context_snapshot_clean();
 +                }
 +                action = 0;
 +            }
              if (screen_input_poll_confirm_cancel() == 2) {
                  screen_cursor_set_shape(3);
              }
-             screen_frame_present();
+-            screen_frame_present();
++            if (action == 0) {
++                contextOverlayWanted = townscene_context_overlay_wanted();
++                if (contextOverlayWanted != contextOverlayDrawn) {
++                    townscene_context_restore_back();
++                    if (contextOverlayWanted != 0)
++                        townscene_context_overlay_draw();
++                    screen_frame_present();
++                    screen_frame_sync_buffers_rect(0, 200);
++                    contextOverlayDrawn = contextOverlayWanted;
++                } else {
++                    screen_frame_present();
++                }
++            }
          }
  
 +        /* ESC / the leave button resolve to the scene's exit-bar actor when
@@ -2817,10 +3085,11 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
          /* action < 0x80 skips the actor dispatch below. */
          if (action >= 0x80) {
  
-@@ -647,10 +832,12 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -647,10 +918,13 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
                  }
++                townscene_context_snapshot_clean();
 +                scrollDesc = 0;
              }
          } /* end if (action >= 0x80) */
@@ -2831,7 +3100,18 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
          if (action == 1) {
              townscene_anim_channel_play_sync(g_pCurrentTownScene->nExitAnim);
              g_pPendingPalette = 0;
-@@ -681,6 +868,20 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -661,6 +935,10 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+     }
+ 
+     /* Loop exit: tear down the scene and restore the prior game state. */
++    if (s_townContextClean != (unsigned char far *)0) {
++        galloc_safe_farfree(s_townContextClean);
++        s_townContextClean = (unsigned char far *)0;
++    }
+     g_pPalQueuedForFlip = 0;
+     townscene_story_actors_destr();
+     townscene_shop_menu_close();
+@@ -681,6 +959,20 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      g_nMapReloadPending = 1;
  }
  
@@ -2852,7 +3132,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
  void far townscene_cheat_menu_screen(void) {
      unsigned int sel;
      unsigned short redraw;
-@@ -696,10 +897,7 @@ void far townscene_cheat_menu_screen(void) {
+@@ -696,10 +988,7 @@ void far townscene_cheat_menu_screen(void) {
      screen_render_main_frame("DIALOG.SCX");
      do {
          if (redraw != 0) {
@@ -2864,7 +3144,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
              menupage_draw(page);
              screen_frame_present();
              screen_frame_sync_buffers_rect(0, 200);
-@@ -773,10 +971,7 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -773,10 +1062,7 @@ void far townscene_chest_open_with_cipher(void) {
              screen_render_main_frame("DIALOG.SCX");
              do {
                  if (redraw != 0) {
@@ -2876,7 +3156,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..c32aefb172a935db10c4b4d12d913041
                      menupage_draw(page);
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
-@@ -791,6 +986,12 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -791,6 +1077,12 @@ void far townscene_chest_open_with_cipher(void) {
                      cmbinv_inventory_screen_run(actor, 0, 0);
                      screen_render_main_frame("DIALOG.SCX");
                      break;
@@ -3166,6 +3446,94 @@ index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c4
      }
      g_wTextWrapXAccum = 0;
      g_wTextWrapLinesDrawn = (count - g_wTextWrapLinesRemaining) - fl;
+diff --git a/bak/SRC/UI/UIWIDGET.C b/bak/SRC/UI/UIWIDGET.C
+index 258c6b3513f696baa7967c53d793d0938e069fb2..2cecf72ace78f28b13ef03ed665e73b0400b2f2e 100644
+--- a/bak/SRC/UI/UIWIDGET.C
++++ b/bak/SRC/UI/UIWIDGET.C
+@@ -19,6 +19,72 @@ unsigned short g_nSkyHorizonRowCached = 0xffff;
+ unsigned short g_bTexturedPolyEnabled = 0x0001;
+ short g_nGlyphColorShift = 0;
+ 
++/* Corner brackets stay legible over both bright and dark scenery while
++   obscuring much less of the original 320x200 artwork than solid boxes. */
++void uiwidget_hotspot_outline_draw(int x, int y, int w, int h, int color) {
++    int x2;
++    int y2;
++    int arm;
++    unsigned char savedClip;
++    ClipRect savedClipRect;
++    unsigned char savedOutlineColor;
++
++    if (w <= 0 || h <= 0)
++        return;
++    x2 = x + w - 1;
++    y2 = y + h - 1;
++    if (x2 < 0 || y2 < 0 || x >= (int)g_wScreen_width || y >= (int)g_wScreen_height)
++        return;
++    if (x < 0)
++        x = 0;
++    if (y < 0)
++        y = 0;
++    if (x2 >= (int)g_wScreen_width)
++        x2 = g_wScreen_width - 1;
++    if (y2 >= (int)g_wScreen_height)
++        y2 = g_wScreen_height - 1;
++    arm = 5;
++    if (x2 - x < arm * 2)
++        arm = (x2 - x + 1) / 2;
++    if (y2 - y < arm * 2 && (y2 - y + 1) / 2 < arm)
++        arm = (y2 - y + 1) / 2;
++    if (arm < 1)
++        arm = 1;
++
++    savedClip = g_graphics_context.bClip_enabled;
++    savedClipRect = g_graphics_context.clip;
++    savedOutlineColor = g_graphics_context.bGfx_outline_color;
++    g_graphics_context.bClip_enabled = 1;
++    g_graphics_context.clip.xmin = 0;
++    g_graphics_context.clip.ymin = 0;
++    g_graphics_context.clip.xmax = g_wScreen_width - 1;
++    g_graphics_context.clip.ymax = g_wScreen_height - 1;
++
++    g_graphics_context.bGfx_outline_color = 0;
++    draw_line(x + 1, y + 1, x + arm + 1, y + 1);
++    draw_line(x + 1, y + 1, x + 1, y + arm + 1);
++    draw_line(x2 - arm + 1, y + 1, x2, y + 1);
++    draw_line(x2, y + 1, x2, y + arm + 1);
++    draw_line(x + 1, y2, x + arm + 1, y2);
++    draw_line(x + 1, y2 - arm + 1, x + 1, y2);
++    draw_line(x2 - arm + 1, y2, x2, y2);
++    draw_line(x2, y2 - arm + 1, x2, y2);
++
++    g_graphics_context.bGfx_outline_color = (unsigned char)color;
++    draw_line(x, y, x + arm, y);
++    draw_line(x, y, x, y + arm);
++    draw_line(x2 - arm, y, x2, y);
++    draw_line(x2, y, x2, y + arm);
++    draw_line(x, y2, x + arm, y2);
++    draw_line(x, y2 - arm, x, y2);
++    draw_line(x2 - arm, y2, x2, y2);
++    draw_line(x2, y2 - arm, x2, y2);
++
++    g_graphics_context.bGfx_outline_color = savedOutlineColor;
++    g_graphics_context.clip = savedClipRect;
++    g_graphics_context.bClip_enabled = savedClip;
++}
++
+ void uiwidget_tile_sprite_load(void) {
+     g_tile_sprite = resblit_load_asset_table("pat.bmp", 0);
+     return;
+diff --git a/bak/SRC/UI/UIWIDGET.H b/bak/SRC/UI/UIWIDGET.H
+index 9457024fa1207470fa27832a4983654fb003b03c..9d9815f20a27a6bfbfe868a84bdfe6b112e446d6 100644
+--- a/bak/SRC/UI/UIWIDGET.H
++++ b/bak/SRC/UI/UIWIDGET.H
+@@ -22,5 +22,6 @@ extern void uiwidget_compass_load(void);
+ extern void uiwidget_compass_free(void);
+ extern void uiwidget_compass_draw(void);
+ extern void uiwidget_draw_beveled_button(int x, int y, int w, int h);
++extern void uiwidget_hotspot_outline_draw(int x, int y, int w, int h, int color);
+ 
+ #endif
 diff --git a/bak/SRC/UI/WIDGET.C b/bak/SRC/UI/WIDGET.C
 index 2af1c575ddcd15c8ab21b24fb094261af92bafa3..172bfe29971aef11b9f44be9affb54799933b946 100644
 --- a/bak/SRC/UI/WIDGET.C
