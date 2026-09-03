@@ -74,10 +74,10 @@
 ## 紮營畫面圖片式按鈕中文化
 
 - `REQ_CAMP.DAT` 三個 type-3 控制項的字串欄位全為 null；英文 `Rest Until Healed`、`Cancel`、`Exit` 直接烙在 sprite 圖片中，因此 `menupage_translate.py` 無法擷取或覆寫。
-- `ENCAMP.C` 載入該頁後將三個控制項切換為同尺寸的 type-0 原生文字按鈕，分別顯示「休息至康復／取消／離開」。共用 `widget_button_render_full()` 已會把中文按鈕標籤切換成 10×10 小字並置中。
+- `ENCAMP.C` 載入該頁後將三個控制項切換為同尺寸的 type-6 原生文字按鈕，分別顯示「休息至康復／取消／離開」。共用 `widget_draw_text_button()` 已會把中文按鈕標籤切換成 10×10 小字並置中。
 - 中文 static 字串指標只在 `menupage_draw()` 期間暫掛，畫完立即清除，避免 `menupage_free()` 將其誤判為動態配置 string blob 的基底。
 - `UI_HARDCODED.json` 新增三筆翻譯來源；小字庫重建為 990 glyph／21790 bytes，SHA-256 `e060b5ec3b8c8b7111256afb422b2fd0831eab9a9ceced9ed7a2f8c564c1d0a6`。
-- 引擎提交：`ed24b0ded5a6cba64b093563a204ef4ce2580f27`。待實機確認三種按鈕狀態的中文字、置中、按下反白及操作行為。
+- 首版 type-0 配色實機顯示為「一般狀態深色／按下狀態亮色」；依回報改用 type-6，使一般狀態較亮、按下狀態較暗，而且僅影響紮營三顆按鈕。引擎提交：`ed24b0ded5a6cba64b093563a204ef4ce2580f27`；配色修正：`8dbeb43a4c7f25a67b0d4d6c2fc6f346d3fdf352`。
 
 ## 俯瞰地圖現代鍵盤操作
 
@@ -93,8 +93,8 @@
 
 - Python 測試：100 passed。
 - `dist/test_v100_zh/krondor.exe`：468768 bytes。
-- SHA-256：`becb8ea51d34971e4015f5c9aea87ade0a59608b120f6300e90f80f7ad3d8ec2`。
+- SHA-256：`9bc7192a9e3250a8f60c79d31a92400a584449f4ef6fdab0d7cad17753054271`。
 - `dist/test_v100_zh/REQ_MAP.DAT` entry 8 action：`0x14`。
-- 引擎最終提交：`ed24b0ded5a6cba64b093563a204ef4ce2580f27`。
-- 引擎最終 tree：`f4b26720a6974a4d384dc8d44ce95cd8264ba2a8`。
+- 引擎最終提交：`8dbeb43a4c7f25a67b0d4d6c2fc6f346d3fdf352`。
+- 引擎最終 tree：`c1cf80da2aed5bc9cdac45faf9ea2a9f0bb6bc4a`。
 - Windows 與 WSL 引擎工作樹原有的 VESA／EVG 實驗修改均保留為未提交 WIP，未混入本輪提交或封存補丁。
