@@ -62,13 +62,13 @@
 
 ## 法術察覺興趣點留存
 
-- 支援三種原版世界察覺法術：`伊夏之眼`（容器）、`The Unseen`（食物）與 `Nacre Cicatrix`（魔法物品）。只有法術原本確實畫出紅點的固定世界物件才會被記錄，因此座標直接沿用遊戲物件本身，不需要另建人工座標表。
+- 支援三種原版世界察覺法術：`伊夏之眼`（容器）、`The Unseen`（食物）與 `Nacre Cicatrix`（魔法物品）。只有法術原本確實畫出紅點的世界物件才會被記錄，因此座標直接沿用遊戲物件本身，不需要另建人工座標表。
 - 關閉法術介面後，已察覺物件會在普通俯瞰地圖以原版風格的小紅點顯示；投影沿用俯瞰地圖座標與視野比例，因此能隨縮放與平移正確移動。
-- 只接受 `g_pVisible_entry_pool` 與 `g_pFixed_object_entries` 的穩定物件。戰鬥遭遇清單中的敵人與其他臨時／移動目標不留存，以免地圖累積失效位置。
+- 首版只接受 `g_pVisible_entry_pool` 與 `g_pFixed_object_entries` 的穩定物件；實機因而出現同一次法術兩個紅點只留下一筆的情形。當時的 `TEMP.GAM` 可直接驗證只寫入 zone 1／shape 162／`(672800,876000)`。修正版依「法術實際顯示即留存」規則，也記錄 `g_apCombat_zone_actor_lists` 遭遇清單的紅點；這類目標若之後移動，地圖保留的是施法當下的位置。
 - 記錄以 zone、shape、世界 x/y 去重，並合併三種察覺類別遮罩。資料附加在 `TEMP.GAM` 原始內容之後，存檔與讀檔改為接受基準大小到擴充上限之間的可變長度；舊存檔沒有擴充標頭時直接視為空清單，無須轉檔。
-- 最多保存 1600 筆。離線掃描十章 WLD 的法術候選固定物件為 1050 筆，連同自生物件的保守上界仍低於 1061，保留足夠餘裕。
+- 最多保存 1600 筆。離線掃描十章 WLD 的法術候選固定物件為 1050 筆；遭遇清單目標通常短暫且以 zone／shape／座標去重，實機驗收時仍需留意長期存檔是否接近上限。
 - 引擎提交：`e9887bf85a84a32a7a7a95e7a069f18bd01d5a2f`；舊檔檔尾讀取邊界修正：`b15752206457a36ba01809299a1da8f1303a6057`。
-- Borland 3.1 重編完成：`KRONDOR.EXE` 468576 bytes，SHA-256 `809420a21340fa8f7750784084556e5c83a97fc45a4e69611075e20d51f2daff`；`VMCODE.OVL`／`SX.OVL` byte-identical。Python 測試 100 passed。
+- 遭遇清單漏接修正：`0076d4dd3d73f0f46d48411ca129f12a1825f974`。Borland 3.1 重編完成：`KRONDOR.EXE` 468624 bytes，SHA-256 `7ffba1b175a05942d5d5963f322c01aceef68b9c5803ed55726c45e9fdbba8d4`；`VMCODE.OVL`／`SX.OVL` byte-identical。Python 測試 100 passed。
 - **待驗收**：施放任一察覺法術，看見紅點後關閉法術畫面，再開普通俯瞰地圖確認紅點仍在；接著存檔、離開遊戲並重新讀檔，確認同一紅點仍保留。
 
 ## 俯瞰地圖現代鍵盤操作
@@ -84,9 +84,9 @@
 ## 最終建置狀態
 
 - Python 測試：100 passed。
-- `dist/test_v100_zh/krondor.exe`：468576 bytes。
-- SHA-256：`809420a21340fa8f7750784084556e5c83a97fc45a4e69611075e20d51f2daff`。
+- `dist/test_v100_zh/krondor.exe`：468624 bytes。
+- SHA-256：`7ffba1b175a05942d5d5963f322c01aceef68b9c5803ed55726c45e9fdbba8d4`。
 - `dist/test_v100_zh/REQ_MAP.DAT` entry 8 action：`0x14`。
-- 引擎最終提交：`b15752206457a36ba01809299a1da8f1303a6057`。
-- 引擎最終 tree：`bf7f30b2cbdb5c81897f96262b551c7e445b36cd`。
+- 引擎最終提交：`0076d4dd3d73f0f46d48411ca129f12a1825f974`。
+- 引擎最終 tree：`25397f7ee145e7af641ca665e03e338abddb8e33`。
 - Windows 與 WSL 引擎工作樹原有的 VESA／EVG 實驗修改均保留為未提交 WIP，未混入本輪提交或封存補丁。
