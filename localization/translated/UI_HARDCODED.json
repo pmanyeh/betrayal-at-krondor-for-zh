@@ -382,6 +382,27 @@
       "notes": "Joins current/max HP-Stamina numbers (\"100 of 100\" -> \"100 / 100\"); kept as a plain ASCII slash rather than a CJK character since it only ever sits between two itoa()'d digit strings."
     },
     {
+      "id": "ENCAMP.C#REQ_CAMP[0]",
+      "source": "Rest Until Healed",
+      "translation": "休息至康復",
+      "status": "translated",
+      "notes": "Caption baked into the original REQ_CAMP sprite; replaced at runtime with a 10x10 text button."
+    },
+    {
+      "id": "ENCAMP.C#REQ_CAMP[1]",
+      "source": "Cancel",
+      "translation": "取消",
+      "status": "translated",
+      "notes": "Caption baked into the original REQ_CAMP sprite; replaced at runtime with a 10x10 text button."
+    },
+    {
+      "id": "ENCAMP.C#REQ_CAMP[2]",
+      "source": "Exit",
+      "translation": "離開",
+      "status": "translated",
+      "notes": "Caption baked into the original REQ_CAMP sprite; replaced at runtime with a 10x10 text button."
+    },
+    {
       "id": "MODALSCR.C#modalscreen_inv_draw_gold_amount:PartyGold",
       "source": "Party Gold:",
       "translation": "隊伍金幣：",

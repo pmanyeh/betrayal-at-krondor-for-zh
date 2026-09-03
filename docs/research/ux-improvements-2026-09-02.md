@@ -71,6 +71,14 @@
 - 遭遇清單漏接修正：`0076d4dd3d73f0f46d48411ca129f12a1825f974`。Borland 3.1 重編完成：`KRONDOR.EXE` 468624 bytes，SHA-256 `7ffba1b175a05942d5d5963f322c01aceef68b9c5803ed55726c45e9fdbba8d4`；`VMCODE.OVL`／`SX.OVL` byte-identical。Python 測試 100 passed。
 - **待驗收**：施放任一察覺法術，看見紅點後關閉法術畫面，再開普通俯瞰地圖確認紅點仍在；接著存檔、離開遊戲並重新讀檔，確認同一紅點仍保留。
 
+## 紮營畫面圖片式按鈕中文化
+
+- `REQ_CAMP.DAT` 三個 type-3 控制項的字串欄位全為 null；英文 `Rest Until Healed`、`Cancel`、`Exit` 直接烙在 sprite 圖片中，因此 `menupage_translate.py` 無法擷取或覆寫。
+- `ENCAMP.C` 載入該頁後將三個控制項切換為同尺寸的 type-0 原生文字按鈕，分別顯示「休息至康復／取消／離開」。共用 `widget_button_render_full()` 已會把中文按鈕標籤切換成 10×10 小字並置中。
+- 中文 static 字串指標只在 `menupage_draw()` 期間暫掛，畫完立即清除，避免 `menupage_free()` 將其誤判為動態配置 string blob 的基底。
+- `UI_HARDCODED.json` 新增三筆翻譯來源；小字庫重建為 990 glyph／21790 bytes，SHA-256 `e060b5ec3b8c8b7111256afb422b2fd0831eab9a9ceced9ed7a2f8c564c1d0a6`。
+- 引擎提交：`ed24b0ded5a6cba64b093563a204ef4ce2580f27`。待實機確認三種按鈕狀態的中文字、置中、按下反白及操作行為。
+
 ## 俯瞰地圖現代鍵盤操作
 
 - `W/S`：前進／後退。
@@ -84,9 +92,9 @@
 ## 最終建置狀態
 
 - Python 測試：100 passed。
-- `dist/test_v100_zh/krondor.exe`：468624 bytes。
-- SHA-256：`7ffba1b175a05942d5d5963f322c01aceef68b9c5803ed55726c45e9fdbba8d4`。
+- `dist/test_v100_zh/krondor.exe`：468768 bytes。
+- SHA-256：`becb8ea51d34971e4015f5c9aea87ade0a59608b120f6300e90f80f7ad3d8ec2`。
 - `dist/test_v100_zh/REQ_MAP.DAT` entry 8 action：`0x14`。
-- 引擎最終提交：`0076d4dd3d73f0f46d48411ca129f12a1825f974`。
-- 引擎最終 tree：`25397f7ee145e7af641ca665e03e338abddb8e33`。
+- 引擎最終提交：`ed24b0ded5a6cba64b093563a204ef4ce2580f27`。
+- 引擎最終 tree：`f4b26720a6974a4d384dc8d44ce95cd8264ba2a8`。
 - Windows 與 WSL 引擎工作樹原有的 VESA／EVG 實驗修改均保留為未提交 WIP，未混入本輪提交或封存補丁。
