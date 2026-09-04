@@ -1,6 +1,12 @@
 from pathlib import Path
+import zipfile
 
-from tools.release.package_release import PLAYER_GUIDES, write_player_guides
+from tools.release.package_release import (
+    PLAYER_GUIDES,
+    make_zip,
+    write_player_guides,
+    write_project_license,
+)
 
 
 def test_player_guide_templates_cover_requested_topics() -> None:
@@ -27,3 +33,23 @@ def test_write_player_guides_uses_windows_friendly_text(tmp_path: Path) -> None:
         assert data.startswith(b"\xef\xbb\xbf")
         assert b"\r\n" in data
         assert b"\n" not in data.replace(b"\r\n", b"")
+
+
+def test_release_includes_project_license(tmp_path: Path) -> None:
+    write_project_license(tmp_path)
+    assert (tmp_path / "LICENSE").read_text(encoding="utf-8").startswith("MIT License")
+
+
+def test_release_zip_excludes_python_cache_artifacts(tmp_path: Path) -> None:
+    release_dir = tmp_path / "release"
+    release_dir.mkdir()
+    (release_dir / "README.txt").write_text("release", encoding="utf-8")
+    cache_dir = release_dir / "__pycache__"
+    cache_dir.mkdir()
+    (cache_dir / "installer.cpython-312.pyc").write_bytes(b"cache")
+
+    zip_path = make_zip(release_dir)
+    with zipfile.ZipFile(zip_path) as archive:
+        names = archive.namelist()
+    assert "release/README.txt" in names
+    assert not any("__pycache__" in name or name.endswith(".pyc") for name in names)

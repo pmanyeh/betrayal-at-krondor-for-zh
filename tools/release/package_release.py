@@ -197,6 +197,11 @@ def write_installer_files(release_dir: Path) -> None:
     print("[OK] 已複製 installer.py / bspatch_apply.py")
 
 
+def write_project_license(release_dir: Path) -> None:
+    shutil.copy2(REPO_ROOT / "LICENSE", release_dir / "LICENSE")
+    print("[OK] 已內附專案 LICENSE")
+
+
 def write_bat(template_name: str, dest: Path) -> None:
     # cmd.exe's batch parser is CRLF-sensitive -- a bare LF can get merged into
     # the next token instead of acting as a line break (e.g. `cd /d "...dosbox-x"`
@@ -245,8 +250,8 @@ def check_python_embed(release_dir: Path) -> bool:
 
 
 README_TEXT = """\
-Betrayal at Krondor 繁體中文化 -- 免安裝整合包使用說明
-======================================================
+Betrayal at Krondor 繁體中文版 v1.0 -- 免安裝整合包使用說明
+=============================================================
 
 這是一份「免安裝整合包」，本身不含任何原版遊戲檔案，也不含 KRONDOR.EXE。
 你需要自備合法取得的《Betrayal at Krondor》v1.00 Floppy 版
@@ -287,8 +292,8 @@ dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 及其後續版權繼受者）無任何關係，亦未獲得其授權或背書。《Betrayal at
 Krondor》的著作權歸原版權所有者所有。
 
-補丁本身（安裝程式、翻譯文字、二進位差異檔）的授權條款請見本專案
-GitHub repo 的 LICENSE 檔案。
+補丁本身（安裝程式、翻譯文字、二進位差異檔）的授權條款請見同一資料夾
+內的 LICENSE 檔案。
 """
 
 
@@ -336,7 +341,8 @@ def make_zip(release_dir: Path) -> Path:
         zip_path.unlink()
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in release_dir.rglob("*"):
-            if path.is_file():
+            relative = path.relative_to(release_dir)
+            if path.is_file() and "__pycache__" not in relative.parts and path.suffix != ".pyc":
                 zf.write(path, path.relative_to(release_dir.parent))
     print(f"[OK] 已打包 {zip_path}")
     return zip_path
@@ -349,6 +355,7 @@ def main() -> None:
     build_resources(RELEASE_DIR / "resources")
     build_gam_patch(RELEASE_DIR / "gam_patch")
     write_installer_files(RELEASE_DIR)
+    write_project_license(RELEASE_DIR)
     write_bat("play_launcher.bat.template", RELEASE_DIR / "玩遊戲.bat")
     write_bat("install_launcher.bat.template", RELEASE_DIR / "安裝中文化.bat")
     write_game_data_placeholder(RELEASE_DIR)

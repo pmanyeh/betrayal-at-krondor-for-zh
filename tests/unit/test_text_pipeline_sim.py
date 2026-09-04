@@ -123,6 +123,15 @@ def dialog_expand_tokens(text: str, speaker_names: list[str]) -> str:
     return "".join(output)
 
 
+def dialog_chinese_title_body_layout(frame_height: int, top_inset: int, bottom_inset: int) -> tuple[int, int]:
+    """Replicate DIALOG.C's large-font frame growth for a Chinese banner."""
+    usable_height = frame_height - top_inset - bottom_inset
+    if usable_height < 33:
+        frame_height += 33 - usable_height
+        usable_height = 33
+    return frame_height, usable_height - 17
+
+
 class TestTextPipelineSim(unittest.TestCase):
     def setUp(self):
         # Setup standard proportional font metrics (e.g. ' ' = 4px, 'i' = 3px, 'W' = 9px, default = 6px)
@@ -182,6 +191,17 @@ class TestTextPipelineSim(unittest.TestCase):
         raw_dialog = "@0: Where are we, @1? Look at @2."
         expanded = dialog_expand_tokens(raw_dialog, speakers)
         self.assertEqual(expanded, "Owyn: Where are we, Locklear? Look at Gorath.")
+
+    def test_chinese_title_grows_30px_panel_for_large_body_text(self):
+        """DIAL_Z16#90 must keep the standard 16x16 font and a body line."""
+        frame_height, body_height = dialog_chinese_title_body_layout(30, 3, 3)
+        self.assertEqual(frame_height, 39)
+        self.assertGreaterEqual(body_height, 16)
+
+    def test_normal_chinese_title_keeps_standard_16px_layout(self):
+        frame_height, body_height = dialog_chinese_title_body_layout(50, 3, 3)
+        self.assertEqual(frame_height, 50)
+        self.assertGreaterEqual(body_height, 16)
 
 
 if __name__ == "__main__":
