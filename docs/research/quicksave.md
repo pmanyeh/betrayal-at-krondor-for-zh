@@ -47,19 +47,20 @@ GAMES\QSave.G98\SAVE20.GAM
 ## 驗證狀態
 
 - Borland C++ 3.1 編譯／Turbo Link 5.1 連結完成，無新增編譯錯誤。
-- 使用者已確認原版 F5 快存與 F9 快讀功能正確；本輪新增的短暫提示待實機確認畫面效果。
+- 使用者已確認 F5 快存、F9 快讀及兩秒提示的畫面效果正確。
 - `KRONDOR.EXE`：472576 bytes，SHA-256 `94bede9adf7d803578edafb2cb6e59ed4b31e0f7866f65a8cc5ea71b59e1f65f`。
 - `ZHSTAT.DAT`：991 glyph／21812 bytes，SHA-256 `ccd2a69a5c3344c043758581a7ae8af0a37238bf1934dc954b1c99c686763fb8`。
 - `VMCODE.OVL`、`SX.OVL` 與基準 byte-identical。
 - Python 測試：100 passed。
-- 已部署至 `dist/test_v100_zh/krondor.exe`，尚待 DOSBox-X 實機驗收。
+- 正式 bspatch：56326 bytes，SHA-256 `3fb059fe40d41acaeae4e10f10dd5c1fa448880fa5e9089abdf63b509ef98877`；由乾淨 v1.00 EXE 往返套用後與目標 EXE byte-identical。
+- 正式發布 ZIP：33831092 bytes，SHA-256 `39e114bd29d907ee1ab0523b1fed251a19e8bf4df3cbee84fe35f1b3ce833fa8`；ZIP 內 `.GAM` 檔案數為 0。
 
 ### 實機驗收清單
 
 - [x] 按 `F5` 後建立 `QSave.G98` 與第一份快存。
 - [x] 移動或改變物品後按 `F9`，回到最近一次 `F5` 的狀態。
-- [ ] `F5` 成功後可看見「快速存檔完成」，且約兩秒自動消失。
-- [ ] `F9` 成功後可看見「正在讀取快速存檔……」，之後正常進入快存。
+- [x] `F5` 成功後可看見「快速存檔完成」，且約兩秒自動消失。
+- [x] `F9` 成功後可看見「正在讀取快速存檔……」，之後正常進入快存。
 - [ ] 普通讀檔畫面可看見 QSave 及其中的快存。
 - [ ] 普通存檔畫面不列出 QSave，書籤也不寫入 QSave。
 - [ ] 建立超過 20 次後仍只有 20 份正式快存，且最舊一份被替換。
