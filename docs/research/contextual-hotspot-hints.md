@@ -31,3 +31,34 @@
 - [x] 已確認不再沿用前一畫面或已消失物件的命中框。
 - [x] 已移除首次進場與滑鼠左右鍵文字提示。
 - [x] 使用者完成整體功能驗收（2026-09-02）。
+
+## 2026-09-04：第二章羅姆尼「黑羊酒館」熱區迴歸修正
+
+### 現象
+
+- 第二章抵達羅姆尼後，右側的 Black Sheep Tavern（黑羊酒館）無法點擊；按住 `Tab` 也沒有該建築的物件框，因此主線無法由此繼續。
+- 異常版畫面只顯示另外三個有效 actor 的角框；修正後黑羊酒館恢復為第四個可互動熱區。
+
+### 根因
+
+- `GDS6A.DAT` 的 actor 0 是黑羊酒館劇情入口：矩形 `(196, 9, 58, 65)`、`wChapterMask = 0x01fd`、游標 7、`cKind = 15`、對話鍵 `1500069`（`To the Black Sheep Tavern.`）。依城鎮場景的遮罩語意，它只在第二章啟用。
+- `cKind = 15` 的真正語意是章節結束／主線推進觸發器；全套 GDS 資源中只有這一個 actor 使用 kind 15。
+- 城鎮熱區功能先前在 `TOWNSCN.C` 的兩處篩選中，把 `cKind == 0xf` 一併當成底部離開列：一處用來尋找離開 action，另一處略過建立 actor 的 `MenuEntry`。因此 actor 0 在點擊判定與 `Tab` 框線建立之前就被排除了。
+
+### 修正
+
+- 從上述兩處離開列判斷移除 `pActor->cKind == 0xf`；只保留真正的底部寬幅離開列與 `cKind == 3` 排除條件。
+- 沒有針對羅姆尼座標硬編碼例外，而是讓 kind 15 actor 重新走原有的資料驅動 `MenuEntry`、點擊 dispatch 與 `Tab` 框線流程。
+- 引擎提交：`2e97009ba429b4315ccac47379cf1e7efccd0388`（`fix: restore Romney chapter-end hotspot`）。
+
+### 驗證與留存
+
+- Borland C++ 3.1 增量重編完成；`KRONDOR.EXE` 468768 bytes，SHA-256 `5f2cace7d6d31f7bbe1e6c2d8a2e4f5b1e70d5c532ba8d423e67e7096be28acb`。
+- `VMCODE.OVL`、`SX.OVL` 與修正前 byte-identical；Python 單元測試 100 passed。
+- 測試版已部署至 `dist/test_v100_zh/krondor.exe`；修正前備份為 `scratchpad/krondor_pre_romney_hotspot_fix.exe`，本次修正版另存為 `scratchpad/KRONDOR_romney_hotspot_fix.EXE`。
+- 執行階段已成功由該熱區進入黑羊酒館屍體劇情；截圖留存在 `scratchpad/romney_fix_progress.png`。使用者於 2026-09-04 確認修復。
+
+### 防止復發
+
+- 不應以 actor 的劇情結果（例如離開場景或結束章節）推斷其 UI 身分；離開列應以實際 kind 與版面幾何識別。
+- 新增或修改 `MenuEntry` 篩選時，先盤點所有 GDS actor kind 的實際用途，並在其限定章節中比對「有效 actor 數」與「可點擊／Tab 框線數」。羅姆尼第二章應有四個一般 actor 熱區，另有一個不顯示框線的底部離開列。

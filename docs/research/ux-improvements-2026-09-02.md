@@ -89,12 +89,19 @@
 - `REQ_MAP.DAT` 的紮營圖示 action 由 `0x12`（E）改為 `0x14`（T），並由 `localization/translated/MENUPAGE.json` 的 action override 重建。
 - 引擎提交：`6fcffc0`；主專案資源提交：`9b0a5f1`。
 
+## 羅姆尼黑羊酒館熱區迴歸修正
+
+- 第二章羅姆尼的 Black Sheep Tavern 原本既無法點擊，按住 `Tab` 也沒有物件框，會阻斷主線。
+- `GDS6A.DAT` actor 0 的 `cKind = 15` 代表章節結束劇情觸發器，不是城鎮底部離開列；先前 `TOWNSCN.C` 的熱區篩選卻在兩處把 kind 15 當成離開 UI 排除，導致它沒有建立 `MenuEntry`。
+- 修正為只排除真正的底部寬幅離開列與 `cKind == 3`，讓該 actor 恢復原有的點擊 dispatch 與 `Tab` 框線。引擎提交：`2e97009ba429b4315ccac47379cf1e7efccd0388`。
+- Borland C++ 3.1 重編、兩個 OVL 位元組比對與 100 項 Python 測試均通過；使用者已於 2026-09-04 實機確認修復。完整根因與防復發原則見 [`contextual-hotspot-hints.md`](contextual-hotspot-hints.md#2026-09-04第二章羅姆尼黑羊酒館熱區迴歸修正)。
+
 ## 最終建置狀態
 
 - Python 測試：100 passed。
 - `dist/test_v100_zh/krondor.exe`：468768 bytes。
-- SHA-256：`9bc7192a9e3250a8f60c79d31a92400a584449f4ef6fdab0d7cad17753054271`。
+- SHA-256：`5f2cace7d6d31f7bbe1e6c2d8a2e4f5b1e70d5c532ba8d423e67e7096be28acb`。
 - `dist/test_v100_zh/REQ_MAP.DAT` entry 8 action：`0x14`。
-- 引擎最終提交：`8dbeb43a4c7f25a67b0d4d6c2fc6f346d3fdf352`。
-- 引擎最終 tree：`c1cf80da2aed5bc9cdac45faf9ea2a9f0bb6bc4a`。
+- 引擎最終提交：`2e97009ba429b4315ccac47379cf1e7efccd0388`。
+- 引擎最終 tree：`ce587dad544a06c92cf61fd8d77e573151a1c9ed`。
 - Windows 與 WSL 引擎工作樹原有的 VESA／EVG 實驗修改均保留為未提交 WIP，未混入本輪提交或封存補丁。
