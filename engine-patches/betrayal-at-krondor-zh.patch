@@ -31,6 +31,34 @@ index 657aa192c09ea43e66c0aabfd90482817cdc6444..eaa76fabf67913e28101de13a04b0260
 +#define CURSOR_REMAP_TAB_OFF FP_OFF(&g_abCursorPaletteLut[0])
  
  #endif
+diff --git a/bak/RECIPES.MAK b/bak/RECIPES.MAK
+index ecebe346b6ffe2ed80bf009dfa7fc221c06d4754..99efe1e7425b3eded1eec9a974abab5d993dd77c 100644
+--- a/bak/RECIPES.MAK
++++ b/bak/RECIPES.MAK
+@@ -9,7 +9,9 @@ BC20 = c:\bc20\bccx
+ AS   = tasm
+ ASFLAGS = /mx /m /iINCLUDE
+ # INCLUDE = the project headers (bak\INCLUDE); C:\BC\INCLUDE = the Borland RTL headers
+-INC  = -IINCLUDE -IC:\BC\INCLUDE
++# The Traditional Chinese build keeps the 1.00 floppy packaging/runtime but
++# opts into the release-1.02 fixes that do not depend on MSCDEX or CD assets.
++INC  = -IINCLUDE -IC:\BC\INCLUDE -DV102_GAMEPLAY_FIXES
+ 
+ # --- flag bands: $(<BAND>) = compiler + flags (each object rule appends -c -zC<class>) ---
+ C_3O1Y   = $(BC31) -3 -O1 -Y -i64 -k -mm
+diff --git a/bak/SRC/AUDIO/ENGINE/AUDIO.C b/bak/SRC/AUDIO/ENGINE/AUDIO.C
+index dee3c8992b8f08d0657a16b9fc1107d6df7a2d4e..cfcee6f7d02ab9a379bbd27dce0c8f3cc1d4b210 100644
+--- a/bak/SRC/AUDIO/ENGINE/AUDIO.C
++++ b/bak/SRC/AUDIO/ENGINE/AUDIO.C
+@@ -412,7 +412,7 @@ int far audio_sfx_play_n_times(int sfx_id, int extra_repeats, int blocking) {
+     if (g_sound_driver == SNDDRV_NONE) {
+         return 0;
+     }
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if (sfx_id < 1) {
+         return 0;
+     }
 diff --git a/bak/SRC/CHAR/CHARSCRN.C b/bak/SRC/CHAR/CHARSCRN.C
 index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553e81a0679 100644
 --- a/bak/SRC/CHAR/CHARSCRN.C
@@ -565,9 +593,36 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
                      screen_frame_sync_buffers_rect(0, 200);
                      if (firstDraw != 0) {
 diff --git a/bak/SRC/CHAR/STAT.C b/bak/SRC/CHAR/STAT.C
-index 8570554112b75a37705b6d7a1bdc43493111a1bb..d1c55e6b8fc2d03f7f31938940dbd9e77dbb6563 100644
+index 8570554112b75a37705b6d7a1bdc43493111a1bb..a0ac0fff90bfb57a65bcab7617a498d94fb0d058 100644
 --- a/bak/SRC/CHAR/STAT.C
 +++ b/bak/SRC/CHAR/STAT.C
+@@ -18,7 +18,7 @@ unsigned char g_abStatClampMax[17] = {0xfa, 0xfa, 0xfa, 0xfa, 0x64, 0x64, 0x64,
+                                       0x64, 0x64, 0x64, 0x64, 0x64, 0x64, 0x64, 0xf4};
+ unsigned char g_abStatRatio[17] = {0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+                                    0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x00};
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ unsigned char g_abStatRatioBase[17] = {0x33, 0x33, 0x08, 0x08, 0x08, 0x33, 0x08, 0x33, 0x00,
+                                        0x80, 0x80, 0x80, 0x20, 0x40, 0x80, 0x40, 0x00};
+ unsigned char g_abStatRatioMax[17] = {0x03, 0x03, 0x01, 0x01, 0x02, 0x03, 0x01, 0x03, 0x10,
+@@ -50,7 +50,7 @@ void stat_apply_modifier(unsigned short *mod, int *stat) {
+ void stat_actor_recalc_equip_bonuses(Combatant *actor) {
+     int statIdx;
+     int statVal;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     int found = 0;
+ #endif
+     Actor far *actorRec;
+@@ -61,7 +61,7 @@ void stat_actor_recalc_equip_bonuses(Combatant *actor) {
+     for (statIdx = 0; statIdx < 0x10; statIdx++)
+         actor->stats[statIdx].perm_mod = 0;
+     for (i = 0; (int)(unsigned int)actorRec->itemCount > i; i++) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         if (*(unsigned char far *)(ACTOR_ITEMS(actorRec) + (unsigned int)i) == 0x5a) {
+             if (found)
+                 continue;
 @@ -83,10 +83,13 @@ void stat_actor_recalc_equip_bonuses(Combatant *actor) {
  }
  
@@ -586,10 +641,91 @@ index 8570554112b75a37705b6d7a1bdc43493111a1bb..d1c55e6b8fc2d03f7f31938940dbd9e7
  
  unsigned int stat_actor_get(Combatant *actor, int stat_idx, int mode) {
      unsigned int value;
+@@ -186,7 +189,7 @@ unsigned int far stat_combatant_modify(Combatant *actor, int stat_idx, long delt
+     StatSlot *slot;
+     int origBase;
+     int rowIdx;
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+     unsigned int sum;
+     unsigned int uMaxSum;
+ #endif
+@@ -197,7 +200,7 @@ unsigned int far stat_combatant_modify(Combatant *actor, int stat_idx, long delt
+     if (stat_idx == 0x10) {
+         unsigned int target;
+         int rank;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         unsigned int sum;
+         unsigned int uMaxSum;
+ #endif
+@@ -239,7 +242,7 @@ unsigned int far stat_combatant_modify(Combatant *actor, int stat_idx, long delt
+         return 0;
+     }
+     if (mode == 3) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         long lBase, lMax, iVar8;
+         lBase = (long)g_abStatRatioBase[stat_idx];
+         lMax = (long)g_abStatRatioMax[stat_idx];
+@@ -391,7 +394,7 @@ unsigned int stat_combatant_apply_condition(Combatant *actor, int stat_idx, int
+             for (stat_idx = 0; stat_idx < 7; stat_idx++) {
+                 if (stat_idx != 6) {
+                     g_gameState.abActorStatusRanks[slot_idx][stat_idx] = 0;
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+                     gstate_event_write(CONDITION(slot_idx * 7 + stat_idx), 0);
+ #endif
+                 }
 diff --git a/bak/SRC/COMBAT/ACTOR/CACTOR.C b/bak/SRC/COMBAT/ACTOR/CACTOR.C
-index 94c8a86a78e14e8dcbd1ac89a80dd9e63cac6cff..2539890f5c4007f1688e4553ada33668129876a3 100644
+index 94c8a86a78e14e8dcbd1ac89a80dd9e63cac6cff..334e73543c3f0174088e9339f6370af6d8e008e3 100644
 --- a/bak/SRC/COMBAT/ACTOR/CACTOR.C
 +++ b/bak/SRC/COMBAT/ACTOR/CACTOR.C
+@@ -203,7 +203,7 @@ Combatant *combat_actor_party_add(int creatureType) {
+     return (Combatant *)0;
+ }
+ 
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ Combatant *far combat_actor_remove(Combatant *actor) {
+     int i;
+     int removed_slot;
+@@ -282,7 +282,7 @@ void combat_actor_register(Combatant *actor) {
+ void far combat_actor_grid_remove(Combatant *actor) {
+     int i;
+ 
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if (combatgrid_tile_terrain(actor->inner->gridX, actor->inner->gridY) == 0)
+         combatgrid_tile_set_word(actor->inner->gridX, actor->inner->gridY, (unsigned int)actor);
+ #else
+@@ -1027,7 +1027,7 @@ static void combat_actor_render_status_vfx(Combatant *actor) {
+ 
+     if (g_bShowActorRosterIndex != 0)
+         combatenc_draw_actor_roster_idx(actor);
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+     combat_actor_draw_float_damage(actor);
+ #endif
+ 
+@@ -1070,7 +1070,7 @@ static void combat_actor_render_status_vfx(Combatant *actor) {
+ 
+     g_nActorShakeX = 0;
+     g_nActorShakeY = 0;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     combat_actor_draw_float_damage(actor);
+ #endif
+ }
+@@ -1459,7 +1459,7 @@ void combat_actor_pick_next(void) {
+ 
+     n_active_alive = 0;
+     for (i = 0; i < g_nCombatActiveCount; i++) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         if (((flags = (int)(signed char)g_pCombatActiveActors[i].inner->flags) & CAF_DEAD) == 0 &&
+             g_pCombatActiveActors[i].charSlot != 0)
+             n_active_alive++;
 @@ -1610,32 +1610,36 @@ void far combat_actor_draw_stats_panel(Combatant *actor) {
      unsigned int strength;
      int x;
@@ -631,10 +767,125 @@ index 94c8a86a78e14e8dcbd1ac89a80dd9e63cac6cff..2539890f5c4007f1688e4553ada33668
      }
  }
  
+diff --git a/bak/SRC/COMBAT/ACTOR/CACTOR.H b/bak/SRC/COMBAT/ACTOR/CACTOR.H
+index 8cb43c9769b91f522460402e6b415ffa13368aea..3413b10cca46540c01e4c4094f1ae6267bef240c 100644
+--- a/bak/SRC/COMBAT/ACTOR/CACTOR.H
++++ b/bak/SRC/COMBAT/ACTOR/CACTOR.H
+@@ -24,7 +24,7 @@ extern void combat_actor_register(Combatant *actor);
+ extern void combat_actor_kill_remaining(void);
+ extern void combat_actor_kill_remaining_enc(void);
+ extern void combat_actor_debug_restore_stats(void);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ extern Combatant *combat_actor_remove(Combatant *actor);
+ #else
+ extern void combat_actor_remove(Combatant *actor);
+diff --git a/bak/SRC/COMBAT/AI/CBTAI.C b/bak/SRC/COMBAT/AI/CBTAI.C
+index 119d5e649599c5efcb66a1fe91eac6d662d1b261..c8f7c2a02502963bee5e1c161db33e3431ed5c82 100644
+--- a/bak/SRC/COMBAT/AI/CBTAI.C
++++ b/bak/SRC/COMBAT/AI/CBTAI.C
+@@ -41,7 +41,7 @@ void far combat_ai_resolve_attack_attempt(Combatant *attacker, Combatant *target
+     }
+ }
+ 
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+ void far combat_ai_resolve_hit(Combatant *attacker, Combatant *target, int damage, int dir) {
+     int hpBefore;
+     int staminaBefore;
+diff --git a/bak/SRC/COMBAT/AI/CBTAI.H b/bak/SRC/COMBAT/AI/CBTAI.H
+index 2e354693c63117e4c18a7d33f089e47a172e7caf..82a0457a0054ea0152ad6d3d73051b5c3cb7a66c 100644
+--- a/bak/SRC/COMBAT/AI/CBTAI.H
++++ b/bak/SRC/COMBAT/AI/CBTAI.H
+@@ -17,7 +17,7 @@ extern int combat_ai_try_aoe_cast_spell_7(Combatant *actor);
+ extern void combat_ai_actor_cast_spell(Combatant *caster, Combatant *target, int spell_id);
+ extern void combat_ai_resolve_attack_attempt(Combatant *attacker, Combatant *target,
+                                              int spell_id);
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+ extern void combat_ai_resolve_hit(Combatant *attacker, Combatant *target, int damage, int dir);
+ #endif
+ extern int combat_ai_pick_action(Combatant *actor);
+diff --git a/bak/SRC/COMBAT/AI/CBTAIACT.C b/bak/SRC/COMBAT/AI/CBTAIACT.C
+index b5662fbad459c3e23062fcc022b407d34e9b0cee..df7a7a594d94a18307e50535cc9c974f737f17d3 100644
+--- a/bak/SRC/COMBAT/AI/CBTAIACT.C
++++ b/bak/SRC/COMBAT/AI/CBTAIACT.C
+@@ -52,7 +52,7 @@ void far combataiact_random_move_attack(Combatant *actor) {
+     actor->inner->destX = (unsigned char)g_cursor_tile_x;
+     actor->inner->destY = (unsigned char)g_cursor_tile_y;
+     combataipath_actor_walk_path(actor, 0);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if ((actor->inner->flags & 2) == 0) {
+ #endif
+         roll = RND(100);
+@@ -76,7 +76,7 @@ void far combataiact_random_move_attack(Combatant *actor) {
+                 return;
+             }
+         }
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     }
+ #endif
+     return;
+@@ -147,7 +147,7 @@ void far combataiact_actor_melee_attack(Combatant *actor) {
+ 
+     hit = 1;
+     target = combatenc_find_nearest_actor(actor, &distance);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if (target == (Combatant *)0)
+         return;
+ #endif
 diff --git a/bak/SRC/COMBAT/ARENA/COMBAT.C b/bak/SRC/COMBAT/ARENA/COMBAT.C
-index d0ff8a10cd37176cdd1deb3047ac47b74e296cea..2ec0fc2c3e0576df1853edcb2c28c6c8d54b910e 100644
+index d0ff8a10cd37176cdd1deb3047ac47b74e296cea..876894d0fb126d4a5dce317ddd484aa9f19ef04d 100644
 --- a/bak/SRC/COMBAT/ARENA/COMBAT.C
 +++ b/bak/SRC/COMBAT/ARENA/COMBAT.C
+@@ -243,7 +243,7 @@ void far combat_arena_actor_die(Combatant *actor, int play_anim) {
+             cspell_status_effect_remove(actor, slot);
+             combatgrid_tile_set_word(actor->inner->gridX, actor->inner->gridY, 0);
+             if ((actor->inner->flags & CAF_AI_SUMMON) != 0) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 actor = combat_actor_remove(actor);
+ #else
+                 combat_actor_remove(actor);
+@@ -514,7 +514,7 @@ void far combat_arena_melee_attack(Combatant *attacker, Combatant *defender, int
+                     case 0x3a:
+                         sound_id = 0x1a;
+                         goto do_audio;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                     case 0x1d:
+                     case 0x1f:
+                     case 0x20:
+@@ -554,7 +554,7 @@ void far combat_arena_melee_attack(Combatant *attacker, Combatant *defender, int
+                         audio_play(0x13);
+                     } else {
+ 
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                         if (cbstat_find_intact_equip_cat(defender, 3) != (ItemRecord far *)0 &&
+                             cbstat_find_intact_equip_cat(attacker, 3) != (ItemRecord far *)0)
+                             goto melee_parry_clang;
+@@ -637,7 +637,7 @@ void far combat_arena_resolve_melee_swing(Combatant *attacker, Combatant *defend
+             case 0x3a:
+                 sound_id = 0x1a;
+                 break;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+             case 0x1d:
+             case 0x1f:
+             case 0x20:
+@@ -672,7 +672,7 @@ void far combat_arena_resolve_melee_swing(Combatant *attacker, Combatant *defend
+                 }
+                 audio_play(0x13);
+             } else {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 if (cbstat_find_intact_equip_cat(defender, 3) != (ItemRecord far *)0x0 &&
+                     cbstat_find_intact_equip_cat(attacker, 3) != (ItemRecord far *)0x0)
+                     goto swing_parry_clang;
 @@ -1095,6 +1095,7 @@ void far combat_arena_draw_tgt_info_hud(Combatant *param_1, int param_2, int par
      int val;
      int accuracy;
@@ -804,10 +1055,55 @@ index d0ff8a10cd37176cdd1deb3047ac47b74e296cea..2ec0fc2c3e0576df1853edcb2c28c6c8
  }
  
  static void far combat_arena_menu_refr_avail(Combatant *actor) {
+@@ -1767,7 +1780,7 @@ void far combat_arena_resume_dispatch(int command_id, int *p_spell_result, int *
+ 
+     switch (command_id) {
+     case 0x0c:
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         if (g_gameState.nChapter == 8)
+             return;
+ #endif
+@@ -2217,7 +2230,7 @@ Combatant *combat_arena_disp_spell_action(int *param_1, int *param_2, int *param
+                 case 6:
+                     if (combatgrid_tile_is_blocked((unsigned char)g_cursor_tile_x, (unsigned char)g_cursor_tile_y))
+                         break;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                     if (combatgrid_tile_walkable_kind(g_cursor_tile_x, g_cursor_tile_y, -1) != 0)
+                         break;
+ #endif
+@@ -2472,7 +2485,7 @@ void far combat_arena_actor_turn_loop(int encounter_id, int *p_status, int b_has
+     stateB = 1;
+     turnInact = 0;
+     spellRecId = -1;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     g_acting_actor = 0;
+ #endif
+     *p_status = -1;
+@@ -2589,7 +2602,7 @@ void far combat_arena_actor_turn_loop(int encounter_id, int *p_status, int b_has
+         if (*p_status == 3)
+             goto LAB_600f_3c8d;
+         *p_status = 0;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         if (g_acting_actor != (Combatant *)0) {
+             g_gameState.nEvtArgActor0 = g_acting_actor->charSlot + -1;
+         } else {
 diff --git a/bak/SRC/COMBAT/ENC/CBENC.C b/bak/SRC/COMBAT/ENC/CBENC.C
-index fd09e156bb1e49f726a2d9fba53454fd3568c635..23577f8f77b5be405aeab36c01f33d97900f468a 100644
+index fd09e156bb1e49f726a2d9fba53454fd3568c635..8af50e9a44c761d7e5de75d8341e4bede484d2eb 100644
 --- a/bak/SRC/COMBAT/ENC/CBENC.C
 +++ b/bak/SRC/COMBAT/ENC/CBENC.C
+@@ -276,7 +276,7 @@ static void far combatenc_stat_roll_draw_line(char *label, int stat_val, int *px
+     roll = (int)RND(100);
+     if (roll > stat)
+         return;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if (*px >= 0x10e)
+         return;
+ #endif
 @@ -306,6 +306,7 @@ static void far combatenc_stat_roll_draw_line(char *label, int stat_val, int *px
  
  void far combatenc_anim_actor_stat_rolls(Combatant *actor) {
@@ -865,9 +1161,63 @@ index fd09e156bb1e49f726a2d9fba53454fd3568c635..23577f8f77b5be405aeab36c01f33d97
      }
  }
 diff --git a/bak/SRC/COMBAT/SPELL/CSPELL.C b/bak/SRC/COMBAT/SPELL/CSPELL.C
-index c671493b630a739c32492abae4512dc0437d0ac6..3a790ecaeace68cc238a103be9a07e20dd42184b 100644
+index c671493b630a739c32492abae4512dc0437d0ac6..26f78a446c4142eaebfb1c75a360a8d420dd114e 100644
 --- a/bak/SRC/COMBAT/SPELL/CSPELL.C
 +++ b/bak/SRC/COMBAT/SPELL/CSPELL.C
+@@ -654,7 +654,7 @@ void far cspell_perform_ranged_hit(Combatant *param_1, Combatant *param_2, int p
+     int hit;
+ 
+     hit = 1;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     cspell_apply_damage_armor_wear(param_1, param_3);
+ #else
+     combat_arena_apply_damage(param_1, param_3, 0, 0, 0, 1);
+@@ -672,7 +672,7 @@ void far cspell_select_target_tile(void) {
+     int tile_chosen;
+     int tile_in_range;
+     unsigned short consumed;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     int valid;
+ #endif
+ 
+@@ -689,7 +689,7 @@ void far cspell_select_target_tile(void) {
+         show_invalid_overlay:
+             world_render_with_overlay(MK_FP(0, 0xffff));
+         }
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         screen_frame_present();
+         valid = (combatgrid_tile_is_blocked((char)g_cursor_tile_x, (char)g_cursor_tile_y) == 0 &&
+                  combatgrid_tile_terrain_field((char)g_cursor_tile_x, (char)g_cursor_tile_y) != 3);
+@@ -983,7 +983,7 @@ static void far cspell_aoe_storm_damage_all(Combatant *caster, Combatant *target
+                                                            1, 1);
+                             }
+ 
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                             cspell_apply_damage_armor_wear(caster, 3);
+ #else
+                             combat_arena_apply_damage(caster, 3, 0, 0, 0, 1);
+@@ -1193,7 +1193,7 @@ int cspell_compute_effect_magnitude(Combatant *actor, int level, int spell_id) {
+     return result;
+ }
+ 
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ void far combat_ai_resolve_hit(Combatant *attacker, Combatant *target, int damage, int dir) {
+     int hpBefore;
+     int staminaBefore;
+@@ -1463,7 +1463,7 @@ void cspell_resolve_cast(Combatant *caster, Combatant *target, int spell_id, int
+                 magnitude = 0;
+                 break;
+             case 0x20:
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 combat_actor_grid_remove(target);
+                 if ((Combatant *)combatgrid_tile_terrain(target->inner->gridX,
+                                                            target->inner->gridY) == target) {
 @@ -1886,6 +1886,7 @@ static void cspell_menu_present_panel(void) {
  }
  
@@ -937,6 +1287,73 @@ index c671493b630a739c32492abae4512dc0437d0ac6..3a790ecaeace68cc238a103be9a07e20
  }
  
  static int far cspell_hotspot_cursor_in_range(int min_index, int max_index) {
+@@ -2469,7 +2477,7 @@ static void far cspell_actor_tick_status_effects(Combatant *actor) {
+             case 1:
+                 cspell_invoke_effect(actor, &actor, 0x20, &chainFlag, 0);
+                 combatgrid_tile_set_word(actor->inner->gridX, actor->inner->gridY, 0);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 actor = combat_actor_remove(actor);
+ #else
+                 combat_actor_remove(actor);
+diff --git a/bak/SRC/COMBAT/SPELL/CSPELL.H b/bak/SRC/COMBAT/SPELL/CSPELL.H
+index bb3d4b0330f2e20a186300877a1f6ce681ce4193..7591c3e6767fea0504255619d77a66902c1e55d9 100644
+--- a/bak/SRC/COMBAT/SPELL/CSPELL.H
++++ b/bak/SRC/COMBAT/SPELL/CSPELL.H
+@@ -65,7 +65,7 @@ extern void cspell_perform_ranged_hit(Combatant *param_1, Combatant *param_2, in
+ extern void cspell_select_target_tile(void);
+ extern void cspell_actor_walk_with_sound(Combatant *actor, Combatant *target);
+ extern void cspell_try_add_status_effect(Combatant *actor, int stat_idx, int value);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ extern void far combat_ai_resolve_hit(Combatant *attacker, Combatant *target, int damage,
+                                       int dir);
+ #endif
+diff --git a/bak/SRC/COMBAT/STATS/CBSTAT.C b/bak/SRC/COMBAT/STATS/CBSTAT.C
+index 5cf32f08c33769305b8122c7e213cd1acc37ae21..2950c1b729e2f974a0949f38f85e74786ea5d639 100644
+--- a/bak/SRC/COMBAT/STATS/CBSTAT.C
++++ b/bak/SRC/COMBAT/STATS/CBSTAT.C
+@@ -405,7 +405,7 @@ int far cbstat_compute_attack_damage(ItemRecord far *weapon, Combatant *attacker
+             damage <<= 1;
+     if (damage < 1)
+         damage = 1;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     if (damage > 0xff)
+         damage = 0xff;
+ #endif
+@@ -455,11 +455,11 @@ void cbstat_damage_equipped_items(Combatant *actor, int category, int severity)
+             item_rec = itemtbl_record_ptr((ItemSlot far *)(&actor_record[1]) + i);
+             if (((item_rec->wCategory == category) || (item_rec->wCategory == altcategory)) &&
+                 (item_rec->wFlags & 0x1000)
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+                 && (RND(100) < item_rec->wWeapon_break_chance_pct)
+ #endif
+             ) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 ((ItemSlot far *)(&actor_record[1]))[i].flags |= 0x4;
+                 if (RND(100) < item_rec->wWeapon_break_chance_pct) {
+ #endif
+@@ -472,7 +472,7 @@ void cbstat_damage_equipped_items(Combatant *actor, int category, int severity)
+                         audio_play(0x43);
+                         new_condition = 0;
+                     }
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                     ((ItemSlot far *)(&actor_record[1]))[i].flags |= 0x20;
+ #else
+                     ((ItemSlot far *)(&actor_record[1]))[i].flags |= 0x24;
+@@ -484,7 +484,7 @@ void cbstat_damage_equipped_items(Combatant *actor, int category, int severity)
+                         ((ItemSlot far *)(&actor_record[1]))[i].flags |= 0x10;
+                     }
+                     ((ItemSlot far *)(&actor_record[1]))[i].condition = (unsigned char)new_condition;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 }
+ #endif
+             }
 diff --git a/bak/SRC/DIALOG/ASKABOUT.C b/bak/SRC/DIALOG/ASKABOUT.C
 index e2a740548f6359593a3d1901651cc1cba55f41ed..066f0a57ad77def0f3c3d9ce7777e697d948121d 100644
 --- a/bak/SRC/DIALOG/ASKABOUT.C
@@ -1050,7 +1467,7 @@ index e2a740548f6359593a3d1901651cc1cba55f41ed..066f0a57ad77def0f3c3d9ce7777e697
      return selected;
  }
 diff --git a/bak/SRC/DIALOG/DIALOG.C b/bak/SRC/DIALOG/DIALOG.C
-index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..18ad5ae8c03a3b9b4eb4caa95f312fcfe608195a 100644
+index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..249199534d8b1b0ff022ad30bbbdbaef5ed7ef53 100644
 --- a/bak/SRC/DIALOG/DIALOG.C
 +++ b/bak/SRC/DIALOG/DIALOG.C
 @@ -23,9 +23,22 @@
@@ -1335,6 +1752,37 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..18ad5ae8c03a3b9b4eb4caa95f312fcf
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
              screen_frame_present();
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
+@@ -776,7 +937,7 @@ void far dialog_animate_open(DDXRecord far *dialog, int steps) {
+ 
+ void far dialog_combatant_name_table_init(void) {
+     int i;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     int found;
+ #endif
+ 
+@@ -790,7 +951,7 @@ void far dialog_combatant_name_table_init(void) {
+     dialog_cmbt_name_assign_kind(5, 0xf, 0, 0);
+     dialog_cmbt_name_assign_kind(3, 0xe, 0, 0);
+     dialog_cmbt_name_assign_kind(0, 0x1f, 0, 0);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     found = 0;
+     for (i = found; i < g_gameState.partySize; i++) {
+         if (g_gameState.activeParty[i] == g_gameState.nEvtArgActor0)
+diff --git a/bak/SRC/GAME/ACTOR/ACTSPAWN.C b/bak/SRC/GAME/ACTOR/ACTSPAWN.C
+index aeb1c776ba9985adaf4f0bd8a525a60c3f97f4b4..34dfcf42bffad926974ddde9d7cb236635f4bc24 100644
+--- a/bak/SRC/GAME/ACTOR/ACTSPAWN.C
++++ b/bak/SRC/GAME/ACTOR/ACTSPAWN.C
+@@ -299,7 +299,7 @@ void far actorspawn_npc_prox_periodic(Actor far *actor) {
+             score /= pProx->bIntensity / 2 + 1;
+         }
+         if (pProx->bHundred_flag != 0) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+             score = 0;
+ #else
+             score /= 100;
 diff --git a/bak/SRC/GAME/ENC/HOTSPOT.C b/bak/SRC/GAME/ENC/HOTSPOT.C
 index 664b71c1ff7c583a820a50fa4910c5318bf24776..0a2982f07887d9c9ff402705b52d67815a10cec2 100644
 --- a/bak/SRC/GAME/ENC/HOTSPOT.C
@@ -1381,10 +1829,47 @@ index 79881ece8257b248f6cc9946cbb8751b714c2ba5..a2c80c4728d238705bfcc984a5a74b34
          g_gameState.nWorldLoopExitRequest = '\0';
      }
 diff --git a/bak/SRC/GAME/STATE/GSTATE.C b/bak/SRC/GAME/STATE/GSTATE.C
-index 64617354ec57df08bb0d82a542375aafebecd1cc..0e3e858c89d3e7329158d358bf199447e4f04944 100644
+index 64617354ec57df08bb0d82a542375aafebecd1cc..7a081ed3b74d6d65e9369c4b6c5fefebbf7fff96 100644
 --- a/bak/SRC/GAME/STATE/GSTATE.C
 +++ b/bak/SRC/GAME/STATE/GSTATE.C
-@@ -458,33 +458,30 @@ void gstate_format_money(char *buf, long gold, int mode) {
+@@ -188,22 +188,32 @@ void gstate_temp_file_close(void) {
+ }
+ 
+ int gstate_temp_file_read_at(void far *dst_far, long offset, unsigned int bytes) {
++    long file_size;
++
++    if (g_tempGamFP == (ResFile *)0 || offset < 0)
++        return 0;
++    if (res_fseek(g_tempGamFP, 0, SEEK_END) != 0)
++        return 0;
++    file_size = res_ftell(g_tempGamFP);
++    if (file_size < 0 || offset > file_size || (long)bytes > file_size - offset)
++        return 0;
+     if (res_fseek(g_tempGamFP, offset, SEEK_SET) != 0) {
+         res_fseek(g_tempGamFP, 0, SEEK_SET);
+         if (res_fseek(g_tempGamFP, offset, SEEK_SET) != 0) {
++            return 0;
+         }
+     }
+     if ((unsigned long)res_ftell(g_tempGamFP) == offset) {
+     }
+-    res_fread_far(dst_far, 1, (long)bytes, g_tempGamFP);
+-    return 1;
++    return res_fread_far(dst_far, 1, (long)bytes, g_tempGamFP) == bytes;
+ }
+ 
+ int gstate_temp_file_write_at(unsigned char far *src_far, unsigned long offset, unsigned int bytes) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     unsigned long lo;
+     unsigned long hi;
+-    if (g_tempGamFP == (ResFile *)0 || offset > 0x51aa9)
++    if (g_tempGamFP == (ResFile *)0 || offset > GAM_TEMP_FILE_MAX_SIZE ||
++        offset + (unsigned long)bytes > GAM_TEMP_FILE_MAX_SIZE)
+         return 0;
+     switch (g_pendingTempWriteRegion) {
+     case TWR_ENCOUNTER_STATE:
+@@ -458,33 +468,30 @@ void gstate_format_money(char *buf, long gold, int mode) {
      long s = gold % 10;
  
      if (mode == 0) {
@@ -1427,7 +1912,7 @@ index 64617354ec57df08bb0d82a542375aafebecd1cc..0e3e858c89d3e7329158d358bf199447
      }
  }
 diff --git a/bak/SRC/GAME/STATE/GSTATE.H b/bak/SRC/GAME/STATE/GSTATE.H
-index 7c70a8adef562af8e9d1b04e805c6234abeed60c..a8605b25e1f301281c15ae01b9f906494860f758 100644
+index 7c70a8adef562af8e9d1b04e805c6234abeed60c..173c7b7ceab84911753e81825ae7486533411747 100644
 --- a/bak/SRC/GAME/STATE/GSTATE.H
 +++ b/bak/SRC/GAME/STATE/GSTATE.H
 @@ -74,6 +74,7 @@ extern int gstate_event_write(unsigned int event_id, unsigned int value);
@@ -1438,8 +1923,81 @@ index 7c70a8adef562af8e9d1b04e805c6234abeed60c..a8605b25e1f301281c15ae01b9f90649
  #define SKILL_IMPROVED(idx) ((idx) + 6350)
  #define ITEM_USED(idx) ((idx) + 6476)
  #define TOWN_VISITED(idx) ((idx) + 6480)
+@@ -102,6 +103,21 @@ extern int gstate_temp_file_write_at(unsigned char far *src_far, unsigned long o
+ #define GAM_ENC_OBJ_STATE(idx) ((idx) * sizeof(EncounterObjectState) + GAM_ENC_VISITED_TIME(700))
+ #define GAM_COMBAT_ACTOR(idx) ((idx) * sizeof(Combatant) + GAM_ENC_OBJ_STATE(40 * 5 * 7))
+ #define GAM_COMBAT_ACTOR_INNER(idx) ((idx) * sizeof(CombatantState) + GAM_COMBAT_ACTOR(1730L))
++
++/* The original TEMP.GAM payload ends at 0x51aa9.  Persistent spell-discovered
++   map points are appended in a backwards-compatible extension; old saves have
++   no extension and continue to load as an empty discovery list. */
++#define GAM_TEMP_FILE_BASE_SIZE 0x51aa9L
++#define GAM_SPELL_LANDMARK_EXT_OFFSET GAM_TEMP_FILE_BASE_SIZE
++#define GAM_SPELL_LANDMARK_MAX_RECORDS 1600
++#define GAM_SPELL_LANDMARK_HEADER_SIZE 8L
++#define GAM_SPELL_LANDMARK_RECORD_SIZE 12L
++#define GAM_TEMP_FILE_MAX_SIZE                                                                  \
++    (GAM_TEMP_FILE_BASE_SIZE + GAM_SPELL_LANDMARK_HEADER_SIZE +                                 \
++     (long)GAM_SPELL_LANDMARK_MAX_RECORDS * GAM_SPELL_LANDMARK_RECORD_SIZE)
++#define GAM_SAVE_FILE_HEADER_SIZE 100L
++#define GAM_SAVE_FILE_BASE_SIZE (GAM_SAVE_FILE_HEADER_SIZE + GAM_TEMP_FILE_BASE_SIZE)
++#define GAM_SAVE_FILE_MAX_SIZE (GAM_SAVE_FILE_HEADER_SIZE + GAM_TEMP_FILE_MAX_SIZE)
+ extern int gstate_member_consume_rations(int member_slot, int a);
+ extern int gstate_advance_time(long seconds, int flags, int recompute_party, int a, int b);
+ extern int gstate_advance_hours(int hours, int pad, int flags);
+diff --git a/bak/SRC/GAME/STATE/SAVEGAME.C b/bak/SRC/GAME/STATE/SAVEGAME.C
+index 2bafd618c72e9e03317aea3ed4b824640c357e61..5c9f1689d00f15270c34194a49691060d9b27380 100644
+--- a/bak/SRC/GAME/STATE/SAVEGAME.C
++++ b/bak/SRC/GAME/STATE/SAVEGAME.C
+@@ -30,7 +30,7 @@ int far savegame_write(char *filename) {
+     char temp_path[50];
+ 
+     ok = 1;
+-    remaining = 0x51aa9;
++    remaining = 0;
+     version = 0x16;
+     gstate_temp_file_close();
+     if (g_cfgTempDrive != 0) {
+@@ -40,6 +40,9 @@ int far savegame_write(char *filename) {
+     }
+     g_nFrameTickCountdown = 30000;
+     if ((src_fd = open(temp_path, -0x7fff)) >= 0) {
++        remaining = filelength(src_fd);
++        if (remaining < GAM_TEMP_FILE_BASE_SIZE || remaining > GAM_TEMP_FILE_MAX_SIZE)
++            ok = 0;
+         if ((dest_fd = open(filename, -0x7cfe, 0x180)) >= 0) {
+             if (!(write(dest_fd, g_abSaveFileHeader, 0x5a) == 0x5a &&
+                   write(dest_fd, &g_gameState, 2) == 2 &&
+@@ -85,7 +88,7 @@ int far savegame_read(char *filename) {
+     int chunk;
+ 
+     ok = 1;
+-    remaining = 0x51aa9;
++    remaining = 0;
+ 
+     if (g_cfgTempDrive != 0) {
+         sprintf(temp_path, "%c:%s", g_cfgTempDrive, "TEMP.GAM");
+@@ -95,6 +98,9 @@ int far savegame_read(char *filename) {
+ 
+     if ((dest_fd = open(temp_path, 0x8302, 0x180)) >= 0) {
+         if ((src_fd = open(filename, -0x7fff)) >= 0) {
++            remaining = filelength(src_fd) - GAM_SAVE_FILE_HEADER_SIZE;
++            if (remaining < GAM_TEMP_FILE_BASE_SIZE || remaining > GAM_TEMP_FILE_MAX_SIZE)
++                ok = 0;
+             if (dos_read(g_pMainScratchBuf, 100, src_fd) != 100)
+                 ok = 0;
+             version_ptr = (unsigned short far *)((char huge *)g_pMainScratchBuf + 0x62);
+@@ -219,7 +225,7 @@ void far savegame_chapter_start_dispatch(int chapter) {
+             itemuse_actor_spawn_clone_inv(src_actor, 0xf, 0x40L, 3L);
+             actorspawn_destroy_and_persist(actor_ptr);
+             actorspawn_destroy_and_persist(src_actor);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+             gstate_event_write(0x1959, 0);
+             gstate_event_write(0x195a, 0);
+ #endif
 diff --git a/bak/SRC/GAME/WORLD/MAP.C b/bak/SRC/GAME/WORLD/MAP.C
-index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334ffd31144 100644
+index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..422389243a53f0c121aa2022be8e27d2bf50ba50 100644
 --- a/bak/SRC/GAME/WORLD/MAP.C
 +++ b/bak/SRC/GAME/WORLD/MAP.C
 @@ -1,4 +1,4 @@
@@ -1448,20 +2006,26 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
  #include "SRC/GAME/GMAIN.H"
  #include "SRC/GEN/GFXCTX.H"
  #include "SRC/R3D/SCENE/ZONE.H"
-@@ -12,6 +12,7 @@
+@@ -12,9 +12,12 @@
  #include "SRC/GFX/SPRITE/RESBLIT.H"
  #include "SRC/GFX/DRIVER/PALDRV.H"
  #include "SRC/GFX/RASTER/PRESENT.H"
 +#include "SRC/GFX/RASTER/DRAWLINE.H"
++#include "SRC/GFX/RASTER/CIRCLE.H"
  #include "SRC/INPUT/KEYBOARD.H"
  #include "SRC/R3D/SCENE/WORLDHIT.H"
  #include "SRC/R3D/CORE/R3D.H"
-@@ -35,12 +36,113 @@
++#include "SRC/R3D/TBLSTORE/SHAPETBL.H"
+ #include "SRC/GFX/SCREEN/SCREEN.H"
+ #include "SRC/UI/MENUPAGE.H"
+ #include "SRC/GFX/PALETTE/PALETTE.H"
+@@ -35,12 +38,315 @@
  #include "SRC/R3D/SCENE/CZONE.H"
  #include "SRC/GAME/ENC/HOTSPOT.H"
  #include "SRC/GAME/WORLD/WORLDCRS.H"
+-#ifdef V102CD
 +#include "r3d.h"
- #ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
  #include "SRC/SYS/CFGPARSE.H"
  #endif
  
@@ -1473,19 +2037,48 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
 +    unsigned short shape_id;
 +    long object_x;
 +    long object_y;
-+    long marker_x;
-+    long marker_y;
 +} MapLandmarkRecord;
 +
-+#define MAP_LANDMARK_COUNT 1
-+#define MAP_LANDMARK_COLOR 0x0f
++typedef struct SpellLandmarkHeader {
++    unsigned long magic;
++    unsigned short version;
++    unsigned short count;
++} SpellLandmarkHeader;
 +
-+/* Verified world landmarks.  Identity comes from the scenery object the player
-+ * sees.  Marker position is the centre of the entrance facade, rather than the
-+ * model origin buried inside the hill or the model's off-centre outer vertex. */
++typedef struct SpellLandmarkRecord {
++    unsigned char zone;
++    unsigned char detection_mask;
++    unsigned short shape_id;
++    long object_x;
++    long object_y;
++} SpellLandmarkRecord;
++
++#define MAP_LANDMARK_COUNT 8
++#define MAP_LANDMARK_COLOR 0x0f
++#define MAP_LANDMARK_MIN_RADIUS 7
++#define MAP_LANDMARK_MAX_RADIUS 36
++#define MAP_LANDMARK_FALLBACK_RADIUS 12
++#define MAP_SPELL_LANDMARK_MAGIC 0x31494f50L /* "POI1" */
++#define MAP_SPELL_LANDMARK_VERSION 1
++#define MAP_SPELL_LANDMARK_COLOR 0x6f
++#define MAP_SPELL_LANDMARK_READ_CHUNK 16
++
++/* Verified surface underground sites absent from the world map.  Seven are
++ * direct cave/mountain objects (including blocked entrances); the waterfall
++ * leads through a background scene to its cave.  Ordinary towns stay excluded
++ * even when their 2-D scenes contain underground entrances.  Event ids remain
++ * stable for save compatibility.  The range marker is centred on the object's
++ * origin and scales from the model bounds. */
 +static MapLandmarkRecord s_mapLandmarks[MAP_LANDMARK_COUNT] = {
-+    {1, 1, 50, 646400L, 864000L, 655000L, 859526L}};
-+static WorldObject s_mapLandmarkProjectionEntry;
++    {1, 1, 50, 646400L, 864000L},
++    {2, 2, 50, 1132800L, 1145600L},
++    {5, 4, 51, 1440000L, 1081600L},
++    {6, 3, 50, 761600L, 723200L},
++    {8, 5, 51, 672000L, 876800L},
++    {8, 6, 51, 1017600L, 659200L},
++    {9, 7, 50, 838400L, 812800L},
++    {4, 10, 39, 672000L, 889600L} /* waterfall cave */
++};
 +
 +void far map_landmark_discover_world_object(WorldObject far *object) {
 +    int i;
@@ -1502,52 +2095,217 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
 +    }
 +}
 +
-+static long map_landmark_abs(long value) { return value < 0 ? -value : value; }
++static int map_spell_landmark_header_read(SpellLandmarkHeader *header) {
++    header->magic = 0;
++    header->version = 0;
++    header->count = 0;
++    if (g_tempGamFP == (ResFile *)0 || sizeof(SpellLandmarkHeader) != GAM_SPELL_LANDMARK_HEADER_SIZE ||
++        sizeof(SpellLandmarkRecord) != GAM_SPELL_LANDMARK_RECORD_SIZE)
++        return 0;
++    if (!gstate_temp_file_read_at(header, GAM_SPELL_LANDMARK_EXT_OFFSET,
++                                  sizeof(SpellLandmarkHeader)))
++        return 0;
++    return header->magic == MAP_SPELL_LANDMARK_MAGIC &&
++           header->version == MAP_SPELL_LANDMARK_VERSION &&
++           header->count <= GAM_SPELL_LANDMARK_MAX_RECORDS;
++}
 +
-+/* Use the renderer's own long-coordinate camera transform.  The generic helper
-+ * truncates its inputs to 16 bits, while this is the same path used to position
-+ * the large world models already visible on the overhead map. */
++static int map_spell_landmark_write(void far *src, unsigned long offset, unsigned int bytes) {
++    TempWriteRegion saved_region = g_pendingTempWriteRegion;
++    int result;
++
++    g_pendingTempWriteRegion = TWR_NONE;
++    result = gstate_temp_file_write_at((unsigned char far *)src, offset, bytes);
++    g_pendingTempWriteRegion = saved_region;
++    return result;
++}
++
++void far map_spell_landmark_discover_world_object(WorldObject far *object,
++                                                   unsigned char detection_mask) {
++    SpellLandmarkHeader header;
++    SpellLandmarkRecord records[MAP_SPELL_LANDMARK_READ_CHUNK];
++    unsigned short base;
++    unsigned short batch;
++    unsigned short i;
++    unsigned long offset;
++
++    if (object == (WorldObject far *)0 || detection_mask == 0 || g_tempGamFP == (ResFile *)0)
++        return;
++
++    if (!map_spell_landmark_header_read(&header)) {
++        header.magic = MAP_SPELL_LANDMARK_MAGIC;
++        header.version = MAP_SPELL_LANDMARK_VERSION;
++        header.count = 0;
++        if (!map_spell_landmark_write(&header, GAM_SPELL_LANDMARK_EXT_OFFSET,
++                                      sizeof(SpellLandmarkHeader)))
++            return;
++    }
++
++    for (base = 0; base < header.count; base += batch) {
++        batch = header.count - base;
++        if (batch > MAP_SPELL_LANDMARK_READ_CHUNK)
++            batch = MAP_SPELL_LANDMARK_READ_CHUNK;
++        offset = GAM_SPELL_LANDMARK_EXT_OFFSET + sizeof(SpellLandmarkHeader) +
++                 (unsigned long)base * sizeof(SpellLandmarkRecord);
++        if (!gstate_temp_file_read_at(records, offset,
++                                      batch * sizeof(SpellLandmarkRecord)))
++            return;
++        for (i = 0; i < batch; i++) {
++            if (records[i].zone == g_gameState.nZoneId &&
++                records[i].shape_id == object->shapeId &&
++                records[i].object_x == object->pos.xy.nWorld_x &&
++                records[i].object_y == object->pos.xy.nWorld_y) {
++                if ((records[i].detection_mask & detection_mask) != detection_mask) {
++                    records[i].detection_mask |= detection_mask;
++                    map_spell_landmark_write(&records[i],
++                                             offset + (unsigned long)i *
++                                                          sizeof(SpellLandmarkRecord),
++                                             sizeof(SpellLandmarkRecord));
++                }
++                return;
++            }
++        }
++    }
++
++    if (header.count >= GAM_SPELL_LANDMARK_MAX_RECORDS)
++        return;
++    records[0].zone = (unsigned char)g_gameState.nZoneId;
++    records[0].detection_mask = detection_mask;
++    records[0].shape_id = object->shapeId;
++    records[0].object_x = object->pos.xy.nWorld_x;
++    records[0].object_y = object->pos.xy.nWorld_y;
++    offset = GAM_SPELL_LANDMARK_EXT_OFFSET + sizeof(SpellLandmarkHeader) +
++             (unsigned long)header.count * sizeof(SpellLandmarkRecord);
++    if (!map_spell_landmark_write(&records[0], offset, sizeof(SpellLandmarkRecord)))
++        return;
++    header.count++;
++    map_spell_landmark_write(&header, GAM_SPELL_LANDMARK_EXT_OFFSET,
++                             sizeof(SpellLandmarkHeader));
++}
++
++/* Match world_render_record_marker_dot(), the original overhead-map marker
++ * projection used by detection spells.  The general 3-D actor transform also
++ * applies camera pitch/depth, which makes a flat map marker drift or leave the
++ * view at some map heights. */
 +static int map_landmark_project(long world_x, long world_y, int *out_screen) {
-+    long depth;
++    int dx;
++    int dy;
++    long rx;
++    long ry;
++    long camera_z = g_world_camera->base.pos.nWorld_z;
 +    int zoom = g_world_widget->zoom;
 +
-+    s_mapLandmarkProjectionEntry.shapeId = 0;
-+    s_mapLandmarkProjectionEntry.pos.xy.nWorld_x = world_x;
-+    s_mapLandmarkProjectionEntry.pos.xy.nWorld_y = world_y;
-+    s_mapLandmarkProjectionEntry.pos.nWorld_z = 0;
-+    s_mapLandmarkProjectionEntry.orientation.pitch =
-+        s_mapLandmarkProjectionEntry.orientation.roll =
-+            s_mapLandmarkProjectionEntry.orientation.yaw = 0;
-+    s_mapLandmarkProjectionEntry.state.stateBits = 0;
-+    r3d_setup_actor_in_camera_space(&s_mapLandmarkProjectionEntry, _DS);
-+    depth = g_abR3dState.nActorCamZ;
-+    if (depth <= 0)
++    if (camera_z <= 0)
 +        return 0;
 +
-+    out_screen[0] = g_world_widget->viewport.x + (g_world_widget->viewport.width >> 1) +
-+                    (int)((g_abR3dState.nActorCamX * (1L << zoom)) / depth);
-+    out_screen[1] = g_world_widget->viewport.y + (g_world_widget->viewport.height >> 1) -
-+                    (int)((g_abR3dState.nActorCamY * (1L << zoom)) / depth);
++    dx = (int)(((world_x - g_world_camera->base.pos.xy.nWorld_x) * (1L << zoom)) / camera_z);
++    dy = (int)(((world_y - g_world_camera->base.pos.xy.nWorld_y) * (1L << zoom)) / camera_z);
++    rx = (r3d_imul_full32(dx, r3d_tbl_cos(-g_world_camera->base.orientation.yaw)) -
++          r3d_imul_full32(dy, r3d_tbl_sin(-g_world_camera->base.orientation.yaw))) >>
++         0xe;
++    ry = (r3d_imul_full32(dy, r3d_tbl_cos(-g_world_camera->base.orientation.yaw)) +
++          r3d_imul_full32(dx, r3d_tbl_sin(-g_world_camera->base.orientation.yaw))) >>
++         0xe;
++
++    out_screen[0] = g_world_widget->viewport.x + (g_world_widget->viewport.width >> 1) + (int)rx;
++    out_screen[1] = g_world_widget->viewport.y + (g_world_widget->viewport.height >> 1) - (int)ry;
 +    return 1;
 +}
 +
-+static void map_landmark_draw_marker(int x, int y) {
++static int map_landmark_screen_radius(unsigned short shape_id, long depth) {
++    Shape far *shape = ts_get_shape(shape_id);
++    long world_radius;
++    long screen_scale;
++    long max_unclamped_world_radius;
++    long screen_radius;
++
++    if (shape == (Shape far *)0 || shape->radius <= 0 || depth <= 0)
++        return MAP_LANDMARK_FALLBACK_RADIUS;
++
++    world_radius = (long)shape->radius * (1L << shape->shift);
++    screen_scale = 1L << g_world_widget->zoom;
++
++    /* Test for the upper clamp before multiplying, keeping the 32-bit DOS
++     * calculation safe even for unusually large model bounds. */
++    max_unclamped_world_radius = (depth * MAP_LANDMARK_MAX_RADIUS) / screen_scale;
++    if (world_radius >= max_unclamped_world_radius)
++        return MAP_LANDMARK_MAX_RADIUS;
++
++    screen_radius = (world_radius * screen_scale) / depth;
++    if (screen_radius < MAP_LANDMARK_MIN_RADIUS)
++        return MAP_LANDMARK_MIN_RADIUS;
++    return (int)screen_radius;
++}
++
++static void map_landmark_draw_marker(int x, int y, int radius) {
 +    g_graphics_context.bGfx_outline_color = MAP_LANDMARK_COLOR;
-+    draw_line(x, y - 5, x + 5, y);
-+    draw_line(x + 5, y, x, y + 5);
-+    draw_line(x, y + 5, x - 5, y);
-+    draw_line(x - 5, y, x, y - 5);
++    draw_line(x, y - radius, x + radius, y);
++    draw_line(x + radius, y, x, y + radius);
++    draw_line(x, y + radius, x - radius, y);
++    draw_line(x - radius, y, x, y - radius);
 +    draw_line(x - 2, y, x + 2, y);
 +    draw_line(x, y - 2, x, y + 2);
 +}
 +
++static void map_spell_landmark_draw_marker(int x, int y) {
++    g_graphics_context.bGfx_fill_enabled = 1;
++    g_graphics_context.bGfx_outline_color = MAP_SPELL_LANDMARK_COLOR;
++    g_graphics_context.bGfx_fill_color = MAP_SPELL_LANDMARK_COLOR;
++    draw_circle(2, x, y);
++}
++
++static void map_spell_landmark_draw_discovered(int xmin, int ymin, int xmax, int ymax) {
++    SpellLandmarkHeader header;
++    SpellLandmarkRecord records[MAP_SPELL_LANDMARK_READ_CHUNK];
++    unsigned short base;
++    unsigned short batch;
++    unsigned short i;
++    unsigned long offset;
++    int screen[2];
++
++    if (!map_spell_landmark_header_read(&header))
++        return;
++
++    for (base = 0; base < header.count; base += batch) {
++        batch = header.count - base;
++        if (batch > MAP_SPELL_LANDMARK_READ_CHUNK)
++            batch = MAP_SPELL_LANDMARK_READ_CHUNK;
++        offset = GAM_SPELL_LANDMARK_EXT_OFFSET + sizeof(SpellLandmarkHeader) +
++                 (unsigned long)base * sizeof(SpellLandmarkRecord);
++        if (!gstate_temp_file_read_at(records, offset,
++                                      batch * sizeof(SpellLandmarkRecord)))
++            return;
++        for (i = 0; i < batch; i++) {
++            if (records[i].zone != g_gameState.nZoneId || records[i].detection_mask == 0)
++                continue;
++            if (!map_landmark_project(records[i].object_x, records[i].object_y, screen))
++                continue;
++            if (screen[0] + 2 >= xmin && screen[0] - 2 <= xmax &&
++                screen[1] + 2 >= ymin && screen[1] - 2 <= ymax)
++                map_spell_landmark_draw_marker(screen[0], screen[1]);
++        }
++    }
++}
++
 +void far map_landmark_draw_discovered(void) {
 +    int screen[2];
-+    int xmin = g_world_widget->viewport.x + 6;
-+    int ymin = g_world_widget->viewport.y + 6;
-+    int xmax = g_world_widget->viewport.x + g_world_widget->viewport.width - 7;
-+    int ymax = g_world_widget->viewport.y + g_world_widget->viewport.height - 7;
++    int radius;
++    int xmin = g_world_widget->viewport.x;
++    int ymin = g_world_widget->viewport.y;
++    int xmax = g_world_widget->viewport.x + g_world_widget->viewport.width - 1;
++    int ymax = g_world_widget->viewport.y + g_world_widget->viewport.height - 1;
++    unsigned char saved_clip_enabled = g_graphics_context.bClip_enabled;
++    unsigned char saved_fill_enabled = g_graphics_context.bGfx_fill_enabled;
++    unsigned char saved_fill_color = g_graphics_context.bGfx_fill_color;
++    unsigned char saved_outline_color = g_graphics_context.bGfx_outline_color;
++    ClipRect saved_clip = g_graphics_context.clip;
 +    int i;
++
++    g_graphics_context.bClip_enabled = 1;
++    g_graphics_context.clip.xmin = xmin;
++    g_graphics_context.clip.xmax = xmax;
++    g_graphics_context.clip.ymin = ymin;
++    g_graphics_context.clip.ymax = ymax;
 +
 +    for (i = 0; i < MAP_LANDMARK_COUNT; i++) {
 +        MapLandmarkRecord *landmark = &s_mapLandmarks[i];
@@ -1556,21 +2314,29 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
 +            gstate_event_read(LANDMARK_DISCOVERED(landmark->event_index)) == 0)
 +            continue;
 +
-+        if (map_landmark_abs(landmark->marker_x - g_world_camera->base.pos.xy.nWorld_x) > 300000L ||
-+            map_landmark_abs(landmark->marker_y - g_world_camera->base.pos.xy.nWorld_y) > 300000L)
++        if (map_landmark_project(landmark->object_x, landmark->object_y, screen) == 0)
 +            continue;
-+        if (map_landmark_project(landmark->marker_x, landmark->marker_y, screen) == 0)
-+            continue;
++        radius = map_landmark_screen_radius(landmark->shape_id,
++                                            g_world_camera->base.pos.nWorld_z);
 +
-+        if (screen[0] >= xmin && screen[0] <= xmax && screen[1] >= ymin && screen[1] <= ymax)
-+            map_landmark_draw_marker(screen[0], screen[1]);
++        if (screen[0] + radius >= xmin && screen[0] - radius <= xmax &&
++            screen[1] + radius >= ymin && screen[1] - radius <= ymax)
++            map_landmark_draw_marker(screen[0], screen[1], radius);
 +    }
++
++    map_spell_landmark_draw_discovered(xmin, ymin, xmax, ymax);
++
++    g_graphics_context.bClip_enabled = saved_clip_enabled;
++    g_graphics_context.clip = saved_clip;
++    g_graphics_context.bGfx_fill_enabled = saved_fill_enabled;
++    g_graphics_context.bGfx_fill_color = saved_fill_color;
++    g_graphics_context.bGfx_outline_color = saved_outline_color;
 +}
 +
  void far map_req_map_screen_load(void) {
      g_pReqMapPage = menupage_load("req_map.dat");
      return;
-@@ -153,6 +255,7 @@ void far map_main_loop(void) {
+@@ -153,6 +459,7 @@ void far map_main_loop(void) {
              menupage_draw(g_pReqMapPage);
              spellfx_draw_events_caption();
              world_render_scene_dispatch(0);
@@ -1578,7 +2344,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
              uiwidget_compass_draw();
              screen_cursor_restore_shape();
              screen_frame_flip();
-@@ -179,6 +282,7 @@ void far map_main_loop(void) {
+@@ -179,6 +486,7 @@ void far map_main_loop(void) {
              }
              if (render_dirty) {
                  world_render_scene_dispatch(moved);
@@ -1586,7 +2352,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
                  uiwidget_compass_draw();
              }
              screen_frame_present();
-@@ -281,6 +385,7 @@ void far map_main_loop(void) {
+@@ -281,6 +589,7 @@ void far map_main_loop(void) {
              }
  
              switch (action_id) {
@@ -1594,7 +2360,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -292,6 +397,7 @@ void far map_main_loop(void) {
+@@ -292,6 +601,7 @@ void far map_main_loop(void) {
                      }
                  }
                  break;
@@ -1602,7 +2368,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -303,6 +409,7 @@ void far map_main_loop(void) {
+@@ -303,6 +613,7 @@ void far map_main_loop(void) {
                      }
                  }
                  break;
@@ -1610,7 +2376,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -311,6 +418,7 @@ void far map_main_loop(void) {
+@@ -311,6 +622,7 @@ void far map_main_loop(void) {
                      render_dirty = 1;
                  }
                  break;
@@ -1618,7 +2384,16 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -387,7 +495,29 @@ void far map_main_loop(void) {
+@@ -373,7 +685,7 @@ void far map_main_loop(void) {
+                     render_dirty = 1;
+                 }
+                 break;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+             case 0x31:
+                 g_cfgNonRotatingMap = !g_cfgNonRotatingMap;
+                 render_dirty = 1;
+@@ -387,7 +699,29 @@ void far map_main_loop(void) {
                      g_nMapReloadPending = 1;
                  }
                  break;
@@ -1648,7 +2423,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe5, 1);
                  } else {
-@@ -532,6 +662,7 @@ void far map_animate_camera_to_tile(TileMoveRecord *ptr) {
+@@ -532,6 +866,7 @@ void far map_animate_camera_to_tile(TileMoveRecord *ptr) {
      g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
          g_graphics_context.wVgaPage2Base;
      world_render_scene_dispatch(0);
@@ -1656,7 +2431,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
      uiwidget_compass_draw();
      screen_frame_present();
      while (worldmove_crossing_check_8dir(&g_world_camera->base.pos,
-@@ -544,12 +675,14 @@ void far map_animate_camera_to_tile(TileMoveRecord *ptr) {
+@@ -544,12 +879,14 @@ void far map_animate_camera_to_tile(TileMoveRecord *ptr) {
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          world_render_scene_dispatch(1);
@@ -1672,15 +2447,21 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..8c4983450ffbd1b31efbe11c8d69b334
      screen_frame_present();
      g_bWorldCrossing = 0;
 diff --git a/bak/SRC/GAME/WORLD/MAP.H b/bak/SRC/GAME/WORLD/MAP.H
-index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..48ab1892bb971760dfe1cfe64eda516a63f020bc 100644
+index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb5f8be6f4 100644
 --- a/bak/SRC/GAME/WORLD/MAP.H
 +++ b/bak/SRC/GAME/WORLD/MAP.H
-@@ -21,5 +21,7 @@ extern void map_main_loop(void);
+@@ -21,5 +21,13 @@ extern void map_main_loop(void);
  extern void map_camera_snap_face_south(long *pSavedZ, short *pSavedYaw);
  extern void map_camera_restore_z_yaw(long new_pos_z, short new_yaw);
  extern void map_animate_camera_to_tile(TileMoveRecord *ptr);
 +extern void map_landmark_discover_world_object(WorldObject far *object);
++extern void map_spell_landmark_discover_world_object(WorldObject far *object,
++                                                      unsigned char detection_mask);
 +extern void map_landmark_draw_discovered(void);
++
++#define MAP_SPELL_DETECT_VESSEL 0x01
++#define MAP_SPELL_DETECT_FOOD 0x02
++#define MAP_SPELL_DETECT_MAGIC 0x04
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
@@ -2420,6 +3201,19 @@ index 515bd5a45283e986a63a1acbb9f4ef2035b93ef9..dc4253311cb086e8a1e7b99f74a782a7
 +extern unsigned int font_draw_zh_glyph_small(int lead, int trail, int x, int y);
  
  #endif
+diff --git a/bak/SRC/INPUT/WCURSOR.C b/bak/SRC/INPUT/WCURSOR.C
+index 9b21b02f9f1e30a280139be222243a44059c1538..73357ec7edcbbf6df5e09769b85d5455bcb6ecc1 100644
+--- a/bak/SRC/INPUT/WCURSOR.C
++++ b/bak/SRC/INPUT/WCURSOR.C
+@@ -896,7 +896,7 @@ dispatch:
+         x = pSub08->hotspot_action.bHotspot_x;
+         y = pSub08->hotspot_action.bHotspot_y;
+         actorspawn_destroy_and_persist(actor_record);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         actor_record = 0;
+ #endif
+         if (hotspotevt_dispatch_at_point(8, x, y, &extra) == 0)
 diff --git a/bak/SRC/R3D/SCENE/CZONE.C b/bak/SRC/R3D/SCENE/CZONE.C
 index bd88f498569e6525137e86da98f43408f1665dcc..532fce9b095922786054bb1d962913995ac0e22a 100644
 --- a/bak/SRC/R3D/SCENE/CZONE.C
@@ -2433,10 +3227,41 @@ index bd88f498569e6525137e86da98f43408f1665dcc..532fce9b095922786054bb1d96291399
      i = 0;
      do {
          list->bZone = 0;
+diff --git a/bak/SRC/R3D/SCENE/WORLDFRM.C b/bak/SRC/R3D/SCENE/WORLDFRM.C
+index 9fe627243d97793e1d4d61a2a721079502a179be..b35577fb331356fec004f9b06817e6b118724d09 100644
+--- a/bak/SRC/R3D/SCENE/WORLDFRM.C
++++ b/bak/SRC/R3D/SCENE/WORLDFRM.C
+@@ -252,7 +252,7 @@ void far worldframe_render_chapter_full(void) {
+     }
+     worldrender_swap_record_table(0, 2);
+     g_nPolygonTextureMode = 1;
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+     if (g_pMapIconsTable != 0) {
+         blit_image_scaled_centered(
+             *g_pMapIconsTable, g_world_widget->viewport.x + (g_world_widget->viewport.width >> 1),
 diff --git a/bak/SRC/R3D/SCENE/WORLDHIT.C b/bak/SRC/R3D/SCENE/WORLDHIT.C
-index c1e5946a28db560f7449a3ffc2dcc8c9667d2f68..50efdaa5e3396be327f2a4d1d3f786283e37b1d2 100644
+index c1e5946a28db560f7449a3ffc2dcc8c9667d2f68..f40c16e2549283f458e4b0a7ac019021395244f2 100644
 --- a/bak/SRC/R3D/SCENE/WORLDHIT.C
 +++ b/bak/SRC/R3D/SCENE/WORLDHIT.C
+@@ -45,7 +45,7 @@
+ #include "SRC/R3D/ACTOR/ACTSHAKE.H"
+ #include "SRC/R3D/ACTOR/ACTOROVL.H"
+ #include "defines.h"
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ #include "SRC/GFX/SPRITE/SPRTHNKS.H"
+ #include "SRC/SYS/CFGPARSE.H"
+ #endif
+@@ -60,7 +60,7 @@ unsigned char g_abActorAnimTemplateRanged[10] = {0x0c, 0xff, 0xff, 0xff, 0xff,
+                                                  0xff, 0xff, 0xff, 0xff, 0xff};
+ 
+ void world_render_scene_dispatch(int animate) {
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     short saved_heading;
+     if (animate != 0) {
+         rgnenc_corpse_tbl_iterate_22byte();
 @@ -161,6 +161,7 @@ void far world_render_frame(int animate) {
      for (i = 0; i < g_nVisibleEntryCount; i++, pOff++) {
          unsigned char bKind;
@@ -2445,6 +3270,173 @@ index c1e5946a28db560f7449a3ffc2dcc8c9667d2f68..50efdaa5e3396be327f2a4d1d3f78628
          bKind = ts_get_shape(pVis->shapeId)->kind;
          if (pVis->shapeId == g_nProximityTableCount) {
              rgnenc_render_object(pVis, animate);
+@@ -233,7 +234,7 @@ void world_render_frame_full(void) {
+     }
+ 
+     g_nPolygonTextureMode = 1;
+-#ifndef V102CD
++#if !defined(V102CD) && !defined(V102_GAMEPLAY_FIXES)
+     if (g_pMapIconsTable != 0) {
+         blit_image_scaled_centered(
+             *g_pMapIconsTable, g_world_widget->viewport.x + (g_world_widget->viewport.width >> 1),
+diff --git a/bak/SRC/R3D/VIS/PROXSCAN.C b/bak/SRC/R3D/VIS/PROXSCAN.C
+index 6b7b4313da1ebdeb40a7d0ae8548a9c0ab514066..b85b51cc458c0e1096e0ad3ad5009490b768bc2a 100644
+--- a/bak/SRC/R3D/VIS/PROXSCAN.C
++++ b/bak/SRC/R3D/VIS/PROXSCAN.C
+@@ -15,7 +15,8 @@
+ #include "SRC/R3D/SCENE/WORLDFRM.H"
+ #include "SRC/COMBAT/SPELL/SPELLFX.H"
+ #include "SRC/GAME/ENC/RGNENC.H"
+-#ifdef V102CD
++#include "SRC/GAME/WORLD/MAP.H"
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ #include "SRC/SYS/CFGPARSE.H"
+ #endif
+ 
+@@ -409,12 +410,12 @@ void proxscan_world_objects(long *p_pos) {
+ void proxscan_paged_dispatch_all(void) {
+     int i;
+     long *party_pos;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     short saved_heading;
+ #endif
+ 
+     party_pos = &g_world_camera->base.pos.xy.nWorld_x;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     saved_heading = g_world_camera->base.orientation.yaw;
+     if (g_cfgNonRotatingMap) {
+         g_world_camera->base.orientation.yaw = 0;
+@@ -424,7 +425,7 @@ void proxscan_paged_dispatch_all(void) {
+         proxscan_paged_list_dispatch(g_apCombat_zone_actor_lists[i], party_pos);
+     }
+     proxscan_paged_dispatch_by_type(party_pos);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     g_world_camera->base.orientation.yaw = saved_heading;
+ #endif
+ }
+@@ -459,6 +460,8 @@ void proxscan_paged_list_dispatch(VisibleEntryList *list, long *party_pos) {
+                          ((int)prec->radius << prec->shift);
+                 if (metric < 64000) {
+                     world_render_record_marker_dot(entry_ptr);
++                    map_spell_landmark_discover_world_object(entry_ptr,
++                                                              MAP_SPELL_DETECT_VESSEL);
+                 }
+                 break;
+             }
+@@ -495,6 +498,8 @@ void proxscan_paged_dispatch_by_type(long *p_coords) {
+                          (long)((int)prec->radius << prec->shift);
+                 if (metric < 64000) {
+                     world_render_record_marker_dot(entry_ptr);
++                    map_spell_landmark_discover_world_object(entry_ptr,
++                                                              MAP_SPELL_DETECT_VESSEL);
+                 }
+                 break;
+             }
+@@ -507,12 +512,12 @@ void proxscan_paged_dispatch_by_type(long *p_coords) {
+ void far proxscan_draw_cmap_inset_markers(void) {
+     long *position;
+     int i;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     short saved_heading;
+ #endif
+ 
+     position = &g_world_camera->base.pos.xy.nWorld_x;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     saved_heading = g_world_camera->base.orientation.yaw;
+     if (g_cfgNonRotatingMap) {
+         g_world_camera->base.orientation.yaw = 0;
+@@ -523,7 +528,7 @@ void far proxscan_draw_cmap_inset_markers(void) {
+     }
+     proxscan_draw_visible_markers(position);
+     proxscan_draw_fixed_object_marks(position);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     g_world_camera->base.orientation.yaw = saved_heading;
+ #endif
+     return;
+@@ -563,6 +568,8 @@ void far proxscan_draw_zone_vis_marks(VisibleEntryList *list, long *position) {
+                 if (dist < 64000) {
+                     if (spellfx_actor_has_ration(entry_ptr) != 0) {
+                         world_render_record_marker_dot(entry_ptr);
++                        map_spell_landmark_discover_world_object(entry_ptr,
++                                                                  MAP_SPELL_DETECT_FOOD);
+                     }
+                 }
+                 break;
+@@ -606,6 +613,8 @@ void far proxscan_draw_visible_markers(long *p_position) {
+                 if (dist < 64000) {
+                     if (spellfx_actor_has_ration(entry_ptr) != 0) {
+                         world_render_record_marker_dot(entry_ptr);
++                        map_spell_landmark_discover_world_object(entry_ptr,
++                                                                  MAP_SPELL_DETECT_FOOD);
+                     }
+                 }
+                 break;
+@@ -628,6 +637,8 @@ void far proxscan_draw_fixed_object_marks(long *p_position) {
+         if (distdir_octagonal_distance(p_position, (long *)&local_pos) < 64000) {
+             if (spellfx_actor_has_ration((WorldObject far *)record_ptr) != 0) {
+                 world_render_record_marker_dot((WorldObject far *)record_ptr);
++                map_spell_landmark_discover_world_object((WorldObject far *)record_ptr,
++                                                          MAP_SPELL_DETECT_FOOD);
+             }
+         }
+         record_ptr++;
+@@ -638,12 +649,12 @@ void far proxscan_draw_fixed_object_marks(long *p_position) {
+ void far proxscan_broadcast_scene_events(void) {
+     long *position;
+     int i;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     short saved_heading;
+ #endif
+ 
+     position = &g_world_camera->base.pos.xy.nWorld_x;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     saved_heading = g_world_camera->base.orientation.yaw;
+     if (g_cfgNonRotatingMap) {
+         g_world_camera->base.orientation.yaw = 0;
+@@ -654,7 +665,7 @@ void far proxscan_broadcast_scene_events(void) {
+     }
+     proxscan_draw_vis_marks_near(position);
+     proxscan_notify_actors_near(position);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+     g_world_camera->base.orientation.yaw = saved_heading;
+ #endif
+     return;
+@@ -699,6 +710,8 @@ void far proxscan_rndr_zone_recs_near(VisibleEntryList *list, long *position) {
+                     if ((prec->kind == 0x1d || prec->kind == 9 || prec->kind == 0x25) ||
+                         spellfx_actor_has_special_item(entry_ptr) != 0) {
+                         world_render_record_marker_dot(entry_ptr);
++                        map_spell_landmark_discover_world_object(entry_ptr,
++                                                                  MAP_SPELL_DETECT_MAGIC);
+                     }
+                 }
+                 break;
+@@ -747,6 +760,8 @@ void far proxscan_draw_vis_marks_near(long *position) {
+                     if ((prec->kind == 0x1d || prec->kind == 9 || prec->kind == 0x25) ||
+                         spellfx_actor_has_special_item(entry_ptr) != 0) {
+                         world_render_record_marker_dot(entry_ptr);
++                        map_spell_landmark_discover_world_object(entry_ptr,
++                                                                  MAP_SPELL_DETECT_MAGIC);
+                     }
+                 }
+                 break;
+@@ -769,6 +784,8 @@ void far proxscan_notify_actors_near(long *position) {
+         if (distdir_octagonal_distance(position, (long *)&local_pos) < 64000) {
+             if (spellfx_actor_has_special_item((WorldObject far *)record_ptr) != 0) {
+                 world_render_record_marker_dot((WorldObject far *)record_ptr);
++                map_spell_landmark_discover_world_object((WorldObject far *)record_ptr,
++                                                          MAP_SPELL_DETECT_MAGIC);
+             }
+         }
+         record_ptr++;
 diff --git a/bak/SRC/SCREENS/BOOKTEXT.C b/bak/SRC/SCREENS/BOOKTEXT.C
 index d2c42ae329a321335adfd21f80ff93e7d46af44f..7e2b82f0fe8d0bd498337f1a10901317ef1baded 100644
 --- a/bak/SRC/SCREENS/BOOKTEXT.C
@@ -2519,7 +3511,7 @@ index d2c42ae329a321335adfd21f80ff93e7d46af44f..7e2b82f0fe8d0bd498337f1a10901317
          xCur += (int)(width + (style.wStyleFlags & 2));
          if (g_pBookViewer->nLineHeightActual < xCur)
 diff --git a/bak/SRC/SCREENS/ENCAMP.C b/bak/SRC/SCREENS/ENCAMP.C
-index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf69369c4c9404 100644
+index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..4963d41b3273cb69643a87bb63b87464e33b4e3b 100644
 --- a/bak/SRC/SCREENS/ENCAMP.C
 +++ b/bak/SRC/SCREENS/ENCAMP.C
 @@ -22,6 +22,7 @@
@@ -2530,7 +3522,75 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf6936
  
  unsigned short g_wEncampHotspotSubW;
  unsigned short g_wEncampHotspotSubH;
-@@ -255,6 +256,8 @@ void far encamp_run(void) {
+@@ -37,6 +38,41 @@ unsigned short *g_pClockHandVertsX = {0};
+ unsigned short *g_pClockHandVertsY = {0};
+ unsigned char *g_pEncampPaletteRemapLut = {0};
+ 
++static char s_szEncampRestUntilHealed[] = "\x83\x3a\x83\x62\x85\x6b\x89\x35\x90\x31"; /* 休息至康復 */
++static char s_szEncampCancel[] = "\x8a\x40\x81\x49";                         /* 取消 */
++static char s_szEncampExit[] = "\x84\x26\x82\x2c";                           /* 離開 */
++
++/* REQ_CAMP uses type-3 sprite buttons whose English captions are baked into
++ * the sprites, so the MenuPage string translator cannot see them.  Switch
++ * the three controls to bright-normal text buttons and temporarily attach the
++ * localized labels only while drawing.  Clearing the pointers afterwards is
++ * important: menupage_free() treats the lowest label pointer as the base of
++ * its allocated string blob, while these labels live in static storage. */
++static void encamp_menu_localize(MenuPage *page) {
++    int i;
++
++    if (page == (MenuPage *)0 || page->wEntry_count < 3)
++        return;
++    for (i = 0; i < 3; i++)
++        page->pEntries[i].wWidget_type = 6;
++}
++
++static void encamp_menu_draw_localized(MenuPage *page) {
++    if (page == (MenuPage *)0)
++        return;
++    if (page->wEntry_count < 3) {
++        menupage_draw(page);
++        return;
++    }
++    page->pEntries[0].pPrimary_label = s_szEncampRestUntilHealed;
++    page->pEntries[1].pPrimary_label = s_szEncampCancel;
++    page->pEntries[2].pPrimary_label = s_szEncampExit;
++    menupage_draw(page);
++    page->pEntries[0].pPrimary_label = (char *)0;
++    page->pEntries[1].pPrimary_label = (char *)0;
++    page->pEntries[2].pPrimary_label = (char *)0;
++}
++
+ void far encamp_run(void) {
+     int running;
+     unsigned short menuSelChanged;
+@@ -79,6 +115,7 @@ void far encamp_run(void) {
+         dialog_play_record(0x65, 1);
+     } else {
+         page = menupage_load("req_camp.dat");
++        encamp_menu_localize(page);
+         menupage_begin(page);
+         if (stat_party_all_above_pct(0x50) != 0) {
+             page->pEntries->bActive_flag = 0;
+@@ -92,7 +129,7 @@ void far encamp_run(void) {
+         encamp_restore_screen_background();
+         encamp_draw_clock_hand(time_in_period);
+         encamp_draw_party_stats();
+-        menupage_draw(page);
++        encamp_menu_draw_localized(page);
+         encamp_proj_trail_emit_facing(0, 1, -1, restStartTime, time_in_period, targetTime);
+         screen_wipe_horizontal(0xd, 0xb, 0x126, 0x65);
+         while (running != 0) {
+@@ -105,7 +142,7 @@ void far encamp_run(void) {
+                 bgRedrawFrames--;
+             }
+             if (menuRedrawFrames != 0) {
+-                menupage_draw(page);
++                encamp_menu_draw_localized(page);
+                 menuRedrawFrames--;
+             }
+             if (trailFrames != 0) {
+@@ -255,6 +292,8 @@ void far encamp_run(void) {
          encamp_teardown();
          menupage_end(page);
          menupage_free(page);
@@ -2539,7 +3599,7 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf6936
      }
      return;
  }
-@@ -476,11 +479,13 @@ void far encamp_draw_party_stats(void) {
+@@ -476,11 +515,13 @@ void far encamp_draw_party_stats(void) {
      unsigned int rations;
      int x;
      int y;
@@ -2553,7 +3613,7 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf6936
      do {
          x = (g_anEncampStatColX[iVar1] + 0x86) -
              (font_text_width_ds(g_apszEncampStatColHeaders[iVar1]) >> 1);
-@@ -488,6 +493,7 @@ void far encamp_draw_party_stats(void) {
+@@ -488,6 +529,7 @@ void far encamp_draw_party_stats(void) {
          font_draw_text_ds(g_apszEncampStatColHeaders[iVar1], x, y);
          iVar1 = iVar1 + 1;
      } while (iVar1 < 2);
@@ -2561,7 +3621,7 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf6936
      p = 0;
      goto LAB_check;
  LAB_body:
-@@ -506,7 +512,10 @@ LAB_body:
+@@ -506,7 +548,10 @@ LAB_body:
          (g_gameState.abActorStatusRanks[iVar1][6] != '\0')) {
          g_graphics_context.bText_fg_color = 'k';
      }
@@ -2572,7 +3632,7 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..8165deb10fc25b5bb286f35446bf6936
      g_graphics_context.bText_fg_color = '\0';
      iVar1 = 0;
      do {
-@@ -538,6 +547,6 @@ LAB_check:
+@@ -538,6 +583,6 @@ LAB_check:
      return;
  }
  
@@ -2973,7 +4033,7 @@ index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f6
      screen_frame_sync_buffers_rect(0xb, 0x79);
  
 diff --git a/bak/SRC/SCREENS/MAINMENU.C b/bak/SRC/SCREENS/MAINMENU.C
-index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0bea51a81 100644
+index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f98373356dda 100644
 --- a/bak/SRC/SCREENS/MAINMENU.C
 +++ b/bak/SRC/SCREENS/MAINMENU.C
 @@ -3,6 +3,7 @@
@@ -2984,21 +4044,19 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
  #include <io.h>
  
  #include "SRC/GAME/GMAIN.H"
-@@ -58,6 +59,13 @@ unsigned short g_wBookmarkCompassIcon;
+@@ -58,6 +59,11 @@ unsigned short g_wBookmarkCompassIcon;
  char g_szSaveSlotDirName_51cc[13];
  unsigned char g_abSaveFileHeader[90];
  
 +#define AUTOSAVE_SLOT_NAME "AutoSave"
 +#define AUTOSAVE_SLOT_ID 99
 +#define AUTOSAVE_FILE_COUNT 10
-+#define AUTOSAVE_FILE_SIZE 334605L
-+
 +static int g_nAutosavePending = 0;
 +
  int mainmenu_save_cfg_load_settings(void) {
      ResFile *file;
  
-@@ -370,7 +378,7 @@ int mainmenu_save_load_game_dialog(void) {
+@@ -370,7 +376,7 @@ int mainmenu_save_load_game_dialog(void) {
                  ;
          }
          if (slot_dirty) {
@@ -3007,7 +4065,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
              if (need_slot_sel) {
                  if (g_wSaveSlotDirValid) {
                      int sel = mainmenu_savelist_find_by_text(slot_list, g_szSaveSlotDirName_51cc);
-@@ -1452,7 +1460,7 @@ void far mainmenu_save_bookmark(void) {
+@@ -1452,7 +1458,7 @@ void far mainmenu_save_bookmark(void) {
      char path[50];
      unsigned int heading;
  
@@ -3016,7 +4074,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
          if (g_cfgBookmarkVerify) {
              dialog_input_wait_release(0, 1);
              dialog_play_record(0x14c, 0);
-@@ -1499,6 +1507,195 @@ void far mainmenu_save_bookmark(void) {
+@@ -1499,6 +1505,195 @@ void far mainmenu_save_bookmark(void) {
      return;
  }
  
@@ -3060,7 +4118,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
 +    fd = open(path, 0);
 +    if (fd < 0)
 +        return 0;
-+    ok = (filelength(fd) == AUTOSAVE_FILE_SIZE);
++    ok = (filelength(fd) >= GAM_SAVE_FILE_BASE_SIZE && filelength(fd) <= GAM_SAVE_FILE_MAX_SIZE);
 +    close(fd);
 +    return ok;
 +}
@@ -3212,7 +4270,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
  void mainmenu_save_party_to_tmp(void) {
      int i;
  
-@@ -1543,7 +1740,7 @@ int mainmenu_save_scan_highest_slot(void) {
+@@ -1543,7 +1738,7 @@ int mainmenu_save_scan_highest_slot(void) {
      int highest;
      int state;
      int save_id;
@@ -3221,7 +4279,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
      char dta[30];
      char path[90];
      int rc;
-@@ -1590,7 +1787,7 @@ void mainmenu_save_slot_exists(void) {
+@@ -1590,7 +1785,7 @@ void mainmenu_save_slot_exists(void) {
      char local[90];
      ResFile *file;
  
@@ -3230,7 +4288,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
          sprintf(local, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
                  g_wCurrentSaveSlotKey, 0x15);
          file = res_fopen(local, "wb");
-@@ -1634,7 +1831,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
+@@ -1634,7 +1829,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
      sprintf(local_path, "%s\\*.G??", "GAMES");
      rc = findfirst(local_path, &dta, 0x10);
      while (rc == 0) {
@@ -3240,7 +4298,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
              mainmenu_savelist_insert_sorted(list, local_path, slotKey);
          rc = findnext(&dta);
      }
-@@ -1643,7 +1841,28 @@ fail:
+@@ -1643,7 +1839,28 @@ fail:
      return 0;
  }
  
@@ -3269,7 +4327,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
      for (; *filename != '\0'; filename++, out_name++) {
          if (*filename == '.') {
              if ((((unsigned char *)_ctype)[filename[2] + 1] & _IS_DIG) == 0) {
-@@ -1655,6 +1874,10 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1655,6 +1872,10 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
              *out_name = '\0';
              filename += 2;
              *out_slot = atoi(filename);
@@ -3280,7 +4338,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..8f45ffe7a089dc0647c3e74465d52af0
              if (*out_slot < 1 || *out_slot > 20) {
                  return 0;
              }
-@@ -1666,22 +1889,67 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1666,22 +1887,67 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
  }
  
  int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id) {
@@ -3436,7 +4494,7 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f48bd3b830db2cca6042102a1dfc6bd0
 +        mainmenu_autosave_request();
  }
 diff --git a/bak/SRC/SCREENS/TOWNSCN.C b/bak/SRC/SCREENS/TOWNSCN.C
-index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c475a1e4f 100644
+index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1d8bb2143 100644
 --- a/bak/SRC/SCREENS/TOWNSCN.C
 +++ b/bak/SRC/SCREENS/TOWNSCN.C
 @@ -19,6 +19,7 @@
@@ -3580,7 +4638,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
 +               (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))))
 +            continue;
 +        if ((pActor->rect.width >= 200 && pActor->rect.y >= 100 && pActor->rect.height >= 40) ||
-+            pActor->cKind == 0xf || pActor->cKind == 3) {
++            pActor->cKind == 3) {
 +            exitCursor = pActor->nCursorShape - 1;
 +            s_exitBarAction = i + 0x80;
 +        }
@@ -3609,21 +4667,23 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
      for (i = 0; i < g_pCurrentTownScene->nActorCount; i++) {
          g_pCurrentTownScene->pAActors[i].pDdxRecord =
              (preserve != 0) ? (void far *)dialog_load_record_by_key(
-@@ -123,6 +252,13 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -123,6 +252,15 @@ static int far townscene_load(int chapter, int sub, int preserve) {
              if ((pActor->nGateEventId == 0) ||
                  (((unsigned int)pActor->nGateMin <= gstate_event_read(pActor->nGateEventId)) &&
                   (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))) {
 +                /* Drop the wide lower-band exit bar (rect ~(0,114,316,83) in
 +                   every shipped scene): that band is now "click to page the
-+                   description", and leaving is the top-right button. */
++                   description", and leaving is the top-right button.  Kind
++                   15 is not an exit bar: Romney uses it for the chapter-two
++                   Black Sheep Tavern story trigger. */
 +                if ((pActor->rect.width >= 200 && pActor->rect.y >= 100 &&
 +                     pActor->rect.height >= 40) ||
-+                    pActor->cKind == 0xf || pActor->cKind == 3)
++                    pActor->cKind == 3)
 +                    goto skip_entry;
                  pEntry->rect.x = pActor->rect.x - g_pTownMenuPage->rect.x;
                  pEntry->rect.y = pActor->rect.y - g_pTownMenuPage->rect.y;
                  pEntry->rect.width = pActor->rect.width;
-@@ -131,11 +267,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -131,11 +269,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
                  pEntry->wAction_id = i + 0x80;
                  g_pTownMenuPage->wEntry_count++;
                  pEntry++;
@@ -3651,7 +4711,16 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
  
      g_pCurrentTownScene->pDdxRecord =
          (void far *)dialog_load_record_by_key(g_pCurrentTownScene->dwDialogKey, 0);
-@@ -195,25 +347,89 @@ static void far townscene_shop_menu_close(void) {
+@@ -147,7 +301,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+             ((Actor far *)g_pCurrentTownScene->pActor)->needsFlush = TRUE;
+             {
+                 int q;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+                 q = (int)((long)((unsigned long)pSub->event_state.bRest_gold_unit *
+                                  ((unsigned long)g_gameState.nChapter + 0x13)) /
+                           0x14);
+@@ -195,25 +349,89 @@ static void far townscene_shop_menu_close(void) {
      return;
  }
  
@@ -3755,7 +4824,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
      }
      return;
  }
-@@ -319,12 +535,17 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -319,12 +537,17 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      unsigned short savedBlendMode;
      unsigned char far *pPalSaved;
      int needRefresh;
@@ -3773,7 +4842,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
      sceneIdx = scene_index;
      savedMusic = audio_music_play(-999);
      musicTrack = -1;
-@@ -409,17 +630,68 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -409,17 +632,68 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                  screen_frame_present();
                  screen_frame_sync_buffers_rect(0, 200);
              }
@@ -3845,7 +4914,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
          /* action < 0x80 skips the actor dispatch below. */
          if (action >= 0x80) {
  
-@@ -647,10 +919,13 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -647,10 +921,13 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
                  }
@@ -3860,7 +4929,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
          if (action == 1) {
              townscene_anim_channel_play_sync(g_pCurrentTownScene->nExitAnim);
              g_pPendingPalette = 0;
-@@ -661,6 +936,10 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -661,6 +938,10 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      }
  
      /* Loop exit: tear down the scene and restore the prior game state. */
@@ -3871,7 +4940,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
      g_pPalQueuedForFlip = 0;
      townscene_story_actors_destr();
      townscene_shop_menu_close();
-@@ -679,6 +958,21 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -679,6 +960,21 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      g_dialog_in_scene = 0;
      g_nSceneReloadPending = 1;
      g_nMapReloadPending = 1;
@@ -3893,7 +4962,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
  }
  
  void far townscene_cheat_menu_screen(void) {
-@@ -696,10 +990,7 @@ void far townscene_cheat_menu_screen(void) {
+@@ -696,10 +992,7 @@ void far townscene_cheat_menu_screen(void) {
      screen_render_main_frame("DIALOG.SCX");
      do {
          if (redraw != 0) {
@@ -3905,7 +4974,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
              menupage_draw(page);
              screen_frame_present();
              screen_frame_sync_buffers_rect(0, 200);
-@@ -773,10 +1064,7 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -773,10 +1066,7 @@ void far townscene_chest_open_with_cipher(void) {
              screen_render_main_frame("DIALOG.SCX");
              do {
                  if (redraw != 0) {
@@ -3917,7 +4986,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..baa813e7414a42f8c352d61cd350c72c
                      menupage_draw(page);
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
-@@ -791,6 +1079,12 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -791,6 +1081,12 @@ void far townscene_chest_open_with_cipher(void) {
                      cmbinv_inventory_screen_run(actor, 0, 0);
                      screen_render_main_frame("DIALOG.SCX");
                      break;
@@ -3996,6 +5065,42 @@ index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36cc
              return dialog_freemem_if_not_null((unsigned char far *)rec);
          }
          break;
+diff --git a/bak/SRC/SYS/CFGPARSE.C b/bak/SRC/SYS/CFGPARSE.C
+index 9d0d8523c111712778c29c479c8845e7206c8f6b..a926d8498c5ed8c192da33f46acd8091a10533c5 100644
+--- a/bak/SRC/SYS/CFGPARSE.C
++++ b/bak/SRC/SYS/CFGPARSE.C
+@@ -39,7 +39,7 @@ bool16 g_cfgKnockKnock = FALSE;
+ int g_cfgCycle = 0;
+ int g_cfgTempDrive = 0;
+ bool16 g_cfgBookmarkVerify = TRUE;
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ bool16 g_cfgNonRotatingMap = FALSE;
+ #endif
+ 
+@@ -84,7 +84,7 @@ void parse_krondor_cfg(void) {
+             fscanf(fp, " %40s", token);
+             fscanf(fp, " %40s", token);
+             g_cfgBookmarkVerify = atoi(token);
+-#ifdef V102CD
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+         } else if (stricmp("NonRotatingMap", token) == 0) {
+             fscanf(fp, " %40s", token);
+             fscanf(fp, " %40s", token);
+diff --git a/bak/SRC/SYS/CFGPARSE.H b/bak/SRC/SYS/CFGPARSE.H
+index 91d0493700125c2d11adc31d79728e5aec8f8d86..1ab7be064fea48fbb1b8138399198c05e42e7225 100644
+--- a/bak/SRC/SYS/CFGPARSE.H
++++ b/bak/SRC/SYS/CFGPARSE.H
+@@ -62,7 +62,9 @@ extern char *g_cfgResourceDrivePrefix;
+  * check fails and CD music stays off.
+  */
+ extern char g_cfgCdDriveLetter;
++#endif
+ 
++#if defined(V102CD) || defined(V102_GAMEPLAY_FIXES)
+ /**
+  * @brief Fixed-orientation overhead map flag (1.02 CD only).
+  *
 diff --git a/bak/SRC/SYS/DOSMEM.C b/bak/SRC/SYS/DOSMEM.C
 index eebcc8ee9ce7f720c1f6bfacacdc24cb7043e4a7..d3910600d359f5e447220604da74d3339ced9dd0 100644
 --- a/bak/SRC/SYS/DOSMEM.C

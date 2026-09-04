@@ -104,3 +104,19 @@ eab7f731185f183f58c4a4d35b0c8e6323557439 debug: capture visible cave scene objec
 980881f8de05d0f125b862e7154fcacb9ec431f4 fix: place cave marker at entrance surface
 397902a524923b14c8561a0d34570b88caa60fd0 fix: align cave marker with entrance
 6fcffc032e93c1352c3e81adaa1c25acaa9be904 fix: enable modern movement controls on map
+d702c7522441114feb98283ee34b59bad62b5d3b feat: mark all outdoor cave entrances on map
+90091ea3034365e34544123081275888cc809d02 feat: scale landmark range markers with map view
+949ca96ebca45098ab6a867dd24dcd0418d663ab fix: keep discovered landmarks visible across map views
+ec9c3b4ebc1eecf7a13698d53960a37179cefd4b feat: mark all outdoor dungeon entrances
+2648f995b9a2ac347e109d33e6030efe12f33351 feat: mark all underground entrance sites
+e9887bf85a84a32a7a7a95e7a069f18bd01d5a2f feat: persist spell-detected map points
+b15752206457a36ba01809299a1da8f1303a6057 fix: bounds-check spell landmark save extension
+0076d4dd3d73f0f46d48411ca129f12a1825f974 fix: retain all spell-detected map targets
+ed24b0ded5a6cba64b093563a204ef4ce2580f27 fix: localize encampment sprite buttons
+8dbeb43a4c7f25a67b0d4d6c2fc6f346d3fdf352 fix: brighten idle encampment buttons
+2e97009ba429b4315ccac47379cf1e7efccd0388 fix: restore Romney chapter-end hotspot
+2c554339cc15c10c7b24d6bee21a2a8203b9b58a fix: exclude mapped towns from landmarks
+666e7fec7b2471a7f9f4986b6dd05c43224fd99f wip: checkpoint EVG native CJK rendering POC
+9744a8cc11396e21d388fefa49fda9a70e18bf6c feat: backport v1.02 safety fixes to v1.00 build
+93913fa287e2c4f29d9401315a2ec3bee2f630e8 feat: backport remaining v1.02 non-CD behavior
+1a9ef5e4a495f173ba7483eb40e019c851eabbf0 Revert "wip: checkpoint EVG native CJK rendering POC"

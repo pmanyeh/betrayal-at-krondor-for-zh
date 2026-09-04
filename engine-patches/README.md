@@ -5,13 +5,13 @@
 ## 固定版本
 
 - 上游基準提交：`1fc2a69e306af1623cd22f3390a5569302059f4d`
-- 本專案最終本機引擎提交：`6fcffc032e93c1352c3e81adaa1c25acaa9be904`
-- 套用後預期 Git tree：`011547febb2f522da5156c80c40a5187cee87569`
-- 補丁 SHA-256：`14404b5ab9307202f7f4bb5765e7304a26ea7a9e8b4c64827256cab8e5fdca16`
+- 本專案最終本機引擎提交：`1a9ef5e4a495f173ba7483eb40e019c851eabbf0`
+- 套用後預期 Git tree：`be0b1e348abba7b2f4032144405e7a08b6da6516`
+- 補丁 SHA-256：`60744e127a68923d1452933cc4f5cc64a82d72e3b63bf2fd4a93874a68adfdaf`
 
-`betrayal-at-krondor-zh.patch` 是由上述兩個提交之間的已提交內容，以 `git diff --binary --full-index` 產生的合併補丁。它涵蓋 38 個原始碼檔；不包含遊戲資產、編譯產物，也不包含本機工作樹尚未提交的 VESA／EVG 實驗。
+`betrayal-at-krondor-zh.patch` 是由上述兩個提交之間的已提交內容，以 `git diff --binary --full-index` 產生的合併補丁。它涵蓋 53 個原始碼檔；不包含遊戲資產、編譯產物，也不包含已從正式開發線撤除並保存在備份分支的 VESA／EVG 實驗。
 
-`commits.txt` 依時間順序記錄這段範圍的 106 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這 106 筆提交歷史，只會重建相同的最終檔案內容。
+`commits.txt` 依時間順序記錄這段範圍的 122 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這 122 筆提交歷史，只會重建相同的最終檔案內容。
 
 ## 套用
 
@@ -28,7 +28,7 @@ git write-tree
 最後一行應輸出：
 
 ```text
-011547febb2f522da5156c80c40a5187cee87569
+be0b1e348abba7b2f4032144405e7a08b6da6516
 ```
 
 這代表套用結果與本專案最終引擎提交的 tree 完全一致。之後可自行建立本地提交，再依 [`HANDOFF.md`](../HANDOFF.md) 的 Borland／WSL 流程編譯。
