@@ -12,6 +12,8 @@ Builds `dist/release_v100_zh/` as a self-contained, portable folder:
     安裝中文化.bat                     -- one click: runs installer.py against game_data/
     玩遊戲.bat                         -- one click: launches dosbox-x mounting game_data/
     README_安裝說明.txt                -- Traditional Chinese install instructions
+    中文按鍵說明.txt                    -- player-facing keyboard reference
+    新增功能說明.txt                    -- v1.02 backports and project enhancements
 
 Deliberately does NOT touch `dist/test_v100_zh/` beyond reading from it, and
 never copies unmodified original game assets (krondor.001/.rmf, .wri manuals,
@@ -63,6 +65,11 @@ HERO_NAMES = [
 UNTRACKED_RESOURCE_FILES = ["KEYWORD.DAT", "OBJINFO.DAT", "fmap_twn.dat"]
 
 FONT_FILES = ["ZH16.DAT", "ZHSTAT.DAT"]
+
+PLAYER_GUIDES = [
+    ("keyboard_guide_zh.txt.template", "中文按鍵說明.txt"),
+    ("new_features_zh.txt.template", "新增功能說明.txt"),
+]
 
 
 def sha256_of(data: bytes) -> str:
@@ -254,6 +261,12 @@ dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 「玩遊戲.bat」就會啟動中文版遊戲。整個資料夾可以直接搬到別的地方，
 不影響運作。
 
+隨附說明
+--------
+「中文按鍵說明.txt」整理遊戲各畫面的常用鍵盤操作。
+「新增功能說明.txt」整理官方 1.02 非光碟修補，以及本中文化額外加入的
+操作、自動存檔、快速存讀檔、地圖和介面功能。
+
 解除安裝
 --------
 雙擊「安裝中文化.bat」旁的命令列視窗執行：
@@ -273,6 +286,19 @@ GitHub repo 的 LICENSE 檔案。
 def write_readme(release_dir: Path) -> None:
     (release_dir / "README_安裝說明.txt").write_text(README_TEXT, encoding="utf-8")
     print("[OK] 已寫入 README_安裝說明.txt")
+
+
+def write_player_guides(release_dir: Path) -> None:
+    """Write Windows-friendly UTF-8/CRLF player documentation.
+
+    A UTF-8 BOM keeps Traditional Chinese readable even in older Windows text
+    editors that do not reliably auto-detect unmarked UTF-8 files.
+    """
+    for template_name, output_name in PLAYER_GUIDES:
+        text = (TOOLS_RELEASE_DIR / template_name).read_text(encoding="utf-8")
+        data = text.replace("\r\n", "\n").replace("\n", "\r\n").encode("utf-8-sig")
+        (release_dir / output_name).write_bytes(data)
+        print(f"[OK] 已寫入 {output_name}")
 
 
 def check_game_data_is_empty(release_dir: Path) -> None:
@@ -320,6 +346,7 @@ def main() -> None:
     check_dosboxx(RELEASE_DIR)
     check_python_embed(RELEASE_DIR)
     write_readme(RELEASE_DIR)
+    write_player_guides(RELEASE_DIR)
     check_game_data_is_empty(RELEASE_DIR)
     make_zip(RELEASE_DIR)
     print(f"\n完成：{RELEASE_DIR}")
