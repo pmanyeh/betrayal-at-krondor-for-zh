@@ -46,6 +46,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DIST_TEST_DIR = REPO_ROOT / "dist" / "test_v100_zh"
 RELEASE_DIR = REPO_ROOT / "dist" / "release_v100_zh"
 TOOLS_RELEASE_DIR = Path(__file__).resolve().parent
+MENUPAGE_CATALOG = REPO_ROOT / "localization" / "translated" / "MENUPAGE.json"
 
 # From docs/baseline/version-evidence.md -- the original, untouched STARTUP.GAM.
 GAM_BASELINE_SHA256 = "b587c74b8a9f00a8b5bf5a382287319120c1958f26282dbc547bb199157bf8c2"
@@ -92,7 +93,15 @@ def collect_bok_files() -> list[tuple[str, str]]:
 
 def collect_menupage_files() -> list[tuple[str, str]]:
     m = _load_manifest("MENUPAGE_BUILD_MANIFEST.json")
-    return list(m["deployed_loose_sha256"].items())
+    deployed = m["deployed_loose_sha256"]
+    catalog = json.loads(MENUPAGE_CATALOG.read_text(encoding="utf-8"))
+    for override in catalog.get("action_overrides", []):
+        filename = override["file"].lower()
+        if filename not in deployed:
+            raise SystemExit(
+                f"MENUPAGE_BUILD_MANIFEST.json omits action override file: {filename}"
+            )
+    return list(deployed.items())
 
 
 def collect_spell_files() -> list[tuple[str, str]]:
