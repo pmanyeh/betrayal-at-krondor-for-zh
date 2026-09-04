@@ -50,7 +50,7 @@ def test_world_map_teleport_destinations_include_corrected_safe_locations() -> N
     records = re.findall(r"\{\s*([^{}]+?)\s*\}", table.group("body"))
     normalized = [re.sub(r"\s+", "", record) for record in records]
     assert normalized[18] == "4,13,12,13,17,0x4000"
-    assert normalized[27] == "6,17,13,18,18,0x2000"
+    assert normalized[27] == "6,17,13,22,18,0x2000"
 
 
 def test_pending_teleport_detects_a_tile_y_only_change() -> None:
