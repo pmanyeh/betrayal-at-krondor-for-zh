@@ -1,9 +1,7 @@
 """Developer-side tool: assemble the complete end-user "免安裝整合包" release.
 
 Builds `dist/release_v100_zh/` as a self-contained, portable folder:
-    game_data/                        -- empty (besides an optional curated
-                                          "easy start" save, see starter_save/);
-                                          the end user drops their own
+    game_data/                        -- empty; the end user drops their own
                                           legally-owned original game files here
     python-embed/                     -- vendored embeddable Python (vendor_python_embed.py)
     dosbox-x/                         -- vendored DOSBox-X (vendor_dosboxx.py)
@@ -203,32 +201,6 @@ def write_game_data_placeholder(release_dir: Path) -> None:
     print(f"[OK] 已建立 {game_data_dir}")
 
 
-# Hand-curated "easy start" saves (see tools/release/starter_save/ and
-# build_starter_save.py), shipped so new players can skip the harder opening:
-# New Game -> watch the intro -> Load Game -> pick this slot. This is
-# project-authored content, not an extracted original asset, so it's carved
-# out of the blanket *.gam .gitignore rule. The whole slot directory is
-# copied as a unit -- it may hold more than one SAVE0N.GAM checkpoint.
-STARTER_SAVE_SRC = Path(__file__).resolve().parent / "starter_save"
-STARTER_SAVE_SLOT_RELPATH = Path("GAMES") / "Plus.G01"
-STARTER_SAVE_SLOT_NAME = "Plus"
-
-
-def write_starter_save(release_dir: Path) -> list[Path]:
-    src_dir = STARTER_SAVE_SRC / STARTER_SAVE_SLOT_RELPATH
-    if not src_dir.is_dir():
-        print(f"[跳過] 沒有內附新手存檔（{src_dir} 不存在）")
-        return []
-    dest_dir = release_dir / "game_data" / STARTER_SAVE_SLOT_RELPATH
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    shipped = []
-    for src in sorted(src_dir.glob("*.GAM")):
-        shutil.copy2(src, dest_dir / src.name)
-        shipped.append(dest_dir / src.name)
-    print(f"[OK] 已內附新手存檔：game_data/{STARTER_SAVE_SLOT_RELPATH.as_posix()}/ 底下 {len(shipped)} 個存檔點")
-    return shipped
-
-
 def check_dosboxx(release_dir: Path) -> bool:
     dosboxx_dir = release_dir / "dosbox-x"
     if not (dosboxx_dir / "dosbox-x.exe").exists():
@@ -282,14 +254,6 @@ dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 「玩遊戲.bat」就會啟動中文版遊戲。整個資料夾可以直接搬到別的地方，
 不影響運作。
 
-新手輕鬆開局（optional）
-------------------------
-整合包內附一個「Plus」存檔，裡面有兩個存檔點：存檔 1 起始金幣調成 1000、
-其餘跟正常開新遊戲完全一樣；存檔 2 是多探索了一些的進度，開局手邊會有
-更多資源可用。想用的話：開新遊戲，看完 Intro 過場後，到主選單選「讀取
-進度」，選讀取「Plus」底下想要的存檔點即可；不想用的話直接開新遊戲照玩
-即可，不影響任何東西。
-
 解除安裝
 --------
 雙擊「安裝中文化.bat」旁的命令列視窗執行：
@@ -314,21 +278,19 @@ def write_readme(release_dir: Path) -> None:
 def check_game_data_is_empty(release_dir: Path) -> None:
     """Safety net: game_data/ must never ship with real game files in it --
     that would mean accidentally distributing original copyrighted assets.
-    Only the placeholder text file and the known starter-save subtree
-    (both written by this script, never by a developer manually) are allowed."""
+    Only the placeholder text file written by this script is allowed."""
     game_data_dir = release_dir / "game_data"
-    starter_save_slot_dir = game_data_dir / STARTER_SAVE_SLOT_RELPATH
     placeholder = game_data_dir / "把遊戲資料放這裡.txt"
     unexpected = [
         p.relative_to(game_data_dir).as_posix()
         for p in game_data_dir.rglob("*")
-        if p.is_file() and p != placeholder and starter_save_slot_dir not in p.parents
+        if p.is_file() and p != placeholder
     ]
     if unexpected:
         raise SystemExit(
             f"拒絕打包：{game_data_dir} 裡有非預期的檔案，可能是開發測試時不小心放了真的遊戲資料進去：\n"
             f"  {unexpected}\n"
-            "先清空 game_data/（只留下說明檔跟新手存檔）再重新 package。"
+            "先清空 game_data/（只留下說明檔）再重新 package。"
         )
     print("[OK] game_data/ 確認乾淨（沒有夾帶原版遊戲資料）")
 
@@ -355,7 +317,6 @@ def main() -> None:
     write_bat("play_launcher.bat.template", RELEASE_DIR / "玩遊戲.bat")
     write_bat("install_launcher.bat.template", RELEASE_DIR / "安裝中文化.bat")
     write_game_data_placeholder(RELEASE_DIR)
-    write_starter_save(RELEASE_DIR)
     check_dosboxx(RELEASE_DIR)
     check_python_embed(RELEASE_DIR)
     write_readme(RELEASE_DIR)
