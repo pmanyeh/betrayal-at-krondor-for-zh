@@ -188,7 +188,7 @@ Inside Preferences: O saves & closes, Esc/C cancels, D resets to defaults. 偏�
 
 | Menu item | Action 動作 | Source |
 |---|---|---|
-| Add gold | Grants 5000 gold 增加 5000 金幣 | TOWNSCN.C:710 |
+| Add gold | Grants 500 gold (`5000` internal tenths) 增加 500 金幣（內部單位為 `5000`） | TOWNSCN.C |
 | Spawn inventory | Opens an inventory screen for a chapter-9 actor 開啟第九章某個角色的物品欄 | TOWNSCN.C:713 |
 | Dialogue test | Plays dialogue record 0x249f1b *(effect unclear)* 播放對話紀錄 0x249f1b（效果不明確） | TOWNSCN.C:722 |
 | End world loop | Force-exits the current world loop 強制結束目前的世界迴圈 | TOWNSCN.C:726 |

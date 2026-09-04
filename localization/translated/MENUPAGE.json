@@ -654,9 +654,9 @@
       "entry": 0,
       "slot": "primary",
       "source": "Get: 500 Gold",
-      "translation": "取得 5000 金幣",
+      "translation": "取得 500 金幣",
       "status": "translated",
-      "notes": "The label says 500 in the original resource, but TOWNSCN.C actually adds 5000 gold."
+      "notes": "TOWNSCN.C adds 5000 internal money units; gstate_format_money() divides by 10, so the player receives 500 gold as the original label states."
     },
     {
       "id": "REQ_KNOC.DAT#1#primary",
