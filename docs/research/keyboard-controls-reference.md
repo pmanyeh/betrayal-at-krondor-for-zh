@@ -49,6 +49,8 @@ Extracted directly from `upstream/betrayal-at-krondor/bak/SRC/` — every `key_i
 | Q / E | Sidestep left / right 隊伍向左／向右平移 | WORLDLP.C |
 | R | Auto-step forward along a detected road, one tile per press 沿著道路走 | WORLDLP.C:295 |
 | Tab（按住） | Show the current interactive object outlines; releasing Tab removes them 顯示目前可互動物件框線，放開即隱藏 | WORLDLP.C |
+| F5 | Quick-save to the 20-slot rotating `QSave` directory 快速存檔至 20 槽輪替的 `QSave` 目錄 | WORLDLP.C |
+| F9 | Immediately load the newest valid `QSave` entry 立即讀取最新且有效的快速存檔 | WORLDLP.C |
 | C | Cast a spell 施放法術 | WORLDLP.C:306 |
 | M | Open the local zone map 開啟區域地圖 | WORLDLP.C:316 |
 | F | Open the full world map 開啟世界地圖 | WORLDLP.C:324 |
