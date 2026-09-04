@@ -121,3 +121,5 @@ ed24b0ded5a6cba64b093563a204ef4ce2580f27 fix: localize encampment sprite buttons
 93913fa287e2c4f29d9401315a2ec3bee2f630e8 feat: backport remaining v1.02 non-CD behavior
 1a9ef5e4a495f173ba7483eb40e019c851eabbf0 Revert "wip: checkpoint EVG native CJK rendering POC"
 f6e20a6d788c113b2ed1f42ad7f849ff20f49d98 feat: add clickable north-lock compass
+2a90a79c57428ac526466e2bdf5de849cd73deae fix: reflow Chinese teleport screen
+5fb5ff77310c02702c9337eae1be4a8a88b1f479 fix: lower teleport place labels

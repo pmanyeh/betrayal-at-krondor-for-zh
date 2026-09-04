@@ -4578,7 +4578,7 @@ index ac127215a1e3034013f714abd8a6e45bcb5e8b78..74f4d22f75c251e91fd51bfa4aec6caf
  extern int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id);
  extern int mainmenu_save_parse_read_title(char *title_buf, char *sig_block, int *out_save_id,
 diff --git a/bak/SRC/SCREENS/MODALSCR.C b/bak/SRC/SCREENS/MODALSCR.C
-index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f48bd3b830db2cca6042102a1dfc6bd0a18815aa 100644
+index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f261f3d1702599f25c278a451dc5b5452c1097c2 100644
 --- a/bak/SRC/SCREENS/MODALSCR.C
 +++ b/bak/SRC/SCREENS/MODALSCR.C
 @@ -37,6 +37,7 @@
@@ -4598,16 +4598,50 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f48bd3b830db2cca6042102a1dfc6bd0
      return hadPending;
  }
  
-@@ -115,7 +118,7 @@ static void far modalscreen_teleport_dest_sel(MenuPage *page, ImageRecord **asse
+@@ -101,6 +104,7 @@ static void far modalscreen_teleport_dest_sel(MenuPage *page, ImageRecord **asse
+     int x;
+     int y;
+     char buf[20];
++    char savedMixedZhMode;
+     ImageRecord *sprite;
+     MenuEntry *entry;
+ 
+@@ -109,14 +113,18 @@ static void far modalscreen_teleport_dest_sel(MenuPage *page, ImageRecord **asse
+     gfx_present_dispatch(0, 0, 0x140, 200);
+     menupage_draw(page);
+     invui_draw_text_aligned_shadow((unsigned char far *)page->pEntries[hover_city - 1].pPrimary_label, 0x3c,
+-                                   0x2c, 1, 10, 1);
++                                   0x26, 1, 10, 1);
+     resblit_sprite(asset_tbl[hover_city - 1], 0x3c - asset_tbl[hover_city - 1]->nWidth / 2, 0x37);
+     if (sel_city != 0) {
          invui_draw_text_aligned_shadow((unsigned char far *)page->pEntries[sel_city - 1].pPrimary_label,
-                                        0x3c, 0x74, 1, 10, 1);
+-                                       0x3c, 0x74, 1, 10, 1);
++                                       0x3c, 0x6e, 1, 10, 1);
          resblit_sprite(asset_tbl[sel_city - 1], 0x3c - asset_tbl[sel_city - 1]->nWidth / 2, 0x7f);
 -        sprintf(buf, "%d sovereigns", cost / 10);
 +        sprintf(buf, "%d\x82\x6b\x91\x52", cost / 10);
++        /* Match the ASCII price digits to the 16-pixel Chinese currency label. */
++        savedMixedZhMode = g_bMixedZhMode;
++        g_bMixedZhMode = 1;
          invui_draw_text_aligned_shadow((unsigned char far *)buf, 0x26, 0xb4, 0, 10, 1);
++        g_bMixedZhMode = savedMixedZhMode;
      }
      i = 0;
-@@ -686,6 +689,7 @@ void modalscreen_inventory_request(unsigned int category_mask, int discount_pct)
+     entry = page->pEntries;
+@@ -214,8 +222,10 @@ int modalscreen_teleport_spell_run(int current_city, long cost_base, int cost_pe
+     menupage_begin(page);
+     g_graphics_context.bGfx_fill_enabled = 1;
+     resblit_sprite(assetTbl[0xc], 0x3c - assetTbl[0xc]->nWidth / 2, 10);
+-    invui_draw_text_aligned_shadow((unsigned char far *)"From:", 0x3c, 0x23, 1, 0, -2);
+-    invui_draw_text_aligned_shadow((unsigned char far *)"To:", 0x3c, 0x6b, 1, 0, -2);
++    /* Chinese place names are 16 pixels high.  Put the short English labels
++     * beside their logos and reuse the old label rows for the place names. */
++    invui_draw_text_aligned_shadow((unsigned char far *)"From:", 0x16, 0x4a, 1, 0, -2);
++    invui_draw_text_aligned_shadow((unsigned char far *)"To:", 0x16, 0x92, 1, 0, -2);
+     invui_draw_text_aligned_shadow((unsigned char far *)"Cost:", 0x18, 0xb4, 1, 0, -2);
+ 
+     for (i = 1; i < 0xd; i++) {
+@@ -686,6 +696,7 @@ void modalscreen_inventory_request(unsigned int category_mask, int discount_pct)
  
  static void modalscreen_inv_draw_gold_amount(void) {
      char szAmount[40];
@@ -4615,7 +4649,7 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f48bd3b830db2cca6042102a1dfc6bd0
      register int x;
      register int y;
  
-@@ -694,10 +698,16 @@ static void modalscreen_inv_draw_gold_amount(void) {
+@@ -694,10 +705,16 @@ static void modalscreen_inv_draw_gold_amount(void) {
      g_graphics_context.bClip_enabled = 0;
      g_graphics_context.bText_fg_color = 0;
      g_graphics_context.bText_style_flags = 1;
@@ -4633,7 +4667,7 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f48bd3b830db2cca6042102a1dfc6bd0
  }
  
  void modalscreen_rest_until_time(Actor far *pActor) {
-@@ -821,4 +831,6 @@ void modalscreen_rest_until_time(Actor far *pActor) {
+@@ -821,4 +838,6 @@ void modalscreen_rest_until_time(Actor far *pActor) {
      screen_frame_present();
      g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage1Base;
      resblit_load_pal_or_stream("DIALOG.SCX");
