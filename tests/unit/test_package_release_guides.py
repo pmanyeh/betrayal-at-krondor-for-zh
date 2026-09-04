@@ -14,6 +14,8 @@ def test_player_guide_templates_cover_requested_topics() -> None:
     assert "F9" in guides["中文按鍵說明.txt"]
     assert "官方 v1.02 非光碟修補回植" in guides["新增功能說明.txt"]
     assert "快速存檔／讀檔" in guides["新增功能說明.txt"]
+    assert "33 個有名稱的地點" in guides["中文按鍵說明.txt"]
+    assert "完整世界地圖左鍵點擊 33 個有名稱的地點" in guides["新增功能說明.txt"]
 
 
 def test_write_player_guides_uses_windows_friendly_text(tmp_path: Path) -> None:
