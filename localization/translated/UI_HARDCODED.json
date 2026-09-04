@@ -646,6 +646,20 @@
       "translation": "尚未學習",
       "status": "translated",
       "notes": "Shown in the spell-school list area when the selected school has no learned spells."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_quicksave_notice:save_complete",
+      "source": "Quick-save complete",
+      "translation": "快速存檔完成",
+      "status": "translated",
+      "notes": "Non-modal F5 success notice; rendered with the 10x10 small font near the bottom of the exploration viewport."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_quicksave_notice:loading",
+      "source": "Loading quick-save...",
+      "translation": "正在讀取快速存檔……",
+      "status": "translated",
+      "notes": "Non-modal F9 loading notice; rendered with the 10x10 small font near the bottom of the exploration viewport."
     }
   ]
 }
