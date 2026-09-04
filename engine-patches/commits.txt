@@ -123,3 +123,12 @@ ed24b0ded5a6cba64b093563a204ef4ce2580f27 fix: localize encampment sprite buttons
 f6e20a6d788c113b2ed1f42ad7f849ff20f49d98 feat: add clickable north-lock compass
 2a90a79c57428ac526466e2bdf5de849cd73deae fix: reflow Chinese teleport screen
 5fb5ff77310c02702c9337eae1be4a8a88b1f479 fix: lower teleport place labels
+72531553e943b9804bda1e97f2ef1ef63b5ed1a7 feat: add rotating quicksave and quickload
+eb3fad1c991b8817e659f83ea6dd196e7ab1503b feat: show quicksave status notices
+5c50c2ef08860244a06bd47d116ddffec060dd84 tweak: lengthen quicksave notices
+d8e3c626cad6270280c06b5d1a8571dae024c84e tweak: show quicksave notices for two seconds
+993f648b9b630c6fd1364a38bec8e1f386a04ef7 feat: teleport from named world map locations
+ee47c39d386f4cfb0c3377a4ab22fa537a100a33 fix: correct world map teleport destinations
+3bd95f4b393c008bee79311e0ca6b5f8a087ac59 fix: place map teleports on roads
+997778ba66127e38475234d519ea13d73bd6c7f8 fix: move Wyke teleport east of river
+6774ae67ed0e41fdcf6d6c0125d92b3382d3a519 fix: refresh overhead map controls after keyboard input

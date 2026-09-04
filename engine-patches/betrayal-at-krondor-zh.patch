@@ -1997,7 +1997,7 @@ index 2bafd618c72e9e03317aea3ed4b824640c357e61..5c9f1689d00f15270c34194a49691060
              gstate_event_write(0x195a, 0);
  #endif
 diff --git a/bak/SRC/GAME/WORLD/MAP.C b/bak/SRC/GAME/WORLD/MAP.C
-index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee490e0769 100644
+index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..4b1e17fff803be0b74827b02243e3b3b1f740aba 100644
 --- a/bak/SRC/GAME/WORLD/MAP.C
 +++ b/bak/SRC/GAME/WORLD/MAP.C
 @@ -1,4 +1,4 @@
@@ -2493,7 +2493,12 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -292,6 +711,7 @@ void far map_main_loop(void) {
+@@ -288,10 +707,11 @@ void far map_main_loop(void) {
+                     moved = worldmove_party_attempt_move(1);
+                     if (moved != 0) {
+                         worldloop_set_flag_8b_preds();
+-                        render_dirty = 1;
++                        redraw_menu = render_dirty = 1;
                      }
                  }
                  break;
@@ -2501,7 +2506,12 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -303,6 +723,7 @@ void far map_main_loop(void) {
+@@ -299,24 +719,26 @@ void far map_main_loop(void) {
+                     moved = worldmove_party_attempt_move(4);
+                     if (moved != 0) {
+                         worldloop_set_flag_8b_preds();
+-                        render_dirty = 1;
++                        redraw_menu = render_dirty = 1;
                      }
                  }
                  break;
@@ -2509,14 +2519,23 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -311,6 +732,7 @@ void far map_main_loop(void) {
-                     render_dirty = 1;
+                 } else {
+                     worldmove_apply_turn_step(2);
+-                    render_dirty = 1;
++                    redraw_menu = render_dirty = 1;
                  }
                  break;
 +            case 0x20:
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
+                 } else {
+                     worldmove_apply_turn_step(3);
+-                    render_dirty = 1;
++                    redraw_menu = render_dirty = 1;
+                 }
+                 break;
+             case 0x51:
 @@ -373,9 +795,9 @@ void far map_main_loop(void) {
                      render_dirty = 1;
                  }
@@ -2540,7 +2559,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee
 +                    moved = worldmove_party_attempt_move(2);
 +                    if (moved != 0) {
 +                        worldloop_set_flag_8b_preds();
-+                        render_dirty = 1;
++                        redraw_menu = render_dirty = 1;
 +                    }
 +                }
 +                break;
@@ -2551,7 +2570,7 @@ index 09bf720ae555491fbdd8356d6a1c45e63f75ff6e..2e7818c6c7eeb8505a18e78bb545f0ee
 +                    moved = worldmove_party_attempt_move(3);
 +                    if (moved != 0) {
 +                        worldloop_set_flag_8b_preds();
-+                        render_dirty = 1;
++                        redraw_menu = render_dirty = 1;
 +                    }
 +                }
 +                break;
@@ -2612,22 +2631,57 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedca6983aeb 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049fb10edb28 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
-@@ -15,6 +15,7 @@
+@@ -15,7 +15,9 @@
  #include "SRC/R3D/SCENE/WORLDHIT.H"
  #include "SRC/GFX/SCREEN/SCREEN.H"
  #include "SRC/UI/MENUPAGE.H"
 +#include "SRC/UI/DLGWIDG.H"
  #include "SRC/GFX/PALETTE/PALETTE.H"
++#include "SRC/GFX/FONT/FONT.H"
  #include "SRC/DIALOG/EVTCOND.H"
  #include "SRC/GAME/STATE/GSTATE.H"
-@@ -41,6 +42,44 @@ MenuPage *g_pReqMainPage = {0};
+ #include "SRC/CHAR/STAT.H"
+@@ -41,6 +43,77 @@ MenuPage *g_pReqMainPage = {0};
  short g_nSceneReloadPending = 0;
  short g_nHotspotActivateRequest = 0;
  
 +#define CONTEXT_HOTSPOT_SCANCODE 0x0f /* Tab */
++#define QUICKSAVE_SCANCODE 0x3f        /* F5 */
++#define QUICKLOAD_SCANCODE 0x43        /* F9 */
++#define QUICKSAVE_NOTICE_TICKS 0x78    /* two seconds */
++
++static char g_szQuickSaveComplete[] =
++    "\x85\x7b\x8a\x59\x8c\x33\x97\x30\x82\x51\x82\x52"; /* 快速存檔完成 */
++static char g_szQuickSaveLoading[] =
++    "\x87\x51\x81\x26\x90\x30\x8a\x40\x85\x7b\x8a\x59\x8c\x33\x97\x30\x80\x7e\x80\x7e";
++    /* 正在讀取快速存檔…… */
++
++static void worldloop_quicksave_notice(char *text) {
++    int text_width;
++    int panel_width;
++    int x;
++    int y;
++    char saved_small_zh_mode;
++
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    saved_small_zh_mode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    text_width = font_text_width_ds(text);
++    panel_width = text_width + 10;
++    x = g_world_widget->viewport.x + ((g_world_widget->viewport.width - panel_width) >> 1);
++    y = g_world_widget->viewport.y + g_world_widget->viewport.height - 18;
++    uiwidget_panel_inset_inverted(x, y, panel_width, 15, 0);
++    uiwidget_draw_text_shadowed(text, 0x33, 1, x + 5, y + 3);
++    g_bSmallZhMode = saved_small_zh_mode;
++    screen_frame_present();
++    g_nFrameTickCountdown = QUICKSAVE_NOTICE_TICKS;
++    while (g_nFrameTickCountdown != 0)
++        ;
++}
 +
 +static int worldloop_context_overlay_wanted(void) {
 +    return key_is_down(CONTEXT_HOTSPOT_SCANCODE) != 0;
@@ -2668,7 +2722,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
  void far worldloop_req_main_screen_load(void) {
      g_pReqMainPage = menupage_load("req_main.dat");
      map_req_map_screen_load();
-@@ -73,6 +112,8 @@ short far world3d_main_loop(void) {
+@@ -73,6 +146,8 @@ short far world3d_main_loop(void) {
         hotspot_active to DI. */
      register int render_dirty;   /* party-dirty / render-scene flag */
      register int hotspot_active; /* hotspot / descent / entered flag */
@@ -2677,7 +2731,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
  
      exit_mode = 0;
      keep_running = 1;
-@@ -82,6 +123,7 @@ short far world3d_main_loop(void) {
+@@ -82,6 +157,7 @@ short far world3d_main_loop(void) {
      redraw_caption = 0;
      pending_events = 0;
      key_repeat_armed = 0;
@@ -2685,7 +2739,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
      focused_entry = (MenuEntry *)0;
      g_nHotspotActivateRequest = 0;
      g_bZoneEntryInProgress = 0;
-@@ -140,11 +182,20 @@ short far world3d_main_loop(void) {
+@@ -140,11 +216,20 @@ short far world3d_main_loop(void) {
              redraw_menu = 0;
              redraw_caption = 0;
              render_dirty = 0;
@@ -2706,7 +2760,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          if (redraw_menu != 0) {
-@@ -154,9 +205,14 @@ short far world3d_main_loop(void) {
+@@ -154,9 +239,14 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
          }
          if (render_dirty != 0) {
@@ -2722,7 +2776,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,12 +224,15 @@ short far world3d_main_loop(void) {
+@@ -168,12 +258,15 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
@@ -2739,7 +2793,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
          if (g_gameState.ground_pile->itemCount != '\0') {
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
-@@ -203,7 +262,15 @@ short far world3d_main_loop(void) {
+@@ -203,7 +296,15 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -2756,15 +2810,42 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +323,7 @@ short far world3d_main_loop(void) {
+@@ -256,6 +357,34 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
++            case QUICKSAVE_SCANCODE:
++                if (refusal_mode == 0) {
++                    screen_cursor_show_busy();
++                    if (mainmenu_quicksave_write() != 0)
++                        worldloop_quicksave_notice(g_szQuickSaveComplete);
++                    else
++                        dialog_play_record(0x96, 1);
++                    screen_cursor_restore_shape();
++                    while (kbhit_read() != 0)
++                        ;
++                    redraw_menu = render_dirty = redraw_caption = 1;
++                }
++                goto post_dispatch;
++            case QUICKLOAD_SCANCODE:
++                if (refusal_mode == 0) {
++                    if (mainmenu_quickload_prepare() != 0) {
++                        worldloop_quicksave_notice(g_szQuickSaveLoading);
++                        exit_mode = 3;
++                        keep_running = 0;
++                    } else {
++                        dialog_play_record(0x8b, 1);
++                        redraw_menu = render_dirty = redraw_caption = 1;
++                    }
++                    while (kbhit_read() != 0)
++                        ;
++                }
++                goto post_dispatch;
 +            case 0x11:
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +335,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +396,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -2772,7 +2853,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +347,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +408,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -2802,7 +2883,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +377,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +438,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -2810,7 +2891,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -325,7 +418,7 @@ short far world3d_main_loop(void) {
+@@ -325,7 +479,7 @@ short far world3d_main_loop(void) {
                  fmap_screen_run();
                  g_nSceneReloadPending = 1;
                  goto post_dispatch;
@@ -2819,7 +2900,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..4f9cb65c64df7593c8cd0e15552beedc
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe5, 1);
                      goto post_dispatch;
-@@ -383,7 +476,12 @@ short far world3d_main_loop(void) {
+@@ -383,7 +537,12 @@ short far world3d_main_loop(void) {
                  }
                  redraw_menu = 1;
              after_move:
@@ -3789,10 +3870,86 @@ index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..4963d41b3273cb69643a87bb63b87464
 +char *g_pszHpSeparator = " / ";
  unsigned short g_anEncampStatColX[2] = {0x0054, 0x0090};
 diff --git a/bak/SRC/SCREENS/FMAP.C b/bak/SRC/SCREENS/FMAP.C
-index 133572d3cb3778c6ce776676fe2a299a6efb259d..4101ec9a36ef2c987d58b928307204fd987f966a 100644
+index 133572d3cb3778c6ce776676fe2a299a6efb259d..c0c853fe7516c96ec6796495c34ea1e948510261 100644
 --- a/bak/SRC/SCREENS/FMAP.C
 +++ b/bak/SRC/SCREENS/FMAP.C
-@@ -262,6 +262,14 @@ void fmap_twn_load(void) {
+@@ -23,6 +23,8 @@
+ #include "SRC/GFX/PALETTE/PALETTE.H"
+ #include "SRC/DIALOG/DIALOG.H"
+ #include "SRC/R3D/CORE/R3D.H"
++#include "SRC/SYS/CFGPARSE.H"
++#include "SRC/INPUT/MOUSE.H"
+ 
+ unsigned short g_wFmapMapWidth;
+ unsigned short g_wFmapMapHeight;
+@@ -38,6 +40,31 @@ unsigned short *g_pFmapTownXCoords = {0};
+ unsigned short *g_pFmapTownYCoords = {0};
+ unsigned short *g_pFmapTownLabels = {0};
+ 
++static PlayerSpawnRecord g_fmapTeleportDestinations[33] = {
++    {1, 10, 14, 16, 20, 0x4000}, {1, 10, 12, 20, 20, 0x0000},
++    {1, 13, 10, 20, 20, 0x0000}, {1, 15, 15, 20, 20, 0x0000},
++    {1, 15, 17, 20, 20, 0x0000}, {1, 11, 16, 20, 20, 0x0000},
++    {2, 14, 15, 20, 20, 0x0000}, {2, 17, 13, 10, 32, 0x0000},
++    {2, 19, 10, 11, 8, 0xa000},  {2, 20, 14, 20, 20, 0x0000},
++    {2, 20, 15, 20, 20, 0x0000}, {3, 11, 10, 20, 20, 0x0000},
++    {3, 13, 10, 27, 6, 0x6000},  {3, 12, 13, 21, 28, 0x0000},
++    {3, 15, 11, 11, 4, 0xa000},  {3, 20, 12, 18, 9, 0xc000},
++    {3, 21, 16, 20, 20, 0x0000}, {3, 23, 18, 19, 26, 0xa000},
++    {4, 13, 12, 13, 17, 0x4000}, {4, 11, 16, 6, 21, 0x4000},
++    {4, 10, 20, 20, 20, 0x0000}, {5, 13, 12, 20, 20, 0x0000},
++    {5, 16, 13, 12, 36, 0x0000}, {5, 19, 13, 20, 20, 0x0000},
++    {5, 21, 15, 20, 20, 0x0000}, {5, 23, 18, 35, 29, 0xc000},
++    {6, 19, 15, 20, 20, 0x0000}, {6, 17, 13, 22, 18, 0x2000},
++    {6, 16, 17, 20, 20, 0x0000}, {6, 14, 17, 21, 34, 0x0000},
++    {6, 11, 14, 20, 20, 0x0000}, {6, 10, 11, 15, 18, 0x4000},
++    {8, 14, 10, 20, 20, 0x0000}};
++
++static void fmap_teleport_queue(int town) {
++    *(PlayerSpawnRecord *)g_gameState.abTeleportRecord = g_fmapTeleportDestinations[town];
++    *(unsigned short *)&g_gameState.abTeleportRecord[7] = 0;
++    *(unsigned short *)&g_gameState.abTeleportRecord[9] = 0;
++}
++
+ void far fmap_screen_run(void) {
+     int curTown;
+     int pasteCounter;
+@@ -65,6 +92,7 @@ void far fmap_screen_run(void) {
+     unsigned long lastTick;
+     unsigned int action;
+     int heading;
++    int teleportMouseDown;
+ 
+     running = 1;
+     needFullRedraw = 1;
+@@ -82,6 +110,7 @@ void far fmap_screen_run(void) {
+     haveMarker = 0;
+     animFrame = 0;
+     lastTick = 0;
++    teleportMouseDown = mouse_button_pressed(0) != 0;
+     palette_cycle_eb_toggle(0);
+     fmap_twn_load();
+     page = menupage_load("req_fmap.dat");
+@@ -167,6 +196,18 @@ void far fmap_screen_run(void) {
+             screen_frame_present();
+         }
+         action = menupage_run(page, &menuConsumed);
++        if (mouse_button_pressed(0) != 0) {
++            if (teleportMouseDown == 0 && g_cfgKnockKnock != 0) {
++                curTown = fmap_hit_test_cursor();
++                if (curTown >= 0) {
++                    fmap_teleport_queue(curTown);
++                    running = 0;
++                }
++            }
++            teleportMouseDown = 1;
++        } else {
++            teleportMouseDown = 0;
++        }
+         if (menuConsumed != 0) {
+             redrawMenuCounter = 2;
+             menuConsumed = 0;
+@@ -262,6 +303,14 @@ void fmap_twn_load(void) {
      }
      res_fclose(file);
      g_wFmapLabelRectH = g_graphics_context.pFont_height[0] + 1;
@@ -4180,7 +4337,7 @@ index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f6
      screen_frame_sync_buffers_rect(0xb, 0x79);
  
 diff --git a/bak/SRC/SCREENS/MAINMENU.C b/bak/SRC/SCREENS/MAINMENU.C
-index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f98373356dda 100644
+index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b4580f30797 100644
 --- a/bak/SRC/SCREENS/MAINMENU.C
 +++ b/bak/SRC/SCREENS/MAINMENU.C
 @@ -3,6 +3,7 @@
@@ -4191,19 +4348,22 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
  #include <io.h>
  
  #include "SRC/GAME/GMAIN.H"
-@@ -58,6 +59,11 @@ unsigned short g_wBookmarkCompassIcon;
+@@ -58,6 +59,14 @@ unsigned short g_wBookmarkCompassIcon;
  char g_szSaveSlotDirName_51cc[13];
  unsigned char g_abSaveFileHeader[90];
  
 +#define AUTOSAVE_SLOT_NAME "AutoSave"
 +#define AUTOSAVE_SLOT_ID 99
 +#define AUTOSAVE_FILE_COUNT 10
++#define QUICKSAVE_SLOT_NAME "QSave"
++#define QUICKSAVE_SLOT_ID 98
++#define QUICKSAVE_FILE_COUNT 20
 +static int g_nAutosavePending = 0;
 +
  int mainmenu_save_cfg_load_settings(void) {
      ResFile *file;
  
-@@ -370,7 +376,7 @@ int mainmenu_save_load_game_dialog(void) {
+@@ -370,7 +379,7 @@ int mainmenu_save_load_game_dialog(void) {
                  ;
          }
          if (slot_dirty) {
@@ -4212,16 +4372,17 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
              if (need_slot_sel) {
                  if (g_wSaveSlotDirValid) {
                      int sel = mainmenu_savelist_find_by_text(slot_list, g_szSaveSlotDirName_51cc);
-@@ -1452,7 +1458,7 @@ void far mainmenu_save_bookmark(void) {
+@@ -1452,7 +1461,8 @@ void far mainmenu_save_bookmark(void) {
      char path[50];
      unsigned int heading;
  
 -    if (g_wSaveSlotDirValid != 0) {
-+    if (g_wSaveSlotDirValid != 0 && g_wCurrentSaveSlotKey != AUTOSAVE_SLOT_ID) {
++    if (g_wSaveSlotDirValid != 0 && g_wCurrentSaveSlotKey != AUTOSAVE_SLOT_ID &&
++        g_wCurrentSaveSlotKey != QUICKSAVE_SLOT_ID) {
          if (g_cfgBookmarkVerify) {
              dialog_input_wait_release(0, 1);
              dialog_play_record(0x14c, 0);
-@@ -1499,6 +1505,195 @@ void far mainmenu_save_bookmark(void) {
+@@ -1499,6 +1509,374 @@ void far mainmenu_save_bookmark(void) {
      return;
  }
  
@@ -4414,10 +4575,189 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
 +    return ok;
 +}
 +
++static void mainmenu_quicksave_recover_files(void) {
++    char backup[50];
++    char target[50];
++    int i;
++
++    remove("GAMES\\QSave.G98\\QSNEW.GAM");
++    for (i = 1; i <= QUICKSAVE_FILE_COUNT; i++) {
++        sprintf(backup, "GAMES\\QSave.G98\\QSB%02d.GAM", i);
++        sprintf(target, "GAMES\\QSave.G98\\SAVE%02d.GAM", i);
++        if (access(backup, 0) == 0) {
++            if (access(target, 0) == 0)
++                remove(backup);
++            else
++                rename(backup, target);
++        }
++    }
++}
++
++static int mainmenu_quicksave_commit(char *temp_path, int target_id) {
++    char backup[50];
++    char target[50];
++
++    sprintf(backup, "GAMES\\QSave.G98\\QSB%02d.GAM", target_id);
++    sprintf(target, "GAMES\\QSave.G98\\SAVE%02d.GAM", target_id);
++    remove(backup);
++    if (access(target, 0) == 0) {
++        if (rename(target, backup) != 0)
++            return 0;
++    }
++    if (rename(temp_path, target) != 0) {
++        if (access(backup, 0) == 0)
++            rename(backup, target);
++        return 0;
++    }
++    remove(backup);
++    return 1;
++}
++
++int mainmenu_quicksave_write(void) {
++    struct date today;
++    char old_header[90];
++    char title[90];
++    char path[50];
++    char temp_path[50];
++    unsigned long current_date;
++    unsigned long date;
++    unsigned long oldest_date;
++    unsigned int sequence;
++    unsigned int max_sequence;
++    unsigned int oldest_sequence;
++    unsigned int old_icon;
++    int old_x;
++    int old_y;
++    int target_id;
++    int first_free;
++    int malformed_id;
++    int i;
++    int ok;
++
++    if (g_gameState.bCombatExitRequest != 0 || g_gameState.nWorldLoopExitRequest != 0)
++        return 0;
++    if (mainmenu_save_games_dir_exists() == 0 && mainmenu_save_games_dir_create() == 0)
++        return 0;
++    if (access("GAMES\\QSave.G98", 0) != 0 && mkdir("GAMES\\QSave.G98") != 0)
++        return 0;
++
++    mainmenu_quicksave_recover_files();
++    getdate(&today);
++    current_date = (unsigned long)today.da_year * 10000L +
++                   (unsigned long)today.da_mon * 100L + (unsigned long)today.da_day;
++    max_sequence = 0;
++    oldest_date = 0;
++    oldest_sequence = 0;
++    first_free = 0;
++    malformed_id = 0;
++    target_id = 1;
++
++    for (i = 1; i <= QUICKSAVE_FILE_COUNT; i++) {
++        sprintf(path, "GAMES\\QSave.G98\\SAVE%02d.GAM", i);
++        if (access(path, 0) != 0) {
++            if (first_free == 0)
++                first_free = i;
++            continue;
++        }
++        if (!mainmenu_autosave_file_valid(path, title) ||
++            !mainmenu_autosave_title_parse(title, &date, &sequence)) {
++            if (malformed_id == 0)
++                malformed_id = i;
++            continue;
++        }
++        if (date == current_date && sequence > max_sequence)
++            max_sequence = sequence;
++        if (oldest_date == 0 || date < oldest_date ||
++            (date == oldest_date && sequence < oldest_sequence)) {
++            oldest_date = date;
++            oldest_sequence = sequence;
++            target_id = i;
++        }
++    }
++    if (first_free != 0)
++        target_id = first_free;
++    else if (malformed_id != 0)
++        target_id = malformed_id;
++
++    memcpy(old_header, g_abSaveFileHeader, sizeof(old_header));
++    old_x = g_wBookmarkFmapX;
++    old_y = g_wBookmarkFmapY;
++    old_icon = g_wBookmarkCompassIcon;
++    sprintf((char *)g_abSaveFileHeader, "%04u%02u%02u_%u", today.da_year, today.da_mon,
++            today.da_day, max_sequence + 1);
++    mainmenu_save_party_to_tmp();
++    if (fmap_xy_lookup_for_chapter(&g_wBookmarkFmapX, &g_wBookmarkFmapY) != 0) {
++        unsigned int heading = g_world_camera->base.orientation.yaw;
++        fmap_farptr_normalize(&heading);
++        g_wBookmarkCompassIcon = (heading >> 0xd) << 2;
++    } else {
++        g_wBookmarkFmapX = g_wBookmarkFmapY = -1;
++        g_wBookmarkCompassIcon = 0;
++    }
++
++    strcpy(temp_path, "GAMES\\QSave.G98\\QSNEW.GAM");
++    remove(temp_path);
++    ok = savegame_write(temp_path);
++    if (ok)
++        ok = mainmenu_autosave_file_valid(temp_path, title);
++    if (ok)
++        ok = mainmenu_quicksave_commit(temp_path, target_id);
++    if (!ok)
++        remove(temp_path);
++
++    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
++    g_wBookmarkFmapX = old_x;
++    g_wBookmarkFmapY = old_y;
++    g_wBookmarkCompassIcon = old_icon;
++    return ok;
++}
++
++int mainmenu_quickload_prepare(void) {
++    char title[90];
++    char newest_title[90];
++    char path[50];
++    unsigned long date;
++    unsigned long newest_date;
++    unsigned int sequence;
++    unsigned int newest_sequence;
++    int newest_id;
++    int i;
++
++    if (mainmenu_save_games_dir_exists() == 0)
++        return 0;
++    mainmenu_quicksave_recover_files();
++    newest_date = 0;
++    newest_sequence = 0;
++    newest_id = 0;
++    for (i = 1; i <= QUICKSAVE_FILE_COUNT; i++) {
++        sprintf(path, "GAMES\\QSave.G98\\SAVE%02d.GAM", i);
++        if (!mainmenu_autosave_file_valid(path, title) ||
++            !mainmenu_autosave_title_parse(title, &date, &sequence))
++            continue;
++        if (newest_id == 0 || date > newest_date ||
++            (date == newest_date && sequence > newest_sequence)) {
++            newest_id = i;
++            newest_date = date;
++            newest_sequence = sequence;
++            strcpy(newest_title, title);
++        }
++    }
++    if (newest_id == 0)
++        return 0;
++
++    strcpy(g_szSaveSlotDirName_51cc, QUICKSAVE_SLOT_NAME);
++    strcpy((char *)g_abSaveFileHeader, newest_title);
++    g_wCurrentSaveSlotKey = QUICKSAVE_SLOT_ID;
++    g_wCurrentSaveFileKey = newest_id;
++    g_wSaveSlotDirValid = 1;
++    g_wSaveFileValid = 1;
++    return 1;
++}
++
  void mainmenu_save_party_to_tmp(void) {
      int i;
  
-@@ -1543,7 +1738,7 @@ int mainmenu_save_scan_highest_slot(void) {
+@@ -1543,7 +1921,7 @@ int mainmenu_save_scan_highest_slot(void) {
      int highest;
      int state;
      int save_id;
@@ -4426,26 +4766,27 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
      char dta[30];
      char path[90];
      int rc;
-@@ -1590,7 +1785,7 @@ void mainmenu_save_slot_exists(void) {
+@@ -1590,7 +1968,8 @@ void mainmenu_save_slot_exists(void) {
      char local[90];
      ResFile *file;
  
 -    if (g_wSaveSlotDirValid != 0) {
-+    if (g_wSaveSlotDirValid != 0 && g_wCurrentSaveSlotKey != AUTOSAVE_SLOT_ID) {
++    if (g_wSaveSlotDirValid != 0 && g_wCurrentSaveSlotKey != AUTOSAVE_SLOT_ID &&
++        g_wCurrentSaveSlotKey != QUICKSAVE_SLOT_ID) {
          sprintf(local, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
                  g_wCurrentSaveSlotKey, 0x15);
          file = res_fopen(local, "wb");
-@@ -1634,7 +1829,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
+@@ -1634,7 +2013,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
      sprintf(local_path, "%s\\*.G??", "GAMES");
      rc = findfirst(local_path, &dta, 0x10);
      while (rc == 0) {
 -        if (mainmenu_save_parse_filename(dta.ff_name, local_path, (int *)&slotKey))
 +        if (mainmenu_save_parse_filename(dta.ff_name, local_path, (int *)&slotKey) &&
-+            slotKey != AUTOSAVE_SLOT_ID)
++            slotKey != AUTOSAVE_SLOT_ID && slotKey != QUICKSAVE_SLOT_ID)
              mainmenu_savelist_insert_sorted(list, local_path, slotKey);
          rc = findnext(&dta);
      }
-@@ -1643,7 +1839,28 @@ fail:
+@@ -1643,7 +2023,28 @@ fail:
      return 0;
  }
  
@@ -4474,7 +4815,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
      for (; *filename != '\0'; filename++, out_name++) {
          if (*filename == '.') {
              if ((((unsigned char *)_ctype)[filename[2] + 1] & _IS_DIG) == 0) {
-@@ -1655,6 +1872,10 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1655,6 +2056,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
              *out_name = '\0';
              filename += 2;
              *out_slot = atoi(filename);
@@ -4482,10 +4823,14 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
 +                strcpy(name_base, AUTOSAVE_SLOT_NAME);
 +                return 1;
 +            }
++            if (*out_slot == QUICKSAVE_SLOT_ID && stricmp(name_base, QUICKSAVE_SLOT_NAME) == 0) {
++                strcpy(name_base, QUICKSAVE_SLOT_NAME);
++                return 1;
++            }
              if (*out_slot < 1 || *out_slot > 20) {
                  return 0;
              }
-@@ -1666,22 +1887,67 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1666,22 +2075,67 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
  }
  
  int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id) {
@@ -4557,19 +4902,21 @@ index c9bf26483924952b5097823240d7155c3ea672eb..2176b6a4fa448d421ec354c373e3f983
  fail:
      return 0;
 diff --git a/bak/SRC/SCREENS/MAINMENU.H b/bak/SRC/SCREENS/MAINMENU.H
-index ac127215a1e3034013f714abd8a6e45bcb5e8b78..74f4d22f75c251e91fd51bfa4aec6caf12536254 100644
+index ac127215a1e3034013f714abd8a6e45bcb5e8b78..ed42edcf2bbd64db70934d64923aa37594ba62fe 100644
 --- a/bak/SRC/SCREENS/MAINMENU.H
 +++ b/bak/SRC/SCREENS/MAINMENU.H
-@@ -31,6 +31,8 @@ extern int mainmenu_save_games_dir_create(void);
+@@ -31,6 +31,10 @@ extern int mainmenu_save_games_dir_create(void);
  extern int mainmenu_save_any_exists(void);
  extern void mainmenu_save_bookmark(void);
  extern void mainmenu_save_party_to_tmp(void);
 +extern void mainmenu_autosave_request(void);
 +extern int mainmenu_autosave_service(void);
++extern int mainmenu_quicksave_write(void);
++extern int mainmenu_quickload_prepare(void);
  extern int mainmenu_save_file_read_header(char *path, void *sig_block, int *ds_state_1,
                                            int *ds_state_2, int *ds_state_3, int *ds_state_4);
  extern int mainmenu_save_scan_highest_slot(void);
-@@ -38,6 +40,7 @@ extern int mainmenu_save_slot_is_at_cap(char *entry);
+@@ -38,6 +42,7 @@ extern int mainmenu_save_slot_is_at_cap(char *entry);
  extern void mainmenu_save_slot_exists(void);
  extern void mainmenu_save_request_load_game(void);
  extern int mainmenu_save_enum_directories(ListWidget *list);
@@ -4578,7 +4925,7 @@ index ac127215a1e3034013f714abd8a6e45bcb5e8b78..74f4d22f75c251e91fd51bfa4aec6caf
  extern int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id);
  extern int mainmenu_save_parse_read_title(char *title_buf, char *sig_block, int *out_save_id,
 diff --git a/bak/SRC/SCREENS/MODALSCR.C b/bak/SRC/SCREENS/MODALSCR.C
-index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f261f3d1702599f25c278a451dc5b5452c1097c2 100644
+index 6f7a9133f09eefd8bac839c9d87261debf140b3b..2c7b55740dcbe62a9a969d55078425aa65ce69c3 100644
 --- a/bak/SRC/SCREENS/MODALSCR.C
 +++ b/bak/SRC/SCREENS/MODALSCR.C
 @@ -37,6 +37,7 @@
@@ -4589,6 +4936,15 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..f261f3d1702599f25c278a451dc5b545
  
  
  void modalscreen_teleport_dat_load(int n_index) {
+@@ -80,7 +81,7 @@ int far modalscreen_pending_scene_trans(void) {
+         if ((spawn.bZoneId != 0xff) &&
+             ((((spawn.bZoneId != g_gameState.nZoneId ||
+                 (spawn.bTileX != g_gameState.nPlayerTileX)) ||
+-               (spawn.bTileY == g_gameState.nPlayerTileY)) ||
++               (spawn.bTileY != g_gameState.nPlayerTileY)) ||
+               (spawn.wCameraHeading != g_gameState.wZoneDefaultCameraHeading)))) {
+             if (spawn.bZoneId != g_gameState.nZoneId) {
+                 zone_world_scene_teardown();
 @@ -92,6 +93,8 @@ int far modalscreen_pending_scene_trans(void) {
              dialog_input_wait_with_cooldown(2);
          }
