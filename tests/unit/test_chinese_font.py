@@ -119,6 +119,16 @@ class TestChineseFont(unittest.TestCase):
         decoded = decode_string(encoded, {glyph_id: ch for ch, glyph_id in mapping.items()})
         self.assertEqual(decoded, "尚未學習")
 
+    def test_spellbook_exit_hardcoded_bytes(self):
+        repo = Path(__file__).resolve().parents[2]
+        mapping = json.loads(
+            (repo / "localization" / "generated" / "zh_mapping.json").read_text(encoding="utf-8")
+        )["char_to_id"]
+        encoded = encode_string("離開", mapping)
+        self.assertEqual(encoded, bytes.fromhex("84 26 82 2c"))
+        decoded = decode_string(encoded, {glyph_id: ch for ch, glyph_id in mapping.items()})
+        self.assertEqual(decoded, "離開")
+
 
 if __name__ == "__main__":
     unittest.main()

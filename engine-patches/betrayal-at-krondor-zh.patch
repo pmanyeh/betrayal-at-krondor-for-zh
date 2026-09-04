@@ -60,7 +60,7 @@ index dee3c8992b8f08d0657a16b9fc1107d6df7a2d4e..cfcee6f7d02ab9a379bbd27dce0c8f3c
          return 0;
      }
 diff --git a/bak/SRC/CHAR/CHARSCRN.C b/bak/SRC/CHAR/CHARSCRN.C
-index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553e81a0679 100644
+index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..1692e11f16610523b999e071fb5a83b343248c56 100644
 --- a/bak/SRC/CHAR/CHARSCRN.C
 +++ b/bak/SRC/CHAR/CHARSCRN.C
 @@ -15,16 +15,18 @@
@@ -83,7 +83,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
  #include "statname.h"
  
  char g_dialog_in_char_screen = 0;
-@@ -36,64 +38,346 @@ struct SpellRecord {
+@@ -36,64 +38,374 @@ struct SpellRecord {
      int idx;
  };
  
@@ -97,7 +97,12 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
 +#define SPELLBOOK_LIST_BOX_WIDTH 0x50
 +#define SPELLBOOK_DOC_X 0x80
 +#define SPELLBOOK_DOC_WIDTH 0xbe
++#define SPELLBOOK_DOC_HEIGHT 0x90
 +#define SPELLBOOK_ZH_ADVANCE 15
++#define SPELLBOOK_EXIT_X 0x10e
++#define SPELLBOOK_EXIT_Y 0xb4
++#define SPELLBOOK_EXIT_WIDTH 0x2c
++#define SPELLBOOK_EXIT_HEIGHT 0xf
 +
 +static int g_spellbookIcons[SPELLBOOK_SCHOOL_COUNT];
 +static int g_spellbookKnownCounts[SPELLBOOK_SCHOOL_COUNT];
@@ -106,6 +111,21 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
 +static char g_spellbookDocText[400];
 +static unsigned char far s_szSpellbookNotLearned[] =
 +    "\x97\x3b\x82\x21\x8e\x41\x86\x3a"; /* 尚未學習 */
++static char s_szSpellbookExit[] = "\x84\x26\x82\x2c"; /* 離開 */
++
++static void charscreen_spellbook_draw_exit_button(int pressed) {
++    MenuEntry button;
++
++    memset(&button, 0, sizeof(button));
++    button.wWidget_type = 6;
++    button.bActive_flag = 1;
++    button.rect.x = SPELLBOOK_EXIT_X;
++    button.rect.y = SPELLBOOK_EXIT_Y;
++    button.rect.width = SPELLBOOK_EXIT_WIDTH;
++    button.rect.height = SPELLBOOK_EXIT_HEIGHT;
++    button.pPrimary_label = s_szSpellbookExit;
++    widget_draw_text_button(&button, 0, 0, pressed);
++}
 +
 +static void far charscreen_spellbook_draw_line(unsigned char far *text, int x, int y) {
 +    while (*text != 0) {
@@ -342,15 +362,16 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
 +        g_bMixedZhMode = 1;
 +        g_graphics_context.bText_fg_color = 1;
 +        textwrap_draw_aligned((long)g_spellbookDocText, SPELLBOOK_DOC_X + 1, 0x21,
-+                              SPELLBOOK_DOC_WIDTH, 0xa2, 4, 0, 0);
++                              SPELLBOOK_DOC_WIDTH, SPELLBOOK_DOC_HEIGHT, 4, 0, 0);
 +        g_graphics_context.bText_fg_color = 10;
 +        textwrap_draw_aligned((long)g_spellbookDocText, SPELLBOOK_DOC_X, 0x20,
-+                              SPELLBOOK_DOC_WIDTH, 0xa2, 4, 0, 0);
++                              SPELLBOOK_DOC_WIDTH, SPELLBOOK_DOC_HEIGHT, 4, 0, 0);
 +        g_bMixedZhMode = savedMixedZhMode;
 +        g_bSmallZhMode = savedSmallZhMode;
 +    }
 +    g_graphics_context.clip = savedClip;
 +    g_graphics_context.bClip_enabled = savedClipEnabled;
++    charscreen_spellbook_draw_exit_button(0);
 +}
 +
 +static void charscreen_draw_spell_book_actor(Combatant *actor, unsigned char far *pal_scratch) {
@@ -416,7 +437,14 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
 +                    done = 1;
 +                } else if (mouse_button_pressed(0) != 0) {
 +                    screen_cursor_get_position(&cursor_x, &cursor_y);
-+                    if (cursor_x >= 6 && cursor_x <= 0x2c) {
++                    if (cursor_x >= SPELLBOOK_EXIT_X &&
++                        cursor_x < SPELLBOOK_EXIT_X + SPELLBOOK_EXIT_WIDTH &&
++                        cursor_y >= SPELLBOOK_EXIT_Y &&
++                        cursor_y < SPELLBOOK_EXIT_Y + SPELLBOOK_EXIT_HEIGHT) {
++                        charscreen_spellbook_draw_exit_button(1);
++                        screen_frame_present();
++                        done = 1;
++                    } else if (cursor_x >= 6 && cursor_x <= 0x2c) {
 +                        for (row = 0; row < SPELLBOOK_SCHOOL_COUNT; row++) {
 +                            if (cursor_y >= row * 0x20 + 5 &&
 +                                cursor_y < row * 0x20 + 0x23) {
@@ -473,7 +501,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
          }
      }
  }
-@@ -119,11 +403,10 @@ static void far charscreen_draw_sheet_stat_row(int stat_idx, int value, int part
+@@ -119,11 +431,10 @@ static void far charscreen_draw_sheet_stat_row(int stat_idx, int value, int part
          sprintf(buf, "N/A");
      }
      if (improved != 0) {
@@ -487,7 +515,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
          invui_draw_text_aligned_shadow((unsigned char far *)buf, x_base + 0x71, y_pos - 1, 2, 10, 1);
      }
      if (value < 0) {
-@@ -172,34 +455,47 @@ static void far charscreen_draw_stat_row(int stat_idx, int cur_val, int max_val,
+@@ -172,34 +483,47 @@ static void far charscreen_draw_stat_row(int stat_idx, int cur_val, int max_val,
      char buf[10];
      unsigned short improved;
  
@@ -539,7 +567,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
      g_graphics_context.bClip_enabled = 1;
      g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
      g_graphics_context.clip.ymax = 199;
-@@ -214,13 +510,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+@@ -214,13 +538,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x19], 0x130, 9, 2);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 9, 0);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 0x4e, 1);
@@ -560,7 +588,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
      for (; i < 7; i++) {
          if ((char)g_gameState.abActorStatusRanks[party_slot][i] > 0) {
              sprintf(buf, "%Fs (%d%)", g_aConditionInfo[i].pName,
-@@ -229,8 +530,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+@@ -229,8 +558,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
                                             0x8f);
          }
      }
@@ -571,7 +599,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
      }
      if (full_sheet != 0) {
          resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x18], 2, 0x6b, 0);
-@@ -269,6 +571,11 @@ void charscreen_info_loop(Combatant *actor) {
+@@ -269,6 +599,11 @@ void charscreen_info_loop(Combatant *actor) {
      slot = gstate_find_party_slot(actor);
      if (slot >= 0) {
          page = menupage_load("req_info.dat");
@@ -583,7 +611,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..9687bdd93051f251400342744b9b8553
          menupage_begin(page);
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage1Base;
          resblit_load_pal_or_stream("DIALOG.SCR");
-@@ -298,7 +605,7 @@ void charscreen_info_loop(Combatant *actor) {
+@@ -298,7 +633,7 @@ void charscreen_info_loop(Combatant *actor) {
                          }
                      }
                      g_nPalBlendMode = 0;

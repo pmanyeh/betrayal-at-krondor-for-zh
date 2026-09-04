@@ -648,6 +648,13 @@
       "notes": "Shown in the spell-school list area when the selected school has no learned spells."
     },
     {
+      "id": "CHARSCRN.C#charscreen_spellbook_draw_exit_button:Exit",
+      "source": "Exit",
+      "translation": "離開",
+      "status": "translated",
+      "notes": "Bottom-right button that closes the character-sheet spell browser; rendered with the native 10x10 text-button style."
+    },
+    {
       "id": "WORLDLP.C#worldloop_quicksave_notice:save_complete",
       "source": "Quick-save complete",
       "translation": "快速存檔完成",

@@ -133,3 +133,4 @@ ee47c39d386f4cfb0c3377a4ab22fa537a100a33 fix: correct world map teleport destina
 997778ba66127e38475234d519ea13d73bd6c7f8 fix: move Wyke teleport east of river
 6774ae67ed0e41fdcf6d6c0125d92b3382d3a519 fix: refresh overhead map controls after keyboard input
 5741a447d781915bb803ba7db854e5d69bc19469 fix: render Chinese text in compact titled dialogs
+f501e534a8d3b8d70d801ad0e2b422efb2bc30d5 feat: add exit button to spell browser
