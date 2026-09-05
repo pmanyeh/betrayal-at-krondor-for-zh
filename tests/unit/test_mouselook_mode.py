@@ -11,7 +11,6 @@ WCURSOR = ENGINE / "INPUT" / "WCURSOR.C"
 UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
 DIALOG = ENGINE / "DIALOG" / "DIALOG.C"
 HOTSPOT = ENGINE / "GAME" / "ENC" / "HOTSPOT.C"
-SKYREND = ENGINE / "R3D" / "SKY" / "SKYREND.C"
 SCREEN = ENGINE / "GFX" / "SCREEN" / "SCREEN.C"
 
 
@@ -110,63 +109,17 @@ class TestMouseLookMode(unittest.TestCase):
             "g_world_camera->base.orientation.pitch = g_nMouseLookBasePitch;", source
         )
 
-    def test_mouse_look_uses_fullscreen_view_and_restores_classic_ui(self) -> None:
+    def test_mouse_look_keeps_the_classic_world_viewport(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
-        sky_source = SKYREND.read_text(encoding="utf-8")
         screen_source = SCREEN.read_text(encoding="utf-8")
 
-        self.assertIn(
-            "g_mouseLookClassicViewport = g_world_widget->viewport;", source
-        )
-        self.assertNotIn("g_world_widget->viewport.x = 0;", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 160", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_HEIGHT 100", source)
-        self.assertIn("worldloop_mouselook_expand_rendered_view();", source)
-        self.assertIn(
-            "g_world_widget->zoom = g_nMouseLookClassicZoom - 1;", source
-        )
-        self.assertIn("g_world_widget->zoom = g_nMouseLookClassicZoom;", source)
-        self.assertIn(
-            "screen_frame_sync_buffers_rect(0, g_wScreen_height);", source
-        )
-        self.assertIn("if (g_bMouseLookImmersiveActive == 0)", source)
-        self.assertIn("screen_render_main_frame((char *)0);", source)
-        self.assertRegex(
-            source,
-            r"worldloop_mouselook_release\(&mouselook_capture_active,\s*"
-            r"mouselook_ui_x,\s*mouselook_ui_y, 0\);\s*"
-            r"dispatched = wcursor_dispatch_hotspot_as_left_click",
-        )
-        self.assertIn("static void skyrender_fill_viewport_band", sky_source)
-        self.assertIn(
-            "g_graphics_context.clip.xmin == 13 && "
-            "g_graphics_context.clip.xmax == 306",
-            sky_source,
-        )
-        self.assertIn(
-            "(g_graphics_context.clip.xmax - "
-            "g_graphics_context.clip.xmin) + 1",
-            sky_source,
-        )
-        self.assertIn(
-            "(g_graphics_context.clip.ymax - "
-            "g_graphics_context.clip.ymin) + 1 > 128",
-            sky_source,
-        )
-        self.assertIn(
-            "void far screen_frame_stretch_world_center_2x", screen_source
-        )
-        self.assertIn(
-            "g_graphics_context.wVgaPage1Base", screen_source
-        )
-        self.assertIn("source_row < 100", screen_source)
-        self.assertIn("out_byte < 0x50", screen_source)
-        self.assertIn(
-            "(r->x - worldloop_composite_source_x()) * "
-            "MOUSELOOK_COMPOSITE_SCALE",
-            source,
-        )
-        self.assertIn("target = wcursor_find_action_at(hit_x, hit_y);", source)
+        self.assertIn("screen_frame_sync_buffers_rect(0xb, 0x80);", source)
+        self.assertIn("menupage_draw(g_pReqMainPage);", source)
+        self.assertIn("uiwidget_compass_draw();", source)
+        self.assertNotIn("g_bMouseLookImmersiveActive", source)
+        self.assertNotIn("MOUSELOOK_COMPOSITE", source)
+        self.assertNotIn("screen_frame_stretch_world", screen_source)
+        self.assertNotIn("screen_frame_compose_world", screen_source)
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
