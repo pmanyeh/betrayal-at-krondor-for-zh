@@ -31,8 +31,20 @@ class TestMouseLookMode(unittest.TestCase):
             "mouse_set_cursor_clip_rect(0, 0, g_wScreen_width, g_wScreen_height);",
             source,
         )
+        self.assertIn("short *edge_x, short *edge_y", source)
+        self.assertIn("dx = 0;", source)
+        self.assertIn("*last_mouse_x = g_mouse_x_mickeys;", source)
         self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);", source)
         self.assertIn("key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0", source)
+
+    def test_release_config_uses_relative_mouse_capture(self) -> None:
+        config = (ROOT / "tools/release/dosbox_krondor.conf.template").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("autolock=true", config)
+        self.assertIn("autolock_feedback=none", config)
+        self.assertIn("mouse_emulation=locked", config)
 
     def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")

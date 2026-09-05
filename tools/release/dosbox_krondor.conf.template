@@ -6,6 +6,11 @@ ime=false
 [sdl]
 windowresolution=1280x800
 output=opengl
+# Lock after the first click so FPS mouse-look keeps receiving relative motion
+# at the edge of the rendered 4:3 image. Ctrl+F10 releases the host pointer.
+autolock=true
+autolock_feedback=none
+mouse_emulation=locked
 
 [render]
 aspect=true
