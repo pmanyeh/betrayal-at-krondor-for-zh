@@ -26,6 +26,7 @@
 - 原滑鼠互動會在按下與放開兩幀之間建立 `g_wMenuDragState == 1`，物件處理器用它區分左／右鍵語意。E 不能只直接呼叫派送，也不能把物件事件執行兩次；第六輪會複製目前準星命中的 hotspot、釋放捕捉，再暫時模擬一次完整左鍵狀態並只派送一次。
 - `F2` 與 `E` 都有按鍵邊緣防重複，按住不會反覆切換模式或連續觸發互動。
 - 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪的 INT 33h function `0Bh` 在未捕捉的 DOSBox-X 整合模式下會依設計回傳零，當時因此撤除；第十一輪加入 `autolock=true` 與 `mouse_emulation=locked` 後，DOSBox-X 會在點入遊戲時啟用 SDL relative mouse mode，`0Bh` 才會提供不受游標位置與畫面邊界影響的真正相對 motion counter。第十二輪正式改回以 `0Bh` 為主要輸入，移除 3D viewport clip、邊界鎖與任何重置中心操作；未完成 host 捕捉前才暫用全畫面絕對座標差，而且絕不 recenter，因此最多在 host 畫面邊界暫停，不會製造持續單向旋轉。相對 counter 乘 4 換算為既有 quarter-pixel 尺度，使水平／垂直手感仍等同每 driver unit `0x02`／`0x01` binary-angle units，保持無 Dead Zone、無加速、無平滑。若仍需更低，須改用固定小數與餘數累積，才能低於整數倍率 `1` 而不吃掉微小移動。
+- 成功的普通移動步伐也會呼叫 `hotspotevt_disp_pending_events()`，即使沒有任何 pending flag；因此不能在整個 dispatcher 外無條件釋放捕捉。第十五輪把釋放移進實際 pending event 的 switch，只在兩種城鎮、遭遇、怪物交談、陷阱／戰鬥與區域切換六類接管畫面的事件前執行；純移動、音效與機率事件不動捕捉，長按 W 時便能持續輪詢滑鼠視角。
 - 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
 ## 實機驗收清單
@@ -47,12 +48,12 @@
 - A／D 平移方向正確。
 - Ctrl 暫時恢復 UI 游標正常；進出地圖、物品欄、紮營與選單後也會正常恢復視角捕捉。
 - F2 關閉後的舊操作維持不變。
-- 第一版滑鼠轉向過快，第二版減半後仍不跟手；第五版又確認反向時會先轉完舊方向，且 E 無作用。第六版補齊 E 的左鍵狀態，但相對 motion counter 在目前環境無輸入；第七版改成相容的逐幀座標差與低頻邊界重置後，使用者確認視角改善很多且 E 已正常。第八版再降靈敏度，第九版改為 X／Y `0x02`／`0x01`；第十二版搭配 DOSBox-X 捕捉改用真正相對輸入後，使用者確認手感大幅改善。第十三版的對話游標釋放與返回探索恢復也已通過實機驗收；第十四版補齊城鎮及其餘世界事件邊界，待實測。
+- 第一版滑鼠轉向過快，第二版減半後仍不跟手；第五版又確認反向時會先轉完舊方向，且 E 無作用。第六版補齊 E 的左鍵狀態，但相對 motion counter 在目前環境無輸入；第七版改成相容的逐幀座標差與低頻邊界重置後，使用者確認視角改善很多且 E 已正常。第八版再降靈敏度，第九版改為 X／Y `0x02`／`0x01`；第十二版搭配 DOSBox-X 捕捉改用真正相對輸入後，使用者確認手感大幅改善。第十三版的對話游標釋放與返回探索恢復、第十四版的城鎮游標均已通過實機驗收；第十五版的長按前進同時轉動視角待實測。
 
 ## 目前測試產物（2026-09-05）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`；無邊界相對輸入：`93381dd`；對話釋放捕捉：`673046c`；全世界事件邊界稽核：`32570de`。
-- `dist/test_v100_zh/krondor.exe`：474848 bytes；SHA-256 `581daec2f24d5274806c0c1e46ca52a456998379d8586a202ebf17103aaf12ad`。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`；無邊界相對輸入：`93381dd`；對話釋放捕捉：`673046c`；全世界事件邊界稽核：`32570de`；連續移動捕捉修正：`7f1a7fe`。
+- `dist/test_v100_zh/krondor.exe`：474896 bytes；SHA-256 `b4052d56e0ddc7bea2b9b5f89dcba1a2dc6ccedfad0f3aaf64c968a664aabc95`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：123 passed、1 skipped。

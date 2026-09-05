@@ -10,6 +10,7 @@ MOUSE_ASM = ENGINE / "INPUT" / "MOUSE.ASM"
 WCURSOR = ENGINE / "INPUT" / "WCURSOR.C"
 UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
 DIALOG = ENGINE / "DIALOG" / "DIALOG.C"
+HOTSPOT = ENGINE / "GAME" / "ENC" / "HOTSPOT.C"
 
 
 class TestMouseLookMode(unittest.TestCase):
@@ -52,26 +53,47 @@ class TestMouseLookMode(unittest.TestCase):
     def test_modal_and_event_entries_release_mouse_look_capture(self) -> None:
         world_source = WORLDLP.read_text(encoding="utf-8")
         dialog_source = DIALOG.read_text(encoding="utf-8")
+        hotspot_source = HOTSPOT.read_text(encoding="utf-8")
 
         self.assertIn("void worldloop_mouselook_release_for_modal(void)", world_source)
         self.assertEqual(
             dialog_source.count("worldloop_mouselook_release_for_modal();"), 2
         )
         self.assertEqual(
-            world_source.count("worldloop_mouselook_release_for_modal();"), 6
+            world_source.count("worldloop_mouselook_release_for_modal();"), 5
         )
         for event_entry in (
             "modalscreen_pending_scene_trans();",
             "evtcond_pty_dirty_flags_process();",
             "itemuse_ground_pile_open_inv();",
             "hotspotevt_activate_at_player();",
-            "hotspotevt_disp_pending_events();",
             "townscene_cheat_menu_screen();",
         ):
             self.assertRegex(
                 world_source,
                 r"worldloop_mouselook_release_for_modal\(\);\s+[^\n]*"
                 + re.escape(event_entry),
+            )
+        self.assertNotRegex(
+            world_source,
+            r"worldloop_mouselook_release_for_modal\(\);\s+[^\n]*"
+            r"hotspotevt_disp_pending_events\(\);",
+        )
+        self.assertEqual(
+            hotspot_source.count("worldloop_mouselook_release_for_modal();"), 6
+        )
+        for modal_event in (
+            "hotspotevt_load_record0_town(evt);",
+            "hotspotevt_type1_encounter_run(evt, (int *)&wHaltFlag);",
+            "hotspotevt_monst_load_speak(evt);",
+            "hotspotevt_action_enter_town(evt);",
+            "hotspotevt_trap_main_fire(evt, &wHaltFlag);",
+            "hotspotevt_action_enter_zone(evt);",
+        ):
+            self.assertRegex(
+                hotspot_source,
+                r"worldloop_mouselook_release_for_modal\(\);\s+[^\n]*"
+                + re.escape(modal_event),
             )
 
     def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
