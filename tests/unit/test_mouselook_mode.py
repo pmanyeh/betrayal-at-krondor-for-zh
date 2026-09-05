@@ -21,6 +21,7 @@ class TestMouseLookMode(unittest.TestCase):
         source = WORLDLP.read_text(encoding="utf-8")
 
         self.assertIn("screen_cursor_set_position(center_x, center_y);", source)
+        self.assertIn("#define MOUSELOOK_YAW_PER_PIXEL 0x20", source)
         self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_PIXEL);", source)
         self.assertIn("key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0", source)
 
