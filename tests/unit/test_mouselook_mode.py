@@ -21,7 +21,7 @@ class TestMouseLookMode(unittest.TestCase):
         source = WORLDLP.read_text(encoding="utf-8")
 
         self.assertIn("screen_cursor_set_position(center_x, center_y);", source)
-        self.assertIn("#define MOUSELOOK_YAW_PER_MICKEY 0x03", source)
+        self.assertIn("#define MOUSELOOK_YAW_PER_MICKEY 0x02", source)
         self.assertIn("g_mouse_x_mickeys - *last_mouse_x", source)
         self.assertIn("#define MOUSELOOK_RECENTER_MARGIN 16", source)
         self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);", source)
@@ -30,7 +30,7 @@ class TestMouseLookMode(unittest.TestCase):
     def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
 
-        self.assertIn("#define MOUSELOOK_PITCH_PER_MICKEY 0x02", source)
+        self.assertIn("#define MOUSELOOK_PITCH_PER_MICKEY 0x01", source)
         self.assertIn("#define MOUSELOOK_PITCH_LIMIT 0x800", source)
         self.assertIn(
             "g_nMouseLookPitchOffset - dy * MOUSELOOK_PITCH_PER_MICKEY", source
