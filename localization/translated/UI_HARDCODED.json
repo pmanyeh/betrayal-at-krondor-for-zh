@@ -667,6 +667,20 @@
       "translation": "正在讀取快速存檔……",
       "status": "translated",
       "notes": "Non-modal F9 loading notice; rendered with the 10x10 small font near the bottom of the exploration viewport."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_mouselook_toggle:on",
+      "source": "Mouse-look mode: on",
+      "translation": "滑鼠視角模式：開",
+      "status": "translated",
+      "notes": "Non-modal F2 notice shown when optional mouse-look exploration controls are enabled."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_mouselook_toggle:off",
+      "source": "Mouse-look mode: off",
+      "translation": "滑鼠視角模式：關",
+      "status": "translated",
+      "notes": "Non-modal F2 notice shown when optional mouse-look exploration controls are disabled."
     }
   ]
 }
