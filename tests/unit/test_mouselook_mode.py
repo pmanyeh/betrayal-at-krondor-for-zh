@@ -32,7 +32,9 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("#define MOUSELOOK_PITCH_PER_MICKEY 0x06", source)
         self.assertIn("#define MOUSELOOK_PITCH_LIMIT 0x800", source)
         self.assertIn("g_mouse_y_mickeys - (center_y << 2)", source)
-        self.assertIn("g_nWorldViewYawNormal = g_nMouseLookBasePitch;", source)
+        self.assertIn(
+            "g_world_camera->base.orientation.pitch = g_nMouseLookBasePitch;", source
+        )
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")

@@ -25,7 +25,7 @@
 - `A`／`D`／`E` 只在實際鍵盤鍵按下時重映射；用 `Ctrl` 恢復游標後點擊畫面上的原生方向按鈕，按鈕 action 不會被誤改。
 - `F2` 與 `E` 都有按鍵邊緣防重複，按住不會反覆切換模式或連續觸發互動。
 - 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第三輪改直接讀取 mouse driver 的 mickey 座標差，不先除以 4 取整數 pixel；水平每 mickey `0x08`、垂直每 mickey `0x06` binary-angle units，保留第二輪水平速度並提高四倍細部解析度。
-- 一般探索 renderer 原本固定採用 `g_nWorldViewYawNormal`。捕捉期間只暫時加上受限的 pitch offset；按 Ctrl、進入 modal、關閉 F2 或離開 3D 時先恢復基準 pitch，重新捕捉後再套回偏移，避免污染其他畫面。
+- 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
 ## 實機驗收清單
 
@@ -48,8 +48,8 @@
 
 ## 目前測試產物（2026-09-05）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`。
-- `dist/test_v100_zh/krondor.exe`：474464 bytes；SHA-256 `f44610f427857e7b6f5dd86b94361961ce643569523b0693c4c72d9951abd266`。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`。
+- `dist/test_v100_zh/krondor.exe`：474480 bytes；SHA-256 `75d54b53541e571afeda3f6575d092f2fe832deab4f4707b66db8f6303810f0b`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：121 passed、1 skipped。
