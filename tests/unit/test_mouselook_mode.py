@@ -6,7 +6,6 @@ ROOT = Path(__file__).resolve().parents[2]
 ENGINE = ROOT / "upstream" / "betrayal-at-krondor" / "bak" / "SRC"
 WORLDLP = ENGINE / "GAME" / "WORLD" / "WORLDLP.C"
 WCURSOR = ENGINE / "INPUT" / "WCURSOR.C"
-MOUSE_ASM = ENGINE / "INPUT" / "MOUSE.ASM"
 UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
 
 
@@ -23,7 +22,8 @@ class TestMouseLookMode(unittest.TestCase):
 
         self.assertIn("screen_cursor_set_position(center_x, center_y);", source)
         self.assertIn("#define MOUSELOOK_YAW_PER_MICKEY 0x06", source)
-        self.assertIn("mouse_get_motion_delta(&dx, &dy);", source)
+        self.assertIn("g_mouse_x_mickeys - *last_mouse_x", source)
+        self.assertIn("#define MOUSELOOK_RECENTER_MARGIN 16", source)
         self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);", source)
         self.assertIn("key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0", source)
 
@@ -38,14 +38,6 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn(
             "g_world_camera->base.orientation.pitch = g_nMouseLookBasePitch;", source
         )
-
-    def test_mouse_look_consumes_relative_driver_motion(self) -> None:
-        source = WORLDLP.read_text(encoding="utf-8")
-        mouse_source = MOUSE_ASM.read_text(encoding="utf-8")
-
-        self.assertIn("mouse_get_motion_delta(&dx, &dy);", source)
-        self.assertIn("_mouse_get_motion_delta", mouse_source)
-        self.assertIn("mov\tax,0bh", mouse_source)
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
