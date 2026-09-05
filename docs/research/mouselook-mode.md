@@ -23,8 +23,9 @@
 - 中心感應只接受原本滑鼠即可互動的 `WorldHotspot` 類型；多個框重疊時沿用原本由後往前掃描的命中優先序。
 - 視角捕捉只存在於 `world3d_main_loop()`。開啟施法、地圖、世界地圖、紮營、存檔選單、角色資訊、物品欄或物件互動前會先恢復游標，返回 3D 後再捕捉。
 - `A`／`D`／`E` 只在實際鍵盤鍵按下時重映射；用 `Ctrl` 恢復游標後點擊畫面上的原生方向按鈕，按鈕 action 不會被誤改。
+- 原滑鼠互動會在按下與放開兩幀之間建立 `g_wMenuDragState == 1`，物件處理器用它區分左／右鍵語意。E 不能只直接呼叫派送，也不能把物件事件執行兩次；第六輪會複製目前準星命中的 hotspot、釋放捕捉，再暫時模擬一次完整左鍵狀態並只派送一次。
 - `F2` 與 `E` 都有按鍵邊緣防重複，按住不會反覆切換模式或連續觸發互動。
-- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第三輪改直接讀取 mouse driver 的 mickey 座標差，不先除以 4 取整數 pixel；水平每 mickey `0x08`、垂直每 mickey `0x06` binary-angle units，保留第二輪水平速度並提高四倍細部解析度。
+- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪改由 INT 33h function `0Bh` 消耗「自上次讀取後」的相對 motion counter，不再每幀把絕對游標拉回中心，避免反向時先消化舊方向事件；水平每 mickey `0x06`、垂直每 mickey `0x04` binary-angle units，並保持無 Dead Zone、無加速、無平滑。
 - 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
 ## 實機驗收清單
@@ -44,13 +45,13 @@
 - A／D 平移方向正確。
 - Ctrl 暫時恢復 UI 游標正常；進出地圖、物品欄、紮營與選單後也會正常恢復視角捕捉。
 - F2 關閉後的舊操作維持不變。
-- 第一版滑鼠轉向過快，第二版減半後仍因只有水平視角與整數 pixel 取樣而感覺不跟手；第三版已加入有限垂直視角與四倍輸入解析度。準星 E／左鍵互動仍待實機驗收。
+- 第一版滑鼠轉向過快，第二版減半後仍不跟手；第五版又確認反向時會先轉完舊方向，且 E 無作用。第六版已改用真正相對 motion counter、再次降低 X／Y 倍率，並補齊 E 的左鍵狀態；兩項均待實機驗收。
 
 ## 目前測試產物（2026-09-05）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`。
-- `dist/test_v100_zh/krondor.exe`：474480 bytes；SHA-256 `d200a4c210e774712f1fe206527a3db3be43cbd2719f266adcdd10a4939ca320`。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；相對輸入與 E 互動修正：`61cc25d`。
+- `dist/test_v100_zh/krondor.exe`：474592 bytes；SHA-256 `5f6369bdd323fd27352e6de7189b940c192af5371b3cf5d65257a3c3b406b135`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
-- Python 測試：121 passed、1 skipped。
+- Python 測試：122 passed、1 skipped。
 - 尚未建立正式 bspatch，也尚未重建 Release ZIP。
