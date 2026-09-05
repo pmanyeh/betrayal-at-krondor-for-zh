@@ -108,6 +108,35 @@ class TestMouseLookMode(unittest.TestCase):
             "g_world_camera->base.orientation.pitch = g_nMouseLookBasePitch;", source
         )
 
+    def test_mouse_look_uses_fullscreen_view_and_restores_classic_ui(self) -> None:
+        source = WORLDLP.read_text(encoding="utf-8")
+
+        self.assertIn(
+            "g_mouseLookClassicViewport = g_world_widget->viewport;", source
+        )
+        self.assertIn("g_world_widget->viewport.x = 0;", source)
+        self.assertIn("g_world_widget->viewport.y = 0;", source)
+        self.assertIn(
+            "g_world_widget->viewport.width = g_wScreen_width;", source
+        )
+        self.assertIn(
+            "g_world_widget->viewport.height = g_wScreen_height;", source
+        )
+        self.assertIn(
+            "g_world_widget->viewport = g_mouseLookClassicViewport;", source
+        )
+        self.assertIn(
+            "screen_frame_sync_buffers_rect(0, g_wScreen_height);", source
+        )
+        self.assertIn("if (g_bMouseLookImmersiveActive == 0)", source)
+        self.assertIn("screen_render_main_frame((char *)0);", source)
+        self.assertRegex(
+            source,
+            r"worldloop_mouselook_release\(&mouselook_capture_active,\s*"
+            r"mouselook_ui_x,\s*mouselook_ui_y, 0\);\s*"
+            r"dispatched = wcursor_dispatch_hotspot_as_left_click",
+        )
+
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
 
