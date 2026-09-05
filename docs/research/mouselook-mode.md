@@ -25,7 +25,7 @@
 - `A`／`D`／`E` 只在實際鍵盤鍵按下時重映射；用 `Ctrl` 恢復游標後點擊畫面上的原生方向按鈕，按鈕 action 不會被誤改。
 - 原滑鼠互動會在按下與放開兩幀之間建立 `g_wMenuDragState == 1`，物件處理器用它區分左／右鍵語意。E 不能只直接呼叫派送，也不能把物件事件執行兩次；第六輪會複製目前準星命中的 hotspot、釋放捕捉，再暫時模擬一次完整左鍵狀態並只派送一次。
 - `F2` 與 `E` 都有按鍵邊緣防重複，按住不會反覆切換模式或連續觸發互動。
-- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪的 INT 33h function `0Bh` 在目前 DOSBox-X 整合模式下一直回傳零，已撤除。第七輪改用可工作的高精度絕對座標計算「本幀－上幀」差值，平時不再回拉中心，只有隱藏游標距離螢幕邊緣 16 pixels 內才重置一次；水平每 driver unit `0x06`、垂直每 unit `0x04` binary-angle units，保持無 Dead Zone、無加速、無平滑。
+- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪的 INT 33h function `0Bh` 在目前 DOSBox-X 整合模式下一直回傳零，已撤除。第七輪改用可工作的高精度絕對座標計算「本幀－上幀」差值，平時不再回拉中心，只有隱藏游標距離螢幕邊緣 16 pixels 內才重置一次。第八輪依實測將水平／垂直倍率各減半為每 driver unit `0x03`／`0x02` binary-angle units，保持無 Dead Zone、無加速、無平滑。
 - 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
 ## 實機驗收清單
@@ -45,12 +45,12 @@
 - A／D 平移方向正確。
 - Ctrl 暫時恢復 UI 游標正常；進出地圖、物品欄、紮營與選單後也會正常恢復視角捕捉。
 - F2 關閉後的舊操作維持不變。
-- 第一版滑鼠轉向過快，第二版減半後仍不跟手；第五版又確認反向時會先轉完舊方向，且 E 無作用。第六版補齊 E 的左鍵狀態，但相對 motion counter 在目前環境無輸入；第七版已改成相容的逐幀座標差與低頻邊界重置。視角與 E 均待實機驗收。
+- 第一版滑鼠轉向過快，第二版減半後仍不跟手；第五版又確認反向時會先轉完舊方向，且 E 無作用。第六版補齊 E 的左鍵狀態，但相對 motion counter 在目前環境無輸入；第七版改成相容的逐幀座標差與低頻邊界重置後，使用者確認視角改善很多且 E 已正常。第八版只將 X／Y 靈敏度再減半，待實測。
 
 ## 目前測試產物（2026-09-05）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`。
-- `dist/test_v100_zh/krondor.exe`：474688 bytes；SHA-256 `c1028b9c3e2563ac0d9d43d68529384dcd5d1e1f16fcb4f7ddf91fb9ad40778e`。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`。
+- `dist/test_v100_zh/krondor.exe`：474688 bytes；SHA-256 `962ddb65379c6d2ef72e9e2a60f4c6612af35d6a3f0d5d38f1c8a81e66332142`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：121 passed、1 skipped。
