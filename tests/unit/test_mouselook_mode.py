@@ -119,13 +119,17 @@ class TestMouseLookMode(unittest.TestCase):
             "g_mouseLookClassicViewport = g_world_widget->viewport;", source
         )
         self.assertNotIn("g_world_widget->viewport.x = 0;", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 160", source)
+        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 288", source)
         self.assertIn("#define MOUSELOOK_COMPOSITE_HEIGHT 100", source)
-        self.assertIn("worldloop_mouselook_expand_rendered_view();", source)
         self.assertIn(
-            "g_world_widget->zoom = g_nMouseLookClassicZoom - 1;", source
+            "g_world_widget->zoom = g_nMouseLookClassicZoom;", source
         )
-        self.assertIn("g_world_widget->zoom = g_nMouseLookClassicZoom;", source)
+        self.assertIn("#define MOUSELOOK_PASS_PITCH 0x0f00", source)
+        self.assertIn("worldloop_mouselook_render_scene(1, 0);", source)
+        self.assertIn("screen_frame_save_world_pass();", source)
+        self.assertIn(
+            "screen_frame_compose_world_two_pass_10x9", source
+        )
         self.assertIn(
             "screen_frame_sync_buffers_rect(0, g_wScreen_height);", source
         )
@@ -153,19 +157,21 @@ class TestMouseLookMode(unittest.TestCase):
             "g_graphics_context.clip.ymin) + 1 > 128",
             sky_source,
         )
+        self.assertIn("void far screen_frame_save_world_pass", screen_source)
         self.assertIn(
-            "void far screen_frame_stretch_world_center_2x", screen_source
+            "void far screen_frame_compose_world_two_pass_10x9", screen_source
         )
         self.assertIn(
             "g_graphics_context.wVgaPage1Base", screen_source
         )
+        self.assertIn("for (source_row = 99; source_row >= 0; source_row--)", screen_source)
         self.assertIn("source_row < 100", screen_source)
         self.assertIn("out_byte < 0x50", screen_source)
         self.assertIn(
-            "(r->x - worldloop_composite_source_x()) * "
-            "MOUSELOOK_COMPOSITE_SCALE",
+            "source_x1 * MOUSELOOK_COMPOSITE_SCALE_NUM /",
             source,
         )
+        self.assertIn("worldloop_mouselook_hotspots_rebuild();", source)
         self.assertIn("target = wcursor_find_action_at(hit_x, hit_y);", source)
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
