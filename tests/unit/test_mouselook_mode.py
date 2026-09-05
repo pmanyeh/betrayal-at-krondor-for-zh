@@ -8,6 +8,7 @@ WORLDLP = ENGINE / "GAME" / "WORLD" / "WORLDLP.C"
 MOUSE_ASM = ENGINE / "INPUT" / "MOUSE.ASM"
 WCURSOR = ENGINE / "INPUT" / "WCURSOR.C"
 UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
+DIALOG = ENGINE / "DIALOG" / "DIALOG.C"
 
 
 class TestMouseLookMode(unittest.TestCase):
@@ -46,6 +47,15 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("autolock=true", config)
         self.assertIn("autolock_feedback=none", config)
         self.assertIn("mouse_emulation=locked", config)
+
+    def test_dialog_entry_releases_mouse_look_capture(self) -> None:
+        world_source = WORLDLP.read_text(encoding="utf-8")
+        dialog_source = DIALOG.read_text(encoding="utf-8")
+
+        self.assertIn("void worldloop_mouselook_release_for_dialog(void)", world_source)
+        self.assertEqual(
+            dialog_source.count("worldloop_mouselook_release_for_dialog();"), 2
+        )
 
     def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
