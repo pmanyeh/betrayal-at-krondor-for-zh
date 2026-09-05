@@ -119,16 +119,11 @@ class TestMouseLookMode(unittest.TestCase):
             "g_mouseLookClassicViewport = g_world_widget->viewport;", source
         )
         self.assertNotIn("g_world_widget->viewport.x = 0;", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 288", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_HEIGHT 180", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_SCALE_NUM 10", source)
-        self.assertIn("#define MOUSELOOK_COMPOSITE_SCALE_DEN 9", source)
+        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 160", source)
+        self.assertIn("#define MOUSELOOK_COMPOSITE_HEIGHT 100", source)
         self.assertIn("worldloop_mouselook_expand_rendered_view();", source)
         self.assertIn(
-            "g_world_widget->viewport.width = MOUSELOOK_COMPOSITE_WIDTH;", source
-        )
-        self.assertIn(
-            "g_world_widget->viewport = g_mouseLookClassicViewport;", source
+            "g_world_widget->zoom = g_nMouseLookClassicZoom - 1;", source
         )
         self.assertIn("g_world_widget->zoom = g_nMouseLookClassicZoom;", source)
         self.assertIn(
@@ -159,18 +154,16 @@ class TestMouseLookMode(unittest.TestCase):
             sky_source,
         )
         self.assertIn(
-            "void far screen_frame_stretch_world_10x9", screen_source
+            "void far screen_frame_stretch_world_center_2x", screen_source
         )
         self.assertIn(
             "g_graphics_context.wVgaPage1Base", screen_source
         )
-        self.assertIn("output_row < 200", screen_source)
-        self.assertIn("source_row = output_row * 9 / 10;", screen_source)
-        self.assertIn("i < 288", screen_source)
+        self.assertIn("source_row < 100", screen_source)
         self.assertIn("out_byte < 0x50", screen_source)
         self.assertIn(
             "(r->x - worldloop_composite_source_x()) * "
-            "MOUSELOOK_COMPOSITE_SCALE_NUM",
+            "MOUSELOOK_COMPOSITE_SCALE",
             source,
         )
         self.assertIn("target = wcursor_find_action_at(hit_x, hit_y);", source)
