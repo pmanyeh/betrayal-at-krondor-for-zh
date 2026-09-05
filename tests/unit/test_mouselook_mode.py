@@ -24,6 +24,13 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("#define MOUSELOOK_YAW_PER_MICKEY 0x02", source)
         self.assertIn("g_mouse_x_mickeys - *last_mouse_x", source)
         self.assertIn("#define MOUSELOOK_RECENTER_MARGIN 16", source)
+        self.assertIn(
+            "mouse_set_cursor_clip_rect(g_world_widget->viewport.x", source
+        )
+        self.assertIn(
+            "mouse_set_cursor_clip_rect(0, 0, g_wScreen_width, g_wScreen_height);",
+            source,
+        )
         self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);", source)
         self.assertIn("key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0", source)
 
