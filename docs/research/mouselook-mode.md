@@ -25,7 +25,7 @@
 - `A`／`D`／`E` 只在實際鍵盤鍵按下時重映射；用 `Ctrl` 恢復游標後點擊畫面上的原生方向按鈕，按鈕 action 不會被誤改。
 - 原滑鼠互動會在按下與放開兩幀之間建立 `g_wMenuDragState == 1`，物件處理器用它區分左／右鍵語意。E 不能只直接呼叫派送，也不能把物件事件執行兩次；第六輪會複製目前準星命中的 hotspot、釋放捕捉，再暫時模擬一次完整左鍵狀態並只派送一次。
 - `F2` 與 `E` 都有按鍵邊緣防重複，按住不會反覆切換模式或連續觸發互動。
-- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪的 INT 33h function `0Bh` 在目前 DOSBox-X 整合模式下一直回傳零，已撤除。第七輪改用可工作的高精度絕對座標計算「本幀－上幀」差值；第十輪進一步把 DOS 游標 clip 在 3D viewport，接近 viewport 邊緣 16 pixels 內才回到中心，按 Ctrl 或離開模式時恢復全螢幕範圍。第十一輪確認：主機游標若已進入 DOSBox-X 的黑邊，absolute integration 會持續回報同一個 guest 邊界；遊戲每次回拉中心後便會把它誤當成新的同方向位移。現在水平／垂直各自鎖住已消耗的邊界座標，在游標回到視野前不再重複累加；DOSBox-X 設定同時啟用 `autolock=true` 與 `mouse_emulation=locked`，點入遊戲後使用真正的相對輸入。第八輪將水平／垂直倍率降至 `0x03`／`0x02`，第九輪再降至每 driver unit `0x02`／`0x01` binary-angle units，保持無 Dead Zone、無加速、無平滑。若仍需更低，須改用固定小數與餘數累積，才能低於整數倍率 `1` 而不吃掉微小移動。
+- 滑鼠向右移沿用引擎右轉時「yaw 減少」的方向慣例。第六輪的 INT 33h function `0Bh` 在未捕捉的 DOSBox-X 整合模式下會依設計回傳零，當時因此撤除；第十一輪加入 `autolock=true` 與 `mouse_emulation=locked` 後，DOSBox-X 會在點入遊戲時啟用 SDL relative mouse mode，`0Bh` 才會提供不受游標位置與畫面邊界影響的真正相對 motion counter。第十二輪正式改回以 `0Bh` 為主要輸入，移除 3D viewport clip、邊界鎖與任何重置中心操作；未完成 host 捕捉前才暫用全畫面絕對座標差，而且絕不 recenter，因此最多在 host 畫面邊界暫停，不會製造持續單向旋轉。相對 counter 乘 4 換算為既有 quarter-pixel 尺度，使水平／垂直手感仍等同每 driver unit `0x02`／`0x01` binary-angle units，保持無 Dead Zone、無加速、無平滑。若仍需更低，須改用固定小數與餘數累積，才能低於整數倍率 `1` 而不吃掉微小移動。
 - 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
 ## 實機驗收清單
@@ -49,8 +49,8 @@
 
 ## 目前測試產物（2026-09-05）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`。
-- `dist/test_v100_zh/krondor.exe`：475056 bytes；SHA-256 `2712c901fc01dba92a412a43ff4052bb03c42d9d4f9c815946fbe0a87ed4167c`。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`；無邊界相對輸入：`93381dd`。
+- `dist/test_v100_zh/krondor.exe`：474704 bytes；SHA-256 `4b01a2013088e993d42d38b0702dfb93058367943ee99023780952abf9a60141`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：122 passed、1 skipped。
