@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import unittest
 
 
@@ -48,14 +49,30 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("autolock_feedback=none", config)
         self.assertIn("mouse_emulation=locked", config)
 
-    def test_dialog_entry_releases_mouse_look_capture(self) -> None:
+    def test_modal_and_event_entries_release_mouse_look_capture(self) -> None:
         world_source = WORLDLP.read_text(encoding="utf-8")
         dialog_source = DIALOG.read_text(encoding="utf-8")
 
-        self.assertIn("void worldloop_mouselook_release_for_dialog(void)", world_source)
+        self.assertIn("void worldloop_mouselook_release_for_modal(void)", world_source)
         self.assertEqual(
-            dialog_source.count("worldloop_mouselook_release_for_dialog();"), 2
+            dialog_source.count("worldloop_mouselook_release_for_modal();"), 2
         )
+        self.assertEqual(
+            world_source.count("worldloop_mouselook_release_for_modal();"), 6
+        )
+        for event_entry in (
+            "modalscreen_pending_scene_trans();",
+            "evtcond_pty_dirty_flags_process();",
+            "itemuse_ground_pile_open_inv();",
+            "hotspotevt_activate_at_player();",
+            "hotspotevt_disp_pending_events();",
+            "townscene_cheat_menu_screen();",
+        ):
+            self.assertRegex(
+                world_source,
+                r"worldloop_mouselook_release_for_modal\(\);\s+[^\n]*"
+                + re.escape(event_entry),
+            )
 
     def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
