@@ -12,6 +12,7 @@ UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
 DIALOG = ENGINE / "DIALOG" / "DIALOG.C"
 HOTSPOT = ENGINE / "GAME" / "ENC" / "HOTSPOT.C"
 SKYREND = ENGINE / "R3D" / "SKY" / "SKYREND.C"
+SCREEN = ENGINE / "GFX" / "SCREEN" / "SCREEN.C"
 
 
 class TestMouseLookMode(unittest.TestCase):
@@ -112,21 +113,15 @@ class TestMouseLookMode(unittest.TestCase):
     def test_mouse_look_uses_fullscreen_view_and_restores_classic_ui(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
         sky_source = SKYREND.read_text(encoding="utf-8")
+        screen_source = SCREEN.read_text(encoding="utf-8")
 
         self.assertIn(
             "g_mouseLookClassicViewport = g_world_widget->viewport;", source
         )
-        self.assertIn("g_world_widget->viewport.x = 0;", source)
-        self.assertIn("g_world_widget->viewport.y = 0;", source)
-        self.assertIn(
-            "g_world_widget->viewport.width = g_wScreen_width;", source
-        )
-        self.assertIn(
-            "g_world_widget->viewport.height = g_wScreen_height;", source
-        )
-        self.assertIn(
-            "g_world_widget->viewport = g_mouseLookClassicViewport;", source
-        )
+        self.assertNotIn("g_world_widget->viewport.x = 0;", source)
+        self.assertIn("#define MOUSELOOK_COMPOSITE_WIDTH 160", source)
+        self.assertIn("#define MOUSELOOK_COMPOSITE_HEIGHT 100", source)
+        self.assertIn("worldloop_mouselook_expand_rendered_view();", source)
         self.assertIn(
             "g_world_widget->zoom = g_nMouseLookClassicZoom - 1;", source
         )
@@ -158,6 +153,20 @@ class TestMouseLookMode(unittest.TestCase):
             "g_graphics_context.clip.ymin) + 1 > 128",
             sky_source,
         )
+        self.assertIn(
+            "void far screen_frame_stretch_world_center_2x", screen_source
+        )
+        self.assertIn(
+            "g_graphics_context.wVgaPage1Base", screen_source
+        )
+        self.assertIn("source_row < 100", screen_source)
+        self.assertIn("out_byte < 0x50", screen_source)
+        self.assertIn(
+            "(r->x - worldloop_composite_source_x()) * "
+            "MOUSELOOK_COMPOSITE_SCALE",
+            source,
+        )
+        self.assertIn("target = wcursor_find_action_at(hit_x, hit_y);", source)
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
