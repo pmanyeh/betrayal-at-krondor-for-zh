@@ -11,6 +11,7 @@ WCURSOR = ENGINE / "INPUT" / "WCURSOR.C"
 UIWIDGET = ENGINE / "UI" / "UIWIDGET.C"
 DIALOG = ENGINE / "DIALOG" / "DIALOG.C"
 HOTSPOT = ENGINE / "GAME" / "ENC" / "HOTSPOT.C"
+SKYREND = ENGINE / "R3D" / "SKY" / "SKYREND.C"
 
 
 class TestMouseLookMode(unittest.TestCase):
@@ -110,6 +111,7 @@ class TestMouseLookMode(unittest.TestCase):
 
     def test_mouse_look_uses_fullscreen_view_and_restores_classic_ui(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
+        sky_source = SKYREND.read_text(encoding="utf-8")
 
         self.assertIn(
             "g_mouseLookClassicViewport = g_world_widget->viewport;", source
@@ -126,6 +128,10 @@ class TestMouseLookMode(unittest.TestCase):
             "g_world_widget->viewport = g_mouseLookClassicViewport;", source
         )
         self.assertIn(
+            "g_world_widget->zoom = g_nMouseLookClassicZoom - 1;", source
+        )
+        self.assertIn("g_world_widget->zoom = g_nMouseLookClassicZoom;", source)
+        self.assertIn(
             "screen_frame_sync_buffers_rect(0, g_wScreen_height);", source
         )
         self.assertIn("if (g_bMouseLookImmersiveActive == 0)", source)
@@ -135,6 +141,22 @@ class TestMouseLookMode(unittest.TestCase):
             r"worldloop_mouselook_release\(&mouselook_capture_active,\s*"
             r"mouselook_ui_x,\s*mouselook_ui_y, 0\);\s*"
             r"dispatched = wcursor_dispatch_hotspot_as_left_click",
+        )
+        self.assertIn("static void skyrender_fill_viewport_band", sky_source)
+        self.assertIn(
+            "g_graphics_context.clip.xmin == 13 && "
+            "g_graphics_context.clip.xmax == 306",
+            sky_source,
+        )
+        self.assertIn(
+            "(g_graphics_context.clip.xmax - "
+            "g_graphics_context.clip.xmin) + 1",
+            sky_source,
+        )
+        self.assertIn(
+            "(g_graphics_context.clip.ymax - "
+            "g_graphics_context.clip.ymin) + 1 > 128",
+            sky_source,
         )
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
