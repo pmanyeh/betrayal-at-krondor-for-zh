@@ -21,9 +21,18 @@ class TestMouseLookMode(unittest.TestCase):
         source = WORLDLP.read_text(encoding="utf-8")
 
         self.assertIn("screen_cursor_set_position(center_x, center_y);", source)
-        self.assertIn("#define MOUSELOOK_YAW_PER_PIXEL 0x20", source)
-        self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_PIXEL);", source)
+        self.assertIn("#define MOUSELOOK_YAW_PER_MICKEY 0x08", source)
+        self.assertIn("g_mouse_x_mickeys - (center_x << 2)", source)
+        self.assertIn("orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);", source)
         self.assertIn("key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0", source)
+
+    def test_mouse_look_has_bounded_vertical_pitch(self) -> None:
+        source = WORLDLP.read_text(encoding="utf-8")
+
+        self.assertIn("#define MOUSELOOK_PITCH_PER_MICKEY 0x06", source)
+        self.assertIn("#define MOUSELOOK_PITCH_LIMIT 0x800", source)
+        self.assertIn("g_mouse_y_mickeys - (center_y << 2)", source)
+        self.assertIn("g_nWorldViewYawNormal = g_nMouseLookBasePitch;", source)
 
     def test_mouse_look_remaps_wasd_and_e_only_for_keyboard_input(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
