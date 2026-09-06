@@ -63,12 +63,14 @@ class TestMenupageBuild(unittest.TestCase):
         (self.pris / "REQ_OPT1.DAT").write_bytes(make_menupage(None, ENTRIES))
         (self.pris / "REQ_DBUG.DAT").write_bytes(make_menupage(None, [(None, "Done", None)]))
 
-    def _build(self, entries, mapping, injected_entries=None, action_overrides=None):
+    def _build(self, entries, mapping, injected_entries=None, action_overrides=None,
+               rect_overrides=None):
         cat = self.root / "MENUPAGE.json"
         mpath = self.root / "map.json"
         cat.write_text(json.dumps({"entries": entries,
                                    "injected_entries": injected_entries or [],
-                                   "action_overrides": action_overrides or []},
+                                   "action_overrides": action_overrides or [],
+                                   "rect_overrides": rect_overrides or []},
                                   ensure_ascii=False), encoding="utf-8")
         mpath.write_text(json.dumps({"char_to_id": mapping}), encoding="utf-8")
         mp.cmd_build(argparse.Namespace(
@@ -141,6 +143,28 @@ class TestMenupageBuild(unittest.TestCase):
             self._build([], {}, action_overrides=[{
                 "file": "REQ_OPT1.DAT", "entry": 0,
                 "expected_action_id": 0x12, "action_id": 0x14,
+            }])
+
+    def test_rect_override_validates_and_changes_only_rectangle(self):
+        original = (self.pris / "REQ_OPT1.DAT").read_bytes()
+        entry = 1
+        rect_off = mp.HEADER_SIZE + 2 + entry * mp.ENTRY_SIZE + 11
+        current = list(struct.unpack_from("<hhhh", original, rect_off))
+        replacement = [10, 20, 30, 40]
+        self._build([], {}, rect_overrides=[{
+            "file": "REQ_OPT1.DAT", "entry": entry,
+            "expected_rect": current, "rect": replacement,
+        }])
+        built = (self.out / "REQ_OPT1.DAT").read_bytes()
+        self.assertEqual(struct.unpack_from("<hhhh", built, rect_off), tuple(replacement))
+        changed = [i for i, (a, b) in enumerate(zip(original, built)) if a != b]
+        self.assertEqual(changed, [rect_off, rect_off + 2, rect_off + 4, rect_off + 6])
+
+    def test_rect_override_rejects_source_drift(self):
+        with self.assertRaisesRegex(ValueError, "expected"):
+            self._build([], {}, rect_overrides=[{
+                "file": "REQ_OPT1.DAT", "entry": 0,
+                "expected_rect": [1, 2, 3, 4], "rect": [5, 6, 7, 8],
             }])
 
 

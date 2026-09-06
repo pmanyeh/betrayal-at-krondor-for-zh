@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "excluded_ranges": [
+    {"first": 11, "last": 14, "category": "cipher_system"},
+    {"first": 31, "last": 35, "category": "combat_system"},
+    {"first": 81, "last": 86, "category": "picklock_system"},
+    {"first": 110, "last": 153, "category": "menu_and_system"},
+    {"first": 199, "last": 206, "category": "spell_and_cipher_system"},
+    {"first": 215, "last": 216, "category": "spell_system"},
+    {"first": 254, "last": 269, "category": "combat_system"},
+    {"first": 305, "last": 306, "category": "combat_system"},
+    {"first": 311, "last": 312, "category": "spell_system"},
+    {"first": 1300062, "last": 1300083, "category": "inn_temple_and_healing_transactions"},
+    {"first": 1800001, "last": 1800048, "category": "shop_inventory_and_item_system"},
+    {"first": 2100288, "last": 2100291, "category": "post_combat_system_notice"}
+  ],
+  "excluded_keys": [
+    {"key": 79, "category": "picklock_system"},
+    {"key": 107, "category": "combat_system"},
+    {"key": 209, "category": "spell_system"},
+    {"key": 212, "category": "spell_system"},
+    {"key": 236, "category": "spell_system"},
+    {"key": 245, "category": "picklock_system"},
+    {"key": 303, "category": "combat_system"},
+    {"key": 315, "category": "load_error"},
+    {"key": 325, "category": "game_over"},
+    {"key": 329, "category": "chapter_contents_help"},
+    {"key": 330, "category": "chapter_contents_help"},
+    {"key": 322, "category": "combat_system"},
+    {"key": 331, "category": "combat_system"},
+    {"key": 332, "category": "bookmark_system"},
+    {"key": 333, "category": "bookmark_system"},
+    {"key": 334, "category": "bookmark_system"},
+    {"key": 336, "category": "combat_system"}
+  ],
+  "excluded_direct_paths": [
+    {"path": "SRC/SCREENS/CIPHER.C", "first_key": 1700001, "reason": "cipher body uses its own render path and has no capture hook"}
+  ],
+  "unresolved": []
+}

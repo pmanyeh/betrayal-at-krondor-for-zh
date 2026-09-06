@@ -57,6 +57,24 @@
   ],
   "injected_entries": [
     {
+      "file": "REQ_OPT0.DAT",
+      "insert_at": 3,
+      "copy_entry": 3,
+      "action_id": 132,
+      "rect": [118, 103, 78, 15],
+      "primary": "訊息紀錄",
+      "notes": "Message-log viewer"
+    },
+    {
+      "file": "REQ_OPT1.DAT",
+      "insert_at": 3,
+      "copy_entry": 3,
+      "action_id": 132,
+      "rect": [118, 108, 78, 15],
+      "primary": "訊息紀錄",
+      "notes": "Message-log viewer"
+    },
+    {
       "file": "REQ_CHET.DAT",
       "insert_at": 2,
       "copy_entry": 0,
@@ -70,6 +88,14 @@
       "primary": "啟動進階密技中心",
       "notes": "Additional cheat-chest button. Enables g_cfgKnockKnock for the current process and closes the chest; it does not modify resource.cfg."
     }
+  ],
+  "rect_overrides": [
+    {"file": "REQ_OPT0.DAT", "entry": 3, "expected_rect": [118, 103, 78, 15], "rect": [118, 119, 78, 15]},
+    {"file": "REQ_OPT0.DAT", "entry": 4, "expected_rect": [118, 119, 78, 15], "rect": [118, 135, 78, 15]},
+    {"file": "REQ_OPT0.DAT", "entry": 5, "expected_rect": [118, 135, 78, 15], "rect": [118, 151, 78, 15]},
+    {"file": "REQ_OPT1.DAT", "entry": 3, "expected_rect": [118, 108, 78, 15], "rect": [118, 124, 78, 15]},
+    {"file": "REQ_OPT1.DAT", "entry": 4, "expected_rect": [118, 124, 78, 15], "rect": [118, 140, 78, 15]},
+    {"file": "REQ_OPT1.DAT", "entry": 5, "expected_rect": [118, 140, 78, 15], "rect": [118, 156, 78, 15]}
   ],
   "action_overrides": [
     {
