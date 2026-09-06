@@ -129,6 +129,26 @@ class TestChineseFont(unittest.TestCase):
         decoded = decode_string(encoded, {glyph_id: ch for ch, glyph_id in mapping.items()})
         self.assertEqual(decoded, "離開")
 
+    def test_mouselook_toggle_hardcoded_bytes(self):
+        repo = Path(__file__).resolve().parents[2]
+        mapping = json.loads(
+            (repo / "localization" / "generated" / "zh_mapping.json").read_text(encoding="utf-8")
+        )["char_to_id"]
+        on_enc = encode_string("滑鼠視角模式：開", mapping)
+        self.assertEqual(on_enc, bytes.fromhex("8f 42 86 4b 8c 2b 8d 6b 81 67 8f 6b 87 5a 82 2c"))
+        off_enc = encode_string("滑鼠視角模式：關", mapping)
+        self.assertEqual(off_enc, bytes.fromhex("8f 42 86 4b 8c 2b 8d 6b 81 67 8f 6b 87 5a 85 6c"))
+
+    def test_quicksave_notice_hardcoded_bytes(self):
+        repo = Path(__file__).resolve().parents[2]
+        mapping = json.loads(
+            (repo / "localization" / "generated" / "zh_mapping.json").read_text(encoding="utf-8")
+        )["char_to_id"]
+        save_enc = encode_string("快速存檔完成", mapping)
+        self.assertEqual(save_enc, bytes.fromhex("85 7b 8a 59 8c 33 97 30 82 51 82 52"))
+        load_enc = encode_string("正在讀取快速存檔……", mapping)
+        self.assertEqual(load_enc, bytes.fromhex("87 51 81 26 90 30 8a 40 85 7b 8a 59 8c 33 97 30 80 7e 80 7e"))
+
 
 if __name__ == "__main__":
     unittest.main()

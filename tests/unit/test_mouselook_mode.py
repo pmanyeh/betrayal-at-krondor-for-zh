@@ -148,3 +148,15 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("wcursor_find_action_at(center_x, center_y)", world_source)
         self.assertIn("worldloop_hotspot_outline_draw(&target->rect, 0xe);", world_source)
         self.assertIn("void uiwidget_aim_point_draw", widget_source)
+
+    def test_mouse_look_toggle_notices_match_encoded_strings(self) -> None:
+        world_source = WORLDLP.read_text(encoding="utf-8")
+
+        self.assertIn(
+            r'"\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x82\x2c"',
+            world_source,
+        )
+        self.assertIn(
+            r'"\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x85\x6c"',
+            world_source,
+        )
