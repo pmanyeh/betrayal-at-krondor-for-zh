@@ -6,7 +6,7 @@
 
 ## 測試版操作
 
-- `F2`：切換滑鼠視角模式；每次啟動遊戲時預設關閉，本次遊戲期間保留狀態。開啟後 3D viewport 會擴張到完整 320×200 畫面。
+- `F2`：切換滑鼠視角模式；每次啟動遊戲時預設關閉，本次遊戲期間保留狀態。開啟後仍保留經典 294×101 3D 景窗與完整 UI。
 - 滑鼠左右移動：水平旋轉視角；滑鼠向上抬頭、向下低頭，限制在基準視角上下各約 11.25°。
 - `W`／`S`：前進／後退。
 - `A`／`D`：向左／向右平移；方向鍵仍保留左轉／右轉。
@@ -38,7 +38,7 @@
 
 ## 實機驗收清單
 
-1. 冷啟動後仍是一般模式；`F2` 顯示「滑鼠視角模式：開」後，3D 應鋪滿整個 320×200 畫面且不留經典 UI；再次按下顯示「關」並完整恢復原版面。
+1. 冷啟動後仍是一般模式；`F2` 顯示「滑鼠視角模式：開」後，應保留經典 294×101 3D 景窗與完整 UI；再次按下顯示「關」並完整恢復原操作。
 2. 滑鼠左右移動方向正確、沒有自行漂移；移動速度不會過快或過慢。
 3. `W/S/A/D` 分別前進、後退、左平移、右平移；方向鍵仍能前後移動及左右轉向；`Q` 仍可左移。
 4. 分別對人物、門、寶箱／袋子、地上物品或屍體測試：準星進入熱區時變黃並框出單一目標；`E` 與左鍵各只觸發一次正確互動。
@@ -64,8 +64,8 @@
 - 建立前 checkpoint：主專案／引擎 tag `backup/pre-fps-fullscreen-20260905`，分別指向 `0ef7f9a`／`7f1a7fe`。
 - 現行引擎：`5c3ed49`（移除所有全畫面渲染路徑，回復經典景窗）；全畫面實驗封存 tag：`backup/fps-fullscreen-experiments-final-20260906`。
 - `dist/test_v100_zh/krondor.exe`：474896 bytes；SHA-256 `b4052d56e0ddc7bea2b9b5f89dcba1a2dc6ccedfad0f3aaf64c968a664aabc95`。
-- 正式 `dist/release_v100_zh.zip`：33839514 bytes；SHA-256 `8825f92725a51f6308b7efab98400686c7d62cbdb653d577c9fb703411d3b590`。
+- 正式 `dist/release_v100_zh.zip`：33840109 bytes；SHA-256 `b3374a3791c320e8a0e45ed9e93c86aaf7e81297b94378ce231b0c901c72c439`；已更新三份玩家說明並確認 ZIP 不含 `KRONDOR.EXE`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：124 passed、1 skipped。
-- 尚未建立正式 bspatch，也尚未重建 Release ZIP。
+- 正式 bspatch 與 Release ZIP 均已建立；經典景窗版本已完成乾淨安裝、啟動及解除安裝驗證。
