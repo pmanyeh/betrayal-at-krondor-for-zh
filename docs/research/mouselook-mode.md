@@ -32,6 +32,7 @@
 - 288×180／10:9 高解析合成雖然計算出的垂直 FOV 小於 160×100／zoom-1 安全版，實測仍會在下半部破圖，證明問題是 renderer／地形資料對約 101 行 viewport 的結構性限制，而非只看視角角度。該實驗已 revert；後續禁止再以增加單次 viewport 高度的方式提升解析度。
 - 雙段 294×101 實驗進一步證明「安全高度」本身仍不夠：當上下 pass 以目前 pitch 加減 `0x0f00` 渲染時，低角度 pass 會讓天空、地面與物件大面積投影錯誤。舊 renderer 的可靠範圍同時受 viewport 高度與俯仰角限制；不能再靠旋轉相機取得上下畫面後拼接。該實驗已 revert，後續只在正常 pitch 的安全景窗輸出上做顯示端處理。
 - 2026-09-06 使用者決定放棄全畫面 renderer。現行版本已完整移除沉浸式 viewport、Mode-X compositor 與相關背景填色特例，固定保留經典 294×101 3D 景窗及所有 UI；全畫面各輪只作為失敗研究紀錄保留，不再屬於現行功能。
+- 經典景窗回歸版已於 2026-09-06 通過使用者實機確認，並完成正式 Release 的差異補丁、乾淨安裝、啟動與解除安裝驗證。
 - R3D 的投影中心、clip rectangle、天空／地面與 hit-test 都由 `ViewContext.viewport` 推導，`ts_create_fullscreen_view()` 原始預設也正是 320×200，因此這個 POC 不改投影器或資料格式。代價是每幀填色面積從 `294×101 = 29,694` 增至 `320×200 = 64,000` pixels，約 2.16 倍；流暢度及原本看不到的上下視野是否出現場景缺口須靠實機驗證。
 - 第三輪誤改了只供另一條 render path 使用的 `g_nWorldViewYawNormal`，但 FPS 熱區渲染實際由 `world_render_frame_with_hittest()` 直接讀取 `g_world_widget->camera`。第四輪已改為調整真正的 `g_world_camera->base.orientation.pitch`；世界移動與碰撞仍只使用 yaw。捕捉期間暫時套用受限 pitch offset，按 Ctrl、進入 modal、關閉 F2 或離開 3D 時恢復基準 pitch，重新捕捉後再套回偏移。
 
@@ -63,6 +64,7 @@
 - 建立前 checkpoint：主專案／引擎 tag `backup/pre-fps-fullscreen-20260905`，分別指向 `0ef7f9a`／`7f1a7fe`。
 - 現行引擎：`5c3ed49`（移除所有全畫面渲染路徑，回復經典景窗）；全畫面實驗封存 tag：`backup/fps-fullscreen-experiments-final-20260906`。
 - `dist/test_v100_zh/krondor.exe`：474896 bytes；SHA-256 `b4052d56e0ddc7bea2b9b5f89dcba1a2dc6ccedfad0f3aaf64c968a664aabc95`。
+- 正式 `dist/release_v100_zh.zip`：33839514 bytes；SHA-256 `8825f92725a51f6308b7efab98400686c7d62cbdb653d577c9fb703411d3b590`。
 - `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
 - Python 測試：124 passed、1 skipped。

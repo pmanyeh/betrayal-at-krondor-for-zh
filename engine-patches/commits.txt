@@ -134,3 +134,26 @@ ee47c39d386f4cfb0c3377a4ab22fa537a100a33 fix: correct world map teleport destina
 6774ae67ed0e41fdcf6d6c0125d92b3382d3a519 fix: refresh overhead map controls after keyboard input
 5741a447d781915bb803ba7db854e5d69bc19469 fix: render Chinese text in compact titled dialogs
 f501e534a8d3b8d70d801ad0e2b422efb2bc30d5 feat: add exit button to spell browser
+51536c67d58ee1294bf6984f5254c1bd4cf8b87f feat: add optional mouse-look exploration mode
+034968591607fd382ab825dc064d5f867d1fa00d fix: reduce mouse-look turn sensitivity
+c9f33bf8da115c15dbce1d3c59e20fb5306dda2e feat: add bounded vertical mouse look
+24e47b9b9bc5d23e41b72fc7d3dd8d4770cfc551 fix: apply mouse pitch to active world camera
+a9ef46abd94a523261a2b53b8683f114989c97f6 fix: use conventional vertical mouse direction
+61cc25d46f2c2ff56abe930ea4ac176d2f11b9ff fix: use relative mouse input and complete E interactions
+146f365b754873014aa82708a7e47224a463d12c fix: track absolute mouse deltas without per-frame warp
+479604b1a7cd171759d448d7d30b681a968c7641 fix: halve mouse-look sensitivity
+7dce83cda3e859c2ce1b734fcbd60df441bb3d31 fix: further reduce mouse-look sensitivity
+7e8c122078f0194378380f982e0c2f8f05ab06c5 fix: confine mouse look to 3D viewport
+d4f5156616ddec56331de771399d0f36de9fc0aa fix: suppress repeated mouse-look edge motion
+93381dd4ad298db42f49eab117e7d2b4b3b9672d fix: use unbounded relative mouse look
+673046c405513ae65bcf8bbd0ecd47d633d6170f fix: release mouse look for dialog events
+32570dedc50d90d7900af2c4d7efc3cf0e187991 fix: release mouse look across world events
+7f1a7feeb65ec150b2fe9021a21d195898875d49 fix: preserve mouse look during continuous movement
+2b39f4bfebf58983026c4481efed234dd33a36ea feat: add immersive fullscreen mouse look
+25e6edb46fd30ee56d04f3e05ebd7ae756d9f371 fix: render immersive world background safely
+45ab415f0798c80b48dfa6230b44702093ed0a5e fix: composite safe world view to fullscreen
+33e2e3a41021d1e571232e0319c79c4a17de8fee refine: raise fullscreen compositor resolution
+90217cc3861610fd725a66a1fde0a4ad4dc1dbb3 Revert "refine: raise fullscreen compositor resolution"
+72de630751c037156b0d75a884dd81e48f32d012 feat: compose fullscreen world from safe height passes
+be37a58b017333b80b56b6798621e7a888a316b5 Revert "feat: compose fullscreen world from safe height passes"
+5c3ed49a62716f631f26445f083c047ae4721751 revert: keep mouse look in classic world viewport

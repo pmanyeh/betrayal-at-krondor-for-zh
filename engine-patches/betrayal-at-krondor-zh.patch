@@ -1495,10 +1495,18 @@ index e2a740548f6359593a3d1901651cc1cba55f41ed..066f0a57ad77def0f3c3d9ce7777e697
      return selected;
  }
 diff --git a/bak/SRC/DIALOG/DIALOG.C b/bak/SRC/DIALOG/DIALOG.C
-index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d319d1496 100644
+index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed1943b0262f 100644
 --- a/bak/SRC/DIALOG/DIALOG.C
 +++ b/bak/SRC/DIALOG/DIALOG.C
-@@ -23,9 +23,22 @@
+@@ -14,6 +14,7 @@
+ #include "SRC/SYS/SYSLOWIO.H"
+ #include "SRC/R3D/SCENE/CZONE.H"
+ #include "SRC/GAME/WORLD/WORLDMOV.H"
++#include "SRC/GAME/WORLD/WORLDLP.H"
+ #include "SRC/SCREENS/BOOKVIEW.H"
+ #include "SRC/SCRIPT/ADSCRIPT.H"
+ #include "SRC/CHAR/CHARSCRN.H"
+@@ -23,9 +24,22 @@
  #include "statname.h"
  
  unsigned char far g_abStatNames[16][15] = {
@@ -1524,7 +1532,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
  
  #include "SRC/DIALOG/DIALOG.H"
  #include "SRC/SYS/RAND.H"
-@@ -297,6 +310,10 @@ typedef struct {
+@@ -297,6 +311,10 @@ typedef struct {
  void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
      DdxOp far *sub2;
      DialogStyleDescriptor *desc;
@@ -1535,7 +1543,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      int i;
  
      sub2 = (DdxOp far *)(record + 1) + record->bCnt1;
-@@ -307,6 +324,27 @@ void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
+@@ -307,6 +325,27 @@ void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
              *(StyleState far *)dest = *(StyleState far *)&sub2->nA1;
          }
      }
@@ -1563,7 +1571,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
  }
  
  void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
-@@ -362,9 +400,12 @@ void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
+@@ -362,9 +401,12 @@ void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
  }
  
  void far dialog_draw_speech_bubble(char far *text, int y_offset) {
@@ -1576,7 +1584,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
      g_graphics_context.clip.xmax = 0x13f;
      g_graphics_context.clip.ymax = 199;
-@@ -395,6 +436,7 @@ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
+@@ -395,6 +437,7 @@ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
          g_graphics_context.bText_fg_color = 0xa;
          font_draw_text_far(text, 0xa0 - font_text_pixel_width(text) / 2, y_offset + 0x6c);
      }
@@ -1584,7 +1592,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
  }
  
  static void far dialog_assign_rand_cmbt_name(int slot_index, int param_2, int param_3) {
-@@ -535,7 +577,7 @@ void far dialog_cmbt_name_assign_kind(int slot, int kind, int aux, int name_toke
+@@ -535,7 +578,7 @@ void far dialog_cmbt_name_assign_kind(int slot, int kind, int aux, int name_toke
          break;
  
      case 28:
@@ -1593,7 +1601,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
          break;
  
      case 29:
-@@ -560,7 +602,9 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -560,7 +603,9 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      char *pName;
      char *pEnd;
      unsigned int flags;
@@ -1603,7 +1611,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      pStyle = dialog_resolve_style(record);
      nScratchLen = 0;
      dialog_apply_style_state(record, applied);
-@@ -578,16 +622,57 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -578,16 +623,57 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
          int nTitleY = applied[1] + pStyle->header[7];
          text++;
          pTitle = text;
@@ -1662,7 +1670,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
          } else {
              sprintf(buf, "%Fs", pTitle);
              dialog_draw_speech_bubble(buf, 10);
-@@ -595,15 +680,36 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -595,15 +681,36 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      }
  
      while (*text != '\0') {
@@ -1701,7 +1709,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
                          pName = g_speaker_names[idx];
                          _fstrcpy(g_pMainScratchBuf + (nScratchLen - 1), "n ");
                          nScratchLen++;
-@@ -634,6 +740,42 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -634,6 +741,42 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      }
  
      g_pMainScratchBuf[nScratchLen] = '\0';
@@ -1744,7 +1752,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      flags = pStyle->header[6];
      if (record->wFlags & 4)
          flags = flags & 0xf8 | 2;
-@@ -641,6 +783,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -641,6 +784,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      applied[1] += pStyle->header[7];
      applied[2] -= pStyle->header[9] + pStyle->header[10];
      applied[3] -= pStyle->header[7] + pStyle->header[8];
@@ -1767,7 +1775,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      if (record->wFlags & 0x200) {
  
          ((int *)&pTitle)[1] =
-@@ -661,14 +819,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -661,14 +820,23 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      g_graphics_context.bText_fg_color = fg_color >= 0 ? (unsigned char)fg_color : pStyle->header[2];
      textwrap_draw_aligned((long)g_pMainScratchBuf, applied[0] + x_off, applied[1] + y_off,
                            applied[2], applied[3], 1, flags, scroll_start);
@@ -1781,6 +1789,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      int iResult;
 +    int i;
  
++    worldloop_mouselook_release_for_modal();
      iResult = 1;
 +    /* Directly displayed records (used by scripted ambient events) do not
 +       pass through dialog_play_record(), which normally initializes the
@@ -1790,7 +1799,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      if ((record = dialog_load_record_by_key(key, 0)) != 0) {
          if (record->wFlags & 0x20)
              interactive = 1;
-@@ -682,7 +848,27 @@ int far dialog_show_by_key(unsigned long key, int interactive) {
+@@ -682,7 +850,27 @@ int far dialog_show_by_key(unsigned long key, int interactive) {
          if (interactive) {
              screen_frame_present();
              screen_frame_sync_buffers_rect(0, 200);
@@ -1819,7 +1828,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
              screen_frame_present();
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
-@@ -776,7 +962,7 @@ void far dialog_animate_open(DDXRecord far *dialog, int steps) {
+@@ -776,7 +964,7 @@ void far dialog_animate_open(DDXRecord far *dialog, int steps) {
  
  void far dialog_combatant_name_table_init(void) {
      int i;
@@ -1828,7 +1837,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      int found;
  #endif
  
-@@ -790,7 +976,7 @@ void far dialog_combatant_name_table_init(void) {
+@@ -790,7 +978,7 @@ void far dialog_combatant_name_table_init(void) {
      dialog_cmbt_name_assign_kind(5, 0xf, 0, 0);
      dialog_cmbt_name_assign_kind(3, 0xe, 0, 0);
      dialog_cmbt_name_assign_kind(0, 0x1f, 0, 0);
@@ -1837,6 +1846,14 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..49e6e1bc6786953d6d8ebd7252fed00d
      found = 0;
      for (i = found; i < g_gameState.partySize; i++) {
          if (g_gameState.activeParty[i] == g_gameState.nEvtArgActor0)
+@@ -827,6 +1015,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+     int i;
+     int j;
+ 
++    worldloop_mouselook_release_for_modal();
+     done = 0;
+     scrLoaded = 0;
+     screenDirty = 0;
 diff --git a/bak/SRC/GAME/ACTOR/ACTSPAWN.C b/bak/SRC/GAME/ACTOR/ACTSPAWN.C
 index aeb1c776ba9985adaf4f0bd8a525a60c3f97f4b4..34dfcf42bffad926974ddde9d7cb236635f4bc24 100644
 --- a/bak/SRC/GAME/ACTOR/ACTSPAWN.C
@@ -1851,7 +1868,7 @@ index aeb1c776ba9985adaf4f0bd8a525a60c3f97f4b4..34dfcf42bffad926974ddde9d7cb2366
  #else
              score /= 100;
 diff --git a/bak/SRC/GAME/ENC/HOTSPOT.C b/bak/SRC/GAME/ENC/HOTSPOT.C
-index 664b71c1ff7c583a820a50fa4910c5318bf24776..0a2982f07887d9c9ff402705b52d67815a10cec2 100644
+index 664b71c1ff7c583a820a50fa4910c5318bf24776..4b41de12d1463b18d8360312e1a4ada9e1778ba7 100644
 --- a/bak/SRC/GAME/ENC/HOTSPOT.C
 +++ b/bak/SRC/GAME/ENC/HOTSPOT.C
 @@ -24,6 +24,7 @@
@@ -1862,7 +1879,49 @@ index 664b71c1ff7c583a820a50fa4910c5318bf24776..0a2982f07887d9c9ff402705b52d6781
  #include <stdlib.h>
  
  ZoneHotspot g_aZoneHotspots[10];
-@@ -527,6 +528,8 @@ void far hotspotevt_type1_encounter_run(ZoneHotspot *pHotspot, int *out_moved) {
+@@ -160,10 +161,12 @@ unsigned short far hotspotevt_disp_pending_events(void) {
+             evt = g_aZoneHotspots + g_wHotspotMatchIdx;
+             switch (evt->wKind) {
+             case 0:
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_load_record0_town(evt);
+                 eventBit = 1;
+                 goto done_mask;
+             case 1:
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_type1_encounter_run(evt, (int *)&wHaltFlag);
+                 if (wHaltFlag != 0) {
+                     running = 0;
+@@ -171,6 +174,7 @@ unsigned short far hotspotevt_disp_pending_events(void) {
+                 eventBit = 0;
+                 break;
+             case 3:
++                worldloop_mouselook_release_for_modal();
+                 eventBit = hotspotevt_monst_load_speak(evt);
+                 goto done_mask;
+             case 5:
+@@ -178,10 +182,12 @@ unsigned short far hotspotevt_disp_pending_events(void) {
+                 eventBit = 0;
+                 break;
+             case 6:
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_action_enter_town(evt);
+                 eventBit = 1;
+                 goto done_mask;
+             case 7:
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_trap_main_fire(evt, &wHaltFlag);
+                 if (wHaltFlag != 0) {
+                     running = 0;
+@@ -189,6 +195,7 @@ unsigned short far hotspotevt_disp_pending_events(void) {
+                 eventBit = 0;
+                 break;
+             case 8:
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_action_enter_zone(evt);
+                 running = 0;
+                 eventBit = 1;
+@@ -527,6 +534,8 @@ void far hotspotevt_type1_encounter_run(ZoneHotspot *pHotspot, int *out_moved) {
          dialog_play_record(*(unsigned long *)(buf + 6), 1);
      }
      combat_arena_actor_turn_loop((unsigned short) * (unsigned long *)(buf + 2), &combatStatus, hasFired);
@@ -1871,7 +1930,7 @@ index 664b71c1ff7c583a820a50fa4910c5318bf24776..0a2982f07887d9c9ff402705b52d6781
      g_pendingTempWriteRegion = TWR_ENCOUNTER_STATE;
      gstate_temp_file_write_at((unsigned char far *)&g_gameState.game_time,
                                GAM_ENC_FOUGHT_TIME(*(unsigned long *)(buf + 2)), 4);
-@@ -780,6 +783,8 @@ void far hotspotevt_trap_main_fire(ZoneHotspot *pHotspot, unsigned short *pOut_s
+@@ -780,6 +789,8 @@ void far hotspotevt_trap_main_fire(ZoneHotspot *pHotspot, unsigned short *pOut_s
          dialog_play_record(trapRec.dwEntry_dialog, 1);
  
      combat_arena_actor_turn_loop((unsigned short)trapRec.dwCombat_index, &combat_status, wHas_fired);
@@ -2698,10 +2757,14 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049fb10edb28 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..982e4cb0cc84eaa097541a6dc71c2d1a3e1e92a9 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
-@@ -15,7 +15,9 @@
+@@ -12,10 +12,13 @@
+ #include "SRC/GFX/DRIVER/PALDRV.H"
+ #include "SRC/GFX/RASTER/PRESENT.H"
+ #include "SRC/INPUT/KEYBOARD.H"
++#include "SRC/INPUT/MOUSE.H"
  #include "SRC/R3D/SCENE/WORLDHIT.H"
  #include "SRC/GFX/SCREEN/SCREEN.H"
  #include "SRC/UI/MENUPAGE.H"
@@ -2711,11 +2774,25 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
  #include "SRC/DIALOG/EVTCOND.H"
  #include "SRC/GAME/STATE/GSTATE.H"
  #include "SRC/CHAR/STAT.H"
-@@ -41,6 +43,77 @@ MenuPage *g_pReqMainPage = {0};
+@@ -40,6 +43,215 @@
+ MenuPage *g_pReqMainPage = {0};
  short g_nSceneReloadPending = 0;
  short g_nHotspotActivateRequest = 0;
- 
++static int g_bMouseLookMode = 0;
++static short g_nMouseLookBasePitch = 0;
++static short g_nMouseLookPitchOffset = 0;
++static int *g_pMouseLookCaptureActive = (int *)0;
++static short *g_pMouseLookUiX = (short *)0;
++static short *g_pMouseLookUiY = (short *)0;
++
 +#define CONTEXT_HOTSPOT_SCANCODE 0x0f /* Tab */
++#define MOUSELOOK_TOGGLE_SCANCODE 0x3c /* F2 */
++#define MOUSELOOK_INTERACT_SCANCODE 0x12 /* E */
++#define MOUSELOOK_CTRL_SCANCODE 0x1d
++#define MOUSELOOK_YAW_PER_MICKEY 0x02
++#define MOUSELOOK_PITCH_PER_MICKEY 0x01
++#define MOUSELOOK_RELATIVE_TO_CURSOR_SCALE 4
++#define MOUSELOOK_PITCH_LIMIT 0x800
 +#define QUICKSAVE_SCANCODE 0x3f        /* F5 */
 +#define QUICKLOAD_SCANCODE 0x43        /* F9 */
 +#define QUICKSAVE_NOTICE_TICKS 0x78    /* two seconds */
@@ -2725,6 +2802,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
 +static char g_szQuickSaveLoading[] =
 +    "\x87\x51\x81\x26\x90\x30\x8a\x40\x85\x7b\x8a\x59\x8c\x33\x97\x30\x80\x7e\x80\x7e";
 +    /* 正在讀取快速存檔…… */
++static char g_szMouseLookOn[] =
++    "\x89\x82\x83\xeb\x87\x8b\x88\x6b\x80\xe7\x89\xab\x84\x9a\x81\x4c";
++    /* 滑鼠視角模式：開 */
++static char g_szMouseLookOff[] =
++    "\x89\x82\x83\xeb\x87\x8b\x88\x6b\x80\xe7\x89\xab\x84\x9a\x83\x6c";
++    /* 滑鼠視角模式：關 */
 +
 +static void worldloop_quicksave_notice(char *text) {
 +    int text_width;
@@ -2754,14 +2837,128 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
 +    return key_is_down(CONTEXT_HOTSPOT_SCANCODE) != 0;
 +}
 +
-+static void worldloop_context_overlay_draw(void) {
-+    int i;
++static int worldloop_viewport_center_x(void) {
++    return g_world_widget->viewport.x + (g_world_widget->viewport.width >> 1);
++}
++
++static int worldloop_viewport_center_y(void) {
++    return g_world_widget->viewport.y + (g_world_widget->viewport.height >> 1);
++}
++
++static void worldloop_mouselook_release(int *capture_active, int ui_x, int ui_y) {
++    if (*capture_active == 0)
++        return;
++    g_world_camera->base.orientation.pitch = g_nMouseLookBasePitch;
++    mouse_set_cursor_clip_rect(0, 0, g_wScreen_width, g_wScreen_height);
++    screen_cursor_set_hidden_flag(1);
++    screen_cursor_set_position(ui_x, ui_y);
++    screen_cursor_hide();
++    *capture_active = 0;
++}
++
++void worldloop_mouselook_release_for_modal(void) {
++    if (g_pMouseLookCaptureActive == (int *)0 ||
++        g_pMouseLookUiX == (short *)0 || g_pMouseLookUiY == (short *)0)
++        return;
++    worldloop_mouselook_release(g_pMouseLookCaptureActive, *g_pMouseLookUiX,
++                                *g_pMouseLookUiY);
++}
++
++static int worldloop_mouselook_poll(int *capture_active, short *ui_x, short *ui_y,
++                                    short *last_mouse_x, short *last_mouse_y) {
++    int wanted;
++    short mouse_x;
++    short mouse_y;
++    int dx;
++    int dy;
++    int pitch_offset;
++
++    wanted = g_bMouseLookMode != 0 && g_mouse_installed != 0 &&
++             key_is_down(MOUSELOOK_CTRL_SCANCODE) == 0;
++    if (wanted != 0 && *capture_active == 0) {
++        screen_cursor_get_position(&mouse_x, &mouse_y);
++        *ui_x = mouse_x;
++        *ui_y = mouse_y;
++        mouse_set_cursor_clip_rect(0, 0, g_wScreen_width, g_wScreen_height);
++        screen_cursor_set_hidden_flag(0);
++        screen_cursor_hide();
++        mouse_get_motion_delta(&dx, &dy);
++        *last_mouse_x = g_mouse_x_mickeys;
++        *last_mouse_y = g_mouse_y_mickeys;
++        g_world_camera->base.orientation.pitch =
++            g_nMouseLookBasePitch + g_nMouseLookPitchOffset;
++        *capture_active = 1;
++        return 1;
++    }
++    if (wanted == 0 && *capture_active != 0) {
++        worldloop_mouselook_release(capture_active, *ui_x, *ui_y);
++        return 1;
++    }
++    if (wanted == 0) {
++        if (g_bMouseLookMode != 0 && g_mouse_installed != 0) {
++            screen_cursor_get_position(&mouse_x, &mouse_y);
++            *ui_x = mouse_x;
++            *ui_y = mouse_y;
++        }
++        return 0;
++    }
++
++    mouse_get_motion_delta(&dx, &dy);
++    if (dx != 0 || dy != 0) {
++        /* INT 33h motion counters use the configured 8:8 mickey ratio, while
++           the legacy absolute callback stores quarter-pixel coordinates. */
++        dx *= MOUSELOOK_RELATIVE_TO_CURSOR_SCALE;
++        dy *= MOUSELOOK_RELATIVE_TO_CURSOR_SCALE;
++    } else {
++        /* Before DOSBox-X has completed host capture, retain ordinary absolute
++           movement as a fallback.  It may stop at the host image boundary, but
++           without recentering it can never manufacture repeated motion. */
++        dx = (short)(g_mouse_x_mickeys - *last_mouse_x);
++        dy = (short)(g_mouse_y_mickeys - *last_mouse_y);
++    }
++    *last_mouse_x = g_mouse_x_mickeys;
++    *last_mouse_y = g_mouse_y_mickeys;
++    if (dx == 0 && dy == 0)
++        return 0;
++    /* Positive mouse X is a right turn; the engine's right-turn convention
++       subtracts from yaw (worldmove_heading_step direction 3). */
++    g_world_camera->base.orientation.yaw -= (short)(dx * MOUSELOOK_YAW_PER_MICKEY);
++    /* Mouse up (negative Y motion) looks up in the active camera. */
++    pitch_offset = g_nMouseLookPitchOffset - dy * MOUSELOOK_PITCH_PER_MICKEY;
++    if (pitch_offset < -MOUSELOOK_PITCH_LIMIT)
++        pitch_offset = -MOUSELOOK_PITCH_LIMIT;
++    else if (pitch_offset > MOUSELOOK_PITCH_LIMIT)
++        pitch_offset = MOUSELOOK_PITCH_LIMIT;
++    g_nMouseLookPitchOffset = (short)pitch_offset;
++    g_world_camera->base.orientation.pitch =
++        g_nMouseLookBasePitch + g_nMouseLookPitchOffset;
++    return 1;
++}
++
++static void worldloop_hotspot_outline_draw(Rect far *r, int color) {
 +    int x;
 +    int y;
 +    int x2;
 +    int y2;
 +    int viewport_x2;
 +    int viewport_y2;
++
++    viewport_x2 = g_world_widget->viewport.x + g_world_widget->viewport.width;
++    viewport_y2 = g_world_widget->viewport.y + g_world_widget->viewport.height;
++    x = (r->x < g_world_widget->viewport.x) ? g_world_widget->viewport.x : r->x;
++    y = (r->y < g_world_widget->viewport.y) ? g_world_widget->viewport.y : r->y;
++    x2 = r->x + r->width;
++    y2 = r->y + r->height;
++    if (x2 > viewport_x2)
++        x2 = viewport_x2;
++    if (y2 > viewport_y2)
++        y2 = viewport_y2;
++    if (x2 > x && y2 > y)
++        uiwidget_hotspot_outline_draw(x, y, x2 - x, y2 - y, color);
++}
++
++static void worldloop_context_overlay_draw(void) {
++    int i;
 +    Rect far *r;
 +
 +    /* Compose on the back page before the flip.  The caller then copies the
@@ -2769,44 +2966,78 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
 +       while Tab is held instead of alternating clean/outlined frames. */
 +    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
 +        g_graphics_context.wVgaPage2Base;
-+    viewport_x2 = g_world_widget->viewport.x + g_world_widget->viewport.width;
-+    viewport_y2 = g_world_widget->viewport.y + g_world_widget->viewport.height;
 +    for (i = 0; i < (int)g_nHitTestEntryCount; i++) {
 +        r = &g_pWorldHitTestTable[i].rect;
-+        x = (r->x < g_world_widget->viewport.x) ? g_world_widget->viewport.x : r->x;
-+        y = (r->y < g_world_widget->viewport.y) ? g_world_widget->viewport.y : r->y;
-+        x2 = r->x + r->width;
-+        y2 = r->y + r->height;
-+        if (x2 > viewport_x2)
-+            x2 = viewport_x2;
-+        if (y2 > viewport_y2)
-+            y2 = viewport_y2;
-+        if (x2 > x && y2 > y)
-+            uiwidget_hotspot_outline_draw(x, y, x2 - x, y2 - y, 0xf);
++        worldloop_hotspot_outline_draw(r, 0xf);
 +    }
 +}
 +
++static void worldloop_mouselook_overlay_draw(void) {
++    WorldHotspot *target;
++    int center_x;
++    int center_y;
++
++    center_x = worldloop_viewport_center_x();
++    center_y = worldloop_viewport_center_y();
++    target = wcursor_find_action_at(center_x, center_y);
++    if (target != (WorldHotspot *)0) {
++        worldloop_hotspot_outline_draw(&target->rect, 0xe);
++        uiwidget_aim_point_draw(center_x, center_y, 0xe);
++    } else {
++        uiwidget_aim_point_draw(center_x, center_y, 7);
++    }
++}
+ 
  void far worldloop_req_main_screen_load(void) {
      g_pReqMainPage = menupage_load("req_main.dat");
-     map_req_map_screen_load();
-@@ -73,6 +146,8 @@ short far world3d_main_loop(void) {
+@@ -73,6 +285,15 @@ short far world3d_main_loop(void) {
         hotspot_active to DI. */
      register int render_dirty;   /* party-dirty / render-scene flag */
      register int hotspot_active; /* hotspot / descent / entered flag */
 +    int context_overlay_drawn;
 +    int context_overlay_wanted;
++    int mouselook_capture_active;
++    short mouselook_ui_x;
++    short mouselook_ui_y;
++    short mouselook_last_mouse_x;
++    short mouselook_last_mouse_y;
++    int mouselook_toggle_held;
++    int mouselook_interact_held;
  
      exit_mode = 0;
      keep_running = 1;
-@@ -82,6 +157,7 @@ short far world3d_main_loop(void) {
+@@ -82,6 +303,18 @@ short far world3d_main_loop(void) {
      redraw_caption = 0;
      pending_events = 0;
      key_repeat_armed = 0;
 +    context_overlay_drawn = 0;
++    mouselook_capture_active = 0;
++    mouselook_toggle_held = 0;
++    mouselook_interact_held = 0;
++    g_nMouseLookBasePitch = g_world_camera->base.orientation.pitch;
++    g_nMouseLookPitchOffset = 0;
++    screen_cursor_get_position(&mouselook_ui_x, &mouselook_ui_y);
++    mouselook_last_mouse_x = g_mouse_x_mickeys;
++    mouselook_last_mouse_y = g_mouse_y_mickeys;
++    g_pMouseLookCaptureActive = &mouselook_capture_active;
++    g_pMouseLookUiX = &mouselook_ui_x;
++    g_pMouseLookUiY = &mouselook_ui_y;
      focused_entry = (MenuEntry *)0;
      g_nHotspotActivateRequest = 0;
      g_bZoneEntryInProgress = 0;
-@@ -140,11 +216,20 @@ short far world3d_main_loop(void) {
+@@ -92,9 +325,11 @@ short far world3d_main_loop(void) {
+ 
+     while (keep_running != 0) {
+         if (g_gameState.abTeleportRecord[0] != '\0') {
++            worldloop_mouselook_release_for_modal();
+             g_nSceneReloadPending = modalscreen_pending_scene_trans();
+         }
+         if (g_gameState.bPartyDirtyFlags != '\0' && g_nSceneReloadPending == 0) {
++            worldloop_mouselook_release_for_modal();
+             evtcond_pty_dirty_flags_process();
+             render_dirty = 1;
+         }
+@@ -140,11 +375,25 @@ short far world3d_main_loop(void) {
              redraw_menu = 0;
              redraw_caption = 0;
              render_dirty = 0;
@@ -2816,6 +3047,11 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
          if (g_bZoneEntryInProgress != 0)
              goto skip_render;
  
++        if (worldloop_mouselook_poll(&mouselook_capture_active, &mouselook_ui_x,
++                                     &mouselook_ui_y, &mouselook_last_mouse_x,
++                                     &mouselook_last_mouse_y) != 0)
++            render_dirty = 1;
++
 +        context_overlay_wanted = worldloop_context_overlay_wanted();
 +        /* Re-render on every overlay-state transition so releasing Tab restores
 +           a clean page.  Tab must use the hit-test renderer: the ordinary scene
@@ -2827,12 +3063,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          if (redraw_menu != 0) {
-@@ -154,9 +239,14 @@ short far world3d_main_loop(void) {
+@@ -154,9 +403,16 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
          }
          if (render_dirty != 0) {
 -            world_render_scene_dispatch(hotspot_active);
-+            if (context_overlay_wanted != 0)
++            if (context_overlay_wanted != 0 || mouselook_capture_active != 0)
 +                world_render_tick_objects();
 +            else
 +                world_render_scene_dispatch(hotspot_active);
@@ -2840,15 +3076,17 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
          }
 +        if (context_overlay_wanted != 0)
 +            worldloop_context_overlay_draw();
++        if (mouselook_capture_active != 0)
++            worldloop_mouselook_overlay_draw();
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,12 +258,15 @@ short far world3d_main_loop(void) {
+@@ -168,13 +424,17 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
 -        if (render_dirty != 0) {
-+        if (render_dirty != 0 || context_overlay_wanted != 0) {
++        if (render_dirty != 0 || context_overlay_wanted != 0 || mouselook_capture_active != 0) {
              screen_frame_sync_buffers_rect(0xb, 0x80);
              render_dirty = 0;
          }
@@ -2858,9 +3096,19 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
 +        mainmenu_autosave_service();
 +
          if (g_gameState.ground_pile->itemCount != '\0') {
++            worldloop_mouselook_release_for_modal();
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
-@@ -203,7 +296,15 @@ short far world3d_main_loop(void) {
+         }
+@@ -183,6 +443,7 @@ short far world3d_main_loop(void) {
+         }
+         if (!g_gameState.bCombatExitRequest) {
+             if (hotspot_active == 0 && g_nHotspotActivateRequest != 0) {
++                worldloop_mouselook_release_for_modal();
+                 hotspotevt_activate_at_player();
+                 g_nHotspotActivateRequest = 0;
+                 hotspot_active = 1;
+@@ -203,7 +464,40 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -2874,13 +3122,49 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
 +            } else {
 +                action_id = menupage_run(g_pReqMainPage, &redraw_menu);
 +            }
++            if (key_is_down(MOUSELOOK_TOGGLE_SCANCODE) == 0)
++                mouselook_toggle_held = 0;
++            if (key_is_down(MOUSELOOK_INTERACT_SCANCODE) == 0)
++                mouselook_interact_held = 0;
++            if (action_id == MOUSELOOK_TOGGLE_SCANCODE) {
++                if (mouselook_toggle_held != 0) {
++                    action_id = 0;
++                } else {
++                    mouselook_toggle_held = 1;
++                }
++            } else if (g_bMouseLookMode != 0) {
++                if (action_id == 0x1e && key_is_down(0x1e) != 0)
++                    action_id = 0x10;
++                else if (action_id == 0x20 && key_is_down(0x20) != 0)
++                    action_id = 0x12;
++                else if (action_id == MOUSELOOK_INTERACT_SCANCODE &&
++                         key_is_down(MOUSELOOK_INTERACT_SCANCODE) != 0) {
++                    if (mouselook_interact_held != 0)
++                        action_id = 0;
++                    else {
++                        mouselook_interact_held = 1;
++                        action_id = 0xc0;
++                    }
++                }
++            }
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +357,34 @@ short far world3d_main_loop(void) {
+@@ -256,6 +550,45 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
++            case MOUSELOOK_TOGGLE_SCANCODE:
++                g_bMouseLookMode = !g_bMouseLookMode;
++                if (g_bMouseLookMode == 0)
++                    worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                                mouselook_ui_y);
++                if (g_bMouseLookMode == 0)
++                    g_nMouseLookPitchOffset = 0;
++                worldloop_quicksave_notice(g_bMouseLookMode != 0 ? g_szMouseLookOn
++                                                                 : g_szMouseLookOff);
++                redraw_menu = render_dirty = redraw_caption = 1;
++                goto post_dispatch;
 +            case QUICKSAVE_SCANCODE:
 +                if (refusal_mode == 0) {
 +                    screen_cursor_show_busy();
@@ -2912,7 +3196,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +396,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +600,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -2920,7 +3204,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +408,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +612,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -2950,7 +3234,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +438,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +642,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -2958,7 +3242,27 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -325,7 +479,7 @@ short far world3d_main_loop(void) {
+@@ -308,6 +666,8 @@ short far world3d_main_loop(void) {
+                     dialog_play_record(0xe4, 1);
+                     goto post_dispatch;
+                 }
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
+                 spellfx_cast_and_dispatch();
+                 redraw_menu = 1;
+                 render_dirty = 1;
+@@ -318,18 +678,24 @@ short far world3d_main_loop(void) {
+                     dialog_play_record(0xe8, 1);
+                     goto post_dispatch;
+                 }
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
+                 map_main_loop();
+                 g_nSceneReloadPending = 1;
+                 goto post_dispatch;
+             case 0x21:
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
                  fmap_screen_run();
                  g_nSceneReloadPending = 1;
                  goto post_dispatch;
@@ -2967,7 +3271,78 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe5, 1);
                      goto post_dispatch;
-@@ -383,7 +537,12 @@ short far world3d_main_loop(void) {
+                 }
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
+                 encamp_run();
+                 redraw_caption = 1;
+                 goto post_dispatch;
+@@ -338,6 +704,8 @@ short far world3d_main_loop(void) {
+                     dialog_play_record(0xe6, 1);
+                     goto after_move;
+                 }
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
+                 mainmenu_save_bookmark();
+                 goto after_move;
+             case 0x18:
+@@ -345,6 +713,8 @@ short far world3d_main_loop(void) {
+                     dialog_play_record(0xe7, 1);
+                     goto post_dispatch;
+                 }
++                worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                            mouselook_ui_y);
+                 exit_mode = mainmenu_save_main_menu(1);
+                 if (exit_mode == 0) {
+                     g_nSceneReloadPending = 1;
+@@ -360,30 +730,57 @@ short far world3d_main_loop(void) {
+                     if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
+                         key_is_down(0x36) != 0) {
+ 
++                        worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                                    mouselook_ui_y);
+                         charscreen_info_loop(gstate_party_member_record((int)chap_sub));
+                         g_nSceneReloadPending = 1;
+                     } else {
+ 
++                        worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                                    mouselook_ui_y);
+                         cmbinv_inventory_screen_run((Actor far *)0, (int)chap_sub + 1, 0);
+                     }
+                     redraw_menu = render_dirty = redraw_caption = 1;
+                 }
+                 goto post_dispatch;
+             }
+-            case 0xc0:
+-                if (wcursor_dispatch_action() != 0) {
++            case 0xc0: {
++                int dispatched;
++                if (mouselook_capture_active != 0) {
++                    int center_x = worldloop_viewport_center_x();
++                    int center_y = worldloop_viewport_center_y();
++                    WorldHotspot *target = wcursor_find_action_at(center_x, center_y);
++                    if (target != (WorldHotspot *)0) {
++                        WorldHotspot target_copy = *target;
++                        worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                                    mouselook_ui_y);
++                        dispatched = wcursor_dispatch_hotspot_as_left_click(&target_copy);
++                    } else {
++                        dispatched = 0;
++                    }
++                } else {
++                    dispatched = wcursor_dispatch_action();
++                }
++                if (dispatched != 0) {
+                     redraw_menu = 1;
+                     goto after_move;
+                 }
+                 goto post_dispatch;
++            }
+             case 0x29:
+                 if (g_cfgKnockKnock && key_is_down(0x2a) == 0 && key_is_down(0x36) != 0 &&
+                     key_is_down(0x1d) == 0 && key_is_down(0x38) != 0) {
++                    worldloop_mouselook_release_for_modal();
+                     townscene_cheat_menu_screen();
                  }
                  redraw_menu = 1;
              after_move:
@@ -2981,6 +3356,28 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..a540d958cf78fa08c9822a8c1d7e049f
                  goto post_dispatch;
              default:
                  break;
+@@ -414,6 +811,10 @@ short far world3d_main_loop(void) {
+         dialog_play_record(0x145, 0);
+     }
+     palette_cycle_eb_toggle(0);
++    worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x, mouselook_ui_y);
++    g_pMouseLookCaptureActive = (int *)0;
++    g_pMouseLookUiX = (short *)0;
++    g_pMouseLookUiY = (short *)0;
+     menupage_end(g_pReqMainPage);
+     return exit_mode;
+ }
+diff --git a/bak/SRC/GAME/WORLD/WORLDLP.H b/bak/SRC/GAME/WORLD/WORLDLP.H
+index 6457e2cb324252a0cce9b95fa54102f6d65e84e3..bce3164ded34bd85147e80b7a2615061b79da1e4 100644
+--- a/bak/SRC/GAME/WORLD/WORLDLP.H
++++ b/bak/SRC/GAME/WORLD/WORLDLP.H
+@@ -16,5 +16,6 @@ extern void worldloop_party_move_done_clr(void);
+ extern void worldloop_step_or_final_movement(void);
+ extern void worldloop_set_flag_8b_preds(void);
+ extern void worldloop_pty_stat7_flag_cd(void);
++extern void worldloop_mouselook_release_for_modal(void);
+ 
+ #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDMOV.C b/bak/SRC/GAME/WORLD/WORLDMOV.C
 index bb3169b7c6b195af9fb2c1b396bece79e161c4f2..4068d86a08396efc88057001cafe9674f2960715 100644
 --- a/bak/SRC/GAME/WORLD/WORLDMOV.C
@@ -3496,11 +3893,332 @@ index 515bd5a45283e986a63a1acbb9f4ef2035b93ef9..dc4253311cb086e8a1e7b99f74a782a7
 +extern unsigned int font_draw_zh_glyph_small(int lead, int trail, int x, int y);
  
  #endif
+diff --git a/bak/SRC/INPUT/MOUSE.ASM b/bak/SRC/INPUT/MOUSE.ASM
+index 55e83baff79aca36297fab2e457519f512b2036a..afec72aa8b853bccc4f2398e3edfad54f2e4d898 100644
+--- a/bak/SRC/INPUT/MOUSE.ASM
++++ b/bak/SRC/INPUT/MOUSE.ASM
+@@ -16,6 +16,7 @@
+ ;;   _vga_restore_registers      0x1ca8c  restore VGA GC/SC after the handler
+ ;;   _mouse_restore_handler      0x1cae5  uninstall: INT33 reset + clear handler
+ ;;   _mouse_get_position         0x1cb01  read cursor pos (mickeys>>2) via *out
++;;   _mouse_get_motion_delta              INT33 fn 0Bh relative motion counters
+ ;;   _mouse_set_position         0x1cb2b  set cursor pos (pixels<<2)
+ ;;   _mouse_button_pressed       0x1cb56  test one button's pressed bit
+ ;;
+@@ -136,6 +137,7 @@ S180C_TEXT	segment byte public use16 'CODE'
+ 	public	_vga_restore_registers
+ 	public	_mouse_restore_handler
+ 	public	_mouse_get_position
++	public	_mouse_get_motion_delta
+ 	public	_mouse_set_position
+ 	public	_mouse_button_pressed
+ 
+@@ -566,6 +568,31 @@ gp_ret:
+ 	retf
+ _mouse_get_position	endp
+ 
++; ============================================================================
++; _mouse_get_motion_delta(int *out_dx, int *out_dy) -- consume relative motion.
++;
++;   INT 33h fn 0Bh returns signed horizontal/vertical motion counters accumulated
++;   since the previous fn-0Bh call.  DOSBox-X reports these while its host mouse
++;   capture is active; reading them does not depend on the absolute cursor edge.
++; ============================================================================
++_mouse_get_motion_delta	proc far
++	push	bp
++	mov	bp,sp
++	xor	ax,ax
++	cmp	byte ptr _g_mouse_installed,al
++	jz	gmd_ret
++	mov	ax,0bh
++	int	33h
++	mov	bx,word ptr [bp+6]
++	mov	word ptr [bx],cx
++	mov	bx,word ptr [bp+8]
++	mov	word ptr [bx],dx
++	mov	ax,1
++gmd_ret:
++	pop	bp
++	retf
++_mouse_get_motion_delta	endp
++
+ ; ============================================================================
+ ; _mouse_set_position(int x, int y) -- set the cursor position.
+ ;
+diff --git a/bak/SRC/INPUT/MOUSE.H b/bak/SRC/INPUT/MOUSE.H
+index 460c79cbc16a2627b2f4a14dd47151a9ac21057f..38dd8dfc350fa0512b6a3033d59345bea4f5aeb4 100644
+--- a/bak/SRC/INPUT/MOUSE.H
++++ b/bak/SRC/INPUT/MOUSE.H
+@@ -27,6 +27,7 @@ extern void vga_save_and_setup_gc_sc(void);
+ extern void vga_restore_registers(void);
+ extern int mouse_restore_handler(void);
+ extern unsigned int mouse_get_position(unsigned int *out_x, unsigned int *out_y);
++extern int mouse_get_motion_delta(int *out_dx, int *out_dy);
+ extern int mouse_set_position(int x, int y);
+ extern int mouse_button_pressed(int button);
+ 
 diff --git a/bak/SRC/INPUT/WCURSOR.C b/bak/SRC/INPUT/WCURSOR.C
-index 9b21b02f9f1e30a280139be222243a44059c1538..73357ec7edcbbf6df5e09769b85d5455bcb6ecc1 100644
+index 9b21b02f9f1e30a280139be222243a44059c1538..a5cad234ebe1f713b39abe4c6be1c24e2aad201f 100644
 --- a/bak/SRC/INPUT/WCURSOR.C
 +++ b/bak/SRC/INPUT/WCURSOR.C
-@@ -896,7 +896,7 @@ dispatch:
+@@ -56,21 +56,52 @@ void wcursor_free_detect_dat(void) {
+     galloc_zfree(g_pWorldHitTestTable);
+ }
+ 
+-int far wcursor_dispatch_action(void) {
+-    short cursor_x;
+-    short cursor_y;
++static int wcursor_hotspot_is_actionable(WorldHotspot *hotspot) {
++    int kind;
++
++    if (hotspot->pEntity->shapeId == g_nProximityTableCount)
++        return 1;
++    kind = (int)((unsigned)ts_get_shape(hotspot->pEntity->shapeId)->kind - 6);
++    switch (kind) {
++    case 35:
++    case 10:
++    case 4:
++    case 20:
++    case 21:
++    case 22:
++    case 13:
++    case 30:
++    case 0:
++    case 31:
++    case 12:
++    case 29:
++    case 17:
++    case 14:
++    case 33:
++    case 6:
++    case 36:
++    case 11:
++    case 19:
++    case 9:
++    case 18:
++    case 3:
++    case 28:
++    case 27:
++    case 7:
++    case 23:
++    case 24:
++    case 25:
++        return 1;
++    }
++    return 0;
++}
++
++WorldHotspot *far wcursor_find_action_at(int cursor_x, int cursor_y) {
+     int slot_index;
+-    int dispatch_idx;
+     int scan_count;
+-    int idx;
+     int cx_diff;
+     int cy_diff;
+ 
+-    cursor_x = screen_cursor_get_x();
+-    cursor_y = screen_cursor_get_y();
+-    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
+-        g_graphics_context.wVgaPage2Base;
+-    world_render_tick_objects();
+     scan_count = 0;
+     slot_index = ((g_nHitTestWriteSlot != 0) ? g_nHitTestWriteSlot : 10) - 1;
+     if (scan_count < (int)g_nHitTestEntryCount) {
+@@ -78,114 +109,140 @@ int far wcursor_dispatch_action(void) {
+             cx_diff = cursor_x - g_pWorldHitTestTable[slot_index].rect.x;
+             cy_diff = cursor_y - g_pWorldHitTestTable[slot_index].rect.y;
+             if (cx_diff >= 0 && cx_diff < g_pWorldHitTestTable[slot_index].rect.width &&
+-                cy_diff >= 0 && cy_diff < g_pWorldHitTestTable[slot_index].rect.height) {
+-                if ((&g_pWorldHitTestTable[slot_index])->pEntity->shapeId ==
+-                    g_nProximityTableCount) {
+-                    idx = ((EncounterAnimScratch *)(&g_pWorldHitTestTable[slot_index])
+-                               ->pEntity->state.animationState)
+-                              ->nEncObjStateIdx;
+-                    if ((g_pEncounterObjectState[idx].wKind_state & 0xff08) >> 8 == 4)
+-                        wcursor_loot_corpse(&g_pWorldHitTestTable[slot_index], idx);
+-                    else
+-                        wcursor_encounter_hint(&g_pWorldHitTestTable[slot_index], idx);
+-                    return 1;
+-                }
+-                switch ((int)((unsigned)ts_get_shape(
+-                                  (&g_pWorldHitTestTable[slot_index])->pEntity->shapeId)
+-                                  ->kind -
+-                              6)) {
++                cy_diff >= 0 && cy_diff < g_pWorldHitTestTable[slot_index].rect.height &&
++                wcursor_hotspot_is_actionable(&g_pWorldHitTestTable[slot_index]) != 0)
++                return &g_pWorldHitTestTable[slot_index];
++            scan_count = scan_count + 1;
++            if (slot_index != 0)
++                slot_index = slot_index - 1;
++            else
++                slot_index = 9;
++        } while (scan_count < (int)g_nHitTestEntryCount);
++    }
++    return (WorldHotspot *)0;
++}
++
++static int wcursor_dispatch_hotspot(WorldHotspot *hotspot) {
++    int idx;
++
++    if (hotspot->pEntity->shapeId == g_nProximityTableCount) {
++        idx = ((EncounterAnimScratch *)hotspot->pEntity->state.animationState)->nEncObjStateIdx;
++        if ((g_pEncounterObjectState[idx].wKind_state & 0xff08) >> 8 == 4)
++            wcursor_loot_corpse(hotspot, idx);
++        else
++            wcursor_encounter_hint(hotspot, idx);
++        return 1;
++    }
++    switch ((int)((unsigned)ts_get_shape(hotspot->pEntity->shapeId)->kind - 6)) {
+                 default:
+-                    goto loop_continue;
++                    return 0;
+                 case 35:
+-                    wcursor_zone_loot_body(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_zone_loot_body(hotspot);
+                     break;
+                 case 10:
+-                    wcursor_zone_open_container(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_zone_open_container(hotspot);
+                     break;
+                 case 4:
+-                    wcursor_click_fixedobj_full(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_fixedobj_full(hotspot);
+                     break;
+                 case 20:
+                 case 21:
+                 case 22:
+-                    wcursor_interact_container_event(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_interact_container_event(hotspot);
+                     break;
+                 case 13:
+-                    wcursor_click_blocked_path(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_blocked_path(hotspot);
+                     break;
+                 case 30:
+-                    wcursor_script_summon_actor(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_script_summon_actor(hotspot);
+                     break;
+                 case 0:
+-                    wcursor_click_inn_or_lock_npc(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_inn_or_lock_npc(hotspot);
+                     break;
+                 case 31:
+-                    wcursor_click_fixedobj_examine(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_fixedobj_examine(hotspot);
+                     break;
+                 case 12:
+-                    wcursor_click_locked_or_sealed(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_locked_or_sealed(hotspot);
+                     break;
+                 case 29:
+-                    wcursor_click_fixedobj(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_fixedobj(hotspot);
+                     break;
+                 case 17:
+-                    wcursor_object_toggle_open_close(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_object_toggle_open_close(hotspot);
+                     break;
+                 case 14:
+                 case 33:
+-                    wcursor_click_npc_or_trap(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_npc_or_trap(hotspot);
+                     break;
+                 case 6:
+-                    wcursor_click_door_or_secret(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_door_or_secret(hotspot);
+                     break;
+                 case 36:
+-                    wcursor_click_fixedobj_picklock(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_fixedobj_picklock(hotspot);
+                     break;
+                 case 11:
+-                    wcursor_open_container_at_cursor(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_open_container_at_cursor(hotspot);
+                     break;
+                 case 19:
+-                    wcursor_click_locked_stub(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_locked_stub(hotspot);
+                     break;
+                 case 9:
+-                    worldcross_hotspot_use_rope(&g_pWorldHitTestTable[slot_index]);
++                    worldcross_hotspot_use_rope(hotspot);
+                     break;
+                 case 18:
+-                    wcursor_interact_fixedobj_variant_a(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_interact_fixedobj_variant_a(hotspot);
+                     break;
+                 case 3:
+-                    wcursor_click_dig_or_use_shovel(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_dig_or_use_shovel(hotspot);
+                     break;
+                 case 28:
+-                    wcursor_click_body(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_body(hotspot);
+                     break;
+                 case 27:
+-                    wcursor_interact_fixedobj_container(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_interact_fixedobj_container(hotspot);
+                     break;
+                 case 7:
+-                    wcursor_fixedobj_examine_var_a(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_fixedobj_examine_var_a(hotspot);
+                     break;
+                 case 23:
+-                    wcursor_fixedobj_examine_var_b(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_fixedobj_examine_var_b(hotspot);
+                     break;
+                 case 24:
+-                    wcursor_click_fixedobj_open(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_click_fixedobj_open(hotspot);
+                     break;
+                 case 25:
+-                    wcursor_fixedobj_examine_var_c(&g_pWorldHitTestTable[slot_index]);
++                    wcursor_fixedobj_examine_var_c(hotspot);
+                     break;
+-                }
+-                return 1;
+-            }
+-        loop_continue:
+-            scan_count = scan_count + 1;
+-            if (slot_index != 0)
+-                slot_index = slot_index - 1;
+-            else
+-                slot_index = 9;
+-        } while (scan_count < (int)g_nHitTestEntryCount);
+     }
+-    return 0;
++    return 1;
++}
++
++int far wcursor_dispatch_hotspot_as_left_click(WorldHotspot *hotspot) {
++    unsigned short saved_drag_state;
++    int result;
++
++    saved_drag_state = g_wMenuDragState;
++    g_wMenuDragState = 1;
++    result = wcursor_dispatch_hotspot(hotspot);
++    g_wMenuDragState = saved_drag_state;
++    return result;
++}
++
++int far wcursor_dispatch_action_at(int x, int y) {
++    WorldHotspot *hotspot;
++
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    world_render_tick_objects();
++    hotspot = wcursor_find_action_at(x, y);
++    if (hotspot == (WorldHotspot *)0)
++        return 0;
++    return wcursor_dispatch_hotspot(hotspot);
++}
++
++int far wcursor_dispatch_action(void) {
++    return wcursor_dispatch_action_at(screen_cursor_get_x(), screen_cursor_get_y());
+ }
+ 
+ void far wcursor_zone_loot_body(WorldHotspot *pHotspot) {
+@@ -896,7 +953,7 @@ dispatch:
          x = pSub08->hotspot_action.bHotspot_x;
          y = pSub08->hotspot_action.bHotspot_y;
          actorspawn_destroy_and_persist(actor_record);
@@ -3509,6 +4227,20 @@ index 9b21b02f9f1e30a280139be222243a44059c1538..73357ec7edcbbf6df5e09769b85d5455
          actor_record = 0;
  #endif
          if (hotspotevt_dispatch_at_point(8, x, y, &extra) == 0)
+diff --git a/bak/SRC/INPUT/WCURSOR.H b/bak/SRC/INPUT/WCURSOR.H
+index b12416e2d076d0116d48837d98aeb3003605895c..f5c7de3bbc5c3e784064ac4007353a9c1039ca6c 100644
+--- a/bak/SRC/INPUT/WCURSOR.H
++++ b/bak/SRC/INPUT/WCURSOR.H
+@@ -11,6 +11,9 @@ extern long g_anEntityKindRenderDist[43];
+ extern void wcursor_load_detect_dat(void);
+ extern void wcursor_free_detect_dat(void);
+ extern int wcursor_dispatch_action(void);
++extern int wcursor_dispatch_action_at(int x, int y);
++extern int wcursor_dispatch_hotspot_as_left_click(WorldHotspot *hotspot);
++extern WorldHotspot *wcursor_find_action_at(int x, int y);
+ extern void wcursor_zone_loot_body(WorldHotspot *pHotspot);
+ extern void wcursor_zone_open_container(WorldHotspot *pHotspot);
+ extern void wcursor_click_fixedobj_full(WorldHotspot *pHotspot);
 diff --git a/bak/SRC/R3D/SCENE/CZONE.C b/bak/SRC/R3D/SCENE/CZONE.C
 index bd88f498569e6525137e86da98f43408f1665dcc..532fce9b095922786054bb1d962913995ac0e22a 100644
 --- a/bak/SRC/R3D/SCENE/CZONE.C
@@ -5917,10 +6649,10 @@ index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c4
      g_wTextWrapXAccum = 0;
      g_wTextWrapLinesDrawn = (count - g_wTextWrapLinesRemaining) - fl;
 diff --git a/bak/SRC/UI/UIWIDGET.C b/bak/SRC/UI/UIWIDGET.C
-index 258c6b3513f696baa7967c53d793d0938e069fb2..2cecf72ace78f28b13ef03ed665e73b0400b2f2e 100644
+index 258c6b3513f696baa7967c53d793d0938e069fb2..a651f597e2451804dba4f80d11fa7c779e68cbb2 100644
 --- a/bak/SRC/UI/UIWIDGET.C
 +++ b/bak/SRC/UI/UIWIDGET.C
-@@ -19,6 +19,72 @@ unsigned short g_nSkyHorizonRowCached = 0xffff;
+@@ -19,6 +19,99 @@ unsigned short g_nSkyHorizonRowCached = 0xffff;
  unsigned short g_bTexturedPolyEnabled = 0x0001;
  short g_nGlyphColorShift = 0;
  
@@ -5990,18 +6722,46 @@ index 258c6b3513f696baa7967c53d793d0938e069fb2..2cecf72ace78f28b13ef03ed665e73b0
 +    g_graphics_context.bClip_enabled = savedClip;
 +}
 +
++/* Small shadowed crosshair used by the optional mouse-look exploration mode. */
++void uiwidget_aim_point_draw(int x, int y, int color) {
++    unsigned char savedClip;
++    ClipRect savedClipRect;
++    unsigned char savedOutlineColor;
++
++    savedClip = g_graphics_context.bClip_enabled;
++    savedClipRect = g_graphics_context.clip;
++    savedOutlineColor = g_graphics_context.bGfx_outline_color;
++    g_graphics_context.bClip_enabled = 1;
++    g_graphics_context.clip.xmin = 0;
++    g_graphics_context.clip.ymin = 0;
++    g_graphics_context.clip.xmax = g_wScreen_width - 1;
++    g_graphics_context.clip.ymax = g_wScreen_height - 1;
++
++    g_graphics_context.bGfx_outline_color = 0;
++    draw_line(x - 3, y + 1, x + 3, y + 1);
++    draw_line(x + 1, y - 3, x + 1, y + 3);
++    g_graphics_context.bGfx_outline_color = (unsigned char)color;
++    draw_line(x - 3, y, x + 3, y);
++    draw_line(x, y - 3, x, y + 3);
++
++    g_graphics_context.bGfx_outline_color = savedOutlineColor;
++    g_graphics_context.clip = savedClipRect;
++    g_graphics_context.bClip_enabled = savedClip;
++}
++
  void uiwidget_tile_sprite_load(void) {
      g_tile_sprite = resblit_load_asset_table("pat.bmp", 0);
      return;
 diff --git a/bak/SRC/UI/UIWIDGET.H b/bak/SRC/UI/UIWIDGET.H
-index 9457024fa1207470fa27832a4983654fb003b03c..9d9815f20a27a6bfbfe868a84bdfe6b112e446d6 100644
+index 9457024fa1207470fa27832a4983654fb003b03c..b2c0c9adcbc1216d10dbc1f0eb49168c4ad77f03 100644
 --- a/bak/SRC/UI/UIWIDGET.H
 +++ b/bak/SRC/UI/UIWIDGET.H
-@@ -22,5 +22,6 @@ extern void uiwidget_compass_load(void);
+@@ -22,5 +22,7 @@ extern void uiwidget_compass_load(void);
  extern void uiwidget_compass_free(void);
  extern void uiwidget_compass_draw(void);
  extern void uiwidget_draw_beveled_button(int x, int y, int w, int h);
 +extern void uiwidget_hotspot_outline_draw(int x, int y, int w, int h, int color);
++extern void uiwidget_aim_point_draw(int x, int y, int color);
  
  #endif
 diff --git a/bak/SRC/UI/WIDGET.C b/bak/SRC/UI/WIDGET.C
