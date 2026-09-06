@@ -905,8 +905,8 @@ BAK_TOOLCHAIN=/home/pmanyeh/bak-toolchain /home/pmanyeh/.local/bin/uv run python
 
 - **行高重疊修正**：進入閱讀器時啟用 `g_bMixedZhMode = 1`（離開時還原），使 `textwrap_draw_aligned()` 的 `line_height` 由預設英文字型高 9 修正為中文字型高 16；搭配 `line_spacing = 2`，行距步進為 18px，徹底消除中文字縱向壓字重疊。時間／人物／地點標頭亦修正為 18px 垂直間隔；無說話者時顯示「旁白」。
 - **長文本分頁機制**：以 `textwrap_compute_lines()` 計算實際行數，按每頁容量 4 行及決定性平衡公式計算 `page_starts`；右上角在多頁時顯示 `頁 %d/%d`；支援以 Left/Right、PageUp/PageDown、Space 或 Enter 前後翻頁。
-- **內容頁直接切換紀錄**：內容頁支援以 Up/Down 操作直接切換上一則／下一則紀錄（`msgview_step`），無須先按 Esc 退回清單。
-- 重編產物：`KRONDOR.EXE` 491712 bytes，SHA-256 `1f59d2136346bbdb311ff902c6e98095a5d2227e885bad93e6dbd03c5cbe2a89`；已部署至 `dist/test_v100_zh/krondor.exe`，備份為 `scratchpad/KRONDOR_msglog_phase4_v2.EXE`。
+- **列表欄位間隔修正**：列表頁時間字串（含指針 18 字元，8×16 寬度共 144px，由 x=20 延伸至 x=164）原本與位於 x=155 的說話者／地點重疊 9px；現將說話者／地點起始 X 座標調整至 x=172（間隔 8px），徹底解決欄位壓字重疊。
+- 重編產物：`KRONDOR.EXE` 491744 bytes，SHA-256 `8c2ad7cc64bd83741ffe02651138d837a10bb847f654cf549f923a5ed6f3c3f5`；已部署至 `dist/test_v100_zh/krondor.exe`，備份為 `scratchpad/KRONDOR_msglog_phase4_v3.EXE`。
 
 ## 第 2 階段補充證據（第 3 階段開始前的基準）
 
