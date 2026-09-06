@@ -60,12 +60,23 @@
 
 ## 目前測試產物（2026-09-06）
 
-- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`；無邊界相對輸入：`93381dd`；對話釋放捕捉：`673046c`；全世界事件邊界稽核：`32570de`；連續移動捕捉修正：`7f1a7fe`；沉浸式全畫面：`2b39f4b`；全畫面背景與焦距修正：`25e6edb`；安全 viewport 2× 合成：`45ab415`；失敗的 288×180 實驗 `33e2e3a` 已由 `90217cc` revert；失敗的雙段 pitch 實驗 `72de630` 已由 `be37a58` revert。
+- 引擎提交：`51536c6`；靈敏度修正：`0349685`；有限垂直視角與細部輸入：`c9f33bf`；有效相機 pitch 修正：`24e47b9`；上下方向修正：`a9ef46a`；E 互動修正：`61cc25d`；相容座標差輸入：`146f365`；低靈敏度：`479604b`／`7dce83c`；viewport 捕捉：`7e8c122`；邊界重複位移抑制：`d4f5156`；無邊界相對輸入：`93381dd`；對話釋放捕捉：`673046c`；全世界事件邊界稽核：`32570de`；連續移動捕捉修正：`7f1a7fe`；沉浸式全畫面：`2b39f4b`；全畫面背景與焦距修正：`25e6edb`；安全 viewport 2× 合成：`45ab415`；失敗的 288×180 實驗 `33e2e3a` 已由 `90217cc` revert；失敗的雙段 pitch 實驗 `72de630` 已由 `be37a58` revert；F2 提示字串編碼修正：`f090662`（WSL `4f3b39a`）。
 - 建立前 checkpoint：主專案／引擎 tag `backup/pre-fps-fullscreen-20260905`，分別指向 `0ef7f9a`／`7f1a7fe`。
-- 現行引擎：`5c3ed49`（移除所有全畫面渲染路徑，回復經典景窗）；全畫面實驗封存 tag：`backup/fps-fullscreen-experiments-final-20260906`。
-- `dist/test_v100_zh/krondor.exe`：474896 bytes；SHA-256 `b4052d56e0ddc7bea2b9b5f89dcba1a2dc6ccedfad0f3aaf64c968a664aabc95`。
-- 正式 `dist/release_v100_zh.zip`：33840109 bytes；SHA-256 `b3374a3791c320e8a0e45ed9e93c86aaf7e81297b94378ce231b0c901c72c439`；已更新三份玩家說明並確認 ZIP 不含 `KRONDOR.EXE`。
-- `dist/test_v100_zh/ZHSTAT.DAT`：996 glyph／21922 bytes；SHA-256 `4d2504fc5fd08cbf996ccc53dff79bb6d59a085da0f899574593a91ed91f65c0`。
+- 現行引擎：`f090662`（含經典景窗回復及 F2 提示編碼修正）；全畫面實驗封存 tag：`backup/fps-fullscreen-experiments-final-20260906`。
+- `dist/test_v100_zh/krondor.exe`：491744 bytes；SHA-256 `f05cd8165a41ac0f088dca0f75feabc07cca74841f06be5c6f82faffed938326`。
+- `dist/test_v100_zh/ZHSTAT.DAT`：997 glyph／21944 bytes；SHA-256 `1c307d505936c9123d8f283c9f49a44233e1d8c2f5058e02af9e4875eb7a362b`。
 - Borland C++ 3.1／Turbo Link 5.1 編譯成功；`VMCODE.OVL`、`SX.OVL` byte-identical。
-- Python 測試：124 passed、1 skipped。
-- 正式 bspatch 與 Release ZIP 均已建立；經典景窗版本已完成乾淨安裝、啟動及解除安裝驗證。
+- Python 測試：178 passed、1 skipped。
+- 備份檔案：`scratchpad/KRONDOR_msglog_phase4_v4.EXE`。
+
+## F2 切換提示文字缺字修正（2026-09-06）
+
+- **現象**：使用者在 3D 探索按 `F2` 切換滑鼠視角時，底部提示文字大量缺字（大部分字元顯示為空白）。
+- **根因分析**：
+  1. 檢驗小字庫 `ZHSTAT.DAT`（997 glyphs），確認「滑(2434)、鼠(1003)、視(1931)、角(2155)、模(231)、式(2475)、：(1178)、開(332)、關(876)」9 個字元全部存在，排除字庫缺字。
+  2. 檢查 `WORLDLP.C`，發現宣告之 `g_szMouseLookOn` 與 `g_szMouseLookOff` 的十六進位 byte escape 存在嚴重異常（`\x89\x82\x83\xeb...`），其中的 `\xeb` 與 `\xe7` 超過 `0xDF`（超出合法 trail byte 範圍），小字型渲染常式 `font_draw_zh_glyph_small()` 直接放棄並傳回 10px 空白；其餘位元組解出的 glyph ID 亦與字形不符且不在字庫中，導致全數字元均繪製成空格。
+- **修正**：
+  - `g_szMouseLookOn`（滑鼠視角模式：開）更正為：`\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x82\x2c`
+  - `g_szMouseLookOff`（滑鼠視角模式：關）更正為：`\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x85\x6c`
+  - 在 `tests/unit/test_chinese_font.py` 與 `tests/unit/test_mouselook_mode.py` 增設對照測試，防止 byte literals 再次漂移。
+- **實機驗證**：使用者已於 DOSBox 實機確認修復，按 F2 能完整正常顯示「滑鼠視角模式：開」與「滑鼠視角模式：關」。
