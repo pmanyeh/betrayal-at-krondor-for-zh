@@ -901,6 +901,13 @@ BAK_TOOLCHAIN=/home/pmanyeh/bak-toolchain /home/pmanyeh/.local/bin/uv run python
 - 建置 log：`~/krondor-build-msglog/msgview-phase4-build.log`。
 - 尚未以實際 DOSBox-X 畫面驗證滑鼠、Esc、中文排版、長文翻頁及反覆開關 30 次；目前環境沒有可互動 debugger 工具，因此不能把 Phase 4 標為實機驗收完成。
 
+### 4.4 實機排版與翻頁改進 (2026-09-06)
+
+- **行高重疊修正**：進入閱讀器時啟用 `g_bMixedZhMode = 1`（離開時還原），使 `textwrap_draw_aligned()` 的 `line_height` 由預設英文字型高 9 修正為中文字型高 16；搭配 `line_spacing = 2`，行距步進為 18px，徹底消除中文字縱向壓字重疊。時間／人物／地點標頭亦修正為 18px 垂直間隔；無說話者時顯示「旁白」。
+- **長文本分頁機制**：以 `textwrap_compute_lines()` 計算實際行數，按每頁容量 4 行及決定性平衡公式計算 `page_starts`；右上角在多頁時顯示 `頁 %d/%d`；支援以 Left/Right、PageUp/PageDown、Space 或 Enter 前後翻頁。
+- **內容頁直接切換紀錄**：內容頁支援以 Up/Down 操作直接切換上一則／下一則紀錄（`msgview_step`），無須先按 Esc 退回清單。
+- 重編產物：`KRONDOR.EXE` 491712 bytes，SHA-256 `1f59d2136346bbdb311ff902c6e98095a5d2227e885bad93e6dbd03c5cbe2a89`；已部署至 `dist/test_v100_zh/krondor.exe`，備份為 `scratchpad/KRONDOR_msglog_phase4_v2.EXE`。
+
 ## 第 2 階段補充證據（第 3 階段開始前的基準）
 
 以下保留第 2 階段完成時的產物與待辦，供比較第 3 階段新增量。
