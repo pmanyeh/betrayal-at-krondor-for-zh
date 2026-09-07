@@ -8677,20 +8677,22 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..2c7b55740dcbe62a9a969d55078425aa
  }
 diff --git a/bak/SRC/SCREENS/MSGVIEW.C b/bak/SRC/SCREENS/MSGVIEW.C
 new file mode 100644
-index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3aa2cb268
+index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47594b862f
 --- /dev/null
 +++ b/bak/SRC/SCREENS/MSGVIEW.C
-@@ -0,0 +1,283 @@
+@@ -0,0 +1,346 @@
 +#include <stdio.h>
 +#include <string.h>
 +
 +#include "SRC/GEN/GFXCTX.H"
 +#include "SRC/GAME/MAINDATA.H"
++#include "SRC/DIALOG/DIALOG.H"
 +#include "SRC/DIALOG/MSGLOG.H"
 +#include "SRC/GFX/FONT/FONT.H"
 +#include "SRC/GFX/SCREEN/SCREEN.H"
 +#include "SRC/GFX/RASTER/PRESENT.H"
 +#include "SRC/INPUT/KEYBOARD.H"
++#include "SRC/INPUT/MOUSE.H"
 +#include "SRC/UI/UIWIDGET.H"
 +#include "SRC/UI/TEXTWRAP.H"
 +#include "SRC/SCREENS/BOOKVIEW.H"
@@ -8708,6 +8710,32 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +static char g_msgviewHelpList[] = "Enter:\x83\x5d\x81\x6f  Esc:\x84\x26\x82\x2c  Up/Down:\x86\x3e\x8a\x30";
 +static char g_msgviewHelpDetailPage[] = "Esc:\x81\x47\x81\x4b  Up/Down:\x86\x46\x87\x77  \x91\x7e\x92\x20:\x88\x41\x89\x7d";
 +static char g_msgviewHelpDetailSingle[] = "Esc:\x81\x47\x81\x4b  Up/Down:\x86\x46\x87\x77\x8e\x44\x94\x2e";
++
++#define MSGVIEW_MOUSE_LEFT 0x100
++#define MSGVIEW_MOUSE_RIGHT 0x101
++
++static unsigned int msgview_wait_input(short *mouse_x, short *mouse_y) {
++    unsigned int key;
++
++    for (;;) {
++        screen_cur_refr_during_long_op();
++        key = kbhit_read() >> 8;
++        if (key != 0)
++            return key;
++        if (g_mouse_installed != 0) {
++            if (mouse_button_pressed(0) != 0) {
++                screen_cursor_get_position(mouse_x, mouse_y);
++                dialog_input_wait_release(0, 0);
++                return MSGVIEW_MOUSE_LEFT;
++            }
++            if (mouse_button_pressed(1) != 0) {
++                screen_cursor_get_position(mouse_x, mouse_y);
++                dialog_input_wait_release(0, 0);
++                return MSGVIEW_MOUSE_RIGHT;
++            }
++        }
++    }
++}
 +
 +static int msgview_read(long offset, MsgLogEvent far *ev, unsigned char far **speaker,
 +                        unsigned char far **location, unsigned char far **body) {
@@ -8826,7 +8854,8 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +            textwrap_draw_aligned((long)location, 172, 40 + row * 40, 128, 16, 0, 0, 0);
 +        else
 +            font_draw_text_ds(g_msgviewNarrator, 172, 40 + row * 40);
-+        textwrap_draw_aligned((long)body, 20, 58 + row * 40, 280, 16, 0, 0, 0);
++        /* Indent previews by two 16px Chinese glyph cells. */
++        textwrap_draw_aligned((long)body, 52, 58 + row * 40, 248, 16, 0, 0, 0);
 +        if (msgview_step(offset, 0, &offset) != MSGLOG_OK)
 +            break;
 +    }
@@ -8886,6 +8915,8 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +    long selected;
 +    long next;
 +    unsigned int key;
++    short mouse_x;
++    short mouse_y;
 +    int detail;
 +    int cur_page;
 +    int total_pages;
@@ -8898,6 +8929,9 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +    savedSmall = g_bSmallZhMode;
 +    g_bMixedZhMode = 1;
 +    g_bSmallZhMode = 0;
++    dialog_input_wait_release(0, 1);
++    screen_cursor_set_position(160, 100);
++    screen_cursor_set_shape(-1);
 +
 +    detail = 0;
 +    cur_page = 0;
@@ -8907,8 +8941,9 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +        msgview_frame(0, 0);
 +        font_draw_text_ds(g_msgviewEmpty, 20, 45);
 +        screen_frame_present();
-+        while ((kbhit_read() >> 8) != 1) {
-+        }
++        do {
++            key = msgview_wait_input(&mouse_x, &mouse_y);
++        } while (key != 1 && key != MSGVIEW_MOUSE_LEFT && key != MSGVIEW_MOUSE_RIGHT);
 +        g_bMixedZhMode = savedMixed;
 +        g_bSmallZhMode = savedSmall;
 +        msglog_leave_viewer();
@@ -8921,15 +8956,43 @@ index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3
 +            msgview_draw_detail(selected, cur_page, &total_pages);
 +        else
 +            msgview_draw_list(selected);
-+        do {
-+            key = kbhit_read() >> 8;
-+        } while (key == 0);
-+        if (key == 1) { /* Esc */
++        key = msgview_wait_input(&mouse_x, &mouse_y);
++        if (key == 1 || key == MSGVIEW_MOUSE_RIGHT) { /* Esc or right click */
 +            if (detail != 0) {
 +                detail = 0;
 +                cur_page = 0;
 +            } else {
 +                running = 0;
++            }
++        } else if (key == MSGVIEW_MOUSE_LEFT) {
++            if (detail == 0) {
++                if (mouse_y >= 36 && mouse_y < 156) {
++                    int row;
++                    long clicked;
++
++                    row = (mouse_y - 36) / 40;
++                    clicked = selected;
++                    while (row > 0) {
++                        if (msgview_step(clicked, 0, &clicked) != MSGLOG_OK)
++                            break;
++                        row--;
++                    }
++                    if (row == 0) {
++                        selected = clicked;
++                        detail = 1;
++                        cur_page = 0;
++                    }
++                } else if (mouse_y >= 164 && mouse_y < 184) {
++                    running = 0;
++                }
++            } else if (mouse_y >= 164 && mouse_y < 184) {
++                detail = 0;
++                cur_page = 0;
++            } else if (mouse_x < 160) {
++                if (cur_page > 0)
++                    cur_page--;
++            } else if (cur_page + 1 < total_pages) {
++                cur_page++;
 +            }
 +        } else if (key == 0x1c) { /* Enter */
 +            if (detail == 0) {
