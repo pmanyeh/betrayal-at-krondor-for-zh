@@ -19,6 +19,8 @@ def test_player_guide_templates_cover_requested_topics() -> None:
 
     assert "F5" in guides["中文按鍵說明.txt"]
     assert "F9" in guides["中文按鍵說明.txt"]
+    assert "L                   直接開啟訊息紀錄" in guides["中文按鍵說明.txt"]
+    assert "同一人物被分頁顯示的連續文字會合為一筆" in guides["新增功能說明.txt"]
     assert "官方 v1.02 非光碟修補回植" in guides["新增功能說明.txt"]
     assert "快速存檔／讀檔" in guides["新增功能說明.txt"]
     assert "33 個有名稱的地點" in guides["中文按鍵說明.txt"]

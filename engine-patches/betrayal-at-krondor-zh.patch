@@ -5582,7 +5582,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d31941270 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5c510ab31 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -12,10 +12,13 @@
@@ -5599,7 +5599,15 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
  #include "SRC/DIALOG/EVTCOND.H"
  #include "SRC/GAME/STATE/GSTATE.H"
  #include "SRC/CHAR/STAT.H"
-@@ -40,6 +43,215 @@
+@@ -31,6 +34,7 @@
+ #include "SRC/SCREENS/MAINMENU.H"
+ #include "SRC/SCREENS/ENCAMP.H"
+ #include "SRC/SCREENS/FMAP.H"
++#include "SRC/SCREENS/MSGVIEW.H"
+ #include "SRC/GAME/WORLD/WORLDMOV.H"
+ #include "SRC/GAME/ENC/HOTSPOT.H"
+ #include "SRC/INPUT/WCURSOR.H"
+@@ -40,6 +44,216 @@
  MenuPage *g_pReqMainPage = {0};
  short g_nSceneReloadPending = 0;
  short g_nHotspotActivateRequest = 0;
@@ -5620,6 +5628,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
 +#define MOUSELOOK_PITCH_LIMIT 0x800
 +#define QUICKSAVE_SCANCODE 0x3f        /* F5 */
 +#define QUICKLOAD_SCANCODE 0x43        /* F9 */
++#define MESSAGE_LOG_SCANCODE 0x26      /* L */
 +#define QUICKSAVE_NOTICE_TICKS 0x78    /* two seconds */
 +
 +static char g_szQuickSaveComplete[] =
@@ -5815,7 +5824,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
  
  void far worldloop_req_main_screen_load(void) {
      g_pReqMainPage = menupage_load("req_main.dat");
-@@ -73,6 +285,15 @@ short far world3d_main_loop(void) {
+@@ -73,6 +287,15 @@ short far world3d_main_loop(void) {
         hotspot_active to DI. */
      register int render_dirty;   /* party-dirty / render-scene flag */
      register int hotspot_active; /* hotspot / descent / entered flag */
@@ -5831,7 +5840,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
  
      exit_mode = 0;
      keep_running = 1;
-@@ -82,6 +303,18 @@ short far world3d_main_loop(void) {
+@@ -82,6 +305,18 @@ short far world3d_main_loop(void) {
      redraw_caption = 0;
      pending_events = 0;
      key_repeat_armed = 0;
@@ -5850,7 +5859,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
      focused_entry = (MenuEntry *)0;
      g_nHotspotActivateRequest = 0;
      g_bZoneEntryInProgress = 0;
-@@ -92,9 +325,11 @@ short far world3d_main_loop(void) {
+@@ -92,9 +327,11 @@ short far world3d_main_loop(void) {
  
      while (keep_running != 0) {
          if (g_gameState.abTeleportRecord[0] != '\0') {
@@ -5862,7 +5871,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              evtcond_pty_dirty_flags_process();
              render_dirty = 1;
          }
-@@ -140,11 +375,25 @@ short far world3d_main_loop(void) {
+@@ -140,11 +377,25 @@ short far world3d_main_loop(void) {
              redraw_menu = 0;
              redraw_caption = 0;
              render_dirty = 0;
@@ -5888,7 +5897,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          if (redraw_menu != 0) {
-@@ -154,9 +403,16 @@ short far world3d_main_loop(void) {
+@@ -154,9 +405,16 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
          }
          if (render_dirty != 0) {
@@ -5906,7 +5915,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,13 +424,17 @@ short far world3d_main_loop(void) {
+@@ -168,13 +426,17 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
@@ -5925,7 +5934,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
          }
-@@ -183,6 +443,7 @@ short far world3d_main_loop(void) {
+@@ -183,6 +445,7 @@ short far world3d_main_loop(void) {
          }
          if (!g_gameState.bCombatExitRequest) {
              if (hotspot_active == 0 && g_nHotspotActivateRequest != 0) {
@@ -5933,7 +5942,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  hotspotevt_activate_at_player();
                  g_nHotspotActivateRequest = 0;
                  hotspot_active = 1;
-@@ -203,7 +464,40 @@ short far world3d_main_loop(void) {
+@@ -203,7 +466,40 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -5975,10 +5984,19 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +550,45 @@ short far world3d_main_loop(void) {
+@@ -256,6 +552,54 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
++            case MESSAGE_LOG_SCANCODE:
++                if (refusal_mode == 0) {
++                    worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
++                                                mouselook_ui_y);
++                    msgview_run();
++                    g_nSceneReloadPending = 1;
++                    redraw_menu = render_dirty = redraw_caption = 1;
++                }
++                goto post_dispatch;
 +            case MOUSELOOK_TOGGLE_SCANCODE:
 +                g_bMouseLookMode = !g_bMouseLookMode;
 +                if (g_bMouseLookMode == 0)
@@ -6021,7 +6039,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +600,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +611,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6029,7 +6047,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +612,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +623,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6059,7 +6077,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +642,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +653,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -6067,7 +6085,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -308,6 +666,8 @@ short far world3d_main_loop(void) {
+@@ -308,6 +677,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe4, 1);
                      goto post_dispatch;
                  }
@@ -6076,7 +6094,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  spellfx_cast_and_dispatch();
                  redraw_menu = 1;
                  render_dirty = 1;
-@@ -318,18 +678,24 @@ short far world3d_main_loop(void) {
+@@ -318,18 +689,24 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe8, 1);
                      goto post_dispatch;
                  }
@@ -6102,7 +6120,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  encamp_run();
                  redraw_caption = 1;
                  goto post_dispatch;
-@@ -338,6 +704,8 @@ short far world3d_main_loop(void) {
+@@ -338,6 +715,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe6, 1);
                      goto after_move;
                  }
@@ -6111,7 +6129,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  mainmenu_save_bookmark();
                  goto after_move;
              case 0x18:
-@@ -345,6 +713,8 @@ short far world3d_main_loop(void) {
+@@ -345,6 +724,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe7, 1);
                      goto post_dispatch;
                  }
@@ -6120,7 +6138,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  exit_mode = mainmenu_save_main_menu(1);
                  if (exit_mode == 0) {
                      g_nSceneReloadPending = 1;
-@@ -360,30 +730,57 @@ short far world3d_main_loop(void) {
+@@ -360,30 +741,57 @@ short far world3d_main_loop(void) {
                      if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
                          key_is_down(0x36) != 0) {
  
@@ -6181,7 +6199,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d
                  goto post_dispatch;
              default:
                  break;
-@@ -414,6 +811,10 @@ short far world3d_main_loop(void) {
+@@ -414,6 +822,10 @@ short far world3d_main_loop(void) {
          dialog_play_record(0x145, 0);
      }
      palette_cycle_eb_toggle(0);
@@ -8677,10 +8695,10 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..2c7b55740dcbe62a9a969d55078425aa
  }
 diff --git a/bak/SRC/SCREENS/MSGVIEW.C b/bak/SRC/SCREENS/MSGVIEW.C
 new file mode 100644
-index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47594b862f
+index 0000000000000000000000000000000000000000..2d08ab436b428b3a9a11321149c3d3d50ad75c49
 --- /dev/null
 +++ b/bak/SRC/SCREENS/MSGVIEW.C
-@@ -0,0 +1,346 @@
+@@ -0,0 +1,417 @@
 +#include <stdio.h>
 +#include <string.h>
 +
@@ -8713,6 +8731,11 @@ index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47
 +
 +#define MSGVIEW_MOUSE_LEFT 0x100
 +#define MSGVIEW_MOUSE_RIGHT 0x101
++#define MSGVIEW_SCRATCH_SIZE 0x3c8c
++#define MSGVIEW_SPEAKER_OFFSET 0
++#define MSGVIEW_LOCATION_OFFSET 65
++#define MSGVIEW_BODY_OFFSET 130
++#define MSGVIEW_BODY_CAP (MSGVIEW_SCRATCH_SIZE - MSGVIEW_BODY_OFFSET - 1)
 +
 +static unsigned int msgview_wait_input(short *mouse_x, short *mouse_y) {
 +    unsigned int key;
@@ -8737,13 +8760,56 @@ index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47
 +    }
 +}
 +
++static int msgview_same_speech(const MsgLogEvent far *first, const MsgLogEvent far *next) {
++    return first->kind == MSGLOG_KIND_TEXT && next->kind == MSGLOG_KIND_TEXT &&
++           first->conversation != 0 && first->conversation == next->conversation &&
++           first->speaker_id == next->speaker_id && first->source_key == next->source_key;
++}
++
++static long msgview_group_start(long offset) {
++    MsgLogEvent cur;
++    MsgLogEvent prev;
++    long prev_offset;
++
++    if (msglog_read_event(offset, &cur, NULL, 0, NULL, 0, NULL, 0) != MSGLOG_OK)
++        return offset;
++    while (msglog_prev_offset(offset, &prev_offset) == MSGLOG_OK) {
++        if (msglog_read_event(prev_offset, &prev, NULL, 0, NULL, 0, NULL, 0) != MSGLOG_OK ||
++            !msgview_same_speech(&prev, &cur))
++            break;
++        offset = prev_offset;
++        cur = prev;
++    }
++    return offset;
++}
++
 +static int msgview_read(long offset, MsgLogEvent far *ev, unsigned char far **speaker,
 +                        unsigned char far **location, unsigned char far **body) {
-+    *speaker = g_pMainScratchBuf;
-+    *location = g_pMainScratchBuf + 65;
-+    *body = g_pMainScratchBuf + 130;
-+    if (msglog_read_event(offset, ev, *speaker, 64, *location, 64, *body, 512) != MSGLOG_OK)
++    MsgLogEvent next_ev;
++    long next_offset;
++    unsigned int body_len;
++
++    offset = msgview_group_start(offset);
++    *speaker = g_pMainScratchBuf + MSGVIEW_SPEAKER_OFFSET;
++    *location = g_pMainScratchBuf + MSGVIEW_LOCATION_OFFSET;
++    *body = g_pMainScratchBuf + MSGVIEW_BODY_OFFSET;
++    if (msglog_read_event(offset, ev, *speaker, 64, *location, 64, *body,
++                          MSGVIEW_BODY_CAP) != MSGLOG_OK)
 +        return 0;
++    body_len = ev->body_len;
++    next_offset = offset;
++    while (msglog_next_offset(next_offset, &next_offset) == MSGLOG_OK) {
++        if (msglog_read_event(next_offset, &next_ev, NULL, 0, NULL, 0, NULL, 0) != MSGLOG_OK ||
++            !msgview_same_speech(ev, &next_ev))
++            break;
++        if ((unsigned long)body_len + next_ev.body_len > MSGVIEW_BODY_CAP)
++            break;
++        if (msglog_read_event(next_offset, &next_ev, NULL, 0, NULL, 0,
++                              *body + body_len, MSGVIEW_BODY_CAP - body_len) != MSGLOG_OK)
++            return 0;
++        body_len += next_ev.body_len;
++    }
++    ev->body_len = body_len;
 +    (*speaker)[ev->speaker_len] = 0;
 +    (*location)[ev->location_len] = 0;
 +    (*body)[ev->body_len] = 0;
@@ -8779,14 +8845,36 @@ index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47
 +}
 +
 +static int msgview_step(long from, int newer, long far *out) {
++    MsgLogEvent group;
++    MsgLogEvent candidate;
 +    long next;
 +    int rc;
++
++    from = msgview_group_start(from);
++    if (newer != 0 &&
++        msglog_read_event(from, &group, NULL, 0, NULL, 0, NULL, 0) == MSGLOG_OK) {
++        for (;;) {
++            rc = msglog_next_offset(from, &next);
++            if (rc != MSGLOG_OK)
++                return rc;
++            if (msglog_read_event(next, &candidate, NULL, 0, NULL, 0, NULL, 0) != MSGLOG_OK)
++                return MSGLOG_E_IO;
++            if (!msgview_same_speech(&group, &candidate))
++                break;
++            from = next;
++        }
++        from = next;
++        if (msgview_visible(from) != 0) {
++            *out = msgview_group_start(from);
++            return MSGLOG_OK;
++        }
++    }
 +    for (;;) {
 +        rc = newer != 0 ? msglog_next_offset(from, &next) : msglog_prev_offset(from, &next);
 +        if (rc != MSGLOG_OK)
 +            return rc;
 +        if (msgview_visible(next) != 0) {
-+            *out = next;
++            *out = msgview_group_start(next);
 +            return MSGLOG_OK;
 +        }
 +        from = next;
@@ -8951,6 +9039,7 @@ index 0000000000000000000000000000000000000000..e9939b613bdecf347668ec273dd32a47
 +    }
 +    while (msgview_visible(selected) == 0 && msglog_prev_offset(selected, &selected) == MSGLOG_OK) {
 +    }
++    selected = msgview_group_start(selected);
 +    while (running != 0) {
 +        if (detail != 0)
 +            msgview_draw_detail(selected, cur_page, &total_pages);

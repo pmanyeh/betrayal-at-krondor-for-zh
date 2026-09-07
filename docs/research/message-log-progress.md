@@ -958,3 +958,12 @@ v1.02 尚未完成：一般 `bak build --version 102` 因工具把目前 diverge
 - DOSBox-X 實機確認：游標可在閱讀器內移動並重繪；點擊第二列會開啟該筆正文；右鍵返回列表；純瀏覽不改寫 MLG。最終截圖位於忽略追蹤的 `scratchpad/msglog-acceptance/mouse-r3-*.png`。
 - 更新後 v1.00 `KRONDOR.EXE` 492528 bytes，SHA-256 `214f3a8ad4bf1f68af82bc01f594e80132f548a750216745521c30a1e088062e`；v1.02 `KRONDOR102.EXE` 493616 bytes，SHA-256 `6051b238b48a0d7836d994c4fd972f6aaf8b939a980c218e40ea46d8b574efb4`。兩版均重新編譯連結成功，v1.00 的兩個 OVL 仍 byte-identical。自動測試增至 **188 passed**。
 - 發布 bspatch 71907 bytes、SHA-256 `aeb8e1a72e2a13ce6c3d01822cc374ba3c73629700f63918b34024074faeee9d`；發布 ZIP 33853218 bytes、SHA-256 `e64473b85368a4cbbabfe11a6d04abb5ca062e0291262223dc18e35c13bf8ef0`，284 entries、禁帶檔案 0。引擎提交 `91f939947574c443e82d67fa180ad58a451abafd`；合併補丁乾淨套用 tree `1225a864c2539e2f16c2f3de97b0cca332797b6f`。
+
+### 直接熱鍵與連續發言合併（2026-09-07）
+
+- 正常 3D 探索新增 `L` 熱鍵，可直接呼叫訊息紀錄。進入前會解除滑鼠視角捕捉；離開後要求完整重繪場景、選單及狀態文字。拒絕操作的劇情狀態仍沿用探索主迴圈既有閘門。
+- 閱讀器將底層相鄰且 `kind=TEXT`、`conversation`、`speaker_id`、`source_key` 全部相同的事件視為同一筆發言。這涵蓋同一 DDX 文本因顯示頁面而分成多個 capture span 的案例；換人、換來源、玩家選項、場景文字或對話邊界都會停止合併。
+- 合併只改閱讀呈現，不改凍結的 MLG v1 格式，也不重寫歷史。因此舊有 `.MLG` 會直接套用；儲存層仍保留各個已提交、可 CRC 驗證的片段。串接內容借用既有 15500-byte 主 scratch buffer，容量足以容納原始 DDX 顯示文本。
+- `L` 已在 DOSBox-X 的實際 3D 探索畫面驗證，可直接進入列表；來源測試亦確認現有 `SAVE01.MLG` 的洛克利爾長文由兩個相鄰 `TEXT` 事件構成，兩者的 `conversation=2`、`speaker_id=1`、`source_key=2003` 完全相同，符合合併條件。仍請以使用者截圖的同一存檔複驗最後排版。
+- Borland C++ 3.1 的 v1.00／v1.02 均編譯連結成功；最終 v1.00 `KRONDOR.EXE` 493248 bytes、SHA-256 `43a595a69a7560d20666c938177c3da683bbf63073421ff795daefb4673e24fd`；v1.02 `KRONDOR102.EXE` 494336 bytes、SHA-256 `1545bb0b8b450a8028a31132aa421d73c3c5d85551daecb1ef8cf48f70dc8a85`。兩個 v1.00 OVL 仍為 byte-identical；完整單元測試 **190 passed**。
+- 發布 bspatch 72238 bytes、SHA-256 `3f2aa43e065a3588c17aa6e346e96c05dbe0ce7b2dc6e5bd51d3d42bb9821aa1`；發布 ZIP 33853624 bytes、SHA-256 `dd452445d9b2c240f34eb019acafe45a0000c64dce6ad3e7b09addbe62fa0a6f`，284 entries、禁帶檔案 0。引擎提交 `4af47e728c14a77b999c6d2834758c96244bea9e`；合併補丁由固定基準乾淨套用後 tree 為 `fc70aa41b0563cbbab87c847636086429948e4dd`。

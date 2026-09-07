@@ -163,3 +163,4 @@ b245787fcf83842167c304e95c016bc653ea50f9 fix(msgview): fix text line overlap, ad
 f090662ef5482129228aac7fdc79eb7fecad6f90 fix(world): correct BaK Chinese encoding bytes for mouse-look toggle notices
 d31db1b1a732b25c4aa3c29e6b580cd16f84efd5 fix(msglog): finish recovery and acceptance coverage
 91f939947574c443e82d67fa180ad58a451abafd feat(msgview): add mouse controls and indent previews
+4af47e728c14a77b999c6d2834758c96244bea9e feat(msgview): add hotkey and group paged speeches
