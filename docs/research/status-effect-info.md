@@ -39,11 +39,13 @@ Caption 會依當前有效圖示總寬度在 x=160 置中，因此不能使用�
 ## 驗證
 
 - Python 回歸測試：`tests/unit/test_status_effect_info.py`。
-- Borland C++ 3.1／Turbo Link 5.1 完整 clean build 成功。
+- Borland C++ 3.1／Turbo Link 5.1 完整 clean build 成功；最終顏色參數順序修正後
+  另完成增量重編與連結。
 - `VMCODE.OVL`、`SX.OVL` 與基準版 byte-identical。
-- 待 DOSBox-X 實機確認個別圖示命中、中文字形、倒數值、非阻塞操作與自動清除。
+- 2026-09-08 經 DOSBox-X 實機驗收通過：圖示點擊、效果與倒數文字、黃色主字／
+  黑色陰影、非阻塞操作、三秒自動清除及換卡均正常。
 
-## 實機驗收清單
+## 實機驗收結果（已通過）
 
 1. 讓兩種以上效果同時生效，分別點每個圖示，確認名稱不會錯位。
 2. 核對顯示時間與剛施法的理論持續時間；移動或休息後再次查看，確認時間下降。

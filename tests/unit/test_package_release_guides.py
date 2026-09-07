@@ -20,6 +20,8 @@ def test_player_guide_templates_cover_requested_topics() -> None:
 
     assert "F5" in guides["中文按鍵說明.txt"]
     assert "F9" in guides["中文按鍵說明.txt"]
+    assert "滑鼠點常駐效果圖示 查看效果說明與剩餘遊戲時間" in guides["中文按鍵說明.txt"]
+    assert "常駐效果資訊卡不會暫停遊戲，三秒後自動消失" in guides["中文按鍵說明.txt"]
     assert "L                   直接開啟訊息紀錄" in guides["中文按鍵說明.txt"]
     assert "此模式下不能再啟用循路前進" in guides["中文按鍵說明.txt"]
     assert "同一人物被分頁顯示的連續文字會合為一筆" in guides["新增功能說明.txt"]
@@ -29,6 +31,7 @@ def test_player_guide_templates_cover_requested_topics() -> None:
     assert "完整世界地圖左鍵點擊 33 個有名稱的地點" in guides["新增功能說明.txt"]
     assert "33 個落點均已逐一" in guides["新增功能說明.txt"]
     assert "開啟滑鼠視角模式時會自動解除循路前進" in guides["新增功能說明.txt"]
+    assert "遊戲選單的黃色文字與黑色陰影" in guides["新增功能說明.txt"]
 
 
 def test_write_player_guides_uses_windows_friendly_text(tmp_path: Path) -> None:
@@ -52,6 +55,8 @@ def test_release_readme_covers_latest_features_and_uses_windows_text(tmp_path: P
     assert "按 L" in text
     assert "按 F5" in text
     assert "按 F9" in text
+    assert "常駐效果資訊" in text
+    assert "三秒後自動消失" in text
     assert ".GAM 與 .MLG 一起處理" in text
     assert "不能再次啟用循路前進" in text
 
