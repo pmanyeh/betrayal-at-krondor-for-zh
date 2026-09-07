@@ -5582,7 +5582,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5c510ab31 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..0ab277eedae3bf28b10ecb59823647684f7fa287 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -12,10 +12,13 @@
@@ -5984,7 +5984,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +552,54 @@ short far world3d_main_loop(void) {
+@@ -256,6 +552,58 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
@@ -5999,6 +5999,10 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
 +                goto post_dispatch;
 +            case MOUSELOOK_TOGGLE_SCANCODE:
 +                g_bMouseLookMode = !g_bMouseLookMode;
++                if (g_bMouseLookMode != 0 && worldmove_step_pending_get() != 0)
++                    worldloop_party_move_done_clr();
++                else
++                    worldloop_set_flag_8b_preds();
 +                if (g_bMouseLookMode == 0)
 +                    worldloop_mouselook_release(&mouselook_capture_active, mouselook_ui_x,
 +                                                mouselook_ui_y);
@@ -6039,7 +6043,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +611,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +615,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6047,7 +6051,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +623,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +627,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6077,7 +6081,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +653,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +657,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -6085,7 +6089,19 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -308,6 +677,8 @@ short far world3d_main_loop(void) {
+@@ -293,6 +666,11 @@ short far world3d_main_loop(void) {
+                 worldmove_apply_turn_step(3);
+                 goto after_move;
+             case 0x13:
++                if (g_bMouseLookMode != 0) {
++                    if (worldmove_step_pending_get() != 0)
++                        worldloop_party_move_done_clr();
++                    goto post_dispatch;
++                }
+                 if (refusal_mode != 0) {
+                     dialog_play_record(0xe3, 1);
+                     goto post_dispatch;
+@@ -308,6 +686,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe4, 1);
                      goto post_dispatch;
                  }
@@ -6094,7 +6110,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
                  spellfx_cast_and_dispatch();
                  redraw_menu = 1;
                  render_dirty = 1;
-@@ -318,18 +689,24 @@ short far world3d_main_loop(void) {
+@@ -318,18 +698,24 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe8, 1);
                      goto post_dispatch;
                  }
@@ -6120,7 +6136,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
                  encamp_run();
                  redraw_caption = 1;
                  goto post_dispatch;
-@@ -338,6 +715,8 @@ short far world3d_main_loop(void) {
+@@ -338,6 +724,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe6, 1);
                      goto after_move;
                  }
@@ -6129,7 +6145,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
                  mainmenu_save_bookmark();
                  goto after_move;
              case 0x18:
-@@ -345,6 +724,8 @@ short far world3d_main_loop(void) {
+@@ -345,6 +733,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe7, 1);
                      goto post_dispatch;
                  }
@@ -6138,7 +6154,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
                  exit_mode = mainmenu_save_main_menu(1);
                  if (exit_mode == 0) {
                      g_nSceneReloadPending = 1;
-@@ -360,30 +741,57 @@ short far world3d_main_loop(void) {
+@@ -360,30 +750,57 @@ short far world3d_main_loop(void) {
                      if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
                          key_is_down(0x36) != 0) {
  
@@ -6199,7 +6215,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
                  goto post_dispatch;
              default:
                  break;
-@@ -414,6 +822,10 @@ short far world3d_main_loop(void) {
+@@ -414,6 +831,10 @@ short far world3d_main_loop(void) {
          dialog_play_record(0x145, 0);
      }
      palette_cycle_eb_toggle(0);
@@ -6210,6 +6226,15 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..b978c24496595273dd1f9a5c2834f4b5
      menupage_end(g_pReqMainPage);
      return exit_mode;
  }
+@@ -459,6 +880,8 @@ void far worldloop_step_or_final_movement(void) {
+ }
+ 
+ void far worldloop_set_flag_8b_preds(void) {
++    if (g_bMouseLookMode != 0)
++        goto disable;
+     if (worldmove_step_pending_get() != 0)
+         goto disable;
+     if (worldmove_cross_walkable_kind() == 0)
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.H b/bak/SRC/GAME/WORLD/WORLDLP.H
 index 6457e2cb324252a0cce9b95fa54102f6d65e84e3..bce3164ded34bd85147e80b7a2615061b79da1e4 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.H

@@ -31,7 +31,7 @@ python .\tools\release\package_release.py
 3. 複製 `installer.py`／`bspatch_apply.py`，並用 CRLF 重新寫出兩個 `.bat` 啟動器（`cmd.exe` 對 LF 換行很敏感，見下方「已知地雷」）。
 4. 建立空的 `game_data/`（僅附說明檔，不內附任何存檔或原版遊戲資料）。
 5. 確認 `dosbox-x/`／`python-embed/` 都在，並把 `dosbox_krondor.conf.template` 重新寫進 `dosbox-x/zh_krondor.conf`（這支設定檔沒有快取，每次都是新的，不會有改了 template 卻沒生效的問題）。
-6. 寫 `README_安裝說明.txt`，並從 `tools/release/*.txt.template` 產生 UTF-8 BOM／CRLF 格式的 `中文按鍵說明.txt` 與 `新增功能說明.txt`。
+6. 寫出 UTF-8 BOM／CRLF 格式的 `README_安裝說明.txt`，並從 `tools/release/*.txt.template` 以相同格式產生 `中文按鍵說明.txt` 與 `新增功能說明.txt`。
 7. **安全檢查**：確認 `game_data/` 除了說明檔以外沒有任何檔案——防止本機測試時不小心把真的遊戲資料或存檔留在裡面、被一起打包發布出去。檢查沒過會直接中止、不出 zip。
 8. 打包成 `dist/release_v100_zh.zip`。
 

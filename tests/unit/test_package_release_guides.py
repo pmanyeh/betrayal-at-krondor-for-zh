@@ -5,6 +5,7 @@ import pytest
 from tools.release.package_release import (
     PLAYER_GUIDES,
     make_zip,
+    write_readme,
     write_player_guides,
     write_project_license,
 )
@@ -20,12 +21,14 @@ def test_player_guide_templates_cover_requested_topics() -> None:
     assert "F5" in guides["中文按鍵說明.txt"]
     assert "F9" in guides["中文按鍵說明.txt"]
     assert "L                   直接開啟訊息紀錄" in guides["中文按鍵說明.txt"]
+    assert "此模式下不能再啟用循路前進" in guides["中文按鍵說明.txt"]
     assert "同一人物被分頁顯示的連續文字會合為一筆" in guides["新增功能說明.txt"]
     assert "官方 v1.02 非光碟修補回植" in guides["新增功能說明.txt"]
     assert "快速存檔／讀檔" in guides["新增功能說明.txt"]
     assert "33 個有名稱的地點" in guides["中文按鍵說明.txt"]
     assert "完整世界地圖左鍵點擊 33 個有名稱的地點" in guides["新增功能說明.txt"]
     assert "33 個落點均已逐一" in guides["新增功能說明.txt"]
+    assert "開啟滑鼠視角模式時會自動解除循路前進" in guides["新增功能說明.txt"]
 
 
 def test_write_player_guides_uses_windows_friendly_text(tmp_path: Path) -> None:
@@ -36,6 +39,21 @@ def test_write_player_guides_uses_windows_friendly_text(tmp_path: Path) -> None:
         assert data.startswith(b"\xef\xbb\xbf")
         assert b"\r\n" in data
         assert b"\n" not in data.replace(b"\r\n", b"")
+
+
+def test_release_readme_covers_latest_features_and_uses_windows_text(tmp_path: Path) -> None:
+    write_readme(tmp_path)
+
+    data = (tmp_path / "README_安裝說明.txt").read_bytes()
+    text = data.decode("utf-8-sig")
+    assert data.startswith(b"\xef\xbb\xbf")
+    assert b"\r\n" in data
+    assert b"\n" not in data.replace(b"\r\n", b"")
+    assert "按 L" in text
+    assert "按 F5" in text
+    assert "按 F9" in text
+    assert ".GAM 與 .MLG 一起處理" in text
+    assert "不能再次啟用循路前進" in text
 
 
 def test_release_includes_project_license(tmp_path: Path) -> None:

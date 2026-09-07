@@ -129,6 +129,26 @@ class TestMouseLookMode(unittest.TestCase):
         self.assertIn("action_id == MOUSELOOK_INTERACT_SCANCODE &&", source)
         self.assertIn("action_id = 0xc0;", source)
 
+    def test_mouse_look_and_follow_road_are_mutually_exclusive(self) -> None:
+        source = WORLDLP.read_text(encoding="utf-8")
+
+        self.assertRegex(
+            source,
+            r"g_bMouseLookMode = !g_bMouseLookMode;\s+"
+            r"if \(g_bMouseLookMode != 0 && worldmove_step_pending_get\(\) != 0\)\s+"
+            r"worldloop_party_move_done_clr\(\);",
+        )
+        self.assertRegex(
+            source,
+            r"(?s)case 0x13:\s+if \(g_bMouseLookMode != 0\) \{.*?"
+            r"goto post_dispatch;\s+\}",
+        )
+        self.assertRegex(
+            source,
+            r"void far worldloop_set_flag_8b_preds\(void\) \{\s+"
+            r"if \(g_bMouseLookMode != 0\)\s+goto disable;",
+        )
+
     def test_center_interaction_reuses_world_cursor_dispatch(self) -> None:
         world_source = WORLDLP.read_text(encoding="utf-8")
         cursor_source = WCURSOR.read_text(encoding="utf-8")
