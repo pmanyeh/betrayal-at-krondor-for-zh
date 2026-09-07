@@ -51,6 +51,8 @@ def run() -> int:
         "MISS prep=0 finish=0 count=1 flags=2",
         "GAMONLY save=0 recover=1 gam=0 mlg=-1",
         "BADMARK recover=0 gam=0 mark=0",
+        "RECOVERY_RETRY failures=0",
+        "FAULT_MATRIX failures=0",
     ]
     missing = [line for line in expected if line not in text.splitlines()]
     if missing:

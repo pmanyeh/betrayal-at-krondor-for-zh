@@ -1,5 +1,6 @@
 from pathlib import Path
 import zipfile
+import pytest
 
 from tools.release.package_release import (
     PLAYER_GUIDES,
@@ -53,3 +54,19 @@ def test_release_zip_excludes_python_cache_artifacts(tmp_path: Path) -> None:
         names = archive.namelist()
     assert "release/README.txt" in names
     assert not any("__pycache__" in name or name.endswith(".pyc") for name in names)
+
+
+@pytest.mark.parametrize("name", ["SAVE01.GAM", "save01.mlg", "MSGWORK.MLG",
+                                 "MLGNEW.GAM", "MLGOLD.MLG", "MLGTXN.DAT"])
+def test_release_rejects_player_history_anywhere(tmp_path: Path, name: str) -> None:
+    release_dir = tmp_path / "release"
+    nested = release_dir / "misplaced"
+    nested.mkdir(parents=True)
+    player_file = nested / name
+    player_file.write_bytes(b"private")
+    archive = tmp_path / "release.zip"
+    archive.write_bytes(b"previous archive")
+    with pytest.raises(SystemExit, match="拒絕打包"):
+        make_zip(release_dir)
+    assert player_file.read_bytes() == b"private"
+    assert archive.read_bytes() == b"previous archive"

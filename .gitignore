@@ -4,6 +4,12 @@ betrayal-at-krondor/
 *.001
 *.rmf
 *.gam
+*.[Gg][Aa][Mm]
+*.[Mm][Ll][Gg]
+[Mm][Ll][Gg][Tt][Xx][Nn].[Dd][Aa][Tt]
+# Deliberate synthetic conformance fixtures remain trackable.
+!tests/fixtures/**/*.MLG
+!tests/fixtures/**/*.mlg
 *.sx
 *.ovl
 *.drv

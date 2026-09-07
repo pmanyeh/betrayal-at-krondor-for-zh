@@ -30,6 +30,9 @@ sbbase=220
 irq=7
 dma=1
 
+[dos]
+dos=high,umb
+
 [autoexec]
 @mount c ../game_data
 @c:

@@ -929,3 +929,23 @@ v1.02 尚未完成：一般 `bak build --version 102` 因工具把目前 diverge
 - 量測遊戲場景內配置 2048-byte scratch 的成功率和保存延遲。核心會優先經 `alloc_far_umb` 配置，操作完成立即解除並釋放，不借用 `g_pMainScratchBuf`。
 - 修通 v1.02 建置並記錄結果。
 - 第 3 階段已在上述未驗項仍公開列出的前提下開始；第 2 階段仍維持「進行中」，不因後續功能接入而標為完成。
+
+---
+
+## 第 5–7 階段續作與交付收尾（2026-09-07）
+
+- **狀態**：設計內的核心、成對存讀、擷取、閱讀器、容量工具、發布防呆及兩版本建置均已完成。實際遊戲已驗證新遊戲第一章開場會立即建立時間線、寫入三筆中文劇情、列表摘要及內容頁可閱讀。仍未逐一走完所有章節、NPC、商店與每一種存檔 UI 路徑，因此不能宣稱 T01–T18 的人工遊戲矩陣全數完成。
+- **新遊戲時序修正**：`msgsave_start_new()` 移到第一章開場書／過場之前，移除讀完 `STARTUP.GAM` 後的第二次重設。修正前第一段劇情先寫入舊／空時間線再遭清除；修正後 `MSGWORK.MLG` 在開場中即由 64 bytes 成長，世界畫面時為 950 bytes、三筆事件。
+- **交易恢復強化**：無法開啟但仍存在的 marker 視為錯誤；刪除與清理結果均檢查；啟動恢復失敗時保留 marker、備份及 staged 檔，不再誤清證據。DOS fault-injection 覆蓋 write、close、DOS write、rename、remove 的 12 種失敗組合，另驗證恢復第一次失敗、第二次重試仍保留完整舊對。結果為 `RECOVERY_RETRY failures=0`、`FAULT_MATRIX failures=0`、`ALL PAIR CHECKS PASSED`。
+- **擷取與 UI**：說話者／地點截斷會辨識 BAK-ZH `0x80..0xdf` 前導位元組，不會留下半個中文字；DOS capture 測試回報 `ALL CAPTURE CHECKS PASSED`。列表改成三筆雙行摘要，正文顯示前略過 ASCII 行首空白，GAP 顯示「歷史中斷」，記錄失敗時顯示「記錄已停止」。最終 EXE 的實機列表已確認三筆正文摘要均可見，內容頁時間、人物、地點與中文正文正常。
+- **容量結果**：DOSBox-X、release 設定 12,000 cycles、2 KiB scratch；1／5／10 MiB 分別為 1,876／9,379／18,758 筆。讀末 30 筆三組皆約 160 ms；snapshot 為 6.54／32.79／65.69 秒；candidate validate 為 11.48／57.18／114.36 秒；三組操作後可用記憶體差皆 0。功能可處理 10 MiB，但完整保留歷史使大型存讀檔明顯變慢，這是已量測的產品限制。
+- **建置**：v1.00 最終 `KRONDOR.EXE` 492144 bytes，SHA-256 `2f85358de9b0a4b128ef8bc7db5c2d822fce5db80ea273b9fe081c5b770c26a1`；`VMCODE.OVL` 44582 bytes、`SX.OVL` 40742 bytes，均與原版 byte-identical。v1.02 亦成功編譯連結，`KRONDOR102.EXE` 493232 bytes，SHA-256 `5d9eacc6344fa5e5faf1dd33cc7e03e0967e7b27c959a8fcc4964b9869acc0b9`。兩者的建置器非零狀態都只源自預期的原版 EXE 大小／雜湊差異。
+- **v1.02 工具鏈修正**：新增較短的 `INC102`，避免 DOS 127-byte command tail；1.02 object 建好後只刪除可重建的 v1.00 link/driver 產物，讓 32 MiB FreeDOS image 有足夠 TLINK 空間。
+- **發布**：完整 release tree 在壓縮前拒絕任何 `.GAM`、`.MLG`、`MLGTXN.DAT`；`.gitignore` 同步排除執行期訊息檔但保留測試 fixture。選單資源由 pristine input 重建，更新 message-log entry 的 manifest。bspatch 71657 bytes，從乾淨 v1.00 套用後與目標 EXE byte-identical。`release_v100_zh.zip` 33852933 bytes，SHA-256 `fc7e04114e6bd4ac84a1ba7f38898bcf0d9951b1c3eb9d0a76803a48df7a7588`，掃描結果無禁帶檔案。
+- **自動驗證**：`python -m pytest tests/unit -q` 為 **186 passed**。新增新遊戲時序 source regression、發布包禁檔測試與 1／5／10 MiB fixture／DOS benchmark driver。引擎提交 `d31db1b1a732b25c4aa3c29e6b580cd16f84efd5`；合併補丁已從固定基準重建，乾淨 worktree 套用後 tree 精確為 `04f59ecc207e2c56c77a0c7786a9ac3a9361870f`。
+
+### 尚需人工遊戲走查
+
+- 依 T01–T13 逐一取得一般 NPC、選項、場景說明、商店任務、章節過場，以及手動／書籤／F5-F9／自動存檔的實際畫面證據；程式與 DOS 合成矩陣已覆蓋相同資料路徑，但不能取代逐場景人工確認。
+- 以固定選單游標腳本或人工操作完成「閱讀器完整開關 30 次」。本輪已多次開啟、切換列表／內容並確認純瀏覽前後 MLG 都是 950 bytes；自動腳本後半段因原版選單保留游標狀態，有部分循環只返回遊戲畫面，故不列為完整 30 次證據。
+- 10 MiB 保存／驗證約需 66／114 秒；若未來要改善，需另立索引或增量 snapshot 設計，不應在未變更格式契約下把本次容量測試標成效能通過。

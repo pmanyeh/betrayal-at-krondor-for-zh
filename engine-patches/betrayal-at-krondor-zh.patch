@@ -31,11 +31,191 @@ index 657aa192c09ea43e66c0aabfd90482817cdc6444..eaa76fabf67913e28101de13a04b0260
 +#define CURSOR_REMAP_TAB_OFF FP_OFF(&g_abCursorPaletteLut[0])
  
  #endif
+diff --git a/bak/KRN102.RSP b/bak/KRN102.RSP
+index d557da2d7ea88362a5cf7305ebf9dc15891d666d..4a4e393388d7b16e35c2511af4b7d6752ce891cc 100644
+--- a/bak/KRN102.RSP
++++ b/bak/KRN102.RSP
+@@ -68,6 +68,9 @@ OUT\NAMEDTBL.OBJ+
+ OUT\LISTWDG.OBJ+
+ OUT102\DIALOG.OBJ+
+ OUT102\ASKABOUT.OBJ+
++OUT\MSGLOG.OBJ+
++OUT\MSGSAVE.OBJ+
++OUT\MSGCAP.OBJ+
+ OUT\TEXTWRAP.OBJ+
+ OUT\SCROLL.OBJ+
+ OUT\BOOKVIEW.OBJ+
+@@ -105,6 +108,7 @@ OUT\WORLDLP.OBJ+
+ OUT\SPELLFX.OBJ+
+ OUT102\MAP.OBJ+
+ OUT102\MAINMENU.OBJ+
++OUT\MSGVIEW.OBJ+
+ OUT\ENCAMP.OBJ+
+ OUT\FMAP.OBJ+
+ OUT\WORLDMOV.OBJ+
+diff --git a/bak/KRONDOR.RSP b/bak/KRONDOR.RSP
+index 2fb521499120078b7d794bdf4e5cc46925add195..408f8bbd756a7d14bc259fd00341c53e46887d10 100644
+--- a/bak/KRONDOR.RSP
++++ b/bak/KRONDOR.RSP
+@@ -67,6 +67,9 @@ OUT\NAMEDTBL.OBJ+
+ OUT\LISTWDG.OBJ+
+ OUT\DIALOG.OBJ+
+ OUT\ASKABOUT.OBJ+
++OUT\MSGLOG.OBJ+
++OUT\MSGSAVE.OBJ+
++OUT\MSGCAP.OBJ+
+ OUT\TEXTWRAP.OBJ+
+ OUT\SCROLL.OBJ+
+ OUT\BOOKVIEW.OBJ+
+@@ -104,6 +107,7 @@ OUT\WORLDLP.OBJ+
+ OUT\SPELLFX.OBJ+
+ OUT\MAP.OBJ+
+ OUT\MAINMENU.OBJ+
++OUT\MSGVIEW.OBJ+
+ OUT\ENCAMP.OBJ+
+ OUT\FMAP.OBJ+
+ OUT\WORLDMOV.OBJ+
+diff --git a/bak/MAKEFILE b/bak/MAKEFILE
+index ae7ad116d5c5a809f2ec60bf21cfca57151742f4..2e5d4ccae378c7b0120b47d1ccdaca0eb629464c 100644
+--- a/bak/MAKEFILE
++++ b/bak/MAKEFILE
+@@ -51,11 +51,12 @@ OUT\D_3160_0.OBJ OUT\D_3160_1.OBJ OUT\D_3160_2.OBJ OUT\D_3160_3.OBJ OUT\D_3160_4
+ OUT\D_3160_6.OBJ OUT\D_3160_7.OBJ OUT\D_3160_8.OBJ OUT\D_3160_9.OBJ OUT\D_3186_0.OBJ OUT\D_3186_1.OBJ \
+ OUT\D_3186_2.OBJ OUT\D_3186_3.OBJ OUT\D_320A.OBJ OUT\D_32C8.OBJ OUT\D_3508.OBJ OUT\D_35F4.OBJ \
+ OUT\D_3657.OBJ OUT\EMS.OBJ OUT\EMSDET.OBJ OUT\EMSIMG.OBJ OUT\ENCAMP.OBJ OUT\EVTCOND.OBJ \
++OUT\MSGLOG.OBJ OUT\MSGSAVE.OBJ OUT\MSGCAP.OBJ \
+ OUT\MAP.OBJ OUT\E_4009.OBJ OUT\E_400A.OBJ OUT\E_400B.OBJ OUT\E_7878.OBJ OUT\FARPTR.OBJ \
+ OUT\FMAP.OBJ OUT\FONT.OBJ OUT\GMAIN.OBJ OUT\MAINDATA.OBJ OUT\GOURAUD.OBJ OUT\GSTATE.OBJ OUT\HEXANIM.OBJ \
+ OUT\HOTSPOT.OBJ OUT\HWSHUT.OBJ OUT\ILBMPACK.OBJ OUT\ILBMSAVE.OBJ OUT\INT00.OBJ OUT\INVENTOR.OBJ \
+ OUT\INVINSP.OBJ OUT\RESOURCE.OBJ OUT\RESFAR.OBJ OUT\ITEMTBL.OBJ OUT\ITEMUSE.OBJ OUT\JOYSTICK.OBJ \
+-OUT\KEYBOARD.OBJ OUT\LISTWDG.OBJ OUT\LOADCHNK.OBJ OUT\LZHUF.OBJ OUT\LZWDEC.OBJ OUT\MAINMENU.OBJ \
++OUT\KEYBOARD.OBJ OUT\LISTWDG.OBJ OUT\LOADCHNK.OBJ OUT\LZHUF.OBJ OUT\LZWDEC.OBJ OUT\MAINMENU.OBJ OUT\MSGVIEW.OBJ \
+ OUT\MDACON.OBJ OUT\MEM.OBJ OUT\MENULBL.OBJ OUT\MENUPAGE.OBJ OUT\MIDI.OBJ OUT\MODALSCR.OBJ \
+ OUT\MONSTAT.OBJ OUT\MOUSE.OBJ OUT\MUSCREAT.OBJ OUT\MUSDISP.OBJ OUT\MUSFADE.OBJ OUT\MUSSTART.OBJ \
+ OUT\MUSSTOP.OBJ OUT\NAMEDTBL.OBJ OUT\PALBLEND.OBJ OUT\PALCYC.OBJ OUT\PALDAC.OBJ OUT\PALETTE.OBJ \
+@@ -94,6 +95,10 @@ krondor.exe : KRONDOR.RSP
+ # each archive from its pack spec. All KVM-safe (bcc/tasm/tlink + PACKOVL.EXE),
+ # so `all` builds them in the same single KVM boot that links KRONDOR.EXE.
+ # ----------------------------------------------------------------------------
++mlgtest : OUT\MLGTEST.EXE
++msgptest : OUT\MSGPTEST.EXE
++msgcaptest : OUT\CAPTEST.EXE
++
+ ovls : OUT\VMCODE.OVL OUT\SX.OVL
+ 
+ OUT\VMCODE.OVL : OUT\PACKOVL.EXE $(VMEXE) SRC\DRIVERS\VMCODE.PAK
+@@ -145,7 +150,7 @@ OUT102\KRONDOR.EXE : KRN102.RSP
+ 	tlink /m @KRN102.RSP
+ 
+ OUT102\INVENTOR.OBJ : SRC\SCREENS\INVENTOR.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS5684_TEXT -nOUT102 SRC\SCREENS\INVENTOR.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS5684_TEXT -nOUT102 SRC\SCREENS\INVENTOR.C
+ 
+ # --- the all-new 1.02-only resident CD-audio driver (TASM, seg 168a) ---
+ OUT102\CDAUDIO.OBJ : SRC\AUDIO\CDAUDIO.ASM
+@@ -153,64 +158,66 @@ OUT102\CDAUDIO.OBJ : SRC\AUDIO\CDAUDIO.ASM
+ 
+ # --- the 30 -DV102CD C recompiles (band/class/includes mirror the module .MAK) ---
+ OUT102\RESOURCE.OBJ : SRC\IO\RESOURCE.C
+-	$(C_3NY) $(INC) -DV102CD -c -zC_TEXT -nOUT102 SRC\IO\RESOURCE.C
++	$(C_3NY) $(INC102) -DV102CD -c -zC_TEXT -nOUT102 SRC\IO\RESOURCE.C
+ OUT102\AUDIO.OBJ : SRC\AUDIO\ENGINE\AUDIO.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS14e8_TEXT -nOUT102 SRC\AUDIO\ENGINE\AUDIO.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS14e8_TEXT -nOUT102 SRC\AUDIO\ENGINE\AUDIO.C
+ OUT102\GMAIN.OBJ : SRC\GAME\GMAIN.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS205a_TEXT -nOUT102 SRC\GAME\GMAIN.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS205a_TEXT -nOUT102 SRC\GAME\GMAIN.C
+ OUT102\MAINDATA.OBJ : SRC\GAME\MAINDATA.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCMAINDATA_TEXT -nOUT102 SRC\GAME\MAINDATA.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCMAINDATA_TEXT -nOUT102 SRC\GAME\MAINDATA.C
+ OUT102\WORLDHIT.OBJ : SRC\R3D\SCENE\WORLDHIT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS2148_TEXT -nOUT102 SRC\R3D\SCENE\WORLDHIT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS2148_TEXT -nOUT102 SRC\R3D\SCENE\WORLDHIT.C
+ OUT102\BOOT.OBJ : SRC\SYS\BOOT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS4139_TEXT -nOUT102 SRC\SYS\BOOT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS4139_TEXT -nOUT102 SRC\SYS\BOOT.C
+ OUT102\SAVEGAME.OBJ : SRC\GAME\STATE\SAVEGAME.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS419f_TEXT -nOUT102 SRC\GAME\STATE\SAVEGAME.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS419f_TEXT -nOUT102 SRC\GAME\STATE\SAVEGAME.C
+ OUT102\GSTATE.OBJ : SRC\GAME\STATE\GSTATE.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS4209_TEXT -nOUT102 SRC\GAME\STATE\GSTATE.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS4209_TEXT -nOUT102 SRC\GAME\STATE\GSTATE.C
+ OUT102\STAT.OBJ : SRC\CHAR\STAT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS42c0_TEXT -nOUT102 SRC\CHAR\STAT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS42c0_TEXT -nOUT102 SRC\CHAR\STAT.C
+ OUT102\CFGPARSE.OBJ : SRC\SYS\CFGPARSE.C
+-	$(C_1O1Y) $(INC) -DV102CD -c -zCS4379_TEXT -nOUT102 SRC\SYS\CFGPARSE.C
++	$(C_1O1Y) $(INC102) -DV102CD -c -zCS4379_TEXT -nOUT102 SRC\SYS\CFGPARSE.C
+ OUT102\PROXSCAN.OBJ : SRC\R3D\VIS\PROXSCAN.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS43c4_TEXT -nOUT102 SRC\R3D\VIS\PROXSCAN.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS43c4_TEXT -nOUT102 SRC\R3D\VIS\PROXSCAN.C
+ OUT102\WORLDFRM.OBJ : SRC\R3D\SCENE\WORLDFRM.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS44e5_TEXT -nOUT102 SRC\R3D\SCENE\WORLDFRM.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS44e5_TEXT -nOUT102 SRC\R3D\SCENE\WORLDFRM.C
+ OUT102\DIALOG.OBJ : SRC\DIALOG\DIALOG.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS4800_TEXT -nOUT102 SRC\DIALOG\DIALOG.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS4800_TEXT -nOUT102 SRC\DIALOG\DIALOG.C
+ OUT102\ASKABOUT.OBJ : SRC\DIALOG\ASKABOUT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS4a91_TEXT -nOUT102 SRC\DIALOG\ASKABOUT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS4a91_TEXT -nOUT102 SRC\DIALOG\ASKABOUT.C
+ OUT102\TOWNSCN.OBJ : SRC\SCREENS\TOWNSCN.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS4d9e_TEXT -nOUT102 SRC\SCREENS\TOWNSCN.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS4d9e_TEXT -nOUT102 SRC\SCREENS\TOWNSCN.C
+ OUT102\ACTSPAWN.OBJ : SRC\GAME\ACTOR\ACTSPAWN.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS5b64_TEXT -nOUT102 SRC\GAME\ACTOR\ACTSPAWN.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS5b64_TEXT -nOUT102 SRC\GAME\ACTOR\ACTSPAWN.C
+ OUT102\CACTOR.OBJ : SRC\COMBAT\ACTOR\CACTOR.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS5ce3_TEXT -nOUT102 SRC\COMBAT\ACTOR\CACTOR.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS5ce3_TEXT -nOUT102 SRC\COMBAT\ACTOR\CACTOR.C
+ OUT102\COMBAT.OBJ : SRC\COMBAT\ARENA\COMBAT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS600f_TEXT -nOUT102 SRC\COMBAT\ARENA\COMBAT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS600f_TEXT -nOUT102 SRC\COMBAT\ARENA\COMBAT.C
+ OUT102\CBENC.OBJ : SRC\COMBAT\ENC\CBENC.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS641c_TEXT -nOUT102 SRC\COMBAT\ENC\CBENC.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS641c_TEXT -nOUT102 SRC\COMBAT\ENC\CBENC.C
+ OUT102\CBTAI.OBJ : SRC\COMBAT\AI\CBTAI.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS66a8_TEXT -nOUT102 SRC\COMBAT\AI\CBTAI.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS66a8_TEXT -nOUT102 SRC\COMBAT\AI\CBTAI.C
+ OUT102\CSPELL.OBJ : SRC\COMBAT\SPELL\CSPELL.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS67c9_TEXT -nOUT102 SRC\COMBAT\SPELL\CSPELL.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS67c9_TEXT -nOUT102 SRC\COMBAT\SPELL\CSPELL.C
+ OUT102\CBTAIACT.OBJ : SRC\COMBAT\AI\CBTAIACT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS6be4_TEXT -nOUT102 SRC\COMBAT\AI\CBTAIACT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS6be4_TEXT -nOUT102 SRC\COMBAT\AI\CBTAIACT.C
+ OUT102\CBSTAT.OBJ : SRC\COMBAT\STATS\CBSTAT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS6cc3_TEXT -nOUT102 SRC\COMBAT\STATS\CBSTAT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS6cc3_TEXT -nOUT102 SRC\COMBAT\STATS\CBSTAT.C
+ OUT102\MAP.OBJ : SRC\GAME\WORLD\MAP.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS6ed5_TEXT -nOUT102 SRC\GAME\WORLD\MAP.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS6ed5_TEXT -nOUT102 SRC\GAME\WORLD\MAP.C
+ OUT102\MAINMENU.OBJ : SRC\SCREENS\MAINMENU.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS6f87_TEXT -nOUT102 SRC\SCREENS\MAINMENU.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS6f87_TEXT -nOUT102 SRC\SCREENS\MAINMENU.C
++OUT\MSGVIEW.OBJ : SRC\SCREENS\MSGVIEW.C
++	$(C_3O1Y) $(INC) -c -zCMSGVIEW_TEXT -nOUT SRC\SCREENS\MSGVIEW.C
+ OUT102\ZONE.OBJ : SRC\R3D\SCENE\ZONE.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS74fb_TEXT -nOUT102 SRC\R3D\SCENE\ZONE.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS74fb_TEXT -nOUT102 SRC\R3D\SCENE\ZONE.C
+ OUT102\HOTSPOT.OBJ : SRC\GAME\ENC\HOTSPOT.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS759a_TEXT -nOUT102 SRC\GAME\ENC\HOTSPOT.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS759a_TEXT -nOUT102 SRC\GAME\ENC\HOTSPOT.C
+ OUT102\WCURSOR.OBJ : SRC\INPUT\WCURSOR.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS7879_TEXT -nOUT102 SRC\INPUT\WCURSOR.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS7879_TEXT -nOUT102 SRC\INPUT\WCURSOR.C
+ OUT102\WORLDRND.OBJ : SRC\R3D\SPRITE\WORLDRND.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS22a1_TEXT -nOUT102 SRC\R3D\SPRITE\WORLDRND.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS22a1_TEXT -nOUT102 SRC\R3D\SPRITE\WORLDRND.C
+ OUT102\SCREEN.OBJ : SRC\GFX\SCREEN\SCREEN.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS2a81_TEXT -nOUT102 SRC\GFX\SCREEN\SCREEN.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS2a81_TEXT -nOUT102 SRC\GFX\SCREEN\SCREEN.C
+ OUT102\WORLDFX.OBJ : SRC\R3D\FX\WORLDFX.C
+-	$(C_3O1Y) $(INC) -DV102CD -c -zCS2fc1_TEXT -nOUT102 SRC\R3D\FX\WORLDFX.C
++	$(C_3O1Y) $(INC102) -DV102CD -c -zCS2fc1_TEXT -nOUT102 SRC\R3D\FX\WORLDFX.C
 diff --git a/bak/RECIPES.MAK b/bak/RECIPES.MAK
-index ecebe346b6ffe2ed80bf009dfa7fc221c06d4754..99efe1e7425b3eded1eec9a974abab5d993dd77c 100644
+index ecebe346b6ffe2ed80bf009dfa7fc221c06d4754..1758bca6939d087dc46506f0d578cdc77e377207 100644
 --- a/bak/RECIPES.MAK
 +++ b/bak/RECIPES.MAK
-@@ -9,7 +9,9 @@ BC20 = c:\bc20\bccx
+@@ -9,7 +9,13 @@ BC20 = c:\bc20\bccx
  AS   = tasm
  ASFLAGS = /mx /m /iINCLUDE
  # INCLUDE = the project headers (bak\INCLUDE); C:\BC\INCLUDE = the Borland RTL headers
@@ -43,6 +223,10 @@ index ecebe346b6ffe2ed80bf009dfa7fc221c06d4754..99efe1e7425b3eded1eec9a974abab5d
 +# The Traditional Chinese build keeps the 1.00 floppy packaging/runtime but
 +# opts into the release-1.02 fixes that do not depend on MSCDEX or CD assets.
 +INC  = -IINCLUDE -IC:\BC\INCLUDE -DV102_GAMEPLAY_FIXES
++# A v1.02 translation unit already selects every gameplay-fix branch through
++# V102CD. Omitting the redundant long define also keeps bcc's DOS command tail
++# below 127 bytes for deeply nested sources such as AUDIO.C.
++INC102 = -IINCLUDE -IC:\BC\INCLUDE
  
  # --- flag bands: $(<BAND>) = compiler + flags (each object rule appends -c -zC<class>) ---
  C_3O1Y   = $(BC31) -3 -O1 -Y -i64 -k -mm
@@ -1494,8 +1678,43 @@ index e2a740548f6359593a3d1901651cc1cba55f41ed..066f0a57ad77def0f3c3d9ce7777e697
 +    g_bSmallZhMode = savedSmallZhMode;
      return selected;
  }
+diff --git a/bak/SRC/DIALOG/CAPCLASS.INC b/bak/SRC/DIALOG/CAPCLASS.INC
+new file mode 100644
+index 0000000000000000000000000000000000000000..3588f9dc9ed8b3c807831560f0502a1e75447751
+--- /dev/null
++++ b/bak/SRC/DIALOG/CAPCLASS.INC
+@@ -0,0 +1,29 @@
++if (key >= 11UL && key <= 14UL)
++    return 1;
++if (key >= 31UL && key <= 35UL)
++    return 1;
++if (key >= 81UL && key <= 86UL)
++    return 1;
++if (key >= 110UL && key <= 153UL)
++    return 1;
++if (key >= 199UL && key <= 206UL)
++    return 1;
++if (key >= 215UL && key <= 216UL)
++    return 1;
++if (key >= 254UL && key <= 269UL)
++    return 1;
++if (key >= 305UL && key <= 306UL)
++    return 1;
++if (key >= 311UL && key <= 312UL)
++    return 1;
++if (key >= 1300062UL && key <= 1300083UL)
++    return 1;
++if (key >= 1800001UL && key <= 1800048UL)
++    return 1;
++if (key >= 2100288UL && key <= 2100291UL)
++    return 1;
++if (key == 79UL || key == 107UL || key == 209UL || key == 212UL || key == 236UL ||
++    key == 245UL || key == 303UL || key == 315UL || key == 322UL || key == 325UL ||
++    key == 329UL || key == 330UL || key == 331UL || key == 332UL || key == 333UL ||
++    key == 334UL || key == 336UL)
++    return 1;
 diff --git a/bak/SRC/DIALOG/DIALOG.C b/bak/SRC/DIALOG/DIALOG.C
-index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed1943b0262f 100644
+index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..64921d606bf15ee131791e2ec0b5ed16d8ee3450 100644
 --- a/bak/SRC/DIALOG/DIALOG.C
 +++ b/bak/SRC/DIALOG/DIALOG.C
 @@ -14,6 +14,7 @@
@@ -1532,7 +1751,15 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
  
  #include "SRC/DIALOG/DIALOG.H"
  #include "SRC/SYS/RAND.H"
-@@ -297,6 +311,10 @@ typedef struct {
+@@ -54,6 +68,7 @@ unsigned char far g_abStatNames[16][15] = {
+ #include "SRC/CHAR/STAT.H"
+ #include "SRC/GAME/STATE/TIMERPL.H"
+ #include "SRC/DIALOG/ASKABOUT.H"
++#include "SRC/DIALOG/MSGCAP.H"
+ #include "SRC/UI/TEXTWRAP.H"
+ #include "SRC/SCREENS/TOWNSCN.H"
+ #include "SRC/SCREENS/MODALSCR.H"
+@@ -297,6 +312,10 @@ typedef struct {
  void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
      DdxOp far *sub2;
      DialogStyleDescriptor *desc;
@@ -1543,7 +1770,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      int i;
  
      sub2 = (DdxOp far *)(record + 1) + record->bCnt1;
-@@ -307,6 +325,27 @@ void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
+@@ -307,6 +326,27 @@ void far dialog_apply_style_state(DDXRecord far *record, void far *dest) {
              *(StyleState far *)dest = *(StyleState far *)&sub2->nA1;
          }
      }
@@ -1571,7 +1798,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
  }
  
  void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
-@@ -362,9 +401,12 @@ void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
+@@ -362,9 +402,12 @@ void far dialog_frame_draw(DDXRecord far *record, int far *rect) {
  }
  
  void far dialog_draw_speech_bubble(char far *text, int y_offset) {
@@ -1584,7 +1811,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
      g_graphics_context.clip.xmax = 0x13f;
      g_graphics_context.clip.ymax = 199;
-@@ -395,6 +437,7 @@ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
+@@ -395,6 +438,7 @@ void far dialog_draw_speech_bubble(char far *text, int y_offset) {
          g_graphics_context.bText_fg_color = 0xa;
          font_draw_text_far(text, 0xa0 - font_text_pixel_width(text) / 2, y_offset + 0x6c);
      }
@@ -1592,7 +1819,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
  }
  
  static void far dialog_assign_rand_cmbt_name(int slot_index, int param_2, int param_3) {
-@@ -535,7 +578,7 @@ void far dialog_cmbt_name_assign_kind(int slot, int kind, int aux, int name_toke
+@@ -535,7 +579,7 @@ void far dialog_cmbt_name_assign_kind(int slot, int kind, int aux, int name_toke
          break;
  
      case 28:
@@ -1601,7 +1828,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
          break;
  
      case 29:
-@@ -560,7 +603,9 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -560,7 +604,9 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      char *pName;
      char *pEnd;
      unsigned int flags;
@@ -1611,7 +1838,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      pStyle = dialog_resolve_style(record);
      nScratchLen = 0;
      dialog_apply_style_state(record, applied);
-@@ -578,16 +623,57 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -578,16 +624,57 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
          int nTitleY = applied[1] + pStyle->header[7];
          text++;
          pTitle = text;
@@ -1670,7 +1897,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
          } else {
              sprintf(buf, "%Fs", pTitle);
              dialog_draw_speech_bubble(buf, 10);
-@@ -595,15 +681,36 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -595,15 +682,36 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      }
  
      while (*text != '\0') {
@@ -1709,7 +1936,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
                          pName = g_speaker_names[idx];
                          _fstrcpy(g_pMainScratchBuf + (nScratchLen - 1), "n ");
                          nScratchLen++;
-@@ -634,6 +741,42 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -634,6 +742,42 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      }
  
      g_pMainScratchBuf[nScratchLen] = '\0';
@@ -1752,7 +1979,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      flags = pStyle->header[6];
      if (record->wFlags & 4)
          flags = flags & 0xf8 | 2;
-@@ -641,6 +784,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -641,6 +785,22 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      applied[1] += pStyle->header[7];
      applied[2] -= pStyle->header[9] + pStyle->header[10];
      applied[3] -= pStyle->header[7] + pStyle->header[8];
@@ -1775,12 +2002,16 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      if (record->wFlags & 0x200) {
  
          ((int *)&pTitle)[1] =
-@@ -661,14 +820,23 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
+@@ -661,15 +821,30 @@ void dialog_render_text_with_tokens(DDXRecord far *record, char far *text, int f
      g_graphics_context.bText_fg_color = fg_color >= 0 ? (unsigned char)fg_color : pStyle->header[2];
      textwrap_draw_aligned((long)g_pMainScratchBuf, applied[0] + x_off, applied[1] + y_off,
                            applied[2], applied[3], 1, flags, scroll_start);
 +    g_bMixedZhMode = 0;
 +    g_bSmallZhMode = 0;
++}
++
++static void dialog_capture_rendered_page(int scroll) {
++    msgcap_rendered((unsigned short)scroll);
  }
  
  int far dialog_show_by_key(unsigned long key, int interactive) {
@@ -1797,9 +2028,16 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
 +       those records resolve to the active party names as intended. */
 +    dialog_combatant_name_table_init();
      if ((record = dialog_load_record_by_key(key, 0)) != 0) {
++        msgcap_scope_begin(key, record->wSpeaker_id, NULL);
++        msgcap_display(MSGCAP_DIRECT, key, record->wSpeaker_id, NULL);
          if (record->wFlags & 0x20)
              interactive = 1;
-@@ -682,7 +850,27 @@ int far dialog_show_by_key(unsigned long key, int interactive) {
+         if (record->wFlags & 0x40)
+@@ -679,15 +854,38 @@ int far dialog_show_by_key(unsigned long key, int interactive) {
+             dialog_cutscene_op_noop((unsigned char far *)rect, 0, record->wFlags);
+         dialog_frame_draw(record, (int far *)rect);
+         dialog_render_text_with_tokens(record, (unsigned char far *)0, -1, 0, 0, 0);
++        dialog_capture_rendered_page(0);
          if (interactive) {
              screen_frame_present();
              screen_frame_sync_buffers_rect(0, 200);
@@ -1822,13 +2060,20 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
 +                i += g_wTextWrapLinesDrawn;
 +                dialog_frame_draw(record, (int far *)rect);
 +                dialog_render_text_with_tokens(record, (unsigned char far *)0, -1, 0, 0, i);
++                dialog_capture_rendered_page(i);
 +                screen_frame_present();
 +                screen_frame_sync_buffers_rect(0, 200);
 +            }
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
              screen_frame_present();
              dialog_cutscene_op_noop((unsigned char far *)rect, 1, record->wFlags);
-@@ -776,7 +964,7 @@ void far dialog_animate_open(DDXRecord far *dialog, int steps) {
+             dialog_cutscene_op_noop((unsigned char far *)rect, 2, record->wFlags);
+         }
++        msgcap_scope_end();
+         dialog_freemem_if_not_null((unsigned char far *)record);
+         return iResult;
+     }
+@@ -776,7 +974,7 @@ void far dialog_animate_open(DDXRecord far *dialog, int steps) {
  
  void far dialog_combatant_name_table_init(void) {
      int i;
@@ -1837,7 +2082,7 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      int found;
  #endif
  
-@@ -790,7 +978,7 @@ void far dialog_combatant_name_table_init(void) {
+@@ -790,7 +988,7 @@ void far dialog_combatant_name_table_init(void) {
      dialog_cmbt_name_assign_kind(5, 0xf, 0, 0);
      dialog_cmbt_name_assign_kind(3, 0xe, 0, 0);
      dialog_cmbt_name_assign_kind(0, 0x1f, 0, 0);
@@ -1846,7 +2091,12 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      found = 0;
      for (i = found; i < g_gameState.partySize; i++) {
          if (g_gameState.activeParty[i] == g_gameState.nEvtArgActor0)
-@@ -827,6 +1015,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+@@ -823,10 +1021,12 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+     int stackDepth;
+     long lTimeAccum;
+     unsigned long keyStack[5];
++    int captureStarted;
+ 
      int i;
      int j;
  
@@ -1854,6 +2104,2496 @@ index 5bd0ca919ff6dc3991ea782a03e5c6fa6c15c2ec..b64dd2c254f1eb99b759c21ae95fed19
      done = 0;
      scrLoaded = 0;
      screenDirty = 0;
+@@ -843,6 +1043,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+     stackDepth = 0;
+     lTimeAccum = 0;
+     g_dialog_running = 1;
++    captureStarted = 0;
+     if ((record = dialog_load_record_by_key(record_key, 0)) == (DDXRecord far *)0L) {
+         g_dialog_running = 0;
+     } else {
+@@ -967,6 +1168,13 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                 if ((record->wFlags & 1) == 0) {
+                     pSpeakerName = (unsigned char *)0;
+                 }
++                if (captureStarted == 0) {
++                    msgcap_scope_begin(record_key, record->wSpeaker_id,
++                                       (const unsigned char far *)pSpeakerName);
++                    captureStarted = 1;
++                }
++                msgcap_display(MSGCAP_DIALOG, record_key, record->wSpeaker_id,
++                               (const unsigned char far *)pSpeakerName);
+                 dialog_apply_style_state(record, (void far *)styleRect);
+                 dialog_cutscene_op_noop((unsigned char far *)styleRect, 0, record->wFlags);
+                 if ((record->wFlags & 2) != 0) {
+@@ -1061,6 +1269,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                     if (record->wBody_len != 0) {
+                         dialog_frame_draw(record, (int far *)0L);
+                         dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, 0);
++                        dialog_capture_rendered_page(0);
+                     }
+                     if (record->wSpeaker_id < 0x46) {
+                         dialog_draw_speech_bubble((unsigned char far *)pSpeakerName, 0);
+@@ -1071,11 +1280,13 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                         if (record->wBody_len != 0) {
+                             dialog_frame_draw(record, (int far *)0L);
+                             dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, 0);
++                            dialog_capture_rendered_page(0);
+                         }
+                     } else {
+                         if (record->wBody_len != 0) {
+                             dialog_frame_draw(record, (int far *)0L);
+                             dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, 0);
++                            dialog_capture_rendered_page(0);
+                         }
+                         if ((record->wFlags & 0x2000) == 0) {
+                             dialog_screen_wipe_rect_or_full(
+@@ -1334,6 +1545,14 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                 bAllowFallback = 0;
+                 i = askabout_dialog_run(&record->bStyle, (char *)pSpeakerName);
+                 if (i >= 0) {
++                    unsigned short topic;
++                    unsigned char *label;
++                    topic = ((DdxChoice far *)(record + 1))[i].wCond;
++                    if (topic != 0) {
++                        label = (unsigned char *)*(unsigned short *)((char *)g_pKeywordTable +
++                                                                    (topic - 1) * 2 + 2);
++                        msgcap_choice(record_key, label, 0);
++                    }
+                     gstate_event_write(KEYWORD_ASKED(((DdxChoice far *)(record + 1))[i].wCond), 1);
+                     record_key = ((DdxChoice far *)(record + 1))[i].dwTarget_key;
+                 } else {
+@@ -1344,6 +1563,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                 while (g_wTextWrapLinesRemaining != 0) {
+                     dialog_frame_draw(record, (int far *)0L);
+                     dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, i);
++                    dialog_capture_rendered_page(i);
+                     if (record->wSpeaker_id < 0x46) {
+                         dialog_draw_speech_bubble((unsigned char far *)pSpeakerName, 0);
+                     }
+@@ -1355,6 +1575,19 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                     i = i + g_wTextWrapLinesDrawn;
+                 }
+                 nResult = askabout_menu_page_run_selection(record);
++                if ((record->wFlags & 0x1000) != 0) {
++                    if (nResult == 0)
++                        msgcap_choice(record_key, (const unsigned char huge *)g_speaker_names[0], 0);
++                } else {
++                    unsigned short topic;
++                    unsigned char *label;
++                    topic = *(unsigned short far *)((unsigned char far *)record + nResult * 10 + 9);
++                    if (topic != 0) {
++                        label = (unsigned char *)*(unsigned short *)((char *)g_pKeywordTable +
++                                                                    (topic - 1) * 2 + 2);
++                        msgcap_choice(record_key, label, 0);
++                    }
++                }
+                 record_key = ((DdxChoice far *)(record + 1))[nResult].dwTarget_key;
+             } else {
+                 if (record->wBody_len != 0) {
+@@ -1376,6 +1609,7 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+                         i = i + g_wTextWrapLinesDrawn;
+                         dialog_frame_draw(record, (int far *)0L);
+                         dialog_render_text_with_tokens(record, (unsigned char far *)0L, -1, 0, 0, i);
++                        dialog_capture_rendered_page(i);
+                         if (record->wSpeaker_id < 0x46) {
+                             dialog_draw_speech_bubble((unsigned char far *)pSpeakerName, 0);
+                         }
+@@ -1480,6 +1714,8 @@ int far dialog_play_record(unsigned long record_key, int modal_flag) {
+         }
+ 
+         g_bDialogWorldAnchorValid = 0;
++        if (captureStarted != 0)
++            msgcap_scope_end();
+         if (bNeedImageFree != 0) {
+             askabout_free_paged_image_table();
+         }
+diff --git a/bak/SRC/DIALOG/DIALOG.MAK b/bak/SRC/DIALOG/DIALOG.MAK
+index ee5c02c2b9f76b10faf6cca52f5c15e95c6487c8..67767e3d0ddb2907761c1e09625d70949c265ed9 100644
+--- a/bak/SRC/DIALOG/DIALOG.MAK
++++ b/bak/SRC/DIALOG/DIALOG.MAK
+@@ -1,5 +1,5 @@
+ # DIALOG module -- object list + rules (byte-verified recipes; hand-curate).
+-DIALOG_OBJS = OUT\ASKABOUT.OBJ OUT\DIALOG.OBJ OUT\EVTCOND.OBJ
++DIALOG_OBJS = OUT\ASKABOUT.OBJ OUT\DIALOG.OBJ OUT\EVTCOND.OBJ OUT\MSGLOG.OBJ OUT\MSGSAVE.OBJ OUT\MSGCAP.OBJ
+ 
+ OUT\ASKABOUT.OBJ : SRC\DIALOG\ASKABOUT.C
+ 	$(C_3O1Y) $(INC) -c -zCS4a91_TEXT -nOUT SRC\DIALOG\ASKABOUT.C
+@@ -7,3 +7,9 @@ OUT\DIALOG.OBJ : SRC\DIALOG\DIALOG.C
+ 	$(C_3O1Y) $(INC) -c -zCS4800_TEXT -nOUT SRC\DIALOG\DIALOG.C
+ OUT\EVTCOND.OBJ : SRC\DIALOG\EVTCOND.C
+ 	$(C_3O1Y) $(INC) -c -zCS4074_TEXT -nOUT SRC\DIALOG\EVTCOND.C
++OUT\MSGLOG.OBJ : SRC\DIALOG\MSGLOG.C
++	$(C_3O1Y) $(INC) -c -zCMSGLOG_TEXT -nOUT SRC\DIALOG\MSGLOG.C
++OUT\MSGSAVE.OBJ : SRC\DIALOG\MSGSAVE.C
++	$(C_3O1Y) $(INC) -c -zCMSGSAVE_TEXT -nOUT SRC\DIALOG\MSGSAVE.C
++OUT\MSGCAP.OBJ : SRC\DIALOG\MSGCAP.C
++	$(C_3O1Y) $(INC) -c -zCMSGCAP_TEXT -nOUT SRC\DIALOG\MSGCAP.C
+diff --git a/bak/SRC/DIALOG/MSGCAP.C b/bak/SRC/DIALOG/MSGCAP.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..fd82bd72b8e45426127919496f700822a11774e3
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGCAP.C
+@@ -0,0 +1,233 @@
++#include <dos.h>
++#include <stdio.h>
++#include <string.h>
++#include "SRC/DIALOG/MSGCAP.H"
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/GAME/GMAIN.H"
++#include "SRC/GAME/MAINDATA.H"
++#include "SRC/SCREENS/BOOKVIEW.H"
++
++#define MSGCAP_SCOPE_MAX 8
++
++static unsigned char g_msgcapScope[MSGCAP_SCOPE_MAX];
++static unsigned short g_msgcapDepth;
++static unsigned short g_msgcapSourceKind;
++static unsigned short g_msgcapSpeakerId;
++static unsigned short g_msgcapSceneId;
++static unsigned long g_msgcapKey;
++static unsigned long g_msgcapDisplayId;
++static unsigned long g_msgcapNextDisplayId;
++static unsigned short g_msgcapMaxEnd;
++static unsigned short g_msgcapLastScroll;
++static unsigned char g_msgcapSpeaker[MSGLOG_MAX_SPEAKER];
++static unsigned short g_msgcapSpeakerLen;
++static unsigned char g_msgcapLocation[MSGLOG_MAX_LOCATION];
++static unsigned short g_msgcapLocationLen;
++
++static unsigned short copy_far(unsigned char *dst, unsigned short cap,
++                               const unsigned char far *src) {
++    unsigned short n;
++
++    n = 0;
++    if (src != NULL) {
++        while (n < cap && src[n] != 0) {
++            if (src[n] >= 0x80 && src[n] <= 0xdf) {
++                if (n + 1 >= cap || src[n + 1] == 0)
++                    break;
++                dst[n] = src[n];
++                dst[n + 1] = src[n + 1];
++                n += 2;
++                continue;
++            }
++            dst[n] = src[n];
++            n++;
++        }
++    }
++    return n;
++}
++
++static void now(MsgLogTime *stamp) {
++    struct date d;
++    struct time t;
++
++    getdate(&d);
++    gettime(&t);
++    stamp->year = d.da_year;
++    stamp->month = d.da_mon;
++    stamp->day = d.da_day;
++    stamp->hour = t.ti_hour;
++    stamp->minute = t.ti_min;
++    stamp->second = t.ti_sec;
++    stamp->hundredth = t.ti_hund;
++}
++
++static int excluded(unsigned long key) {
++    key &= 0x7fffffffUL;
++#include "SRC/DIALOG/CAPCLASS.INC"
++    return 0;
++}
++
++static int scope_enabled(void) {
++    unsigned short i;
++
++    if (g_msgcapDepth > MSGCAP_SCOPE_MAX)
++        return 0;
++    for (i = 0; i < g_msgcapDepth; i++) {
++        if (g_msgcapScope[i] == 0)
++            return 0;
++    }
++    return 1;
++}
++
++static void context(MsgLogContext *ctx) {
++    memset(ctx, 0, sizeof(*ctx));
++    ctx->chapter = g_gameState.nChapter;
++    ctx->zone_id = g_gameState.nZoneId;
++    ctx->scene_id = g_msgcapSceneId;
++    ctx->speaker_id = g_msgcapSpeakerId;
++    ctx->source_key = g_msgcapKey;
++    ctx->source_file = g_msgcapKey == 0 ? 0xffff : (unsigned short)(g_msgcapKey / 100000UL);
++    ctx->speaker = g_msgcapSpeakerLen == 0 ? NULL : g_msgcapSpeaker;
++    ctx->speaker_len = g_msgcapSpeakerLen;
++    ctx->location = g_msgcapLocation;
++    ctx->location_len = g_msgcapLocationLen;
++    if (g_msgcapSpeakerLen == 0)
++        ctx->flags |= MSGLOG_EV_NARRATION;
++}
++
++void far msgcap_init(void) {
++    g_msgcapDepth = 0;
++    g_msgcapSourceKind = 0;
++    g_msgcapSpeakerId = 0;
++    g_msgcapSceneId = 0xffff;
++    g_msgcapKey = 0;
++    g_msgcapDisplayId = 0;
++    g_msgcapNextDisplayId = 0;
++    g_msgcapMaxEnd = 0;
++    g_msgcapLastScroll = 0;
++    g_msgcapSpeakerLen = 0;
++    g_msgcapLocationLen = (unsigned short)sprintf((char *)g_msgcapLocation, "Zone %u",
++                                                  (unsigned int)g_gameState.nZoneId);
++}
++
++int far msgcap_scope_begin(unsigned long key, unsigned short speaker_id,
++                           const unsigned char far *speaker) {
++    MsgLogContext ctx;
++    MsgLogTime stamp;
++    int active;
++
++    active = !excluded(key);
++    if (active) {
++        msgcap_display(MSGCAP_DIALOG, key, speaker_id, speaker);
++        context(&ctx);
++        now(&stamp);
++        active = msglog_conv_begin(&ctx, &stamp) == MSGLOG_OK;
++    }
++    if (g_msgcapDepth < MSGCAP_SCOPE_MAX)
++        g_msgcapScope[g_msgcapDepth] = (unsigned char)active;
++    g_msgcapDepth++;
++    return active ? MSGLOG_OK : MSGLOG_E_SUPPRESSED;
++}
++
++void far msgcap_scope_end(void) {
++    MsgLogTime stamp;
++    int active;
++
++    if (g_msgcapDepth == 0)
++        return;
++    g_msgcapDepth--;
++    active = g_msgcapDepth < MSGCAP_SCOPE_MAX ? g_msgcapScope[g_msgcapDepth] : 0;
++    if (active) {
++        now(&stamp);
++        msglog_conv_end(&stamp);
++    }
++}
++
++void far msgcap_display(unsigned int source_kind, unsigned long key,
++                        unsigned short speaker_id, const unsigned char far *speaker) {
++    g_msgcapSourceKind = source_kind;
++    g_msgcapKey = key & 0x7fffffffUL;
++    g_msgcapSpeakerId = speaker_id;
++    g_msgcapSpeakerLen = copy_far(g_msgcapSpeaker, MSGLOG_MAX_SPEAKER, speaker);
++    g_msgcapNextDisplayId++;
++    if (g_msgcapNextDisplayId == 0)
++        g_msgcapNextDisplayId++;
++    g_msgcapDisplayId = g_msgcapNextDisplayId;
++    g_msgcapMaxEnd = 0;
++    g_msgcapLastScroll = 0xffff;
++    if (g_msgcapSceneId == 0xffff) {
++        g_msgcapLocationLen = (unsigned short)sprintf((char *)g_msgcapLocation, "Zone %u",
++                                                      (unsigned int)g_gameState.nZoneId);
++    }
++}
++
++int far msgcap_page(const unsigned char huge *text, unsigned short start,
++                    unsigned short end, unsigned short scroll) {
++    MsgLogContext ctx;
++    MsgLogTime stamp;
++
++    if (text == NULL || end <= start || g_msgcapDisplayId == 0 || excluded(g_msgcapKey) ||
++        !scope_enabled())
++        return MSGLOG_E_SUPPRESSED;
++    if (end <= g_msgcapMaxEnd || (scroll == g_msgcapLastScroll && end == g_msgcapMaxEnd))
++        return MSGLOG_E_SUPPRESSED;
++    g_msgcapMaxEnd = end;
++    g_msgcapLastScroll = scroll;
++    context(&ctx);
++    now(&stamp);
++    if (g_msgcapSourceKind == MSGCAP_SCENE)
++        return msglog_append_scene(&ctx, &stamp, text + start, end - start);
++    return msglog_append_span(&ctx, &stamp, text + start, end - start);
++}
++
++int far msgcap_rendered(unsigned short scroll) {
++    return msgcap_page((const unsigned char huge *)g_pMainScratchBuf,
++                       g_wTextWrapByteStart, g_wTextWrapByteEnd, scroll);
++}
++
++int far msgcap_choice(unsigned long key, const unsigned char huge *label,
++                      unsigned short label_len) {
++    MsgLogContext ctx;
++    MsgLogTime stamp;
++
++    if (label == NULL || excluded(key) || !scope_enabled())
++        return MSGLOG_E_SUPPRESSED;
++    if (label_len == 0) {
++        while (label[label_len] != 0 && label_len < MSGLOG_MAX_BODY)
++            label_len++;
++    }
++    if (label_len == 0)
++        return MSGLOG_E_SUPPRESSED;
++    g_msgcapKey = key & 0x7fffffffUL;
++    context(&ctx);
++    now(&stamp);
++    return msglog_append_choice(&ctx, &stamp, label, label_len);
++}
++
++void far msgcap_scene_enter(unsigned short scene_id, unsigned long key,
++                            const unsigned char far *title) {
++    int same;
++    int sameScene;
++
++    key &= 0x7fffffffUL;
++    sameScene = g_msgcapSceneId == scene_id;
++    same = g_msgcapSourceKind == MSGCAP_SCENE && g_msgcapSceneId == scene_id &&
++           g_msgcapKey == key;
++    g_msgcapSceneId = scene_id;
++    if (title != NULL)
++        g_msgcapLocationLen = copy_far(g_msgcapLocation, MSGLOG_MAX_LOCATION, title);
++    else if (!sameScene)
++        g_msgcapLocationLen = 0;
++    if (g_msgcapLocationLen == 0)
++        g_msgcapLocationLen = (unsigned short)sprintf((char *)g_msgcapLocation, "Zone %u",
++                                                      (unsigned int)g_gameState.nZoneId);
++    if (!same)
++        msgcap_display(MSGCAP_SCENE, key, 0, NULL);
++}
++
++void far msgcap_scene_leave(void) {
++    g_msgcapSceneId = 0xffff;
++    g_msgcapDisplayId = 0;
++    g_msgcapLocationLen = (unsigned short)sprintf((char *)g_msgcapLocation, "Zone %u",
++                                                  (unsigned int)g_gameState.nZoneId);
++}
+diff --git a/bak/SRC/DIALOG/MSGCAP.H b/bak/SRC/DIALOG/MSGCAP.H
+new file mode 100644
+index 0000000000000000000000000000000000000000..23e887dc44a3f8bc619515f292ca31b2e8d51771
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGCAP.H
+@@ -0,0 +1,25 @@
++#ifndef BAK_MSGCAP_H
++#define BAK_MSGCAP_H
++
++#define MSGCAP_DIALOG 1
++#define MSGCAP_DIRECT 2
++#define MSGCAP_CUTSCENE 3
++#define MSGCAP_SCENE 4
++
++extern void far msgcap_init(void);
++extern int far msgcap_scope_begin(unsigned long key, unsigned short speaker_id,
++                                  const unsigned char far *speaker);
++extern void far msgcap_scope_end(void);
++extern void far msgcap_display(unsigned int source_kind, unsigned long key,
++                               unsigned short speaker_id,
++                               const unsigned char far *speaker);
++extern int far msgcap_page(const unsigned char huge *text, unsigned short start,
++                           unsigned short end, unsigned short scroll);
++extern int far msgcap_rendered(unsigned short scroll);
++extern int far msgcap_choice(unsigned long key, const unsigned char huge *label,
++                             unsigned short label_len);
++extern void far msgcap_scene_enter(unsigned short scene_id, unsigned long key,
++                                   const unsigned char far *title);
++extern void far msgcap_scene_leave(void);
++
++#endif
+diff --git a/bak/SRC/DIALOG/MSGLOG.C b/bak/SRC/DIALOG/MSGLOG.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..c1ca49a697e122f781756855b7f8d584b318994e
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGLOG.C
+@@ -0,0 +1,1289 @@
++/**
++ * @file  MSGLOG.C
++ * @brief Message-log (.MLG) v1 data core. See MSGLOG.H for the contract and
++ *        docs/research/message-log-format.md (main repo) for the byte layout.
++ *
++ * Implementation notes
++ * --------------------
++ *  * Every integer goes to disk field by field through put_u16/put_u32 into a
++ *    byte array. No C struct is ever written, so 16-bit packing and pointer
++ *    size never leak into the format.
++ *  * Resident cost is deliberately tiny: a handful of scalars plus the 64-byte
++ *    CRC nibble table. There is no persistent buffer -- the append path streams
++ *    the caller's strings straight to the file handle, and the two block
++ *    operations (snapshot copy, whole-history CRC) borrow a caller-owned
++ *    scratch block that the caller can free again the moment they return.
++ *  * Far/huge string walks use huge pointers so a span that starts near the top
++ *    of a segment cannot wrap its offset.
++ */
++
++#include <stdio.h>
++#include <string.h>
++#include <io.h>
++
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/IO/DOSRW.H"
++
++/* Borland open() flags: O_RDONLY 1, O_WRONLY 2, O_RDWR 4, O_CREAT 0x100,
++   O_TRUNC 0x200, O_BINARY 0x8000 (the same literals SAVEGAME.C uses). */
++#define MSGLOG_O_RDONLY 0x8001
++#define MSGLOG_O_RDWR 0x8004
++#define MSGLOG_O_CREATE 0x8304
++#define MSGLOG_S_RW 0x0180
++
++#define MSGLOG_SEEK_SET 0
++#define MSGLOG_SEEK_END 2
++
++/* ------------------------------------------------------------------ */
++/* Module state (the whole resident footprint)                         */
++/* ------------------------------------------------------------------ */
++
++static int g_mlgBaseState = MSGLOG_STATE_INACTIVE;
++static int g_mlgTransitionDepth = 0;
++static int g_mlgViewerDepth = 0;
++static int g_mlgConvDepth = 0;
++static int g_mlgLastError = MSGLOG_OK;
++
++static int g_mlgWorkFd = -1;
++static int g_mlgCandFd = -1;
++
++static unsigned short g_mlgFlags = 0;
++static long g_mlgCommitted = MSGLOG_HEADER_SIZE;
++static unsigned long g_mlgEventCount = 0;
++static unsigned long g_mlgNextSeq = 1;
++static long g_mlgLastOffset = 0;
++static unsigned long g_mlgConvId = 0;
++static MsgLogTime g_mlgCreated;
++
++/* Candidate metadata, filled by msglog_load_candidate(). */
++static long g_mlgCandCommitted = 0;
++static unsigned long g_mlgCandEvents = 0;
++static unsigned long g_mlgCandNextSeq = 1;
++static long g_mlgCandLastOffset = 0;
++static unsigned short g_mlgCandFlags = 0;
++static MsgLogTime g_mlgCandCreated;
++
++static unsigned char far *g_mlgScratch = NULL;
++static unsigned int g_mlgScratchLen = 0;
++
++/* CRC-32/ISO-HDLC, nibble-wise: 64 bytes of table instead of 1 KiB. */
++static unsigned long g_mlgCrcNibble[16] = {
++    0x00000000UL, 0x1DB71064UL, 0x3B6E20C8UL, 0x26D930ACUL,
++    0x76DC4190UL, 0x6B6B51F4UL, 0x4DB26158UL, 0x5005713CUL,
++    0xEDB88320UL, 0xF00F9344UL, 0xD6D6A3E8UL, 0xCB61B38CUL,
++    0x9B64C2B0UL, 0x86D3D2D4UL, 0xA00AE278UL, 0xBDBDF21CUL};
++
++/* ------------------------------------------------------------------ */
++/* Little-endian field primitives                                      */
++/* ------------------------------------------------------------------ */
++
++static void msglog_put_u16(unsigned char *p, unsigned int off, unsigned int v) {
++    p[off] = (unsigned char)(v & 0xff);
++    p[off + 1] = (unsigned char)((v >> 8) & 0xff);
++}
++
++static void msglog_put_u32(unsigned char *p, unsigned int off, unsigned long v) {
++    p[off] = (unsigned char)(v & 0xffUL);
++    p[off + 1] = (unsigned char)((v >> 8) & 0xffUL);
++    p[off + 2] = (unsigned char)((v >> 16) & 0xffUL);
++    p[off + 3] = (unsigned char)((v >> 24) & 0xffUL);
++}
++
++static unsigned int msglog_get_u16(const unsigned char *p, unsigned int off) {
++    return (unsigned int)p[off] | ((unsigned int)p[off + 1] << 8);
++}
++
++static unsigned long msglog_get_u32(const unsigned char *p, unsigned int off) {
++    return (unsigned long)p[off] | ((unsigned long)p[off + 1] << 8) |
++           ((unsigned long)p[off + 2] << 16) | ((unsigned long)p[off + 3] << 24);
++}
++
++unsigned long far msglog_crc32_update(unsigned long crc, const unsigned char huge *data,
++                                      unsigned int len) {
++    unsigned int i;
++    for (i = 0; i < len; i++) {
++        crc ^= (unsigned long)data[i];
++        crc = (crc >> 4) ^ g_mlgCrcNibble[(unsigned int)(crc & 0x0fUL)];
++        crc = (crc >> 4) ^ g_mlgCrcNibble[(unsigned int)(crc & 0x0fUL)];
++    }
++    return crc;
++}
++
++/** Same CRC over a DS-relative buffer -- avoids any near->huge pointer cast. */
++static unsigned long msglog_crc32_near(unsigned long crc, const unsigned char *data,
++                                       unsigned int len) {
++    unsigned int i;
++    for (i = 0; i < len; i++) {
++        crc ^= (unsigned long)data[i];
++        crc = (crc >> 4) ^ g_mlgCrcNibble[(unsigned int)(crc & 0x0fUL)];
++        crc = (crc >> 4) ^ g_mlgCrcNibble[(unsigned int)(crc & 0x0fUL)];
++    }
++    return crc;
++}
++
++/* ------------------------------------------------------------------ */
++/* State machine                                                       */
++/* ------------------------------------------------------------------ */
++
++void far msglog_init(void) {
++    g_mlgBaseState = MSGLOG_STATE_INACTIVE;
++    g_mlgTransitionDepth = 0;
++    g_mlgViewerDepth = 0;
++    g_mlgConvDepth = 0;
++    g_mlgLastError = MSGLOG_OK;
++    g_mlgWorkFd = -1;
++    g_mlgCandFd = -1;
++    g_mlgFlags = 0;
++    g_mlgCommitted = MSGLOG_HEADER_SIZE;
++    g_mlgEventCount = 0;
++    g_mlgNextSeq = 1;
++    g_mlgLastOffset = 0;
++    g_mlgConvId = 0;
++    g_mlgScratch = NULL;
++    g_mlgScratchLen = 0;
++    memset(&g_mlgCreated, 0, sizeof(g_mlgCreated));
++}
++
++int far msglog_set_scratch(unsigned char far *buf, unsigned int size) {
++    if (buf != NULL && size < MSGLOG_MIN_SCRATCH)
++        return MSGLOG_E_PARAM;
++    g_mlgScratch = buf;
++    g_mlgScratchLen = (buf != NULL) ? size : 0;
++    return MSGLOG_OK;
++}
++
++int far msglog_base_state(void) { return g_mlgBaseState; }
++
++int far msglog_state(void) {
++    /* FAILED outranks the suppression counters on purpose: a timeline that can
++       no longer record is a condition the player must be told about, and
++       leaving a viewer must never look like a return to healthy recording. */
++    if (g_mlgBaseState == MSGLOG_STATE_FAILED)
++        return MSGLOG_STATE_FAILED;
++    if (g_mlgViewerDepth > 0)
++        return MSGLOG_STATE_VIEWER;
++    if (g_mlgTransitionDepth > 0)
++        return MSGLOG_STATE_TRANSITION;
++    return g_mlgBaseState;
++}
++
++int far msglog_recording_enabled(void) {
++    return (g_mlgBaseState == MSGLOG_STATE_ACTIVE && g_mlgTransitionDepth == 0 &&
++            g_mlgViewerDepth == 0 && g_mlgWorkFd >= 0)
++               ? 1
++               : 0;
++}
++
++int far msglog_last_error(void) { return g_mlgLastError; }
++
++void far msglog_enter_transition(void) { g_mlgTransitionDepth++; }
++
++void far msglog_leave_transition(void) {
++    if (g_mlgTransitionDepth > 0)
++        g_mlgTransitionDepth--;
++}
++
++void far msglog_enter_viewer(void) { g_mlgViewerDepth++; }
++
++void far msglog_leave_viewer(void) {
++    if (g_mlgViewerDepth > 0)
++        g_mlgViewerDepth--;
++}
++
++unsigned long far msglog_conversation_id(void) { return g_mlgConvId; }
++
++unsigned long far msglog_event_count(void) { return g_mlgEventCount; }
++
++unsigned short far msglog_header_flags(void) { return g_mlgFlags; }
++
++static int msglog_fail(int code) {
++    g_mlgLastError = code;
++    g_mlgBaseState = MSGLOG_STATE_FAILED;
++    return code;
++}
++
++/* ------------------------------------------------------------------ */
++/* Header I/O                                                          */
++/* ------------------------------------------------------------------ */
++
++static void msglog_build_header(unsigned char *hdr, unsigned short flags, unsigned long gam_len,
++                                unsigned long gam_crc, long committed, unsigned long events,
++                                unsigned long next_seq, long last_off, unsigned long data_crc,
++                                const MsgLogTime *created) {
++    unsigned long crc;
++
++    memset(hdr, 0, MSGLOG_HEADER_SIZE);
++    hdr[0] = MSGLOG_MAGIC0;
++    hdr[1] = MSGLOG_MAGIC1;
++    hdr[2] = MSGLOG_MAGIC2;
++    hdr[3] = MSGLOG_MAGIC3;
++    msglog_put_u16(hdr, 4, MSGLOG_FORMAT_VERSION);
++    msglog_put_u16(hdr, 6, MSGLOG_HEADER_SIZE);
++    msglog_put_u16(hdr, 8, flags);
++    msglog_put_u16(hdr, 10, MSGLOG_ENCODING_BAKZH_V1);
++    msglog_put_u32(hdr, 12, MSGLOG_MAPPING_FINGERPRINT);
++    msglog_put_u32(hdr, 16, gam_len);
++    msglog_put_u32(hdr, 20, gam_crc);
++    msglog_put_u32(hdr, 24, (unsigned long)committed);
++    msglog_put_u32(hdr, 28, events);
++    msglog_put_u32(hdr, 32, next_seq);
++    msglog_put_u32(hdr, 36, (unsigned long)last_off);
++    msglog_put_u32(hdr, 40, data_crc);
++    msglog_put_u16(hdr, 44, created->year);
++    hdr[46] = created->month;
++    hdr[47] = created->day;
++    hdr[48] = created->hour;
++    hdr[49] = created->minute;
++    hdr[50] = created->second;
++    hdr[51] = created->hundredth;
++    /* 52..59 reserved, already zero */
++    crc = msglog_crc32_near(MSGLOG_CRC32_INIT, hdr, 60);
++    msglog_put_u32(hdr, 60, MSGLOG_CRC32_FINAL(crc));
++}
++
++/** Rewrite the 64-byte header of the open working file from module state. */
++static int msglog_flush_header(unsigned short extra_flags) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    msglog_build_header(hdr, (unsigned short)((g_mlgFlags | extra_flags) & ~MSGLOG_HF_SNAPSHOT), 0UL,
++                        0UL, g_mlgCommitted, g_mlgEventCount, g_mlgNextSeq, g_mlgLastOffset, 0UL,
++                        &g_mlgCreated);
++    if (lseek(g_mlgWorkFd, 0L, MSGLOG_SEEK_SET) != 0L)
++        return MSGLOG_E_IO;
++    if (write(g_mlgWorkFd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE)
++        return MSGLOG_E_IO;
++    return MSGLOG_OK;
++}
++
++/**
++ * Parse and validate a 64-byte header image.
++ * @param check_binding non-zero to enforce the bound-GAM fingerprint.
++ */
++static int msglog_parse_header(const unsigned char *hdr, long file_len, unsigned long gam_len,
++                               unsigned long gam_crc, int check_binding, unsigned short *flags_out,
++                               long *committed_out, unsigned long *events_out,
++                               unsigned long *next_seq_out, long *last_off_out,
++                               unsigned long *data_crc_out) {
++    unsigned long stored;
++    unsigned long computed;
++    unsigned short flags;
++    unsigned long committed;
++    long last_off;
++
++    if (hdr[0] != MSGLOG_MAGIC0 || hdr[1] != MSGLOG_MAGIC1 || hdr[2] != MSGLOG_MAGIC2 ||
++        hdr[3] != MSGLOG_MAGIC3)
++        return MSGLOG_E_MAGIC;
++    if (msglog_get_u16(hdr, 4) != MSGLOG_FORMAT_VERSION)
++        return MSGLOG_E_VERSION;
++    if (msglog_get_u16(hdr, 6) != MSGLOG_HEADER_SIZE)
++        return MSGLOG_E_HEADER;
++    stored = msglog_get_u32(hdr, 60);
++    computed = MSGLOG_CRC32_FINAL(msglog_crc32_near(MSGLOG_CRC32_INIT, hdr, 60));
++    if (stored != computed)
++        return MSGLOG_E_HEADER;
++    if (msglog_get_u16(hdr, 10) != MSGLOG_ENCODING_BAKZH_V1)
++        return MSGLOG_E_ENCODING;
++    if (msglog_get_u32(hdr, 12) != MSGLOG_MAPPING_FINGERPRINT)
++        return MSGLOG_E_ENCODING;
++
++    flags = (unsigned short)msglog_get_u16(hdr, 8);
++    committed = msglog_get_u32(hdr, 24);
++    if (committed < (unsigned long)MSGLOG_HEADER_SIZE)
++        return MSGLOG_E_RANGE;
++    if (committed > (unsigned long)MSGLOG_MAX_FILE)
++        return MSGLOG_E_RANGE;
++    if ((long)committed > file_len)
++        return MSGLOG_E_TRUNC;
++    last_off = (long)msglog_get_u32(hdr, 36);
++    if (last_off != 0 &&
++        (last_off < MSGLOG_HEADER_SIZE || (unsigned long)last_off >= committed))
++        return MSGLOG_E_RANGE;
++    if (check_binding) {
++        if (!(flags & MSGLOG_HF_GAM_BOUND))
++            return MSGLOG_E_BINDING;
++        if (msglog_get_u32(hdr, 16) != gam_len || msglog_get_u32(hdr, 20) != gam_crc)
++            return MSGLOG_E_BINDING;
++    }
++
++    *flags_out = flags;
++    *committed_out = (long)committed;
++    *events_out = msglog_get_u32(hdr, 28);
++    *next_seq_out = msglog_get_u32(hdr, 32);
++    *last_off_out = last_off;
++    *data_crc_out = msglog_get_u32(hdr, 40);
++    return MSGLOG_OK;
++}
++
++/* ------------------------------------------------------------------ */
++/* Record verification / scanning                                      */
++/* ------------------------------------------------------------------ */
++
++/**
++ * Read the record at @p off and verify its length bounds and CRC32.
++ * @param head_out optional 52-byte destination for the record head.
++ * @return MSGLOG_OK, or MSGLOG_E_TRUNC / _RANGE / _CRC / _IO.
++ */
++static int msglog_verify_record(int fd, long off, long committed, unsigned char *head_out,
++                                unsigned long *len_out) {
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned char chunk[64];
++    unsigned long total;
++    unsigned long crc;
++    unsigned long remaining;
++    unsigned long stored;
++    unsigned int s_len;
++    unsigned int l_len;
++    unsigned int b_len;
++    int n;
++
++    if (off < MSGLOG_HEADER_SIZE || off >= committed)
++        return MSGLOG_E_RANGE;
++    if (lseek(fd, off, MSGLOG_SEEK_SET) != off)
++        return MSGLOG_E_IO;
++    if (read(fd, head, MSGLOG_EVENT_HEAD_SIZE) != MSGLOG_EVENT_HEAD_SIZE)
++        return MSGLOG_E_TRUNC;
++    total = msglog_get_u32(head, 0);
++    if (total < (unsigned long)MSGLOG_EVENT_MIN_RECORD || total > (unsigned long)MSGLOG_MAX_RECORD)
++        return MSGLOG_E_RANGE;
++    /* No overflow possible: total <= MSGLOG_MAX_RECORD and committed <= MSGLOG_MAX_FILE. */
++    if ((unsigned long)off + total > (unsigned long)committed)
++        return MSGLOG_E_TRUNC;
++    s_len = msglog_get_u16(head, 44);
++    l_len = msglog_get_u16(head, 46);
++    b_len = msglog_get_u16(head, 48);
++    if (s_len > MSGLOG_MAX_SPEAKER || l_len > MSGLOG_MAX_LOCATION || b_len > MSGLOG_MAX_BODY)
++        return MSGLOG_E_RANGE;
++    if ((unsigned long)MSGLOG_EVENT_HEAD_SIZE + s_len + l_len + b_len + 4UL != total)
++        return MSGLOG_E_RANGE;
++
++    crc = msglog_crc32_near(MSGLOG_CRC32_INIT, head, MSGLOG_EVENT_HEAD_SIZE);
++    remaining = total - MSGLOG_EVENT_HEAD_SIZE - 4UL;
++    while (remaining != 0) {
++        n = (remaining > sizeof(chunk)) ? (int)sizeof(chunk) : (int)remaining;
++        if (read(fd, chunk, n) != n)
++            return MSGLOG_E_TRUNC;
++        crc = msglog_crc32_near(crc, chunk, (unsigned int)n);
++        remaining -= (unsigned long)n;
++    }
++    if (read(fd, chunk, 4) != 4)
++        return MSGLOG_E_TRUNC;
++    stored = msglog_get_u32(chunk, 0);
++    if (stored != MSGLOG_CRC32_FINAL(crc))
++        return MSGLOG_E_CRC;
++
++    if (head_out != NULL)
++        memcpy(head_out, head, MSGLOG_EVENT_HEAD_SIZE);
++    if (len_out != NULL)
++        *len_out = total;
++    return MSGLOG_OK;
++}
++
++/**
++ * Walk records forward from the header, keeping the longest prefix in which
++ * every record verifies. Used when the header cannot be trusted.
++ */
++static void msglog_rescan(int fd, long file_len, long *committed, unsigned long *events,
++                          unsigned long *next_seq, long *last_off) {
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned long total;
++    unsigned long seq;
++    unsigned long high;
++    long off;
++
++    off = MSGLOG_HEADER_SIZE;
++    *events = 0;
++    *last_off = 0;
++    high = 0;
++    for (;;) {
++        if (msglog_verify_record(fd, off, file_len, head, &total) != MSGLOG_OK)
++            break;
++        seq = msglog_get_u32(head, 8);
++        if (seq > high)
++            high = seq;
++        *last_off = off;
++        (*events)++;
++        off += (long)total;
++    }
++    *committed = off;
++    *next_seq = high + 1UL;
++}
++
++/* ------------------------------------------------------------------ */
++/* Timeline creation / reopen / close                                  */
++/* ------------------------------------------------------------------ */
++
++int far msglog_new_timeline(const char *path, const MsgLogTime far *now) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    int fd;
++
++    if (path == NULL || now == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd >= 0) {
++        close(g_mlgWorkFd);
++        g_mlgWorkFd = -1;
++    }
++    fd = open((char *)path, MSGLOG_O_CREATE, MSGLOG_S_RW);
++    if (fd < 0)
++        return msglog_fail(MSGLOG_E_OPEN);
++    g_mlgFlags = 0;
++    g_mlgCommitted = MSGLOG_HEADER_SIZE;
++    g_mlgEventCount = 0;
++    g_mlgNextSeq = 1;
++    g_mlgLastOffset = 0;
++    g_mlgConvId = 0;
++    g_mlgConvDepth = 0;
++    g_mlgCreated.year = now->year;
++    g_mlgCreated.month = now->month;
++    g_mlgCreated.day = now->day;
++    g_mlgCreated.hour = now->hour;
++    g_mlgCreated.minute = now->minute;
++    g_mlgCreated.second = now->second;
++    g_mlgCreated.hundredth = now->hundredth;
++
++    msglog_build_header(hdr, 0, 0UL, 0UL, g_mlgCommitted, 0UL, 1UL, 0L, 0UL, &g_mlgCreated);
++    if (write(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE) {
++        close(fd);
++        return msglog_fail(MSGLOG_E_IO);
++    }
++    g_mlgWorkFd = fd;
++    g_mlgBaseState = MSGLOG_STATE_ACTIVE;
++    g_mlgLastError = MSGLOG_OK;
++    return MSGLOG_OK;
++}
++
++int far msglog_open_working(const char *path) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    long file_len;
++    unsigned short flags;
++    long committed;
++    unsigned long events;
++    unsigned long next_seq;
++    long last_off;
++    unsigned long data_crc;
++    int fd;
++    int rc;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd >= 0) {
++        close(g_mlgWorkFd);
++        g_mlgWorkFd = -1;
++    }
++    fd = open((char *)path, MSGLOG_O_RDWR);
++    if (fd < 0) {
++        g_mlgLastError = MSGLOG_E_OPEN;
++        return MSGLOG_E_OPEN;
++    }
++    file_len = filelength(fd);
++    if (file_len < MSGLOG_HEADER_SIZE) {
++        close(fd);
++        g_mlgLastError = MSGLOG_E_TRUNC;
++        return MSGLOG_E_TRUNC;
++    }
++    if (read(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE) {
++        close(fd);
++        g_mlgLastError = MSGLOG_E_IO;
++        return MSGLOG_E_IO;
++    }
++    rc = msglog_parse_header(hdr, file_len, 0UL, 0UL, 0, &flags, &committed, &events, &next_seq,
++                             &last_off, &data_crc);
++    if (rc == MSGLOG_E_MAGIC || rc == MSGLOG_E_VERSION || rc == MSGLOG_E_ENCODING) {
++        /* Not ours, or a mapping/format we must refuse rather than misread. */
++        close(fd);
++        g_mlgLastError = rc;
++        return rc;
++    }
++    if (rc != MSGLOG_OK) {
++        /* Header itself is untrustworthy: fall back to the verifiable prefix. */
++        flags = (unsigned short)msglog_get_u16(hdr, 8);
++        msglog_rescan(fd, file_len, &committed, &events, &next_seq, &last_off);
++    } else if (last_off != 0 &&
++               msglog_verify_record(fd, last_off, committed, NULL, NULL) != MSGLOG_OK) {
++        msglog_rescan(fd, file_len, &committed, &events, &next_seq, &last_off);
++    }
++    g_mlgFlags = (unsigned short)(flags & ~(MSGLOG_HF_SNAPSHOT | MSGLOG_HF_SEALED |
++                                            MSGLOG_HF_DATA_CRC | MSGLOG_HF_GAM_BOUND));
++    /* The timeline keeps the creation stamp it was born with. Without this the
++       next header flush would write zeros over it and quietly rewrite history's
++       start time to "never". */
++    g_mlgCreated.year = (unsigned short)msglog_get_u16(hdr, 44);
++    g_mlgCreated.month = hdr[46];
++    g_mlgCreated.day = hdr[47];
++    g_mlgCreated.hour = hdr[48];
++    g_mlgCreated.minute = hdr[49];
++    g_mlgCreated.second = hdr[50];
++    g_mlgCreated.hundredth = hdr[51];
++    g_mlgCommitted = committed;
++    g_mlgEventCount = events;
++    g_mlgNextSeq = next_seq;
++    g_mlgLastOffset = last_off;
++    g_mlgConvId = 0;
++    g_mlgConvDepth = 0;
++    g_mlgWorkFd = fd;
++    g_mlgBaseState = MSGLOG_STATE_ACTIVE;
++    g_mlgLastError = MSGLOG_OK;
++    return MSGLOG_OK;
++}
++
++int far msglog_shutdown(void) {
++    int rc;
++
++    rc = MSGLOG_OK;
++    if (g_mlgCandFd >= 0) {
++        close(g_mlgCandFd);
++        g_mlgCandFd = -1;
++    }
++    if (g_mlgWorkFd >= 0) {
++        if (g_mlgBaseState != MSGLOG_STATE_FAILED)
++            rc = msglog_flush_header(MSGLOG_HF_SEALED);
++        if (close(g_mlgWorkFd) != 0 && rc == MSGLOG_OK)
++            rc = MSGLOG_E_IO;
++        g_mlgWorkFd = -1;
++    }
++    g_mlgBaseState = MSGLOG_STATE_INACTIVE;
++    g_mlgTransitionDepth = 0;
++    g_mlgViewerDepth = 0;
++    g_mlgConvDepth = 0;
++    g_mlgConvId = 0;
++    return rc;
++}
++
++/* ------------------------------------------------------------------ */
++/* Appending                                                           */
++/* ------------------------------------------------------------------ */
++
++unsigned int far msglog_split_point(const unsigned char huge *body, unsigned int len,
++                                    unsigned int limit) {
++    unsigned int i;
++    unsigned int last_safe;
++    unsigned int step;
++    unsigned char b;
++
++    if (limit == 0)
++        return 0;
++    if (len <= limit)
++        return len;
++    i = 0;
++    last_safe = 0;
++    while (i < len) {
++        b = body[i];
++        step = (b >= 0x80 && b <= 0xdf && (i + 1) < len) ? 2 : 1;
++        if (i + step > limit)
++            break;
++        i += step;
++        last_safe = i;
++    }
++    return last_safe;
++}
++
++/**
++ * Write one complete record. All fields already validated by the caller.
++ * On any I/O failure the module goes FAILED and the committed tail is untouched,
++ * so the verifiable prefix survives.
++ */
++static int msglog_write_record(unsigned short kind, unsigned short flags,
++                               const MsgLogContext far *ctx, const MsgLogTime far *now,
++                               unsigned short fragment_index, const unsigned char huge *body,
++                               unsigned int body_len) {
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned char tail[4];
++    unsigned long total;
++    unsigned long crc;
++    unsigned int s_len;
++    unsigned int l_len;
++
++    s_len = (ctx->speaker != NULL) ? ctx->speaker_len : 0;
++    l_len = (ctx->location != NULL) ? ctx->location_len : 0;
++    if (s_len > MSGLOG_MAX_SPEAKER || l_len > MSGLOG_MAX_LOCATION || body_len > MSGLOG_MAX_BODY)
++        return MSGLOG_E_RANGE;
++    total = (unsigned long)MSGLOG_EVENT_HEAD_SIZE + s_len + l_len + body_len + 4UL;
++    if ((unsigned long)g_mlgCommitted + total > (unsigned long)MSGLOG_MAX_FILE)
++        return MSGLOG_E_FULL;
++
++    memset(head, 0, MSGLOG_EVENT_HEAD_SIZE);
++    msglog_put_u32(head, 0, total);
++    msglog_put_u16(head, 4, kind);
++    msglog_put_u16(head, 6, flags);
++    msglog_put_u32(head, 8, g_mlgNextSeq);
++    msglog_put_u32(head, 12, g_mlgConvId);
++    msglog_put_u32(head, 16, (unsigned long)g_mlgLastOffset);
++    msglog_put_u16(head, 20, now->year);
++    head[22] = now->month;
++    head[23] = now->day;
++    head[24] = now->hour;
++    head[25] = now->minute;
++    head[26] = now->second;
++    head[27] = now->hundredth;
++    msglog_put_u16(head, 28, ctx->chapter);
++    msglog_put_u16(head, 30, ctx->zone_id);
++    msglog_put_u16(head, 32, ctx->scene_id);
++    msglog_put_u16(head, 34, ctx->speaker_id);
++    msglog_put_u32(head, 36, ctx->source_key);
++    msglog_put_u16(head, 40, ctx->source_file);
++    msglog_put_u16(head, 42, fragment_index);
++    msglog_put_u16(head, 44, s_len);
++    msglog_put_u16(head, 46, l_len);
++    msglog_put_u16(head, 48, body_len);
++    msglog_put_u16(head, 50, 0);
++
++    /* Drop any partial record left behind by an interrupted append. */
++    if (chsize(g_mlgWorkFd, g_mlgCommitted) != 0)
++        return MSGLOG_E_IO;
++    if (lseek(g_mlgWorkFd, g_mlgCommitted, MSGLOG_SEEK_SET) != g_mlgCommitted)
++        return MSGLOG_E_IO;
++
++    crc = msglog_crc32_near(MSGLOG_CRC32_INIT, head, MSGLOG_EVENT_HEAD_SIZE);
++    if (write(g_mlgWorkFd, head, MSGLOG_EVENT_HEAD_SIZE) != MSGLOG_EVENT_HEAD_SIZE)
++        return MSGLOG_E_IO;
++    if (s_len != 0) {
++        crc = msglog_crc32_update(crc, (const unsigned char huge *)ctx->speaker, s_len);
++        if (dos_write((unsigned char far *)ctx->speaker, (long)s_len, g_mlgWorkFd) != (long)s_len)
++            return MSGLOG_E_IO;
++    }
++    if (l_len != 0) {
++        crc = msglog_crc32_update(crc, (const unsigned char huge *)ctx->location, l_len);
++        if (dos_write((unsigned char far *)ctx->location, (long)l_len, g_mlgWorkFd) != (long)l_len)
++            return MSGLOG_E_IO;
++    }
++    if (body_len != 0) {
++        crc = msglog_crc32_update(crc, body, body_len);
++        if (dos_write((unsigned char far *)body, (long)body_len, g_mlgWorkFd) != (long)body_len)
++            return MSGLOG_E_IO;
++    }
++    msglog_put_u32(tail, 0, MSGLOG_CRC32_FINAL(crc));
++    if (write(g_mlgWorkFd, tail, 4) != 4)
++        return MSGLOG_E_IO;
++
++    g_mlgLastOffset = g_mlgCommitted;
++    g_mlgCommitted += (long)total;
++    g_mlgEventCount++;
++    g_mlgNextSeq++;
++    return msglog_flush_header(0);
++}
++
++/** Common entry gate: returns MSGLOG_OK when the caller may write. */
++static int msglog_append_gate(const MsgLogContext far *ctx, const MsgLogTime far *now) {
++    if (ctx == NULL || now == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgBaseState == MSGLOG_STATE_FAILED)
++        return MSGLOG_E_STATE;
++    if (g_mlgBaseState != MSGLOG_STATE_ACTIVE || g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgTransitionDepth > 0 || g_mlgViewerDepth > 0)
++        return MSGLOG_E_SUPPRESSED;
++    return MSGLOG_OK;
++}
++
++static int msglog_append_fragments(unsigned short kind, const MsgLogContext far *ctx,
++                                   const MsgLogTime far *now, const unsigned char huge *body,
++                                   unsigned int body_len) {
++    unsigned int done;
++    unsigned int cut;
++    unsigned short frag;
++    unsigned short flags;
++    int rc;
++
++    rc = msglog_append_gate(ctx, now);
++    if (rc != MSGLOG_OK)
++        return rc;
++    if (body == NULL && body_len != 0)
++        return MSGLOG_E_PARAM;
++
++    if (body == NULL || body_len == 0) {
++        flags = (unsigned short)(ctx->flags & ~(MSGLOG_EV_CONTINUED | MSGLOG_EV_MORE));
++        rc = msglog_write_record(kind, flags, ctx, now, 0, NULL, 0);
++        if (rc != MSGLOG_OK)
++            return msglog_fail(rc);
++        return MSGLOG_OK;
++    }
++
++    done = 0;
++    frag = 0;
++    for (;;) {
++        cut = msglog_split_point(body + done, body_len - done, MSGLOG_MAX_BODY);
++        if (cut == 0) {
++            /* A lone lead byte with no trail: emit it rather than loop forever. */
++            cut = 1;
++        }
++        flags = (unsigned short)(ctx->flags & ~(MSGLOG_EV_CONTINUED | MSGLOG_EV_MORE));
++        if (frag != 0)
++            flags |= MSGLOG_EV_CONTINUED;
++        if (done + cut < body_len)
++            flags |= MSGLOG_EV_MORE;
++        rc = msglog_write_record(kind, flags, ctx, now, frag, body + done, cut);
++        if (rc != MSGLOG_OK)
++            return msglog_fail(rc);
++        done += cut;
++        frag++;
++        if (done >= body_len)
++            break;
++    }
++    return MSGLOG_OK;
++}
++
++int far msglog_conv_begin(const MsgLogContext far *ctx, const MsgLogTime far *now) {
++    int rc;
++
++    rc = msglog_append_gate(ctx, now);
++    if (rc != MSGLOG_OK)
++        return rc;
++    if (g_mlgConvDepth > 0) {
++        g_mlgConvDepth++;
++        return MSGLOG_OK;
++    }
++    /* A conversation is identified by the sequence number of its own begin
++       record -- no extra header field, and it is reconstructible from the
++       stream alone. */
++    g_mlgConvId = g_mlgNextSeq;
++    rc = msglog_write_record(MSGLOG_KIND_CONV_BEGIN, ctx->flags, ctx, now, 0, NULL, 0);
++    if (rc != MSGLOG_OK) {
++        g_mlgConvId = 0;
++        return msglog_fail(rc);
++    }
++    g_mlgConvDepth = 1;
++    return MSGLOG_OK;
++}
++
++int far msglog_conv_end(const MsgLogTime far *now) {
++    MsgLogContext ctx;
++    int rc;
++
++    if (now == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgConvDepth <= 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgConvDepth > 1) {
++        g_mlgConvDepth--;
++        return MSGLOG_OK;
++    }
++    memset(&ctx, 0, sizeof(ctx));
++    ctx.scene_id = 0xffff;
++    ctx.source_file = 0xffff;
++    rc = msglog_append_gate((const MsgLogContext far *)&ctx, now);
++    if (rc != MSGLOG_OK) {
++        /* Still close the scope: an unbalanced depth would leak the previous
++           NPC's conversation id into the next one. */
++        g_mlgConvDepth = 0;
++        g_mlgConvId = 0;
++        return rc;
++    }
++    rc = msglog_write_record(MSGLOG_KIND_CONV_END, 0, (const MsgLogContext far *)&ctx, now, 0,
++                             NULL, 0);
++    g_mlgConvDepth = 0;
++    g_mlgConvId = 0;
++    if (rc != MSGLOG_OK)
++        return msglog_fail(rc);
++    return MSGLOG_OK;
++}
++
++int far msglog_append_span(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                           const unsigned char huge *body, unsigned int body_len) {
++    return msglog_append_fragments(MSGLOG_KIND_TEXT, ctx, now, body, body_len);
++}
++
++int far msglog_append_choice(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                             const unsigned char huge *label, unsigned int label_len) {
++    return msglog_append_fragments(MSGLOG_KIND_CHOICE, ctx, now, label, label_len);
++}
++
++int far msglog_append_scene(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                            const unsigned char huge *body, unsigned int body_len) {
++    return msglog_append_fragments(MSGLOG_KIND_SCENE, ctx, now, body, body_len);
++}
++
++int far msglog_append_gap(const MsgLogTime far *now) {
++    MsgLogContext ctx;
++    int rc;
++
++    if (now == NULL)
++        return MSGLOG_E_PARAM;
++    memset(&ctx, 0, sizeof(ctx));
++    ctx.scene_id = 0xffff;
++    ctx.source_file = 0xffff;
++    rc = msglog_append_gate((const MsgLogContext far *)&ctx, now);
++    if (rc != MSGLOG_OK)
++        return rc;
++    g_mlgFlags |= MSGLOG_HF_HAS_GAP;
++    rc = msglog_write_record(MSGLOG_KIND_GAP, 0, (const MsgLogContext far *)&ctx, now, 0, NULL, 0);
++    if (rc != MSGLOG_OK)
++        return msglog_fail(rc);
++    return MSGLOG_OK;
++}
++
++/* ------------------------------------------------------------------ */
++/* Reading                                                             */
++/* ------------------------------------------------------------------ */
++
++int far msglog_first_offset(long far *out) {
++    if (out == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgEventCount == 0 || g_mlgCommitted <= MSGLOG_HEADER_SIZE)
++        return MSGLOG_E_EMPTY;
++    *out = MSGLOG_HEADER_SIZE;
++    return MSGLOG_OK;
++}
++
++int far msglog_last_offset(long far *out) {
++    if (out == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgEventCount == 0 || g_mlgLastOffset == 0)
++        return MSGLOG_E_EMPTY;
++    *out = g_mlgLastOffset;
++    return MSGLOG_OK;
++}
++
++int far msglog_next_offset(long cur, long far *out) {
++    unsigned long total;
++    int rc;
++
++    if (out == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    rc = msglog_verify_record(g_mlgWorkFd, cur, g_mlgCommitted, NULL, &total);
++    if (rc != MSGLOG_OK)
++        return rc;
++    if (cur + (long)total >= g_mlgCommitted)
++        return MSGLOG_E_EMPTY;
++    *out = cur + (long)total;
++    return MSGLOG_OK;
++}
++
++int far msglog_prev_offset(long cur, long far *out) {
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned long prev;
++    int rc;
++
++    if (out == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    rc = msglog_verify_record(g_mlgWorkFd, cur, g_mlgCommitted, head, NULL);
++    if (rc != MSGLOG_OK)
++        return rc;
++    prev = msglog_get_u32(head, 16);
++    if (prev == 0)
++        return MSGLOG_E_EMPTY;
++    if (prev < (unsigned long)MSGLOG_HEADER_SIZE || prev >= (unsigned long)g_mlgCommitted)
++        return MSGLOG_E_RANGE;
++    *out = (long)prev;
++    return MSGLOG_OK;
++}
++
++int far msglog_page_start(long from, int count, long far *out) {
++    long cur;
++    long prev;
++    int rc;
++
++    if (out == NULL || count < 0)
++        return MSGLOG_E_PARAM;
++    cur = from;
++    while (count > 0) {
++        rc = msglog_prev_offset(cur, &prev);
++        if (rc == MSGLOG_E_EMPTY)
++            break;
++        if (rc != MSGLOG_OK)
++            return rc;
++        cur = prev;
++        count--;
++    }
++    *out = cur;
++    return MSGLOG_OK;
++}
++
++int far msglog_read_event(long offset, MsgLogEvent far *ev, unsigned char far *speaker,
++                          unsigned int speaker_cap, unsigned char far *location,
++                          unsigned int location_cap, unsigned char far *body,
++                          unsigned int body_cap) {
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned long total;
++    unsigned int s_len;
++    unsigned int l_len;
++    unsigned int b_len;
++    long p;
++    int rc;
++
++    if (ev == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    rc = msglog_verify_record(g_mlgWorkFd, offset, g_mlgCommitted, head, &total);
++    if (rc != MSGLOG_OK)
++        return rc;
++    s_len = msglog_get_u16(head, 44);
++    l_len = msglog_get_u16(head, 46);
++    b_len = msglog_get_u16(head, 48);
++    if (speaker != NULL && s_len > speaker_cap)
++        return MSGLOG_E_RANGE;
++    if (location != NULL && l_len > location_cap)
++        return MSGLOG_E_RANGE;
++    if (body != NULL && b_len > body_cap)
++        return MSGLOG_E_RANGE;
++
++    ev->kind = (unsigned short)msglog_get_u16(head, 4);
++    ev->flags = (unsigned short)msglog_get_u16(head, 6);
++    ev->sequence = msglog_get_u32(head, 8);
++    ev->conversation = msglog_get_u32(head, 12);
++    ev->prev_offset = msglog_get_u32(head, 16);
++    ev->when.year = (unsigned short)msglog_get_u16(head, 20);
++    ev->when.month = head[22];
++    ev->when.day = head[23];
++    ev->when.hour = head[24];
++    ev->when.minute = head[25];
++    ev->when.second = head[26];
++    ev->when.hundredth = head[27];
++    ev->chapter = (unsigned short)msglog_get_u16(head, 28);
++    ev->zone_id = (unsigned short)msglog_get_u16(head, 30);
++    ev->scene_id = (unsigned short)msglog_get_u16(head, 32);
++    ev->speaker_id = (unsigned short)msglog_get_u16(head, 34);
++    ev->source_key = msglog_get_u32(head, 36);
++    ev->source_file = (unsigned short)msglog_get_u16(head, 40);
++    ev->fragment_index = (unsigned short)msglog_get_u16(head, 42);
++    ev->speaker_len = (unsigned short)s_len;
++    ev->location_len = (unsigned short)l_len;
++    ev->body_len = (unsigned short)b_len;
++    ev->offset = offset;
++    ev->record_length = total;
++
++    p = offset + MSGLOG_EVENT_HEAD_SIZE;
++    if (s_len != 0) {
++        if (speaker != NULL) {
++            if (lseek(g_mlgWorkFd, p, MSGLOG_SEEK_SET) != p)
++                return MSGLOG_E_IO;
++            if (dos_read(speaker, (long)s_len, g_mlgWorkFd) != (long)s_len)
++                return MSGLOG_E_IO;
++        }
++        p += (long)s_len;
++    }
++    if (l_len != 0) {
++        if (location != NULL) {
++            if (lseek(g_mlgWorkFd, p, MSGLOG_SEEK_SET) != p)
++                return MSGLOG_E_IO;
++            if (dos_read(location, (long)l_len, g_mlgWorkFd) != (long)l_len)
++                return MSGLOG_E_IO;
++        }
++        p += (long)l_len;
++    }
++    if (b_len != 0 && body != NULL) {
++        if (lseek(g_mlgWorkFd, p, MSGLOG_SEEK_SET) != p)
++            return MSGLOG_E_IO;
++        if (dos_read(body, (long)b_len, g_mlgWorkFd) != (long)b_len)
++            return MSGLOG_E_IO;
++    }
++    return MSGLOG_OK;
++}
++
++/* ------------------------------------------------------------------ */
++/* Snapshot / candidate                                                */
++/* ------------------------------------------------------------------ */
++
++int far msglog_crc32_file(const char *path, unsigned long far *length_out,
++                          unsigned long far *crc_out) {
++    unsigned long crc;
++    long remaining;
++    long total;
++    int chunk;
++    int fd;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++    fd = open((char *)path, MSGLOG_O_RDONLY);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++    total = filelength(fd);
++    remaining = total;
++    crc = MSGLOG_CRC32_INIT;
++    while (remaining > 0) {
++        chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++        if (dos_read(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++            close(fd);
++            return MSGLOG_E_IO;
++        }
++        crc = msglog_crc32_update(crc, (const unsigned char huge *)g_mlgScratch,
++                                  (unsigned int)chunk);
++        remaining -= (long)chunk;
++    }
++    if (close(fd) != 0)
++        return MSGLOG_E_IO;
++    if (length_out != NULL)
++        *length_out = (unsigned long)total;
++    if (crc_out != NULL)
++        *crc_out = MSGLOG_CRC32_FINAL(crc);
++    return MSGLOG_OK;
++}
++
++int far msglog_prepare_snapshot(const char *path, unsigned long gam_length,
++                                unsigned long gam_crc32) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    unsigned long crc;
++    long remaining;
++    int chunk;
++    int fd;
++    int rc;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++
++    fd = open((char *)path, MSGLOG_O_CREATE, MSGLOG_S_RW);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++    /* Placeholder header: rewritten once the data CRC is known. */
++    memset(hdr, 0, MSGLOG_HEADER_SIZE);
++    rc = MSGLOG_OK;
++    if (write(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE)
++        rc = MSGLOG_E_IO;
++    if (rc == MSGLOG_OK && lseek(g_mlgWorkFd, (long)MSGLOG_HEADER_SIZE, MSGLOG_SEEK_SET) !=
++                               (long)MSGLOG_HEADER_SIZE)
++        rc = MSGLOG_E_IO;
++
++    crc = MSGLOG_CRC32_INIT;
++    remaining = g_mlgCommitted - MSGLOG_HEADER_SIZE;
++    while (rc == MSGLOG_OK && remaining > 0) {
++        chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++        if (dos_read(g_mlgScratch, (long)chunk, g_mlgWorkFd) != (long)chunk) {
++            rc = MSGLOG_E_IO;
++            break;
++        }
++        crc = msglog_crc32_update(crc, (const unsigned char huge *)g_mlgScratch,
++                                  (unsigned int)chunk);
++        if (dos_write(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++            rc = MSGLOG_E_IO;
++            break;
++        }
++        remaining -= (long)chunk;
++    }
++    if (rc == MSGLOG_OK) {
++        msglog_build_header(hdr,
++                            (unsigned short)((g_mlgFlags & MSGLOG_HF_HAS_GAP) |
++                                             MSGLOG_HF_SNAPSHOT | MSGLOG_HF_SEALED |
++                                             MSGLOG_HF_DATA_CRC | MSGLOG_HF_GAM_BOUND),
++                            gam_length, gam_crc32, g_mlgCommitted, g_mlgEventCount, g_mlgNextSeq,
++                            g_mlgLastOffset, MSGLOG_CRC32_FINAL(crc), &g_mlgCreated);
++        if (lseek(fd, 0L, MSGLOG_SEEK_SET) != 0L)
++            rc = MSGLOG_E_IO;
++        else if (write(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE)
++            rc = MSGLOG_E_IO;
++    }
++    if (close(fd) != 0 && rc == MSGLOG_OK)
++        rc = MSGLOG_E_IO;
++    if (rc != MSGLOG_OK)
++        remove((char *)path);
++    /* Leave the working handle where the next append expects it. */
++    lseek(g_mlgWorkFd, g_mlgCommitted, MSGLOG_SEEK_SET);
++    return rc;
++}
++
++int far msglog_load_candidate(const char *path, unsigned long gam_length,
++                              unsigned long gam_crc32) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned long crc;
++    unsigned long data_crc;
++    unsigned long events;
++    unsigned long next_seq;
++    unsigned long scanned;
++    unsigned long total;
++    unsigned short flags;
++    long committed;
++    long last_off;
++    long file_len;
++    long off;
++    long prev;
++    long remaining;
++    int chunk;
++    int fd;
++    int rc;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++    msglog_discard_candidate();
++
++    fd = open((char *)path, MSGLOG_O_RDONLY);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++    file_len = filelength(fd);
++    if (file_len < MSGLOG_HEADER_SIZE) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    if (read(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE) {
++        close(fd);
++        return MSGLOG_E_IO;
++    }
++    rc = msglog_parse_header(hdr, file_len, gam_length, gam_crc32,
++                             (gam_length != 0UL || gam_crc32 != 0UL) ? 1 : 0, &flags, &committed,
++                             &events, &next_seq, &last_off, &data_crc);
++    if (rc != MSGLOG_OK) {
++        close(fd);
++        return rc;
++    }
++    if (!(flags & MSGLOG_HF_SNAPSHOT)) {
++        close(fd);
++        return MSGLOG_E_HEADER;
++    }
++
++    /* Whole-history CRC, chunked. This is the one place the full history is
++       hashed -- appends never redo it. */
++    if (flags & MSGLOG_HF_DATA_CRC) {
++        crc = MSGLOG_CRC32_INIT;
++        remaining = committed - MSGLOG_HEADER_SIZE;
++        while (remaining > 0) {
++            chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++            if (dos_read(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++                close(fd);
++                return MSGLOG_E_IO;
++            }
++            crc = msglog_crc32_update(crc, (const unsigned char huge *)g_mlgScratch,
++                                      (unsigned int)chunk);
++            remaining -= (long)chunk;
++        }
++        if (MSGLOG_CRC32_FINAL(crc) != data_crc) {
++            close(fd);
++            return MSGLOG_E_CRC;
++        }
++    }
++
++    /* Structural pass: every record must verify, its prev_offset must chain,
++       and the last one must land exactly on committed_length. */
++    off = MSGLOG_HEADER_SIZE;
++    scanned = 0;
++    prev = 0L;
++    while (off < committed) {
++        rc = msglog_verify_record(fd, off, committed, head, &total);
++        if (rc != MSGLOG_OK) {
++            close(fd);
++            return rc;
++        }
++        if (msglog_get_u32(head, 16) != (unsigned long)prev) {
++            close(fd);
++            return MSGLOG_E_RANGE;
++        }
++        prev = off;
++        scanned++;
++        off += (long)total;
++    }
++    if (off != committed) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    if (scanned != events) {
++        close(fd);
++        return MSGLOG_E_RANGE;
++    }
++    if ((unsigned long)prev != (unsigned long)last_off) {
++        close(fd);
++        return MSGLOG_E_RANGE;
++    }
++
++    g_mlgCandFd = fd;
++    g_mlgCandCommitted = committed;
++    g_mlgCandEvents = events;
++    g_mlgCandNextSeq = next_seq;
++    g_mlgCandLastOffset = prev;
++    g_mlgCandFlags = flags;
++    g_mlgCandCreated.year = (unsigned short)msglog_get_u16(hdr, 44);
++    g_mlgCandCreated.month = hdr[46];
++    g_mlgCandCreated.day = hdr[47];
++    g_mlgCandCreated.hour = hdr[48];
++    g_mlgCandCreated.minute = hdr[49];
++    g_mlgCandCreated.second = hdr[50];
++    g_mlgCandCreated.hundredth = hdr[51];
++    return MSGLOG_OK;
++}
++
++void far msglog_discard_candidate(void) {
++    if (g_mlgCandFd >= 0) {
++        close(g_mlgCandFd);
++        g_mlgCandFd = -1;
++    }
++    g_mlgCandCommitted = 0;
++    g_mlgCandEvents = 0;
++    g_mlgCandNextSeq = 1;
++    g_mlgCandLastOffset = 0;
++    g_mlgCandFlags = 0;
++}
++
++int far msglog_activate_candidate(const char *work_path) {
++    long remaining;
++    int chunk;
++    int fd;
++    int rc;
++
++    if (work_path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgCandFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++
++    /* The old working timeline is gone the moment we truncate: the caller must
++       treat a failure here as "history unavailable", never as "keep the old". */
++    if (g_mlgWorkFd >= 0) {
++        close(g_mlgWorkFd);
++        g_mlgWorkFd = -1;
++    }
++    g_mlgBaseState = MSGLOG_STATE_INACTIVE;
++
++    fd = open((char *)work_path, MSGLOG_O_CREATE, MSGLOG_S_RW);
++    if (fd < 0) {
++        msglog_discard_candidate();
++        return msglog_fail(MSGLOG_E_OPEN);
++    }
++    rc = MSGLOG_OK;
++    if (lseek(g_mlgCandFd, 0L, MSGLOG_SEEK_SET) != 0L)
++        rc = MSGLOG_E_IO;
++    remaining = g_mlgCandCommitted;
++    while (rc == MSGLOG_OK && remaining > 0) {
++        chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++        if (dos_read(g_mlgScratch, (long)chunk, g_mlgCandFd) != (long)chunk) {
++            rc = MSGLOG_E_IO;
++            break;
++        }
++        if (dos_write(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++            rc = MSGLOG_E_IO;
++            break;
++        }
++        remaining -= (long)chunk;
++    }
++    if (rc == MSGLOG_OK) {
++        /* Re-stamp as a working file: not a snapshot, no GAM binding, and the
++           stale data CRC dropped so a later append cannot contradict it. The
++           timeline keeps the snapshot's creation stamp, not today's. */
++        g_mlgCreated = g_mlgCandCreated;
++        g_mlgFlags = (unsigned short)(g_mlgCandFlags & MSGLOG_HF_HAS_GAP);
++        g_mlgCommitted = g_mlgCandCommitted;
++        g_mlgEventCount = g_mlgCandEvents;
++        g_mlgNextSeq = g_mlgCandNextSeq;
++        g_mlgLastOffset = g_mlgCandLastOffset;
++        g_mlgConvId = 0;
++        g_mlgConvDepth = 0;
++        g_mlgWorkFd = fd;
++        rc = msglog_flush_header(0);
++        if (rc != MSGLOG_OK) {
++            close(fd);
++            g_mlgWorkFd = -1;
++        }
++    } else {
++        close(fd);
++    }
++    msglog_discard_candidate();
++    if (rc != MSGLOG_OK)
++        return msglog_fail(rc);
++    g_mlgBaseState = MSGLOG_STATE_ACTIVE;
++    g_mlgLastError = MSGLOG_OK;
++    return MSGLOG_OK;
++}
+diff --git a/bak/SRC/DIALOG/MSGLOG.H b/bak/SRC/DIALOG/MSGLOG.H
+new file mode 100644
+index 0000000000000000000000000000000000000000..61ade35ae3ac2f38b9d3d06007b3bc37e0c25029
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGLOG.H
+@@ -0,0 +1,370 @@
++#ifndef BAK_MSGLOG_H
++#define BAK_MSGLOG_H
++
++/**
++ * @file  MSGLOG.H
++ * @brief Message-log (.MLG) v1 data core -- pure file/format layer.
++ *
++ * @details The in-game message log lets the player re-read NPC conversations,
++ *          quest hints and story text they have already seen.  This module is
++ *          the *data* half only: it owns the on-disk MLG v1 container, the
++ *          append/scan protocol and the recording state machine.  It knows
++ *          nothing about the dialog VM, the renderer, the save-game slots or
++ *          the UI -- callers hand it already-resolved bytes.
++ *
++ *          Deliberate dependency floor (keeps it linkable and testable on its
++ *          own, and keeps the resident cost near zero): the C runtime plus
++ *          @c SRC/IO/DOSRW.H.  No allocator: the two operations that need a
++ *          block buffer (snapshot copy, whole-history CRC) borrow one the
++ *          caller installs with @ref msglog_set_scratch and may take back
++ *          afterwards.  Nothing in this module ever touches
++ *          @c g_pMainScratchBuf, which savegame_write() is using at exactly
++ *          the moment a snapshot is taken.
++ *
++ *          Byte layout, endianness, checksum ranges and worked golden fixtures
++ *          are frozen in docs/research/message-log-format.md (main repo).
++ *          Every integer is written field by field, little endian; no C struct
++ *          is ever handed to write().
++ */
++
++/* ------------------------------------------------------------------ */
++/* Format constants -- keep in lock-step with tools/text/message_log.py */
++/* ------------------------------------------------------------------ */
++
++#define MSGLOG_MAGIC0 'B'
++#define MSGLOG_MAGIC1 'K'
++#define MSGLOG_MAGIC2 'M'
++#define MSGLOG_MAGIC3 'L'
++
++#define MSGLOG_FORMAT_VERSION 1
++#define MSGLOG_HEADER_SIZE 64
++#define MSGLOG_EVENT_HEAD_SIZE 52
++#define MSGLOG_EVENT_MIN_RECORD (MSGLOG_EVENT_HEAD_SIZE + 4)
++
++/** Encoding id 1 = the BAK-ZH compact 2-byte game encoding (see ADR-001). */
++#define MSGLOG_ENCODING_BAKZH_V1 1
++
++/**
++ * CRC32 of the canonical serialization of localization/generated/zh_mapping.json.
++ * Generated by `python -m tools.text.message_log fingerprint --c-define`; a
++ * mapping change that would turn stored history into mojibake makes an old file
++ * fail to load instead of rendering garbage.
++ */
++#define MSGLOG_MAPPING_FINGERPRINT 0x9659C961UL
++
++/* Per-field caps. A record therefore never exceeds MSGLOG_MAX_RECORD bytes,
++   which is what lets the reader bound-check before it indexes. */
++#define MSGLOG_MAX_SPEAKER 64
++#define MSGLOG_MAX_LOCATION 64
++#define MSGLOG_MAX_BODY 512
++#define MSGLOG_MAX_RECORD (MSGLOG_EVENT_HEAD_SIZE + MSGLOG_MAX_SPEAKER + \
++                           MSGLOG_MAX_LOCATION + MSGLOG_MAX_BODY + 4)
++
++/** Hard ceiling on a .MLG file: keeps every offset + length sum inside lseek's
++ *  signed long, with three orders of magnitude to spare. */
++#define MSGLOG_MAX_FILE 0x3FFFFFFFL
++
++/* --- header flags --- */
++#define MSGLOG_HF_SNAPSHOT 0x0001  /**< save-slot snapshot (else: live working file) */
++#define MSGLOG_HF_HAS_GAP 0x0002   /**< timeline contains a recording gap */
++#define MSGLOG_HF_SEALED 0x0004    /**< header last written by a clean close */
++#define MSGLOG_HF_DATA_CRC 0x0008  /**< data_crc32 covers [64, committed_length) */
++#define MSGLOG_HF_GAM_BOUND 0x0010 /**< bound_gam_length/crc32 are meaningful */
++
++/* --- event kinds --- */
++#define MSGLOG_KIND_NONE 0
++#define MSGLOG_KIND_CONV_BEGIN 1
++#define MSGLOG_KIND_TEXT 2
++#define MSGLOG_KIND_CHOICE 3
++#define MSGLOG_KIND_CONV_END 4
++#define MSGLOG_KIND_GAP 5
++#define MSGLOG_KIND_SCENE 6
++
++/* --- event flags --- */
++#define MSGLOG_EV_CONTINUED 0x0001 /**< body continues the previous record's body */
++#define MSGLOG_EV_MORE 0x0002      /**< a further fragment follows */
++#define MSGLOG_EV_NARRATION 0x0004 /**< no speaker (narration / unknown) */
++#define MSGLOG_EV_TRUNCATED 0x0008 /**< body was cut short at the source */
++
++/* --- result codes: every failure is distinguishable --- */
++#define MSGLOG_OK 0
++#define MSGLOG_E_STATE -1      /**< call is not legal in the current state */
++#define MSGLOG_E_PARAM -2      /**< bad argument */
++#define MSGLOG_E_NOMEM -3      /**< no scratch buffer installed / too small */
++#define MSGLOG_E_OPEN -4       /**< open()/creat() failed */
++#define MSGLOG_E_IO -5         /**< read/write/seek/close failed */
++#define MSGLOG_E_MAGIC -6      /**< not an MLG file */
++#define MSGLOG_E_VERSION -7    /**< unsupported format_version */
++#define MSGLOG_E_HEADER -8     /**< header_length or header CRC32 bad */
++#define MSGLOG_E_ENCODING -9   /**< encoding id or mapping fingerprint mismatch */
++#define MSGLOG_E_CRC -10       /**< data or event CRC32 mismatch */
++#define MSGLOG_E_TRUNC -11     /**< file shorter than it declares */
++#define MSGLOG_E_RANGE -12     /**< length/offset out of range or would overflow */
++#define MSGLOG_E_BINDING -13   /**< bound GAM length/CRC does not match the save */
++#define MSGLOG_E_FULL -14      /**< MSGLOG_MAX_FILE reached; recording stops */
++#define MSGLOG_E_EMPTY -15     /**< no events / no such event */
++#define MSGLOG_E_SUPPRESSED -16 /**< ignored on purpose (transition/viewer) */
++
++/* --- states --- */
++#define MSGLOG_STATE_INACTIVE 0
++#define MSGLOG_STATE_ACTIVE 1
++#define MSGLOG_STATE_TRANSITION 2
++#define MSGLOG_STATE_VIEWER 3
++#define MSGLOG_STATE_FAILED 4
++
++/** CRC-32/ISO-HDLC running value before the final xor. */
++#define MSGLOG_CRC32_INIT 0xFFFFFFFFUL
++#define MSGLOG_CRC32_FINAL(c) ((c) ^ 0xFFFFFFFFUL)
++
++/** Minimum scratch block @ref msglog_set_scratch accepts. */
++#define MSGLOG_MIN_SCRATCH 512
++
++/**
++ * @brief Wall-clock stamp, as read straight from DOS (getdate/gettime).
++ *
++ * Stored as a plain 8-byte field group, not a packed FAT datetime: the feature
++ * spec asks for second resolution and a literal `YYYY-MM-DD HH:MM:SS` display,
++ * which the 2-second FAT encoding cannot express.
++ */
++typedef struct {
++    unsigned short year;
++    unsigned char month;
++    unsigned char day;
++    unsigned char hour;
++    unsigned char minute;
++    unsigned char second;
++    unsigned char hundredth;
++} MsgLogTime;
++
++/**
++ * @brief Everything about "who/where/when" that the caller has already resolved.
++ *
++ * @details The speaker and location strings are a *snapshot*: the caller must
++ *          pass bytes it owns right now.  Never hand over a pointer into the
++ *          keyword table or a DDX record -- both are freed when the dialog
++ *          ends (askabout_keyword_table_free / dialog_freemem_if_not_null).
++ *          This module copies straight to disk before returning.
++ */
++typedef struct {
++    unsigned short chapter;
++    unsigned short zone_id;
++    unsigned short scene_id;   /**< 0xFFFF when not in a town/interior scene */
++    unsigned short speaker_id; /**< DDXRecord.wSpeaker_id; 0 = narration */
++    unsigned long source_key;  /**< DDX record key */
++    unsigned short source_file; /**< record_key/100000; 0xFFFF when unknown */
++    unsigned short flags;      /**< MSGLOG_EV_NARRATION etc.; frag bits are set here */
++    const unsigned char far *speaker;  /**< may be 0 */
++    unsigned short speaker_len;
++    const unsigned char far *location; /**< may be 0 */
++    unsigned short location_len;
++} MsgLogContext;
++
++/** @brief One decoded event record head (in-memory only; never serialized). */
++typedef struct {
++    unsigned short kind;
++    unsigned short flags;
++    unsigned long sequence;
++    unsigned long conversation;
++    unsigned long prev_offset;
++    MsgLogTime when;
++    unsigned short chapter;
++    unsigned short zone_id;
++    unsigned short scene_id;
++    unsigned short speaker_id;
++    unsigned long source_key;
++    unsigned short source_file;
++    unsigned short fragment_index;
++    unsigned short speaker_len;
++    unsigned short location_len;
++    unsigned short body_len;
++    long offset;                /**< where this record starts */
++    unsigned long record_length; /**< total bytes of the record */
++} MsgLogEvent;
++
++/* ------------------------------------------------------------------ */
++/* Lifecycle + state                                                   */
++/* ------------------------------------------------------------------ */
++
++/** @brief Reset all module state to MSGLOG_STATE_INACTIVE. Call once at boot. */
++extern void far msglog_init(void);
++
++/**
++ * @brief Install (or remove, with @p buf == 0) the block buffer used by the
++ *        snapshot copy, the whole-history CRC pass and crash recovery.
++ * @return MSGLOG_OK, or MSGLOG_E_PARAM when a non-null buffer is smaller than
++ *         MSGLOG_MIN_SCRATCH.
++ * @note   Nothing else in the module allocates, so the caller decides exactly
++ *         when conventional memory is spent.
++ */
++extern int far msglog_set_scratch(unsigned char far *buf, unsigned int size);
++
++/** @brief Composite state for the UI: FAILED wins, then VIEWER, then TRANSITION. */
++extern int far msglog_state(void);
++
++/** @brief The underlying state, ignoring viewer/transition suppression. */
++extern int far msglog_base_state(void);
++
++/** @brief Non-zero when an append would actually be recorded right now. */
++extern int far msglog_recording_enabled(void);
++
++/** @brief The result code of the call that put the module into FAILED. */
++extern int far msglog_last_error(void);
++
++/* Suppression is a *counter*, layered over the base state. Leaving a viewer or
++   a transition therefore restores whatever the base state was -- a timeline
++   that had already failed stays failed and never silently becomes active. */
++extern void far msglog_enter_transition(void);
++extern void far msglog_leave_transition(void);
++extern void far msglog_enter_viewer(void);
++extern void far msglog_leave_viewer(void);
++
++/* ------------------------------------------------------------------ */
++/* Timeline files                                                      */
++/* ------------------------------------------------------------------ */
++
++/**
++ * @brief Create (truncating) a fresh, empty working timeline at @p path.
++ * @param now Creation stamp recorded in the header.
++ * @return MSGLOG_OK -> state becomes ACTIVE; otherwise MSGLOG_E_OPEN / _IO.
++ */
++extern int far msglog_new_timeline(const char *path, const MsgLogTime far *now);
++
++/**
++ * @brief Reopen an existing working timeline and determine its committed tail.
++ *
++ * @details Trusts the header when its CRC32 validates, the declared committed
++ *          length fits the file and the last record verifies.  Otherwise it
++ *          rescans forward from the header, keeping the longest prefix whose
++ *          records all pass their own CRC32 -- an interrupted append loses only
++ *          the partial record, never the history before it.  Anything past the
++ *          committed tail is truncated away on the first append.
++ */
++extern int far msglog_open_working(const char *path);
++
++/** @brief Flush the header with SEALED set and close. Safe to call when inactive. */
++extern int far msglog_shutdown(void);
++
++/** @brief Record a "history has a hole here" marker and set the HAS_GAP flag. */
++extern int far msglog_append_gap(const MsgLogTime far *now);
++
++/* ------------------------------------------------------------------ */
++/* Recording                                                           */
++/* ------------------------------------------------------------------ */
++
++/**
++ * @brief Open a conversation scope. Nested calls only deepen the scope.
++ * @return MSGLOG_OK, or MSGLOG_E_SUPPRESSED when recording is suppressed.
++ */
++extern int far msglog_conv_begin(const MsgLogContext far *ctx, const MsgLogTime far *now);
++
++/** @brief Close the outermost conversation scope. Balanced with conv_begin. */
++extern int far msglog_conv_end(const MsgLogTime far *now);
++
++/** @brief The id of the conversation currently open, or 0. */
++extern unsigned long far msglog_conversation_id(void);
++
++/**
++ * @brief Append one visible text span.
++ *
++ * @details Bodies longer than MSGLOG_MAX_BODY are split into consecutive
++ *          fragments at a boundary that never cuts a BAK-ZH double-byte glyph;
++ *          continuation fragments carry MSGLOG_EV_CONTINUED and every fragment
++ *          but the last carries MSGLOG_EV_MORE.
++ * @param body May be 0 only when @p body_len is 0.
++ */
++extern int far msglog_append_span(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                                  const unsigned char huge *body, unsigned int body_len);
++
++/** @brief Append the topic/answer the player actually confirmed (never a candidate). */
++extern int far msglog_append_choice(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                                    const unsigned char huge *label, unsigned int label_len);
++
++/** @brief Append a town/interior caption span (display path 4, not a conversation). */
++extern int far msglog_append_scene(const MsgLogContext far *ctx, const MsgLogTime far *now,
++                                   const unsigned char huge *body, unsigned int body_len);
++
++/* ------------------------------------------------------------------ */
++/* Snapshots (save) and candidates (load)                              */
++/* ------------------------------------------------------------------ */
++
++/**
++ * @brief Stream the committed prefix of the working timeline into a sealed
++ *        snapshot at @p path, bound to a game file's length and CRC32.
++ * @note  Needs the scratch buffer. The working file is left untouched and open.
++ */
++extern int far msglog_prepare_snapshot(const char *path, unsigned long gam_length,
++                                       unsigned long gam_crc32);
++
++/**
++ * @brief Fully validate a snapshot before anything is replaced.
++ * @param gam_length,gam_crc32 the *actual* save file being loaded; pass 0/0 to
++ *        skip the binding check.
++ * @return MSGLOG_OK when the candidate is usable; a distinguishable code
++ *         (MSGLOG_E_MAGIC / _VERSION / _HEADER / _ENCODING / _CRC / _TRUNC /
++ *         _RANGE / _BINDING) otherwise. Never mutates the active timeline.
++ */
++extern int far msglog_load_candidate(const char *path, unsigned long gam_length,
++                                     unsigned long gam_crc32);
++
++/**
++ * @brief Replace the working timeline with the verified candidate.
++ * @pre   msglog_load_candidate() returned MSGLOG_OK.
++ * @note  Needs the scratch buffer. On failure the previous working file is
++ *        already closed, so the caller must treat it as "history unavailable"
++ *        and start a new timeline -- it must never fall back to the old one.
++ */
++extern int far msglog_activate_candidate(const char *work_path);
++
++/** @brief Drop a loaded candidate without activating it. */
++extern void far msglog_discard_candidate(void);
++
++/* ------------------------------------------------------------------ */
++/* Read-only access (the viewer path; never re-runs a DDX record)      */
++/* ------------------------------------------------------------------ */
++
++extern unsigned long far msglog_event_count(void);
++extern unsigned short far msglog_header_flags(void);
++
++/** @brief Offset of the first / last committed event. MSGLOG_E_EMPTY if none. */
++extern int far msglog_first_offset(long far *out);
++extern int far msglog_last_offset(long far *out);
++
++/** @brief Offset of the record after / before @p cur. MSGLOG_E_EMPTY at the ends. */
++extern int far msglog_next_offset(long cur, long far *out);
++extern int far msglog_prev_offset(long cur, long far *out);
++
++/** @brief Walk @p count events backwards from @p from -- the paging primitive. */
++extern int far msglog_page_start(long from, int count, long far *out);
++
++/**
++ * @brief Read one event. Any of the three destination buffers may be 0, in
++ *        which case that string is skipped; a buffer smaller than the stored
++ *        length is a MSGLOG_E_RANGE failure, never a silent truncation.
++ */
++extern int far msglog_read_event(long offset, MsgLogEvent far *ev,
++                                 unsigned char far *speaker, unsigned int speaker_cap,
++                                 unsigned char far *location, unsigned int location_cap,
++                                 unsigned char far *body, unsigned int body_cap);
++
++/* ------------------------------------------------------------------ */
++/* Shared helpers (phase 2 uses these to fingerprint the .GAM)         */
++/* ------------------------------------------------------------------ */
++
++extern unsigned long far msglog_crc32_update(unsigned long crc, const unsigned char huge *data,
++                                             unsigned int len);
++
++/** @brief Length + CRC32 of a whole file, read in scratch-sized chunks. */
++extern int far msglog_crc32_file(const char *path, unsigned long far *length_out,
++                                 unsigned long far *crc_out);
++
++/**
++ * @brief Longest prefix of @p len bytes that is <= @p limit and does not cut a
++ *        BAK-ZH double-byte glyph.
++ * @note  Scans forward tracking lead bytes (0x80..0xDF). A trail byte may
++ *        legitimately be '#' (0x23) or '@' (0x40), so a backward search for an
++ *        ASCII character would be wrong.
++ */
++extern unsigned int far msglog_split_point(const unsigned char huge *body, unsigned int len,
++                                           unsigned int limit);
++
++#endif
+diff --git a/bak/SRC/DIALOG/MSGSAVE.C b/bak/SRC/DIALOG/MSGSAVE.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc21dfd91c
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGSAVE.C
+@@ -0,0 +1,395 @@
++#include <stdio.h>
++#include <string.h>
++#include <io.h>
++#include <dos.h>
++
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/DIALOG/MSGCAP.H"
++#include "SRC/DIALOG/MSGSAVE.H"
++#include "SRC/GAME/STATE/SAVEGAME.H"
++#include "SRC/GAME/STATE/GSTATE.H"
++#include "SRC/SYS/CFGPARSE.H"
++#include "SRC/SYS/DOSMEM.H"
++
++#define MSGSAVE_PATH_MAX 64
++#define MSGSAVE_SCRATCH 2048
++#define MSGSAVE_O_CREATE 0x8302
++#define MSGSAVE_O_RDONLY 0x8001
++#define MSGSAVE_S_RW 0x0180
++#define MSGSAVE_MARK_SIZE 18
++
++static int g_msgsaveCandidate = 0;
++#ifdef MSGSAVE_TEST
++int g_msgsaveTestStage = 0;
++int g_msgsaveTestCrashAfter = 0;
++#define MSGSAVE_CAPTURE_INIT()
++#define MSGSAVE_STAGE(n) (g_msgsaveTestStage = (n))
++#define MSGSAVE_CRASH(n) if (g_msgsaveTestCrashAfter == (n)) return 0
++#else
++#define MSGSAVE_CAPTURE_INIT() msgcap_init()
++#define MSGSAVE_STAGE(n)
++#define MSGSAVE_CRASH(n)
++#endif
++
++static void msgsave_now(MsgLogTime *t) {
++    struct date d;
++    struct time ti;
++    getdate(&d);
++    gettime(&ti);
++    t->year = d.da_year;
++    t->month = d.da_mon;
++    t->day = d.da_day;
++    t->hour = ti.ti_hour;
++    t->minute = ti.ti_min;
++    t->second = ti.ti_sec;
++    t->hundredth = ti.ti_hund;
++}
++
++static void msgsave_work_path(char *p) {
++    if (g_cfgTempDrive != 0)
++        sprintf(p, "%c:MSGWORK.MLG", g_cfgTempDrive);
++    else
++        strcpy(p, "MSGWORK.MLG");
++}
++
++static int msgsave_parts(const char *gam, char *dir, int *id) {
++    const char *base;
++    const char *slash;
++    int n;
++    slash = strrchr(gam, '\\');
++    base = slash == NULL ? gam : slash + 1;
++    if (strlen(base) != 10 || strnicmp(base, "SAVE", 4) != 0 ||
++        base[4] < '0' || base[4] > '9' || base[5] < '0' || base[5] > '9' ||
++        stricmp(base + 6, ".GAM") != 0)
++        return 0;
++    n = slash == NULL ? 0 : (int)(slash - gam);
++    if (n >= MSGSAVE_PATH_MAX - 14)
++        return 0;
++    if (n != 0)
++        memcpy(dir, gam, n);
++    dir[n] = '\0';
++    *id = (base[4] - '0') * 10 + base[5] - '0';
++    return 1;
++}
++
++static void msgsave_path(char *out, const char *dir, const char *name) {
++    if (*dir != '\0')
++        sprintf(out, "%s\\%s", dir, name);
++    else
++        strcpy(out, name);
++}
++
++static void msgsave_target(char *out, const char *dir, int id, const char *ext) {
++    char name[13];
++    sprintf(name, "SAVE%02d.%s", id, ext);
++    msgsave_path(out, dir, name);
++}
++
++static unsigned int msgsave_mark_sum(const unsigned char *p) {
++    unsigned int s;
++    int i;
++    s = 0x4d53;
++    for (i = 0; i < 16; i++)
++        s = (unsigned int)((s << 1) | (s >> 15)) ^ p[i];
++    return s;
++}
++
++static void msgsave_put32(unsigned char *p, unsigned long v) {
++    p[0] = (unsigned char)v;
++    p[1] = (unsigned char)(v >> 8);
++    p[2] = (unsigned char)(v >> 16);
++    p[3] = (unsigned char)(v >> 24);
++}
++
++static unsigned long msgsave_get32(const unsigned char *p) {
++    return (unsigned long)p[0] | ((unsigned long)p[1] << 8) |
++           ((unsigned long)p[2] << 16) | ((unsigned long)p[3] << 24);
++}
++
++static int msgsave_write_mark(const char *path, int id, int old_gam, int old_mlg,
++                              unsigned long len, unsigned long crc) {
++    unsigned char b[MSGSAVE_MARK_SIZE];
++    int fd;
++    unsigned int sum;
++    memset(b, 0, sizeof(b));
++    b[0] = 'B'; b[1] = 'K'; b[2] = 'T'; b[3] = 'X'; b[4] = 1;
++    b[5] = (unsigned char)id; b[6] = (unsigned char)old_gam; b[7] = (unsigned char)old_mlg;
++    msgsave_put32(b + 8, len);
++    msgsave_put32(b + 12, crc);
++    sum = msgsave_mark_sum(b);
++    b[16] = (unsigned char)sum; b[17] = (unsigned char)(sum >> 8);
++    fd = open((char *)path, MSGSAVE_O_CREATE, MSGSAVE_S_RW);
++    if (fd < 0)
++        return 0;
++    if (write(fd, b, sizeof(b)) != sizeof(b)) {
++        close(fd); remove((char *)path); return 0;
++    }
++    if (close(fd) != 0) {
++        remove((char *)path); return 0;
++    }
++    return 1;
++}
++
++static int msgsave_read_mark(const char *path, int *id, int *old_gam, int *old_mlg,
++                             unsigned long *len, unsigned long *crc) {
++    unsigned char b[MSGSAVE_MARK_SIZE];
++    int fd;
++    unsigned int sum;
++    fd = open((char *)path, MSGSAVE_O_RDONLY);
++    if (fd < 0)
++        return access((char *)path, 0) == 0 ? -1 : 0;
++    if (read(fd, b, sizeof(b)) != sizeof(b) || filelength(fd) != sizeof(b)) {
++        close(fd); return -1;
++    }
++    if (close(fd) != 0)
++        return -1;
++    sum = (unsigned int)b[16] | ((unsigned int)b[17] << 8);
++    if (b[0] != 'B' || b[1] != 'K' || b[2] != 'T' || b[3] != 'X' || b[4] != 1 ||
++        b[5] > 99 || sum != msgsave_mark_sum(b))
++        return -1;
++    *id = b[5]; *old_gam = b[6] != 0; *old_mlg = b[7] != 0;
++    *len = msgsave_get32(b + 8); *crc = msgsave_get32(b + 12);
++    return 1;
++}
++
++static int msgsave_pair_valid(const char *gam, const char *mlg,
++                              unsigned long expect_len, unsigned long expect_crc) {
++    unsigned long len;
++    unsigned long crc;
++    int rc;
++    rc = msglog_crc32_file(gam, &len, &crc);
++    if (rc != MSGLOG_OK || len != expect_len || crc != expect_crc)
++        return 0;
++    rc = msglog_load_candidate(mlg, len, crc);
++    msglog_discard_candidate();
++    return rc == MSGLOG_OK;
++}
++
++static int msgsave_gam_valid(const char *path) {
++    unsigned char h[GAM_SAVE_FILE_HEADER_SIZE];
++    long n;
++    int fd;
++    fd = open((char *)path, MSGSAVE_O_RDONLY);
++    if (fd < 0)
++        return 0;
++    n = filelength(fd);
++    if (n < GAM_SAVE_FILE_BASE_SIZE || n > GAM_SAVE_FILE_MAX_SIZE ||
++        read(fd, h, sizeof(h)) != sizeof(h)) {
++        close(fd); return 0;
++    }
++    if (close(fd) != 0)
++        return 0;
++    return h[98] == 0x16 && h[99] == 0;
++}
++
++static int msgsave_remove(const char *path) {
++    return access((char *)path, 0) != 0 || remove((char *)path) == 0;
++}
++
++static int msgsave_recover_inner(const char *dir) {
++    char mark[MSGSAVE_PATH_MAX], target_gam[MSGSAVE_PATH_MAX], target_mlg[MSGSAVE_PATH_MAX];
++    char new_gam[MSGSAVE_PATH_MAX], new_mlg[MSGSAVE_PATH_MAX];
++    char old_gam_path[MSGSAVE_PATH_MAX], old_mlg_path[MSGSAVE_PATH_MAX];
++    unsigned long len, crc;
++    int id, old_gam, old_mlg, rc;
++    msgsave_path(mark, dir, "MLGTXN.DAT");
++    rc = msgsave_read_mark(mark, &id, &old_gam, &old_mlg, &len, &crc);
++    if (rc == 0)
++        return 1;
++    if (rc < 0)
++        return 0;
++    msgsave_target(target_gam, dir, id, "GAM");
++    msgsave_target(target_mlg, dir, id, "MLG");
++    msgsave_path(new_gam, dir, "MLGNEW.GAM"); msgsave_path(new_mlg, dir, "MLGNEW.MLG");
++    msgsave_path(old_gam_path, dir, "MLGOLD.GAM"); msgsave_path(old_mlg_path, dir, "MLGOLD.MLG");
++    if (msgsave_pair_valid(target_gam, target_mlg, len, crc)) {
++        return msgsave_remove(old_gam_path) && msgsave_remove(old_mlg_path) &&
++               msgsave_remove(new_gam) && msgsave_remove(new_mlg) && msgsave_remove(mark);
++    }
++    if (old_gam) {
++        if (access(old_gam_path, 0) == 0) {
++            remove(target_gam);
++            if (rename(old_gam_path, target_gam) != 0)
++                return 0;
++        } else if (access(target_gam, 0) != 0)
++            return 0;
++    } else if (!msgsave_remove(target_gam))
++        return 0;
++    if (old_mlg) {
++        if (access(old_mlg_path, 0) == 0) {
++            remove(target_mlg);
++            if (rename(old_mlg_path, target_mlg) != 0)
++                return 0;
++        } else if (access(target_mlg, 0) != 0)
++            return 0;
++    } else if (!msgsave_remove(target_mlg))
++        return 0;
++    return msgsave_remove(new_gam) && msgsave_remove(new_mlg) && msgsave_remove(mark);
++}
++
++static unsigned char far *msgsave_scratch_begin(void) {
++    unsigned char far *p;
++    p = (unsigned char far *)alloc_far_umb(MSGSAVE_SCRATCH);
++    if (p != NULL)
++        msglog_set_scratch(p, MSGSAVE_SCRATCH);
++    return p;
++}
++
++static void msgsave_scratch_end(unsigned char far *p) {
++    msglog_set_scratch(NULL, 0);
++    if (p != NULL)
++        _freemem(p);
++}
++
++void far msgsave_init(void) {
++    msglog_init();
++    MSGSAVE_CAPTURE_INIT();
++    g_msgsaveCandidate = 0;
++}
++
++void far msgsave_shutdown(void) {
++    msglog_discard_candidate();
++    msglog_shutdown();
++}
++
++int far msgsave_start_new(void) {
++    char work[MSGSAVE_PATH_MAX];
++    MsgLogTime now;
++    msglog_discard_candidate();
++    g_msgsaveCandidate = 0;
++    msgsave_work_path(work); msgsave_now(&now);
++    return msglog_new_timeline(work, &now);
++}
++
++int far msgsave_recover_for(const char *gam_path) {
++    char dir[MSGSAVE_PATH_MAX];
++    int id, ok;
++    unsigned char far *scratch;
++    if (!msgsave_parts(gam_path, dir, &id))
++        return 0;
++    scratch = msgsave_scratch_begin();
++    if (scratch == NULL)
++        return 0;
++    MSGSAVE_STAGE(1); ok = msgsave_recover_inner(dir);
++    if (!ok) {
++        msgsave_scratch_end(scratch);
++        return 0;
++    }
++    msgsave_scratch_end(scratch);
++    return ok;
++}
++
++int far msgsave_write_pair(const char *target_gam) {
++    char dir[MSGSAVE_PATH_MAX], target_mlg[MSGSAVE_PATH_MAX], new_gam[MSGSAVE_PATH_MAX];
++    char new_mlg[MSGSAVE_PATH_MAX], old_gam[MSGSAVE_PATH_MAX], old_mlg[MSGSAVE_PATH_MAX];
++    char mark[MSGSAVE_PATH_MAX];
++    unsigned long len, crc;
++    unsigned char far *scratch;
++    int id, had_gam, had_mlg, ok;
++    if (!msgsave_parts(target_gam, dir, &id))
++        return 0;
++    scratch = msgsave_scratch_begin();
++    if (scratch == NULL)
++        return 0;
++    ok = msgsave_recover_inner(dir);
++    /* A failed recovery owns every transaction artifact. Do not erase its
++       backups or staged pair while trying to start another save. */
++    if (!ok) {
++        msgsave_scratch_end(scratch);
++        return 0;
++    }
++    msgsave_target(target_mlg, dir, id, "MLG");
++    msgsave_path(new_gam, dir, "MLGNEW.GAM"); msgsave_path(new_mlg, dir, "MLGNEW.MLG");
++    msgsave_path(old_gam, dir, "MLGOLD.GAM"); msgsave_path(old_mlg, dir, "MLGOLD.MLG");
++    msgsave_path(mark, dir, "MLGTXN.DAT");
++    ok = msgsave_remove(new_gam) && msgsave_remove(new_mlg) &&
++         msgsave_remove(old_gam) && msgsave_remove(old_mlg);
++    if (ok) { MSGSAVE_STAGE(2); ok = savegame_write(new_gam); }
++    if (ok) { MSGSAVE_STAGE(3); ok = msgsave_gam_valid(new_gam); }
++    if (ok) { MSGSAVE_STAGE(4); ok = msglog_crc32_file(new_gam, &len, &crc) == MSGLOG_OK; }
++    if (ok) { MSGSAVE_STAGE(5); ok = msglog_prepare_snapshot(new_mlg, len, crc) == MSGLOG_OK; }
++    if (ok) { MSGSAVE_STAGE(6); ok = msgsave_pair_valid(new_gam, new_mlg, len, crc); }
++    had_gam = access(target_gam, 0) == 0;
++    had_mlg = access(target_mlg, 0) == 0;
++    if (ok) { MSGSAVE_STAGE(7); ok = msgsave_write_mark(mark, id, had_gam, had_mlg, len, crc); }
++    if (ok) { MSGSAVE_CRASH(7); }
++    if (ok && had_gam) { MSGSAVE_STAGE(8); ok = rename((char *)target_gam, old_gam) == 0; }
++    if (ok && had_gam) { MSGSAVE_CRASH(8); }
++    if (ok && had_mlg) { MSGSAVE_STAGE(9); ok = rename(target_mlg, old_mlg) == 0; }
++    if (ok && had_mlg) { MSGSAVE_CRASH(9); }
++    if (ok) { MSGSAVE_STAGE(10); ok = rename(new_gam, (char *)target_gam) == 0; }
++    if (ok) { MSGSAVE_CRASH(10); }
++    if (ok) { MSGSAVE_STAGE(11); ok = rename(new_mlg, target_mlg) == 0; }
++    if (ok) { MSGSAVE_CRASH(11); }
++    if (ok) { MSGSAVE_STAGE(12); ok = msgsave_pair_valid(target_gam, target_mlg, len, crc); }
++    if (ok) {
++        /* Keep the marker until cleanup finishes, so a retry can finish it. */
++        ok = msgsave_remove(old_gam) && msgsave_remove(old_mlg) && msgsave_remove(mark);
++    } else if (access(mark, 0) == 0)
++        msgsave_recover_inner(dir);
++    else {
++        remove(new_gam); remove(new_mlg);
++    }
++    msgsave_scratch_end(scratch);
++    return ok;
++}
++
++int far msgsave_prepare_load(const char *gam_path) {
++    char dir[MSGSAVE_PATH_MAX], mlg[MSGSAVE_PATH_MAX];
++    unsigned long len, crc;
++    unsigned char far *scratch;
++    int id, rc;
++    msglog_discard_candidate();
++    g_msgsaveCandidate = 0;
++    if (!msgsave_parts(gam_path, dir, &id))
++        return 0;
++    scratch = msgsave_scratch_begin();
++    if (scratch == NULL)
++        return 0;
++    if (!msgsave_recover_inner(dir)) {
++        msgsave_scratch_end(scratch); return 0;
++    }
++    msgsave_target(mlg, dir, id, "MLG");
++    rc = msglog_crc32_file(gam_path, &len, &crc);
++    if (rc == MSGLOG_OK)
++        rc = msglog_load_candidate(mlg, len, crc);
++    g_msgsaveCandidate = rc == MSGLOG_OK;
++    msgsave_scratch_end(scratch);
++    return g_msgsaveCandidate;
++}
++
++int far msgsave_finish_load(int game_ok) {
++    char work[MSGSAVE_PATH_MAX];
++    MsgLogTime now;
++    unsigned char far *scratch;
++    int rc;
++    if (!game_ok) {
++        msglog_discard_candidate(); g_msgsaveCandidate = 0; return 1;
++    }
++    msgsave_work_path(work);
++    rc = MSGLOG_E_STATE;
++    if (g_msgsaveCandidate) {
++        scratch = msgsave_scratch_begin();
++        if (scratch != NULL) {
++            rc = msglog_activate_candidate(work);
++            msgsave_scratch_end(scratch);
++        }
++    } else
++        msglog_discard_candidate();
++    g_msgsaveCandidate = 0;
++    if (rc == MSGLOG_OK)
++        return 1;
++    msglog_discard_candidate();
++    msgsave_now(&now);
++    if (msglog_new_timeline(work, &now) == MSGLOG_OK)
++        msglog_append_gap(&now);
++    return 0;
++}
++
++void far msgsave_delete_companion(const char *gam_path) {
++    char dir[MSGSAVE_PATH_MAX], mlg[MSGSAVE_PATH_MAX];
++    int id;
++    if (msgsave_parts(gam_path, dir, &id)) {
++        msgsave_target(mlg, dir, id, "MLG"); remove(mlg);
++    }
++}
+diff --git a/bak/SRC/DIALOG/MSGSAVE.H b/bak/SRC/DIALOG/MSGSAVE.H
+new file mode 100644
+index 0000000000000000000000000000000000000000..cd00f259ccebc68d6b69992574151918bb5db1d1
+--- /dev/null
++++ b/bak/SRC/DIALOG/MSGSAVE.H
+@@ -0,0 +1,17 @@
++#ifndef BAK_MSGSAVE_H
++#define BAK_MSGSAVE_H
++
++extern void far msgsave_init(void);
++extern void far msgsave_shutdown(void);
++extern int far msgsave_start_new(void);
++extern int far msgsave_write_pair(const char *target_gam);
++extern int far msgsave_prepare_load(const char *gam_path);
++extern int far msgsave_finish_load(int game_ok);
++extern int far msgsave_recover_for(const char *gam_path);
++extern void far msgsave_delete_companion(const char *gam_path);
++#ifdef MSGSAVE_TEST
++extern int g_msgsaveTestStage;
++extern int g_msgsaveTestCrashAfter;
++#endif
++
++#endif
 diff --git a/bak/SRC/GAME/ACTOR/ACTSPAWN.C b/bak/SRC/GAME/ACTOR/ACTSPAWN.C
 index aeb1c776ba9985adaf4f0bd8a525a60c3f97f4b4..34dfcf42bffad926974ddde9d7cb236635f4bc24 100644
 --- a/bak/SRC/GAME/ACTOR/ACTSPAWN.C
@@ -1940,10 +4680,60 @@ index 664b71c1ff7c583a820a50fa4910c5318bf24776..4b41de12d1463b18d8360312e1a4ada9
      if (combat_status == 2) {
          *(CamPos far *)&g_world_camera->base.pos.xy.nWorld_x = *(CamPos far *)originalCamera;
 diff --git a/bak/SRC/GAME/GMAIN.C b/bak/SRC/GAME/GMAIN.C
-index 79881ece8257b248f6cc9946cbb8751b714c2ba5..a2c80c4728d238705bfcc984a5a74b34086e954f 100644
+index 79881ece8257b248f6cc9946cbb8751b714c2ba5..eb54801e4ecead0c63d1483fdb1d9c96867c81a5 100644
 --- a/bak/SRC/GAME/GMAIN.C
 +++ b/bak/SRC/GAME/GMAIN.C
-@@ -201,8 +201,10 @@ int far gmain_start_dispatch(int mode) {
+@@ -30,6 +30,8 @@
+ #include "SRC/SYS/CFGPARSE.H"
+ #include "SRC/UI/UIWIDGET.H"
+ #include "SRC/DIALOG/DIALOG.H"
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/DIALOG/MSGSAVE.H"
+ #include "SRC/SCREENS/BOOKVIEW.H"
+ #include "SRC/SCRIPT/ANIMSCR.H"
+ #include "SRC/SCRIPT/ADSCRIPT.H"
+@@ -82,6 +84,9 @@ int far gmain_start_dispatch(int mode) {
+     iconX = -1;
+     doFullmap = 0;
+ 
++    if (iMode == 2 || iMode == 3)
++        msglog_enter_transition();
++
+     if (iMode != 4) {
+         palette_fade_out(0, 0x100, -1, 0);
+         palette_screen_clear_black();
+@@ -101,6 +106,7 @@ int far gmain_start_dispatch(int mode) {
+         sprintf(pathBuf, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
+                 g_wCurrentSaveSlotKey, g_wCurrentSaveFileKey);
+         path = pathBuf;
++        msgsave_prepare_load(path);
+         if (mainmenu_save_file_read_header(path, sig_block, &chapter, &iconX, &iconY, &iconIndex) !=
+             0) {
+             iconIndex += 2;
+@@ -187,6 +193,10 @@ int far gmain_start_dispatch(int mode) {
+ 
+     if (path != (char *)0) {
+         if (savegame_read(path) == 0) {
++            if (iMode == 2 || iMode == 3)
++                msglog_leave_transition();
++            if (iMode == 3)
++                msgsave_finish_load(0);
+             dialog_play_record(0x13b, 1);
+             palette_fade_out(0, 0x100, -1, 0);
+             palette_screen_clear_black();
+@@ -194,6 +204,11 @@ int far gmain_start_dispatch(int mode) {
+         }
+     }
+ 
++    if (iMode == 2 || iMode == 3)
++        msglog_leave_transition();
++    if (iMode == 3)
++        msgsave_finish_load(1);
++
+     gstate_temp_file_open();
+     uiwidget_tile_sprite_load();
+     boot_party_state_load_from_temp();
+@@ -201,8 +216,10 @@ int far gmain_start_dispatch(int mode) {
  
      if (iMode == 2) {
          savegame_chapter_start_dispatch(1);
@@ -1954,6 +4744,41 @@ index 79881ece8257b248f6cc9946cbb8751b714c2ba5..a2c80c4728d238705bfcc984a5a74b34
      } else if (iMode == 7) {
          g_gameState.nWorldLoopExitRequest = '\0';
      }
+@@ -722,6 +739,7 @@ void far main(int argc, char **argv) {
+     parse_krondor_cfg();
+     gmain_parse_cmdline_sound_flag(argc, argv);
+     boot_subsystems_init();
++    msgsave_init();
+     if (g_engine_prefs != (EnginePrefs *)0x0) {
+         if (g_engine_prefs->flags & 8) {
+             gmain_play_intro_animation();
+@@ -734,13 +752,19 @@ void far main(int argc, char **argv) {
+             mode = mainmenu_save_main_menu(0);
+         }
+         if (mode == 2) {
++            /* The chapter-one cutscene is player-visible history. Start the
++               new timeline before playing it; dispatch must not truncate it
++               again after STARTUP.GAM has loaded. */
++            msgsave_start_new();
+             gmain_play_chapter_cutscene(1, 1, 1);
+             goto dispatch;
+         }
+         if (mode == 3)
+             goto dispatch;
+         if (mode == 4) {
++            msglog_enter_transition();
+             gmain_restart_from_save_flow();
++            msglog_leave_transition();
+             goto dispatch;
+         }
+         if (mode == 5) {
+@@ -760,5 +784,6 @@ void far main(int argc, char **argv) {
+     dispatch:
+         mode = gmain_start_dispatch(mode);
+     }
++    msgsave_shutdown();
+     boot_main_menu_resources_free();
+ }
 diff --git a/bak/SRC/GAME/STATE/GSTATE.C b/bak/SRC/GAME/STATE/GSTATE.C
 index 64617354ec57df08bb0d82a542375aafebecd1cc..7a081ed3b74d6d65e9369c4b6c5fefebbf7fff96 100644
 --- a/bak/SRC/GAME/STATE/GSTATE.C
@@ -2757,7 +5582,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..982e4cb0cc84eaa097541a6dc71c2d1a3e1e92a9 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..fc09a4c0e3c3192ced73b1e5b7d20c1d31941270 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -12,10 +12,13 @@
@@ -2803,10 +5628,10 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..982e4cb0cc84eaa097541a6dc71c2d1a
 +    "\x87\x51\x81\x26\x90\x30\x8a\x40\x85\x7b\x8a\x59\x8c\x33\x97\x30\x80\x7e\x80\x7e";
 +    /* 正在讀取快速存檔…… */
 +static char g_szMouseLookOn[] =
-+    "\x89\x82\x83\xeb\x87\x8b\x88\x6b\x80\xe7\x89\xab\x84\x9a\x81\x4c";
++    "\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x82\x2c";
 +    /* 滑鼠視角模式：開 */
 +static char g_szMouseLookOff[] =
-+    "\x89\x82\x83\xeb\x87\x8b\x88\x6b\x80\xe7\x89\xab\x84\x9a\x83\x6c";
++    "\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x85\x6c";
 +    /* 滑鼠視角模式：關 */
 +
 +static void worldloop_quicksave_notice(char *text) {
@@ -4537,6 +7362,32 @@ index d2c42ae329a321335adfd21f80ff93e7d46af44f..7e2b82f0fe8d0bd498337f1a10901317
          font_glyph_metrics((char)*pCur, &width, &height);
          xCur += (int)(width + (style.wStyleFlags & 2));
          if (g_pBookViewer->nLineHeightActual < xCur)
+diff --git a/bak/SRC/SCREENS/BOOKVIEW.C b/bak/SRC/SCREENS/BOOKVIEW.C
+index 986351fa2c9297f51dd6078f85519016772a302b..ec7898a759ec9fd00ec2458fd07466c9109241c3 100644
+--- a/bak/SRC/SCREENS/BOOKVIEW.C
++++ b/bak/SRC/SCREENS/BOOKVIEW.C
+@@ -8,6 +8,8 @@ BookViewerState *g_pBookViewer;
+ unsigned short g_wTextWrapXAccum = 0x0000;
+ unsigned short g_wTextWrapLinesDrawn = 0x0000;
+ unsigned short g_wTextWrapLinesRemaining = 0x0000;
++unsigned short g_wTextWrapByteStart = 0x0000;
++unsigned short g_wTextWrapByteEnd = 0x0000;
+ 
+ #include <stdlib.h>
+ 
+diff --git a/bak/SRC/SCREENS/BOOKVIEW.H b/bak/SRC/SCREENS/BOOKVIEW.H
+index ed4b28ab28844c395e1f5a994c07a2084c82a7b5..3ca600e3d045e1c9d3076ae43afbc0e445d33da4 100644
+--- a/bak/SRC/SCREENS/BOOKVIEW.H
++++ b/bak/SRC/SCREENS/BOOKVIEW.H
+@@ -6,6 +6,8 @@
+ extern unsigned short g_wTextWrapXAccum;
+ extern unsigned short g_wTextWrapLinesDrawn;
+ extern unsigned short g_wTextWrapLinesRemaining;
++extern unsigned short g_wTextWrapByteStart;
++extern unsigned short g_wTextWrapByteEnd;
+ extern BookViewerState *g_pBookViewer;
+ 
+ extern void bookview_init(void);
 diff --git a/bak/SRC/SCREENS/ENCAMP.C b/bak/SRC/SCREENS/ENCAMP.C
 index d11a233978fd28ad97d915e917a84ed1d2fcb4ae..4963d41b3273cb69643a87bb63b87464e33b4e3b 100644
 --- a/bak/SRC/SCREENS/ENCAMP.C
@@ -5136,7 +7987,7 @@ index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f6
      screen_frame_sync_buffers_rect(0xb, 0x79);
  
 diff --git a/bak/SRC/SCREENS/MAINMENU.C b/bak/SRC/SCREENS/MAINMENU.C
-index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b4580f30797 100644
+index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a20662721 100644
 --- a/bak/SRC/SCREENS/MAINMENU.C
 +++ b/bak/SRC/SCREENS/MAINMENU.C
 @@ -3,6 +3,7 @@
@@ -5147,7 +7998,16 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
  #include <io.h>
  
  #include "SRC/GAME/GMAIN.H"
-@@ -58,6 +59,14 @@ unsigned short g_wBookmarkCompassIcon;
+@@ -35,6 +36,8 @@
+ #include "SRC/UI/NAMEDTBL.H"
+ #include "SRC/UI/LISTWDG.H"
+ #include "SRC/DIALOG/DIALOG.H"
++#include "SRC/DIALOG/MSGSAVE.H"
++#include "SRC/SCREENS/MSGVIEW.H"
+ #include "SRC/GAME/ACTOR/ACTSPAWN.H"
+ #include "SRC/COMBAT/ARENA/COMBAT.H"
+ #include "SRC/SCREENS/FMAP.H"
+@@ -58,6 +61,14 @@ unsigned short g_wBookmarkCompassIcon;
  char g_szSaveSlotDirName_51cc[13];
  unsigned char g_abSaveFileHeader[90];
  
@@ -5162,7 +8022,20 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
  int mainmenu_save_cfg_load_settings(void) {
      ResFile *file;
  
-@@ -370,7 +379,7 @@ int mainmenu_save_load_game_dialog(void) {
+@@ -290,6 +301,12 @@ int mainmenu_save_main_menu(int reentering) {
+             mainmenu_save_show_ctrd_modal();
+             bFullRender = 1;
+             continue;
++        case 0x84:
++            if (overlay == 0) {
++                msgview_run();
++                bFullRender = 1;
++            }
++            continue;
+         default:
+             continue;
+         }
+@@ -370,7 +387,7 @@ int mainmenu_save_load_game_dialog(void) {
                  ;
          }
          if (slot_dirty) {
@@ -5171,7 +8044,24 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
              if (need_slot_sel) {
                  if (g_wSaveSlotDirValid) {
                      int sel = mainmenu_savelist_find_by_text(slot_list, g_szSaveSlotDirName_51cc);
-@@ -1452,7 +1461,8 @@ void far mainmenu_save_bookmark(void) {
+@@ -877,6 +894,7 @@ int mainmenu_save_save_game_dialog(void) {
+                     sprintf(sprintf_buf, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", slot_text, slot_key,
+                             file_key);
+                     remove(sprintf_buf);
++                    msgsave_delete_companion(sprintf_buf);
+                     slot_reload = 1;
+                     file_dirty = 1;
+                     file_reload = 1;
+@@ -968,7 +986,7 @@ int mainmenu_save_save_game_dialog(void) {
+                 g_wBookmarkFmapX = g_wBookmarkFmapY = -1;
+                 g_wBookmarkCompassIcon = 0;
+             }
+-            if (savegame_write(sprintf_buf) != 0)
++            if (msgsave_write_pair(sprintf_buf) != 0)
+                 goto save_committed;
+             dialog_play_record(0x96, 1);
+         redraw_and_loop:
+@@ -1452,7 +1470,8 @@ void far mainmenu_save_bookmark(void) {
      char path[50];
      unsigned int heading;
  
@@ -5181,7 +8071,16 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
          if (g_cfgBookmarkVerify) {
              dialog_input_wait_release(0, 1);
              dialog_play_record(0x14c, 0);
-@@ -1499,6 +1509,374 @@ void far mainmenu_save_bookmark(void) {
+@@ -1488,7 +1507,7 @@ void far mainmenu_save_bookmark(void) {
+             g_wBookmarkFmapX = g_wBookmarkFmapY = -1;
+             g_wBookmarkCompassIcon = 0;
+         }
+-        if (savegame_write(path) != 0) {
++        if (msgsave_write_pair(path) != 0) {
+             g_wSaveFileValid = 0;
+             return;
+         }
+@@ -1499,6 +1518,319 @@ void far mainmenu_save_bookmark(void) {
      return;
  }
  
@@ -5248,26 +8147,6 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +    }
 +}
 +
-+static int mainmenu_autosave_commit(char *temp_path, int target_id) {
-+    char backup[50];
-+    char target[50];
-+
-+    sprintf(backup, "GAMES\\AutoSave.G99\\AUTOB%02d.GAM", target_id);
-+    sprintf(target, "GAMES\\AutoSave.G99\\SAVE%02d.GAM", target_id);
-+    remove(backup);
-+    if (access(target, 0) == 0) {
-+        if (rename(target, backup) != 0)
-+            return 0;
-+    }
-+    if (rename(temp_path, target) != 0) {
-+        if (access(backup, 0) == 0)
-+            rename(backup, target);
-+        return 0;
-+    }
-+    remove(backup);
-+    return 1;
-+}
-+
 +void mainmenu_autosave_request(void) {
 +    g_nAutosavePending = 1;
 +}
@@ -5277,7 +8156,6 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +    char old_header[90];
 +    char title[90];
 +    char path[50];
-+    char temp_path[50];
 +    unsigned long current_date;
 +    unsigned long date;
 +    unsigned long oldest_date;
@@ -5357,15 +8235,8 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +        g_wBookmarkCompassIcon = 0;
 +    }
 +
-+    strcpy(temp_path, "GAMES\\AutoSave.G99\\AUTONEW.GAM");
-+    remove(temp_path);
-+    ok = savegame_write(temp_path);
-+    if (ok)
-+        ok = mainmenu_autosave_file_valid(temp_path, title);
-+    if (ok)
-+        ok = mainmenu_autosave_commit(temp_path, target_id);
-+    if (!ok)
-+        remove(temp_path);
++    sprintf(path, "GAMES\\AutoSave.G99\\SAVE%02d.GAM", target_id);
++    ok = msgsave_write_pair(path);
 +
 +    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
 +    g_wBookmarkFmapX = old_x;
@@ -5392,32 +8263,11 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +    }
 +}
 +
-+static int mainmenu_quicksave_commit(char *temp_path, int target_id) {
-+    char backup[50];
-+    char target[50];
-+
-+    sprintf(backup, "GAMES\\QSave.G98\\QSB%02d.GAM", target_id);
-+    sprintf(target, "GAMES\\QSave.G98\\SAVE%02d.GAM", target_id);
-+    remove(backup);
-+    if (access(target, 0) == 0) {
-+        if (rename(target, backup) != 0)
-+            return 0;
-+    }
-+    if (rename(temp_path, target) != 0) {
-+        if (access(backup, 0) == 0)
-+            rename(backup, target);
-+        return 0;
-+    }
-+    remove(backup);
-+    return 1;
-+}
-+
 +int mainmenu_quicksave_write(void) {
 +    struct date today;
 +    char old_header[90];
 +    char title[90];
 +    char path[50];
-+    char temp_path[50];
 +    unsigned long current_date;
 +    unsigned long date;
 +    unsigned long oldest_date;
@@ -5494,15 +8344,8 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +        g_wBookmarkCompassIcon = 0;
 +    }
 +
-+    strcpy(temp_path, "GAMES\\QSave.G98\\QSNEW.GAM");
-+    remove(temp_path);
-+    ok = savegame_write(temp_path);
-+    if (ok)
-+        ok = mainmenu_autosave_file_valid(temp_path, title);
-+    if (ok)
-+        ok = mainmenu_quicksave_commit(temp_path, target_id);
-+    if (!ok)
-+        remove(temp_path);
++    sprintf(path, "GAMES\\QSave.G98\\SAVE%02d.GAM", target_id);
++    ok = msgsave_write_pair(path);
 +
 +    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
 +    g_wBookmarkFmapX = old_x;
@@ -5525,6 +8368,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
 +    if (mainmenu_save_games_dir_exists() == 0)
 +        return 0;
 +    mainmenu_quicksave_recover_files();
++    msgsave_recover_for("GAMES\\QSave.G98\\SAVE01.GAM");
 +    newest_date = 0;
 +    newest_sequence = 0;
 +    newest_id = 0;
@@ -5556,7 +8400,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
  void mainmenu_save_party_to_tmp(void) {
      int i;
  
-@@ -1543,7 +1921,7 @@ int mainmenu_save_scan_highest_slot(void) {
+@@ -1543,7 +1875,7 @@ int mainmenu_save_scan_highest_slot(void) {
      int highest;
      int state;
      int save_id;
@@ -5565,7 +8409,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
      char dta[30];
      char path[90];
      int rc;
-@@ -1590,7 +1968,8 @@ void mainmenu_save_slot_exists(void) {
+@@ -1590,7 +1922,8 @@ void mainmenu_save_slot_exists(void) {
      char local[90];
      ResFile *file;
  
@@ -5575,7 +8419,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
          sprintf(local, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
                  g_wCurrentSaveSlotKey, 0x15);
          file = res_fopen(local, "wb");
-@@ -1634,7 +2013,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
+@@ -1634,7 +1967,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
      sprintf(local_path, "%s\\*.G??", "GAMES");
      rc = findfirst(local_path, &dta, 0x10);
      while (rc == 0) {
@@ -5585,7 +8429,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
              mainmenu_savelist_insert_sorted(list, local_path, slotKey);
          rc = findnext(&dta);
      }
-@@ -1643,7 +2023,28 @@ fail:
+@@ -1643,7 +1977,28 @@ fail:
      return 0;
  }
  
@@ -5614,7 +8458,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
      for (; *filename != '\0'; filename++, out_name++) {
          if (*filename == '.') {
              if ((((unsigned char *)_ctype)[filename[2] + 1] & _IS_DIG) == 0) {
-@@ -1655,6 +2056,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1655,6 +2010,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
              *out_name = '\0';
              filename += 2;
              *out_slot = atoi(filename);
@@ -5629,7 +8473,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
              if (*out_slot < 1 || *out_slot > 20) {
                  return 0;
              }
-@@ -1666,22 +2075,67 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1666,22 +2029,69 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
  }
  
  int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id) {
@@ -5650,6 +8494,8 @@ index c9bf26483924952b5097823240d7155c3ea672eb..1a980dcc933882631ede6a8247280b45
  
      if (!list)
          goto fail;
++    sprintf(path, "%s\\%s.G%02d\\SAVE00.GAM", "GAMES", slot_name, slot_id);
++    msgsave_recover_for(path);
      sprintf(path, "%s\\%s.G%02d\\SAVE??.GAM", "GAMES", slot_name, slot_id);
 +    count = 0;
      rc = findfirst(path, (struct ffblk *)dta, 0);
@@ -5829,11 +8675,312 @@ index 6f7a9133f09eefd8bac839c9d87261debf140b3b..2c7b55740dcbe62a9a969d55078425aa
 +    if (g_gameState.game_time != saved_time)
 +        mainmenu_autosave_request();
  }
+diff --git a/bak/SRC/SCREENS/MSGVIEW.C b/bak/SRC/SCREENS/MSGVIEW.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..d7605fc6be46717f5c06113c89c814a3aa2cb268
+--- /dev/null
++++ b/bak/SRC/SCREENS/MSGVIEW.C
+@@ -0,0 +1,283 @@
++#include <stdio.h>
++#include <string.h>
++
++#include "SRC/GEN/GFXCTX.H"
++#include "SRC/GAME/MAINDATA.H"
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/GFX/FONT/FONT.H"
++#include "SRC/GFX/SCREEN/SCREEN.H"
++#include "SRC/GFX/RASTER/PRESENT.H"
++#include "SRC/INPUT/KEYBOARD.H"
++#include "SRC/UI/UIWIDGET.H"
++#include "SRC/UI/TEXTWRAP.H"
++#include "SRC/SCREENS/BOOKVIEW.H"
++#include "SRC/SCREENS/MSGVIEW.H"
++
++static char g_msgviewTitle[] = "\x89\x79\x83\x62\x8e\x44\x94\x2e";
++static char g_msgviewEmpty[] = "\x85\x23\x80\x75\x84\x4f\x85\x4a\x8e\x44\x94\x2e";
++static char g_msgviewBad[] = "\x8e\x44\x94\x2e\x8f\x34\x86\x5c\x84\x29\x82\x24\x83\x7b\x90\x30\x8a\x40";
++static char g_msgviewWho[] = "\x82\x2a\x81\x2f:";
++static char g_msgviewWhere[] = "\x83\x69\x85\x5c:";
++static char g_msgviewWhen[] = "\x80\x5d\x80\x27:";
++static char g_msgviewNarrator[] = "\x8d\x34\x81\x29";
++static char g_msgviewGap[] = "\x94\x22\x94\x23\x81\x27\x8b\x7a";
++static char g_msgviewStopped[] = "\x8b\x52\x94\x2e\x81\x3e\x95\x4c\x8c\x39";
++static char g_msgviewHelpList[] = "Enter:\x83\x5d\x81\x6f  Esc:\x84\x26\x82\x2c  Up/Down:\x86\x3e\x8a\x30";
++static char g_msgviewHelpDetailPage[] = "Esc:\x81\x47\x81\x4b  Up/Down:\x86\x46\x87\x77  \x91\x7e\x92\x20:\x88\x41\x89\x7d";
++static char g_msgviewHelpDetailSingle[] = "Esc:\x81\x47\x81\x4b  Up/Down:\x86\x46\x87\x77\x8e\x44\x94\x2e";
++
++static int msgview_read(long offset, MsgLogEvent far *ev, unsigned char far **speaker,
++                        unsigned char far **location, unsigned char far **body) {
++    *speaker = g_pMainScratchBuf;
++    *location = g_pMainScratchBuf + 65;
++    *body = g_pMainScratchBuf + 130;
++    if (msglog_read_event(offset, ev, *speaker, 64, *location, 64, *body, 512) != MSGLOG_OK)
++        return 0;
++    (*speaker)[ev->speaker_len] = 0;
++    (*location)[ev->location_len] = 0;
++    (*body)[ev->body_len] = 0;
++    if (ev->kind == MSGLOG_KIND_GAP)
++        *body = (unsigned char far *)g_msgviewGap;
++    else
++        while (**body != 0 && **body <= ' ')
++            (*body)++;
++    return 1;
++}
++
++static void msgview_frame(int detail, int has_pages) {
++    g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
++    uiwidget_panel_draw_inset(12, 12, 296, 172, 0xa9);
++    font_draw_text_ds(g_msgviewTitle, 20, 18);
++    if (msglog_base_state() == MSGLOG_STATE_FAILED)
++        font_draw_text_ds(g_msgviewStopped, 150, 18);
++    if (detail == 0) {
++        font_draw_text_ds(g_msgviewHelpList, 20, 167);
++    } else if (has_pages != 0) {
++        font_draw_text_ds(g_msgviewHelpDetailPage, 20, 167);
++    } else {
++        font_draw_text_ds(g_msgviewHelpDetailSingle, 20, 167);
++    }
++}
++
++static int msgview_visible(long offset) {
++    MsgLogEvent ev;
++    if (msglog_read_event(offset, &ev, NULL, 0, NULL, 0, NULL, 0) != MSGLOG_OK)
++        return 0;
++    return ev.kind == MSGLOG_KIND_TEXT || ev.kind == MSGLOG_KIND_CHOICE ||
++           ev.kind == MSGLOG_KIND_SCENE || ev.kind == MSGLOG_KIND_GAP;
++}
++
++static int msgview_step(long from, int newer, long far *out) {
++    long next;
++    int rc;
++    for (;;) {
++        rc = newer != 0 ? msglog_next_offset(from, &next) : msglog_prev_offset(from, &next);
++        if (rc != MSGLOG_OK)
++            return rc;
++        if (msgview_visible(next) != 0) {
++            *out = next;
++            return MSGLOG_OK;
++        }
++        from = next;
++    }
++}
++
++static int msgview_calc_pages(unsigned char far *body, int far *page_starts, int max_pages) {
++    int count;
++    int fl;
++    int n_pages;
++    int capacity;
++
++    fl = 0;
++    n_pages = 0;
++    capacity = 4;
++    count = textwrap_compute_lines((long)body, 280, (int *)0L, 90);
++    if (count <= 0) {
++        page_starts[0] = 0;
++        return 1;
++    }
++    while (fl < count && n_pages < max_pages) {
++        int total;
++        int drawn;
++
++        total = count - fl;
++        page_starts[n_pages++] = fl;
++        if (total <= capacity) {
++            break;
++        } else {
++            int pages;
++
++            pages = (total + capacity - 1) / capacity;
++            drawn = (total + pages - 1) / pages;
++            fl += drawn;
++        }
++    }
++    return n_pages > 0 ? n_pages : 1;
++}
++
++static void msgview_draw_list(long selected) {
++    MsgLogEvent ev;
++    unsigned char far *speaker;
++    unsigned char far *location;
++    unsigned char far *body;
++    char line[40];
++    long offset;
++    int row;
++
++    msgview_frame(0, 0);
++    offset = selected;
++    /* Three two-line summaries fit the 320x200 layout at the native 16px
++       Chinese size. Clip names through TEXTWRAP instead of drawing past the
++       right edge; the detail view retains the complete stored text. */
++    for (row = 0; row < 3 && offset >= MSGLOG_HEADER_SIZE; row++) {
++        if (!msgview_read(offset, &ev, &speaker, &location, &body)) {
++            font_draw_text_ds(g_msgviewBad, 20, 45);
++            break;
++        }
++        sprintf(line, "%c %04u-%02u-%02u %02u:%02u", row == 0 ? '>' : ' ', ev.when.year,
++                ev.when.month, ev.when.day, ev.when.hour, ev.when.minute);
++        font_draw_text_ds(line, 20, 40 + row * 40);
++        if (ev.speaker_len != 0)
++            textwrap_draw_aligned((long)speaker, 172, 40 + row * 40, 128, 16, 0, 0, 0);
++        else if (ev.location_len != 0)
++            textwrap_draw_aligned((long)location, 172, 40 + row * 40, 128, 16, 0, 0, 0);
++        else
++            font_draw_text_ds(g_msgviewNarrator, 172, 40 + row * 40);
++        textwrap_draw_aligned((long)body, 20, 58 + row * 40, 280, 16, 0, 0, 0);
++        if (msgview_step(offset, 0, &offset) != MSGLOG_OK)
++            break;
++    }
++    screen_frame_present();
++}
++
++static void msgview_draw_detail(long offset, int cur_page, int far *out_total_pages) {
++    MsgLogEvent ev;
++    unsigned char far *speaker;
++    unsigned char far *location;
++    unsigned char far *body;
++    char when[24];
++    char pageStr[16];
++    int page_starts[30];
++    int total_pages;
++    int firstLine;
++
++    if (!msgview_read(offset, &ev, &speaker, &location, &body)) {
++        msgview_frame(1, 0);
++        font_draw_text_ds(g_msgviewBad, 20, 45);
++        if (out_total_pages != NULL)
++            *out_total_pages = 1;
++        screen_frame_present();
++        return;
++    }
++
++    total_pages = msgview_calc_pages(body, page_starts, 30);
++    if (out_total_pages != NULL)
++        *out_total_pages = total_pages;
++    if (cur_page >= total_pages)
++        cur_page = total_pages - 1;
++    if (cur_page < 0)
++        cur_page = 0;
++    firstLine = page_starts[cur_page];
++
++    msgview_frame(1, total_pages > 1);
++    if (total_pages > 1) {
++        sprintf(pageStr, "\x89\x7d %d/%d", cur_page + 1, total_pages);
++        font_draw_text_ds(pageStr, 240, 18);
++    }
++    sprintf(when, "%04u-%02u-%02u %02u:%02u:%02u", ev.when.year, ev.when.month,
++            ev.when.day, ev.when.hour, ev.when.minute, ev.when.second);
++    font_draw_text_ds(g_msgviewWhen, 20, 35);
++    font_draw_text_ds(when, 65, 35);
++    font_draw_text_ds(g_msgviewWho, 20, 53);
++    if (ev.speaker_len != 0)
++        font_draw_text_far((char far *)speaker, 65, 53);
++    else
++        font_draw_text_ds(g_msgviewNarrator, 65, 53);
++    font_draw_text_ds(g_msgviewWhere, 20, 71);
++    font_draw_text_far((char far *)location, 65, 71);
++    textwrap_draw_aligned((long)body, 20, 90, 280, 74, 2, 0, firstLine);
++    screen_frame_present();
++}
++
++void far msgview_run(void) {
++    long selected;
++    long next;
++    unsigned int key;
++    int detail;
++    int cur_page;
++    int total_pages;
++    int running;
++    char savedMixed;
++    char savedSmall;
++
++    msglog_enter_viewer();
++    savedMixed = g_bMixedZhMode;
++    savedSmall = g_bSmallZhMode;
++    g_bMixedZhMode = 1;
++    g_bSmallZhMode = 0;
++
++    detail = 0;
++    cur_page = 0;
++    total_pages = 1;
++    running = 1;
++    if (msglog_last_offset(&selected) != MSGLOG_OK) {
++        msgview_frame(0, 0);
++        font_draw_text_ds(g_msgviewEmpty, 20, 45);
++        screen_frame_present();
++        while ((kbhit_read() >> 8) != 1) {
++        }
++        g_bMixedZhMode = savedMixed;
++        g_bSmallZhMode = savedSmall;
++        msglog_leave_viewer();
++        return;
++    }
++    while (msgview_visible(selected) == 0 && msglog_prev_offset(selected, &selected) == MSGLOG_OK) {
++    }
++    while (running != 0) {
++        if (detail != 0)
++            msgview_draw_detail(selected, cur_page, &total_pages);
++        else
++            msgview_draw_list(selected);
++        do {
++            key = kbhit_read() >> 8;
++        } while (key == 0);
++        if (key == 1) { /* Esc */
++            if (detail != 0) {
++                detail = 0;
++                cur_page = 0;
++            } else {
++                running = 0;
++            }
++        } else if (key == 0x1c) { /* Enter */
++            if (detail == 0) {
++                detail = 1;
++                cur_page = 0;
++            } else if (cur_page + 1 < total_pages) {
++                cur_page++;
++            }
++        } else if (key == 0x48) { /* Up */
++            if (msgview_step(selected, 1, &next) == MSGLOG_OK) {
++                selected = next;
++                cur_page = 0;
++            }
++        } else if (key == 0x50) { /* Down */
++            if (msgview_step(selected, 0, &next) == MSGLOG_OK) {
++                selected = next;
++                cur_page = 0;
++            }
++        } else if (detail != 0 && (key == 0x4b || key == 0x49)) { /* Left or PageUp */
++            if (cur_page > 0)
++                cur_page--;
++        } else if (detail != 0 && (key == 0x4d || key == 0x51 || key == 0x39)) { /* Right, PageDown, Space */
++            if (cur_page + 1 < total_pages)
++                cur_page++;
++        } else if (detail != 0 && key == 0x47) { /* Home */
++            cur_page = 0;
++        } else if (detail != 0 && key == 0x4f) { /* End */
++            cur_page = total_pages - 1;
++        }
++    }
++    g_bMixedZhMode = savedMixed;
++    g_bSmallZhMode = savedSmall;
++    msglog_leave_viewer();
++}
+diff --git a/bak/SRC/SCREENS/MSGVIEW.H b/bak/SRC/SCREENS/MSGVIEW.H
+new file mode 100644
+index 0000000000000000000000000000000000000000..a5127608954cbe1151005be7a9d41cc8c9dc2770
+--- /dev/null
++++ b/bak/SRC/SCREENS/MSGVIEW.H
+@@ -0,0 +1,6 @@
++#ifndef BAK_MSGVIEW_H
++#define BAK_MSGVIEW_H
++
++extern void far msgview_run(void);
++
++#endif
 diff --git a/bak/SRC/SCREENS/TOWNSCN.C b/bak/SRC/SCREENS/TOWNSCN.C
-index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1d8bb2143 100644
+index a48aa290c865bb895d5de6e6a8f84b6c31505657..7c623c563223de806a9a09c03fb4d83d4a2e08ce 100644
 --- a/bak/SRC/SCREENS/TOWNSCN.C
 +++ b/bak/SRC/SCREENS/TOWNSCN.C
-@@ -19,6 +19,7 @@
+@@ -19,11 +19,13 @@
  #include "SRC/INPUT/KEYBOARD.H"
  #include "SRC/GFX/SCREEN/SCREEN.H"
  #include "SRC/UI/MENUPAGE.H"
@@ -5841,7 +8988,13 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
  #include "SRC/GFX/PALETTE/PALETTE.H"
  #include "SRC/AUDIO/CHAN/AUDSETIN.H"
  #include "SRC/GAME/STATE/GSTATE.H"
-@@ -34,8 +35,43 @@
+ #include "SRC/CHAR/STAT.H"
+ #include "SRC/DIALOG/DIALOG.H"
++#include "SRC/DIALOG/MSGCAP.H"
+ #include "SRC/SCREENS/MODALSCR.H"
+ #include "SRC/SCRIPT/ANIMSCR.H"
+ #include "SRC/SCRIPT/ADSCRIPT.H"
+@@ -34,8 +36,43 @@
  #include "SRC/GAME/ACTOR/ACTORREC.H"
  #include "SRC/R3D/SCENE/ZONE.H"
  #include "SRC/SCREENS/CIPHER.H"
@@ -5885,7 +9038,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
  
  unsigned short g_dialog_anim_channel;
  
-@@ -44,6 +80,59 @@ MenuPage *g_pTownMenuPage = {0};
+@@ -44,6 +81,59 @@ MenuPage *g_pTownMenuPage = {0};
  short g_nTownSceneAnimHandle = -1;
  unsigned short g_dialog_in_scene = 0x0000;
  
@@ -5945,7 +9098,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
  static void far townscene_story_actors_destr(void) {
      int actor;
  
-@@ -77,6 +166,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -77,6 +167,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
      static char g_szTownSceneFilenameSuffix[6] = "?.DAT";
      char fname[16];
      int i;
@@ -5953,7 +9106,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
      unsigned int size;
      MenuEntry *pEntry;
      ResFile *file;
-@@ -111,9 +201,48 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -111,9 +202,48 @@ static int far townscene_load(int chapter, int sub, int preserve) {
          }
      }
  
@@ -6003,7 +9156,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
      for (i = 0; i < g_pCurrentTownScene->nActorCount; i++) {
          g_pCurrentTownScene->pAActors[i].pDdxRecord =
              (preserve != 0) ? (void far *)dialog_load_record_by_key(
-@@ -123,6 +252,15 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -123,6 +253,15 @@ static int far townscene_load(int chapter, int sub, int preserve) {
              if ((pActor->nGateEventId == 0) ||
                  (((unsigned int)pActor->nGateMin <= gstate_event_read(pActor->nGateEventId)) &&
                   (gstate_event_read(pActor->nGateEventId) <= (unsigned int)pActor->nGateMax))) {
@@ -6019,7 +9172,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
                  pEntry->rect.x = pActor->rect.x - g_pTownMenuPage->rect.x;
                  pEntry->rect.y = pActor->rect.y - g_pTownMenuPage->rect.y;
                  pEntry->rect.width = pActor->rect.width;
-@@ -131,11 +269,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -131,11 +270,27 @@ static int far townscene_load(int chapter, int sub, int preserve) {
                  pEntry->wAction_id = i + 0x80;
                  g_pTownMenuPage->wEntry_count++;
                  pEntry++;
@@ -6047,7 +9200,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
  
      g_pCurrentTownScene->pDdxRecord =
          (void far *)dialog_load_record_by_key(g_pCurrentTownScene->dwDialogKey, 0);
-@@ -147,7 +301,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
+@@ -147,7 +302,7 @@ static int far townscene_load(int chapter, int sub, int preserve) {
              ((Actor far *)g_pCurrentTownScene->pActor)->needsFlush = TRUE;
              {
                  int q;
@@ -6056,7 +9209,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
                  q = (int)((long)((unsigned long)pSub->event_state.bRest_gold_unit *
                                   ((unsigned long)g_gameState.nChapter + 0x13)) /
                            0x14);
-@@ -195,25 +349,89 @@ static void far townscene_shop_menu_close(void) {
+@@ -195,25 +350,95 @@ static void far townscene_shop_menu_close(void) {
      return;
  }
  
@@ -6147,11 +9300,17 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
 +        dialog_draw_speech_bubble((char far *)title, 0);
 +    dialog_combatant_name_table_init();
 +    dialog_render_text_with_tokens(record, (char far *)body, -1, 0, 0, scroll);
++    msgcap_rendered((unsigned short)scroll);
 +    townscene_draw_exit_button();
 +}
 +
-+static void far townscene_dlg_play_rec_bubble(DDXRecord far *record) {
++static void far townscene_dlg_play_rec_bubble(DDXRecord far *record, unsigned long key,
++                                               unsigned short scene_id) {
 +    if (record != (DDXRecord far *)0) {
++        unsigned char far *body;
++        unsigned char far *title;
++        townscene_dlg_split_title(record, &body, &title);
++        msgcap_scene_enter(scene_id, key, title);
 +        townscene_anim_channel_play_sync(g_dialog_anim_channel);
 +        townscene_dlg_snapshot_strip();
 +        townscene_dlg_draw_page(record, 0);
@@ -6160,13 +9319,14 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
      }
      return;
  }
-@@ -319,12 +537,17 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -319,12 +544,19 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      unsigned short savedBlendMode;
      unsigned char far *pPalSaved;
      int needRefresh;
 +    int scrollDesc;
 +    int contextOverlayDrawn;
 +    int contextOverlayWanted;
++    unsigned short captureSceneId;
      TownSceneActor *pA;
      int di;
  
@@ -6175,10 +9335,31 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
      exitFlag = 0;
 +    scrollDesc = 0;
 +    contextOverlayDrawn = 0;
++    captureSceneId = 0xffff;
      sceneIdx = scene_index;
      savedMusic = audio_music_play(-999);
      musicTrack = -1;
-@@ -409,17 +632,68 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -352,6 +584,8 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+             screen_cursor_hide();
+             screen_cursor_show_busy();
+             townscene_load((int)scene_kind, sceneIdx, 0);
++            captureSceneId = (unsigned short)(((unsigned int)scene_kind << 8) |
++                                              ((unsigned int)sceneIdx & 0xff));
+             palette_cycle_eb_toggle(0);
+             townscene_anim_channel_play_sync(g_pCurrentTownScene->nEntryAnim);
+             dialog_input_wait_with_cooldown(2);
+@@ -389,7 +623,9 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+                 }
+             }
+             if (action == 0) {
+-                townscene_dlg_play_rec_bubble(g_pCurrentTownScene->pDdxRecord);
++                townscene_dlg_play_rec_bubble(g_pCurrentTownScene->pDdxRecord,
++                                               g_pCurrentTownScene->dwDialogKey,
++                                               captureSceneId);
+             }
+             if (g_pPendingPalette != 0) {
+                 g_pPalQueuedForFlip = g_pPendingPalette;
+@@ -409,17 +645,68 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                  screen_frame_present();
                  screen_frame_sync_buffers_rect(0, 200);
              }
@@ -6250,7 +9431,28 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
          /* action < 0x80 skips the actor dispatch below. */
          if (action >= 0x80) {
  
-@@ -647,10 +921,13 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -445,7 +732,8 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+                             ((DDXRecord far *)pA->pDdxRecord)->bCnt1 != 0) {
+                             dialog_play_record(pA->dwDialogKey, 0);
+                         } else {
+-                            townscene_dlg_play_rec_bubble((DDXRecord far *)pA->pDdxRecord);
++                            townscene_dlg_play_rec_bubble((DDXRecord far *)pA->pDdxRecord,
++                                                           pA->dwDialogKey, captureSceneId);
+                             townscene_cursor_wait_for_drag();
+                             g_pPendingPalette = 0;
+                         }
+@@ -628,7 +916,9 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+                     screen_cursor_hide();
+                 }
+                 townscene_anim_channel_play_sync(g_pCurrentTownScene->nIdleAnim);
+-                townscene_dlg_play_rec_bubble(g_pCurrentTownScene->pDdxRecord);
++                townscene_dlg_play_rec_bubble(g_pCurrentTownScene->pDdxRecord,
++                                               g_pCurrentTownScene->dwDialogKey,
++                                               captureSceneId);
+                 if (g_pPendingPalette != 0) {
+                     g_pPalQueuedForFlip = g_pPendingPalette;
+                     g_pPendingPalette = 0;
+@@ -647,10 +937,13 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
                  }
@@ -6265,7 +9467,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
          if (action == 1) {
              townscene_anim_channel_play_sync(g_pCurrentTownScene->nExitAnim);
              g_pPendingPalette = 0;
-@@ -661,6 +938,10 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -661,6 +954,10 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
      }
  
      /* Loop exit: tear down the scene and restore the prior game state. */
@@ -6276,8 +9478,11 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
      g_pPalQueuedForFlip = 0;
      townscene_story_actors_destr();
      townscene_shop_menu_close();
-@@ -679,6 +960,21 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+@@ -677,8 +974,24 @@ void far townscene_main_loop(unsigned int scene_kind, int scene_index) {
+     }
+     palette_cycle_eb_toggle(1);
      g_dialog_in_scene = 0;
++    msgcap_scene_leave();
      g_nSceneReloadPending = 1;
      g_nMapReloadPending = 1;
 +    mainmenu_autosave_request();
@@ -6298,7 +9503,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
  }
  
  void far townscene_cheat_menu_screen(void) {
-@@ -696,10 +992,7 @@ void far townscene_cheat_menu_screen(void) {
+@@ -696,10 +1009,7 @@ void far townscene_cheat_menu_screen(void) {
      screen_render_main_frame("DIALOG.SCX");
      do {
          if (redraw != 0) {
@@ -6310,7 +9515,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
              menupage_draw(page);
              screen_frame_present();
              screen_frame_sync_buffers_rect(0, 200);
-@@ -773,10 +1066,7 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -773,10 +1083,7 @@ void far townscene_chest_open_with_cipher(void) {
              screen_render_main_frame("DIALOG.SCX");
              do {
                  if (redraw != 0) {
@@ -6322,7 +9527,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
                      menupage_draw(page);
                      screen_frame_present();
                      screen_frame_sync_buffers_rect(0, 200);
-@@ -791,6 +1081,12 @@ void far townscene_chest_open_with_cipher(void) {
+@@ -791,6 +1098,12 @@ void far townscene_chest_open_with_cipher(void) {
                      cmbinv_inventory_screen_run(actor, 0, 0);
                      screen_render_main_frame("DIALOG.SCX");
                      break;
@@ -6336,18 +9541,20 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..f196cced4eec6b9f0bf0888899e26bf1
                      if (key_is_down(0x2a) != 0)
                          break;
 diff --git a/bak/SRC/SCRIPT/TTMDLG.C b/bak/SRC/SCRIPT/TTMDLG.C
-index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36ccc7eb247b 100644
+index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..0e528dce15ad9a8a71ef0c3dbc7100d9612809ba 100644
 --- a/bak/SRC/SCRIPT/TTMDLG.C
 +++ b/bak/SRC/SCRIPT/TTMDLG.C
-@@ -14,6 +14,7 @@
+@@ -13,7 +13,9 @@
+ #include "SRC/SYS/EMSIMG.H"
  #include "SRC/GFX/SPRITE/BLITAA.H"
  #include "SRC/DIALOG/DIALOG.H"
++#include "SRC/DIALOG/MSGCAP.H"
  #include "SRC/SCRIPT/ADSCRIPT.H"
 +#include "SRC/SCREENS/BOOKVIEW.H"
  
  unsigned short g_wScriptEnhancedAuxFlag = 0x0000;
  unsigned short g_nScriptEnhancedOpcodeDispatchEnabled = 0x0000;
-@@ -78,6 +79,7 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
+@@ -78,6 +80,7 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
      case 3: {
          long key;
          PDdxRecord rec;
@@ -6355,9 +9562,12 @@ index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36cc
  
          key = (long)arg + 1600000;
          g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
-@@ -86,17 +88,35 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
+@@ -85,18 +88,40 @@ int far ttmscript_show_dialog_action(int arg, unsigned int mode) {
+ 
          g_graphics_context.clip.xmax = 0x13f;
          if (rec = dialog_load_record_by_key((unsigned long)key, 0)) {
++            msgcap_scope_begin((unsigned long)key, rec->wSpeaker_id, NULL);
++            msgcap_display(MSGCAP_CUTSCENE, (unsigned long)key, rec->wSpeaker_id, NULL);
              font_activate(g_wGameFontSlot);
 -            g_graphics_context.wGfxBlitSrcPage = g_wVgaScratchPageBase;
 -            g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
@@ -6386,6 +9596,7 @@ index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36cc
 +                g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaPage2Base;
 +                gfx_present_dispatch(0, 0x73, 0x140, 0x55);
 +                dialog_render_text_with_tokens(rec, (char far *)0, -1, 0, 0, i);
++                msgcap_rendered((unsigned short)i);
 +                g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wVgaPage2Base;
 +                g_graphics_context.wGfxBlitDstPage = g_graphics_context.wVgaFrontPageBase;
 +                gfx_present_dispatch(0, 0x73, 0x140, 0x55);
@@ -6398,6 +9609,7 @@ index 19d09517c10ddef42e7720b4b79e19d3b12dbc00..2db0e206fe168adc2005189bd8fe36cc
 +                    break;
 +                i += g_wTextWrapLinesDrawn;
 +            }
++            msgcap_scope_end();
              return dialog_freemem_if_not_null((unsigned char far *)rec);
          }
          break;
@@ -6530,7 +9742,7 @@ index 2da1703d83ba6e17512a2edc4f930396b22b0c1e..642556bceeef998d9625b54a916f84b9
          if (widget->wEnable_gate == 0) {
              if (widget->wWidget_type != 2)
 diff --git a/bak/SRC/UI/TEXTWRAP.C b/bak/SRC/UI/TEXTWRAP.C
-index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c443da4e10 100644
+index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..c9f5aa561c611e3c1f4466986e4c424f4471ed11 100644
 --- a/bak/SRC/UI/TEXTWRAP.C
 +++ b/bak/SRC/UI/TEXTWRAP.C
 @@ -12,12 +12,14 @@ struct textline {
@@ -6604,7 +9816,7 @@ index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c4
      hoff = 0;
      voff = 0;
      if ((f & 0) != 0)
-@@ -112,14 +134,35 @@ void textwrap_draw_aligned(long text, int x, int y, int max_width, int max_heigh
+@@ -112,17 +134,45 @@ void textwrap_draw_aligned(long text, int x, int y, int max_width, int max_heigh
      else
          count = textwrap_compute_lines(text, max_width, (int *)lines, 0x5a);
  
@@ -6648,6 +9860,16 @@ index 3a5dd136c1269567c9f9f63654f2cc78f9d87d15..497f95cbc6e0c8be5a8f2dfc6416b8c4
      }
      g_wTextWrapXAccum = 0;
      g_wTextWrapLinesDrawn = (count - g_wTextWrapLinesRemaining) - fl;
++    g_wTextWrapByteStart = 0;
++    g_wTextWrapByteEnd = 0;
++    if (g_wTextWrapLinesDrawn != 0) {
++        g_wTextWrapByteStart = (unsigned short)lines[fl].start;
++        g_wTextWrapByteEnd =
++            (unsigned short)lines[fl + g_wTextWrapLinesDrawn - 1].end;
++    }
+ 
+     if (((f & 0x20) != 0) || ((f & 0x10) != 0)) {
+         voff = max_height - (line_height + line_spacing) * g_wTextWrapLinesDrawn;
 diff --git a/bak/SRC/UI/UIWIDGET.C b/bak/SRC/UI/UIWIDGET.C
 index 258c6b3513f696baa7967c53d793d0938e069fb2..a651f597e2451804dba4f80d11fa7c779e68cbb2 100644
 --- a/bak/SRC/UI/UIWIDGET.C
@@ -6821,3 +10043,761 @@ index 2af1c575ddcd15c8ab21b24fb094261af92bafa3..172bfe29971aef11b9f44be9affb5479
  }
  
  void widget_draw_iconbox(MenuEntry *widget, int x, int y, int pressed, int sprite_flags) {
+diff --git a/bak/TOOLS/CAPTEST.C b/bak/TOOLS/CAPTEST.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..00e66b5d97fa788aecf49582673b0f85eb6e429f
+--- /dev/null
++++ b/bak/TOOLS/CAPTEST.C
+@@ -0,0 +1,116 @@
++#include <stdio.h>
++#include <string.h>
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/DIALOG/MSGCAP.H"
++#include "SRC/GAME/GMAIN.H"
++
++GameState g_gameState;
++unsigned char far *g_pMainScratchBuf;
++unsigned short g_wTextWrapXAccum;
++unsigned short g_wTextWrapLinesDrawn;
++unsigned short g_wTextWrapLinesRemaining;
++unsigned short g_wTextWrapByteStart;
++unsigned short g_wTextWrapByteEnd;
++
++static unsigned char g_scratch[1024];
++static unsigned char g_text[] = "first second third";
++static unsigned char g_speaker[] = "NPC";
++static unsigned char g_choice[] = "Topic";
++static unsigned char g_title[] = "Inn";
++
++static void dump(void) {
++    MsgLogEvent ev;
++    unsigned char speaker[MSGLOG_MAX_SPEAKER];
++    unsigned char location[MSGLOG_MAX_LOCATION];
++    unsigned char body[MSGLOG_MAX_BODY];
++    long p;
++    int rc;
++
++    rc = msglog_first_offset(&p);
++    while (rc == MSGLOG_OK) {
++        memset(speaker, 0, sizeof(speaker));
++        memset(location, 0, sizeof(location));
++        memset(body, 0, sizeof(body));
++        rc = msglog_read_event(p, &ev, speaker, sizeof(speaker), location,
++                               sizeof(location), body, sizeof(body));
++        if (rc != MSGLOG_OK)
++            break;
++        printf("EV %u %lu %lu %u %u %u %u %u %u\n", ev.kind, ev.sequence,
++               ev.conversation, ev.chapter, ev.zone_id, ev.scene_id,
++               ev.speaker_id, ev.speaker_len, ev.body_len);
++        rc = msglog_next_offset(p, &p);
++    }
++}
++
++static void excluded_probe(unsigned long key) {
++    int begin;
++    int page;
++
++    begin = msgcap_scope_begin(key, 0, NULL);
++    msgcap_display(MSGCAP_DIALOG, key, 0, NULL);
++    page = msgcap_page(g_text, 0, 5, 0);
++    msgcap_scope_end();
++    printf("EX %lu %d %d\n", key, begin, page);
++}
++
++int main(void) {
++    MsgLogTime stamp;
++    int rc;
++    unsigned char long_name[67];
++
++    memset(&g_gameState, 0, sizeof(g_gameState));
++    g_gameState.nChapter = 3;
++    g_gameState.nZoneId = 9;
++    stamp.year = 2026;
++    stamp.month = 9;
++    stamp.day = 6;
++    stamp.hour = 15;
++    stamp.minute = 0;
++    stamp.second = 0;
++    stamp.hundredth = 0;
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_new_timeline("CAP.MLG", &stamp);
++    printf("NEW %d\n", rc);
++    msgcap_init();
++    printf("BEGIN %d\n", msgcap_scope_begin(1600006UL, 7, g_speaker));
++    msgcap_display(MSGCAP_DIALOG, 1600006UL, 7, g_speaker);
++    printf("PAGE1 %d\n", msgcap_page(g_text, 0, 5, 0));
++    printf("DUP1 %d\n", msgcap_page(g_text, 0, 5, 0));
++    printf("PAGE2 %d\n", msgcap_page(g_text, 6, 12, 1));
++    printf("BACK %d\n", msgcap_page(g_text, 0, 5, 0));
++    printf("CHOICE %d\n", msgcap_choice(1600006UL, g_choice, 0));
++    msgcap_scope_end();
++    printf("XBEGIN %d\n", msgcap_scope_begin(1800022UL, 7, g_speaker));
++    msgcap_display(MSGCAP_DIALOG, 1800022UL, 7, g_speaker);
++    printf("XPAGE %d\n", msgcap_page(g_text, 0, 5, 0));
++    printf("XCHOICE %d\n", msgcap_choice(1800022UL, g_choice, 0));
++    msgcap_scope_end();
++    excluded_probe(254UL);
++    excluded_probe(199UL);
++    excluded_probe(11UL);
++    msgcap_scene_enter(0x1301, 1300001UL, g_title);
++    printf("SCENE %d\n", msgcap_page(g_text, 0, 5, 0));
++    msgcap_scene_enter(0x1301, 1300001UL, g_title);
++    printf("SDUP %d\n", msgcap_page(g_text, 0, 5, 0));
++    msgcap_scene_leave();
++    dump();
++    printf("COUNT %lu\n", msglog_event_count());
++    msglog_shutdown();
++    msglog_new_timeline("CAPSPLIT.MLG", &stamp);
++    msgcap_init();
++    memset(long_name, 'A', 63);
++    long_name[63] = 0x80; long_name[64] = 0x40; long_name[65] = 0;
++    msgcap_scope_begin(1600006UL, 7, long_name);
++    msgcap_page(g_text, 0, 5, 0);
++    msgcap_scope_end();
++    long_name[62] = 0x80; long_name[63] = 0x40; long_name[64] = 0;
++    msgcap_scope_begin(1600006UL, 7, long_name);
++    msgcap_page(g_text, 0, 5, 0);
++    msgcap_scope_end();
++    msglog_shutdown();
++    return 0;
++}
++
++#include "SRC/DIALOG/MSGLOG.C"
++#include "SRC/DIALOG/MSGCAP.C"
+diff --git a/bak/TOOLS/MLGBENCH.C b/bak/TOOLS/MLGBENCH.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..acb95f70cbed5ee97bd574927b74a81ee489f801
+--- /dev/null
++++ b/bak/TOOLS/MLGBENCH.C
+@@ -0,0 +1,62 @@
++/* Standalone DOS capacity probe. Synthetic input only; never run in GAMES.
++   Reports core I/O costs, not game rendering or the GAM serializer. */
++#include <stdio.h>
++#include <stdlib.h>
++#include <dos.h>
++#include <alloc.h>
++#include "SRC/DIALOG/MSGLOG.H"
++
++static unsigned long ticks(void) {
++    struct time t;
++    gettime(&t);
++    return ((unsigned long)t.ti_hour * 3600UL + (unsigned long)t.ti_min * 60UL +
++            t.ti_sec) * 100UL + t.ti_hund;
++}
++static unsigned long millis(unsigned long start) {
++    unsigned long end = ticks();
++    if (end < start) end += 8640000UL;
++    return (end - start) * 10UL;
++}
++
++int main(int argc, char **argv) {
++    unsigned char far *scratch;
++    unsigned char body[513], who[65], where[65];
++    MsgLogEvent ev;
++    unsigned long before, after, opened, read_ms, save_ms, load_ms;
++    unsigned long start;
++    long offset;
++    int rc, i;
++    if (argc != 2) return 2;
++    before = farcoreleft();
++    scratch = farmalloc(2048UL);
++    if (!scratch) return 3;
++    msglog_init(); msglog_set_scratch(scratch, 2048);
++    start = ticks();
++    rc = msglog_open_working(argv[1]);
++    opened = millis(start);
++    if (rc) { printf("OPEN_ERROR %d\n", rc); return 4; }
++    start = ticks();
++    msglog_last_offset(&offset);
++    for (i = 0; i < 30 && rc == MSGLOG_OK; i++) {
++        rc = msglog_read_event(offset, &ev, who, 64, where, 64, body, 512);
++        if (rc == MSGLOG_OK) rc = msglog_prev_offset(offset, &offset);
++    }
++    read_ms = millis(start);
++    if (rc) { printf("READ_ERROR %d\n", rc); return 5; }
++    start = ticks();
++    rc = msglog_prepare_snapshot("BENCH.MLG", 100UL, 123UL);
++    save_ms = millis(start);
++    if (rc) { printf("SAVE_ERROR %d\n", rc); return 6; }
++    start = ticks();
++    rc = msglog_load_candidate("BENCH.MLG", 100UL, 123UL);
++    load_ms = millis(start);
++    if (rc) { printf("LOAD_ERROR %d\n", rc); return 7; }
++    msglog_discard_candidate();
++    printf("BENCH %s events=%lu open_ms=%lu read30_ms=%lu snapshot_ms=%lu validate_ms=%lu scratch=2048 free_before=%lu\n",
++           argv[1], msglog_event_count(), opened, read_ms, save_ms, load_ms, before);
++    msglog_shutdown(); msglog_set_scratch(NULL, 0); farfree(scratch);
++    after = farcoreleft();
++    printf("FREE_AFTER %lu delta=%ld\n", after, (long)after - (long)before);
++    remove("BENCH.MLG");
++    return 0;
++}
+diff --git a/bak/TOOLS/MLGTEST.C b/bak/TOOLS/MLGTEST.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..216f658201ed17dc73126a9034122b822031de2a
+--- /dev/null
++++ b/bak/TOOLS/MLGTEST.C
+@@ -0,0 +1,312 @@
++/**
++ * @file  MLGTEST.C
++ * @brief DOS-side conformance harness for the MSGLOG (.MLG v1) data core.
++ *
++ * @details Builds as a standalone real-mode tool from the same Borland C++ 3.1
++ *          medium-model toolchain as the game, linking the *unmodified*
++ *          SRC/DIALOG/MSGLOG.C plus OUT\DOSRW.OBJ.  It exists so the format can
++ *          be verified across languages for real: a fixture this tool writes is
++ *          parsed by tools/text/message_log.py, and fixtures that Python writes
++ *          (including deliberately corrupt ones) are fed back through the very
++ *          same C code the game will run.
++ *
++ *          Every command prints one plain-ASCII line per fact so a host-side
++ *          test can assert on it; strings are printed as uppercase hex because
++ *          the payload is BAK-ZH game bytes, not console text.
++ *
++ * Usage:
++ *   MLGTEST GEN  <out.mlg>          write the canonical scripted fixture
++ *   MLGTEST DUMP <in.mlg>           open as a working file and list every event
++ *   MLGTEST OPEN <in.mlg>           print only the msglog_open_working() code
++ *   MLGTEST CAND <in.mlg> <len> <crc>   print the msglog_load_candidate() code
++ *   MLGTEST SNAP <work.mlg> <out.mlg> <len> <crc>   snapshot a working file
++ *   MLGTEST ACT  <cand.mlg> <work.mlg>  load + activate a candidate, then list
++ *   MLGTEST SPLIT                   exercise msglog_split_point()
++ *   MLGTEST STATE                   exercise the state machine
++ */
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++#include "SRC/DIALOG/MSGLOG.H"
++
++static unsigned char g_scratch[1024];
++static unsigned char g_speaker[MSGLOG_MAX_SPEAKER];
++static unsigned char g_location[MSGLOG_MAX_LOCATION];
++static unsigned char g_body[MSGLOG_MAX_BODY];
++static unsigned char g_long[601];
++
++/* "納馮" and "三山當鋪" in the BAK-ZH compact encoding. */
++static unsigned char g_zhSpeaker[4] = {0x84, 0x32, 0x96, 0x49};
++static unsigned char g_zhLocation[8] = {0x85, 0x43, 0x80, 0x24, 0x81, 0x34, 0x99, 0x3d};
++
++/* '"Hello!" ' + U+6F2B (trail 0x23 '#') + U+62B5 (trail 0x40 '@') + U+6578
++   (trail 0x23) + '#end@'. Proves a trail byte that looks like the title
++   delimiter or a token marker survives a byte-exact round trip. */
++static unsigned char g_zhBody[20] = {0x22, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21, 0x22, 0x20,
++                                     0x80, 0x23, 0x80, 0x40, 0x81, 0x23,
++                                     0x23, 0x65, 0x6e, 0x64, 0x40};
++
++/* U+62B5 + U+812B: a short two-glyph choice label. */
++static unsigned char g_zhChoice[4] = {0x80, 0x40, 0x82, 0x23};
++
++static void mlgtest_set_time(MsgLogTime *t, unsigned short y, int mo, int d, int h, int mi, int s,
++                             int hs) {
++    t->year = y;
++    t->month = (unsigned char)mo;
++    t->day = (unsigned char)d;
++    t->hour = (unsigned char)h;
++    t->minute = (unsigned char)mi;
++    t->second = (unsigned char)s;
++    t->hundredth = (unsigned char)hs;
++}
++
++static void mlgtest_print_hex(const char *label, const unsigned char *p, unsigned int n) {
++    unsigned int i;
++    printf("%s ", label);
++    for (i = 0; i < n; i++)
++        printf("%02X", p[i]);
++    printf("\n");
++}
++
++static void mlgtest_story_context(MsgLogContext *ctx) {
++    memset(ctx, 0, sizeof(MsgLogContext));
++    ctx->chapter = 1;
++    ctx->zone_id = 9;
++    ctx->scene_id = 7;
++    ctx->speaker_id = 7;
++    ctx->source_key = 1600006UL;
++    ctx->source_file = 16;
++    ctx->flags = 0;
++    ctx->speaker = g_zhSpeaker;
++    ctx->speaker_len = 4;
++    ctx->location = g_zhLocation;
++    ctx->location_len = 8;
++}
++
++static int mlgtest_gen(const char *path) {
++    MsgLogContext ctx;
++    MsgLogTime now;
++    int rc;
++    int i;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 7, 25);
++    rc = msglog_new_timeline(path, &now);
++    printf("GEN new_timeline=%d\n", rc);
++    if (rc != MSGLOG_OK)
++        return 1;
++
++    mlgtest_story_context(&ctx);
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 8, 0);
++    printf("GEN conv_begin=%d\n", msglog_conv_begin(&ctx, &now));
++
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 9, 10);
++    printf("GEN append_span=%d\n", msglog_append_span(&ctx, &now, g_zhBody, 20));
++
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 10, 20);
++    printf("GEN append_choice=%d\n", msglog_append_choice(&ctx, &now, g_zhChoice, 4));
++
++    /* 'A' followed by 300 double-byte glyphs = 601 bytes. A naive 512-byte cut
++       would land between the lead and trail of the glyph at bytes 511/512, so
++       the first fragment must come out 511 bytes long, not 512. */
++    g_long[0] = 0x41;
++    for (i = 0; i < 300; i++) {
++        g_long[1 + i * 2] = 0x80;
++        g_long[2 + i * 2] = 0x23;
++    }
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 11, 30);
++    printf("GEN append_long=%d\n", msglog_append_span(&ctx, &now, g_long, 601));
++
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 12, 40);
++    printf("GEN append_gap=%d\n", msglog_append_gap(&now));
++
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 13, 50);
++    printf("GEN conv_end=%d\n", msglog_conv_end(&now));
++
++    printf("GEN events=%lu\n", msglog_event_count());
++    printf("GEN shutdown=%d\n", msglog_shutdown());
++    return 0;
++}
++
++static void mlgtest_list(void) {
++    MsgLogEvent ev;
++    long off;
++    int rc;
++
++    printf("LIST events=%lu flags=%04X\n", msglog_event_count(), msglog_header_flags());
++    rc = msglog_first_offset(&off);
++    if (rc != MSGLOG_OK) {
++        printf("LIST first=%d\n", rc);
++        return;
++    }
++    for (;;) {
++        rc = msglog_read_event(off, &ev, g_speaker, sizeof(g_speaker), g_location,
++                               sizeof(g_location), g_body, sizeof(g_body));
++        if (rc != MSGLOG_OK) {
++            printf("EV off=%ld read=%d\n", off, rc);
++            return;
++        }
++        printf("EV off=%ld len=%lu kind=%u flags=%04X seq=%lu conv=%lu prev=%lu\n", ev.offset,
++               ev.record_length, ev.kind, ev.flags, ev.sequence, ev.conversation, ev.prev_offset);
++        printf("   when=%04u-%02u-%02u %02u:%02u:%02u.%02u ch=%u zone=%u scene=%u spk=%u "
++               "key=%lu file=%u frag=%u\n",
++               ev.when.year, ev.when.month, ev.when.day, ev.when.hour, ev.when.minute,
++               ev.when.second, ev.when.hundredth, ev.chapter, ev.zone_id, ev.scene_id,
++               ev.speaker_id, ev.source_key, ev.source_file, ev.fragment_index);
++        mlgtest_print_hex("   SPK", g_speaker, ev.speaker_len);
++        mlgtest_print_hex("   LOC", g_location, ev.location_len);
++        mlgtest_print_hex("   BOD", g_body, ev.body_len);
++        rc = msglog_next_offset(off, &off);
++        if (rc != MSGLOG_OK) {
++            printf("LIST end=%d\n", rc);
++            break;
++        }
++    }
++    /* Walk back with prev_offset to prove the reverse chain the pager uses. */
++    rc = msglog_last_offset(&off);
++    printf("BACK start=%d off=%ld\n", rc, (rc == MSGLOG_OK) ? off : -1L);
++    while (rc == MSGLOG_OK) {
++        rc = msglog_prev_offset(off, &off);
++        if (rc == MSGLOG_OK)
++            printf("BACK off=%ld\n", off);
++    }
++    printf("BACK end=%d\n", rc);
++}
++
++static int mlgtest_dump(const char *path) {
++    int rc;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_open_working(path);
++    printf("DUMP open=%d state=%d\n", rc, msglog_state());
++    if (rc != MSGLOG_OK)
++        return 1;
++    mlgtest_list();
++    msglog_shutdown();
++    return 0;
++}
++
++static int mlgtest_open(const char *path) {
++    int rc;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_open_working(path);
++    printf("OPEN rc=%d committed_events=%lu\n", rc, msglog_event_count());
++    if (rc == MSGLOG_OK)
++        msglog_shutdown();
++    return 0;
++}
++
++static int mlgtest_cand(const char *path, unsigned long len, unsigned long crc) {
++    int rc;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_load_candidate(path, len, crc);
++    printf("CAND rc=%d\n", rc);
++    msglog_discard_candidate();
++    return 0;
++}
++
++static int mlgtest_snap(const char *work, const char *out, unsigned long len, unsigned long crc) {
++    int rc;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_open_working(work);
++    printf("SNAP open=%d\n", rc);
++    if (rc != MSGLOG_OK)
++        return 1;
++    rc = msglog_prepare_snapshot(out, len, crc);
++    printf("SNAP prepare=%d\n", rc);
++    msglog_shutdown();
++    return 0;
++}
++
++static int mlgtest_act(const char *cand, const char *work) {
++    int rc;
++
++    msglog_init();
++    msglog_set_scratch(g_scratch, sizeof(g_scratch));
++    rc = msglog_load_candidate(cand, 0UL, 0UL);
++    printf("ACT load=%d\n", rc);
++    if (rc != MSGLOG_OK)
++        return 1;
++    rc = msglog_activate_candidate(work);
++    printf("ACT activate=%d state=%d\n", rc, msglog_state());
++    if (rc != MSGLOG_OK)
++        return 1;
++    mlgtest_list();
++    msglog_shutdown();
++    return 0;
++}
++
++static int mlgtest_split(void) {
++    static unsigned char a[8] = {0x41, 0x42, 0x80, 0x23, 0x80, 0x40, 0x43, 0x44};
++    int i;
++
++    for (i = 0; i <= 8; i++)
++        printf("SPLIT limit=%d cut=%u\n", i, msglog_split_point(a, 8, (unsigned int)i));
++    printf("SPLIT lead_only cut=%u\n", msglog_split_point(a + 2, 6, 1));
++    return 0;
++}
++
++static int mlgtest_state(void) {
++    MsgLogTime now;
++
++    mlgtest_set_time(&now, 2026, 9, 6, 13, 45, 7, 25);
++    msglog_init();
++    printf("ST init base=%d state=%d rec=%d\n", msglog_base_state(), msglog_state(),
++           msglog_recording_enabled());
++    msglog_enter_transition();
++    printf("ST transition state=%d rec=%d\n", msglog_state(), msglog_recording_enabled());
++    msglog_enter_viewer();
++    printf("ST viewer state=%d rec=%d\n", msglog_state(), msglog_recording_enabled());
++    msglog_leave_viewer();
++    msglog_leave_transition();
++    printf("ST restored base=%d state=%d\n", msglog_base_state(), msglog_state());
++
++    /* Drive the module into recording-failed, then prove a viewer visit cannot
++       launder it back into active on the way out. */
++    printf("ST bad_new=%d\n", msglog_new_timeline("Z:\\NOSUCH\\X.MLG", &now));
++    printf("ST failed base=%d state=%d rec=%d\n", msglog_base_state(), msglog_state(),
++           msglog_recording_enabled());
++    msglog_enter_viewer();
++    printf("ST failed_in_viewer state=%d rec=%d\n", msglog_state(), msglog_recording_enabled());
++    msglog_leave_viewer();
++    printf("ST failed_after_viewer base=%d state=%d rec=%d\n", msglog_base_state(), msglog_state(),
++           msglog_recording_enabled());
++    printf("ST gap_when_failed=%d\n", msglog_append_gap(&now));
++    return 0;
++}
++
++int main(int argc, char **argv) {
++    if (argc < 2) {
++        printf("MLGTEST: no command\n");
++        return 2;
++    }
++    if (strcmp(argv[1], "GEN") == 0 && argc >= 3)
++        return mlgtest_gen(argv[2]);
++    if (strcmp(argv[1], "DUMP") == 0 && argc >= 3)
++        return mlgtest_dump(argv[2]);
++    if (strcmp(argv[1], "OPEN") == 0 && argc >= 3)
++        return mlgtest_open(argv[2]);
++    if (strcmp(argv[1], "CAND") == 0 && argc >= 5)
++        return mlgtest_cand(argv[2], strtoul(argv[3], NULL, 10), strtoul(argv[4], NULL, 16));
++    if (strcmp(argv[1], "SNAP") == 0 && argc >= 6)
++        return mlgtest_snap(argv[2], argv[3], strtoul(argv[4], NULL, 10),
++                            strtoul(argv[5], NULL, 16));
++    if (strcmp(argv[1], "ACT") == 0 && argc >= 4)
++        return mlgtest_act(argv[2], argv[3]);
++    if (strcmp(argv[1], "SPLIT") == 0)
++        return mlgtest_split();
++    if (strcmp(argv[1], "STATE") == 0)
++        return mlgtest_state();
++    printf("MLGTEST: bad command %s\n", argv[1]);
++    return 2;
++}
+diff --git a/bak/TOOLS/MSGPTEST.C b/bak/TOOLS/MSGPTEST.C
+new file mode 100644
+index 0000000000000000000000000000000000000000..13ead354e485dcf01bdfaff19e5bbd62f685ed66
+--- /dev/null
++++ b/bak/TOOLS/MSGPTEST.C
+@@ -0,0 +1,204 @@
++#include <stdio.h>
++#include <string.h>
++#include <io.h>
++#include <dir.h>
++#include <alloc.h>
++
++#define MSGSAVE_TEST
++#include "SRC/DIALOG/MSGLOG.H"
++#include "SRC/DIALOG/MSGSAVE.H"
++#include "SRC/GAME/STATE/GSTATE.H"
++#include "SRC/IO/DOSRW.H"
++
++/* Only this test translation unit redirects I/O. Release code is unchanged.
++   A close fault closes the handle and reports failure (e.g. delayed flush). */
++static int fault_stage, fault_op, fault_hit;
++static int should_fail(int op) {
++    if (!fault_hit && fault_op == op && fault_stage == g_msgsaveTestStage) {
++        fault_hit = 1;
++        return 1;
++    }
++    return 0;
++}
++static int test_write(int fd, const void *p, unsigned n) {
++    if (should_fail(1))
++        return n > 1 ? write(fd, p, n / 2) : -1;
++    return write(fd, p, n);
++}
++static int test_close(int fd) {
++    int fail = should_fail(2);
++    int rc = close(fd);
++    return fail ? -1 : rc;
++}
++static long far test_dos_write(unsigned char far *p, long n, int fd) {
++    if (should_fail(3))
++        return dos_write(p, n / 2, fd);
++    return dos_write(p, n, fd);
++}
++static int test_rename(const char *a, const char *b) {
++    return should_fail(4) ? -1 : rename(a, b);
++}
++static int test_remove(const char *p) {
++    return should_fail(5) ? -1 : remove(p);
++}
++#define write test_write
++#define close test_close
++#define dos_write test_dos_write
++#define rename test_rename
++#define remove test_remove
++
++int g_cfgTempDrive = 0;
++static int g_saveSerial = 0;
++
++void far *alloc_far_umb(unsigned long size) {
++    return farmalloc(size);
++}
++
++int _freemem(void far *p) {
++    farfree(p);
++    return 0;
++}
++
++int far savegame_write(char *path) {
++    unsigned char b[1024];
++    long remaining;
++    int chunk;
++    int fd;
++    int i;
++    g_saveSerial++;
++    for (i = 0; i < sizeof(b); i++)
++        b[i] = (unsigned char)(g_saveSerial * 17 + i);
++    b[98] = 0x16; b[99] = 0;
++    fd = open(path, 0x8302, 0x0180);
++    if (fd < 0)
++        return 0;
++    remaining = GAM_SAVE_FILE_BASE_SIZE;
++    while (remaining > 0) {
++        chunk = remaining > sizeof(b) ? sizeof(b) : (int)remaining;
++        if (write(fd, b, chunk) != chunk) {
++            close(fd); return 0;
++        }
++        remaining -= chunk;
++        b[98] = (unsigned char)(g_saveSerial * 17 + 98);
++        b[99] = (unsigned char)(g_saveSerial * 17 + 99);
++    }
++    return close(fd) == 0;
++}
++
++static void clean(void) {
++    remove("PAIR\\SAVE01.GAM"); remove("PAIR\\SAVE01.MLG");
++    remove("PAIR\\SAVE02.GAM"); remove("PAIR\\SAVE02.MLG");
++    remove("PAIR\\SAVE03.GAM"); remove("PAIR\\SAVE03.MLG");
++    remove("PAIR\\MLGNEW.GAM"); remove("PAIR\\MLGNEW.MLG");
++    remove("PAIR\\MLGOLD.GAM"); remove("PAIR\\MLGOLD.MLG"); remove("PAIR\\MLGTXN.DAT");
++    remove("MSGWORK.MLG");
++}
++
++int main(void) {
++    MsgLogTime t;
++    int p;
++    int f;
++    int crash;
++    int again;
++    unsigned long old_count;
++    int test;
++    int failed = 0;
++    static int stages[] = {2, 2, 5, 5, 5, 7, 7, 8, 9, 10, 11, 12};
++    static int ops[] =    {1, 2, 1, 2, 3, 1, 2, 4, 4,  4,  4,  5};
++    clean(); mkdir("PAIR");
++    msgsave_init();
++    printf("NEW %d\n", msgsave_start_new());
++    memset(&t, 0, sizeof(t)); t.year = 2026; t.month = 9; t.day = 6;
++    printf("AAPP %d\n", msglog_append_gap(&t));
++    printf("ASAVE %d\n", msgsave_write_pair("PAIR\\SAVE01.GAM"));
++    t.second = 1;
++    printf("BAPP %d\n", msglog_append_gap(&t));
++    printf("BSAVE %d\n", msgsave_write_pair("PAIR\\SAVE02.GAM"));
++    p = msgsave_prepare_load("PAIR\\SAVE01.GAM");
++    f = msgsave_finish_load(1);
++    printf("ALOAD prep=%d finish=%d count=%lu\n", p, f, msglog_event_count());
++    remove("PAIR\\SAVE02.GAM"); remove("PAIR\\SAVE02.MLG");
++    t.second = 2;
++    printf("CAPP %d\n", msglog_append_gap(&t));
++    f = msgsave_write_pair("PAIR\\SAVE03.GAM");
++    printf("CSAVE %d count=%lu err=%d newg=%d newm=%d txn=%d\n", f, msglog_event_count(),
++           g_msgsaveTestStage, access("PAIR\\MLGNEW.GAM", 0), access("PAIR\\MLGNEW.MLG", 0),
++           access("PAIR\\MLGTXN.DAT", 0));
++    remove("PAIR\\SAVE03.GAM"); remove("PAIR\\SAVE03.MLG");
++    printf("AOVER %d\n", msgsave_write_pair("PAIR\\SAVE01.GAM"));
++    old_count = msglog_event_count();
++    for (crash = 7; crash <= 11; crash++) {
++        t.second++;
++        msglog_append_gap(&t);
++        g_msgsaveTestCrashAfter = crash;
++        f = msgsave_write_pair("PAIR\\SAVE01.GAM");
++        g_msgsaveTestCrashAfter = 0;
++        p = msgsave_recover_for("PAIR\\SAVE01.GAM");
++        again = msgsave_recover_for("PAIR\\SAVE01.GAM");
++        msgsave_prepare_load("PAIR\\SAVE01.GAM");
++        msgsave_finish_load(1);
++        if (crash == 11)
++            old_count++;
++        printf("CRASH step=%d save=%d recover=%d again=%d count=%lu expect=%lu\n", crash, f, p,
++               again, msglog_event_count(), old_count);
++    }
++    for (test = 0; test < sizeof(stages) / sizeof(stages[0]); test++) {
++        old_count = msglog_event_count();
++        msglog_append_gap(&t);
++        fault_stage = stages[test]; fault_op = ops[test]; fault_hit = 0;
++        f = msgsave_write_pair("PAIR\\SAVE01.GAM");
++        fault_op = 0;
++        p = msgsave_recover_for("PAIR\\SAVE01.GAM");
++        again = msgsave_recover_for("PAIR\\SAVE01.GAM");
++        if (stages[test] == 12) old_count++;
++        if (f || !fault_hit || !p || !again ||
++            !msgsave_prepare_load("PAIR\\SAVE01.GAM") || !msgsave_finish_load(1) ||
++            msglog_event_count() != old_count) failed++;
++        printf("IOFAULT stage=%d op=%d hit=%d save=%d recover=%d again=%d count=%lu expected=%lu\n",
++               stages[test], ops[test], fault_hit, f, p, again, msglog_event_count(), old_count);
++    }
++    /* A second save after failed recovery must preserve the only old GAM. */
++    msglog_append_gap(&t);
++    g_msgsaveTestCrashAfter = 10;
++    msgsave_write_pair("PAIR\\SAVE01.GAM");
++    g_msgsaveTestCrashAfter = 0;
++    fault_stage = g_msgsaveTestStage; fault_op = 4; fault_hit = 0;
++    f = msgsave_write_pair("PAIR\\SAVE01.GAM");
++    fault_op = 0;
++    if (f || !fault_hit || access("PAIR\\MLGOLD.GAM", 0) || access("PAIR\\MLGTXN.DAT", 0))
++        failed++;
++    p = msgsave_recover_for("PAIR\\SAVE01.GAM");
++    if (!p || !msgsave_recover_for("PAIR\\SAVE01.GAM") ||
++        !msgsave_prepare_load("PAIR\\SAVE01.GAM") || !msgsave_finish_load(1) ||
++        msglog_event_count() != old_count) failed++;
++    printf("RECOVERY_RETRY failures=%d\n", failed);
++    remove("PAIR\\SAVE01.MLG");
++    p = msgsave_prepare_load("PAIR\\SAVE01.GAM");
++    f = msgsave_finish_load(1);
++    printf("MISS prep=%d finish=%d count=%lu flags=%u\n", p, f, msglog_event_count(),
++           msglog_header_flags());
++    t.second++;
++    msglog_append_gap(&t);
++    g_msgsaveTestCrashAfter = 8;
++    f = msgsave_write_pair("PAIR\\SAVE01.GAM");
++    g_msgsaveTestCrashAfter = 0;
++    p = msgsave_recover_for("PAIR\\SAVE01.GAM");
++    printf("GAMONLY save=%d recover=%d gam=%d mlg=%d\n", f, p,
++           access("PAIR\\SAVE01.GAM", 0), access("PAIR\\SAVE01.MLG", 0));
++    {
++        unsigned char bad[5] = {'B', 'A', 'D', '!', 1};
++        int fd = open("PAIR\\MLGTXN.DAT", 0x8302, 0x0180);
++        write(fd, bad, sizeof(bad));
++        close(fd);
++    }
++    p = msgsave_recover_for("PAIR\\SAVE01.GAM");
++    printf("BADMARK recover=%d gam=%d mark=%d\n", p, access("PAIR\\SAVE01.GAM", 0),
++           access("PAIR\\MLGTXN.DAT", 0));
++    remove("PAIR\\MLGTXN.DAT");
++    msgsave_shutdown();
++    printf("FAULT_MATRIX failures=%d\n", failed);
++    return failed != 0;
++}
++
++#include "SRC/DIALOG/MSGLOG.C"
++#include "SRC/DIALOG/MSGSAVE.C"
+diff --git a/bak/TOOLS/TOOLS.MAK b/bak/TOOLS/TOOLS.MAK
+index d5e3bd1fe098ff3c662941453e024862a098e464..e32502f123741beab00c50b4526846faf2af17e7 100644
+--- a/bak/TOOLS/TOOLS.MAK
++++ b/bak/TOOLS/TOOLS.MAK
+@@ -13,3 +13,18 @@
+ 
+ OUT\PACKOVL.EXE : TOOLS\PACKOVL\PACKOVL.C
+ 	$(BC31) -mm -f- -IC:\BC\INCLUDE -LC:\BC\LIB -eOUT\PACKOVL.EXE TOOLS\PACKOVL\PACKOVL.C
++
++# MLGTEST -- the .MLG v1 conformance harness (see TOOLS\MLGTEST.C).
++# Links the game's own SRC\DIALOG\MSGLOG.C unmodified plus OUT\DOSRW.OBJ, so a
++# cross-language fixture check exercises exactly the code the game will run.
++OUT\MLGTEST.EXE : TOOLS\MLGTEST.C SRC\DIALOG\MSGLOG.C OUT\DOSRW.OBJ
++	$(BC31) -mm -f- -I. -IINCLUDE -IC:\BC\INCLUDE -LC:\BC\LIB -eOUT\MLGTEST.EXE TOOLS\MLGTEST.C SRC\DIALOG\MSGLOG.C OUT\DOSRW.OBJ
++
++OUT\MSGPTEST.EXE : TOOLS\MSGPTEST.C SRC\DIALOG\MSGLOG.C SRC\DIALOG\MSGSAVE.C OUT\DOSRW.OBJ
++	$(BC31) -mm -f- -I. -IINCLUDE -IC:\BC\INCLUDE -LC:\BC\LIB -eOUT\MSGPTEST.EXE TOOLS\MSGPTEST.C OUT\DOSRW.OBJ
++
++OUT\CAPTEST.EXE : TOOLS\CAPTEST.C SRC\DIALOG\MSGLOG.C SRC\DIALOG\MSGCAP.C OUT\DOSRW.OBJ
++	$(BC31) -mm -f- -I. -IINCLUDE -IC:\BC\INCLUDE -LC:\BC\LIB -eOUT\CAPTEST.EXE TOOLS\CAPTEST.C OUT\DOSRW.OBJ
++
++OUT\MLGBENCH.EXE : TOOLS\MLGBENCH.C SRC\DIALOG\MSGLOG.C OUT\DOSRW.OBJ
++	$(BC31) -mm -f- -I. -IINCLUDE -IC:\BC\INCLUDE -LC:\BC\LIB -eOUT\MLGBENCH.EXE TOOLS\MLGBENCH.C SRC\DIALOG\MSGLOG.C OUT\DOSRW.OBJ
+diff --git a/cli/src/bakbuild/vm.py b/cli/src/bakbuild/vm.py
+index 60f83cda64380c7b90dbf5e33ff2810239f2db9c..31bdbfd009794b3fff6ece6a2f0502dba69cec64 100644
+--- a/cli/src/bakbuild/vm.py
++++ b/cli/src/bakbuild/vm.py
+@@ -379,6 +379,12 @@ def run_kvm_link_102() -> str:
+     y, mo, dd = day.split("-")
+     bat = _DOS_HEAD
+     bat += "make kvmobjs102 > C:\\KVM102.LOG\r\n"
++    # The 32 MiB FreeDOS image holds both object sets. Once the 1.02 objects
++    # exist, discard only reproducible 1.00 link/driver outputs to leave TLINK
++    # working room. The object files and every source remain intact, and the
++    # next base `make all` recreates these missing targets.
++    bat += "del KRONDOR.EXE\r\ndel VMCODE.OVL\r\ndel SX.OVL\r\n"
++    bat += "del OUT\\*.EXE\r\ndel OUT\\*.MAP\r\n"
+     bat += f"DATE {mo}-{dd}-{y}\r\nTIME {tod}\r\n"
+     bat += "make link102 > C:\\LINK102.LOG\r\n"
+     bat += "c:\\EXIT.COM\r\n"

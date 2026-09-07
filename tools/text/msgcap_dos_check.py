@@ -49,6 +49,7 @@ def run() -> int:
         path.unlink()
     freedos.mcopy_out(paths.IMG, "/CAP.LOG", out)
     freedos.mcopy_out(paths.IMG, "/CAP.MLG", out)
+    freedos.mcopy_out(paths.IMG, "/CAPSPLIT.MLG", out)
     log = (out / "CAP.LOG").read_text(errors="replace")
     print(log)
     failures: list[str] = []
@@ -73,6 +74,10 @@ def run() -> int:
     check([event.body for event in mlg.events if event.kind == 2] == [b"first", b"second"], "stored bodies match visible spans", failures)
     check(mlg.events[1].speaker == b"NPC" and mlg.events[1].location == b"Zone 9", "Who and fallback Where were snapshotted", failures)
     check(mlg.events[-1].scene_id == 0x1301 and mlg.events[-1].location == b"Inn", "scene identity and title were snapshotted", failures)
+    split = MlgFile.read(out / "CAPSPLIT.MLG")
+    names = [event.speaker for event in split.events if event.kind == 2]
+    check(names == [b"A" * 63, b"A" * 62 + b"\x80\x40"],
+          "long names truncate only at a complete Chinese glyph", failures)
     if failures:
         print(f"FAILED: {len(failures)} check(s)")
         return 1

@@ -157,3 +157,8 @@ d4f5156616ddec56331de771399d0f36de9fc0aa fix: suppress repeated mouse-look edge 
 72de630751c037156b0d75a884dd81e48f32d012 feat: compose fullscreen world from safe height passes
 be37a58b017333b80b56b6798621e7a888a316b5 Revert "feat: compose fullscreen world from safe height passes"
 5c3ed49a62716f631f26445f083c047ae4721751 revert: keep mouse look in classic world viewport
+ddbffd7f61ebe5473295fe45cd17ed671fd6e2d2 feat(msglog): implement message log phase 0-4 (core, save coordination, capture, viewer)
+b245787fcf83842167c304e95c016bc653ea50f9 fix(msgview): fix text line overlap, add pagination, and enable Up/Down record switching in detail view
+84d79e011aa661ec23d0635dc49985beef65fff9 fix(msgview): separate time and speaker/location columns in list view to avoid overlap
+f090662ef5482129228aac7fdc79eb7fecad6f90 fix(world): correct BaK Chinese encoding bytes for mouse-look toggle notices
+d31db1b1a732b25c4aa3c29e6b580cd16f84efd5 fix(msglog): finish recovery and acceptance coverage

@@ -343,6 +343,19 @@ def check_game_data_is_empty(release_dir: Path) -> None:
 
 
 def make_zip(release_dir: Path) -> Path:
+    # Check the entire staging tree, not just game_data/: a misplaced backup
+    # beside the installer is still private player data. Fail before replacing
+    # an existing archive and leave the source files untouched.
+    forbidden = [
+        p.relative_to(release_dir).as_posix()
+        for p in release_dir.rglob("*")
+        if p.is_file() and (
+            p.suffix.lower() in {".gam", ".mlg"}
+            or p.name.upper() == "MLGTXN.DAT"
+        )
+    ]
+    if forbidden:
+        raise SystemExit(f"拒絕打包玩家存檔、訊息歷史或交易檔案：{forbidden}")
     zip_path = release_dir.parent / f"{release_dir.name}.zip"
     if zip_path.exists():
         zip_path.unlink()
