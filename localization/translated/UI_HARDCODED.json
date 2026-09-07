@@ -681,6 +681,69 @@
       "translation": "滑鼠視角模式：關",
       "status": "translated",
       "notes": "Non-modal F2 notice shown when optional mouse-look exploration controls are disabled."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:dragons_breath",
+      "source": "Dragon's Breath: Creates thick fog",
+      "translation": "龍息術：生成濃霧",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; rendered with the 10x10 small font."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:candle_glow",
+      "source": "Candle Glow: Creates light below ground",
+      "translation": "燭光術：在地下產生光亮",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; rendered with the 10x10 small font."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:stardusk",
+      "source": "Stardusk: Creates light above ground",
+      "translation": "星暮術：在地面產生光亮",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; rendered with the 10x10 small font."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:and_the_light_shall_lie",
+      "source": "And the Light Shall Lie: Caster appears to be moredhel",
+      "translation": "光影欺敵：使施法者看似莫瑞德人",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; rendered with the 10x10 small font."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:union",
+      "source": "Union: Allows caster to read moredhel",
+      "translation": "通解術：使施法者能讀懂莫瑞德文",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; rendered with the 10x10 small font."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:scent_of_sarig",
+      "source": "Scent of Sarig: Caster can sense trapped chests",
+      "translation": "薩瑞格之嗅：察覺陷阱寶箱",
+      "status": "translated",
+      "notes": "First line of the timed-effect information card; shortened to fit the exploration viewport."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:generic_effect",
+      "source": "Timed effect",
+      "translation": "常駐效果",
+      "status": "translated",
+      "notes": "Fallback title for the three unused caption slots."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:remaining",
+      "source": "Remaining:",
+      "translation": "剩餘：",
+      "status": "translated",
+      "notes": "Dynamic in-game duration prefix; followed by day/hour/minute values."
+    },
+    {
+      "id": "WORLDLP.C#worldloop_effect_info_show:unknown_time",
+      "source": "Remaining time unknown",
+      "translation": "剩餘時間不明",
+      "status": "translated",
+      "notes": "Defensive fallback if an active caption bit has no matching kind-2 timer."
     }
   ]
 }

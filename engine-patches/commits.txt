@@ -165,3 +165,4 @@ d31db1b1a732b25c4aa3c29e6b580cd16f84efd5 fix(msglog): finish recovery and accept
 91f939947574c443e82d67fa180ad58a451abafd feat(msgview): add mouse controls and indent previews
 4af47e728c14a77b999c6d2834758c96244bea9e feat(msgview): add hotkey and group paged speeches
 4f8ec342837002c7ad87de9c154e3b0b9a02f261 fix(world): disable follow-road while mouse look is active
+f3321c8bd8a4fe3e192ec087dc78851aae428974 feat(world): inspect timed effect captions
