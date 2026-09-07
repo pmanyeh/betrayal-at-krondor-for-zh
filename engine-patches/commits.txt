@@ -167,3 +167,4 @@ d31db1b1a732b25c4aa3c29e6b580cd16f84efd5 fix(msglog): finish recovery and accept
 4f8ec342837002c7ad87de9c154e3b0b9a02f261 fix(world): disable follow-road while mouse look is active
 f3321c8bd8a4fe3e192ec087dc78851aae428974 feat(world): inspect timed effect captions
 de91a5be1d55aa578d97171e52b3193a21f299e3 fix(world): make effect tips nonblocking and yellow
+4b359a0d45e34d1884ea51f0a2a81dd22f317551 fix(world): pass notice colors in shadow-first order

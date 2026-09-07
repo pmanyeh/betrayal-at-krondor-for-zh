@@ -81,7 +81,25 @@ class TestStatusEffectInfo(unittest.TestCase):
         self.assertIn("#define NOTICE_SHADOW_COLOR 1", source)
         self.assertEqual(source.count("NOTICE_TEXT_COLOR"), 4)
         self.assertEqual(source.count("NOTICE_SHADOW_COLOR"), 4)
+        self.assertEqual(
+            source.count(
+                "uiwidget_draw_text_shadowed(text, NOTICE_SHADOW_COLOR, "
+                "NOTICE_TEXT_COLOR"
+            ),
+            1,
+        )
+        self.assertIn(
+            "uiwidget_draw_text_shadowed(time_text, NOTICE_SHADOW_COLOR, "
+            "NOTICE_TEXT_COLOR",
+            source,
+        )
+        self.assertIn(
+            "uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], "
+            "NOTICE_SHADOW_COLOR,\n                                NOTICE_TEXT_COLOR",
+            source,
+        )
         self.assertNotIn("uiwidget_draw_text_shadowed(text, 0x33, 1", source)
+        self.assertNotIn("NOTICE_TEXT_COLOR, NOTICE_SHADOW_COLOR", source)
 
     def test_time_is_rounded_up_and_formatted_in_game_minutes(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")

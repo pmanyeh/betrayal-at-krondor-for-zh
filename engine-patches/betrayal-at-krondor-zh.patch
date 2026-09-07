@@ -5661,7 +5661,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..ac5c5a594306ac76064b9d5f8a8a3add0be66b9e 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd4599b8f8 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -1,8 +1,10 @@
@@ -5772,7 +5772,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..ac5c5a594306ac76064b9d5f8a8a3add
 +    x = g_world_widget->viewport.x + ((g_world_widget->viewport.width - panel_width) >> 1);
 +    y = g_world_widget->viewport.y + g_world_widget->viewport.height - 18;
 +    uiwidget_panel_inset_inverted(x, y, panel_width, 15, 0);
-+    uiwidget_draw_text_shadowed(text, NOTICE_TEXT_COLOR, NOTICE_SHADOW_COLOR,
++    uiwidget_draw_text_shadowed(text, NOTICE_SHADOW_COLOR, NOTICE_TEXT_COLOR,
 +                                x + 5, y + 3);
 +    g_bSmallZhMode = saved_small_zh_mode;
 +    screen_frame_present();
@@ -5828,10 +5828,10 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..ac5c5a594306ac76064b9d5f8a8a3add
 +    x = g_world_widget->viewport.x + ((g_world_widget->viewport.width - panel_width) >> 1);
 +    y = g_world_widget->viewport.y + 5;
 +    uiwidget_panel_inset_inverted(x, y, panel_width, EFFECT_INFO_PANEL_HEIGHT, 0);
-+    uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], NOTICE_TEXT_COLOR,
-+                                NOTICE_SHADOW_COLOR,
++    uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], NOTICE_SHADOW_COLOR,
++                                NOTICE_TEXT_COLOR,
 +                                x + ((panel_width - line_width) >> 1), y + 3);
-+    uiwidget_draw_text_shadowed(time_text, NOTICE_TEXT_COLOR, NOTICE_SHADOW_COLOR,
++    uiwidget_draw_text_shadowed(time_text, NOTICE_SHADOW_COLOR, NOTICE_TEXT_COLOR,
 +                                x + ((panel_width - time_width) >> 1), y + 15);
 +    g_bSmallZhMode = saved_small_zh_mode;
 +}
