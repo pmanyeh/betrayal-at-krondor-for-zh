@@ -59,14 +59,29 @@ class TestStatusEffectInfo(unittest.TestCase):
         self.assertIn("entry->wSub_id == (unsigned short)effect_id", source)
         self.assertIn("extern long spellfx_event_remaining_ticks(int effect_id);", header)
 
-    def test_world_click_opens_a_modal_info_card_and_redraws_afterwards(self) -> None:
+    def test_world_click_opens_a_nonblocking_timed_info_card(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")
 
-        self.assertIn("worldloop_effect_info_show(effect_id);", source)
+        self.assertIn("#define EFFECT_INFO_TICKS 0xb4", source)
+        self.assertIn("effect_info_id = effect_id;", source)
+        self.assertIn("effect_info_deadline = g_timer_ticks + EFFECT_INFO_TICKS;", source)
+        self.assertIn("worldloop_effect_info_draw(effect_info_id);", source)
         self.assertIn("mouselook_capture_active == 0", source)
-        self.assertIn("redraw_menu = render_dirty = redraw_caption = 1;", source)
-        self.assertIn("screen_frame_present();", source)
-        self.assertIn("screen_input_poll_confirm_cancel() != 0", source)
+        self.assertIn("g_timer_ticks >= effect_info_deadline", source)
+        self.assertNotIn("static void worldloop_effect_info_show", source)
+        self.assertNotRegex(
+            source,
+            r"worldloop_effect_info_draw\(int effect_id\).*?for \(;;\)",
+        )
+
+    def test_added_world_notices_use_standard_yellow_with_a_shadow(self) -> None:
+        source = WORLDLP.read_text(encoding="utf-8")
+
+        self.assertIn("#define NOTICE_TEXT_COLOR 0x0a", source)
+        self.assertIn("#define NOTICE_SHADOW_COLOR 1", source)
+        self.assertEqual(source.count("NOTICE_TEXT_COLOR"), 4)
+        self.assertEqual(source.count("NOTICE_SHADOW_COLOR"), 4)
+        self.assertNotIn("uiwidget_draw_text_shadowed(text, 0x33, 1", source)
 
     def test_time_is_rounded_up_and_formatted_in_game_minutes(self) -> None:
         source = WORLDLP.read_text(encoding="utf-8")

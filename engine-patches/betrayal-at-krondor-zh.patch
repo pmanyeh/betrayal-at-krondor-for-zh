@@ -5661,15 +5661,21 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f1b980b72 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..ac5c5a594306ac76064b9d5f8a8a3add0be66b9e 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
-@@ -1,3 +1,4 @@
+@@ -1,8 +1,10 @@
 +#include <stdio.h>
  #include "SRC/GAME/GMAIN.H"
  #include "SRC/GEN/GFXCTX.H"
  #include "SRC/R3D/SCENE/ZONE.H"
-@@ -12,10 +13,13 @@
+ #include "SRC/R3D/SCENE/CZONE.H"
+ #include "SRC/INPUT/TIMER.H"
++#include "SRC/SYS/SYSLOWIO.H"
+ #include "structs.h"
+ #include "SRC/GAME/ACTOR/ACTOR.H"
+ #include "SRC/GAME/WORLD/WORLDLP.H"
+@@ -12,10 +14,13 @@
  #include "SRC/GFX/DRIVER/PALDRV.H"
  #include "SRC/GFX/RASTER/PRESENT.H"
  #include "SRC/INPUT/KEYBOARD.H"
@@ -5683,7 +5689,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
  #include "SRC/DIALOG/EVTCOND.H"
  #include "SRC/GAME/STATE/GSTATE.H"
  #include "SRC/CHAR/STAT.H"
-@@ -31,6 +35,7 @@
+@@ -31,6 +36,7 @@
  #include "SRC/SCREENS/MAINMENU.H"
  #include "SRC/SCREENS/ENCAMP.H"
  #include "SRC/SCREENS/FMAP.H"
@@ -5691,7 +5697,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
  #include "SRC/GAME/WORLD/WORLDMOV.H"
  #include "SRC/GAME/ENC/HOTSPOT.H"
  #include "SRC/INPUT/WCURSOR.H"
-@@ -40,6 +45,303 @@
+@@ -40,6 +46,295 @@
  MenuPage *g_pReqMainPage = {0};
  short g_nSceneReloadPending = 0;
  short g_nHotspotActivateRequest = 0;
@@ -5716,6 +5722,9 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +#define QUICKSAVE_NOTICE_TICKS 0x78    /* two seconds */
 +
 +#define EFFECT_INFO_PANEL_HEIGHT 29
++#define EFFECT_INFO_TICKS 0xb4         /* three seconds */
++#define NOTICE_TEXT_COLOR 0x0a         /* standard menu/dialog yellow */
++#define NOTICE_SHADOW_COLOR 1
 +
 +static char *g_apszEffectInfo[9] = {
 +    "\x8f\x52\x83\x62\x83\x7e\x87\x5a\x82\x54\x82\x52\x80\x20\x80\x21",
@@ -5763,7 +5772,8 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +    x = g_world_widget->viewport.x + ((g_world_widget->viewport.width - panel_width) >> 1);
 +    y = g_world_widget->viewport.y + g_world_widget->viewport.height - 18;
 +    uiwidget_panel_inset_inverted(x, y, panel_width, 15, 0);
-+    uiwidget_draw_text_shadowed(text, 0x33, 1, x + 5, y + 3);
++    uiwidget_draw_text_shadowed(text, NOTICE_TEXT_COLOR, NOTICE_SHADOW_COLOR,
++                                x + 5, y + 3);
 +    g_bSmallZhMode = saved_small_zh_mode;
 +    screen_frame_present();
 +    g_nFrameTickCountdown = QUICKSAVE_NOTICE_TICKS;
@@ -5771,13 +5781,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +        ;
 +}
 +
-+static void worldloop_effect_info_show(int effect_id) {
++static void worldloop_effect_info_draw(int effect_id) {
 +    long ticks;
 +    long minutes;
 +    long days;
 +    long hours;
 +    long mins;
-+    int key;
 +    int line_width;
 +    int time_width;
 +    int panel_width;
@@ -5819,23 +5828,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +    x = g_world_widget->viewport.x + ((g_world_widget->viewport.width - panel_width) >> 1);
 +    y = g_world_widget->viewport.y + 5;
 +    uiwidget_panel_inset_inverted(x, y, panel_width, EFFECT_INFO_PANEL_HEIGHT, 0);
-+    uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], 0x33, 1,
++    uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], NOTICE_TEXT_COLOR,
++                                NOTICE_SHADOW_COLOR,
 +                                x + ((panel_width - line_width) >> 1), y + 3);
-+    uiwidget_draw_text_shadowed(time_text, 0x33, 1,
++    uiwidget_draw_text_shadowed(time_text, NOTICE_TEXT_COLOR, NOTICE_SHADOW_COLOR,
 +                                x + ((panel_width - time_width) >> 1), y + 15);
 +    g_bSmallZhMode = saved_small_zh_mode;
-+    screen_frame_present();
-+
-+    while (mouse_button_pressed(0) || mouse_button_pressed(1))
-+        ;
-+    for (;;) {
-+        key = kbhit_read();
-+        if ((key != 0 && (((key >> 8) & 0xff) == 1 || ((key >> 8) & 0xff) == 0x1c)) ||
-+            screen_input_poll_confirm_cancel() != 0)
-+            break;
-+    }
-+    while (mouse_button_pressed(0) || mouse_button_pressed(1))
-+        ;
 +}
 +
 +static int worldloop_context_overlay_wanted(void) {
@@ -5995,7 +5993,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
  
  void far worldloop_req_main_screen_load(void) {
      g_pReqMainPage = menupage_load("req_main.dat");
-@@ -73,6 +375,17 @@ short far world3d_main_loop(void) {
+@@ -73,6 +368,19 @@ short far world3d_main_loop(void) {
         hotspot_active to DI. */
      register int render_dirty;   /* party-dirty / render-scene flag */
      register int hotspot_active; /* hotspot / descent / entered flag */
@@ -6010,10 +6008,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +    int mouselook_interact_held;
 +    int effect_caption_click_held;
 +    int effect_id;
++    int effect_info_id;
++    unsigned long effect_info_deadline;
  
      exit_mode = 0;
      keep_running = 1;
-@@ -82,6 +395,19 @@ short far world3d_main_loop(void) {
+@@ -82,6 +390,21 @@ short far world3d_main_loop(void) {
      redraw_caption = 0;
      pending_events = 0;
      key_repeat_armed = 0;
@@ -6022,6 +6022,8 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +    mouselook_toggle_held = 0;
 +    mouselook_interact_held = 0;
 +    effect_caption_click_held = 0;
++    effect_info_id = -1;
++    effect_info_deadline = 0;
 +    g_nMouseLookBasePitch = g_world_camera->base.orientation.pitch;
 +    g_nMouseLookPitchOffset = 0;
 +    screen_cursor_get_position(&mouselook_ui_x, &mouselook_ui_y);
@@ -6033,7 +6035,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
      focused_entry = (MenuEntry *)0;
      g_nHotspotActivateRequest = 0;
      g_bZoneEntryInProgress = 0;
-@@ -92,9 +418,11 @@ short far world3d_main_loop(void) {
+@@ -92,9 +415,11 @@ short far world3d_main_loop(void) {
  
      while (keep_running != 0) {
          if (g_gameState.abTeleportRecord[0] != '\0') {
@@ -6045,7 +6047,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              evtcond_pty_dirty_flags_process();
              render_dirty = 1;
          }
-@@ -140,11 +468,25 @@ short far world3d_main_loop(void) {
+@@ -140,11 +465,32 @@ short far world3d_main_loop(void) {
              redraw_menu = 0;
              redraw_caption = 0;
              render_dirty = 0;
@@ -6055,6 +6057,13 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
          if (g_bZoneEntryInProgress != 0)
              goto skip_render;
  
++        if (effect_info_id >= 0 &&
++            (g_timer_ticks >= effect_info_deadline ||
++             spellfx_event_mask_test_bit(effect_info_id) == 0)) {
++            effect_info_id = -1;
++            render_dirty = 1;
++        }
++
 +        if (worldloop_mouselook_poll(&mouselook_capture_active, &mouselook_ui_x,
 +                                     &mouselook_ui_y, &mouselook_last_mouse_x,
 +                                     &mouselook_last_mouse_y) != 0)
@@ -6071,7 +6080,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          if (redraw_menu != 0) {
-@@ -154,9 +496,16 @@ short far world3d_main_loop(void) {
+@@ -154,9 +500,18 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
          }
          if (render_dirty != 0) {
@@ -6086,10 +6095,12 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +            worldloop_context_overlay_draw();
 +        if (mouselook_capture_active != 0)
 +            worldloop_mouselook_overlay_draw();
++        if (effect_info_id >= 0)
++            worldloop_effect_info_draw(effect_info_id);
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,13 +517,17 @@ short far world3d_main_loop(void) {
+@@ -168,13 +523,17 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
@@ -6108,7 +6119,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
          }
-@@ -183,6 +536,7 @@ short far world3d_main_loop(void) {
+@@ -183,6 +542,7 @@ short far world3d_main_loop(void) {
          }
          if (!g_gameState.bCombatExitRequest) {
              if (hotspot_active == 0 && g_nHotspotActivateRequest != 0) {
@@ -6116,7 +6127,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  hotspotevt_activate_at_player();
                  g_nHotspotActivateRequest = 0;
                  hotspot_active = 1;
-@@ -203,7 +557,53 @@ short far world3d_main_loop(void) {
+@@ -203,7 +563,54 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -6138,8 +6149,9 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
 +                                                           screen_cursor_get_y());
 +                effect_caption_click_held = 1;
 +                if (effect_id >= 0) {
-+                    worldloop_effect_info_show(effect_id);
-+                    redraw_menu = render_dirty = redraw_caption = 1;
++                    effect_info_id = effect_id;
++                    effect_info_deadline = g_timer_ticks + EFFECT_INFO_TICKS;
++                    render_dirty = 1;
 +                    action_id = 0;
 +                }
 +            }
@@ -6171,7 +6183,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +656,58 @@ short far world3d_main_loop(void) {
+@@ -256,6 +663,58 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
@@ -6230,7 +6242,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +719,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +726,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6238,7 +6250,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +731,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +738,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6268,7 +6280,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +761,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +768,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -6276,7 +6288,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -293,6 +770,11 @@ short far world3d_main_loop(void) {
+@@ -293,6 +777,11 @@ short far world3d_main_loop(void) {
                  worldmove_apply_turn_step(3);
                  goto after_move;
              case 0x13:
@@ -6288,7 +6300,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe3, 1);
                      goto post_dispatch;
-@@ -308,6 +790,8 @@ short far world3d_main_loop(void) {
+@@ -308,6 +797,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe4, 1);
                      goto post_dispatch;
                  }
@@ -6297,7 +6309,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  spellfx_cast_and_dispatch();
                  redraw_menu = 1;
                  render_dirty = 1;
-@@ -318,18 +802,24 @@ short far world3d_main_loop(void) {
+@@ -318,18 +809,24 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe8, 1);
                      goto post_dispatch;
                  }
@@ -6323,7 +6335,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  encamp_run();
                  redraw_caption = 1;
                  goto post_dispatch;
-@@ -338,6 +828,8 @@ short far world3d_main_loop(void) {
+@@ -338,6 +835,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe6, 1);
                      goto after_move;
                  }
@@ -6332,7 +6344,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  mainmenu_save_bookmark();
                  goto after_move;
              case 0x18:
-@@ -345,6 +837,8 @@ short far world3d_main_loop(void) {
+@@ -345,6 +844,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe7, 1);
                      goto post_dispatch;
                  }
@@ -6341,7 +6353,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  exit_mode = mainmenu_save_main_menu(1);
                  if (exit_mode == 0) {
                      g_nSceneReloadPending = 1;
-@@ -360,30 +854,57 @@ short far world3d_main_loop(void) {
+@@ -360,30 +861,57 @@ short far world3d_main_loop(void) {
                      if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
                          key_is_down(0x36) != 0) {
  
@@ -6402,7 +6414,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
                  goto post_dispatch;
              default:
                  break;
-@@ -414,6 +935,10 @@ short far world3d_main_loop(void) {
+@@ -414,6 +942,10 @@ short far world3d_main_loop(void) {
          dialog_play_record(0x145, 0);
      }
      palette_cycle_eb_toggle(0);
@@ -6413,7 +6425,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1b5c7886541ba24516e3da7a2afc1b3f
      menupage_end(g_pReqMainPage);
      return exit_mode;
  }
-@@ -459,6 +984,8 @@ void far worldloop_step_or_final_movement(void) {
+@@ -459,6 +991,8 @@ void far worldloop_step_or_final_movement(void) {
  }
  
  void far worldloop_set_flag_8b_preds(void) {
