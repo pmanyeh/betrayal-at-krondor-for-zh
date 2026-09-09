@@ -380,9 +380,31 @@ def make_zip(release_dir: Path) -> Path:
     return zip_path
 
 
+def check_exe_patch_is_fresh(release_dir: Path) -> None:
+    """Fails loudly if exe_patch/ was built from a KRONDOR.EXE other than the one
+    currently in dist/test_v100_zh/ -- e.g. a stale patch left over from before a
+    later engine rebuild. build_exe_patch.py must be re-run any time KRONDOR.EXE
+    changes; this only catches the case where someone forgot, it doesn't rebuild
+    the patch itself (that needs the bsdiff4 dependency this script doesn't use)."""
+    manifest_path = release_dir / "exe_patch" / "manifest.json"
+    if not manifest_path.exists():
+        raise SystemExit(f"找不到 {manifest_path}，先跑 tools/release/build_exe_patch.py")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected = manifest["target"]["sha256"]
+    current_exe = DIST_TEST_DIR / "krondor.exe"
+    if not current_exe.exists():
+        raise SystemExit(f"找不到 {current_exe}，先建置並部署好測試用 krondor.exe")
+    actual = sha256_of(current_exe.read_bytes())
+    if actual != expected:
+        raise SystemExit(
+            f"exe_patch/manifest.json 記錄的目標 exe 雜湊值（{expected}）"
+            f"跟目前 {current_exe} 的雜湊值（{actual}）不一致——"
+            f"補丁是舊的，先重新跑 tools/release/build_exe_patch.py 再打包。"
+        )
+
+
 def main() -> None:
-    if not (RELEASE_DIR / "exe_patch" / "manifest.json").exists():
-        raise SystemExit(f"找不到 {RELEASE_DIR / 'exe_patch' / 'manifest.json'}，先跑 tools/release/build_exe_patch.py")
+    check_exe_patch_is_fresh(RELEASE_DIR)
 
     build_resources(RELEASE_DIR / "resources")
     build_gam_patch(RELEASE_DIR / "gam_patch")
