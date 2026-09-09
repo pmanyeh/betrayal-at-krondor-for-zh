@@ -79,8 +79,8 @@ class TestStatusEffectInfo(unittest.TestCase):
 
         self.assertIn("#define NOTICE_TEXT_COLOR 0x0a", source)
         self.assertIn("#define NOTICE_SHADOW_COLOR 1", source)
-        self.assertEqual(source.count("NOTICE_TEXT_COLOR"), 4)
-        self.assertEqual(source.count("NOTICE_SHADOW_COLOR"), 4)
+        self.assertEqual(source.count("NOTICE_TEXT_COLOR"), 5)
+        self.assertEqual(source.count("NOTICE_SHADOW_COLOR"), 5)
         self.assertEqual(
             source.count(
                 "uiwidget_draw_text_shadowed(text, NOTICE_SHADOW_COLOR, "
@@ -96,6 +96,11 @@ class TestStatusEffectInfo(unittest.TestCase):
         self.assertIn(
             "uiwidget_draw_text_shadowed(g_apszEffectInfo[effect_id], "
             "NOTICE_SHADOW_COLOR,\n                                NOTICE_TEXT_COLOR",
+            source,
+        )
+        self.assertIn(
+            "uiwidget_draw_text_shadowed(g_szSavingInProgress, NOTICE_SHADOW_COLOR, "
+            "NOTICE_TEXT_COLOR",
             source,
         )
         self.assertNotIn("uiwidget_draw_text_shadowed(text, 0x33, 1", source)
