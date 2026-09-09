@@ -636,7 +636,7 @@
     {
       "id": "TOWNSCN.C#townscene_draw_cheat_heading:Enjoy_with_caution",
       "source": "Enjoy with caution...",
-      "translation": "請謹慎使用……",
+      "translation": "請謹慎使用…",
       "status": "translated",
       "notes": "Cheat menu warning; rendered with the 10x10 small font."
     },
@@ -664,7 +664,7 @@
     {
       "id": "WORLDLP.C#worldloop_quicksave_notice:loading",
       "source": "Loading quick-save...",
-      "translation": "正在讀取快速存檔……",
+      "translation": "正在讀取快速存檔…",
       "status": "translated",
       "notes": "Non-modal F9 loading notice; rendered with the 10x10 small font near the bottom of the exploration viewport."
     },
