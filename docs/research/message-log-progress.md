@@ -967,3 +967,14 @@ v1.02 尚未完成：一般 `bak build --version 102` 因工具把目前 diverge
 - `L` 已在 DOSBox-X 的實際 3D 探索畫面驗證，可直接進入列表；來源測試亦確認現有 `SAVE01.MLG` 的洛克利爾長文由兩個相鄰 `TEXT` 事件構成，兩者的 `conversation=2`、`speaker_id=1`、`source_key=2003` 完全相同，符合合併條件。仍請以使用者截圖的同一存檔複驗最後排版。
 - Borland C++ 3.1 的 v1.00／v1.02 均編譯連結成功；最終 v1.00 `KRONDOR.EXE` 493248 bytes、SHA-256 `43a595a69a7560d20666c938177c3da683bbf63073421ff795daefb4673e24fd`；v1.02 `KRONDOR102.EXE` 494336 bytes、SHA-256 `1545bb0b8b450a8028a31132aa421d73c3c5d85551daecb1ef8cf48f70dc8a85`。兩個 v1.00 OVL 仍為 byte-identical；完整單元測試 **190 passed**。
 - 發布 bspatch 72238 bytes、SHA-256 `3f2aa43e065a3588c17aa6e346e96c05dbe0ce7b2dc6e5bd51d3d42bb9821aa1`；發布 ZIP 33853624 bytes、SHA-256 `dd452445d9b2c240f34eb019acafe45a0000c64dce6ad3e7b09addbe62fa0a6f`，284 entries、禁帶檔案 0。引擎提交 `4af47e728c14a77b999c6d2834758c96244bea9e`；合併補丁由固定基準乾淨套用後 tree 為 `fc70aa41b0563cbbab87c847636086429948e4dd`。
+
+### 存檔延遲：CRC 重讀收斂與增量快照（2026-09-09）
+
+使用者回報加入訊息紀錄後存檔明顯變慢，連剛開的新遊戲也是。分兩步處理：
+
+1. **`perf(msgsave): collapse save-time GAM CRC passes from three to one`（引擎 `ca2c869`）**：`msgsave_write_pair()` 原本一次存檔要對 `.GAM` 整檔算三次 CRC32（stage 4、stage 6 的 `msgsave_pair_valid`、stage 12 rename 後再一次）。stage 4 的 `(len, crc)` 就是唯一真相：stage 6 改成只結構驗證剛寫的 `.MLG` 快照，stage 12 改成 GAM 標頭檢查 + MLG 完整載入。整檔 CRC 由 3 趟降為 1 趟；串流緩衝 `MSGSAVE_SCRATCH` 2 KiB → 4 KiB（取 4 而非設計上限 8，因發布用 conf 的 UMB link 尚未確認）。新遊戲的存檔延遲主因就在這三趟重讀，此步即解決。兩個 OVL byte-identical，`msgpair`／`msgcap` DOS 檢查通過。
+
+2. **增量快照（見格式文件 §11）**：長時間遊玩後 `.MLG` 長大，每次存檔仍完整複製一份是第二個瓶頸。新增 `msglog_snapshot_extends_working()`／`msglog_extend_snapshot()`／`msglog_validate_snapshot_tail()`：能判定某槽的既有快照是目前工作時間線的前綴時，只 append 上次存到該槽之後的新記錄、從舊 `data_crc32` 續算（CRC-32 final xor 自反），並重寫標頭。`MSGSAVE.C` 端 `MLGTXN.DAT` 升 v2（88 bytes，帶 MLG 模式與 increment 回滾用的舊 64-byte 標頭；仍可讀 v1）。`msgsave_recover_inner()` 依模式回滾（increment＝截斷＋還原舊標頭；full＝還原 `MLGOLD.MLG`）。首次存檔／覆蓋別條時間線／檔案損壞時自動退回完整路徑。
+   - **等價保證**：`MSGPTEST` 新增 `EQUIV` 檢查，證明增量長出的 `SAVEnn.MLG` 與完整快照 byte-for-byte 相同；`FULL9` 檢查涵蓋 full 模式 stage 9 rename 失敗的恢復。故障矩陣的 crash 迴圈與 I/O 注入迴圈現在跑在 increment 模式，逐 stage／逐 op 驗證舊的一對檔案完好。
+   - **驗證**：`msgpair_dos_check.py` **ALL PAIR CHECKS PASSED**（`FAULT_MATRIX failures=0`、`EQUIV crc=1 full=1 identical=1`、`FULL9 hit=1`）；`msgcap_dos_check.py` **ALL CAPTURE CHECKS PASSED**；訊息紀錄單元測試 49 passed。乾淨 v1.00／v1.02 建置的 `VMCODE.OVL`／`SX.OVL` 維持既有 SHA-256（`cd0cf73d…`／`d73d92d8…`）；`KRONDOR.EXE` 497328 bytes（繁中版預期不同）。
+   - **尚未做**：發布打包（`package_release.py` / bspatch 重建）、v1.02 的 `--version 102` 專用 EXE 在此環境仍受既有 build-path 限制、遊戲內長 session 的實測存檔耗時對照。

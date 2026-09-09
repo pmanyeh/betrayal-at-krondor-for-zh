@@ -1,6 +1,7 @@
 # MLG v1：訊息紀錄檔格式規格（凍結版）
 
-日期：2026-09-06。狀態：**格式已凍結**（第 1 階段成果）。
+日期：2026-09-06（§11 增訂 2026-09-09）。狀態：**MLG 檔格式已凍結**（第 1 階段成果）。
+§11 的增量快照寫入路徑與 `MLGTXN.DAT` v2 標記**不改變任何 MLG byte 佈局**——增量長出來的快照與一次性完整快照 byte-for-byte 相同（`MSGPTEST` 的 `EQUIV` 檢查為證）。
 
 配套文件：[功能與技術規劃](message-log-design.md)、[施工清單](message-log-agent-tasks.md)、[施工進度](message-log-progress.md)。
 
@@ -67,13 +68,15 @@
 | `GAM_BOUND` / `bound_gam_*` | 0 / 0 | **1** / 實際 GAM 長度與 CRC32 |
 | `DATA_CRC` / `data_crc32` | **0 / 0** | **1** / 全歷史 CRC32 |
 | `SEALED` | 追加期間為 0；正常關閉時為 1 | 永遠 1 |
-| 每次追加的成本 | 記錄本身 + 重寫 64-byte 標頭 | 不適用（快照是一次性串流複製） |
+| 每次追加的成本 | 記錄本身 + 重寫 64-byte 標頭 | 完整快照：一次串流複製；增量快照（§11）：只複製上次存檔後的新記錄 |
 
-> **「不要求每次追加都重算整個歷史 CRC」如何達成**：`data_crc32` **只在做快照時**（`msglog_prepare_snapshot()`）
-> 用一次串流掃描算出。工作檔在追加期間 `DATA_CRC` 永遠是 0，追加只付出「寫記錄 + 重寫 64 bytes 標頭」的代價。
+> **「不要求每次追加都重算整個歷史 CRC」如何達成**：`data_crc32` **只在做快照時**（`msglog_prepare_snapshot()` 或 `msglog_extend_snapshot()`）
+> 算出。完整快照用一次串流掃描；增量快照從既有快照標頭裡的 `data_crc32` **接續**計算（CRC-32/ISO-HDLC 的 final xor 自反，儲存值就是可續算的執行狀態），只掃新增 bytes。
+> 工作檔在追加期間 `DATA_CRC` 永遠是 0，追加只付出「寫記錄 + 重寫 64 bytes 標頭」的代價。
 > 每筆事件自己的 `event_crc32` 才是追加時的完整性依據。
 >
 > `msglog_load_candidate()` 是唯一會重算整份歷史 CRC 的路徑，且只在讀檔驗證候選時發生。
+> `msglog_validate_snapshot_tail()`（增量存檔後驗證）只重雜湊新增區段。
 
 ### 2.3 已提交尾端的判定（正常 close vs. 追加中斷）
 
@@ -339,7 +342,10 @@ python -m tools.text.message_log fingerprint --c-define
 | `msglog_conv_begin/end(...)` | conversation 範圍；巢狀只加深不重複記錄 |
 | `msglog_append_span/choice/scene(...)` | 追加已顯示本文／實際選擇／場景說明；自動雙位元組安全分片 |
 | `msglog_append_gap(now)` | 缺口標記 + `HAS_GAP` |
-| `msglog_prepare_snapshot(path, gam_len, gam_crc)` | 串流複製成綁定快照（唯一計算全歷史 CRC 的寫入路徑） |
+| `msglog_prepare_snapshot(path, gam_len, gam_crc)` | 串流複製成綁定快照（完整寫入路徑） |
+| `msglog_snapshot_extends_working(path, out_hdr64)` | 非破壞性判斷：`path` 是不是目前工作時間線的已提交前綴（可增量長出）；順便回傳其現行 64-byte 標頭當回滾點 |
+| `msglog_extend_snapshot(path, gam_len, gam_crc)` | 只把上次存檔後新增的記錄 append 到既有快照、續算 `data_crc32`、重封標頭；任何失敗都把快照還原到原狀（§11） |
+| `msglog_validate_snapshot_tail(path, tail_from, gam_len, gam_crc, prev_data_crc, prev_last_off, prev_events)` | 增量存檔後的驗證：標頭 + GAM 綁定 + 從 `prev_data_crc` 續算的 CRC + 只走一遍新增記錄 |
 | `msglog_load_candidate(path, gam_len, gam_crc)` | **完整驗證候選，且不動現有時間線** |
 | `msglog_activate_candidate(work_path)` | 把已驗證候選變成新的工作時間線 |
 | `msglog_discard_candidate()` | 丟棄候選 |
@@ -385,3 +391,44 @@ CRC 邊寫邊算。這是為了 2026-08-31 那次傳統記憶體不足三重錯�
 **本模組絕不碰 `g_pMainScratchBuf`**——`savegame_write()` 做快照的當下正在用它搬 `TEMP.GAM`。
 
 續作驗證補註：上述 DGROUP／常駐映像「增量」為前次記錄，續作未重新建置無 MSGLOG 的對照版，不能當成本次重新量測。最新完整 MAP 的 `_DATA` = 0x3DE0、`_BSS` = 0x2A44、`_STACK` = 0x80；stub 仍為 0xCF。核心沒有自行配置，不代表整個功能零記憶體需求：呼叫者仍須提供分塊 scratch，且未來實際場景的連續記憶體餘量尚待驗證。
+
+§11 的三個新函式仍不持有常駐緩衝、仍只用呼叫者的 scratch；新增的是 overlay 程式碼與 `MSGSAVE.C` 端 88-byte 的堆疊 marker 影像，常駐純量無新增。
+
+---
+
+## 11. 增量快照與 `MLGTXN.DAT` v2（2026-09-09）
+
+存檔時不再每次都把整份歷史複製一遍。`MSGSAVE.C` 的 `msgsave_write_pair()` 依 `msglog_snapshot_extends_working()` 的結果二選一：
+
+- **increment（增量）**：既有 `SAVEnn.MLG` 是目前工作時間線的已提交前綴（`created_time` 相同、`committed_length`／`event_count`／`next_sequence`／`last_event_offset` 都不超過現值、檔長等於標頭宣告、最後一筆記錄 CRC 通過）。把 `SAVEnn.MLG` rename 成 `MLGNEW.MLG`，用 `msglog_extend_snapshot()` 只 append `[舊 committed, 新 committed)`、從舊標頭的 `data_crc32` 續算、重寫標頭並綁定新的 GAM 長度／CRC。
+- **full（完整）**：首次存到該槽，或既有 `SAVEnn.MLG` 不是前綴（讀了別條時間線後覆蓋、檔案損壞…）。走原本的 `msglog_prepare_snapshot()` 寫 `MLGNEW.MLG`，並照舊把舊檔 rename 成 `MLGOLD.MLG` 備份。
+
+**等價保證**：`extend(snapshot(T[0:k]), T[k:n])` 與 `prepare_snapshot(T[0:n])` 產出的 `SAVEnn.MLG` **byte-for-byte 相同**。記錄是位置無關的複製，`prev_offset`／`last_event_offset` 都是絕對值且工作檔與快照的事件都從 offset 64 起，`data_crc32` 精確續算。`MSGPTEST` 的 `EQUIV` 檢查每次執行都驗這一點。
+
+### 11.1 `MLGTXN.DAT` v2（88 bytes；`MSGSAVE.C` 私有，非 MLG 格式的一部分）
+
+| off | size | 欄位 |
+|---|---|---|
+| 0 | 4 | magic `"BKTX"` |
+| 4 | 1 | version = **2**（v1 = 18 bytes，仍可讀以回收舊版中斷的存檔；只寫 v2） |
+| 5 | 1 | 目標槽 id（0–99） |
+| 6 | 1 | 存檔前該槽已有 GAM（0/1） |
+| 7 | 1 | 存檔前該槽已有 MLG（0/1） |
+| 8 | 4 | 新 GAM 長度 |
+| 12 | 4 | 新 GAM CRC32 |
+| 16 | 1 | MLG 模式：0 = full（回滾靠 `MLGOLD.MLG`），1 = increment（回滾靠截斷 + 還原下面的舊標頭） |
+| 17 | 1 | 0 |
+| 18 | 64 | increment 模式的**存檔前 `SAVEnn.MLG` 64-byte 標頭**；full 模式全 0 |
+| 82 | 4 | 0 |
+| 86 | 2 | `[0, 86)` 的 16-bit 校驗（`msgsave_mark_sum`） |
+
+### 11.2 崩潰恢復
+
+`msgsave_recover_inner()` 讀 marker，依模式判斷：
+
+- **已提交**：full → `msgsave_pair_valid()`（GAM 全檔 CRC + MLG 完整載入）；increment → GAM 全檔 CRC 相符 **且** `msglog_validate_snapshot_tail()` 通過（只驗新增段）。成立就清掉備份／暫存／marker，回報成功。
+- **未提交**：GAM 端沿用原本的「有備份就還原備份、沒有就刪掉半成品」。MLG 端 increment 模式 = 把 `SAVEnn.MLG`（或還沒 rename 回去的 `MLGNEW.MLG`）截斷到 marker 記的舊長度、寫回 marker 記的舊 64-byte 標頭；full 模式 = 還原 `MLGOLD.MLG`。整個程序可重跑得到同一結果。
+
+同磁碟 rename 不改動 bytes，所以存檔流程的 stage 6／12 驗證對 increment 模式只做「GAM 標頭 + 續算 CRC 的尾段驗證」，不再整份重雜湊——這也是長時間遊玩後存檔仍不變慢的關鍵。
+
+驗證：`tools/text/msgpair_dos_check.py`（`MSGPTEST.C`）的完整故障矩陣在 full 與 increment 兩種模式下、每個 stage 與每個 I/O op 注入失敗，都要求舊的一對檔案完好；另有 `EQUIV`（增量＝完整，byte 相同）與 `FULL9`（full 模式 stage 9 rename 失敗可恢復）兩項專檢。兩個 OVL 維持 byte-identical。
