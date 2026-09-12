@@ -5,13 +5,13 @@
 ## 固定版本
 
 - 上游基準提交：`1fc2a69e306af1623cd22f3390a5569302059f4d`
-- 本專案最終本機引擎提交：`948b9df`（`fix(world): stop the saving notice from flickering after a scene load`）
-- 套用後預期 Git tree：`b53b724dfaf9d1c11b4102b741f4f4d6c3f8b188`
-- 補丁 SHA-256：`5f3616591e7c03f88a644fce4f5fce474ce915dc009d853690ef96b237c282d5`
+- 本專案最終本機引擎提交：`b3669e1`（`fix(world): clear the autosave notice on the very next frame`）
+- 套用後預期 Git tree：`cd740deb2fb8ff22ac00ba9d8e84b69fc27afda1`
+- 補丁 SHA-256：`012a19b0bae375155dd34b21a26e43f10c770c43c1dbde6a5fe6d17d62f8247a`
 
 `betrayal-at-krondor-zh.patch` 是由上述兩個提交之間的已提交內容，以 `git diff --binary --full-index` 產生的合併補丁；不包含遊戲資產、編譯產物，也不包含已從正式開發線撤除並保存在備份分支的 VESA／EVG 實驗。
 
-`commits.txt` 依時間順序記錄這段範圍的 177 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這些提交歷史，只會重建相同的最終檔案內容。
+`commits.txt` 依時間順序記錄這段範圍的 178 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這些提交歷史，只會重建相同的最終檔案內容。
 
 ## 套用
 

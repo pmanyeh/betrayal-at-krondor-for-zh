@@ -175,3 +175,4 @@ ca2c869ed0bcce793929b866442a6f8fbffce94d perf(msgsave): collapse save-time GAM C
 2c25f42ea40e2190f371fa53668692613c7733a7 feat(world): show a "saving" notice during autosave and quicksave
 403f61b8a6ea8a2e499230ea92efa6609f07bc99 feat(world): show the saving notice on the manual Save Game dialog too
 948b9df7347497c755a6046bf9556fc8b12a6f89 fix(world): stop the saving notice from flickering after a scene load
+b3669e174a4d66893f1d9895384ebd477213ae6c fix(world): clear the autosave notice on the very next frame

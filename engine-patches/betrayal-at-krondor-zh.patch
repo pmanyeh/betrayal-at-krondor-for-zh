@@ -6086,7 +6086,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38b6f20240 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..6482bbbf201635024fa4fb0d979befbf4acaac0a 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -1,8 +1,10 @@
@@ -6561,7 +6561,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,13 +559,17 @@ short far world3d_main_loop(void) {
+@@ -168,13 +559,18 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
@@ -6573,14 +6573,15 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
 +        context_overlay_drawn = context_overlay_wanted;
      skip_render:
  
-+        mainmenu_autosave_service();
++        if (mainmenu_autosave_service() != 0)
++            render_dirty = 1;
 +
          if (g_gameState.ground_pile->itemCount != '\0') {
 +            worldloop_mouselook_release_for_modal();
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
          }
-@@ -183,6 +578,7 @@ short far world3d_main_loop(void) {
+@@ -183,6 +579,7 @@ short far world3d_main_loop(void) {
          }
          if (!g_gameState.bCombatExitRequest) {
              if (hotspot_active == 0 && g_nHotspotActivateRequest != 0) {
@@ -6588,7 +6589,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  hotspotevt_activate_at_player();
                  g_nHotspotActivateRequest = 0;
                  hotspot_active = 1;
-@@ -203,7 +599,54 @@ short far world3d_main_loop(void) {
+@@ -203,7 +600,54 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -6644,7 +6645,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +699,58 @@ short far world3d_main_loop(void) {
+@@ -256,6 +700,58 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
@@ -6703,7 +6704,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +762,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +763,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6711,7 +6712,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +774,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +775,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6741,7 +6742,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +804,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +805,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -6749,7 +6750,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -293,6 +813,11 @@ short far world3d_main_loop(void) {
+@@ -293,6 +814,11 @@ short far world3d_main_loop(void) {
                  worldmove_apply_turn_step(3);
                  goto after_move;
              case 0x13:
@@ -6761,7 +6762,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe3, 1);
                      goto post_dispatch;
-@@ -308,6 +833,8 @@ short far world3d_main_loop(void) {
+@@ -308,6 +834,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe4, 1);
                      goto post_dispatch;
                  }
@@ -6770,7 +6771,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  spellfx_cast_and_dispatch();
                  redraw_menu = 1;
                  render_dirty = 1;
-@@ -318,18 +845,24 @@ short far world3d_main_loop(void) {
+@@ -318,18 +846,24 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe8, 1);
                      goto post_dispatch;
                  }
@@ -6796,7 +6797,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  encamp_run();
                  redraw_caption = 1;
                  goto post_dispatch;
-@@ -338,6 +871,8 @@ short far world3d_main_loop(void) {
+@@ -338,6 +872,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe6, 1);
                      goto after_move;
                  }
@@ -6805,7 +6806,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  mainmenu_save_bookmark();
                  goto after_move;
              case 0x18:
-@@ -345,6 +880,8 @@ short far world3d_main_loop(void) {
+@@ -345,6 +881,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe7, 1);
                      goto post_dispatch;
                  }
@@ -6814,7 +6815,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  exit_mode = mainmenu_save_main_menu(1);
                  if (exit_mode == 0) {
                      g_nSceneReloadPending = 1;
-@@ -360,30 +897,57 @@ short far world3d_main_loop(void) {
+@@ -360,30 +898,57 @@ short far world3d_main_loop(void) {
                      if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
                          key_is_down(0x36) != 0) {
  
@@ -6875,7 +6876,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
                  goto post_dispatch;
              default:
                  break;
-@@ -414,6 +978,10 @@ short far world3d_main_loop(void) {
+@@ -414,6 +979,10 @@ short far world3d_main_loop(void) {
          dialog_play_record(0x145, 0);
      }
      palette_cycle_eb_toggle(0);
@@ -6886,7 +6887,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38
      menupage_end(g_pReqMainPage);
      return exit_mode;
  }
-@@ -459,6 +1027,8 @@ void far worldloop_step_or_final_movement(void) {
+@@ -459,6 +1028,8 @@ void far worldloop_step_or_final_movement(void) {
  }
  
  void far worldloop_set_flag_8b_preds(void) {
@@ -8692,7 +8693,7 @@ index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f6
      screen_frame_sync_buffers_rect(0xb, 0x79);
  
 diff --git a/bak/SRC/SCREENS/MAINMENU.C b/bak/SRC/SCREENS/MAINMENU.C
-index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7a25658b1 100644
+index c9bf26483924952b5097823240d7155c3ea672eb..c1cfb52c1bdb995393d12ea1e11ed0a2d279feae 100644
 --- a/bak/SRC/SCREENS/MAINMENU.C
 +++ b/bak/SRC/SCREENS/MAINMENU.C
 @@ -3,6 +3,7 @@
@@ -8791,7 +8792,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
              g_wSaveFileValid = 0;
              return;
          }
-@@ -1499,6 +1520,321 @@ void far mainmenu_save_bookmark(void) {
+@@ -1499,6 +1520,320 @@ void far mainmenu_save_bookmark(void) {
      return;
  }
  
@@ -8880,7 +8881,6 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
 +    int first_free;
 +    int malformed_id;
 +    int i;
-+    int ok;
 +
 +    if (!g_nAutosavePending || g_gameState.bCombatExitRequest != 0 ||
 +        g_gameState.nWorldLoopExitRequest != 0)
@@ -8948,13 +8948,13 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
 +
 +    sprintf(path, "GAMES\\AutoSave.G99\\SAVE%02d.GAM", target_id);
 +    world_saving_notice();
-+    ok = msgsave_write_pair(path);
++    msgsave_write_pair(path);
 +
 +    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
 +    g_wBookmarkFmapX = old_x;
 +    g_wBookmarkFmapY = old_y;
 +    g_wBookmarkCompassIcon = old_icon;
-+    return ok;
++    return 1;
 +}
 +
 +static void mainmenu_quicksave_recover_files(void) {
@@ -9113,7 +9113,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
  void mainmenu_save_party_to_tmp(void) {
      int i;
  
-@@ -1543,7 +1879,7 @@ int mainmenu_save_scan_highest_slot(void) {
+@@ -1543,7 +1878,7 @@ int mainmenu_save_scan_highest_slot(void) {
      int highest;
      int state;
      int save_id;
@@ -9122,7 +9122,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
      char dta[30];
      char path[90];
      int rc;
-@@ -1590,7 +1926,8 @@ void mainmenu_save_slot_exists(void) {
+@@ -1590,7 +1925,8 @@ void mainmenu_save_slot_exists(void) {
      char local[90];
      ResFile *file;
  
@@ -9132,7 +9132,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
          sprintf(local, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
                  g_wCurrentSaveSlotKey, 0x15);
          file = res_fopen(local, "wb");
-@@ -1634,7 +1971,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
+@@ -1634,7 +1970,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
      sprintf(local_path, "%s\\*.G??", "GAMES");
      rc = findfirst(local_path, &dta, 0x10);
      while (rc == 0) {
@@ -9142,7 +9142,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
              mainmenu_savelist_insert_sorted(list, local_path, slotKey);
          rc = findnext(&dta);
      }
-@@ -1643,7 +1981,28 @@ fail:
+@@ -1643,7 +1980,28 @@ fail:
      return 0;
  }
  
@@ -9171,7 +9171,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
      for (; *filename != '\0'; filename++, out_name++) {
          if (*filename == '.') {
              if ((((unsigned char *)_ctype)[filename[2] + 1] & _IS_DIG) == 0) {
-@@ -1655,6 +2014,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1655,6 +2013,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
              *out_name = '\0';
              filename += 2;
              *out_slot = atoi(filename);
@@ -9186,7 +9186,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7
              if (*out_slot < 1 || *out_slot > 20) {
                  return 0;
              }
-@@ -1666,22 +2033,69 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1666,22 +2032,69 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
  }
  
  int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id) {
