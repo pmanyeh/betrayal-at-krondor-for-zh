@@ -7,7 +7,7 @@
 這不是一個「破解字型顯示」或手刻二進位補丁的專案。做法是：
 
 1. 使用 [`canassa/betrayal-at-krondor`](https://github.com/canassa/betrayal-at-krondor) 這個逆向工程還原專案，取得**完整還原自原始 1993 年二進位檔的 C 原始碼**。
-2. 直接在原始碼層級加入中文渲染邏輯、修改文字排版/換行邏輯。
+2. 直接在原始碼層級加入中文渲染邏輯、修改文字排版/換行邏輯，並新增現代化的操作與便利功能。
 3. 用**真正的 1993 年 Borland C++ 3.1 工具鏈**（透過 WSL2 + QEMU-KVM 重建的建置環境）重新編譯。
 4. 每次修改都跟原版二進位做雜湊比對——確保「沒改到的部分」保證與原版逐位元組相同，只有刻意修改的邏輯才會不同。
 
@@ -15,21 +15,21 @@
 
 ## 目前狀態
 
-**Phase 5（穩健中文文字引擎）已完成**，並在 DOSBox-X 實機驗證：
+**v1.0.0**：十章主要對話、章節書籍、物品、法術、怪物、地名、人物名與玩家常用選單已完整翻譯，並在真正的 1993 年工具鏈下重編、以 DOSBox-X 實機驗證。除了翻譯本身，這個版本也在原始碼層級加入了訊息紀錄、自動存檔／快速存讀檔、可切換滑鼠視角、地圖強化、法術瀏覽器等一系列新功能，另外提供一個選用、預設不啟用的除錯／測試用「進階密技中心」。
 
-- 雙位元組中文偵測、字碼查表、寬度計算、自動換行
-- 多行中文行距、中英混排基線對齊
-- 置中對齊、超長文本換頁（沿用原生捲動機制）
-- 異常/不完整雙位元組序列的容錯處理
+完整的功能清單、啟用方式與已知限制，請看發布說明：
 
-字型使用真正的**倚天 3.53 點陣字**（`STDFONT.15` 漢字 + `ASCFONT.15` 英數），目前示範字庫有 82 個中文字（POC 階段，離完整翻譯還很遠）。
+- [`docs/release-notes/v1.0.0.md`](docs/release-notes/v1.0.0.md) — v1.0.0 完整發布說明（版本基礎、新增功能、密技功能、安裝方式、已知限制）
 
-詳細進度、環境設定、已知問題與下一步規劃，請看：
+字型使用真正的**倚天 3.53 點陣字**（`STDFONT.15` 漢字 + `ASCFONT.15` 英數）重新產生的專案自製字庫。
 
-- [`HANDOFF.md`](HANDOFF.md) — 給下一個工作階段（人類或 AI agent）的交接備忘錄，**建議從這份開始看**
-- [`Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`](Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md) — 完整分階段（Phase 0–12）專案計畫，目前主線採用中
+更細緻的開發歷程、環境設定與逐項驗證證據，請看：
+
+- [`HANDOFF.md`](HANDOFF.md) — 給下一個工作階段（人類或 AI agent）的交接備忘錄，含環境設置、關鍵原始碼位置與待辦事項
+- [`Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md`](Betrayal_at_Krondor_Traditional_Chinese_PROJECT_PLAN.md) — 完整分階段（Phase 0–12）專案計畫
 - [`docs/baseline/`](docs/baseline/) — 各 Phase 的建置環境與驗證證據
 - [`docs/decisions/`](docs/decisions/) — 中文編碼、字型格式等架構決策紀錄（ADR）
+- [`docs/research/`](docs/research/) — 各功能（訊息紀錄、自動存檔、滑鼠視角、傳送等）的技術規劃與逐階段施工紀錄
 
 ## 專案結構
 
@@ -38,8 +38,9 @@ localization/generated/   已產生的中文字型與編碼對照表（正式產
 engine-patches/            可重建全部中文化引擎修改的合併 Git 補丁與提交清單
 tools/font/                字型產生工具（ZH16.DAT）與中文編碼（encode/decode）
 tools/text/                DDX 對話檔 extract / pack 工具
+tools/release/              整合包封裝、bspatch 產生與發布腳本
 tests/unit/                對照原始碼演算法的 deterministic 單元測試
-docs/                       各階段驗證文件、架構決策紀錄
+docs/                       各階段驗證文件、架構決策紀錄、發布說明
 upstream/                   還原專案原始碼的本地 clone（獨立 git repo；修改以 engine-patches/ 保存）
 dist/                       本機測試用產物（gitignored，隨時可能被覆寫，非正式產物）
 ```
@@ -69,6 +70,10 @@ python -m unittest discover -s tests/unit -v
 整合包還內附官方預先編譯的 **DOSBox-X**（GPLv2 開源 DOS 模擬器）與**可嵌入版 Python**（PSF 授權），兩者都跟原版遊戲無關、可以合法重新散布。使用者不需要自己另外裝 Python 或 DOS 模擬器：解壓整合包 → 把遊戲檔案丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」開始玩，整個資料夾可以直接搬到別的地方。
 
 開發端出包的標準流程（何時要重跑哪支腳本、驗證步驟）見 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)；最常用的一行是 `python tools/release/package_release.py`，組出完整整合包到 `dist/release_v100_zh/`。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
+
+## 授權
+
+本專案原始碼以 [MIT License](LICENSE) 授權釋出。這份授權僅涵蓋本專案新增／修改的原始碼與工具，**不涵蓋**任何原版遊戲資產或衍生的執行檔——這些依然受原始商業授權拘束，本專案也因此不會直接散布它們（見上方「關於遊戲資料」）。
 
 ## 致謝
 
