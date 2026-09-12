@@ -168,3 +168,10 @@ d31db1b1a732b25c4aa3c29e6b580cd16f84efd5 fix(msglog): finish recovery and accept
 f3321c8bd8a4fe3e192ec087dc78851aae428974 feat(world): inspect timed effect captions
 de91a5be1d55aa578d97171e52b3193a21f299e3 fix(world): make effect tips nonblocking and yellow
 4b359a0d45e34d1884ea51f0a2a81dd22f317551 fix(world): pass notice colors in shadow-first order
+e7a959b7aa0dc57ec3dd1acf32ebeeaa67ed0d02 fix(charscreen): correct condition-list row pitch for 10px CJK glyph
+2f82c1c8af5693a090000673458ed45b4058d353 fix(ui): drop duplicated ellipsis in two hardcoded small-font strings
+ca2c869ed0bcce793929b866442a6f8fbffce94d perf(msgsave): collapse save-time GAM CRC passes from three to one
+0170c5ee87b5ca1d34911d25e9cf00a027e1ac8c feat(msgsave): grow save-slot message logs incrementally
+2c25f42ea40e2190f371fa53668692613c7733a7 feat(world): show a "saving" notice during autosave and quicksave
+403f61b8a6ea8a2e499230ea92efa6609f07bc99 feat(world): show the saving notice on the manual Save Game dialog too
+948b9df7347497c755a6046bf9556fc8b12a6f89 fix(world): stop the saving notice from flickering after a scene load

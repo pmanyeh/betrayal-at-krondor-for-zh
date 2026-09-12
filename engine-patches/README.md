@@ -5,13 +5,13 @@
 ## 固定版本
 
 - 上游基準提交：`1fc2a69e306af1623cd22f3390a5569302059f4d`
-- 本專案最終本機引擎提交：`4b359a0d45e34d1884ea51f0a2a81dd22f317551`
-- 套用後預期 Git tree：`8098c938d189d63678ae7512209b8fba695deb00`
-- 補丁 SHA-256：`9a61d491c07cd45174af8fa20918a28d74b8a366e3a94d965d9b63c0685dfbbc`
+- 本專案最終本機引擎提交：`948b9df`（`fix(world): stop the saving notice from flickering after a scene load`）
+- 套用後預期 Git tree：`b53b724dfaf9d1c11b4102b741f4f4d6c3f8b188`
+- 補丁 SHA-256：`5f3616591e7c03f88a644fce4f5fce474ce915dc009d853690ef96b237c282d5`
 
-`betrayal-at-krondor-zh.patch` 是由上述兩個提交之間的已提交內容，以 `git diff --binary --full-index` 產生的合併補丁。它涵蓋 78 個原始碼檔；不包含遊戲資產、編譯產物，也不包含已從正式開發線撤除並保存在備份分支的 VESA／EVG 實驗。
+`betrayal-at-krondor-zh.patch` 是由上述兩個提交之間的已提交內容，以 `git diff --binary --full-index` 產生的合併補丁；不包含遊戲資產、編譯產物，也不包含已從正式開發線撤除並保存在備份分支的 VESA／EVG 實驗。
 
-`commits.txt` 依時間順序記錄這段範圍的 170 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這 170 筆提交歷史，只會重建相同的最終檔案內容。
+`commits.txt` 依時間順序記錄這段範圍的 177 個本機提交，方便回查每項修改的目的。合併補丁本身不會在目標 clone 重建這些提交歷史，只會重建相同的最終檔案內容。
 
 ## 套用
 

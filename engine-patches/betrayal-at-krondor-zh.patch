@@ -244,7 +244,7 @@ index dee3c8992b8f08d0657a16b9fc1107d6df7a2d4e..cfcee6f7d02ab9a379bbd27dce0c8f3c
          return 0;
      }
 diff --git a/bak/SRC/CHAR/CHARSCRN.C b/bak/SRC/CHAR/CHARSCRN.C
-index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..1692e11f16610523b999e071fb5a83b343248c56 100644
+index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..a348dac6d5b02e288859722ffd0f8ba1bc967610 100644
 --- a/bak/SRC/CHAR/CHARSCRN.C
 +++ b/bak/SRC/CHAR/CHARSCRN.C
 @@ -15,16 +15,18 @@
@@ -751,7 +751,7 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..1692e11f16610523b999e071fb5a83b3
      g_graphics_context.bClip_enabled = 1;
      g_graphics_context.clip.ymin = g_graphics_context.clip.xmin = 0;
      g_graphics_context.clip.ymax = 199;
-@@ -214,13 +538,18 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+@@ -214,23 +538,29 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x19], 0x130, 9, 2);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 9, 0);
      resblit_sprite_frame(g_pInvSpriteHiAssetTable[0x1a], 0x56, 0x4e, 1);
@@ -772,7 +772,9 @@ index 4c9d2762ee5cf2017c0fda528c398f4a6bb011a6..1692e11f16610523b999e071fb5a83b3
      for (; i < 7; i++) {
          if ((char)g_gameState.abActorStatusRanks[party_slot][i] > 0) {
              sprintf(buf, "%Fs (%d%)", g_aConditionInfo[i].pName,
-@@ -229,8 +558,9 @@ static void far charscreen_info_draw(Combatant *actor, MenuPage *page, int party
+                     (int)(char)g_gameState.abActorStatusRanks[party_slot][i]);
+-            invui_draw_text_aligned_shadow((unsigned char far *)buf, 0xdc, ++condCount * 9 + 0x10, 0, 0x89,
++            invui_draw_text_aligned_shadow((unsigned char far *)buf, 0xdc, ++condCount * 10 + 0x10, 0, 0x89,
                                             0x8f);
          }
      }
@@ -2580,10 +2582,10 @@ index 0000000000000000000000000000000000000000..23e887dc44a3f8bc619515f292ca31b2
 +#endif
 diff --git a/bak/SRC/DIALOG/MSGLOG.C b/bak/SRC/DIALOG/MSGLOG.C
 new file mode 100644
-index 0000000000000000000000000000000000000000..c1ca49a697e122f781756855b7f8d584b318994e
+index 0000000000000000000000000000000000000000..f56faa22dbdcd163d85fbecf2c22c6054e9cb484
 --- /dev/null
 +++ b/bak/SRC/DIALOG/MSGLOG.C
-@@ -0,0 +1,1289 @@
+@@ -0,0 +1,1527 @@
 +/**
 + * @file  MSGLOG.C
 + * @brief Message-log (.MLG) v1 data core. See MSGLOG.H for the contract and
@@ -3671,6 +3673,244 @@ index 0000000000000000000000000000000000000000..c1ca49a697e122f781756855b7f8d584
 +    return rc;
 +}
 +
++int far msglog_snapshot_extends_working(const char *path, unsigned char far *old_header64) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    unsigned short flags;
++    unsigned long events;
++    unsigned long next_seq;
++    unsigned long data_crc;
++    long committed;
++    long last_off;
++    long file_len;
++    int fd;
++    int rc;
++    int i;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    fd = open((char *)path, MSGLOG_O_RDONLY);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++    file_len = filelength(fd);
++    if (file_len < MSGLOG_HEADER_SIZE ||
++        read(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    if (close(fd) != 0)
++        return MSGLOG_E_IO;
++    rc = msglog_parse_header(hdr, file_len, 0UL, 0UL, 0, &flags, &committed, &events, &next_seq,
++                             &last_off, &data_crc);
++    if (rc != MSGLOG_OK)
++        return rc;
++    if (!(flags & MSGLOG_HF_SNAPSHOT) || !(flags & MSGLOG_HF_DATA_CRC))
++        return MSGLOG_E_HEADER;
++    if (committed != file_len)
++        return MSGLOG_E_TRUNC;
++    if (msglog_get_u16(hdr, 44) != g_mlgCreated.year || hdr[46] != g_mlgCreated.month ||
++        hdr[47] != g_mlgCreated.day || hdr[48] != g_mlgCreated.hour ||
++        hdr[49] != g_mlgCreated.minute || hdr[50] != g_mlgCreated.second ||
++        hdr[51] != g_mlgCreated.hundredth)
++        return MSGLOG_E_BINDING;
++    if (committed > g_mlgCommitted || events > g_mlgEventCount || next_seq > g_mlgNextSeq ||
++        last_off > g_mlgLastOffset)
++        return MSGLOG_E_RANGE;
++    if (old_header64 != NULL)
++        for (i = 0; i < MSGLOG_HEADER_SIZE; i++)
++            old_header64[i] = hdr[i];
++    return MSGLOG_OK;
++}
++
++int far msglog_extend_snapshot(const char *path, unsigned long gam_length,
++                               unsigned long gam_crc32) {
++    unsigned char old_hdr[MSGLOG_HEADER_SIZE];
++    unsigned char new_hdr[MSGLOG_HEADER_SIZE];
++    unsigned long crc;
++    unsigned long old_data_crc;
++    long old_committed;
++    long tail;
++    long remaining;
++    int chunk;
++    int fd;
++    int rc;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgWorkFd < 0)
++        return MSGLOG_E_STATE;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++
++    rc = msglog_snapshot_extends_working(path, old_hdr);
++    if (rc != MSGLOG_OK)
++        return rc;
++    old_committed = (long)msglog_get_u32(old_hdr, 24);
++    old_data_crc = msglog_get_u32(old_hdr, 40);
++    tail = g_mlgCommitted - old_committed;
++
++    fd = open((char *)path, MSGLOG_O_RDWR);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++
++    /* CRC32/ISO-HDLC final xor is self-inverse, so the stored data_crc32 of the
++       already-committed prefix is exactly the running state to resume from. */
++    rc = MSGLOG_OK;
++    crc = MSGLOG_CRC32_FINAL(old_data_crc);
++    if (tail > 0) {
++        if (lseek(g_mlgWorkFd, old_committed, MSGLOG_SEEK_SET) != old_committed ||
++            lseek(fd, old_committed, MSGLOG_SEEK_SET) != old_committed)
++            rc = MSGLOG_E_IO;
++        remaining = tail;
++        while (rc == MSGLOG_OK && remaining > 0) {
++            chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++            if (dos_read(g_mlgScratch, (long)chunk, g_mlgWorkFd) != (long)chunk) {
++                rc = MSGLOG_E_IO;
++                break;
++            }
++            crc = msglog_crc32_update(crc, (const unsigned char huge *)g_mlgScratch,
++                                      (unsigned int)chunk);
++            if (dos_write(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++                rc = MSGLOG_E_IO;
++                break;
++            }
++            remaining -= (long)chunk;
++        }
++    }
++    if (rc == MSGLOG_OK) {
++        msglog_build_header(new_hdr,
++                            (unsigned short)((g_mlgFlags & MSGLOG_HF_HAS_GAP) |
++                                             MSGLOG_HF_SNAPSHOT | MSGLOG_HF_SEALED |
++                                             MSGLOG_HF_DATA_CRC | MSGLOG_HF_GAM_BOUND),
++                            gam_length, gam_crc32, g_mlgCommitted, g_mlgEventCount, g_mlgNextSeq,
++                            g_mlgLastOffset, MSGLOG_CRC32_FINAL(crc), &g_mlgCreated);
++        if (lseek(fd, 0L, MSGLOG_SEEK_SET) != 0L ||
++            write(fd, new_hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE)
++            rc = MSGLOG_E_IO;
++    }
++    if (rc != MSGLOG_OK) {
++        /* Restore the snapshot to exactly what it was. Idempotent on re-run. */
++        chsize(fd, old_committed);
++        if (lseek(fd, 0L, MSGLOG_SEEK_SET) == 0L)
++            write(fd, old_hdr, MSGLOG_HEADER_SIZE);
++    }
++    if (close(fd) != 0 && rc == MSGLOG_OK)
++        rc = MSGLOG_E_IO;
++    lseek(g_mlgWorkFd, g_mlgCommitted, MSGLOG_SEEK_SET);
++    return rc;
++}
++
++int far msglog_validate_snapshot_tail(const char *path, long tail_from, unsigned long gam_length,
++                                      unsigned long gam_crc32, unsigned long prev_data_crc,
++                                      long prev_last_off, unsigned long prev_events) {
++    unsigned char hdr[MSGLOG_HEADER_SIZE];
++    unsigned char head[MSGLOG_EVENT_HEAD_SIZE];
++    unsigned long crc;
++    unsigned long data_crc;
++    unsigned long events;
++    unsigned long next_seq;
++    unsigned long total;
++    unsigned long scanned;
++    unsigned short flags;
++    long committed;
++    long last_off;
++    long file_len;
++    long off;
++    long prev;
++    long remaining;
++    int chunk;
++    int fd;
++    int rc;
++
++    if (path == NULL)
++        return MSGLOG_E_PARAM;
++    if (g_mlgScratch == NULL)
++        return MSGLOG_E_NOMEM;
++    fd = open((char *)path, MSGLOG_O_RDONLY);
++    if (fd < 0)
++        return MSGLOG_E_OPEN;
++    file_len = filelength(fd);
++    if (file_len < MSGLOG_HEADER_SIZE ||
++        read(fd, hdr, MSGLOG_HEADER_SIZE) != MSGLOG_HEADER_SIZE) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    rc = msglog_parse_header(hdr, file_len, gam_length, gam_crc32,
++                             (gam_length != 0UL || gam_crc32 != 0UL) ? 1 : 0, &flags, &committed,
++                             &events, &next_seq, &last_off, &data_crc);
++    if (rc != MSGLOG_OK) {
++        close(fd);
++        return rc;
++    }
++    if (!(flags & MSGLOG_HF_SNAPSHOT) || !(flags & MSGLOG_HF_DATA_CRC)) {
++        close(fd);
++        return MSGLOG_E_HEADER;
++    }
++    if (committed != file_len) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    if (tail_from < MSGLOG_HEADER_SIZE || tail_from > committed) {
++        close(fd);
++        return MSGLOG_E_RANGE;
++    }
++
++    crc = MSGLOG_CRC32_FINAL(prev_data_crc);
++    if (lseek(fd, tail_from, MSGLOG_SEEK_SET) != tail_from) {
++        close(fd);
++        return MSGLOG_E_IO;
++    }
++    remaining = committed - tail_from;
++    while (remaining > 0) {
++        chunk = (remaining > (long)g_mlgScratchLen) ? (int)g_mlgScratchLen : (int)remaining;
++        if (dos_read(g_mlgScratch, (long)chunk, fd) != (long)chunk) {
++            close(fd);
++            return MSGLOG_E_IO;
++        }
++        crc = msglog_crc32_update(crc, (const unsigned char huge *)g_mlgScratch,
++                                  (unsigned int)chunk);
++        remaining -= (long)chunk;
++    }
++    if (MSGLOG_CRC32_FINAL(crc) != data_crc) {
++        close(fd);
++        return MSGLOG_E_CRC;
++    }
++
++    off = tail_from;
++    scanned = 0;
++    prev = prev_last_off;
++    while (off < committed) {
++        rc = msglog_verify_record(fd, off, committed, head, &total);
++        if (rc != MSGLOG_OK) {
++            close(fd);
++            return rc;
++        }
++        if (msglog_get_u32(head, 16) != (unsigned long)prev) {
++            close(fd);
++            return MSGLOG_E_RANGE;
++        }
++        prev = off;
++        scanned++;
++        off += (long)total;
++    }
++    if (off != committed) {
++        close(fd);
++        return MSGLOG_E_TRUNC;
++    }
++    if (scanned + prev_events != events) {
++        close(fd);
++        return MSGLOG_E_RANGE;
++    }
++    if ((unsigned long)prev != (unsigned long)last_off) {
++        close(fd);
++        return MSGLOG_E_RANGE;
++    }
++    if (close(fd) != 0)
++        return MSGLOG_E_IO;
++    return MSGLOG_OK;
++}
++
 +int far msglog_load_candidate(const char *path, unsigned long gam_length,
 +                              unsigned long gam_crc32) {
 +    unsigned char hdr[MSGLOG_HEADER_SIZE];
@@ -3875,10 +4115,10 @@ index 0000000000000000000000000000000000000000..c1ca49a697e122f781756855b7f8d584
 +}
 diff --git a/bak/SRC/DIALOG/MSGLOG.H b/bak/SRC/DIALOG/MSGLOG.H
 new file mode 100644
-index 0000000000000000000000000000000000000000..61ade35ae3ac2f38b9d3d06007b3bc37e0c25029
+index 0000000000000000000000000000000000000000..9136ddbdeb60b8b066f452892ae929d747eed45a
 --- /dev/null
 +++ b/bak/SRC/DIALOG/MSGLOG.H
-@@ -0,0 +1,370 @@
+@@ -0,0 +1,409 @@
 +#ifndef BAK_MSGLOG_H
 +#define BAK_MSGLOG_H
 +
@@ -4177,6 +4417,45 @@ index 0000000000000000000000000000000000000000..61ade35ae3ac2f38b9d3d06007b3bc37
 +                                       unsigned long gam_crc32);
 +
 +/**
++ * @brief Non-mutating test: is the snapshot at @p path a committed prefix of the
++ *        live working timeline, so it can be grown in place instead of recopied?
++ * @param old_header64 optional 64-byte destination for the snapshot's current
++ *        header image (phase 2 stashes it in the transaction marker as the
++ *        rollback point).
++ * @return MSGLOG_OK when extensible; a distinguishable code otherwise (the
++ *         caller then falls back to a full msglog_prepare_snapshot()).
++ */
++extern int far msglog_snapshot_extends_working(const char *path,
++                                               unsigned char far *old_header64);
++
++/**
++ * @brief Append only the records committed since the snapshot at @p path was
++ *        last written, and re-seal its header, bound to @p gam_length/@p gam_crc32.
++ *
++ * @details The whole-history @c data_crc32 is resumed from the snapshot's own
++ *          stored value (CRC32/ISO-HDLC's final xor is self-inverse), so the
++ *          existing prefix is never re-read. On any failure the snapshot is
++ *          restored byte-for-byte to its previous state before returning.
++ * @pre   Working file open; scratch installed; @ref msglog_snapshot_extends_working
++ *        would return MSGLOG_OK for @p path (re-checked internally).
++ */
++extern int far msglog_extend_snapshot(const char *path, unsigned long gam_length,
++                                      unsigned long gam_crc32);
++
++/**
++ * @brief Validate a snapshot that was just grown by @ref msglog_extend_snapshot:
++ *        header + GAM binding, the resumed whole-history CRC32, and a structural
++ *        walk of the records at/after @p tail_from only.
++ * @param prev_data_crc,prev_last_off,prev_events the snapshot's pre-extend
++ *        header values (from the transaction marker). Pass @p tail_from equal to
++ *        the pre-extend committed length.
++ */
++extern int far msglog_validate_snapshot_tail(const char *path, long tail_from,
++                                             unsigned long gam_length, unsigned long gam_crc32,
++                                             unsigned long prev_data_crc, long prev_last_off,
++                                             unsigned long prev_events);
++
++/**
 + * @brief Fully validate a snapshot before anything is replaced.
 + * @param gam_length,gam_crc32 the *actual* save file being loaded; pass 0/0 to
 + *        skip the binding check.
@@ -4251,10 +4530,10 @@ index 0000000000000000000000000000000000000000..61ade35ae3ac2f38b9d3d06007b3bc37
 +#endif
 diff --git a/bak/SRC/DIALOG/MSGSAVE.C b/bak/SRC/DIALOG/MSGSAVE.C
 new file mode 100644
-index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc21dfd91c
+index 0000000000000000000000000000000000000000..43822adceeb907e62a7b4a9bc595bf12e763a957
 --- /dev/null
 +++ b/bak/SRC/DIALOG/MSGSAVE.C
-@@ -0,0 +1,395 @@
+@@ -0,0 +1,541 @@
 +#include <stdio.h>
 +#include <string.h>
 +#include <io.h>
@@ -4269,11 +4548,19 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +#include "SRC/SYS/DOSMEM.H"
 +
 +#define MSGSAVE_PATH_MAX 64
-+#define MSGSAVE_SCRATCH 2048
++#define MSGSAVE_SCRATCH 4096
 +#define MSGSAVE_O_CREATE 0x8302
 +#define MSGSAVE_O_RDONLY 0x8001
++#define MSGSAVE_O_RDWR 0x8002
 +#define MSGSAVE_S_RW 0x0180
-+#define MSGSAVE_MARK_SIZE 18
++/* Transaction marker. v1 (18 bytes) is still read so a save interrupted by an
++   older build can still be recovered; new markers are v2 (88 bytes) and carry
++   the MLG mode plus, for an in-place extend, the pre-extend 64-byte MLG header
++   as the rollback point. */
++#define MSGSAVE_MARK_V1_SIZE 18
++#define MSGSAVE_MARK_SIZE 88
++#define MSGSAVE_MLG_FULL 0
++#define MSGSAVE_MLG_EXTEND 1
 +
 +static int g_msgsaveCandidate = 0;
 +#ifdef MSGSAVE_TEST
@@ -4342,11 +4629,11 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    msgsave_path(out, dir, name);
 +}
 +
-+static unsigned int msgsave_mark_sum(const unsigned char *p) {
++static unsigned int msgsave_mark_sum(const unsigned char *p, int n) {
 +    unsigned int s;
 +    int i;
 +    s = 0x4d53;
-+    for (i = 0; i < 16; i++)
++    for (i = 0; i < n; i++)
 +        s = (unsigned int)((s << 1) | (s >> 15)) ^ p[i];
 +    return s;
 +}
@@ -4363,18 +4650,25 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +           ((unsigned long)p[2] << 16) | ((unsigned long)p[3] << 24);
 +}
 +
-+static int msgsave_write_mark(const char *path, int id, int old_gam, int old_mlg,
-+                              unsigned long len, unsigned long crc) {
++static int msgsave_write_mark(const char *path, int id, int old_gam, int old_mlg, int mlg_mode,
++                              const unsigned char *mlg_old_hdr, unsigned long len,
++                              unsigned long crc) {
 +    unsigned char b[MSGSAVE_MARK_SIZE];
 +    int fd;
++    int i;
 +    unsigned int sum;
 +    memset(b, 0, sizeof(b));
-+    b[0] = 'B'; b[1] = 'K'; b[2] = 'T'; b[3] = 'X'; b[4] = 1;
++    b[0] = 'B'; b[1] = 'K'; b[2] = 'T'; b[3] = 'X'; b[4] = 2;
 +    b[5] = (unsigned char)id; b[6] = (unsigned char)old_gam; b[7] = (unsigned char)old_mlg;
 +    msgsave_put32(b + 8, len);
 +    msgsave_put32(b + 12, crc);
-+    sum = msgsave_mark_sum(b);
-+    b[16] = (unsigned char)sum; b[17] = (unsigned char)(sum >> 8);
++    b[16] = (unsigned char)mlg_mode;
++    if (mlg_mode == MSGSAVE_MLG_EXTEND && mlg_old_hdr != NULL)
++        for (i = 0; i < MSGLOG_HEADER_SIZE; i++)
++            b[18 + i] = mlg_old_hdr[i];
++    sum = msgsave_mark_sum(b, MSGSAVE_MARK_SIZE - 2);
++    b[MSGSAVE_MARK_SIZE - 2] = (unsigned char)sum;
++    b[MSGSAVE_MARK_SIZE - 1] = (unsigned char)(sum >> 8);
 +    fd = open((char *)path, MSGSAVE_O_CREATE, MSGSAVE_S_RW);
 +    if (fd < 0)
 +        return 0;
@@ -4387,39 +4681,62 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    return 1;
 +}
 +
-+static int msgsave_read_mark(const char *path, int *id, int *old_gam, int *old_mlg,
-+                             unsigned long *len, unsigned long *crc) {
++static int msgsave_read_mark(const char *path, int *id, int *old_gam, int *old_mlg, int *mlg_mode,
++                             unsigned char *mlg_old_hdr, unsigned long *len, unsigned long *crc) {
 +    unsigned char b[MSGSAVE_MARK_SIZE];
++    long flen;
 +    int fd;
++    int i;
 +    unsigned int sum;
 +    fd = open((char *)path, MSGSAVE_O_RDONLY);
 +    if (fd < 0)
 +        return access((char *)path, 0) == 0 ? -1 : 0;
-+    if (read(fd, b, sizeof(b)) != sizeof(b) || filelength(fd) != sizeof(b)) {
++    flen = filelength(fd);
++    if ((flen != MSGSAVE_MARK_SIZE && flen != MSGSAVE_MARK_V1_SIZE) ||
++        read(fd, b, (unsigned)flen) != (int)flen) {
 +        close(fd); return -1;
 +    }
 +    if (close(fd) != 0)
 +        return -1;
-+    sum = (unsigned int)b[16] | ((unsigned int)b[17] << 8);
-+    if (b[0] != 'B' || b[1] != 'K' || b[2] != 'T' || b[3] != 'X' || b[4] != 1 ||
-+        b[5] > 99 || sum != msgsave_mark_sum(b))
++    if (b[0] != 'B' || b[1] != 'K' || b[2] != 'T' || b[3] != 'X' || b[5] > 99)
++        return -1;
++    if (b[4] == 1 && flen == MSGSAVE_MARK_V1_SIZE) {
++        sum = (unsigned int)b[16] | ((unsigned int)b[17] << 8);
++        if (sum != msgsave_mark_sum(b, 16))
++            return -1;
++        *mlg_mode = MSGSAVE_MLG_FULL;
++    } else if (b[4] == 2 && flen == MSGSAVE_MARK_SIZE) {
++        sum = (unsigned int)b[MSGSAVE_MARK_SIZE - 2] |
++              ((unsigned int)b[MSGSAVE_MARK_SIZE - 1] << 8);
++        if (sum != msgsave_mark_sum(b, MSGSAVE_MARK_SIZE - 2))
++            return -1;
++        *mlg_mode = b[16] == MSGSAVE_MLG_EXTEND ? MSGSAVE_MLG_EXTEND : MSGSAVE_MLG_FULL;
++        if (mlg_old_hdr != NULL)
++            for (i = 0; i < MSGLOG_HEADER_SIZE; i++)
++                mlg_old_hdr[i] = b[18 + i];
++    } else
 +        return -1;
 +    *id = b[5]; *old_gam = b[6] != 0; *old_mlg = b[7] != 0;
 +    *len = msgsave_get32(b + 8); *crc = msgsave_get32(b + 12);
 +    return 1;
 +}
 +
++static int msgsave_mlg_valid(const char *mlg, unsigned long gam_len,
++                             unsigned long gam_crc) {
++    int rc;
++    rc = msglog_load_candidate(mlg, gam_len, gam_crc);
++    msglog_discard_candidate();
++    return rc == MSGLOG_OK;
++}
++
 +static int msgsave_pair_valid(const char *gam, const char *mlg,
 +                              unsigned long expect_len, unsigned long expect_crc) {
 +    unsigned long len;
 +    unsigned long crc;
-+    int rc;
-+    rc = msglog_crc32_file(gam, &len, &crc);
-+    if (rc != MSGLOG_OK || len != expect_len || crc != expect_crc)
++    if (msglog_crc32_file(gam, &len, &crc) != MSGLOG_OK ||
++        len != expect_len || crc != expect_crc)
 +        return 0;
-+    rc = msglog_load_candidate(mlg, len, crc);
-+    msglog_discard_candidate();
-+    return rc == MSGLOG_OK;
++    return msgsave_mlg_valid(mlg, len, crc);
 +}
 +
 +static int msgsave_gam_valid(const char *path) {
@@ -4443,14 +4760,70 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    return access((char *)path, 0) != 0 || remove((char *)path) == 0;
 +}
 +
++static int msgsave_gam_crc_is(const char *gam, unsigned long expect_len, unsigned long expect_crc) {
++    unsigned long len;
++    unsigned long crc;
++    return msglog_crc32_file(gam, &len, &crc) == MSGLOG_OK && len == expect_len &&
++           crc == expect_crc;
++}
++
++/* Validate an extended snapshot without re-hashing its already-committed prefix:
++   the pre-extend header (from the marker) supplies the resume point. */
++static int msgsave_tail_valid(const char *mlg, const unsigned char *old_hdr, unsigned long gam_len,
++                              unsigned long gam_crc) {
++    return msglog_validate_snapshot_tail(mlg, (long)msgsave_get32(old_hdr + 24), gam_len, gam_crc,
++                                         msgsave_get32(old_hdr + 40),
++                                         (long)msgsave_get32(old_hdr + 36),
++                                         msgsave_get32(old_hdr + 28)) == MSGLOG_OK;
++}
++
++/* Roll an in-place-extended snapshot back to its pre-save bytes. Idempotent. */
++static int msgsave_mlg_restore(const char *mlg, long old_len, const unsigned char *old_hdr) {
++    int fd;
++    int ok;
++    fd = open((char *)mlg, MSGSAVE_O_RDWR);
++    if (fd < 0)
++        return 0;
++    ok = chsize(fd, old_len) == 0 && lseek(fd, 0L, 0) == 0L &&
++         write(fd, (char *)old_hdr, MSGLOG_HEADER_SIZE) == MSGLOG_HEADER_SIZE;
++    if (close(fd) != 0)
++        ok = 0;
++    return ok;
++}
++
++static int msgsave_mlg_rollback(const char *target_mlg, const char *new_mlg, int had_mlg,
++                                const char *old_mlg_path, int mlg_mode, long mlg_old_len,
++                                const unsigned char *mlg_old_hdr) {
++    if (mlg_mode == MSGSAVE_MLG_EXTEND) {
++        if (access((char *)target_mlg, 0) != 0) {
++            if (access((char *)new_mlg, 0) != 0 ||
++                rename((char *)new_mlg, (char *)target_mlg) != 0)
++                return 0;
++        }
++        return msgsave_mlg_restore(target_mlg, mlg_old_len, mlg_old_hdr);
++    }
++    if (had_mlg) {
++        if (access((char *)old_mlg_path, 0) == 0) {
++            remove((char *)target_mlg);
++            return rename((char *)old_mlg_path, (char *)target_mlg) == 0;
++        }
++        return access((char *)target_mlg, 0) == 0;
++    }
++    return msgsave_remove(target_mlg);
++}
++
 +static int msgsave_recover_inner(const char *dir) {
 +    char mark[MSGSAVE_PATH_MAX], target_gam[MSGSAVE_PATH_MAX], target_mlg[MSGSAVE_PATH_MAX];
 +    char new_gam[MSGSAVE_PATH_MAX], new_mlg[MSGSAVE_PATH_MAX];
 +    char old_gam_path[MSGSAVE_PATH_MAX], old_mlg_path[MSGSAVE_PATH_MAX];
++    unsigned char mlg_old_hdr[MSGLOG_HEADER_SIZE];
 +    unsigned long len, crc;
-+    int id, old_gam, old_mlg, rc;
++    long mlg_old_len;
++    int id, old_gam, old_mlg, mlg_mode, rc;
++
++    memset(mlg_old_hdr, 0, sizeof(mlg_old_hdr));
 +    msgsave_path(mark, dir, "MLGTXN.DAT");
-+    rc = msgsave_read_mark(mark, &id, &old_gam, &old_mlg, &len, &crc);
++    rc = msgsave_read_mark(mark, &id, &old_gam, &old_mlg, &mlg_mode, mlg_old_hdr, &len, &crc);
 +    if (rc == 0)
 +        return 1;
 +    if (rc < 0)
@@ -4459,10 +4832,16 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    msgsave_target(target_mlg, dir, id, "MLG");
 +    msgsave_path(new_gam, dir, "MLGNEW.GAM"); msgsave_path(new_mlg, dir, "MLGNEW.MLG");
 +    msgsave_path(old_gam_path, dir, "MLGOLD.GAM"); msgsave_path(old_mlg_path, dir, "MLGOLD.MLG");
-+    if (msgsave_pair_valid(target_gam, target_mlg, len, crc)) {
++    mlg_old_len = (long)msgsave_get32(mlg_old_hdr + 24);
++
++    if (mlg_mode == MSGSAVE_MLG_EXTEND
++            ? (msgsave_gam_crc_is(target_gam, len, crc) &&
++               msgsave_tail_valid(target_mlg, mlg_old_hdr, len, crc))
++            : msgsave_pair_valid(target_gam, target_mlg, len, crc)) {
 +        return msgsave_remove(old_gam_path) && msgsave_remove(old_mlg_path) &&
 +               msgsave_remove(new_gam) && msgsave_remove(new_mlg) && msgsave_remove(mark);
 +    }
++
 +    if (old_gam) {
 +        if (access(old_gam_path, 0) == 0) {
 +            remove(target_gam);
@@ -4472,14 +4851,9 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +            return 0;
 +    } else if (!msgsave_remove(target_gam))
 +        return 0;
-+    if (old_mlg) {
-+        if (access(old_mlg_path, 0) == 0) {
-+            remove(target_mlg);
-+            if (rename(old_mlg_path, target_mlg) != 0)
-+                return 0;
-+        } else if (access(target_mlg, 0) != 0)
-+            return 0;
-+    } else if (!msgsave_remove(target_mlg))
++
++    if (!msgsave_mlg_rollback(target_mlg, new_mlg, old_mlg, old_mlg_path, mlg_mode, mlg_old_len,
++                              mlg_old_hdr))
 +        return 0;
 +    return msgsave_remove(new_gam) && msgsave_remove(new_mlg) && msgsave_remove(mark);
 +}
@@ -4540,9 +4914,11 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    char dir[MSGSAVE_PATH_MAX], target_mlg[MSGSAVE_PATH_MAX], new_gam[MSGSAVE_PATH_MAX];
 +    char new_mlg[MSGSAVE_PATH_MAX], old_gam[MSGSAVE_PATH_MAX], old_mlg[MSGSAVE_PATH_MAX];
 +    char mark[MSGSAVE_PATH_MAX];
++    unsigned char mlg_old_hdr[MSGLOG_HEADER_SIZE];
 +    unsigned long len, crc;
++    long mlg_old_len;
 +    unsigned char far *scratch;
-+    int id, had_gam, had_mlg, ok;
++    int id, had_gam, had_mlg, mlg_extend, ok;
 +    if (!msgsave_parts(target_gam, dir, &id))
 +        return 0;
 +    scratch = msgsave_scratch_begin();
@@ -4561,30 +4937,79 @@ index 0000000000000000000000000000000000000000..d4243059dee32652d3fe50adaa06d0fc
 +    msgsave_path(mark, dir, "MLGTXN.DAT");
 +    ok = msgsave_remove(new_gam) && msgsave_remove(new_mlg) &&
 +         msgsave_remove(old_gam) && msgsave_remove(old_mlg);
++
++    had_gam = access(target_gam, 0) == 0;
++    had_mlg = access(target_mlg, 0) == 0;
++    mlg_old_len = 0L;
++    mlg_extend = ok && had_mlg &&
++                 msglog_snapshot_extends_working(target_mlg, mlg_old_hdr) == MSGLOG_OK;
++    if (mlg_extend)
++        mlg_old_len = (long)msgsave_get32(mlg_old_hdr + 24);
++
 +    if (ok) { MSGSAVE_STAGE(2); ok = savegame_write(new_gam); }
 +    if (ok) { MSGSAVE_STAGE(3); ok = msgsave_gam_valid(new_gam); }
 +    if (ok) { MSGSAVE_STAGE(4); ok = msglog_crc32_file(new_gam, &len, &crc) == MSGLOG_OK; }
-+    if (ok) { MSGSAVE_STAGE(5); ok = msglog_prepare_snapshot(new_mlg, len, crc) == MSGLOG_OK; }
-+    if (ok) { MSGSAVE_STAGE(6); ok = msgsave_pair_valid(new_gam, new_mlg, len, crc); }
-+    had_gam = access(target_gam, 0) == 0;
-+    had_mlg = access(target_mlg, 0) == 0;
-+    if (ok) { MSGSAVE_STAGE(7); ok = msgsave_write_mark(mark, id, had_gam, had_mlg, len, crc); }
++
++    if (mlg_extend) {
++        /* Seed MLGNEW.MLG with the previous snapshot by moving it, then grow it
++           in place -- only the records committed since the last save to this
++           slot are written. No MLGOLD.MLG: the rollback point is the pre-extend
++           header carried in the marker. */
++        if (ok) { MSGSAVE_STAGE(5);
++                  ok = rename(target_mlg, new_mlg) == 0 &&
++                       msglog_extend_snapshot(new_mlg, len, crc) == MSGLOG_OK; }
++        if (ok) { MSGSAVE_STAGE(6); ok = msgsave_tail_valid(new_mlg, mlg_old_hdr, len, crc); }
++        if (!ok) {
++            /* Nothing durable has changed: restore the moved snapshot and bail. */
++            if (access(new_mlg, 0) == 0) {
++                msgsave_mlg_restore(new_mlg, mlg_old_len, mlg_old_hdr);
++                rename(new_mlg, target_mlg);
++            }
++            msgsave_scratch_end(scratch);
++            return 0;
++        }
++    } else {
++        if (ok) { MSGSAVE_STAGE(5); ok = msglog_prepare_snapshot(new_mlg, len, crc) == MSGLOG_OK; }
++        if (ok) { MSGSAVE_STAGE(6); ok = msgsave_mlg_valid(new_mlg, len, crc); }
++    }
++
++    if (ok) { MSGSAVE_STAGE(7);
++              ok = msgsave_write_mark(mark, id, had_gam, had_mlg,
++                                      mlg_extend ? MSGSAVE_MLG_EXTEND : MSGSAVE_MLG_FULL,
++                                      mlg_extend ? mlg_old_hdr : (unsigned char *)NULL,
++                                      len, crc); }
 +    if (ok) { MSGSAVE_CRASH(7); }
 +    if (ok && had_gam) { MSGSAVE_STAGE(8); ok = rename((char *)target_gam, old_gam) == 0; }
 +    if (ok && had_gam) { MSGSAVE_CRASH(8); }
-+    if (ok && had_mlg) { MSGSAVE_STAGE(9); ok = rename(target_mlg, old_mlg) == 0; }
-+    if (ok && had_mlg) { MSGSAVE_CRASH(9); }
++    /* Stage 9 is the old MLG being set aside. In extend mode that already
++       happened at stage 5 (moved to MLGNEW.MLG), so the rename is skipped but
++       the checkpoint stays so an interruption here is still exercised. */
++    if (ok) { MSGSAVE_STAGE(9);
++              if (had_mlg && !mlg_extend) ok = rename(target_mlg, old_mlg) == 0; }
++    if (ok) { MSGSAVE_CRASH(9); }
 +    if (ok) { MSGSAVE_STAGE(10); ok = rename(new_gam, (char *)target_gam) == 0; }
 +    if (ok) { MSGSAVE_CRASH(10); }
 +    if (ok) { MSGSAVE_STAGE(11); ok = rename(new_mlg, target_mlg) == 0; }
 +    if (ok) { MSGSAVE_CRASH(11); }
-+    if (ok) { MSGSAVE_STAGE(12); ok = msgsave_pair_valid(target_gam, target_mlg, len, crc); }
++    /* Same-volume renames do not alter bytes; a GAM header check plus a tail-only
++       (extend) or full (fresh) MLG load catches a mismove without re-hashing the
++       whole save. */
++    if (ok) { MSGSAVE_STAGE(12); ok = msgsave_gam_valid(target_gam) &&
++                                      (mlg_extend
++                                           ? msgsave_tail_valid(target_mlg, mlg_old_hdr, len, crc)
++                                           : msgsave_mlg_valid(target_mlg, len, crc)); }
 +    if (ok) {
 +        /* Keep the marker until cleanup finishes, so a retry can finish it. */
 +        ok = msgsave_remove(old_gam) && msgsave_remove(old_mlg) && msgsave_remove(mark);
 +    } else if (access(mark, 0) == 0)
 +        msgsave_recover_inner(dir);
-+    else {
++    else if (mlg_extend) {
++        if (access(new_mlg, 0) == 0) {
++            msgsave_mlg_restore(new_mlg, mlg_old_len, mlg_old_hdr);
++            rename(new_mlg, target_mlg);
++        }
++        remove(new_gam);
++    } else {
 +        remove(new_gam); remove(new_mlg);
 +    }
 +    msgsave_scratch_end(scratch);
@@ -5661,7 +6086,7 @@ index 3b9b235c92a3f90cc9c6988cf7f078619bd42dc7..a30a8bf8ba1c1349ba55b266b9ba55cb
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.C b/bak/SRC/GAME/WORLD/WORLDLP.C
-index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd4599b8f8 100644
+index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..8ef66c93e06de8db7705fb7cfdb70c38b6f20240 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.C
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.C
 @@ -1,8 +1,10 @@
@@ -5697,7 +6122,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
  #include "SRC/GAME/WORLD/WORLDMOV.H"
  #include "SRC/GAME/ENC/HOTSPOT.H"
  #include "SRC/INPUT/WCURSOR.H"
-@@ -40,6 +46,295 @@
+@@ -40,6 +46,331 @@
  MenuPage *g_pReqMainPage = {0};
  short g_nSceneReloadPending = 0;
  short g_nHotspotActivateRequest = 0;
@@ -5747,8 +6172,8 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
 +static char g_szQuickSaveComplete[] =
 +    "\x85\x7b\x8a\x59\x8c\x33\x97\x30\x82\x51\x82\x52"; /* 快速存檔完成 */
 +static char g_szQuickSaveLoading[] =
-+    "\x87\x51\x81\x26\x90\x30\x8a\x40\x85\x7b\x8a\x59\x8c\x33\x97\x30\x80\x7e\x80\x7e";
-+    /* 正在讀取快速存檔…… */
++    "\x87\x51\x81\x26\x90\x30\x8a\x40\x85\x7b\x8a\x59\x8c\x33\x97\x30\x80\x7e";
++    /* 正在讀取快速存檔… */
 +static char g_szMouseLookOn[] =
 +    "\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x82\x2c";
 +    /* 滑鼠視角模式：開 */
@@ -5756,7 +6181,10 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
 +    "\x8f\x42\x86\x4b\x8c\x2b\x8d\x6b\x81\x67\x8f\x6b\x87\x5a\x85\x6c";
 +    /* 滑鼠視角模式：關 */
 +
-+static void worldloop_quicksave_notice(char *text) {
++static char g_szSavingInProgress[] =
++    "\x87\x51\x81\x26\x8c\x33\x97\x30\x80\x7e"; /* 正在存檔… */
++
++static void worldloop_notice_panel(char *text) {
 +    int text_width;
 +    int panel_width;
 +    int x;
@@ -5776,9 +6204,42 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
 +                                x + 5, y + 3);
 +    g_bSmallZhMode = saved_small_zh_mode;
 +    screen_frame_present();
++    screen_frame_sync_buffers_rect(0xb, 0x80);
++}
++
++static void worldloop_quicksave_notice(char *text) {
++    worldloop_notice_panel(text);
 +    g_nFrameTickCountdown = QUICKSAVE_NOTICE_TICKS;
 +    while (g_nFrameTickCountdown != 0)
 +        ;
++}
++
++/* Painted by the save-game entry points just before the blocking pair write, so
++   a slow save (first write to a slot, slow media) is not a silent freeze. It is
++   cleared by the next world-loop redraw or the quicksave "complete" notice. */
++void world_saving_notice(void) {
++    worldloop_notice_panel(g_szSavingInProgress);
++}
++
++/* Same notice for the manual Save Game dialog, which covers the world viewport:
++   centred near the top of the screen instead of on the (hidden) viewport. */
++void menu_saving_notice(void) {
++    int panel_width;
++    int x;
++    char saved_small_zh_mode;
++
++    g_graphics_context.wGfxBlitSrcPage = g_graphics_context.wGfxBlitDstPage =
++        g_graphics_context.wVgaPage2Base;
++    saved_small_zh_mode = g_bSmallZhMode;
++    g_bSmallZhMode = 1;
++    panel_width = font_text_width_ds(g_szSavingInProgress) + 10;
++    x = (320 - panel_width) >> 1;
++    uiwidget_panel_inset_inverted(x, 30, panel_width, 15, 0);
++    uiwidget_draw_text_shadowed(g_szSavingInProgress, NOTICE_SHADOW_COLOR, NOTICE_TEXT_COLOR,
++                                x + 5, 33);
++    g_bSmallZhMode = saved_small_zh_mode;
++    screen_frame_present();
++    screen_frame_sync_buffers_rect(0xb, 0x80);
 +}
 +
 +static void worldloop_effect_info_draw(int effect_id) {
@@ -5993,7 +6454,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
  
  void far worldloop_req_main_screen_load(void) {
      g_pReqMainPage = menupage_load("req_main.dat");
-@@ -73,6 +368,19 @@ short far world3d_main_loop(void) {
+@@ -73,6 +404,19 @@ short far world3d_main_loop(void) {
         hotspot_active to DI. */
      register int render_dirty;   /* party-dirty / render-scene flag */
      register int hotspot_active; /* hotspot / descent / entered flag */
@@ -6013,7 +6474,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
  
      exit_mode = 0;
      keep_running = 1;
-@@ -82,6 +390,21 @@ short far world3d_main_loop(void) {
+@@ -82,6 +426,21 @@ short far world3d_main_loop(void) {
      redraw_caption = 0;
      pending_events = 0;
      key_repeat_armed = 0;
@@ -6035,7 +6496,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
      focused_entry = (MenuEntry *)0;
      g_nHotspotActivateRequest = 0;
      g_bZoneEntryInProgress = 0;
-@@ -92,9 +415,11 @@ short far world3d_main_loop(void) {
+@@ -92,9 +451,11 @@ short far world3d_main_loop(void) {
  
      while (keep_running != 0) {
          if (g_gameState.abTeleportRecord[0] != '\0') {
@@ -6047,7 +6508,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              evtcond_pty_dirty_flags_process();
              render_dirty = 1;
          }
-@@ -140,11 +465,32 @@ short far world3d_main_loop(void) {
+@@ -140,11 +501,32 @@ short far world3d_main_loop(void) {
              redraw_menu = 0;
              redraw_caption = 0;
              render_dirty = 0;
@@ -6080,7 +6541,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
          if (redraw_menu != 0) {
-@@ -154,9 +500,18 @@ short far world3d_main_loop(void) {
+@@ -154,9 +536,18 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
          }
          if (render_dirty != 0) {
@@ -6100,7 +6561,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
          screen_frame_present();
          g_graphics_context.wGfxBlitDstPage = g_graphics_context.wGfxBlitSrcPage =
              g_graphics_context.wVgaPage2Base;
-@@ -168,13 +523,17 @@ short far world3d_main_loop(void) {
+@@ -168,13 +559,17 @@ short far world3d_main_loop(void) {
              spellfx_draw_events_caption();
              redraw_caption = 0;
          }
@@ -6119,7 +6580,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              itemuse_ground_pile_open_inv();
              redraw_menu = render_dirty = 0;
          }
-@@ -183,6 +542,7 @@ short far world3d_main_loop(void) {
+@@ -183,6 +578,7 @@ short far world3d_main_loop(void) {
          }
          if (!g_gameState.bCombatExitRequest) {
              if (hotspot_active == 0 && g_nHotspotActivateRequest != 0) {
@@ -6127,7 +6588,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  hotspotevt_activate_at_player();
                  g_nHotspotActivateRequest = 0;
                  hotspot_active = 1;
-@@ -203,7 +563,54 @@ short far world3d_main_loop(void) {
+@@ -203,7 +599,54 @@ short far world3d_main_loop(void) {
                  hotspot_active = 0;
              }
              g_dwDialogInputCooldown = 0;
@@ -6183,7 +6644,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              prev_focused_entry = focused_entry;
              focused_entry = menupage_focused_entry();
              if (prev_focused_entry != focused_entry && key_repeat_armed != 0) {
-@@ -256,6 +663,58 @@ short far world3d_main_loop(void) {
+@@ -256,6 +699,58 @@ short far world3d_main_loop(void) {
              }
  
              switch (action_id) {
@@ -6242,7 +6703,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              case 0x48:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xdf, 1);
-@@ -267,6 +726,7 @@ short far world3d_main_loop(void) {
+@@ -267,6 +762,7 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6250,7 +6711,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              case 0x50:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe0, 1);
-@@ -278,6 +738,29 @@ short far world3d_main_loop(void) {
+@@ -278,6 +774,29 @@ short far world3d_main_loop(void) {
                      goto after_move;
                  }
                  goto post_dispatch;
@@ -6280,7 +6741,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              case 0x4b:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe1, 1);
-@@ -285,6 +768,7 @@ short far world3d_main_loop(void) {
+@@ -285,6 +804,7 @@ short far world3d_main_loop(void) {
                  }
                  worldmove_apply_turn_step(2);
                  goto after_move;
@@ -6288,7 +6749,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
              case 0x4d:
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe2, 1);
-@@ -293,6 +777,11 @@ short far world3d_main_loop(void) {
+@@ -293,6 +813,11 @@ short far world3d_main_loop(void) {
                  worldmove_apply_turn_step(3);
                  goto after_move;
              case 0x13:
@@ -6300,7 +6761,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  if (refusal_mode != 0) {
                      dialog_play_record(0xe3, 1);
                      goto post_dispatch;
-@@ -308,6 +797,8 @@ short far world3d_main_loop(void) {
+@@ -308,6 +833,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe4, 1);
                      goto post_dispatch;
                  }
@@ -6309,7 +6770,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  spellfx_cast_and_dispatch();
                  redraw_menu = 1;
                  render_dirty = 1;
-@@ -318,18 +809,24 @@ short far world3d_main_loop(void) {
+@@ -318,18 +845,24 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe8, 1);
                      goto post_dispatch;
                  }
@@ -6335,7 +6796,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  encamp_run();
                  redraw_caption = 1;
                  goto post_dispatch;
-@@ -338,6 +835,8 @@ short far world3d_main_loop(void) {
+@@ -338,6 +871,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe6, 1);
                      goto after_move;
                  }
@@ -6344,7 +6805,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  mainmenu_save_bookmark();
                  goto after_move;
              case 0x18:
-@@ -345,6 +844,8 @@ short far world3d_main_loop(void) {
+@@ -345,6 +880,8 @@ short far world3d_main_loop(void) {
                      dialog_play_record(0xe7, 1);
                      goto post_dispatch;
                  }
@@ -6353,7 +6814,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  exit_mode = mainmenu_save_main_menu(1);
                  if (exit_mode == 0) {
                      g_nSceneReloadPending = 1;
-@@ -360,30 +861,57 @@ short far world3d_main_loop(void) {
+@@ -360,30 +897,57 @@ short far world3d_main_loop(void) {
                      if (menupage_state_0e7c() == 2 || key_is_down(0x2a) != 0 ||
                          key_is_down(0x36) != 0) {
  
@@ -6414,7 +6875,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
                  goto post_dispatch;
              default:
                  break;
-@@ -414,6 +942,10 @@ short far world3d_main_loop(void) {
+@@ -414,6 +978,10 @@ short far world3d_main_loop(void) {
          dialog_play_record(0x145, 0);
      }
      palette_cycle_eb_toggle(0);
@@ -6425,7 +6886,7 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
      menupage_end(g_pReqMainPage);
      return exit_mode;
  }
-@@ -459,6 +991,8 @@ void far worldloop_step_or_final_movement(void) {
+@@ -459,6 +1027,8 @@ void far worldloop_step_or_final_movement(void) {
  }
  
  void far worldloop_set_flag_8b_preds(void) {
@@ -6435,14 +6896,16 @@ index 8c7230cb7721022f8375f3d88d72d8ebc1247d9d..1257fc36a55c28afc0bacce40868eafd
          goto disable;
      if (worldmove_cross_walkable_kind() == 0)
 diff --git a/bak/SRC/GAME/WORLD/WORLDLP.H b/bak/SRC/GAME/WORLD/WORLDLP.H
-index 6457e2cb324252a0cce9b95fa54102f6d65e84e3..bce3164ded34bd85147e80b7a2615061b79da1e4 100644
+index 6457e2cb324252a0cce9b95fa54102f6d65e84e3..78b1d17142e1bfce87462b44ccbf1e48ac70121c 100644
 --- a/bak/SRC/GAME/WORLD/WORLDLP.H
 +++ b/bak/SRC/GAME/WORLD/WORLDLP.H
-@@ -16,5 +16,6 @@ extern void worldloop_party_move_done_clr(void);
+@@ -16,5 +16,8 @@ extern void worldloop_party_move_done_clr(void);
  extern void worldloop_step_or_final_movement(void);
  extern void worldloop_set_flag_8b_preds(void);
  extern void worldloop_pty_stat7_flag_cd(void);
 +extern void worldloop_mouselook_release_for_modal(void);
++extern void world_saving_notice(void);
++extern void menu_saving_notice(void);
  
  #endif
 diff --git a/bak/SRC/GAME/WORLD/WORLDMOV.C b/bak/SRC/GAME/WORLD/WORLDMOV.C
@@ -8229,7 +8692,7 @@ index 1568880638398067364af1a6d9f832156b4a8362..bd3a0fe84508a06474fd04d7fbb418f6
      screen_frame_sync_buffers_rect(0xb, 0x79);
  
 diff --git a/bak/SRC/SCREENS/MAINMENU.C b/bak/SRC/SCREENS/MAINMENU.C
-index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a20662721 100644
+index c9bf26483924952b5097823240d7155c3ea672eb..aee87b496dc403fbb875e84f1df984d7a25658b1 100644
 --- a/bak/SRC/SCREENS/MAINMENU.C
 +++ b/bak/SRC/SCREENS/MAINMENU.C
 @@ -3,6 +3,7 @@
@@ -8240,7 +8703,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
  #include <io.h>
  
  #include "SRC/GAME/GMAIN.H"
-@@ -35,6 +36,8 @@
+@@ -35,10 +36,13 @@
  #include "SRC/UI/NAMEDTBL.H"
  #include "SRC/UI/LISTWDG.H"
  #include "SRC/DIALOG/DIALOG.H"
@@ -8249,7 +8712,12 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
  #include "SRC/GAME/ACTOR/ACTSPAWN.H"
  #include "SRC/COMBAT/ARENA/COMBAT.H"
  #include "SRC/SCREENS/FMAP.H"
-@@ -58,6 +61,14 @@ unsigned short g_wBookmarkCompassIcon;
+ #include "SRC/GAME/WORLD/WORLDMOV.H"
++#include "SRC/GAME/WORLD/WORLDLP.H"
+ #include "SRC/R3D/SCENE/CZONE.H"
+ #include "SRC/R3D/SCENE/ZONE.H"
+ #include "SRC/SYS/CFGPARSE.H"
+@@ -58,6 +62,14 @@ unsigned short g_wBookmarkCompassIcon;
  char g_szSaveSlotDirName_51cc[13];
  unsigned char g_abSaveFileHeader[90];
  
@@ -8264,7 +8732,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
  int mainmenu_save_cfg_load_settings(void) {
      ResFile *file;
  
-@@ -290,6 +301,12 @@ int mainmenu_save_main_menu(int reentering) {
+@@ -290,6 +302,12 @@ int mainmenu_save_main_menu(int reentering) {
              mainmenu_save_show_ctrd_modal();
              bFullRender = 1;
              continue;
@@ -8277,7 +8745,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
          default:
              continue;
          }
-@@ -370,7 +387,7 @@ int mainmenu_save_load_game_dialog(void) {
+@@ -370,7 +388,7 @@ int mainmenu_save_load_game_dialog(void) {
                  ;
          }
          if (slot_dirty) {
@@ -8286,7 +8754,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
              if (need_slot_sel) {
                  if (g_wSaveSlotDirValid) {
                      int sel = mainmenu_savelist_find_by_text(slot_list, g_szSaveSlotDirName_51cc);
-@@ -877,6 +894,7 @@ int mainmenu_save_save_game_dialog(void) {
+@@ -877,6 +895,7 @@ int mainmenu_save_save_game_dialog(void) {
                      sprintf(sprintf_buf, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", slot_text, slot_key,
                              file_key);
                      remove(sprintf_buf);
@@ -8294,16 +8762,17 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
                      slot_reload = 1;
                      file_dirty = 1;
                      file_reload = 1;
-@@ -968,7 +986,7 @@ int mainmenu_save_save_game_dialog(void) {
+@@ -968,7 +987,8 @@ int mainmenu_save_save_game_dialog(void) {
                  g_wBookmarkFmapX = g_wBookmarkFmapY = -1;
                  g_wBookmarkCompassIcon = 0;
              }
 -            if (savegame_write(sprintf_buf) != 0)
++            menu_saving_notice();
 +            if (msgsave_write_pair(sprintf_buf) != 0)
                  goto save_committed;
              dialog_play_record(0x96, 1);
          redraw_and_loop:
-@@ -1452,7 +1470,8 @@ void far mainmenu_save_bookmark(void) {
+@@ -1452,7 +1472,8 @@ void far mainmenu_save_bookmark(void) {
      char path[50];
      unsigned int heading;
  
@@ -8313,7 +8782,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
          if (g_cfgBookmarkVerify) {
              dialog_input_wait_release(0, 1);
              dialog_play_record(0x14c, 0);
-@@ -1488,7 +1507,7 @@ void far mainmenu_save_bookmark(void) {
+@@ -1488,7 +1509,7 @@ void far mainmenu_save_bookmark(void) {
              g_wBookmarkFmapX = g_wBookmarkFmapY = -1;
              g_wBookmarkCompassIcon = 0;
          }
@@ -8322,7 +8791,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
              g_wSaveFileValid = 0;
              return;
          }
-@@ -1499,6 +1518,319 @@ void far mainmenu_save_bookmark(void) {
+@@ -1499,6 +1520,321 @@ void far mainmenu_save_bookmark(void) {
      return;
  }
  
@@ -8478,6 +8947,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
 +    }
 +
 +    sprintf(path, "GAMES\\AutoSave.G99\\SAVE%02d.GAM", target_id);
++    world_saving_notice();
 +    ok = msgsave_write_pair(path);
 +
 +    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
@@ -8587,6 +9057,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
 +    }
 +
 +    sprintf(path, "GAMES\\QSave.G98\\SAVE%02d.GAM", target_id);
++    world_saving_notice();
 +    ok = msgsave_write_pair(path);
 +
 +    memcpy(g_abSaveFileHeader, old_header, sizeof(old_header));
@@ -8642,7 +9113,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
  void mainmenu_save_party_to_tmp(void) {
      int i;
  
-@@ -1543,7 +1875,7 @@ int mainmenu_save_scan_highest_slot(void) {
+@@ -1543,7 +1879,7 @@ int mainmenu_save_scan_highest_slot(void) {
      int highest;
      int state;
      int save_id;
@@ -8651,7 +9122,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
      char dta[30];
      char path[90];
      int rc;
-@@ -1590,7 +1922,8 @@ void mainmenu_save_slot_exists(void) {
+@@ -1590,7 +1926,8 @@ void mainmenu_save_slot_exists(void) {
      char local[90];
      ResFile *file;
  
@@ -8661,7 +9132,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
          sprintf(local, "%s\\%s.G%02d\\SAVE%02d.GAM", "GAMES", g_szSaveSlotDirName_51cc,
                  g_wCurrentSaveSlotKey, 0x15);
          file = res_fopen(local, "wb");
-@@ -1634,7 +1967,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
+@@ -1634,7 +1971,8 @@ int mainmenu_save_enum_directories(ListWidget *list) {
      sprintf(local_path, "%s\\*.G??", "GAMES");
      rc = findfirst(local_path, &dta, 0x10);
      while (rc == 0) {
@@ -8671,7 +9142,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
              mainmenu_savelist_insert_sorted(list, local_path, slotKey);
          rc = findnext(&dta);
      }
-@@ -1643,7 +1977,28 @@ fail:
+@@ -1643,7 +1981,28 @@ fail:
      return 0;
  }
  
@@ -8700,7 +9171,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
      for (; *filename != '\0'; filename++, out_name++) {
          if (*filename == '.') {
              if ((((unsigned char *)_ctype)[filename[2] + 1] & _IS_DIG) == 0) {
-@@ -1655,6 +2010,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1655,6 +2014,14 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
              *out_name = '\0';
              filename += 2;
              *out_slot = atoi(filename);
@@ -8715,7 +9186,7 @@ index c9bf26483924952b5097823240d7155c3ea672eb..301eafd58a45528a64559cff6c5bdb2a
              if (*out_slot < 1 || *out_slot > 20) {
                  return 0;
              }
-@@ -1666,22 +2029,69 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
+@@ -1666,22 +2033,69 @@ int mainmenu_save_parse_filename(char *filename, char *out_name, int *out_slot)
  }
  
  int mainmenu_save_enum_files_slot(ListWidget *list, char *slot_name, int slot_id) {
@@ -9353,7 +9824,7 @@ index 0000000000000000000000000000000000000000..a5127608954cbe1151005be7a9d41cc8
 +
 +#endif
 diff --git a/bak/SRC/SCREENS/TOWNSCN.C b/bak/SRC/SCREENS/TOWNSCN.C
-index a48aa290c865bb895d5de6e6a8f84b6c31505657..7c623c563223de806a9a09c03fb4d83d4a2e08ce 100644
+index a48aa290c865bb895d5de6e6a8f84b6c31505657..ef5ca53e29c79d72ba8c2c204e73041415b957a1 100644
 --- a/bak/SRC/SCREENS/TOWNSCN.C
 +++ b/bak/SRC/SCREENS/TOWNSCN.C
 @@ -19,11 +19,13 @@
@@ -9873,7 +10344,7 @@ index a48aa290c865bb895d5de6e6a8f84b6c31505657..7c623c563223de806a9a09c03fb4d83d
 +        (unsigned char far *)"\x2d\x3e\x20\x87\x57\x8b\x6d\x81\x27\x83\x76\x20\x3c\x2d",
 +        0xa0, 0x14, 1, 10, 1);
 +    invui_draw_text_aligned_shadow(
-+        (unsigned char far *)"\x8d\x4b\x8b\x3a\x8b\x3b\x86\x7b\x83\x53\x80\x7e\x80\x7e",
++        (unsigned char far *)"\x8d\x4b\x8b\x3a\x8b\x3b\x86\x7b\x83\x53\x80\x7e",
 +        0xa0, 0x23, 1, 10, 1);
 +    g_bSmallZhMode = savedSmallZhMode;
  }
@@ -10929,10 +11400,10 @@ index 0000000000000000000000000000000000000000..216f658201ed17dc73126a9034122b82
 +}
 diff --git a/bak/TOOLS/MSGPTEST.C b/bak/TOOLS/MSGPTEST.C
 new file mode 100644
-index 0000000000000000000000000000000000000000..13ead354e485dcf01bdfaff19e5bbd62f685ed66
+index 0000000000000000000000000000000000000000..0ff3bf462da536247efe5a3f94eb800e4acb2cd8
 --- /dev/null
 +++ b/bak/TOOLS/MSGPTEST.C
-@@ -0,0 +1,204 @@
+@@ -0,0 +1,273 @@
 +#include <stdio.h>
 +#include <string.h>
 +#include <io.h>
@@ -11029,6 +11500,34 @@ index 0000000000000000000000000000000000000000..13ead354e485dcf01bdfaff19e5bbd62
 +    remove("MSGWORK.MLG");
 +}
 +
++static int files_equal(const char *a, const char *b) {
++    unsigned char ba[512];
++    unsigned char bb[512];
++    int fa;
++    int fb;
++    int na;
++    int nb;
++    int eq;
++    fa = open((char *)a, 0x8001);
++    fb = open((char *)b, 0x8001);
++    if (fa < 0 || fb < 0) {
++        if (fa >= 0) close(fa);
++        if (fb >= 0) close(fb);
++        return 0;
++    }
++    eq = filelength(fa) == filelength(fb);
++    while (eq) {
++        na = read(fa, ba, sizeof(ba));
++        nb = read(fb, bb, sizeof(bb));
++        if (na != nb || na < 0 || (na > 0 && memcmp(ba, bb, na) != 0))
++            eq = 0;
++        if (na <= 0)
++            break;
++    }
++    close(fa); close(fb);
++    return eq;
++}
++
 +int main(void) {
 +    MsgLogTime t;
 +    int p;
@@ -11038,8 +11537,8 @@ index 0000000000000000000000000000000000000000..13ead354e485dcf01bdfaff19e5bbd62
 +    unsigned long old_count;
 +    int test;
 +    int failed = 0;
-+    static int stages[] = {2, 2, 5, 5, 5, 7, 7, 8, 9, 10, 11, 12};
-+    static int ops[] =    {1, 2, 1, 2, 3, 1, 2, 4, 4,  4,  4,  5};
++    static int stages[] = {2, 2, 5, 5, 5, 7, 7, 8, 10, 11, 12};
++    static int ops[] =    {1, 2, 1, 2, 3, 1, 2, 4,  4,  4,  5};
 +    clean(); mkdir("PAIR");
 +    msgsave_init();
 +    printf("NEW %d\n", msgsave_start_new());
@@ -11060,7 +11559,48 @@ index 0000000000000000000000000000000000000000..13ead354e485dcf01bdfaff19e5bbd62
 +           g_msgsaveTestStage, access("PAIR\\MLGNEW.GAM", 0), access("PAIR\\MLGNEW.MLG", 0),
 +           access("PAIR\\MLGTXN.DAT", 0));
 +    remove("PAIR\\SAVE03.GAM"); remove("PAIR\\SAVE03.MLG");
++    /* Full-mode stage 9 (target MLG -> MLGOLD.MLG) rename fault. SAVE04.MLG is
++       not a valid prefix of the live timeline, so the overwrite cannot extend
++       it and takes the full path -- the only path that renames the target MLG
++       at stage 9. Placed here, after the earlier slots are freed, so the
++       synthetic GAM still fits the small build image. */
++    {
++        int jd = open("PAIR\\SAVE04.MLG", 0x8302, 0x0180);
++        write(jd, "not-an-mlg", 9);
++        close(jd);
++    }
++    fault_stage = 9; fault_op = 4; fault_hit = 0;
++    f = msgsave_write_pair("PAIR\\SAVE04.GAM");
++    fault_op = 0;
++    p = msgsave_recover_for("PAIR\\SAVE04.GAM");
++    again = msgsave_recover_for("PAIR\\SAVE04.GAM");
++    if (f || !fault_hit || !p || !again) failed++;
++    printf("FULL9 hit=%d save=%d recover=%d again=%d\n", fault_hit, f, p, again);
++    remove("PAIR\\SAVE04.GAM"); remove("PAIR\\SAVE04.MLG");
 +    printf("AOVER %d\n", msgsave_write_pair("PAIR\\SAVE01.GAM"));
++    /* AOVER extended SAVE01 in place. A full snapshot of the same timeline bound
++       to the same GAM must be byte-for-byte identical. */
++    {
++        unsigned char far *sb;
++        unsigned long gl;
++        unsigned long gc;
++        int e1;
++        int e2;
++        int e3;
++        e1 = e2 = e3 = 0;
++        sb = (unsigned char far *)farmalloc(4096UL);
++        if (sb != (unsigned char far *)0) {
++            msglog_set_scratch(sb, 4096);
++            e1 = msglog_crc32_file("PAIR\\SAVE01.GAM", &gl, &gc) == 0;
++            e2 = e1 && msglog_prepare_snapshot("PAIR\\EQUIV.MLG", gl, gc) == 0;
++            msglog_set_scratch((unsigned char far *)0, 0);
++            farfree(sb);
++        }
++        e3 = files_equal("PAIR\\SAVE01.MLG", "PAIR\\EQUIV.MLG");
++        remove("PAIR\\EQUIV.MLG");
++        if (!e1 || !e2 || !e3) failed++;
++        printf("EQUIV crc=%d full=%d identical=%d\n", e1, e2, e3);
++    }
 +    old_count = msglog_event_count();
 +    for (crash = 7; crash <= 11; crash++) {
 +        t.second++;
