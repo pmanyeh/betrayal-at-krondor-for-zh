@@ -242,8 +242,12 @@ def do_install(game_dir: Path, release_dir: Path) -> None:
     (game_dir / INSTALL_MANIFEST_NAME).write_text(
         json.dumps(install_manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
-    print("\n安裝完成，可以雙擊上一層的「玩遊戲.bat」開始玩。")
-    print("若要解除安裝，執行：\n  python installer.py --uninstall")
+    if sys.platform == "win32":
+        print("\n安裝完成，可以雙擊上一層的「玩遊戲.bat」開始玩。")
+        print("若要解除安裝，執行：\n  python installer.py --uninstall")
+    else:
+        print("\n安裝完成，在整合包資料夾執行 ./play_mac.sh 開始玩。")
+        print("若要解除安裝，執行：\n  python3 installer.py --uninstall")
 
 
 def do_uninstall(game_dir: Path) -> None:

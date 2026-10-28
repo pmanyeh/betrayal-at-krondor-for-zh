@@ -1,0 +1,34 @@
+#!/bin/bash
+# macOS launcher. Search order adapted from the play_mac.sh contributed by
+# wesley316-Guybrush in issue #1. The bundled dosbox-x/ folder holds the
+# Windows build, so the player supplies a Mac DOSBox-X; we still cd into
+# dosbox-x/ and reuse its zh_krondor.conf so "mount c ../game_data" resolves
+# exactly as it does for 玩遊戲.bat.
+set -e
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ -x "$BASE_DIR/dosbox-x.app/Contents/MacOS/dosbox-x" ]; then
+    DOSBOX_BIN="$BASE_DIR/dosbox-x.app/Contents/MacOS/dosbox-x"
+elif [ -x "/Applications/dosbox-x.app/Contents/MacOS/dosbox-x" ]; then
+    DOSBOX_BIN="/Applications/dosbox-x.app/Contents/MacOS/dosbox-x"
+elif [ -x "/Applications/Games/dosbox-x.app/Contents/MacOS/dosbox-x" ]; then
+    DOSBOX_BIN="/Applications/Games/dosbox-x.app/Contents/MacOS/dosbox-x"
+elif [ -x "/Applications/Games/dosbox-x/dosbox-x.app/Contents/MacOS/dosbox-x" ]; then
+    DOSBOX_BIN="/Applications/Games/dosbox-x/dosbox-x.app/Contents/MacOS/dosbox-x"
+elif command -v dosbox-x >/dev/null 2>&1; then
+    DOSBOX_BIN="$(command -v dosbox-x)"
+else
+    echo "[錯誤] 找不到 Mac 版 DOSBox-X。"
+    echo "請把 dosbox-x.app 放進本整合包資料夾、/Applications 或 /Applications/Games，"
+    echo "或安裝到 PATH 找得到的位置（Mac 版下載：https://dosbox-x.com/）。"
+    exit 1
+fi
+
+cd "$BASE_DIR/dosbox-x"
+if [ ! -f zh_krondor.conf ]; then
+    echo "[錯誤] 找不到 dosbox-x/zh_krondor.conf，整合包可能不完整，請重新解壓縮。"
+    exit 1
+fi
+
+exec "$DOSBOX_BIN" -conf zh_krondor.conf

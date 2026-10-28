@@ -11,6 +11,7 @@ Builds `dist/release_v100_zh/` as a self-contained, portable folder:
     resources/                        -- translated loose resource files
     安裝中文化.bat                     -- one click: runs installer.py against game_data/
     玩遊戲.bat                         -- one click: launches dosbox-x mounting game_data/
+    play_mac.sh                       -- macOS launcher (player-supplied Mac DOSBox-X)
     README_安裝說明.txt                -- Traditional Chinese install instructions
     中文按鍵說明.txt                    -- player-facing keyboard reference
     新增功能說明.txt                    -- v1.02 backports and project enhancements
@@ -212,6 +213,15 @@ def write_bat(template_name: str, dest: Path) -> None:
     print(f"[OK] 已寫入 {dest.name}（CRLF）")
 
 
+def write_shell_script(template_name: str, dest: Path) -> None:
+    # The mirror image of write_bat: bash chokes on CRLF ("$'\r': command not
+    # found"), so force LF. The exec bit is applied when zipping (make_zip),
+    # since this usually runs on Windows where chmod has no effect.
+    text = (TOOLS_RELEASE_DIR / template_name).read_text(encoding="utf-8")
+    dest.write_bytes(text.replace("\r\n", "\n").encode("utf-8"))
+    print(f"[OK] 已寫入 {dest.name}（LF）")
+
+
 def write_game_data_placeholder(release_dir: Path) -> None:
     game_data_dir = release_dir / "game_data"
     game_data_dir.mkdir(parents=True, exist_ok=True)
@@ -274,6 +284,26 @@ Betrayal at Krondor 繁體中文版 v1.0 -- 免安裝整合包使用說明
 dosbox-x\\COPYING_dosbox-x）。裝好之後，直接雙擊這個整合包裡的
 「玩遊戲.bat」就會啟動中文版遊戲。整個資料夾可以直接搬到別的地方，
 不影響運作。
+
+Mac 使用者
+----------
+內附的 DOSBox-X 與 Python 是 Windows 版，Mac 需要自備：
+1. Python 3：在「終端機」輸入 python3 --version 確認。較新的 macOS 第一次
+   執行時，若跳出安裝「命令列開發者工具」的提示，依指示安裝即可；也可
+   用 Homebrew 安裝的 python3。
+2. Mac 版 DOSBox-X（https://dosbox-x.com/）：把 dosbox-x.app 放進
+   /Applications、/Applications/Games，或直接放進這個整合包資料夾。
+
+遊戲檔案一樣複製到 game_data/，然後在終端機切換到本整合包資料夾：
+       cd "/路徑/到/整合包資料夾"
+       python3 installer.py
+       ./play_mac.sh
+若提示權限不足，先執行 chmod +x play_mac.sh。若 macOS 阻擋開啟
+dosbox-x.app，請到「系統設定」→「隱私權與安全性」點「仍要開啟」，或
+執行 xattr -cr /路徑/到/dosbox-x.app。Mac 鍵盤的 F 鍵若預設是媒體鍵，
+請搭配 fn（例如 fn + F5）。釋放滑鼠游標是 Control + F10。
+解除安裝：python3 installer.py --uninstall
+（Mac 啟動方式參考玩家 wesley316-Guybrush 提供的腳本，特此感謝。）
 
 本版主要新增功能
 ----------------
@@ -374,8 +404,19 @@ def make_zip(release_dir: Path) -> Path:
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in release_dir.rglob("*"):
             relative = path.relative_to(release_dir)
-            if path.is_file() and "__pycache__" not in relative.parts and path.suffix != ".pyc":
-                zf.write(path, path.relative_to(release_dir.parent))
+            if not path.is_file() or "__pycache__" in relative.parts or path.suffix == ".pyc":
+                continue
+            arcname = path.relative_to(release_dir.parent)
+            if path.suffix == ".sh":
+                # Mark as a Unix rwxr-xr-x entry so macOS unzip keeps the
+                # launcher runnable; Windows-built entries carry no mode bits.
+                info = zipfile.ZipInfo.from_file(path, arcname)
+                info.create_system = 3
+                info.external_attr = 0o100755 << 16
+                info.compress_type = zipfile.ZIP_DEFLATED
+                zf.writestr(info, path.read_bytes())
+            else:
+                zf.write(path, arcname)
     print(f"[OK] 已打包 {zip_path}")
     return zip_path
 
@@ -412,6 +453,7 @@ def main() -> None:
     write_project_license(RELEASE_DIR)
     write_bat("play_launcher.bat.template", RELEASE_DIR / "玩遊戲.bat")
     write_bat("install_launcher.bat.template", RELEASE_DIR / "安裝中文化.bat")
+    write_shell_script("play_mac.sh.template", RELEASE_DIR / "play_mac.sh")
     write_game_data_placeholder(RELEASE_DIR)
     check_dosboxx(RELEASE_DIR)
     check_python_embed(RELEASE_DIR)

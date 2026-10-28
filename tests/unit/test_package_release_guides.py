@@ -8,6 +8,7 @@ from tools.release.package_release import (
     write_readme,
     write_player_guides,
     write_project_license,
+    write_shell_script,
 )
 
 
@@ -95,3 +96,38 @@ def test_release_rejects_player_history_anywhere(tmp_path: Path, name: str) -> N
         make_zip(release_dir)
     assert player_file.read_bytes() == b"private"
     assert archive.read_bytes() == b"previous archive"
+
+
+def test_mac_launcher_uses_lf_and_shared_conf(tmp_path: Path) -> None:
+    write_shell_script("play_mac.sh.template", tmp_path / "play_mac.sh")
+
+    data = (tmp_path / "play_mac.sh").read_bytes()
+    assert data.startswith(b"#!/bin/bash\n")
+    assert b"\r" not in data
+    text = data.decode("utf-8")
+    # Must run from dosbox-x/ so the shared conf's "mount c ../game_data" resolves.
+    assert 'cd "$BASE_DIR/dosbox-x"' in text
+    assert "-conf zh_krondor.conf" in text
+
+
+def test_release_zip_marks_shell_scripts_executable(tmp_path: Path) -> None:
+    release_dir = tmp_path / "release"
+    release_dir.mkdir()
+    (release_dir / "play_mac.sh").write_bytes(b"#!/bin/bash\necho hi\n")
+    (release_dir / "README.txt").write_text("release", encoding="utf-8")
+
+    zip_path = make_zip(release_dir)
+    with zipfile.ZipFile(zip_path) as archive:
+        script = archive.getinfo("release/play_mac.sh")
+        assert script.create_system == 3
+        assert (script.external_attr >> 16) & 0o777 == 0o755
+        assert archive.read(script) == b"#!/bin/bash\necho hi\n"
+
+
+def test_release_readme_covers_mac_launch(tmp_path: Path) -> None:
+    write_readme(tmp_path)
+
+    text = (tmp_path / "README_安裝說明.txt").read_text(encoding="utf-8-sig")
+    assert "python3 installer.py" in text
+    assert "./play_mac.sh" in text
+    assert "xattr -cr" in text

@@ -20,6 +20,7 @@
 完整的功能清單、啟用方式與已知限制，請看發布說明：
 
 - [`docs/release-notes/v1.0.0.md`](docs/release-notes/v1.0.0.md) — v1.0.0 完整發布說明（版本基礎、新增功能、密技功能、安裝方式、已知限制）
+- [`CHANGELOG.md`](CHANGELOG.md) — 各版本與尚未發布的更新紀錄
 
 字型使用真正的**倚天 3.53 點陣字**（`STDFONT.15` 漢字 + `ASCFONT.15` 英數）重新產生的專案自製字庫。
 
@@ -68,6 +69,8 @@ python -m unittest discover -s tests/unit -v
 - **翻譯資源檔**（DDX/BOK/DAT/字型等）：這些是本專案工具從翻譯內容重新產生的全新檔案，直接以 loose 覆蓋檔形式複製進 `game_data/`（引擎本身支援 loose 檔優先於封裝檔的載入順序）。
 
 整合包還內附官方預先編譯的 **DOSBox-X**（GPLv2 開源 DOS 模擬器）與**可嵌入版 Python**（PSF 授權），兩者都跟原版遊戲無關、可以合法重新散布。使用者不需要自己另外裝 Python 或 DOS 模擬器：解壓整合包 → 把遊戲檔案丟進 `game_data/` → 雙擊「安裝中文化.bat」→ 雙擊「玩遊戲.bat」開始玩，整個資料夾可以直接搬到別的地方。
+
+Mac 使用者需自備 Python 3 與 Mac 版 DOSBox-X，改在終端機執行 `python3 installer.py`，再執行 `./play_mac.sh` 開始玩（細節見整合包內的 `README_安裝說明.txt`）。Mac 啟動腳本參考 [@wesley316-Guybrush](https://github.com/wesley316-Guybrush) 在 [#1](https://github.com/pmanyeh/betrayal-at-krondor-for-zh/issues/1) 提供的版本。
 
 開發端出包的標準流程（何時要重跑哪支腳本、驗證步驟）見 [`docs/workflows/release-packaging.md`](docs/workflows/release-packaging.md)；最常用的一行是 `python tools/release/package_release.py`，組出完整整合包到 `dist/release_v100_zh/`。目前只支援 v1.00 Floppy 版，其餘版本尚未支援。
 
