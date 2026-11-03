@@ -260,7 +260,7 @@ def check_python_embed(release_dir: Path) -> bool:
 
 
 README_TEXT = """\
-Betrayal at Krondor 繁體中文版 v1.0 -- 免安裝整合包使用說明
+Betrayal at Krondor 繁體中文版 v1.0.1 -- 免安裝整合包使用說明
 =============================================================
 
 這是一份「免安裝整合包」，本身不含任何原版遊戲檔案，也不含 KRONDOR.EXE。
